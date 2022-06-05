@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/dp_10">
+
+
+    <ImageView
+        android:id="@+id/iv_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/ic_stories"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_stories_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp_size_65"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_12"
+
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_top"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="33dp"
+        android:background="@drawable/bg_white_bottom">
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/bg_gray_radius10"
+            android:gravity="top"
+            android:hint="写下你想说的话，请务必尊守芍药文明公约及规则…（非必填）"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/color_normal"
+            android:textColorLink="@color/color_light_font"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/dp_90"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:text="299金币/条"
+            android:textColor="@color/red"
+            android:textSize="@dimen/sp_10" />
+
+        <TextView
+            android:id="@+id/tv_send_stories"
+            style="@style/CustomButton"
+            android:layout_below="@+id/et_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/bg_red_radius10"
+            android:text="发布头条"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

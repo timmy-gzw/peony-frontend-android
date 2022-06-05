@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@color/red">
+
+        <ImageView
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/dp_28"
+            android:src="@mipmap/peony_gxg_bdgz_img"
+            app:layout_constraintDimensionRatio="3.47"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_white_bottom_radius20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/top"
+            app:layout_constraintStart_toStartOf="@id/top"
+            app:layout_constraintTop_toBottomOf="@id/top" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="家族宝箱玩法："
+            android:textColor="#ffff9600"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toStartOf="@id/top"
+            app:layout_constraintTop_toBottomOf="@id/top" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/dp_20"
+            app:layout_constraintEnd_toEndOf="@id/top"
+            app:layout_constraintStart_toStartOf="@id/top"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:layout_marginVertical="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:background="@drawable/bg_pop_family_box_desc_btn"
+            android:gravity="center"
+            android:text="我知道了"
+            android:textColor="@color/family_box_color"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/recy"
+            app:layout_constraintStart_toStartOf="@id/recy"
+            app:layout_constraintTop_toBottomOf="@id/recy" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

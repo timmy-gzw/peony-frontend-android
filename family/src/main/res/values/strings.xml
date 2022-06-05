@@ -1,0 +1,3 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="exit_family_tip">退出家族后,贡献值将全部清空,情侣关系也会解除哦。确认退出家族吗?</string>
+</resources>

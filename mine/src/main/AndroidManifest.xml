@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tftechsz.mine">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.LoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.LoginByPhoneActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.GetCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.MineDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AlipayAuthActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="main"
+                    android:scheme="alpverify" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.MinePhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.MinePhotoActivityNew"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.GradeIntroduceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.RealAuthenticationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.RealAuthenticationActivityNew"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.FaceCheckActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.RealCameraActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.ChargeListNewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.WithdrawActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.ChargePayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.RealAuthenticationStatusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.EditInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.MineIntegralActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.ImproveInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.BindPhoneActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.BindPhoneHintActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.ImproveInfoActivity_New"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.IntegralShopActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.IntegralDetailedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.MineFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.MineInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccountBindingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.NotifySettingActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.GuardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.BlackListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.ChargeSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.ExchangeDetailsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.RealNameActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.CancellationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.RealNameSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.SelfCheckActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <!--闪验一键登录-->
+        <activity
+            android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.ActivityDialogStyle" />
+
+        <activity-alias
+            android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
+            android:theme="@style/Theme.ActivityDialogStyle" /> <!-- **********************电信授权页activity************************** -->
+        <activity
+            android:name="com.chuanglan.shanyan_sdk.view.ShanYanOneKeyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.ActivityDialogStyle" /> <!-- **********************协议页activity************************** -->
+        <activity
+            android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:launchMode="standard"
+            android:screenOrientation="behind" />
+
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.VoiceSignActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.FaceUnitySettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccostSettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.PrivacySettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccostPicActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccostCustomizeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccostCustomizeManagerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccostRecordToMyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccostRecordToAddActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccostCustomizeEditActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.VisitorActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.VipActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.VipDressUpActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.NobleActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.SignChatNumActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.NoteValueShopActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+    </application>
+</manifest>

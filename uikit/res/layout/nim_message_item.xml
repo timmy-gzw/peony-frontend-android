@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/message_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/bubble_time_layout_margin_top"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_half_tran20"
+        android:paddingLeft="10dip"
+        android:paddingTop="3dp"
+        android:paddingRight="10dip"
+        android:paddingBottom="3dp"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/message_item_multi_check_box"
+        android:layout_width="@dimen/avatar_size_in_session"
+        android:layout_height="@dimen/avatar_size_in_session"
+        android:layout_below="@id/message_item_time"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="@dimen/bubble_head_margin_horizontal"
+        android:enabled="true"
+        android:visibility="gone" />
+
+    <com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView
+        android:id="@+id/message_item_portrait_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_item_time"
+        android:layout_marginStart="@dimen/dp_size_5"
+        android:layout_toEndOf="@id/message_item_multi_check_box"
+        android:visibility="gone"
+        app:is_round="true"
+        app:vip_height="@dimen/chat_icon_size"
+        app:vip_margin="@dimen/dp_size_12"
+        app:vip_width="@dimen/chat_icon_size" />
+
+
+    <!--    <com.netease.nim.uikit.common.ui.imageview.AvatarImageView-->
+    <!--        android:id="@+id/message_item_portrait_left"-->
+    <!--        android:layout_width="@dimen/message_thumb_size"-->
+    <!--        android:layout_height="@dimen/message_thumb_size"-->
+    <!--        android:layout_below="@id/message_item_time"-->
+    <!--        android:layout_marginLeft="@dimen/dp_size_20"-->
+    <!--        android:layout_marginRight="@dimen/dp_size_12"-->
+    <!--        android:layout_toRightOf="@id/message_item_multi_check_box"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:visibility="gone" />-->
+
+    <com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView
+        android:id="@+id/message_item_portrait_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_item_time"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        app:is_round="true"
+        app:vip_height="@dimen/chat_icon_size"
+        app:vip_margin="@dimen/dp_size_12"
+        app:vip_width="@dimen/chat_icon_size" />
+
+    <!--    <com.netease.nim.uikit.common.ui.imageview.AvatarImageView-->
+    <!--        android:id="@+id/message_item_portrait_right"-->
+    <!--        android:layout_width="@dimen/message_thumb_size"-->
+    <!--        android:layout_height="@dimen/message_thumb_size"-->
+    <!--        android:layout_below="@id/message_item_time"-->
+    <!--        android:layout_alignParentRight="true"-->
+    <!--        android:layout_marginLeft="@dimen/dp_size_12"-->
+    <!--        android:layout_marginEnd="@dimen/dp_size_20"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:visibility="gone" />-->
+
+    <com.netease.nim.uikit.common.ui.imageview.RoundImageView
+        android:id="@+id/message_item_rounded_right"
+        android:layout_width="@dimen/message_thumb_size"
+        android:layout_height="@dimen/message_thumb_size"
+        android:layout_below="@id/message_item_time"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/dp_size_12"
+        android:layout_marginEnd="@dimen/dp_size_20"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:radius="@dimen/message_thumb_size" />
+
+
+    <LinearLayout
+        android:id="@+id/message_item_name_layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_item_time"
+        android:layout_marginTop="3dp"
+        android:visibility="gone"
+        android:layout_toLeftOf="@id/message_item_portrait_right"
+        android:layout_toRightOf="@id/message_item_portrait_left"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/message_item_name_icon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="3dp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/noble_label2"
+            style="@style/NobleBadgeStyle"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:scaleType="fitStart"
+            android:visibility="gone"
+            android:layout_marginEnd="3dp"
+            tools:src="@drawable/noble_label_1"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_sex2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_size_13"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:drawablePadding="@dimen/dp_size_2"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_size_9"
+            android:visibility="gone"
+            tools:background="@drawable/bg_boy"
+            tools:drawableStart="@drawable/ic_boy"
+            tools:text="15"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_new_people2"
+            android:layout_width="@dimen/dp_size_30"
+            android:layout_height="@dimen/dp_size_12"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:background="@drawable/chat_ic_new_people"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_couple2"
+            android:layout_width="@dimen/dp_size_36"
+            android:layout_height="@dimen/dp_size_12"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:background="@drawable/chat_ic_couple"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_role2"
+            android:layout_width="@dimen/dp_size_30"
+            android:layout_height="@dimen/dp_size_12"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:visibility="gone"
+            tools:background="@drawable/peony_jzxqy_zzhz_icon"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/message_item_nickname2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:ellipsize="end"
+            android:maxWidth="160dip"
+            android:singleLine="true"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"
+            android:visibility="gone"
+            tools:text="马保国"
+            tools:visibility="visible" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/message_item_name_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_item_time"
+        android:layout_marginTop="3dp"
+        android:layout_toLeftOf="@id/message_item_portrait_right"
+        android:layout_toRightOf="@id/message_item_portrait_left"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/message_item_name_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="3dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/message_item_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxWidth="160dip"
+            android:singleLine="true"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"
+            android:visibility="gone"
+            tools:text="马保国"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_role"
+            android:layout_width="@dimen/dp_size_30"
+            android:layout_height="@dimen/dp_size_12"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:visibility="gone"
+            tools:background="@drawable/peony_jzxqy_zzhz_icon"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_couple"
+            android:layout_width="@dimen/dp_size_36"
+            android:layout_height="@dimen/dp_size_12"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:background="@drawable/chat_ic_couple"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_new_people"
+            android:layout_width="@dimen/dp_size_30"
+            android:layout_height="@dimen/dp_size_12"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:background="@drawable/chat_ic_new_people"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_size_13"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:drawablePadding="@dimen/dp_size_2"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_size_9"
+            android:visibility="gone"
+            tools:background="@drawable/bg_boy"
+            tools:drawableStart="@drawable/ic_boy"
+            tools:text="15"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/noble_label"
+            style="@style/NobleBadgeStyle"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:scaleType="fitStart"
+            android:visibility="gone"
+            tools:src="@drawable/noble_label_1"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/message_item_body_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_item_name_layout"
+        android:layout_marginTop="@dimen/dp_size_3"
+        android:layout_marginEnd="@dimen/dp_size_10"
+        android:layout_toLeftOf="@id/message_item_portrait_right"
+        android:layout_toRightOf="@id/message_item_portrait_left"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/message_item_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/message_item_progress"
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/nim_progress_small_white"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/message_item_alert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/nim_ic_failed"
+                android:visibility="gone" />
+
+            <include layout="@layout/nim_read_recipt_layout" />
+
+            <TextView
+                android:id="@+id/team_ack_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="3dip"
+                android:background="@color/transparent"
+                android:paddingTop="5dp"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:id="@+id/message_item_container_with_reply_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_reply_tip_above_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reply_with_message"
+                    android:visibility="gone" />
+
+                <FrameLayout
+                    android:id="@+id/message_item_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- 覆盖层只保留一个 礼物提示，其它都是位置占位-->
+        <LinearLayout
+            android:id="@+id/message_item_body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+            <!-- 覆盖层只保留一个 礼物提示，其它都是位置占位-->
+            <TextView
+                android:id="@+id/tv_reward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="right"
+                android:text="123123123"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/message_item_extension_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_item_body_layout"
+        android:layout_marginStart="@dimen/dp_size_12"
+        android:layout_toLeftOf="@id/message_item_portrait_right"
+        android:layout_toRightOf="@id/message_item_portrait_left">
+
+        <LinearLayout
+            android:id="@+id/message_item_extension"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/message_item_pin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/nim_uikit_icon_pin"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/message_item_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/nim_uikit_icon_reply"
+                android:text="@string/reply_has_blank"
+                android:visibility="gone" />
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

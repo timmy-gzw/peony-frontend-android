@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tftechsz.home.widget.carrousellayout.CarrouselLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                          xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                          android:id="@+id/carrousel"
+                                                          android:layout_width="match_parent"
+                                                          android:layout_height="29dp"
+                                                          android:gravity="center"
+                                                          app:rotateDirection="anticlockwise"
+                                                          android:clickable="false"
+                                                          android:focusable="false"
+                                                          app:rotationTime="3000">
+
+    <ImageView
+        android:id="@+id/img_carrousel1"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:scaleType="center" />
+
+    <ImageView
+        android:id="@+id/img_carrousel2"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:scaleType="center" />
+
+    <ImageView
+        android:id="@+id/img_carrousel3"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:scaleType="center" />
+
+</com.tftechsz.home.widget.carrousellayout.CarrouselLayout>

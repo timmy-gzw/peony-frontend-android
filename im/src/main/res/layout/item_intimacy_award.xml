@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rel_root_iia"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_iia"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:src="@mipmap/peony_ccxy_icon" />
+
+    <TextView
+        android:id="@+id/tv_iia_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_toEndOf="@id/img_iia"
+        android:text="初次相遇"
+        android:textColor="#ff886471"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/tv_iia_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_iia_name"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="10dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:layout_marginBottom="15dp"
+        android:layout_toEndOf="@id/img_iia"
+        android:background="@null"
+        android:enabled="false"
+        android:textColor="#ffc2b5ba"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_current_textvisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/shape_ffedab_to_ffaf00_"
+        android:paddingStart="6dp"
+        android:paddingTop="1dp"
+        android:paddingEnd="6dp"
+        android:layout_marginEnd="2dp"
+        android:paddingBottom="1dp"
+        android:text="当前"
+        android:textColor="#ff9b7414"
+        android:textSize="10sp"
+        android:visibility="gone" />
+</RelativeLayout>

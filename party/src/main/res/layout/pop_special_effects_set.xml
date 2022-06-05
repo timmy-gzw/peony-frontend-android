@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top"
+    android:paddingHorizontal="@dimen/dp_20"
+    android:paddingVertical="@dimen/dp_20">
+
+    <TextView
+        android:id="@+id/tv_left3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="屏蔽礼物特效"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_alg1"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:paddingEnd="@dimen/dp_10"
+        android:text="@string/special_effects_party_gift_hind"
+        android:textColor="#ff999999"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@id/my_switch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_left3" />
+
+    <ImageView
+        android:id="@+id/my_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_switch_normal"
+        app:layout_constraintBottom_toBottomOf="@id/tv_alg1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_left3" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/driver"
+        app:layout_constraintTop_toBottomOf="@id/tv_alg1" />
+
+    <TextView
+        android:id="@+id/tv_left31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_9"
+        android:text="屏蔽座驾特效"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view3" />
+
+    <TextView
+        android:id="@+id/tv_alg11"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:paddingEnd="@dimen/dp_10"
+        android:text="@string/special_effects_party_hind"
+        android:textColor="#ff999999"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@id/my_switch1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_left31" />
+
+    <ImageView
+        android:id="@+id/my_switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_switch_normal"
+        app:layout_constraintBottom_toBottomOf="@id/tv_alg11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_left31" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

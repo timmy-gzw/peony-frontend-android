@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_video_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/cl_video"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@drawable/bg_half_tran20_radius20"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/dp_10"
+    android:paddingTop="@dimen/dp_8"
+    android:paddingEnd="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_8">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/dp_3"
+        android:text="你收到礼物"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:id="@+id/tv_gift_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/dp_3"
+        android:gravity="center"
+        android:textColor="@color/color_F8D423"
+        android:textSize="@dimen/sp_12" />
+
+</LinearLayout>

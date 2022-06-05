@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="is_next"
+            type="boolean" />
+
+        <variable
+            name="is_click"
+            type="boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_top_radius10"
+        android:paddingBottom="@dimen/dp_10"
+        tools:background="@color/red">
+
+        <TextView
+            android:id="@+id/top_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:padding="@dimen/dp_10"
+            android:text="取消"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:background="@drawable/bg_orange_selector_radius6"
+            android:enabled="@{is_click}"
+            android:paddingVertical="@dimen/dp_6"
+            android:paddingStart="@{is_next ? (int)@dimen/dp_19 : (int)@dimen/dp_11}"
+            android:paddingEnd="@{is_next ? (int)@dimen/dp_19 : (int)@dimen/dp_11}"
+            android:text='@{is_next ? "提交" : "下一步"}'
+            android:textColor="@drawable/color_orange_selector"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@id/top_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/top_cancel"
+            tools:background="@drawable/bg_eee_radius6"
+            tools:text="下一步"
+            tools:textColor="@color/color_light_font" />
+
+        <FrameLayout
+            android:id="@+id/fl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_5"
+            app:layout_constraintBottom_toBottomOf="@id/top_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/top_cancel">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_pop_pic" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text='@{is_next ? "提交新账户" : "绑定手机号"}'
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                tools:text="绑定手机号" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:background="@drawable/shape_bg_f9f9f9_radius_6"
+            android:visibility="@{is_next ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/edt_tell"
+            app:layout_constraintTop_toTopOf="@id/edt_tell"
+            tools:visibility="visible" />
+
+        <EditText
+            android:id="@+id/edt_tell"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@null"
+            android:hint="请输入账号绑定的手机号"
+            android:inputType="number"
+            android:paddingHorizontal="@dimen/dp_15"
+            android:singleLine="true"
+            android:textColor="@color/color_normal"
+            android:textColorHint="@color/color_cccccc"
+            android:textSize="@dimen/sp_15"
+            android:visibility="@{is_next ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toStartOf="@id/btn_get_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_cancel" />
+
+        <Button
+            android:id="@+id/btn_get_code"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_34"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:background="@drawable/bg_orange_selector_radius6"
+            android:enabled="false"
+            android:text="获取验证码"
+            android:textColor="@drawable/color_orange_selector"
+            android:textSize="@dimen/sp_12"
+            android:visibility="@{is_next ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/edt_tell"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/edt_tell" />
+
+
+        <EditText
+            android:id="@+id/edt_code"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/shape_bg_f9f9f9_radius_6"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:maxLength="4"
+            android:paddingHorizontal="@dimen/dp_15"
+            android:singleLine="true"
+            android:textColor="@color/color_normal"
+            android:textColorHint="@color/color_cccccc"
+            android:textSize="@dimen/sp_15"
+            android:visibility="@{is_next ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_tell" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/bg_pay_choose"
+            android:overScrollMode="never"
+            android:visibility="@{is_next ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/edt_code">
+
+            <LinearLayout
+                android:id="@+id/ll_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_zfb"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:background="@drawable/bg_pay_choose"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_pay_way">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="支付宝"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_15"
+                        app:drawableStartCompat="@mipmap/ic_zxb" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:background="@mipmap/ic_arrow"
+                        android:visibility="invisible" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:text="真实姓名"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_15" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/transparent"
+                    android:hint="请输入收款人真实姓名"
+                    android:inputType="text"
+                    android:paddingHorizontal="@dimen/sp_15"
+                    android:singleLine="true"
+                    android:textColor="@color/color_normal"
+                    android:textColorHint="@color/color_cc"
+                    android:textSize="@dimen/sp_16" />
+
+                <View
+                    style="@style/Driver"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:background="@color/driver" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:text="收款人手机号"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_15" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/transparent"
+                    android:hint="请输入收款人手机号"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:paddingHorizontal="@dimen/sp_15"
+                    android:singleLine="true"
+                    android:textColor="@color/color_normal"
+                    android:textColorHint="@color/color_cc"
+                    android:textSize="@dimen/sp_16" />
+
+                <View
+                    style="@style/Driver"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:background="@color/driver" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:text="支付宝账号"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_15" />
+
+                <EditText
+                    android:id="@+id/et_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/transparent"
+                    android:hint="请输入收款人支付宝账号"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="@dimen/sp_15"
+                    android:singleLine="true"
+                    android:textColor="@color/color_normal"
+                    android:textColorHint="@color/color_cc"
+                    android:textSize="@dimen/sp_16" />
+
+                <View
+                    style="@style/Driver"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:background="@color/driver" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:text="身份证号码"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_15" />
+
+                <EditText
+                    android:id="@+id/et_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/transparent"
+                    android:digits="0123456789xX"
+                    android:hint="请输入收款人的身份证号码"
+                    android:inputType="number"
+                    android:maxLength="18"
+                    android:paddingHorizontal="@dimen/sp_15"
+                    android:singleLine="true"
+                    android:textColor="@color/color_normal"
+                    android:textColorHint="@color/color_cc"
+                    android:textSize="@dimen/sp_16" />
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_mode_freedom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/dp_29"
+        android:paddingBottom="@dimen/dp_19"
+        android:text="普通模式"
+        android:textColor="#ff333333"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:visibility="gone"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:background="#EEEEEE" />
+
+    <TextView
+        android:id="@+id/tv_mode_sequence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/dp_19"
+        android:visibility="gone"
+        android:paddingBottom="@dimen/dp_19"
+        android:text="PK模式"
+        android:textColor="#ff333333"
+        android:textSize="15sp" />
+
+</LinearLayout>

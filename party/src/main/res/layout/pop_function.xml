@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_mine_white_top"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20">
+
+        <TextView
+            android:id="@+id/tv_funtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/party_function"
+            android:textColor="#ff333333"
+            android:textSize="@dimen/sp_15" />
+
+        <TextView
+            android:id="@+id/tv_click_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="@dimen/dp_20"
+            android:text="取消"
+            android:textColor="#ff999999"
+            android:textSize="15sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_party"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:overScrollMode="never" />
+
+    <TextView
+        android:id="@+id/tv_play_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:visibility="gone"
+        android:text="@string/party_play_method"
+        android:textColor="#ff333333"
+        android:textSize="@dimen/sp_15" />
+
+    <TextView
+        android:id="@+id/img_play_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_25"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_normal"
+        android:visibility="gone"
+        android:drawablePadding="@dimen/dp_5"
+        android:gravity="center"
+        android:text="PK模式"
+        app:drawableTopCompat="@drawable/party_function_pk" />
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_couple"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="end|bottom"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+   >
+
+    <ImageView
+        android:id="@+id/iv_couple"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/chat_ic_couple_letter" />
+
+    <TextView
+        android:id="@+id/tv_couple_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dot_red1"
+        android:gravity="center"
+        android:minWidth="@dimen/dp_18"
+        android:minHeight="@dimen/dp_18"
+        android:layout_marginBottom="-20dp"
+        android:layout_above="@+id/iv_couple"
+        android:paddingStart="@dimen/dp_3"
+        android:paddingEnd="@dimen/dp_3"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+
+</RelativeLayout>

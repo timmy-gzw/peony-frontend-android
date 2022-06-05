@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.tftechsz.common.nertcvoiceroom.model.VoiceRoomSeat" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/gift_view"
+            android:layout_width="@dimen/dp_38"
+            android:layout_height="@dimen/dp_38"
+            android:background="@drawable/bg_orange_radius100"
+            android:visibility="@{item.giftPopSel ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dp_1"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/gift_view"
+            app:layout_constraintEnd_toEndOf="@id/gift_view"
+            app:layout_constraintStart_toStartOf="@id/gift_view"
+            app:layout_constraintTop_toTopOf="@id/gift_view"
+            tools:src="@drawable/gift_all_wheat_normal" />
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_0"
+            android:layout_marginBottom="@dimen/dp_10"
+            app:layout_constraintBottom_toBottomOf="@id/gift_view"
+            app:layout_constraintEnd_toEndOf="@id/gift_view"
+            app:layout_constraintStart_toStartOf="@id/gift_view" />
+
+        <TextView
+            android:id="@+id/gift_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{item.giftPopSel ? @drawable/bg_orange_radius100 : @drawable/bg_eee_radius100}"
+            android:paddingHorizontal="@dimen/dp_4"
+            android:paddingVertical="@dimen/dp_1"
+            android:text='@{item.index == 0 ? "主持" : String.valueOf(item.index)}'
+            android:textColor="@{item.giftPopSel ? @color/gift_wheat_text_color : @color/color_mid_font}"
+            android:textSize="@dimen/sp_8"
+            app:layout_constraintEnd_toEndOf="@id/gift_view"
+            app:layout_constraintStart_toStartOf="@id/gift_view"
+            app:layout_constraintTop_toBottomOf="@id/space"
+            tools:background="@drawable/bg_eee_radius100"
+            tools:text="全麦"
+            tools:textColor="@color/color_mid_font" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

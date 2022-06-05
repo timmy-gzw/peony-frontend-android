@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="item"
+            type="com.tftechsz.mine.entity.DressUpBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/du_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/dp_8"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
+            app:imageBackgroundUrl="@{item.url}"
+            app:layout_constraintDimensionRatio="h,8:5"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/red" />
+
+        <ImageView
+            android:id="@+id/svg_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:padding="@dimen/dp_5"
+            android:src="@mipmap/svga_player"
+            android:visibility="@{TextUtils.isEmpty(item.svg_link) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/du_bg"
+            app:layout_constraintStart_toStartOf="@id/du_bg"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_is_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:background="@drawable/bg_accost"
+            android:paddingStart="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_2"
+            android:paddingEnd="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_2"
+            android:text="使用中"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_9"
+            android:visibility="@{item.is_active == 1 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@id/du_bg"
+            app:layout_constraintTop_toTopOf="@id/du_bg" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_3"
+            android:text="@{item.title}"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/du_bg"
+            tools:text="专属起泡" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

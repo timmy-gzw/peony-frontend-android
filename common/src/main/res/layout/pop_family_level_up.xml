@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="#aa000000">
+
+    <ImageView
+        android:id="@+id/iv_rotate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:src="@mipmap/peony_djts_gx_png"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/level_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/peony_djts_bg_img"
+        app:layout_constraintBottom_toTopOf="@id/del"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+        android:id="@+id/level_icon"
+        android:layout_width="@dimen/dp_92"
+        android:layout_height="@dimen/dp_92"
+        android:layout_marginTop="@dimen/dp_75"
+        android:src="@mipmap/peony_djts_01_icon"
+        app:layout_constraintEnd_toEndOf="@id/level_bg"
+        app:layout_constraintStart_toStartOf="@id/level_bg"
+        app:layout_constraintTop_toTopOf="@id/level_bg" />
+
+    <TextView
+        android:id="@+id/level_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@id/level_icon"
+        app:layout_constraintEnd_toEndOf="@id/level_icon"
+        app:layout_constraintStart_toStartOf="@id/level_icon"
+        app:layout_constraintTop_toTopOf="@id/level_icon" />
+
+    <TextView
+        android:id="@+id/level_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#ffdd7649"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="@id/level_bg"
+        app:layout_constraintEnd_toEndOf="@id/level_bg"
+        app:layout_constraintStart_toStartOf="@id/level_bg"
+        app:layout_constraintTop_toBottomOf="@id/level_icon"
+        tools:text="恭喜！家族\n等级升级到\nLV.1" />
+
+    <ImageView
+        android:id="@+id/del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:src="@mipmap/real_pop_del"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/level_bg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

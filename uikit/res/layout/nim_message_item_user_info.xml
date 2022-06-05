@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minWidth="335dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/message_item_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_size_20"
+        android:layout_marginEnd="@dimen/text_size_10"
+        android:background="@drawable/bg_user_info_radius"
+        android:gravity="center_vertical"
+        android:minWidth="335dp"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10">
+
+
+        <FrameLayout
+            android:id="@+id/fl_avatar"
+            android:layout_width="@dimen/dp_size_74"
+            android:layout_height="@dimen/dp_size_74"
+            android:layout_marginStart="@dimen/dp_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
+                android:id="@+id/iv_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_default_avatar" />
+
+            <ImageView
+                android:id="@+id/iv_sex"
+                android:layout_width="@dimen/dp_size_20"
+                android:layout_height="@dimen/dp_size_20"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/nim_ic_boy" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/tv_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_size_18"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_toEndOf="@+id/fl_avatar"
+            android:gravity="center"
+            android:textColor="@color/color_black_ff666666"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/fl_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="15" />
+
+
+        <TextView
+            android:id="@+id/tv_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_user_info"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_size_6"
+            android:layout_toEndOf="@+id/fl_avatar"
+            android:singleLine="true"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toEndOf="@+id/fl_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_info"
+            tools:text="我就是我，是颜色不一样的烟火～" />
+
+        <LinearLayout
+            android:id="@+id/ll_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_size_24"
+            android:layout_below="@+id/tv_sign"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_size_6"
+            android:layout_toEndOf="@+id/fl_avatar"
+            android:background="@drawable/shape_yellow_radius"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@+id/fl_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sign"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_audio"
+                android:layout_width="@dimen/dp_size_24"
+                android:layout_height="@dimen/dp_size_24"
+                android:src="@drawable/peony_me_zt_icon" />
+
+            <TextView
+                android:id="@+id/audio_time"
+                android:layout_width="@dimen/dp_size_30"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_size_10"
+                tools:text="17s" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_audio_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_size_24"
+            android:layout_below="@+id/tv_sign"
+            android:layout_marginStart="@dimen/dp_size_6"
+            android:layout_marginTop="@dimen/dp_size_6"
+            android:layout_toEndOf="@+id/ll_audio"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_size_7"
+            android:text="点击播放语音"
+            android:textColor="#D3D3D3"
+            android:textSize="@dimen/text_size_10"
+            app:layout_constraintStart_toEndOf="@+id/ll_audio"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sign" />
+
+        <View
+            android:id="@+id/view_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/fl_avatar"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_size_10"
+            android:background="#F1F1F1"
+            app:layout_constraintBottom_toTopOf="@+id/rv_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_avatar" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_bottom"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_size_17"
+            android:layout_toStartOf="@+id/tv_home"
+            app:layout_constraintEnd_toStartOf="@+id/tv_home"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_bottom" />
+
+
+        <TextView
+            android:id="@+id/tv_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_bottom"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/dp_size_20"
+            android:background="@drawable/bg_gray_d0"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_size_7"
+            android:text="查看主页"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_bottom" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gray_ee"
+        android:paddingStart="@dimen/dp_size_30"
+        android:layout_marginStart="@dimen/dp_size_41"
+        android:layout_marginEnd="@dimen/dp_size_31"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:paddingTop="@dimen/dp_size_8"
+        android:paddingEnd="@dimen/dp_size_30"
+        android:paddingBottom="@dimen/dp_size_8">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_size_2"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"
+            tools:text="对方已通过真人～在近期使用Glide4." />
+    </FrameLayout>
+
+
+</LinearLayout>

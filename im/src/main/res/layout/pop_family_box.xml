@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isClick"
+            type="boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/root_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/peony_jzbx_bxtc_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@mipmap/white_del"
+            app:layout_constraintEnd_toEndOf="@id/root_bg"
+            app:layout_constraintTop_toTopOf="@id/root_bg"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/iv_prestige"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="@dimen/dp_8"
+            android:paddingStart="@dimen/dp_15"
+            android:paddingEnd="@dimen/dp_8"
+            android:text="活动说明"
+            android:textColor="#cc5513"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/tip"
+            app:layout_constraintStart_toStartOf="@id/tip"
+            app:layout_constraintTop_toTopOf="@id/tip" />
+
+        <ImageView
+            android:id="@+id/tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_80"
+            android:src="@mipmap/family_icon_tip"
+            app:layout_constraintStart_toStartOf="@id/root_bg"
+            app:layout_constraintTop_toTopOf="@id/root_bg"
+            app:tint="#cc5513" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="@dimen/dp_280"
+            android:layout_height="@dimen/dp_280"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/t1"
+            app:layout_constraintEnd_toEndOf="@id/root_bg"
+            app:layout_constraintStart_toStartOf="@id/root_bg"
+            app:layout_constraintTop_toTopOf="@id/iv_prestige"
+            app:lottie_autoPlay="false"
+            app:lottie_fileName="pop_family_box.zip"
+            app:lottie_loop="false" />
+
+        <TextView
+            android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginHorizontal="@dimen/dp_45"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:alpha="@{isClick ? 1f : 0.5f}"
+            android:background="@drawable/bg_pop_family_box_btn"
+            android:enabled="@{isClick}"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toBottomOf="@id/root_bg"
+            app:layout_constraintEnd_toEndOf="@id/root_bg"
+            app:layout_constraintStart_toStartOf="@id/root_bg"
+            tools:text="抢宝箱" />
+
+        <TextView
+            android:id="@+id/tips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:text="*在两小时内，家族发言人数达到20人，同时金币消耗达到2000，即可触发家族宝藏哦～"
+            android:textColor="#ffcc5513"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/btn"
+            app:layout_constraintEnd_toEndOf="@id/root_bg"
+            app:layout_constraintStart_toStartOf="@id/root_bg" />
+
+        <TextView
+            android:id="@+id/tv_task1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_13"
+            android:drawablePadding="@dimen/dp_3"
+            android:text="发言人数 12/20"
+            android:textColor="#ffffa000"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toTopOf="@id/tips"
+            app:layout_constraintStart_toStartOf="@id/root_bg"
+            app:drawableStartCompat="@mipmap/peony_jzbx_dy_icon" />
+
+        <TextView
+            android:id="@+id/tv_task2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_3"
+            android:text="金币消耗 1200/2000"
+            android:textColor="#ffffa000"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/tv_task1"
+            app:layout_constraintEnd_toEndOf="@id/root_bg"
+            app:layout_constraintTop_toTopOf="@id/tv_task1"
+            app:drawableStartCompat="@mipmap/peony_jzbx_de_icon" />
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="开启条件："
+            android:textColor="#ffcc5513"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_task1"
+            app:layout_constraintStart_toStartOf="@id/tv_task1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

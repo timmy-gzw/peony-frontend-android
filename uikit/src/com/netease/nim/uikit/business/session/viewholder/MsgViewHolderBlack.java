@@ -1,0 +1,73 @@
+package com.netease.nim.uikit.business.session.viewholder;
+
+import android.text.method.LinkMovementMethod;
+import android.text.style.ImageSpan;
+import android.widget.TextView;
+
+import com.netease.nim.uikit.R;
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.business.session.emoji.MoonUtil;
+import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
+
+/**
+ * Created by zhoujianghua on 2015/8/4.
+ */
+public class MsgViewHolderBlack extends MsgViewHolderBase {
+
+    protected TextView bodyTextView;
+
+    public MsgViewHolderBlack(BaseMultiItemFetchLoadAdapter adapter) {
+        super(adapter);
+    }
+
+    @Override
+    public int getContentResId() {
+        return R.layout.chat_item_center_custom;
+    }
+
+    @Override
+    public void inflateContentView() {
+        bodyTextView = findViewById(R.id.tv_content);
+    }
+
+    @Override
+    public void bindContentView() {
+        layoutDirection();
+    }
+
+    private void layoutDirection() {
+//        if (isReceivedMessage()) {
+//            bodyTextView.setBackgroundResource(NimUIKitImpl.getOptions().messageLeftBackground);
+//            bodyTextView.setTextColor(Color.BLACK);
+//            bodyTextView.setPadding(ScreenUtil.dip2px(15), ScreenUtil.dip2px(8), ScreenUtil.dip2px(10), ScreenUtil.dip2px(8));
+//        } else {
+//            bodyTextView.setBackgroundResource(NimUIKitImpl.getOptions().messageRightBackground);
+//            bodyTextView.setTextColor(Color.BLACK);
+//            bodyTextView.setPadding(ScreenUtil.dip2px(10), ScreenUtil.dip2px(8), ScreenUtil.dip2px(15), ScreenUtil.dip2px(8));
+//        }
+        MoonUtil.identifyFaceExpression(NimUIKit.getContext(), bodyTextView, getDisplayText(), ImageSpan.ALIGN_BOTTOM);
+        bodyTextView.setMovementMethod(LinkMovementMethod.getInstance());
+//        bodyTextView.setLinkTextColor(Color.BLACK);
+        bodyTextView.setOnLongClickListener(longClickListener);
+    }
+
+
+    protected String getDisplayText() {
+        return message.getContent();
+    }
+
+    @Override
+    protected boolean isShowHeadImage() {
+        return false;
+    }
+
+    @Override
+    protected int leftBackground() {
+        return 0;
+    }
+
+    @Override
+    protected int rightBackground() {
+        return 0;
+    }
+}

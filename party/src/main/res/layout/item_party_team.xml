@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="@dimen/dp_8">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_member_avatar"
+        android:layout_width="@dimen/dp_size_37"
+        android:layout_height="@dimen/dp_size_37"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="-12dp"
+        android:layout_toEndOf="@+id/iv_member_avatar"
+        android:src="@drawable/party_ic_close_black"
+        app:layout_constraintStart_toEndOf="@+id/iv_member_avatar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_member_avatar"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_member_avatar"
+
+        />
+
+</RelativeLayout>

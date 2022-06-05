@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_leader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/dp_20"
+        android:paddingVertical="@dimen/dp_10"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/mine_ic_girl_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/voice_family_bg"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_20"
+            android:background="@drawable/shape_voice_family_bg"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+            app:layout_constraintEnd_toEndOf="@id/iv_avatar"
+            app:layout_constraintStart_toStartOf="@id/iv_avatar"
+            tools:visibility="visible" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/voice_family_lottie"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_10"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_2"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/voice_family_bg"
+            app:layout_constraintEnd_toEndOf="@id/voice_family_bg"
+            app:layout_constraintStart_toStartOf="@id/voice_family_bg"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="white-data.json"
+            app:lottie_imageAssetsFolder="gift/"
+            app:lottie_loop="true"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/tag_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/peony_jzgc_xjz_icon"
+            app:layout_constraintEnd_toEndOf="@id/iv_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_avatar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_name"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            app:layout_constraintBottom_toTopOf="@+id/tv_number"
+            app:layout_constraintEnd_toStartOf="@id/tv_add"
+            app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_15"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@id/rl_level"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="喵了个咪儿喵了个咪儿" />
+
+            <RelativeLayout
+                android:id="@+id/rl_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="@id/tv_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_name"
+                app:layout_constraintTop_toTopOf="@id/tv_name">
+
+                <ImageView
+                    android:id="@+id/iv_level"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_26"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:id="@+id/tv_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_22"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_9"
+                    android:textStyle="bold"
+                    tools:text="10" />
+
+            </RelativeLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/bg_family_num"
+            android:drawablePadding="@dimen/dp_1"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_5"
+            android:paddingVertical="@dimen/dp_2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/cl_name"
+            tools:text="15人" />
+
+
+        <TextView
+            android:id="@+id/tv_prestige"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_4"
+            android:background="@drawable/bg_family_prestige"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_5"
+            android:paddingVertical="@dimen/dp_2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintBottom_toBottomOf="@id/tv_number"
+            app:layout_constraintStart_toEndOf="@id/tv_number"
+            app:layout_constraintTop_toTopOf="@id/tv_number"
+            tools:text="威望100W" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_5"
+            android:paddingEnd="@dimen/dp_5"
+            android:singleLine="true"
+            android:textColor="@color/color_light_font"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintEnd_toStartOf="@id/tv_add"
+            app:layout_constraintStart_toEndOf="@id/iv_avatar"
+            app:layout_constraintTop_toBottomOf="@id/tv_number"
+            tools:text="料很小分队启动，美女请进，男士请撩" />
+
+
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_34"
+            android:background="@drawable/bg_family_add"
+            android:gravity="center"
+            android:text="加入"
+            android:textColor="@color/color_CFB78A"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view"
+        style="@style/Driver"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:background="@color/driver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_desc" />
+</LinearLayout>

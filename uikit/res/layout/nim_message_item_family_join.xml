@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/message_item_red_root"
+    android:layout_width="340dp"
+    android:layout_height="@dimen/dp_size_70"
+    android:layout_marginHorizontal="@dimen/dp_size_15"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_white_radius14"
+    android:paddingHorizontal="@dimen/dp_size_15"
+    android:paddingStart="@dimen/dp_size_5"
+    android:paddingEnd="@dimen/dp_size_15">
+
+
+    <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_size_15"
+        android:text="🎉欢迎新成员加入家族"
+        android:textColor="@color/color_999999"
+        android:textSize="15sp"
+        android:layout_marginEnd="@dimen/dp_size_5"
+        android:singleLine="true"
+        app:layout_constraintEnd_toStartOf="@+id/tv_join"
+        app:layout_constraintBottom_toTopOf="@+id/tv_content"
+        app:layout_constraintStart_toEndOf="@+id/iv_head"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_size_15"
+        android:text="dsafa"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_head"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_family_join"
+        android:paddingHorizontal="@dimen/dp_size_15"
+        android:paddingVertical="@dimen/dp_size_5"
+        android:text="欢迎TA"
+        android:textColor="#CFB78A"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

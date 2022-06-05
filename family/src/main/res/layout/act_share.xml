@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="hasData"
+            type="boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        android:orientation="vertical">
+
+        <include layout="@layout/tool_bar" />
+
+        <TextView
+            android:id="@+id/share_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/base_tool_bar"
+            android:background="@color/color_F8D423"
+            android:gravity="center"
+
+            android:paddingTop="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_12"
+            android:text="只能邀请亲密度大于3℃的用户哦"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_12"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/share_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/share_hint"
+            app:srlEnableRefresh="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/share_recy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:visibility="@{hasData ? View.VISIBLE : View.GONE}"
+                tools:visibility="gone" />
+
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        <include
+            android:id="@+id/empty"
+            layout="@layout/base_empty_view"
+            android:visibility="@{hasData ? View.GONE : View.VISIBLE}"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_5">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintEnd_toEndOf="@id/view"
+            app:layout_constraintStart_toStartOf="@id/view"
+            app:layout_constraintTop_toTopOf="@id/view"
+            tools:text="未领取" />
+
+        <View
+            android:id="@+id/left_line"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:background="@drawable/shape_gradient_sign_in_left_line_normal"
+            app:layout_constraintBottom_toBottomOf="@id/tv_status"
+            app:layout_constraintEnd_toStartOf="@id/tv_status"
+            app:layout_constraintTop_toTopOf="@id/tv_status" />
+
+        <View
+            android:id="@+id/end_line"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_marginStart="@dimen/dp_4"
+            android:background="@drawable/shape_gradient_sign_in_right_line_normal"
+            app:layout_constraintBottom_toBottomOf="@id/tv_status"
+            app:layout_constraintStart_toEndOf="@id/tv_status"
+            app:layout_constraintTop_toTopOf="@id/tv_status" />
+
+        <TextView
+            android:id="@+id/tips"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/shape_sign_top_tips_sel"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="送VIP体验"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tv_status"
+            app:layout_constraintTop_toTopOf="@id/view"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/tips_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:background="@drawable/shape_sign_top_tips_line"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tips" />
+
+        <ImageView
+            android:id="@+id/iv_gold_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/peony_qd_bg_icon"
+            app:layout_constraintBottom_toBottomOf="@id/view"
+            app:layout_constraintEnd_toEndOf="@id/view"
+            app:layout_constraintStart_toStartOf="@id/view"
+            app:layout_constraintTop_toTopOf="@id/view" />
+
+        <ImageView
+            android:id="@+id/iv_gold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
+            app:layout_constraintEnd_toEndOf="@id/view"
+            app:layout_constraintStart_toStartOf="@id/view"
+            app:layout_constraintTop_toBottomOf="@id/tv_status"
+            tools:src="@mipmap/peony_qd_yqd02_icon" />
+
+        <TextView
+            android:id="@+id/tv_gold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/view"
+            app:layout_constraintStart_toStartOf="@id/view"
+            app:layout_constraintTop_toBottomOf="@id/iv_gold"
+            tools:text="12金币" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

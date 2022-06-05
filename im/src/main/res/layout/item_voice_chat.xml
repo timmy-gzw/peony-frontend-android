@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_avatar"
+        android:layout_width="@dimen/dp_size_78"
+        android:layout_height="@dimen/dp_size_78"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/circle"
+            android:layout_width="@dimen/dp_53"
+            android:layout_height="@dimen/dp_53"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/chat_ic_blue_round"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/circle1"
+            android:layout_width="@dimen/dp_53"
+            android:layout_height="@dimen/dp_53"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/chat_ic_blue_round"
+            android:visibility="visible" />
+
+        <com.tftechsz.common.widget.CircleImageView
+            android:id="@+id/iv_user"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/chat_ic_voice_chat_add" />
+
+        <com.opensource.svgaplayer.SVGAImageView
+            android:id="@+id/svga_head"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:autoPlay="true"
+            app:clearsAfterStop="true" />
+
+        <ImageView
+            android:id="@+id/iv_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/vip_style_picture_frame_s02_round" />
+
+        <TextView
+            android:id="@+id/tv_user_position"
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_13"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:background="@drawable/bg_dot_position"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_avatar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-3dp"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_10"
+        tools:text="快乐王宝强" />
+
+
+    <TextView
+        android:id="@+id/tv_chat_love"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_position"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_3"
+        android:drawablePadding="@dimen/dp_2"
+        android:text="0"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_10"
+        app:drawableStartCompat="@mipmap/chat_ic_voice_chat_love" />
+
+</RelativeLayout>

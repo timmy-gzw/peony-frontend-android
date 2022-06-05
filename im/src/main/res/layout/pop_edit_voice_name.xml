@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_35"
+    android:layout_marginEnd="@dimen/dp_35"
+    android:background="@drawable/bg_white">
+
+
+    <com.tftechsz.common.widget.CommonFrameView
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_20"
+        app:text_content="修改玩法名称" />
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_title"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_14"
+        android:background="@color/transparent"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold"
+        tools:text="sagagasgasgasdga" />
+
+    <View
+        android:id="@+id/view"
+        style="@style/Driver"
+        android:layout_below="@+id/et_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_13"
+        android:background="@color/driver" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/view"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_size_23"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="@dimen/dp_size_20"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_gray_radius100"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/color_light_font"
+            android:textSize="@dimen/sp_15" />
+
+        <View
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_orange_enable"
+            android:gravity="center"
+            android:text="确认修改"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_15" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

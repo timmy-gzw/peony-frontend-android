@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.tftechsz.main"
+  >
+
+  <application
+    android:allowBackup="true"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
+    <activity
+      android:name="com.tftechsz.main.mvp.ui.MainActivity"
+      android:launchMode="singleTask"
+      android:screenOrientation="portrait" />
+
+    <service
+      android:name="com.tftechsz.common.music.service.PlayService"
+      android:enabled="true" />
+
+    <!--  <receiver android:name="com.tftechsz.common.music.receiver.AudioBroadcastReceiver">
+          <intent-filter>
+              <action android:name="cn.ycbjie.lock" />
+          </intent-filter>
+      </receiver>-->
+    <receiver android:name="com.tftechsz.common.music.receiver.AudioEarPhoneReceiver" />
+  </application>
+
+</manifest>

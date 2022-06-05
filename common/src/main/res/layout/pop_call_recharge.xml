@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_recharge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_recharge_radius6"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/dp_16"
+    android:paddingTop="@dimen/dp_11"
+    android:paddingEnd="@dimen/dp_16"
+    android:paddingBottom="@dimen/dp_11">
+
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="当前金币余额不足2分钟"
+        android:textColor="@color/color_F8D423"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_1"
+        android:gravity="center"
+        android:text="请及时充值，避免通话断开"
+        android:textColor="@color/color_99_ff"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+
+        />
+
+
+    <TextView
+
+        android:id="@+id/tv_recharge"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginStart="@dimen/dp_20"
+        android:background="@drawable/bg_orange_radius15"
+        android:paddingStart="@dimen/dp_13"
+        android:paddingTop="@dimen/dp_7"
+        android:paddingEnd="@dimen/dp_13"
+        android:paddingBottom="@dimen/dp_7"
+        android:text="去充值"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

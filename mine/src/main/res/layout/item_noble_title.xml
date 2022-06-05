@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.tftechsz.mine.entity.NobleBean.GradeDTO" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{item.isSel ? @drawable/shape_bg_d8d8d8_25 : @drawable/bg_trans}"
+            android:paddingHorizontal="@dimen/dp_15"
+            android:paddingVertical="@dimen/dp_5"
+            android:text="@{item.name}"
+            android:textColor="@{item.isSel ? (int)@color/noble_color : (int)@color/color_928C81}"
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/shape_bg_d8d8d8_25"
+            tools:text="伯爵"
+            tools:textColor="@color/noble_color" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

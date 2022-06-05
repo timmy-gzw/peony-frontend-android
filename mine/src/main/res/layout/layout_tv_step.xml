@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="text"
+            type="String" />
+    </data>
+
+        <TextView
+            android:id="@+id/step_tv"
+            android:layout_width="@dimen/step_tv_un_focus_size"
+            android:layout_height="@dimen/step_tv_un_focus_size"
+            android:layout_margin="@dimen/step_tv_gap"
+            android:background="@drawable/circle_tv_un_focus"
+            android:gravity="center"
+            android:text="@{text}"
+            android:textColor="#FFFFFFFF"
+            android:textSize="@dimen/step_tv_font_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+</layout>
+

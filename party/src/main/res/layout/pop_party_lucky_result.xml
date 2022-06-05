@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/con_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_50"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_30">
+
+    <ImageView
+        android:id="@+id/img_align_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_25"
+        android:gravity="bottom"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rel_party_lucky_result_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="5dp"
+        android:overScrollMode="never"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_align_1" />
+
+    <TextView
+        android:id="@+id/tv_title_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_40"
+        android:gravity="center"
+        android:paddingTop="@dimen/dp_100"
+        android:paddingBottom="@dimen/dp_100"
+        android:shadowColor="#dea844f0"
+        android:shadowRadius="3.0"
+        android:text="系统出错，请退出转盘后重试!"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_align_1" />
+
+
+    <TextView
+        android:id="@+id/tv_title_partylucky"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_80"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:shadowColor="#dea844f0"
+        android:shadowRadius="3.0"
+        android:text="*可在背包中查看和使用哦～"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rel_party_lucky_result_recyclerview" />
+
+    <!--
+        <TextView
+            android:id="@+id/tv_title_lucky_stone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:drawableLeft="@drawable/check_lucky_stone"
+            android:gravity="top|center_horizontal"
+            android:shadowColor="#dea844f0"
+            android:shadowRadius="3.0"
+            android:text="当幸运石不足时，自动为您购买聊天气泡，并赠送初级幸运石"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rel_party_lucky_result_recyclerview" />
+    -->
+
+    <CheckBox
+        android:id="@+id/tv_title_lucky_stone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:background="@color/transparent"
+        android:button="@drawable/check_protocol_pay_party"
+        android:checked="true"
+        android:gravity="top|center_horizontal"
+        android:includeFontPadding="false"
+        android:shadowColor="#dea844f0"
+        android:shadowRadius="3.0"
+        android:text="当幸运石不足时，自动为您购买聊天气泡，并赠送初级幸运石"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rel_party_lucky_result_recyclerview" />
+
+    <ImageView
+        android:id="@+id/img_know_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dp_29"
+        android:src="@drawable/party_result_lucky_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_partylucky" />
+
+    <ImageView
+        android:id="@+id/img_know_click_not"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_36"
+        android:layout_marginBottom="@dimen/dp_29"
+        android:src="@drawable/party_know_btn"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_hint" />
+
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

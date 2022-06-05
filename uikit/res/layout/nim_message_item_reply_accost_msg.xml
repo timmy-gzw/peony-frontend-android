@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_reply_accost"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginStart="@dimen/dp_size_47"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收到搭讪礼物"
+            android:textColor="@color/color_333333"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/tv_gift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="礼物"
+            android:textColor="#F8D423"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="96dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_toEndOf="@+id/ll_content"
+        android:background="@drawable/chat_ic_accost_left">
+
+
+        <ImageView
+            android:id="@+id/message_item_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:layout_gravity="center"
+            android:contentDescription="@string/empty" />
+
+    </FrameLayout>
+
+</RelativeLayout>
+
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_48">
+
+    <ImageView
+        android:id="@+id/iv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_6"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_empty" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center_horizontal"
+        android:text="暂无任何数据..."
+        android:textColor="@color/color_cc"
+        android:textSize="@dimen/sp_15" />
+
+    <TextView
+        android:id="@+id/tv_send"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@drawable/bg_orange_enable"
+        android:text=" 发布动态"
+        android:visibility="gone"
+
+        />
+</LinearLayout>

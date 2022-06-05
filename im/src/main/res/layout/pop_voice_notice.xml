@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="75dp"
+    android:layout_marginTop="@dimen/dp_50"
+    android:layout_marginEnd="@dimen/dp_50"
+    android:id="@+id/lin_layouts"
+    android:background="@mipmap/chat_bg_vly_yyf_gg_imgnew"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tv_announcement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="2dp"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_12"
+        android:text="啊"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_14"
+        tools:ignore="RtlSymmetry" />
+
+</LinearLayout>

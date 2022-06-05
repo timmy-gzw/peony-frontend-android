@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="search_mode"
+            type="boolean" />
+
+        <variable
+            name="selected_mode"
+            type="boolean" />
+
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/base_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/toolbar_back_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingEnd="@dimen/dp_15"
+                android:paddingBottom="@dimen/dp_10"
+                android:src="@mipmap/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="家族成员"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_search_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:padding="@dimen/dp_7"
+                android:src="@mipmap/ic_search"
+                android:transitionName="family_search"
+                android:visibility="@{selected_mode ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/toolbar_iv_menu"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/color_normal" />
+
+            <ImageView
+                android:id="@+id/toolbar_iv_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:padding="@dimen/dp_7"
+                android:src="@mipmap/family_icon_clear_inactive"
+                android:visibility="@{selected_mode ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/toolbar_iv_choose"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/toolbar_iv_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_13"
+                android:padding="@dimen/dp_7"
+                android:src="@mipmap/family_icon_contribute"
+                android:visibility="@{selected_mode ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:background="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="@{search_mode ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="@id/base_tool_bar"
+            tools:visibility="gone">
+
+            <ImageView
+                android:id="@+id/back_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingEnd="@dimen/dp_15"
+                android:paddingBottom="@dimen/dp_10"
+                android:src="@mipmap/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_0"
+                android:background="@drawable/bg_gray"
+                app:layout_constraintBottom_toBottomOf="@id/et_search"
+                app:layout_constraintEnd_toEndOf="@id/et_search"
+                app:layout_constraintStart_toStartOf="@id/iv_search"
+                app:layout_constraintTop_toTopOf="@id/et_search" />
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_7"
+                android:src="@mipmap/ic_search"
+                android:transitionName="family_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back_all"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/color_light_font" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_35"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:background="@null"
+                android:hint="搜索家族成员"
+                android:imeOptions="actionSearch"
+                android:paddingHorizontal="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColorHint="@color/color_light_font"
+                android:textSize="@dimen/sp_15"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/toolbar_tv_menu"
+                app:layout_constraintStart_toEndOf="@id/iv_search"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/toolbar_tv_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:text="搜索"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/smartrefreshlayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/bg_color"
+            android:visibility="@{search_mode ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/bot_sel"
+            app:layout_constraintTop_toBottomOf="@id/base_tool_bar">
+
+            <com.tftechsz.common.widget.sticky.StickyHeaderLayout
+                android:id="@+id/sticky_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
+
+            </com.tftechsz.common.widget.sticky.StickyHeaderLayout>
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:overScrollMode="never"
+            android:visibility="@{search_mode ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/bot_sel"
+            app:layout_constraintTop_toBottomOf="@id/base_tool_bar" />
+
+        <include
+            layout="@layout/base_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/bot_sel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/base_tool_bar" />
+
+        <RelativeLayout
+            android:id="@+id/bot_sel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="@{selected_mode ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_0_5"
+                android:background="@color/EEEEEE" />
+
+            <TextView
+                android:id="@+id/sel_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dp_20"
+                tools:text="已选2人"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/sel_btn"
+                style="@style/CustomButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_8"
+                tools:text="移除 (2)"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_14" />
+
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

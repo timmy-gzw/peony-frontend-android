@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.tftechsz.mine.entity.NobleBean.PriceDTO" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_6"
+        android:layout_marginEnd="@dimen/dp_6"
+        android:background="@{item.selTemp ? @drawable/shape_noble_price_bg_selected : @drawable/shape_noble_price_bg_normal}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_member_top_bg"
+        tools:background="@drawable/shape_noble_price_bg_normal">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:drawableStart="@mipmap/peony_gzkt_jb_icon"
+            android:drawablePadding="@dimen/dp_4"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:paddingVertical="@dimen/dp_5"
+            android:gravity="center"
+            android:text='@{"送" + item.coin + "金币"}'
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="送100金币" />
+
+        <View
+            android:id="@+id/white_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@{item.selTemp ? (int)@dimen/dp_1_5 : (int)@dimen/dp_0}"
+            android:layout_marginEnd="@{item.selTemp ? (int)@dimen/dp_1_5 : (int)@dimen/dp_0}"
+            android:layout_marginBottom="@{item.selTemp ? (int)@dimen/dp_1_5 : (int)@dimen/dp_0}"
+            android:background="@drawable/shape_noble_price_white_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/price1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text='@{item.day + "天"}'
+            android:textColor='@{item.selTemp ? @color/white : @color/color_cccccc}'
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="3个月"
+            tools:textColor="@color/color_cccccc" />
+
+        <TextView
+            android:id="@+id/price2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_2"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_25"
+            android:text="@{String.valueOf(item.price)}"
+            android:textColor="@{item.selTemp ? @color/color_noble : @color/color_noble}"
+            android:textSize="@dimen/sp_24"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/price_unit"
+            app:layout_constraintTop_toBottomOf="@id/price1"
+            tools:text="180"
+            tools:textColor="@color/color_noble" />
+
+        <TextView
+            android:id="@+id/price_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_6"
+            android:text="¥"
+            android:textColor="@{item.selTemp? @color/color_noble : @color/color_noble}"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/price2"
+            app:layout_constraintEnd_toStartOf="@id/price2"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price1"
+            tools:textColor="@color/color_noble" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_airdrop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="end|bottom"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_8"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <ImageView
+        android:id="@+id/iv_couple_bag"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/chat_ic_couple_paster"
+      />
+    <TextView
+        android:id="@+id/tv_couple_time"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_14"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_9"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10" />
+
+</RelativeLayout>

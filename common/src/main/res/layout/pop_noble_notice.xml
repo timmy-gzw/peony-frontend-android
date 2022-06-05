@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/peony_ktgx_png"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/root_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_25"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@mipmap/noble_notice_bg_1" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                android:padding="@dimen/dp_7"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="@dimen/dp_6"
+                tools:src="@mipmap/mine_ic_girl_default" />
+
+            <ImageView
+                android:id="@+id/frame_bg"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/icon"
+                app:layout_constraintEnd_toEndOf="@id/icon"
+                app:layout_constraintStart_toStartOf="@id/icon"
+                app:layout_constraintTop_toTopOf="@id/icon"
+                tools:background="@drawable/vip_style_picture_frame_s18_start" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:textColor="#FFD993"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon"
+                tools:text="恭喜您" />
+
+            <TextView
+                android:id="@+id/tips"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:textColor="#F7D8BE"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="@id/root_bg"
+                app:layout_constraintStart_toStartOf="@id/root_bg"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="恭喜您火火低的而阿呆赛点局爱神的箭阿是价" />
+
+            <TextView
+                android:id="@+id/know_btn"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginHorizontal="@dimen/dp_30"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:background="@drawable/shape_noble_notice_btn"
+                android:gravity="center"
+                android:text="好的"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/root_bg"
+                app:layout_constraintEnd_toEndOf="@id/root_bg"
+                app:layout_constraintStart_toStartOf="@id/root_bg" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="@dimen/dp_35"
+    android:layout_marginTop="@dimen/dp_30"
+    android:layout_marginEnd="@dimen/dp_35"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@mipmap/bg_red_package">
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_100"
+            android:text="搭讪红包奖励"
+            android:textColor="@color/color_FEDCB4"
+            android:textSize="@dimen/sp_24" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_3"
+            android:gravity="center">
+
+            <View
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_0_5"
+                android:background="@color/color_FEDCB4"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/tv_form"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:gravity="center"
+                android:textColor="@color/color_FEDCB4"
+                android:textSize="@dimen/sp_12" />
+
+            <View
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_0_5"
+                android:background="@color/color_FEDCB4"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_from"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_70"
+            android:visibility="gone">
+
+            <TextView
+
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="1"
+                android:textColor="@color/color_FEDCB4"
+                android:textSize="@dimen/sp_50"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_price_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_price"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/dp_2"
+                android:layout_toEndOf="@+id/tv_price"
+                android:text="元"
+                android:textColor="@color/color_FEDCB4"
+                android:textSize="@dimen/sp_15" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_price"
+                android:layout_marginTop="@dimen/dp_5"
+                android:alpha="0.6"
+                android:text="已存入账户，可以开始使用啦"
+                android:textColor="@color/color_FEDCB4"
+                android:textSize="@dimen/sp_12" />
+
+        </RelativeLayout>
+
+
+        <ImageView
+
+            android:id="@+id/iv_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_46"
+            android:background="@mipmap/ic_open_red_package" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@mipmap/ic_close_red_package"
+
+        />
+
+</LinearLayout>

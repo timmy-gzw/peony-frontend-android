@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_bottom"
+        android:layout_below="@+id/base_tool_bar"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/base_tool_bar">
+
+        <TextView
+            android:id="@+id/tv_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_30"
+            android:drawablePadding="@dimen/dp_6"
+            android:text="兑换人民币"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_coin_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_coin"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_6"
+            android:text="0"
+            android:textColor="@color/blue_7F89F3"
+            android:textSize="@dimen/sp_24"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/Driver"
+            android:layout_height="@dimen/dp_10"
+            android:layout_below="@+id/tv_coin_num"
+            android:layout_marginTop="@dimen/dp_30"
+            android:background="@color/bg_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_coin" />
+
+        <TextView
+            android:id="@+id/tv_withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_6"
+            android:text="提现方式"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_24"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/cl_info"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/tv_withdraw"
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_withdraw">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_pay_choose"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dp_15">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_zfb"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_60"
+                        android:background="@drawable/bg_pay_choose"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_pay_way">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/dp_15"
+                            android:drawablePadding="@dimen/dp_10"
+                            android:gravity="center"
+                            android:text="支付宝支付"
+                            android:textColor="@color/color_normal"
+                            android:textSize="@dimen/sp_15"
+                            app:drawableStartCompat="@mipmap/ic_zxb" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/dp_20"
+                            android:background="@mipmap/ic_arrow"
+                            android:visibility="invisible" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:text="支付宝账号"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_15" />
+
+                    <EditText
+                        android:id="@+id/et_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@color/transparent"
+                        android:hint="请输入你的支付宝账号"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="@dimen/sp_16"
+                        android:singleLine="true"
+                        android:textColor="@color/color_normal"
+                        android:textColorHint="@color/color_cc" />
+
+                    <View
+                        style="@style/Driver"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_1"
+                        android:background="@color/driver" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:text="支付宝账号所有者真实姓名"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_15" />
+
+                    <EditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@color/transparent"
+                        android:hint="请输入你的真实姓名"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/sp_16"
+                        android:singleLine="true"
+                        android:textColor="@color/color_normal"
+                        android:textColorHint="@color/color_cc" />
+
+                    <View
+                        style="@style/Driver"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_1"
+                        android:background="@color/driver" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:text="身份证号码"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_15" />
+
+                    <EditText
+                        android:id="@+id/et_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@color/transparent"
+                        android:digits="0123456789xX"
+                        android:hint="请输入你的身份证号码"
+                        android:inputType="number"
+                        android:maxLength="18"
+                        android:paddingStart="@dimen/sp_16"
+                        android:singleLine="true"
+                        android:textColor="@color/color_normal"
+                        android:textColorHint="@color/color_cc"
+                        android:textStyle="bold" />
+
+                    <View
+                        style="@style/Driver"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_1"
+                        android:background="@color/driver" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:text="手机号码"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_15" />
+
+                    <EditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@color/transparent"
+                        android:hint="请输入你的手机号码"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:paddingStart="@dimen/sp_16"
+                        android:singleLine="true"
+                        android:textColor="@color/color_normal"
+                        android:textColorHint="@color/color_cc" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:text="*不填写真实资料会造成无法汇款，提现后3个工作日内到账\n*身份证信息需要跟当前登录的支付宝账号身份信息一致"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/sp_12"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_info"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_withdraw_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_info"
+
+                    />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            style="@style/Driver"
+            android:background="@color/driver" />
+
+        <TextView
+            android:id="@+id/tv_integral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_20"
+            android:text="扣除积分：220"
+            android:textColor="@color/red"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_exchange"
+            style="@style/CustomButton"
+            android:layout_width="160dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/bg_gray_ee"
+            android:text="确认兑换" />
+
+    </RelativeLayout>
+</RelativeLayout>

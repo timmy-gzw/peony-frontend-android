@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10">
+
+
+    <com.tftechsz.common.widget.CommonFrameView
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_20"
+        app:text_content="家族设置" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_family_manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/ll_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_6"
+            android:background="#F5F5F5" />
+
+
+        <TextView
+
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_18" />
+
+    </LinearLayout>
+
+</LinearLayout>

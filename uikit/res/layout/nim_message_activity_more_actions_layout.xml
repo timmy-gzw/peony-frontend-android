@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/actionsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:paddingHorizontal="@dimen/dp_size_16"
+        android:paddingVertical="@dimen/dp_size_5" />
+
+    <TextView
+        android:id="@+id/tv_short_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_40"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center"
+        android:text="召唤空投"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:drawableTopCompat="@drawable/chat_ic_short_position"
+        tools:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/tv_game_dice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_40"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center"
+        android:text="掷骰子"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:drawableTopCompat="@drawable/chat_ic_game_dice"
+        tools:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/tv_game_guess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_40"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center"
+        android:text="猜拳"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:drawableTopCompat="@drawable/chat_ic_game_guess"
+        tools:visibility="visible" />
+
+
+</LinearLayout>

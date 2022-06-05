@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@mipmap/bg_recharge_tip"
+    android:layout_marginStart="@dimen/dp_40"
+    android:layout_marginEnd="@dimen/dp_40"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_60"
+            android:layout_marginEnd="@dimen/dp_60"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="余额不足，错过了该有缘分马上充值再续前缘"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_15"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray_radius20"
+            android:layout_gravity="bottom"
+            android:paddingStart="@dimen/dp_30"
+            android:paddingEnd="@dimen/dp_30"
+            android:paddingTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_10"
+            android:text="残忍离开"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_15"
+
+            />
+
+
+        <TextView
+            android:id="@+id/tv_recharge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:paddingStart="@dimen/dp_30"
+            android:paddingEnd="@dimen/dp_30"
+            android:paddingTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_10"
+            android:background="@drawable/bg_orange_radius20"
+            android:drawablePadding="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:text="马上充值"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_15"
+
+            />
+</FrameLayout>

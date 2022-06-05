@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_28"
+    android:background="@drawable/bg_white_radius20"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_15"
+    android:paddingBottom="@dimen/dp_20">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_pop_pic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="恭喜您获得了"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:layout_marginTop="@dimen/dp_20"
+        tools:src="@mipmap/mine_ic_girl_default" />
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:textColor="@color/color_black_ff666666"
+        android:textSize="@dimen/sp_15"
+        tools:text="“甜蜜蜜”气泡（7天）" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:paddingHorizontal="@dimen/dp_18"
+        android:textColor="@color/color_black_ff999999"
+        android:textSize="@dimen/sp_12"
+        tools:text="可以前往聊天设置-个性化设置逗,更换聊天背景哦" />
+
+    <TextView
+        android:id="@+id/btn"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="我知道了"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold" />
+</LinearLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/black_opacity_30"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_size_13"
+            android:layout_marginBottom="@dimen/dp_size_13"
+            tools:src="@drawable/bg_girl" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dp_14">
+
+
+            <TextView
+                android:id="@+id/tv_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="送"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_16" />
+
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_size_5"
+                android:layout_toEndOf="@+id/tv_send"
+                android:text="大气的鸡"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/tv_gift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_14"
+                tools:text="惊喜盲盒 x1" />
+        </RelativeLayout>
+
+        <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
+            android:id="@+id/iv_gift"
+            android:layout_width="@dimen/dp_size_44"
+            android:layout_height="@dimen/dp_size_44"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/text_size_16"
+            tools:src="@drawable/bg_girl" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/message_item_body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+        <!-- 覆盖层只保留一个 礼物提示，其它都是位置占位-->
+        <TextView
+            android:id="@+id/tv_reward"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:textSize="@dimen/sp_12"
+            android:singleLine="true"
+            android:textColor="#999999"
+            android:visibility="gone"
+            tools:text="@string/waitfor_image_local"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+</LinearLayout>

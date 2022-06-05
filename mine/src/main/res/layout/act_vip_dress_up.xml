@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/tool_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.flyco.tablayout.SlidingScaleTabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginStart="@dimen/dp_12"
+                android:background="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/include"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.4"
+                app:tl_divider_padding="@dimen/dp_6"
+                app:tl_indicator_color="@color/black"
+                app:tl_indicator_corner_radius="@dimen/dp_10"
+                app:tl_indicator_height="@dimen/dp_2"
+                app:tl_indicator_margin_top="@dimen/dp_10"
+                app:tl_indicator_width="@dimen/dp_10"
+                app:tl_tab_padding="@dimen/dp_10"
+                app:tl_tab_vertical_gravity="Center"
+                app:tl_textBold="SELECT"
+                app:tl_textSelectColor="@color/color_normal"
+                app:tl_textSelectSize="@dimen/sp_15"
+                app:tl_textUnSelectColor="@color/color_light_font"
+                app:tl_textUnSelectSize="@dimen/sp_15"
+                app:tl_underline_gravity="BOTTOM" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_color"
+                android:overScrollMode="never" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

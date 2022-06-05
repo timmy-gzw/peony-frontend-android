@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rel_pop_bottom_alg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="7dp"
+    android:paddingStart="@dimen/dp_15"
+    android:paddingTop="@dimen/dp_20"
+    android:paddingEnd="@dimen/dp_15"
+    android:paddingBottom="@dimen/dp_15">
+
+    <ImageView
+        android:id="@+id/tv_title_ira"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/record_click_1"
+        android:text="单击1次"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_session"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="1dp"
+        android:includeFontPadding="false"
+        android:text="（初级场）"
+        android:textColor="#ffffffff"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title_ira"
+        app:layout_constraintLeft_toRightOf="@id/tv_title_ira" />
+
+    <TextView
+        android:id="@+id/tv_time_ira"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="2021-10-1  23:59"
+        android:textColor="#ff7bf1f9"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title_ira"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_ira"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_ira" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

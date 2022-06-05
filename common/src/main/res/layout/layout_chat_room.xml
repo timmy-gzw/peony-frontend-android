@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_room"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingStart="@dimen/dp_20"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingEnd="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_10">
+
+
+    <ImageView
+        android:id="@+id/ci_room_avatar"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_room_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:text="聊天广场"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toTopOf="@+id/tv_room_content"
+        app:layout_constraintStart_toEndOf="@+id/ci_room_avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_6"
+        android:background="@drawable/bg_see_also"
+        android:gravity="center"
+        android:text="火爆"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toTopOf="@+id/tv_room_content"
+        app:layout_constraintStart_toEndOf="@+id/tv_room_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_room_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:layout_marginTop="@dimen/dp_2"
+        android:text="多人群聊，快乐加倍！"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ci_room_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_cc"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

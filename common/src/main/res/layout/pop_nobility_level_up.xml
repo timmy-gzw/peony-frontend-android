@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="#88000000">
+
+        <ImageView
+            android:id="@+id/bg_pic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@mipmap/peony_qd_bbg_icon" />
+
+        <com.opensource.svgaplayer.SVGAImageView
+            android:id="@+id/svg_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:scaleType="centerCrop"
+            app:autoPlay="true"
+            app:clearsAfterStop="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:loopCount="1" />
+
+        <ImageView
+            android:id="@+id/top_pic"
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/bg_pic"
+            tools:src="@drawable/peony_jzbx_kxsx_icon" />
+
+        <ImageView
+            android:id="@+id/bot_pic"
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_42"
+            app:layout_constraintBottom_toBottomOf="@id/bg_pic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/peony_jzbx_kxsx_icon" />
+
+        <ImageView
+            android:id="@+id/del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_50"
+            android:src="@drawable/icon_pop_del"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bg_pic" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

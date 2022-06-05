@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_chat_selector"
+   >
+
+    <CheckBox
+        android:id="@+id/iv_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:background="@color/transparent"
+        android:button="@drawable/bg_checkbox"
+        android:checked="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_height="60dp"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/fl_iv_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView
+            android:id="@+id/iv_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_2"
+            android:layout_marginBottom="@dimen/dp_2" />
+
+        <TextView
+            android:id="@+id/tv_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/dp_2"
+            android:background="@drawable/bg_dot_red1"
+            android:gravity="center"
+            android:minWidth="@dimen/dp_18"
+            android:minHeight="@dimen/dp_18"
+            android:paddingStart="@dimen/dp_3"
+            android:paddingEnd="@dimen/dp_3"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            tools:text="9" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_5"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toTopOf="@id/tv_content"
+        app:layout_constraintLeft_toRightOf="@id/fl_iv_avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="喵了个咪儿" />
+
+    <ImageView
+        android:id="@+id/iv_office"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_4"
+        android:src="@mipmap/ic_official"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name"
+        app:layout_constraintLeft_toRightOf="@id/tv_name"
+        app:layout_constraintTop_toTopOf="@id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:singleLine="true"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tv_name"
+        app:layout_constraintRight_toLeftOf="@+id/ll_end"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="在干嘛呢" />
+
+    <LinearLayout
+        android:id="@+id/ll_end"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:gravity="center|end"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_check"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:singleLine="true"
+            android:textColor="@color/color_d6"
+            android:textSize="@dimen/sp_12"
+            tools:text="10:00" />
+
+        <ImageView
+            android:id="@+id/iv_red_packet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:background="@drawable/ic_red_packet"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_intimacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:drawablePadding="@dimen/dp_3"
+            android:text="123"
+            android:textColor="#F77975"
+            android:textSize="@dimen/sp_12"
+            app:drawableStartCompat="@mipmap/chat_ic_intimacy_red_heart" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        style="@style/Driver"
+        android:layout_width="0dp"
+        android:background="@color/driver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

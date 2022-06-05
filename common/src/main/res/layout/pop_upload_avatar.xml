@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top">
+
+
+    <FrameLayout
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_30">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_pop_pic" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="请上传本人高清正面靓照"
+            android:layout_marginStart="@dimen/dp_6"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="五官清晰的照片，会更受欢迎哦～"
+        android:textColor="@color/color_mid_font"
+        android:textSize="@dimen/sp_14"
+
+        />
+
+
+    <ImageView
+        android:id="@+id/iv_true_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_tip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@mipmap/ic_true_avatar"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_tip2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_true_avatar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="不能通过的头像"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_12"
+
+        />
+
+    <ImageView
+        android:id="@+id/iv_error_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_tip2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@mipmap/ic_error_avatar"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_upload"
+        style="@style/CustomButton"
+        android:layout_below="@+id/iv_error_avatar"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/bg_orange_enable"
+        android:gravity="center"
+        android:text="知道了" />
+
+
+</RelativeLayout>

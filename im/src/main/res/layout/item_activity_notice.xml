@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="02:55" />
+
+    <ImageView
+        android:id="@+id/iv_type"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/tv_time"
+        android:layout_marginStart="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@mipmap/ic_customer_service"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_time" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_type"
+        app:layout_constraintTop_toTopOf="@id/iv_type">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_nim_message_left_white_bg"
+            android:paddingStart="@dimen/dp_16"
+            android:lineSpacingMultiplier="1.1"
+            android:layout_marginTop="3dp"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_10"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_16"
+            tools:text="现场直击深圳大型疫苗接种点】深圳市民，新冠疫苗你接种了吗？根据国家、广东省统一部署，深圳面对18-59岁中国内地居民开展新冠疫苗免费接种工作。除了社康中心，深圳还新增21家大中型临时接种点。南都记者现场直击南山文体中心疫苗接种情况" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

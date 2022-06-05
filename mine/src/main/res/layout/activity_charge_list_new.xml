@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:drawablePadding="@dimen/dp_6"
+        android:gravity="center"
+        android:text="金币余额:"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        app:drawableStartCompat="@mipmap/mine_ic_coin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/base_tool_bar" />
+
+    <TextView
+        android:id="@+id/coin_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_29"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="#ff999999"
+        android:textSize="@dimen/sp_10"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/tv_coin"
+        app:layout_constraintTop_toBottomOf="@id/tv_coin"
+        tools:text="其中有 30.22金币 为绑定金币"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/coin_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_5"
+        android:src="@mipmap/family_icon_tip"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/coin_hint"
+        app:layout_constraintStart_toEndOf="@id/coin_hint"
+        app:layout_constraintTop_toTopOf="@id/coin_hint"
+        app:tint="@color/blue_7F89F3"
+        tools:visibility="visible" />
+
+    <com.robinhood.ticker.TickerView
+        android:id="@+id/tv_coin_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:drawablePadding="@dimen/dp_6"
+        android:textColor="@color/blue_7F89F3"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_coin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_coin"
+        app:ticker_animationDuration="0"
+        app:ticker_defaultCharacterList="number"
+        tools:text="0" />
+
+    <View
+        android:id="@+id/view"
+        style="@style/Driver"
+        android:layout_height="@dimen/dp_6"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/bg_color"
+        app:drawableStartCompat="@mipmap/mine_ic_coin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coin_hint" />
+
+    <ImageView
+        android:id="@+id/vp_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        app:layout_constraintDimensionRatio="h,6.25:1"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        tools:src="@mipmap/default_mine_vip_bg_nor"
+        tools:visibility="visible" />
+
+    <include
+        layout="@layout/base_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_first_recharge"
+        app:layout_constraintStart_toStartOf="@+id/parent"
+        app:layout_constraintTop_toBottomOf="@+id/vp_bg" />
+
+
+    <TextView
+        android:id="@+id/tv_first_recharge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_first_recharge"
+        android:gravity="center"
+        android:padding="@dimen/dp_15"
+        android:text="首充送2小时至尊VIP会员"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

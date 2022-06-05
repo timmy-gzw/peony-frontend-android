@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/view">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_25"
+        android:background="@color/bg_color"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="A"
+        android:textColor="@color/color_mid_font"
+        android:textSize="@dimen/sp_14" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_leader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:background="@color/white"
+        android:paddingStart="@dimen/dp_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <LinearLayout
+            android:id="@+id/ll_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50" />
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_16"
+                android:layout_marginTop="-8dp"
+                android:layout_marginBottom="@dimen/dp_6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
+                tools:background="@drawable/peony_jzxqy_zzhz_icon" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_17"
+            app:layout_constraintBottom_toTopOf="@+id/tv_sex"
+            app:layout_constraintStart_toEndOf="@+id/ll_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="喵了个咪儿" />
+
+
+        <TextView
+            android:id="@+id/tv_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_3"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/ic_girl"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ll_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:background="@drawable/bg_girl"
+            tools:drawablePadding="@dimen/dp_2"
+            tools:drawableStart="@drawable/ic_girl"
+            tools:text="15"
+            tools:textSize="@dimen/sp_10" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/Driver"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:background="@color/driver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

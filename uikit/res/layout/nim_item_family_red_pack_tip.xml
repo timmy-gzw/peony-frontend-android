@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="@dimen/dp_size_31"
+    android:layout_marginEnd="@dimen/dp_size_21"
+    android:minWidth="350dp">
+
+    <LinearLayout
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_gray_ee"
+        android:paddingStart="@dimen/dp_size_8"
+        android:paddingTop="@dimen/dp_size_8"
+        android:paddingEnd="@dimen/dp_size_8"
+        android:paddingBottom="@dimen/dp_size_8">
+
+        <ImageView
+            android:id="@+id/iv_level"
+            android:layout_width="34dp"
+            android:layout_height="@dimen/dp_size_18"
+            android:layout_gravity="top|center_vertical"
+            android:gravity="center"
+            android:src="@drawable/ly13_jz_red02_icon" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"
+            tools:text="红包雨还有5分钟降落，准备好了吗..." />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,13 @@
+include ':videotrimmer'
+include ':faceunity'
+include ':home'
+include ':moment'
+include ':im'
+include ':mine'
+include ':family'
+include ':party'
+include ':main'
+include ':common'
+include ':uikit'
+include ':app'
+rootProject.name = "peony-frontend-android"

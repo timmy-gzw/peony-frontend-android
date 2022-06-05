@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.tftechsz.mine.entity.NobleBean.GradeDTO" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="match_parent"
+        tools:background="@color/black_opacity_60">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:visibility="@{item.sel ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/icon"
+            app:layout_constraintDimensionRatio="0.9"
+            app:layout_constraintTop_toTopOf="@id/icon"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="noble_selected_bg.zip"
+            app:lottie_imageAssetsFolder="gift/"
+            app:lottie_loop="true"
+            tools:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/dp_59"
+            android:layout_height="@dimen/dp_59"
+            app:layout_constraintBottom_toTopOf="@id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:layout_height="@dimen/dp_72"
+            tools:layout_width="@dimen/dp_72"
+            tools:src="@mipmap/mine_ic_girl_default" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_3"
+            android:text="@{item.name}"
+            android:textColor="@color/color_noble"
+            android:textSize="@{item.isSel() ? @dimen/sp_15 : @dimen/sp_13}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon"
+            tools:text="贵族·骑士"
+            tools:textSize="@dimen/sp_13" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

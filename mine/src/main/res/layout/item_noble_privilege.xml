@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_5"
+    android:background="@drawable/shape_noble_item_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/dp_13"
+    tools:background="@drawable/shape_black_radius_6">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/dp_33"
+        android:layout_height="@dimen/dp_33"
+        android:scaleType="fitCenter"
+        tools:src="@mipmap/mine_ic_girl_default" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:textColor="@color/color_noble"
+        android:textSize="@dimen/sp_14"
+        tools:text="贵族卡片" />
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_5"
+        android:textColor="#87888a"
+        android:textSize="@dimen/sp_10"
+        tools:text="贵族专属资料\n卡片" />
+
+
+</LinearLayout>

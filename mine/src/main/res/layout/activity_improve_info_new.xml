@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_complete"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/tool_bar" />
+
+        <TextView
+            android:id="@+id/tv_top_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/base_tool_bar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-10dp"
+            android:text="性别选择后不可修改"
+            android:textColor="#cccccc"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <com.tftechsz.common.widget.chat.NoScrollViewPager
+        android:id="@+id/noscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/edt_code"
+        android:layout_below="@+id/framelayout" />
+
+    <TextView
+        android:id="@+id/tv_next"
+        style="@style/CustomButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_46"
+        android:background="@drawable/bg_orange_selector"
+        android:text="完成"
+        android:textColor="@drawable/color_orange_selector" />
+
+    <View
+        android:id="@+id/projection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_next" />
+
+    <EditText
+        android:id="@+id/edt_code"
+        style="@style/CustomButton"
+        android:layout_above="@id/tv_next"
+        android:background="@drawable/bg_orange_noenable"
+        android:hint="邀请码(选填)"
+        android:inputType="textEmailAddress"
+        android:maxLength="20"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:singleLine="true"
+        android:textColorHint="@color/color_999999" />
+
+    <ImageView
+        android:id="@+id/iv_red_qp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_next"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/peony_red_qp_img" />
+
+</RelativeLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_30"
+    android:layout_marginEnd="@dimen/dp_30"
+    android:background="@drawable/bg_white_radius10"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_del"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_gravity="end"
+        android:padding="@dimen/dp_10"
+        android:src="@drawable/iv_del" />
+
+    <ImageView
+        android:id="@+id/iv_gif"
+        android:layout_width="@dimen/dp_180"
+        android:layout_height="@dimen/dp_300" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
+        android:text="开启通知"
+        android:textColor="#ff000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.1"
+        android:layout_marginTop="@dimen/dp_5"
+        android:gravity="center"
+        android:text="开启通知，实时接收消息提醒，别错过\nTa的消息哦～"
+        android:textColor="#ff666666"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_open"
+        style="@style/CustomButton"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/dp_size_38"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_size_38"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:background="@drawable/bg_orange_enable"
+        android:text="立即开启" />
+
+
+</LinearLayout>

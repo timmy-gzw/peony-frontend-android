@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="33dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_avatar_rank"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/dp_3"
+            android:src="@drawable/demo_combination_girl"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/chat_icon_rank"
+            app:layout_constraintBottom_toTopOf="@id/iv_avatar_rank"
+            app:layout_constraintEnd_toEndOf="@id/iv_avatar_rank"
+            app:layout_constraintStart_toStartOf="@id/iv_avatar_rank"
+            app:layout_constraintTop_toTopOf="@id/iv_avatar_rank" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@drawable/bg_family_rank"
+            android:gravity="bottom"
+            android:paddingHorizontal="@dimen/dp_3"
+            android:text="贡献"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/iv_avatar_rank"
+            app:layout_constraintStart_toStartOf="@id/iv_avatar_rank" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

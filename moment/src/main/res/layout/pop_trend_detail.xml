@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:layout_marginEnd="@dimen/dp_20"
+    android:background="@mipmap/bg_more"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_20">
+
+
+    <TextView
+        android:id="@+id/tv_attention"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@mipmap/trend_ic_attention"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="关注"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+
+        />
+
+
+    <View
+        style="@style/Driver"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/white"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:drawableStart="@mipmap/trend_ic_report"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="举报"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+
+        />
+
+</LinearLayout>

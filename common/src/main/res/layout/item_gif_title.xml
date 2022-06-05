@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.tftechsz.common.entity.GifTitleDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.name}"
+                android:textColor="@{item.is_active ? @color/color_normal :@color/color_light_font}"
+                android:textSize="@dimen/sp_14"
+                android:visibility="@{item.is_active ? View.GONE : View.VISIBLE }"
+                tools:text="人气"
+                tools:textColor="@color/color_normal"
+                tools:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.name}"
+                android:textColor="@{item.is_active ? @color/color_normal :@color/color_light_font}"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                android:visibility="@{item.is_active ? View.VISIBLE : View.GONE }"
+                tools:text="人气"
+                tools:textColor="@color/color_normal" />
+
+            <View
+                android:id="@+id/bot_line"
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="@dimen/dp_2"
+                android:layout_marginTop="@dimen/dp_2"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:background="@drawable/shape_black_radius_100"
+                android:visibility="@{item.is_active ? View.VISIBLE : View.INVISIBLE }" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/end_line"
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="@dimen/dp_10"
+            android:background="@color/EEEEEE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

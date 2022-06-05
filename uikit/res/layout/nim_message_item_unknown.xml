@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/message_item_unsupport_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/nim_message_left_white_bg"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+
+    <TextView
+        android:id="@+id/message_item_unsupport_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:paddingStart="@dimen/dp_size_15"
+        android:paddingEnd="@dimen/dp_size_15"
+        android:gravity="left"
+        android:singleLine="true"
+        android:text="[当前版本不支持该消息类型]"
+        android:textColor="@color/color_black_333333"
+        android:textSize="16sp" />
+</RelativeLayout>

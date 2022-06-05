@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="hasData"
+            type="boolean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/tool_bar" />
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/base_tool_bar"
+            android:overScrollMode="never"
+            app:srlEnableLoadMore="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{hasData ? View.VISIBLE : View.GONE}" />
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        <include
+            android:id="@+id/empty"
+            android:visibility="@{hasData ? View.GONE : View.VISIBLE}"
+            layout="@layout/base_empty_view" />
+
+    </RelativeLayout>
+</layout>

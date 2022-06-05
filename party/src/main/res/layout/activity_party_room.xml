@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_cl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+             />
+
+        <LinearLayout
+            android:id="@+id/ll_info"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_45"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/rl_watcher"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_black_tran10_radius100"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/dp_16"
+                android:paddingVertical="@dimen/dp_4">
+
+                <LinearLayout
+                    android:id="@+id/t_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_party_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="123411" />
+
+                    <com.tftechsz.common.widget.CustomMarqueeTextView
+                        android:id="@+id/tv_party_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:freezesText="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintStart_toEndOf="@+id/tv_party_code"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="娃哈哈哈哈哈"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_volume_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:drawablePadding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:textColor="@color/trans_white_40"
+                    android:textSize="@dimen/sp_10"
+                    app:drawableStartCompat="@drawable/party_ic_volume"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/t_top"
+                    tools:text="10.29w" />
+
+                <TextView
+                    android:id="@+id/tv_hot_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:drawablePadding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:textColor="@color/trans_white_40"
+                    android:textSize="@dimen/sp_10"
+                    app:drawableStartCompat="@drawable/party_ic_hot_tran"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_volume_value"
+                    app:layout_constraintStart_toEndOf="@+id/tv_volume_value"
+                    app:layout_constraintTop_toTopOf="@id/tv_volume_value"
+                    tools:text="1.2w" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_hour_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_6"
+            android:background="@drawable/bg_black_tran10"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:paddingVertical="@dimen/dp_2"
+            android:text="小时榜 暂未上榜"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            app:drawableEndCompat="@drawable/party_ic_hour_rank_end"
+            app:drawableStartCompat="@drawable/party_ic_hour_rank_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_info" />
+
+        <TextView
+            android:id="@+id/tv_announcement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@drawable/bg_black_tran10"
+            android:gravity="center"
+            android:paddingVertical="@dimen/dp_2"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_4"
+            android:text="公告"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            app:drawableEndCompat="@drawable/party_ic_hour_rank_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_info" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rl_watcher"
+            android:layout_width="@dimen/dp_140"
+            android:layout_height="@dimen/dp_40"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_20"
+            android:fadingEdge="horizontal"
+            android:overScrollMode="never"
+            android:requiresFadingEdge="horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/iv_close"
+            app:layout_constraintTop_toTopOf="@+id/ll_info" />
+
+        <ImageView
+            android:id="@+id/iv_hour_arrow"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:src="@drawable/party_ic_hour_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_info"
+            app:layout_constraintEnd_toStartOf="@+id/iv_close" />
+
+        <ImageView
+            android:id="@id/iv_close"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/party_ic_close"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_info"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_seat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hour_rank">
+
+            <RelativeLayout
+                android:id="@+id/rl_host"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_100"
+                android:background="@color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.tftechsz.common.widget.CircleImageView
+                    android:id="@+id/iv_host_avatar"
+                    android:layout_width="@dimen/dp_55"
+                    android:layout_height="@dimen/dp_55"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/party_ic_seat" />
+
+                <ImageView
+                    android:id="@+id/circle"
+                    android:layout_width="@dimen/dp_58"
+                    android:layout_height="@dimen/dp_58"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/party_ic_blue_round"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/circle1"
+                    android:layout_width="@dimen/dp_58"
+                    android:layout_height="@dimen/dp_58"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/party_ic_blue_round"
+                    android:visibility="invisible" />
+
+                <com.opensource.svgaplayer.SVGAImageView
+                    android:id="@+id/svga_head"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerCrop"
+                    app:autoPlay="true"
+                    app:clearsAfterStop="true" />
+
+                <ImageView
+                    android:id="@+id/iv_frame"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80"
+                    tools:background="@drawable/vip_style_picture_frame_s02_round" />
+
+                <ImageView
+                    android:id="@+id/iv_mute_voice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_60"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/party_ic_voice_seat_close"
+                    android:visibility="invisible" />
+
+
+                <TextView
+                    android:id="@+id/tv_chat_love"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_14"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:background="@drawable/bg_white_radius8"
+                    android:drawablePadding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/dp_5"
+                    android:text="0"
+                    android:textColor="#99F6508D"
+                    android:textSize="@dimen/sp_9"
+                    app:drawableStartCompat="@drawable/party_ic_love"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/iv_big_emotion"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/tv_host"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_host_avatar"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:drawablePadding="@dimen/dp_1"
+                    android:gravity="center"
+                    android:text="主持位"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_10"
+                    app:drawableStartCompat="@drawable/party_ic_host" />
+
+            </RelativeLayout>
+
+            <!-- pk排行榜-->
+            <include
+                android:id="@+id/seat_ranking"
+                layout="@layout/include_seat_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_17"
+                android:layout_marginEnd="@dimen/dp_17"
+                android:layout_marginBottom="5dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/cl_pk"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <include
+                android:id="@+id/cl_pk"
+                layout="@layout/include_pk_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rl_host" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_svga"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rl_host">
+
+                <com.opensource.svgaplayer.SVGAImageView
+                    android:id="@+id/svg_pk"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    app:autoPlay="true"
+                    app:clearsAfterStop="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rl_host" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_seat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_24"
+                android:layout_marginEnd="@dimen/dp_14"
+                android:overScrollMode="never"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rl_host" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_float"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_6"
+            android:background="@drawable/party_bg_float"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hour_rank"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_float_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_65"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textColor="#905814"
+                android:textSize="12sp"
+                tools:text="[清风]给[小萝北]送了1个带你回家，" />
+
+            <!--   <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentEnd="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginEnd="@dimen/dp_7"
+                   android:src="@drawable/party_ic_arrow" />-->
+
+
+        </LinearLayout>
+
+
+        <com.opensource.svgaplayer.SVGAImageView
+            android:id="@+id/svga_lucky"
+            android:layout_width="@dimen/dp_85"
+            android:layout_height="@dimen/dp_85"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:autoPlay="true"
+            app:clearsAfterStop="true"
+            app:layout_constraintBottom_toTopOf="@+id/iv_gift"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_66"
+            android:layout_marginTop="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_11"
+            android:layout_marginBottom="@dimen/dp_6"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:banner_indicator_gravity="center"
+            app:banner_indicator_height="4dp"
+            app:banner_indicator_marginBottom="@dimen/dp_10"
+            app:banner_indicator_normal_color="@color/white_alpha_20"
+            app:banner_indicator_normal_width="4dp"
+            app:banner_indicator_radius="@dimen/dp_100"
+            app:banner_indicator_selected_color="@color/white"
+            app:banner_indicator_selected_width="@dimen/dp_10"
+            app:layout_constraintBottom_toTopOf="@+id/indicator"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:background="@color/red"
+            tools:visibility="visible" />
+
+        <com.tftechsz.party.widget.MyRectangleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_10"
+            android:layout_below="@+id/banner"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:maxWidth="@dimen/dp_60"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/svga_lucky"
+            app:layout_constraintEnd_toEndOf="@id/banner"
+            app:layout_constraintStart_toStartOf="@id/banner"
+            tools:background="@color/white"
+            tools:visibility="visible" />
+
+
+        <com.tftechsz.common.widget.DoubleHitGiftChatView
+            android:id="@+id/double_gift"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/svga_lucky"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+
+
+        <FrameLayout
+            android:id="@+id/fl_include"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hour_rank">
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/item_gift_show_view" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_gift_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/chat_ic_message_mask"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/muhu_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/input_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99333333"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <com.tftechsz.common.widget.FadingEdgeRecyclerView
+            android:id="@+id/rv_message"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_85"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@color/transparent"
+            android:fadingEdgeLength="@dimen/dp_40"
+            android:overScrollMode="never"
+            android:requiresFadingEdge="vertical"
+            app:layout_constraintBottom_toTopOf="@id/ll_send_message"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_seat" />
+
+        <TextView
+            android:id="@+id/show_new_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_orange_radius100"
+            android:drawablePadding="@dimen/dp_5"
+            android:paddingHorizontal="@dimen/dp_15"
+            android:paddingVertical="@dimen/dp_4"
+            android:text="有新消息"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_13"
+            android:visibility="gone"
+            app:drawableEndCompat="@drawable/show_more_msg"
+            app:layout_constraintBottom_toBottomOf="@id/rv_message"
+            app:layout_constraintStart_toStartOf="@id/rv_message"
+            tools:visibility="visible" />
+
+        <RelativeLayout
+            android:id="@+id/rl_party_scroller_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:background="@drawable/bg_red_radius10"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/rv_message"
+            app:layout_constraintStart_toStartOf="@id/rv_message"
+            app:layout_constraintTop_toTopOf="@id/rv_message"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/party_warn" />
+
+            <com.tftechsz.party.widget.PartyScrollerView
+                android:id="@+id/PartyScrollerView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_44"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_toEndOf="@id/img" />
+        </RelativeLayout>
+
+        <com.opensource.svgaplayer.SVGAImageView
+            android:id="@+id/svga_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:autoPlay="true"
+            app:clearsAfterStop="true"
+            app:loopCount="1"
+            tools:visibility="visible" />
+
+        <com.tencent.qgame.animplayer.AnimView
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_autoPlay="true"
+            app:lottie_imageAssetsFolder="gift/"
+            app:lottie_loop="false"
+            tools:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_send_message"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/bg_black_tran10"
+            android:paddingHorizontal="@dimen/dp_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fl_seat_on"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="说点什么…"
+                android:textColor="@color/color_light_font"
+                android:textColorHint="@color/color_light_font"
+                android:textSize="@dimen/sp_14" />
+
+            <ImageView
+                android:id="@+id/iv_emoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/party_ic_emoji" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_send_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/bg_black_tran10"
+            android:src="@drawable/party_ic_send_message"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <FrameLayout
+            android:id="@+id/fl_seat_on"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_45"
+            android:layout_marginEnd="@dimen/dp_6"
+            app:layout_constraintBottom_toBottomOf="@id/ll_send_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_expression">
+
+            <TextView
+                android:id="@+id/tv_seat_on"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bg_black_tran10"
+                android:gravity="center"
+                android:text="上麦"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_apply_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/bg_dot_red2"
+                android:gravity="center"
+                android:minWidth="@dimen/dp_18"
+                android:minHeight="@dimen/dp_18"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10"
+                android:visibility="gone"
+                tools:text="12"
+                tools:visibility="visible" />
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_expression"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:background="@drawable/bg_black_tran10"
+            android:gravity="center"
+            android:src="@drawable/party_ic_expression"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/ll_send_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_mute"
+            app:layout_constraintTop_toTopOf="@id/ll_send_message"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_mute"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:background="@drawable/bg_black_tran10"
+            android:gravity="center"
+            android:src="@drawable/party_ic_voice_close"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/ll_send_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/fl_message"
+            app:layout_constraintTop_toTopOf="@id/ll_send_message"
+            tools:visibility="visible" />
+
+
+        <FrameLayout
+            android:id="@+id/fl_message"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginEnd="@dimen/dp_6"
+            app:layout_constraintBottom_toBottomOf="@id/ll_send_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_function"
+            app:layout_constraintTop_toTopOf="@id/ll_send_message">
+
+            <ImageView
+                android:id="@+id/iv_message"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:src="@drawable/party_ic_message"
+                app:layout_constraintBottom_toBottomOf="@id/ll_send_message"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_function"
+                app:layout_constraintTop_toTopOf="@id/ll_send_message" />
+
+            <View
+                android:id="@+id/view_message"
+                android:layout_width="@dimen/dp_7"
+                android:layout_height="@dimen/dp_7"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/dp_9"
+                android:background="@drawable/bg_dot_red1"
+                android:visibility="invisible" />
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_function"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:src="@drawable/party_ic_function"
+            app:layout_constraintBottom_toBottomOf="@id/ll_send_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_gift"
+            app:layout_constraintTop_toTopOf="@id/ll_send_message" />
+
+        <ImageView
+            android:id="@+id/iv_gift"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:src="@mipmap/chat_ic_call_gift"
+            app:layout_constraintBottom_toBottomOf="@id/ll_send_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ll_send_message" />
+
+
+        <include
+            android:id="@+id/cl_input_msg"
+            layout="@layout/include_bottom_msg_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/root_into_on_room"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:layout_marginStart="@dimen/dp_12"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rv_message">
+
+            <com.opensource.svgaplayer.SVGAImageView
+                android:id="@+id/noble_into_on_room"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="match_parent"
+                app:autoPlay="true"
+                app:clearsAfterStop="true"
+                app:loopCount="1"
+                app:lottie_loop="false" />
+
+            <com.opensource.svgaplayer.SVGAImageView
+                android:id="@+id/svg_image_on_room"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="match_parent"
+                app:autoPlay="true"
+                app:clearsAfterStop="true"
+                app:loopCount="1"
+                app:lottie_loop="false" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

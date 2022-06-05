@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cb="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/tool_bar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:background="@color/bg_color" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 派对封面-->
+            <RelativeLayout
+                android:id="@+id/rel_item_1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:background="@color/white"
+                android:descendantFocusability="blocksDescendants"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/party_setting_cover_name"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_16" />
+
+                <ImageView
+                    android:id="@+id/iv_agl_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:src="@mipmap/ic_arrow" />
+
+                <ImageView
+                    android:id="@+id/iv_right_img"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_44"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/party_bg_default" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:background="@color/driver" />
+
+            </RelativeLayout>
+
+            <!-- 派对名称-->
+            <RelativeLayout
+                android:id="@+id/rel_btn_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:descendantFocusability="blocksDescendants"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/party_setting_name"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_16" />
+
+                <ImageView
+                    android:id="@+id/iv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:src="@mipmap/ic_arrow" />
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/iv_right"
+                    android:layout_toEndOf="@+id/tv_left"
+                    android:gravity="center_vertical|end"
+                    android:paddingHorizontal="@dimen/dp_10">
+
+                    <TextView
+                        android:id="@+id/tv_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/color_light_font"
+                        android:textSize="@dimen/sp_15" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:background="@color/driver" />
+
+            </RelativeLayout>
+            <!-- 连麦场景-->
+            <RelativeLayout
+                android:id="@+id/rel_click_scene"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:descendantFocusability="blocksDescendants"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_left2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/party_setting_even_the_wheat_scenario"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_16" />
+
+                <ImageView
+                    android:id="@+id/iv_right3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:src="@mipmap/ic_arrow" />
+
+                <TextView
+                    android:id="@+id/tv_party_setting_even_the_wheat_scenario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_44"
+                    android:gravity="end"
+                    android:textColor="@color/color_light_font"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:background="@color/driver" />
+
+            </RelativeLayout>
+            <!-- 关闭公屏-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:descendantFocusability="blocksDescendants"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_left3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/party_setting_the_male_screen"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_16" />
+
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/my_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:background="@drawable/bg_switch"
+                    android:checked="true"
+                    android:focusable="false"
+                    android:thumb="@android:color/transparent" />
+
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:background="@color/driver" />
+
+            </RelativeLayout>
+            <!-- 上麦模式 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:descendantFocusability="blocksDescendants"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_left5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/party_setting_upmai_mode"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_16" />
+
+                <com.flyco.tablayout.SegmentTabLayout
+                    android:id="@+id/tl_2"
+                    android:layout_width="164dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    app:tl_bar_color="#F9F9F9"
+                    app:tl_bar_stroke_color="#F9F9F9"
+                    app:tl_divider_color="#F9F9F9"
+                    app:tl_indicator_anim_enable="true"
+                    app:tl_indicator_bounce_enable="false"
+                    app:tl_indicator_color="#F8D423"
+                    app:tl_textSelectColor="#333333"
+                    app:tl_textSize="@dimen/sp_12"
+                    app:tl_textUnSelectColor="#999999"
+                    tl:tl_indicator_color="#F9F9F9"
+                    tl:tl_tab_padding="7dp" />
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:background="@color/driver" />
+
+            </RelativeLayout>
+            <!-- 派对公告-->
+            <RelativeLayout
+                android:id="@+id/rel_click_announcement"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:descendantFocusability="blocksDescendants"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_left4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/party_setting_com"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_16" />
+
+                <ImageView
+                    android:id="@+id/iv_right4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:src="@mipmap/ic_arrow" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/iv_right4"
+                    android:layout_toEndOf="@+id/tv_left4"
+                    android:gravity="center_vertical|end"
+                    android:paddingHorizontal="@dimen/dp_5">
+
+
+                    <com.tftechsz.common.widget.CBAlignTextView
+                        android:id="@+id/tv_right4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:includeFontPadding="false"
+                        android:text="@string/party_setting_edit"
+                        android:textColor="@color/color_light_font"
+                        android:textSize="@dimen/sp_15"
+                        cb:align="right" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:background="@color/driver" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_left6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="@string/party_setting_bg"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_16" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_setting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:overScrollMode="never" />
+
+            <TextView
+                android:id="@+id/tv_exit_party"
+                style="@style/CustomButton"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_50"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:background="@drawable/bg_red"
+                android:text="关闭派对"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_15"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

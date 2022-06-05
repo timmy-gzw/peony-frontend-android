@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingHorizontal="@dimen/dp_20">
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/mine_ic_girl_default"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ll"
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="喵了个咪儿" />
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name">
+
+        <ImageView
+            android:id="@+id/noble_label"
+            style="@style/NobleBadgeStyle"
+            android:layout_marginEnd="@dimen/dp_6"
+            tools:src="@drawable/noble_label_1"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/dp_1"
+            android:textColor="@color/white"
+            tools:background="@drawable/bg_girl"
+            tools:drawablePadding="@dimen/dp_2"
+            tools:drawableStart="@drawable/ic_girl"
+            tools:text="15"
+            tools:textSize="@dimen/sp_10" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_reject"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_size_34"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:background="@drawable/bg_gray_ee_radius16"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_18"
+        android:text="拒绝"
+        android:textColor="@color/red"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_agree"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_agree"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_size_34"
+        android:background="@drawable/bg_recharge"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_18"
+        android:text="同意"
+        android:textColor="@color/blue_7F89F3"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_first"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_size_34"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_8"
+        android:text="优先上麦"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_12"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

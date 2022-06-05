@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_white_top"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10">
+
+
+    <com.tftechsz.common.widget.CommonFrameView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cf_title"
+        android:layout_marginBottom="@dimen/dp_20"
+        app:text_content="清理不活跃用户"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_inactive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#F5F5F5" />
+
+
+    <TextView
+
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/red"
+        android:textSize="@dimen/sp_18" />
+
+
+</LinearLayout>

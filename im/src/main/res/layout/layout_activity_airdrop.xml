@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_airdrop"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/dp_8"
+    android:layout_gravity="end|bottom"
+    android:orientation="vertical"
+    >
+
+    <com.opensource.svgaplayer.SVGAImageView
+        android:id="@+id/svga_airdrop"
+        app:autoPlay="true"
+        app:clearsAfterStop="true"
+        android:layout_width="64dp"
+        android:layout_height="78dp"
+        android:layout_above="@+id/tv_airdrop"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_airdrop_num"
+        tools:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:background="@drawable/bg_dot_red1"
+        android:gravity="center"
+        android:minWidth="@dimen/dp_18"
+        android:minHeight="@dimen/dp_18"
+        android:paddingStart="@dimen/dp_3"
+        android:paddingEnd="@dimen/dp_3"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_airdrop"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_14"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-10dp"
+        android:background="@drawable/bg_airdrop_radius7"
+        android:gravity="center"
+        android:text="抢空投"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10" />
+
+
+</RelativeLayout>

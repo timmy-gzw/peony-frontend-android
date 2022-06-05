@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_couple_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/dp_32"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="-20dp"
+            android:layout_toEndOf="@+id/rl_couple"
+            android:background="@drawable/bg_couple_bag_tip">
+
+            <com.tftechsz.common.widget.CustomMarqueeTextView
+                android:id="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:ellipsize="marquee"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingVertical="@dimen/dp_2"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="有情人终成眷属！"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_couple"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_size_33">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/left_icon"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:padding="@dimen/dp_1"
+                android:src="@drawable/demo_combination_girl" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:background="@mipmap/peony_qlz_txk_icon" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/right_icon"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/dp_1"
+                android:src="@drawable/demo_combination_rose" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:layout_alignParentEnd="true"
+                android:background="@mipmap/peony_qlz_txk_icon" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/peony_jz_qlb_icon" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_couple_bag_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_couple_top"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_22"
+        android:src="@mipmap/chat_ic_couple_bag_top" />
+
+    <ImageView
+        android:id="@+id/iv_couple_bag_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_couple_top"
+        android:layout_alignEnd="@+id/iv_couple_bag_top"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/chat_ic_couple_bag_top_time" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_love"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_couple_time"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-50dp"
+        android:background="@mipmap/chat_ic_couple_bag_love"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_12" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_couple_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_couple_bag_top"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-35dp"
+        android:background="@mipmap/chat_ic_couple_bag_time"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_couple_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_love"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-60dp"
+        android:background="@mipmap/chat_ic_couple_bag_buy"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/dp_10">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/chat_ic_couple_bag_buy_now" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_3"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12"
+                tools:text="1314金币" />
+
+            <TextView
+                android:id="@+id/tv_couple_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12"
+                tools:text="1314金币" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_not_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_couple_buy"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_18"
+        android:text="暂不购买"
+        android:textColor="#A6ffffff"
+        android:textSize="@dimen/sp_15"
+
+        />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_not_buy"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@drawable/bg_black_tran10_radius6"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingBottom="@dimen/dp_12">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_6"
+            android:text="规则说明"
+            android:textColor="#66FFFFFF"
+            android:textSize="@dimen/sp_11"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:text=" 1、购买后，礼物会放进您的背包中，时效为15天；\n
+2、礼物中的道具（头像框、聊天气泡、座驾、勋章）会放【我的装扮】中，需要您自己佩戴哦；\n
+3、礼包优惠时效24小时，每个账号只能购买一次。\n
+4、此优惠大礼包只能使用付费金币购买；\n
+5、平台享有该活动最终解释权。"
+            android:textColor="#66FFFFFF"
+            android:textSize="@dimen/sp_11"
+
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

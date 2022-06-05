@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/tv_exit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:gravity="center"
+        android:text="退出家族"
+        android:textColor="@color/red"
+        android:textSize="@dimen/sp_18" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_6"
+        android:background="#F5F5F5" />
+
+
+    <TextView
+
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_18" />
+
+
+</LinearLayout>

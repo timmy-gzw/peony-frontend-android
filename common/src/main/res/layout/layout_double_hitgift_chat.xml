@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_root_click"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_f1f8cd_circle">
+
+    <com.tftechsz.common.widget.CountDownCircleView
+        android:id="@+id/cir_view"
+        android:layout_width="@dimen/dp_58"
+        android:layout_height="@dimen/dp_58" />
+
+    <ImageView
+        android:id="@+id/iv_double_hit_gift"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="@dimen/dp_35"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_3" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_double_hit_gift"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_3"
+        android:src="@mipmap/gift_double_hit" />
+
+    <TextView
+        android:id="@+id/tv_hit_gift_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/cir_view"
+        android:layout_alignEnd="@id/cir_view"
+        android:background="@drawable/shape_black_solid_cor_10"
+        android:gravity="center"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="2dp"
+        android:text="x1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10" />
+</RelativeLayout>

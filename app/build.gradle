@@ -1,0 +1,173 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.huawei.agconnect'
+apply plugin: 'com.alibaba.arouter'
+
+def appName = "伊糖"
+def appName2 = "伊糖交友"
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.tftechsz.peony"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        flavorDimensions "versionCode"
+        vectorDrawables.useSupportLibrary = true
+        renderscriptTargetApi 25
+        renderscriptSupportModeEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: name,
+                                APPLOG_SCHEME      : "rangersapplog.__TBD__".toLowerCase(),
+                                app_label          : appName,
+                                app_icon           : "@mipmap/ic_launcher"]
+
+        ndk {
+            abiFilters "armeabi-v7a"
+//            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+        }
+
+    }
+    signingConfigs {
+        release {
+            storeFile file('peony.jks')
+            storePassword "cikJayHiow"
+            keyAlias "peony"
+            keyPassword "Pixiznuf"
+        }
+        debug {
+            storeFile file('peony.jks')
+            storePassword "cikJayHiow"
+            keyAlias "peony"
+            keyPassword "Pixiznuf"
+        }
+    }
+    buildTypes {
+
+        debug {
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            manifestPlaceholders = [app_icon: "@mipmap/ic_launcher"]
+        }
+
+        release {
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def apkFileName = "Peony_" + "${variant.productFlavors[0].name}" + "_V${defaultConfig.versionName}_"
+                    apkFileName += "${defaultConfig.versionCode}"
+//                    apkFileName += new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08:00"))
+                    outputFileName = apkFileName + ".apk"
+                }
+                variant.mergeAssetsProvider.configure {
+                    doLast {
+                        delete(fileTree(dir: outputDir,
+                                includes: ['model/ai_face_processor.bundle',
+                                           'model/ai_gesture.bundle',
+                                           'model/ai_hand_processor.bundle',
+                                           'model/ai_human_processor.bundle',
+                                           'graphics/controller.bundle',
+                                           'graphics/fuzzytoonfilter.bundle',
+                                           'graphics/fxaa.bundle',
+                                           'graphics/face_makeup.bundle',
+                                           'graphics/tongue.bundle']))
+                    }
+                }
+            }
+        }
+
+    }
+
+    packagingOptions {
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        //pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
+
+    useLibrary 'org.apache.http.legacy'
+
+    buildFeatures {
+        dataBinding = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
+    productFlavors {
+        OFFICE {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OFFICE", app_label: appName, app_icon: "@mipmap/ic_near_people"]
+        }
+        YINGYONGBAO {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "YINGYONGBAO", app_label: appName, app_icon: "@mipmap/ic_near_peopley"]
+        }
+        HUAWEI {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "HUAWEI", app_label: appName, app_icon: "@mipmap/huawei_icon"]
+        }
+        XIAOMI {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "XIAOMI", app_label: appName, app_icon: "@mipmap/ic_near_people"]
+        }
+        OPPO {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OPPO", app_label: appName2, app_icon: "@mipmap/ic_near_people"]
+        }
+        VIVO {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "VIVO", app_label: appName2, app_icon: "@mipmap/ic_near_people"]
+        }
+    }
+}
+
+
+repositories {
+    flatDir {
+        dirs '../app/libs'
+    }
+}
+
+
+configurations {
+    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    if (isModule.toBoolean()) {
+        implementation project(':main')
+        implementation project(':home')
+        implementation project(':moment')
+        implementation project(':party')
+        implementation project(':im')
+        implementation project(':mine')
+        implementation project(':family')
+        implementation project(':videotrimmer')
+    }
+
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "androidx.test.ext:junit:1.1.3"
+}

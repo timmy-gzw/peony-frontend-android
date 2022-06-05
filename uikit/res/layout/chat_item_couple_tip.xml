@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="@dimen/dp_size_41"
+    android:layout_marginEnd="@dimen/dp_size_31"
+    android:gravity="center"
+    android:minWidth="350dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_size_2"
+            android:textColor="#7F89F3"
+            android:textSize="@dimen/sp_12"
+            tools:text="对方已通过真" />
+
+        <TextView
+            android:id="@+id/tv_from_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_size_2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_8"
+            tools:text="对方" />
+
+        <TextView
+            android:id="@+id/tv_with"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_size_2"
+            android:text="与"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"
+            tools:text="对方" />
+
+        <TextView
+            android:id="@+id/tv_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_size_2"
+            android:textColor="#FF6A9D"
+            android:textSize="@dimen/sp_12"
+            tools:text="对方已通过真" />
+
+        <TextView
+            android:id="@+id/tv_to_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_size_2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_8"
+            tools:text="对方已" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_size_3"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_size_2"
+            android:text="组成情侣，"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dp_size_2"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        tools:text="对方已通过真人～在近期使用Glide4.0" />
+
+
+</LinearLayout>

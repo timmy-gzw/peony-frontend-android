@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_local_tyrant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_3_5"
+            android:background="@drawable/bg_local_tyrant"
+            android:padding="@dimen/dp_10"
+            app:layout_constraintEnd_toStartOf="@id/cl_charm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/viewbg1"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_60"
+                android:background="@mipmap/mine_bg_local_tyrant"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_local_tyrant_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_6"
+                android:background="@drawable/bg_local_tyrant_value"
+                android:paddingHorizontal="@dimen/dp_4"
+                android:paddingVertical="@dimen/dp_1_5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_8"
+                app:layout_constraintBottom_toBottomOf="@id/viewbg1"
+                app:layout_constraintEnd_toEndOf="@id/viewbg1"
+                app:layout_constraintStart_toStartOf="@id/viewbg1"
+                tools:text="勇往直前" />
+
+            <TextView
+                android:id="@+id/tv_local_tyrant_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:paddingVertical="@dimen/dp_3"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_local_tyrant_value"
+                app:layout_constraintStart_toEndOf="@+id/viewbg1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="等级 lv.1" />
+
+            <com.tftechsz.common.widget.AutoFitTextView
+                android:id="@+id/tv_local_tyrant_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/dp_2"
+                android:singleLine="true"
+                android:textColor="@color/color_mid_font"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_local_tyrant_level"
+                app:layout_constraintTop_toBottomOf="@id/tv_local_tyrant_level"
+                app:minTextSize="@dimen/sp_8"
+                tools:text="土豪值 99" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_charm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_3_5"
+            android:background="@drawable/bg_charm"
+            android:padding="@dimen/dp_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cl_local_tyrant"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_60"
+                android:background="@mipmap/mine_bg_charm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_charm_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="@dimen/dp_6"
+                android:background="@drawable/bg_charm_value"
+                android:paddingHorizontal="@dimen/dp_4"
+                android:paddingVertical="@dimen/dp_1_5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_8"
+                app:layout_constraintBottom_toBottomOf="@id/view2"
+                app:layout_constraintEnd_toEndOf="@id/view2"
+                app:layout_constraintStart_toStartOf="@id/view2"
+                tools:text="勇往直前" />
+
+            <TextView
+                android:id="@+id/tv_charm_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:paddingVertical="@dimen/dp_2"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_charm_value"
+                app:layout_constraintStart_toEndOf="@id/view2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="等级 lv.1" />
+
+            <com.tftechsz.common.widget.AutoFitTextView
+                android:id="@+id/tv_charm_value"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/dp_2"
+                android:singleLine="true"
+                android:textColor="@color/color_mid_font"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_charm_level"
+                app:layout_constraintTop_toBottomOf="@id/tv_charm_level"
+                app:minTextSize="@dimen/sp_8"
+                tools:text="土豪值 99" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

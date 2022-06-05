@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <!--android:tint="?attr/colorControlNormal">-->
+            <solid android:color="#9D1510" />
+            <size android:height="13dp" />
+            <corners android:radius="100dp" />
+        </shape>
+    </item>
+
+
+    <!-- 进度条 -->
+    <item android:id="@android:id/progress">
+        <scale android:scaleWidth="100%"
+            android:drawable="@drawable/shape_lesson_progress_bar"   />
+
+    </item>
+</layer-list>

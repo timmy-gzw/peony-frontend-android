@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingHorizontal="@dimen/dp_20">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:singleLine="true"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="19:20:11" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_2"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintEnd_toStartOf="@id/tv_balance"
+        app:layout_constraintStart_toStartOf="@id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time"
+        tools:text="收获 (兔兔) 赠送的粉玫瑰x1" />
+
+    <TextView
+        android:id="@+id/tv_integral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_time"
+        app:layout_constraintEnd_toStartOf="@id/right_arrow"
+        app:layout_constraintTop_toTopOf="@id/tv_time"
+        tools:text="+20.40金币" />
+
+    <TextView
+        android:id="@+id/tv_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/dp_4"
+        android:gravity="end"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintEnd_toEndOf="@id/tv_integral"
+        app:layout_constraintTop_toBottomOf="@id/tv_integral"
+        tools:text="余额: 26.34金币" />
+
+    <ImageView
+        android:id="@+id/right_arrow"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/dp_8"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_arrow_up"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_balance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_integral"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:layout_marginTop="@dimen/dp_12"
+        android:background="@color/driver"
+        app:layout_constraintTop_toBottomOf="@id/tv_content"
+        tools:background="@color/red"
+        tools:layout_height="@dimen/dp_1" />
+
+    <LinearLayout
+        android:id="@+id/ll_free"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/tv_integral"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_6"
+            android:textColor="@color/color_light_font"
+            android:textSize="@dimen/sp_12"
+            tools:text="金币 +5 " />
+
+        <TextView
+            android:id="@+id/free_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/dp_6"
+            android:textColor="@color/color_light_font"
+            android:textSize="@dimen/sp_12"
+            tools:text="绑定金币 +15 " />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

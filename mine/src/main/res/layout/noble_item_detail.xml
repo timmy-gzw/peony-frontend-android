@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <!-- <View
+                 android:id="@+id/c_top"
+                 android:layout_width="0dp"
+                 android:layout_height="0dp"
+                 app:layout_constraintBottom_toBottomOf="@id/recy"
+                 app:layout_constraintEnd_toEndOf="@id/recy"
+                 app:layout_constraintStart_toStartOf="@id/recy"
+                 app:layout_constraintTop_toTopOf="@id/recy" />
+
+             <View
+                 android:id="@+id/c_mid"
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 app:layout_constraintBottom_toBottomOf="@id/rl_vp"
+                 app:layout_constraintTop_toTopOf="@id/rl_vp" />
+
+             <View
+                 android:id="@+id/c_bot"
+                 android:layout_width="0dp"
+                 android:layout_height="0dp"
+                 app:layout_constraintBottom_toBottomOf="@id/tips"
+                 app:layout_constraintEnd_toEndOf="@id/tips"
+                 app:layout_constraintStart_toStartOf="@id/tips"
+                 app:layout_constraintTop_toTopOf="@id/name" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="center"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toTopOf="@id/rl_vp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/rl_vp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:clipChildren="false"
+                app:layout_constraintTop_toBottomOf="@id/recy">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vp_loop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_300"
+                    android:layout_marginHorizontal="@dimen/dp_size_75"
+                    android:clipChildren="false" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:textColor="#fffcc89c"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_vp"
+                tools:text="聊天气泡框" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/peony_gz_bt_png2"
+                app:layout_constraintBottom_toBottomOf="@id/name"
+                app:layout_constraintEnd_toStartOf="@id/name"
+                app:layout_constraintTop_toTopOf="@id/name" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/peony_gz_bt_png"
+                app:layout_constraintBottom_toBottomOf="@id/name"
+                app:layout_constraintStart_toEndOf="@id/name"
+                app:layout_constraintTop_toTopOf="@id/name" />
+
+            <TextView
+                android:id="@+id/tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="#ffa8a8a8"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                tools:text="贵族专属聊天气泡" />
+
+            <TextView
+                android:id="@+id/bot_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginHorizontal="@dimen/dp_88"
+                android:layout_marginTop="@dimen/dp_25"
+                android:background="@drawable/shape_noble_bot_btn_bg"
+                android:gravity="center"
+                android:textColor="@color/color_noble"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tips"
+                tools:text="开通贵族" />
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_30"
+                android:padding="@dimen/dp_10"
+                android:src="@mipmap/ic_close_red_package"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bot_btn"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+</layout>

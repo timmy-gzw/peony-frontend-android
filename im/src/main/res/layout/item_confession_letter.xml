@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/chat_bg_confession_letter">
+
+
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:src="@mipmap/chat_ic_confession_letter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_alg_top_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:src="@mipmap/img_title_gift_left"
+        app:layout_constraintBottom_toBottomOf="@id/iv_title"
+        app:layout_constraintRight_toLeftOf="@id/iv_title"
+        app:layout_constraintTop_toTopOf="@id/iv_title" />
+
+    <ImageView
+        android:id="@+id/img_alg_top_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:src="@mipmap/img_title_gift_right"
+        app:layout_constraintBottom_toBottomOf="@id/iv_title"
+        app:layout_constraintLeft_toRightOf="@id/iv_title"
+        app:layout_constraintTop_toTopOf="@id/iv_title" />
+
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_size_33"
+        android:layout_marginTop="@dimen/dp_18"
+        android:text="一封来自手可摘鹅的的表白信，他想跟你组成情侣，并送给你一个表白礼物。"
+        android:textColor="@color/half_red"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_title"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/ll_gift"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <RelativeLayout
+            android:id="@+id/rl_left"
+            android:layout_width="@dimen/dp_size_63"
+            android:layout_height="@dimen/dp_size_78"
+            android:layout_gravity="center">
+
+            <com.netease.nim.uikit.common.ui.imageview.HeadImageView
+                android:id="@+id/iv_left"
+                android:layout_width="@dimen/dp_size_57"
+                android:layout_height="@dimen/dp_size_57"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:id="@+id/iv_left_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/chat_bg_group_couple_head_girl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="手可摘鹅"
+            android:textColor="#7F89F3"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintTop_toBottomOf="@+id/rl_left" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_gift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ll_people"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/chat_ic_confession_letter_gift"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="（价值2520金币）"
+            android:textColor="#FFAACA"
+            android:textSize="9sp"
+            app:layout_constraintTop_toBottomOf="@+id/rl_left" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="表白礼物X1"
+            android:textColor="@color/half_red"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintTop_toBottomOf="@+id/rl_left" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_size_33"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        android:text="*答应他后，你们将成为情侣，并领取他送的礼物；拒绝他后，你们将不会成为情侣，礼物会退还给他"
+        android:textColor="#7F89F3"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_people" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail">
+
+        <TextView
+            android:id="@+id/tv_think"
+            android:layout_width="115dp"
+            android:layout_height="@dimen/dp_40"
+            android:background="@drawable/bg_tran_white_radius25"
+            android:gravity="center"
+            android:text="暂时没想好"
+            android:textColor="#FD538D"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_accept"
+            android:layout_width="115dp"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_15"
+            android:background="@mipmap/chat_confession_letter_ok"
+            android:gravity="center"
+            android:text="马上答应TA"
+            android:textColor="#FD538D"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

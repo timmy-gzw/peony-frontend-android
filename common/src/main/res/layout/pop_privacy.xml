@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_pop"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_30"
+    android:layout_marginEnd="@dimen/dp_30"
+    android:background="@drawable/bg_white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:gravity="center"
+        android:text="用户服务协议和芍药隐私政策提示"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/driver"
+
+        />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        android:layout_marginStart="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_25"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200">
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/dp_8"
+                android:text="欢迎您使用“芍药”！芍药非常重视保护用户（以下简称“您”）的个人信息和隐私，我们根据监管要求更新了《用户服务协议》和《芍药隐私政策》；并希望通过以下《芍药隐私政策（摘要）》帮助您直观、简洁地了解我们在必要范围内收集和使用您的个人信息类型和业务场景，以及我们处理您个人信息的基本规则。
+\n                       芍药隐私政策（摘要）
+\n一、我们如何收集和使用个人信息
+\n1．帮助您完成注册、登陆及认证
+\n注册芍药帐号时，您需要提供手机号码、验证码匹配结果、昵称、头像、生日，如果您使用第三方帐号进行登陆，需要您提供第三方帐号的昵称、头像、性别。在注册、登陆或后续的使用过程中，您也可以向我们补充额外信息（如您的性别、星座、所在地、职业、学历、身高、体重、年收入、交友宣言、兴趣爱好、您本人的真实头像），有助于我们提供更好的服务，同时增进您与其他用户之间的互动、了解。如果您不提供这些信息，并不会影响您使用芍药的基本功能。
+依据相关法律法规的规定，或为了满足实名认证的需要，保障用户帐号安全，在您使用芍药实名认证、身份认证、兑换收益功能时，我们需要对您进行身份验证，并收集您的以下身份认证信息：姓名、身份证号码、电话号码、面部特征值（静态或动态）、与实名认证一致的收款帐号以及兑换收益记录信息。如果您拒绝向我们提供上述信息，我们将无法向您提供相关的功能及服务。
+\n2．为您提供信息发布与互动服务
+\n在您使用芍药进行上传/发布信息以及进行相关行为（即上传发布音视频、图文内容、点赞、评论、关注、收藏、送礼时）时，我们将收集您上传、发布及形成的信息并有权展示您的昵称、头像和发布内容。当您使用芍药向其他用户打赏、送礼时，我们将收集您的头像、昵称及送礼数据，并向其他用户进行展示。当您使用上传头像、进行真人认证、发布语音个性签名、发布动态（包括图文与视频内容）时，我们还会根据您所发布的内容请求您授权相机、照片、麦克风以及存储权限；请你知悉，权限的开启或授权是您使用上述功能的前提，如您关闭或拒绝授权将无法使用上述功能，但不会影响您使用其他功能与服务。
+\n3．为您展示和推送内容或服务
+\n为向您提供个性化的信息搜索服务，我们会收集有关您的必要日志信息，包括您的操作使用行为信息（包括点击、关注、搜索、浏览、分享）、您主动提供的信息（包括反馈、发布、点赞、评论），我们还会根据您的IP地址向您推送您所需要的内容和更感兴趣的服务。
+\n4．基于地理位置的功能及推荐服务
+\n当您使用附近的人、附近动态、附近群组功能时，我们会向您请求授权获取地理位置信息，以便您推荐附近的用户或展示您与其他用户之间的距离。如您不希望使用该功能，您可以在您的移动端设备选择取消位置权限的授权。
+\n请您注意，您在使用我们提供的服务时所提供的所有个人信息，除非您删除或通过系统设置拒绝我们收集，否则将在您使用我们的服务期间持续授权我们使用。在您注销帐号时，我们将停止使用并删除您的个人信息，或采取匿名化处理，使其不再与您关联到一起。
+\n二、我们如何共享您的个人信息
+\n我们会委托第三方服务提供商处理我们收集的您的个人信息，以便其为我们提供基础设施技术、数据分析、广告投放、营销决策等产品或技术支持，上述委托处理行为受《芍药隐私政策》中所声明目的约束，并且我们会以合同方式对上述的第三方进行监督，以确保您的个人信息安全。
+\n三、您的权利
+\n在您使用芍药期间，您可以通过相应页面提示或《芍药隐私政策》载明的方式联系我们，以访问、更正、删除您的个人信息，以及行使改变授权同意的范围与注销帐号的权利，我们将及时响应您的请求。如果您需要您的个人信息副本，您可以通过我们提供的方式联系我们，在核实您的身份后，我们将向您提供您在我们服务中的个人信息副本（包括基本资料、身份信息），但法律法规另有规定的或《芍药隐私政策》另有约定的除外。
+\n四、未成年人保护
+\n我们的产品和服务仅面向18周岁以上的成年人，任何不满18周岁的未成年人不得创建自己的用户帐号及/或使用我们的服务。如我们发现或审核出任何未成年人注册或使用我们的产品，我们将采取注销帐号、删除信息等措施禁止、限制未成年人使用。
+\n五、如何联系我们
+\n如果您对本隐私政策或个人信息保护有任何问题，您可以将您的书面疑问、意见或建议联系在线客服或发送邮件至：ipeony@mail.peony1314.com，或电话联系：0755-26912284。一般情况下，我们将在十五个工作日内回复。如果您对我们的回复或处理不满意，您还可以向履行个人信息保护职责的部门进行投诉、举报。"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_12"
+
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_agree"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/bg_orange_enable"
+        android:gravity="center"
+        android:text="同意" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        style="@style/CustomButton"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@color/transparent"
+        android:gravity="center"
+        android:text="不同意,退出APP"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_15" />
+
+
+</LinearLayout>

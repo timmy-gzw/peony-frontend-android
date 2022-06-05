@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_size_33">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/left_icon"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:padding="@dimen/dp_1"
+            android:src="@drawable/demo_combination_girl"
+           />
+
+        <ImageView
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:background="@mipmap/peony_qlz_txk_icon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/right_icon"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/dp_1"
+            android:src="@drawable/demo_combination_rose"
+           />
+
+        <ImageView
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_alignParentEnd="true"
+            android:background="@mipmap/peony_qlz_txk_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/peony_jz_qlb_icon" />
+
+    </RelativeLayout>
+</LinearLayout>

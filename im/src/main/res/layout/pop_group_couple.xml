@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_top"
+        android:layout_marginTop="-45dp"
+        android:background="@drawable/bg_white_top"
+        android:paddingStart="@dimen/dp_28">
+
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/chat_close_xx"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_current_lovers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_size_66"
+            android:text="当前情侣："
+            android:textColor="@color/color_mid_font"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sweet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_size_66"
+            android:layout_marginEnd="@dimen/dp_28"
+            android:text="甜蜜值："
+            android:textColor="@color/color_mid_font"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <RelativeLayout
+            android:id="@+id/iv_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_28"
+            android:background="@mipmap/chat_couples_task_bg2_img"
+            android:padding="@dimen/dp_10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_current_lovers">
+
+            <ImageView
+                android:layout_width="141dp"
+                android:layout_height="135dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/dp_30"
+                android:src="@mipmap/chat_considertask_love" />
+
+            <TextView
+                android:id="@+id/tv_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF6A9D"
+                android:textSize="@dimen/sp_13" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/color_mid_font"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_tip" />
+
+        <ImageView
+            android:id="@+id/tv_operation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_33"
+            android:src="@mipmap/chat_couples_biaobai_couples"
+            android:text="跟TA表白，成为情侣"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tip"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_left"
+            android:layout_width="@dimen/dp_size_63"
+            android:layout_height="@dimen/dp_size_78"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.netease.nim.uikit.common.ui.imageview.HeadImageView
+                android:id="@+id/iv_left"
+                android:layout_width="@dimen/dp_size_57"
+                android:layout_height="@dimen/dp_size_57"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:id="@+id/iv_left_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/chat_bg_group_couple_head_girl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_dump"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_38"
+            android:src="@mipmap/chat_group_couple_dump"
+            app:layout_constraintStart_toEndOf="@+id/rl_left"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <RelativeLayout
+            android:id="@+id/rl_right"
+            android:layout_width="@dimen/dp_size_63"
+            android:layout_height="@dimen/dp_size_78"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_dump"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.netease.nim.uikit.common.ui.imageview.HeadImageView
+                android:id="@+id/iv_right"
+                android:layout_width="@dimen/dp_size_57"
+                android:layout_height="@dimen/dp_size_57"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:id="@+id/iv_right_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/chat_bg_group_couple_head_girl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_btn_dissolve_couple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_top"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_chat_couples_dissolve"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="2dp"
+        android:text="解散情侣"
+        android:textColor="#3D5B94"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</RelativeLayout>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.tftechsz.mine.entity.VipPriceBean" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <!--        android:paddingStart="@{item.position == item.selIndex ? @dimen/dp_2 : @dimen/dp_0}"-->
+    <!--        android:paddingEnd="@{item.position == item.selIndex ? @dimen/dp_2 : @dimen/dp_0}"-->
+    <!--        android:paddingBottom="@{item.position == item.selIndex ? @dimen/dp_2 : @dimen/dp_0}"-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_6"
+        android:layout_marginEnd="@dimen/dp_6"
+        android:background="@{item.sel ? @drawable/shape_vip_price_bg_selected : @drawable/shape_vip_price_bg_normal}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_member_top_bg"
+        tools:background="@drawable/shape_vip_price_bg_normal">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_2"
+            android:paddingBottom="@dimen/dp_2"
+            android:text="@{item.title}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="超值推荐" />
+
+        <View
+            android:id="@+id/white_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@{item.sel ? (int)@dimen/dp_1_8 : (int)@dimen/dp_1}"
+            android:layout_marginEnd="@{item.sel ? (int)@dimen/dp_1_8 : (int)@dimen/dp_1}"
+            android:layout_marginBottom="@{item.sel ? (int)@dimen/dp_1_8 : (int)@dimen/dp_1}"
+            android:background="@drawable/shape_vip_price_white_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/price1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@{item.aging}"
+            android:textColor='@{item.sel ? @color/color_FD5C15 : @color/color_cccccc}'
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="3个月" />
+
+        <TextView
+            android:id="@+id/price2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/dp_8"
+            android:paddingStart="@dimen/dp_2"
+            android:text="@{item.price}"
+            android:textColor='@{item.sel ? @color/color_FD5C15 : @color/color_cccccc}'
+            android:textSize="@dimen/sp_24"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/price3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/price_unit"
+            app:layout_constraintTop_toBottomOf="@id/price1"
+            tools:text="180" />
+
+        <TextView
+            android:id="@+id/price_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_6"
+            android:text="¥"
+            android:textColor='@{item.sel? @color/color_FD5C15 : @color/color_cccccc}'
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/price2"
+            app:layout_constraintBottom_toTopOf="@id/price3"
+            app:layout_constraintEnd_toStartOf="@id/price2"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price1" />
+
+        <TextView
+            android:id="@+id/price3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@{item.origin_price_title}"
+            android:textColor='@color/color_cccccc'
+            android:textSize="@dimen/sp_12"
+            android:visibility="@{TextUtils.isEmpty(item.origin_price_title) ? View.GONE : View.VISIBLE }"
+            app:layout_constraintBottom_toTopOf="@id/price4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_marginBottom="@dimen/dp_10"
+            tools:text="1.20元/天"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/price4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@{item.sel ? @drawable/shape_vip_price_btn_selected : @drawable/shape_bg_f9f9f9_radius}"
+            android:paddingHorizontal="@dimen/dp_15"
+            android:paddingVertical="@dimen/dp_3"
+            android:text="@{item.reduce_price_title}"
+            android:textColor='@{item.sel ? @color/white : @color/color_cccccc}'
+            android:textSize="@dimen/sp_12"
+            android:visibility="@{TextUtils.isEmpty(item.reduce_price_title) ? View.GONE : View.VISIBLE }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@drawable/shape_bg_f9f9f9_radius"
+            tools:layout_marginBottom="@dimen/dp_10"
+            tools:text="1.20元/天"
+            tools:textColor="@color/color_cc"
+            tools:visibility="visible" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

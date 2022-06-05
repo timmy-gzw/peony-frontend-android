@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="show_coin"
+            type="boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{show_coin ? @drawable/peony_jzbx_jb_img : @drawable/peony_jzbx_hyh_img}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/peony_jzbx_jb_img" />
+
+        <TextView
+            android:id="@+id/coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_25"
+            android:textColor="#ff9600"
+            android:textSize="@dimen/sp_50"
+            android:visibility="@{show_coin ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/btn"
+            app:layout_constraintEnd_toStartOf="@id/unit"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/bg"
+            tools:text="7"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:text="金币"
+            android:textColor="#ff9600"
+            android:textSize="@dimen/sp_18"
+            android:visibility="@{show_coin ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBaseline_toBaselineOf="@id/coin"
+            app:layout_constraintBottom_toBottomOf="@id/coin"
+            app:layout_constraintEnd_toEndOf="@id/bg"
+            app:layout_constraintStart_toEndOf="@id/coin"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_12"
+            android:src="@{show_coin ? @drawable/peony_jzbx_kxsx_icon : @drawable/peony_jzbx_wzdl_icon}"
+            app:layout_constraintBottom_toBottomOf="@id/bg"
+            app:layout_constraintEnd_toEndOf="@id/bg"
+            app:layout_constraintStart_toStartOf="@id/bg"
+            tools:src="@drawable/peony_jzbx_kxsx_icon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

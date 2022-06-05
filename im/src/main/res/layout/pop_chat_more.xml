@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:layout_marginEnd="@dimen/dp_25"
+    android:background="@mipmap/bg_more"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_20">
+
+    <TextView
+        android:id="@+id/tv_all_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="@string/chat_message_all_read"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+        app:drawableStartCompat="@mipmap/ic_message_all_read"
+        tools:drawableStart="@mipmap/ic_message_all_read" />
+
+    <View
+        style="@style/Driver"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/dp_20"
+        android:alpha="0.2"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="@string/chat_message_all_del"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+        app:drawableStartCompat="@mipmap/ic_message_del"
+        tools:drawableStart="@mipmap/ic_message_del" />
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="@dimen/dp_size_41"
+    android:layout_marginEnd="@dimen/dp_size_31"
+    android:minWidth="350dp">
+
+    <FrameLayout
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_gray_ee"
+        android:paddingStart="@dimen/dp_size_30"
+        android:paddingTop="@dimen/dp_size_8"
+        android:paddingEnd="@dimen/dp_size_30"
+        android:paddingBottom="@dimen/dp_size_8">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_size_2"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"
+            tools:text="对方已通过真人～在近期使用Glide4.0+版本的时候,需要进行图片加载进度的监听,于是查找各种资料实现该功能,便有了这篇记录。 一、准备工作 笔者Glide为: 二、具体实现 大致思路:通..." />
+
+    </FrameLayout>
+
+
+</RelativeLayout>

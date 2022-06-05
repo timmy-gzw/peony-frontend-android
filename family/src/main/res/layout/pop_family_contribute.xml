@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:gravity="center"
+    android:layout_marginEnd="@dimen/dp_22"
+    android:background="@mipmap/bg_more"
+    android:layout_marginTop="@dimen/dp_5"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_20">
+
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="日贡献"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15" />
+
+    <View
+        style="@style/Driver"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:alpha="0.2"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="周贡献"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15" />
+
+    <View
+        style="@style/Driver"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:alpha="0.2"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="总贡献"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15" />
+
+</LinearLayout>

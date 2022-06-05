@@ -1,0 +1,203 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", 'IS_DEBUG', 'true'
+        }
+        release {
+            buildConfigField "boolean", 'IS_DEBUG', 'false'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            jni.srcDirs = []
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs', '../lib_common/libs'
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+//    api rootProject.ext.support["kotlin"]
+    api rootProject.ext.support["design"]
+    api rootProject.ext.support["support-v4"]
+    api rootProject.ext.support["appcompat-v7"]
+    api rootProject.ext.support["recyclerview-v7"]
+    api rootProject.ext.support["constraint-layout"]
+    api rootProject.ext.support["material"]
+    api rootProject.ext.support["viewpager2"]
+    api rootProject.ext.support["work"]
+    api rootProject.ext.dependencies["arouter-api"]
+    api rootProject.ext.dependencies['smartRefreshLayout']
+    api rootProject.ext.dependencies['smartRefreshHeader']
+    api rootProject.ext.dependencies["smartFooiter"]
+    api rootProject.ext.dependencies["material"]
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+    api rootProject.ext.dependencies.eventbus
+
+    //rx管理View的生命周期
+    api(rootProject.ext.dependencies.rxlifecycle) {
+        exclude group: 'com.android.support'
+    }
+    api(rootProject.ext.dependencies["rxlifecycle-components"]) {
+        exclude group: 'com.android.support'
+    }
+    //rxbinding
+    api(rootProject.ext.dependencies.rxbinding) {
+        exclude group: 'com.android.support'
+    }
+    api rootProject.ext.dependencies.autosize
+    api rootProject.ext.dependencies.okhttp
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies["logging-interceptor"]
+
+//    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["adapter-rxjava"]
+    //json解析
+    api rootProject.ext.dependencies.gson
+
+//    api (rootProject.ext.dependencies.glide){
+//        exclude group: 'com.android.support'
+//    }
+    api rootProject.ext.dependencies["glide-transformations"]
+    api rootProject.ext.dependencies["lifecycle-extensions"]
+
+    annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+
+    api rootProject.ext.dependencies.dagger
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    api rootProject.ext.dependencies["immersionbar"]
+    api rootProject.ext.dependencies["immersionbar_component"]
+    api rootProject.ext.dependencies.flycoTabLayout
+    api rootProject.ext.dependencies["rxpermission"]
+    api rootProject.ext.dependencies["basePopup"]
+
+    //网易云信
+
+
+    api rootProject.ext.dependencies["yunxin-nertc"]
+    api rootProject.ext.dependencies["neliveplayer"]
+    api rootProject.ext.dependencies["playerGslbVersion"]
+    api project(path: ':uikit')
+    api project(path: ':faceunity')
+
+    api rootProject.ext.dependencies["avsignalling"]
+//    api rootProject.ext.dependencies["fastjson"]
+    api rootProject.ext.dependencies["push"]
+
+
+    api rootProject.ext.dependencies["SVGAPlayer"]
+    api rootProject.ext.dependencies["filedownloader"]
+
+
+//    api rootProject.ext.dependencies["lottie"]
+
+    api rootProject.ext.dependencies["pickerView"]
+    //room
+    api rootProject.ext.dependencies["room-runtime"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
+    api rootProject.ext.dependencies["room-rxjava2"]
+    //上传
+    api rootProject.ext.dependencies["aliyun-oss"]
+    //api rootProject.ext.dependencies["utilcodex"]
+    api rootProject.ext.dependencies["banner"]
+    api rootProject.ext.dependencies["loadingdialog"]
+
+    api rootProject.ext.dependencies["WaveLineView"]
+
+    api rootProject.ext.dependencies["umeng-common"]
+    api rootProject.ext.dependencies["umeng-asms"]
+    api rootProject.ext.dependencies["umeng-crash"]
+    api rootProject.ext.dependencies["imagePreview"]
+    api rootProject.ext.dependencies["umeng-share-core"]
+    api rootProject.ext.dependencies["umeng-share-board"]
+    api rootProject.ext.dependencies["umeng-share-wx"]
+    api rootProject.ext.dependencies["umeng-share-wxopensdk"]
+    /**
+     api rootProject.ext.dependencies["umeng-share-sina"]
+     **/
+    api rootProject.ext.dependencies["huawei-push"]
+    api rootProject.ext.dependencies["roundedimageview"]
+    api rootProject.ext.dependencies["umeng-utdid"]
+    api rootProject.ext.dependencies["umeng-push"]
+    api rootProject.ext.dependencies["umeng-alicloud-httpdns"]
+    api rootProject.ext.dependencies["umeng-alicloud-utils"]
+    api rootProject.ext.dependencies["umeng-alicloud_beacon"]
+    api rootProject.ext.dependencies["umeng-accs"]
+    api rootProject.ext.dependencies["umeng-agoo_networksdk"]
+    api rootProject.ext.dependencies["umeng-agoo_tlog"]
+    api rootProject.ext.dependencies["umeng-agoo_tnet4android"]
+    api rootProject.ext.dependencies["umeng-link"]
+
+    api rootProject.ext.dependencies["photoview"]
+    api rootProject.ext.dependencies["LikeButton"]
+
+    api rootProject.ext.dependencies["dkplayer-java"]
+    api rootProject.ext.dependencies["dkplayer-ui"]
+    api rootProject.ext.dependencies["dkplayer-exo"]
+    api rootProject.ext.dependencies["dkplayer-ijk"]
+    api rootProject.ext.dependencies["videocache"]
+    //api rootProject.ext.dependencies["ffmpeg"]
+    api rootProject.ext.dependencies["baseutils"]
+    api rootProject.ext.dependencies["rclayout"]
+    //视频裁剪
+    //api rootProject.ext.dependencies["EpMedia"]
+    //api rootProject.ext.dependencies["toast"]
+    api rootProject.ext.dependencies["multidex"]
+    api rootProject.ext.dependencies["luban"]
+    api rootProject.ext.dependencies["mojito"]
+    api rootProject.ext.dependencies["GlideImageLoader"]
+    api rootProject.ext.dependencies["SketchImageFactory"]
+    api rootProject.ext.dependencies["ticker"]
+    api rootProject.ext.dependencies["integration"]
+    api rootProject.ext.dependencies["glide-extension"]
+    api rootProject.ext.dependencies["mmkv"]
+    api rootProject.ext.dependencies["livedetect"]
+    api rootProject.ext.dependencies["realtimeblurview"]
+    api rootProject.ext.dependencies["ctpv"]
+    api 'com.github.princekin-f:EasyFloat:1.3.4'
+    api rootProject.ext.dependencies["rxdownload"]
+    api rootProject.ext.dependencies["MagicIndicator"]
+    api rootProject.ext.dependencies["tkrefreshlayout"]
+//    api 'com.bytedance.applog:RangersAppLog-Lite-cn:5.3.0'
+    //跑马灯
+    api rootProject.ext.dependencies["marquee"]
+    api rootProject.ext.dependencies["vap"]
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "androidx.test.ext:junit:1.1.3"
+}

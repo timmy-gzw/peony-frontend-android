@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <merge
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.tftechsz.common.widget.gift.GiftRootLayout
+            android:id="@+id/gift_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.tftechsz.common.widget.gift.GiftItemLayout
+                android:id="@+id/gift1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:gift_index="0" />
+
+            <com.tftechsz.common.widget.gift.GiftItemLayout
+                android:id="@+id/gift2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:gift_index="1" />
+
+            <com.tftechsz.common.widget.gift.GiftItemLayout
+                android:id="@+id/gift3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:gift_index="2" />
+        </com.tftechsz.common.widget.gift.GiftRootLayout>
+
+    </merge>
+</layout>

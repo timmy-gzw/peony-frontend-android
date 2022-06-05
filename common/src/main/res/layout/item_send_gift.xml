@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_20"
+    android:layout_marginTop="@dimen/dp_5"
+    android:layout_marginBottom="@dimen/dp_5"
+    android:clipChildren="false">
+
+    <LinearLayout
+        android:id="@+id/left_view"
+        android:layout_width="@dimen/dp_162"
+        android:layout_height="@dimen/dp_size_41"
+        android:background="@drawable/bg_gift_send"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/dp_162"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/dp_4">
+
+            <com.netease.nim.uikit.common.ui.imageview.HeadImageView
+                android:id="@+id/cir_avatar"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_record" />
+
+            <ImageView
+                android:id="@+id/iv_gift"
+                android:layout_width="@dimen/dp_34"
+                android:layout_height="@dimen/dp_34"
+                android:clipChildren="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_record" />
+
+            <com.tftechsz.common.widget.AutoFitTextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_message"
+                app:layout_constraintEnd_toStartOf="@id/iv_gift"
+                app:layout_constraintStart_toEndOf="@id/cir_avatar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="热情的裤子" />
+
+            <com.tftechsz.common.widget.AutoFitTextView
+                android:id="@+id/tv_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
+                android:alpha="0.6"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_gift"
+                app:layout_constraintStart_toEndOf="@id/cir_avatar"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+                tools:autoSizeMinTextSize="@dimen/sp_7"
+                tools:text="送 快乐王宝强" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <com.tftechsz.common.widget.OrangeStrokeTextView
+        android:id="@+id/gift_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/left_view"
+        android:layout_toEndOf="@id/left_view"
+        android:ellipsize="end"
+        android:paddingStart="@dimen/dp_6"
+        android:singleLine="true"
+        android:textColor="@color/color_F8D423"
+        android:textSize="@dimen/sp_34"
+        android:textStyle="bold"
+        tools:text="×123546" />
+
+    <!--
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/left_view"
+            android:layout_alignEnd="@id/left_view"
+            android:layout_marginTop="5dp"
+            android:background="@mipmap/family_gift_bottom_bg"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_7"
+                android:includeFontPadding="false"
+                android:text="中奖 "
+                android:textColor="#ffffffff"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_2"
+                android:layout_marginEnd="7dp"
+                android:includeFontPadding="false"
+                android:text=" 777"
+                android:textColor="#ffffffff"
+                android:textSize="@dimen/sp_10" />
+
+        </LinearLayout>
+    -->
+</RelativeLayout>

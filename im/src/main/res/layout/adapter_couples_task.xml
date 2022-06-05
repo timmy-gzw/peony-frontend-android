@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/con_root_gg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@drawable/bg_couples_task_get"
+    android:paddingHorizontal="@dimen/dp_10"
+    android:paddingVertical="@dimen/dp_8">
+
+    <ImageView
+        android:id="@+id/img_header"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_default_avatar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_couples_task_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:text="初尝甜蜜"
+        android:textColor="#ffca406f"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/img_header"
+        app:layout_constraintTop_toTopOf="@id/img_header" />
+
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:includeFontPadding="false"
+        android:text="跟情侣的甜蜜值达到10W后，双方可获得情侣聊天气泡（3天）"
+        android:textSize="10sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_couples_task_name"
+        app:layout_constraintRight_toLeftOf="@+id/img_click_btn"
+        app:layout_constraintTop_toBottomOf="@id/tv_couples_task_name" />
+
+    <ImageView
+        android:id="@+id/img_click_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/chat_couples_task_btn_get"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="mine_phone_number">手机号</string>
+    <string name="main_get_phone_code">获取验证码</string>
+    <string name="mine_share_money">邀请赚钱</string>
+    <string name="mine_red_pack">红包福利</string>
+    <string name="mine_help_feed">帮助反馈</string>
+    <string name="mine_setting">设置</string>
+    <string name="mine_record_voice">为了更好的展示自己，\n请录制5秒以上的语音介绍</string>
+    <string name="mine_accost_record">录一些诱惑的声音，会让异性更喜欢你哦！</string>
+</resources>

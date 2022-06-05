@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="mRippleView">
+        <attr name="cColor" format="color" />
+        <attr name="cSpeed" format="integer" />
+        <attr name="cDensity" format="integer" />
+        <attr name="cIsFill" format="boolean" />
+        <attr name="cIsAlpha" format="boolean" />
+    </declare-styleable>
+    <!-- 标点转换 -->
+    <declare-styleable name="CBAlignTextView">
+        <attr name="punctuationConvert" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ExpandTextView">
+        <attr name="showLines" format="integer" />
+    </declare-styleable>
+    <item name="type_header" type="integer" />
+    <item name="type_footer" type="integer" />
+    <item name="type_child" type="integer" />
+    <declare-styleable name="PraiseListView">
+        <attr name="item_color" format="color" />
+        <attr name="item_selector_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="NineGridLayout">
+        <attr name="sapcing" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="CommonItemView">
+        <!--右边文字是否可见-->
+        <attr name="right_text_visible" format="boolean" />
+        <attr name="center_text_visible" format="boolean" />
+        <!--右边箭头是否可见-->
+        <attr name="right_arrow_visible" format="boolean" />
+        <!--右边开关是否可见-->
+        <attr name="right_switch_visible" format="boolean" />
+        <!--开关是否打开-->
+        <attr name="right_switch_open" format="boolean" />
+        <!--左边文字颜色-->
+        <attr name="left_text_color" format="color" />
+        <!--左边文字内容-->
+        <attr name="left_text_content" format="string" />
+        <!--右边文字内容-->
+        <attr name="right_text_content" format="string" />
+        <attr name="center_text_content" format="string" />
+        <attr name="view_visible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CommonFrameView">
+        <attr name="text_content" format="string" />
+
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="AlignTextView">
+        <attr name="align" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="GiftItemLayout">
+        <attr name="gift_index" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ScrollTextView">
+        <attr name="clickEnable" format="boolean" />
+        <attr name="isHorizontal" format="boolean" />
+        <attr name="speed" format="integer" />
+        <attr name="text" format="string" />
+        <attr name="text_color" format="color" />
+        <attr name="text_size" format="dimension" />
+        <attr name="times" format="integer" />
+        <attr name="isScrollForever" format="boolean" />
+    </declare-styleable>
+
+
+    <string-array name="host_name">
+        <item>正式环境</item>
+        <item>预发布环境</item>
+        <item>提测环境</item>
+        <item>杨凯环境</item>
+        <item>王齐环境</item>
+        <item>陆盘刚环境</item>
+        <item>王子超环境</item>
+        <item>杨明辉环境</item>
+        <item>孙志鹏环境</item>
+        <item>申弘扬环境</item>
+        <item>测试稳定版本</item>
+        <item>无用端口</item>
+    </string-array>
+
+    <string-array name="host_url">
+        <item>http://config.peony125.com/</item>
+        <item>http://config.peony126.com/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com:28409/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com:28408/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com:28406/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com:28407/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com:28601/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com:28507/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com:28410/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com:28511/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com/</item>
+        <item>http://config.office-local.peony.taifangsz.com.com/</item>
+    </string-array>
+
+    <declare-styleable name="AutofitTextView">
+        <!-- Minimum size of the text. -->
+        <attr name="minTextSize" format="dimension" />
+        <!-- Amount of precision used to calculate the correct text size to fit within its
+        bounds. Lower precision is more precise and takes more time. -->
+        <attr name="tv_precision" format="float" />
+        <!-- Defines whether to automatically resize text to fit to the view's bounds. -->
+        <attr name="sizeToFit" format="boolean" />
+    </declare-styleable>
+
+
+    <attr name="tl_divider_color" format="color" />
+    <attr name="tl_divider_padding" format="dimension" />
+    <attr name="tl_divider_width" format="dimension" />
+    <attr name="tl_indicator_anim_duration" format="integer" />
+    <attr name="tl_indicator_anim_enable" format="boolean" />
+    <attr name="tl_indicator_bounce_enable" format="boolean" />
+    <attr name="tl_indicator_color" format="color" />
+    <attr name="tl_indicator_corner_radius" format="dimension" />
+    <attr name="tl_indicator_gravity" format="enum">
+        <enum name="TOP" value="48" />
+        <enum name="BOTTOM" value="80" />
+    </attr>
+    <attr name="tl_indicator_height" format="dimension" />
+    <attr name="tl_indicator_margin_bottom" format="dimension" />
+    <attr name="tl_indicator_margin_left" format="dimension" />
+    <attr name="tl_indicator_margin_right" format="dimension" />
+    <attr name="tl_indicator_margin_top" format="dimension" />
+    <attr name="tl_indicator_style" format="enum">
+        <enum name="NORMAL" value="0" />
+        <enum name="TRIANGLE" value="1" />
+        <enum name="BLOCK" value="2" />
+    </attr>
+    <attr name="tl_indicator_width" format="dimension" />
+    <attr name="tl_indicator_width_equal_title" format="boolean" />
+    <attr name="tl_tab_background" format="reference" />
+    <attr name="tl_tab_dot_marginRight" format="dimension" />
+    <attr name="tl_tab_dot_marginTop" format="dimension" />
+    <attr name="tl_tab_gravity" format="enum">
+        <enum name="Top" value="0" />
+        <enum name="Bottom" value="1" />
+        <enum name="Center" value="2" />
+    </attr>
+    <attr name="tl_tab_horizontal_gravity" format="enum">
+        <enum name="Left" value="0" />
+        <enum name="Right" value="1" />
+        <enum name="Center" value="2" />
+    </attr>
+    <attr name="tl_tab_marginBottom" format="dimension" />
+    <attr name="tl_tab_marginTop" format="dimension" />
+    <attr name="tl_tab_msg_marginRight" format="dimension" />
+    <attr name="tl_tab_msg_marginTop" format="dimension" />
+    <attr name="tl_tab_padding" format="dimension" />
+    <attr name="tl_tab_space_equal" format="boolean" />
+    <attr name="tl_tab_vertical_gravity" format="enum">
+        <enum name="Top" value="0" />
+        <enum name="Bottom" value="1" />
+        <enum name="Center" value="2" />
+    </attr>
+    <attr name="tl_tab_width" format="dimension" />
+    <attr name="tl_textAllCaps" format="boolean" />
+    <attr name="tl_textBold" format="enum">
+        <enum name="NONE" value="0" />
+        <enum name="SELECT" value="1" />
+        <enum name="BOTH" value="2" />
+    </attr>
+    <attr name="tl_textSelectColor" format="color" />
+    <attr name="tl_textSelectSize" format="dimension" />
+    <attr name="tl_textSize" format="dimension" />
+    <attr name="tl_textUnSelectColor" format="color" />
+    <attr name="tl_textUnSelectSize" format="dimension" />
+    <attr name="tl_underline_color" format="color" />
+    <attr name="tl_underline_gravity" format="enum">
+        <enum name="TOP" value="48" />
+        <enum name="BOTTOM" value="80" />
+    </attr>
+    <attr name="tl_underline_height" format="dimension" />
+    <declare-styleable name="MySegmentTabLayout">
+        <!-- indicator -->
+        <attr name="tl_indicator_color" />
+        <attr name="tl_indicator_height" />
+        <attr name="tl_indicator_margin_left" />
+        <attr name="tl_indicator_margin_top" />
+        <attr name="tl_indicator_margin_right" />
+        <attr name="tl_indicator_margin_bottom" />
+        <attr name="tl_indicator_corner_radius" />
+        <attr name="tl_indicator_anim_enable" />
+        <attr name="tl_indicator_anim_duration" />
+        <attr name="tl_indicator_bounce_enable" />
+
+        <!-- divider -->
+        <attr name="tl_divider_color" />
+        <attr name="tl_divider_width" />
+        <attr name="tl_divider_padding" />
+
+        <!-- tab -->
+        <attr name="tl_tab_padding" />
+        <attr name="tl_tab_space_equal" />
+        <attr name="tl_tab_width" />
+
+        <!-- title -->
+        <attr name="tl_textSize" />
+        <attr name="tl_textSelectColor" />
+        <attr name="tl_textUnSelectColor" />
+        <attr name="tl_textBold" />
+        <attr name="tl_textAllCaps" />
+
+        <attr name="tl_bar_color" format="color" />
+        <attr name="tl_bar_stroke_color" format="color" />
+        <attr name="tl_bar_stroke_width" format="dimension" />
+
+    </declare-styleable>
+
+    <declare-styleable name="MySlidingScaleTabLayout">
+        <!-- indicator -->
+        <attr name="tl_indicator_color" />
+        <attr name="tl_indicator_height" />
+        <attr name="tl_indicator_width" />
+        <attr name="tl_indicator_margin_left" />
+        <attr name="tl_indicator_margin_top" />
+        <attr name="tl_indicator_margin_right" />
+        <attr name="tl_indicator_margin_bottom" />
+        <attr name="tl_indicator_corner_radius" />
+        <attr name="tl_indicator_gravity" />
+        <attr name="tl_indicator_style" />
+        <attr name="tl_indicator_width_equal_title" />
+
+        <!-- underline -->
+        <attr name="tl_underline_color" />
+        <attr name="tl_underline_height" />
+        <attr name="tl_underline_gravity" />
+
+        <!-- divider -->
+        <attr name="tl_divider_color" />
+        <attr name="tl_divider_width" />
+        <attr name="tl_divider_padding" />
+
+        <!-- tab -->
+        <attr name="tl_tab_padding" />
+        <attr name="tl_tab_space_equal" />
+        <attr name="tl_tab_width" />
+        <attr name="tl_tab_marginTop" />
+        <attr name="tl_tab_marginBottom" />
+        <attr name="tl_tab_horizontal_gravity" />
+        <attr name="tl_tab_vertical_gravity" />
+        <attr name="tl_tab_background" />
+
+        <!-- title -->
+        <attr name="tl_textSelectSize" />
+        <attr name="tl_textUnSelectSize" />
+        <attr name="tl_textSelectColor" />
+        <attr name="tl_textUnSelectColor" />
+        <attr name="tl_textBold" />
+        <attr name="tl_textAllCaps" />
+
+        <!-- 是否开启文字的图片镜像 -->
+        <attr name="tl_openTextDmg" format="boolean" />
+
+        <!-- 未读消息的位置 -->
+        <attr name="tl_tab_msg_marginTop" />
+        <attr name="tl_tab_msg_marginRight" />
+
+        <!-- 红点的位置 -->
+        <attr name="tl_tab_dot_marginTop" />
+        <attr name="tl_tab_dot_marginRight" />
+
+    </declare-styleable>
+
+    <declare-styleable name="CountDownView">
+        <attr name="ringColor" format="color" />
+        <attr name="ringWidth" format="float" />
+        <attr name="viewWidth" format="float" />
+        <attr name="viewHeight" format="float" />
+        <attr name="countdownTime" format="integer" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CountDownView_res">
+        <!--颜色-->
+        <attr name="ringColor2" format="color" />
+        <!-- 进度文本的字体大小 -->
+        <attr name="progressTextSize2" format="dimension" />
+        <!-- 圆环宽度 -->
+        <attr name="ringWidth2" format="float" />
+        <!--进度文本颜色-->
+        <attr name="progressTextColor2" format="color" />
+        <!--倒计时-->
+        <attr name="countdownTime2" format="integer" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/base_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/toolbar_back_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_15"
+            android:paddingBottom="@dimen/dp_10"
+            android:src="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/toolbar_tv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:background="@drawable/bg_family_submit"
+            android:paddingStart="@dimen/dp_15"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingEnd="@dimen/dp_15"
+            android:paddingBottom="@dimen/dp_5"
+            android:text="提交"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+    <com.tftechsz.common.widget.EditTextClipboard
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:imeOptions="actionDone"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_6"
+        android:background="@drawable/bg_white_radius10"
+        android:gravity="center|start"
+        android:minHeight="@dimen/dp_60"
+        android:padding="@dimen/dp_20"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_16"
+        tools:text="@string/app_name" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_6"
+        android:gravity="center|start"
+        android:lineSpacingExtra="@dimen/dp_2"
+        android:minHeight="@dimen/dp_60"
+        android:padding="@dimen/dp_20"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_16"
+        android:visibility="gone"
+        tools:text="中央网信办主办的中国正能量2021“五个一百”网络精品征集评选展播活动正式启动，通过展播百名网络正能量榜样、百篇网络正能量文字、百幅网络正能量图片、百部网络正能量动漫音视频作品和百项网络正能量专题活动，共同传播可爱中国、青春中国、可亲中国、魅力中国、奋进中国。评选结果将于今年年底对外发布。"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:text="1/1"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_12" />
+</LinearLayout>

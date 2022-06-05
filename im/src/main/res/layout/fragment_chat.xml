@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ns_message"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    android:overScrollMode="never">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/emptyBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_80"
+        android:contentDescription="@string/empty"
+        android:drawablePadding="@dimen/dp_10"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dp_size_5"
+        android:text="暂无消息，去搭讪小姐姐吧"
+        android:textColor="@color/color_cc"
+        android:textSize="@dimen/sp_13"
+        app:drawableTopCompat="@mipmap/chat_ic_no_message" />
+
+</LinearLayout>

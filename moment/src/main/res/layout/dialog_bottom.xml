@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/color_eeeeee"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:color="#333333"
+        android:gravity="center"
+        android:text="@string/yaoqinghaoyou"
+        android:textSize="@dimen/dp_18"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:color="#666666"
+        android:gravity="center"
+        android:text="@string/fenxiangyaoqinghaoyou"
+        android:textSize="@dimen/dp_14"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <!--微信朋友圈开始-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_share_wx_zone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:color="#333333"
+                android:gravity="center"
+                android:text="@string/wxpengyoucircle"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <!--微信朋友圈结束-->
+
+
+        <!--QQ空间开始-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_share_qq_zone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:color="#333333"
+                android:gravity="center"
+                android:text="@string/qqzone"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal" />
+        </LinearLayout>
+        <!--QQ空间结束-->
+
+
+        <!--QQ空间开始-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_share_wx" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:color="#333333"
+                android:gravity="center"
+                android:text="@string/wxhaoyou"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal" />
+        </LinearLayout>
+        <!--QQ空间结束-->
+
+
+        <!--QQ好友开始-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_share_qq" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:color="#333333"
+                android:gravity="center"
+                android:text="@string/qqhaoyou"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal" />
+        </LinearLayout>
+        <!--QQ好友结束-->
+
+
+        <!--新浪微博开始-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_share_wb" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:color="#333333"
+                android:gravity="center"
+                android:text="@string/sinaweibo"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal" />
+        </LinearLayout>
+        <!--新浪微博结束-->
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="45dp"
+    android:background="@mipmap/chat_zql_lwtc_img"
+    android:paddingBottom="@dimen/dp_25">
+
+    <ImageView
+        android:id="@+id/img_alg_top_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:src="@mipmap/img_title_gift_left"
+        app:layout_constraintBottom_toBottomOf="@+id/img_alg_top"
+        app:layout_constraintRight_toLeftOf="@+id/img_alg_top"
+        app:layout_constraintTop_toTopOf="@+id/img_alg_top" />
+
+    <ImageView
+        android:id="@+id/img_alg_top_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:src="@mipmap/img_title_gift_right"
+        app:layout_constraintBottom_toBottomOf="@+id/img_alg_top"
+        app:layout_constraintLeft_toRightOf="@+id/img_alg_top"
+        app:layout_constraintTop_toTopOf="@+id/img_alg_top" />
+
+    <ImageView
+        android:id="@+id/img_alg_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:src="@mipmap/chat_light_gift_text_top"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_gift"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="@dimen/dp_23"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_alg_top" />
+
+    <TextView
+        android:id="@+id/tv_alg_gift_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#ffff6a9d"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_gift" />
+
+    <TextView
+        android:id="@+id/tv_hint_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_26"
+        android:layout_marginTop="@dimen/dp_35"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="2dp"
+        android:text="该礼物可从情侣大礼包中获取，
+情侣达到2000甜蜜值可解锁情侣大礼包哦～"
+        android:textColor="#ff7f89f3"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_alg_gift_name" />
+
+    <ImageView
+        android:id="@+id/img_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/btn_couples_task"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_hint_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

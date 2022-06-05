@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top"
+    android:paddingTop="@dimen/dp_15">
+
+    <FrameLayout
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_pop_pic" />
+
+        <TextView
+            android:id="@+id/tv_share_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_5"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            tools:text="邀请好友赚金币" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_share_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:textColor="@color/color_mid_font"
+        android:textSize="@dimen/sp_14"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fl_title"
+        tools:text="分享邀请好友一起友一！～"
+        tools:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/share_recy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:padding="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/tv_share_desc" />
+
+    <!-- <LinearLayout
+
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/tv_desc"
+         android:layout_marginStart="@dimen/dp_20"
+         android:layout_marginTop="@dimen/dp_30"
+         android:layout_marginEnd="@dimen/dp_20">
+
+         <TextView
+             android:id="@+id/tv_wx_zone"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:drawableTop="@mipmap/ic_share_wx_zone"
+             android:drawablePadding="@dimen/dp_6"
+             android:gravity="center"
+             android:text="微信朋友圈"
+             android:textColor="@color/color_mid_font"
+             android:textSize="@dimen/sp_12"
+
+             />
+
+         <TextView
+             android:id="@+id/tv_qq_zone"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:drawableTop="@mipmap/ic_share_qq_zone"
+             android:drawablePadding="@dimen/dp_6"
+             android:gravity="center"
+             android:text="QQ空间"
+             android:textColor="@color/color_mid_font"
+             android:textSize="@dimen/sp_12"
+
+             />
+
+         <TextView
+             android:id="@+id/tv_wx"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:drawableTop="@mipmap/ic_share_wx"
+             android:drawablePadding="@dimen/dp_6"
+             android:gravity="center"
+             android:text="微信好友"
+             android:textColor="@color/color_mid_font"
+             android:textSize="@dimen/sp_12"
+
+             />
+
+         <TextView
+             android:id="@+id/tv_qq"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:drawableTop="@mipmap/ic_share_qq"
+             android:drawablePadding="@dimen/dp_6"
+             android:gravity="center"
+             android:text="QQ好友"
+             android:textColor="@color/color_mid_font"
+             android:textSize="@dimen/sp_12"
+
+             />
+
+         <TextView
+             android:id="@+id/tv_wb"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:drawableTop="@mipmap/ic_share_wb"
+             android:drawablePadding="@dimen/dp_6"
+             android:gravity="center"
+             android:text="新浪微博"
+             android:textColor="@color/color_mid_font"
+             android:textSize="@dimen/sp_12"
+
+             />
+     </LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
