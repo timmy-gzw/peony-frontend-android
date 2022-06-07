@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.tftechsz.common.R;
 import com.tftechsz.common.iservice.UserProviderService;
 
@@ -32,8 +33,8 @@ public class UploadAvatarPopWindow extends BaseBottomPop implements View.OnClick
     private void initUI() {
         TextView mTvTip = findViewById(R.id.tv_tip);
         findViewById(R.id.tv_upload).setOnClickListener(this);   // 知道了
-        ImageView ivAvatar = findViewById(R.id.iv_true_avatar);
-        ivAvatar.setBackgroundResource(service.getUserInfo().getSex() == 1 ? R.mipmap.ic_boy_true_avatar : R.mipmap.ic_true_avatar);
+//        RoundedImageView ivAvatar = findViewById(R.id.iv_true_avatar);
+//        ivAvatar.setBackgroundResource(service.getUserInfo().getSex() == 1 ? R.mipmap.ic_boy_true_avatar : R.mipmap.ic_true_avatar);
 
     }
 

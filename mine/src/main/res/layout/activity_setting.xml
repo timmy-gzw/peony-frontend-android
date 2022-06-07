@@ -21,6 +21,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="vertical">
 
 
@@ -61,6 +62,7 @@
                 android:layout_height="@dimen/dp_60"
                 android:background="@color/white"
                 app:left_text_content="美颜设置"
+                android:visibility="gone"
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
                 app:right_text_visible="false" />
@@ -115,8 +117,7 @@
                 app:left_text_content="关于"
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
-                app:right_text_visible="false"
-                app:view_visible="false" />
+                app:right_text_visible="false" />
 
             <com.tftechsz.common.widget.CommonItemView
                 android:id="@+id/item_debug"
@@ -125,6 +126,7 @@
                 android:background="@color/white"
                 app:left_text_color="@color/red"
                 app:left_text_content="环境切换(debug)"
+                android:visibility="gone"
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
                 app:right_text_visible="true"
@@ -133,11 +135,11 @@
             <TextView
                 android:id="@+id/tv_exit"
                 style="@style/CustomButton"
-                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginBottom="@dimen/dp_20"
-                android:background="@drawable/bg_red"
-                android:text="退出当前账号"
-                android:textColor="@color/white" />
+                android:background="@color/white"
+                android:text="@string/login_out"
+                android:textColor="#F76576" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

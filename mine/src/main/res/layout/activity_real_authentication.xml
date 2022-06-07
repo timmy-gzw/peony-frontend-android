@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_40"
-                android:background="@mipmap/ic_true_avatar" />
+                android:background="@mipmap/right_avater" />
 
             <TextView
                 android:id="@+id/tv_tip2"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@mipmap/ic_error_avatar" />
+                android:background="@mipmap/wrong_avater" />
 
 
             <TextView

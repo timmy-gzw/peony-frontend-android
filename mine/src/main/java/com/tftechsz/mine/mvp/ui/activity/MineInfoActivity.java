@@ -27,6 +27,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.netease.nim.uikit.common.UserInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
@@ -69,7 +70,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     private CommonItemView mItemWeight;  //体重
     private CommonItemView mItemIncome;  //年收入
     private RelativeLayout mRlMineInfo;
-    private ImageView mIvAvatar;
+    private RoundedImageView mIvAvatar;
     private TextView mTvName, mTvNameAudit, mTvSignAudit;
     private UserInfo mUserInfo;
     private String path = "";  //头像路径

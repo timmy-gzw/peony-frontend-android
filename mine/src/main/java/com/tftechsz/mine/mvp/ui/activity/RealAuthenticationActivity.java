@@ -50,7 +50,7 @@ public class RealAuthenticationActivity extends BaseMvpActivity<IRealAuthView, R
     protected void initView(Bundle savedInstanceState) {
         new ToolBarBuilder().showBack(true)
                 .build();
-        ImageView ivAvatar = findViewById(com.tftechsz.common.R.id.iv_true_avatar);
+        ImageView ivAvatar = findViewById(R.id.iv_true_avatar);
         mRelaTips = findViewById(R.id.rela_tips);
         mRelaTips.setVisibility(service.getUserInfo().isBoy() ? View.GONE : View.VISIBLE);
         RecyclerView recy = findViewById(R.id.real_recy);

@@ -82,7 +82,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/iv_avatar" />
 
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/iv_avatar"
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="@dimen/dp_60"
@@ -90,11 +90,12 @@
                     android:layout_marginBottom="@dimen/dp_5"
                     android:layout_toStartOf="@+id/iv_arrow"
                     android:scaleType="centerCrop"
+                    app:riv_corner_radius="@dimen/dp_30"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/tv_icon_audit"
                     app:layout_constraintEnd_toStartOf="@id/iv_arrow"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@mipmap/mine_ic_girl_default" />
+                    tools:src="@mipmap/mine_ic_girl_default"/>
 
                 <TextView
                     android:id="@+id/tv_icon_audit"

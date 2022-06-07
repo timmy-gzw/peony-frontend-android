@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">芍药</string>
+    <string name="app_name">伊糖</string>
     <string name="string_search_you_want">搜索你想要的内容</string>
     <string name="hold_talk">按住 说话</string>
     <string name="finger_loosening_cancel_send">松开手指，取消发送</string>

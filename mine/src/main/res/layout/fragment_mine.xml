@@ -12,8 +12,8 @@
     <View
         android:id="@+id/top_bg"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@color/EEEEEE"
+        android:layout_height="400dp"
+        android:background="@mipmap/mine_bg"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
@@ -31,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_54"
+            android:paddingTop="@dimen/dp_12"
             app:layout_constraintLeft_toLeftOf="parent">
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -44,7 +45,7 @@
                 app:layout_constraintEnd_toEndOf="@id/pic_frame"
                 app:layout_constraintStart_toStartOf="@id/pic_frame"
                 app:layout_constraintTop_toTopOf="@id/pic_frame"
-                app:riv_corner_radius="@dimen/dp_6"
+                app:riv_corner_radius="@dimen/dp_40"
                 tools:src="@mipmap/mine_ic_boy_default" />
 
             <View
@@ -57,132 +58,198 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:background="@drawable/vip_style_picture_frame_s01_start" />
 
-            <TextView
-                android:id="@+id/tv_name"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_12"
-                android:layout_marginTop="@dimen/dp_4"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_21"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/tv_user_id"
-                app:layout_constraintStart_toEndOf="@id/pic_frame"
                 app:layout_constraintTop_toTopOf="@id/pic_frame"
-                tools:text="喵了个咪儿" />
+                app:layout_constraintLeft_toRightOf="@id/pic_frame"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/pic_frame"
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_21"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:textStyle="bold"
+                        tools:text="喵了个咪儿"
+                        tools:ignore="MissingConstraints" />
+                    <TextView
+                        android:id="@+id/iv_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_16"
+                        android:layout_marginStart="@dimen/dp_4"
+                        android:layout_marginTop="@dimen/dp_13"
+                        android:background="@drawable/bg_girl"
+                        android:drawablePadding="@dimen/dp_1"
+                        android:gravity="center"
+                        android:paddingEnd="@dimen/dp_5"
+                        android:text="15"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_10"
+                        android:visibility="gone"
+                        app:drawableStartCompat="@drawable/ic_girl"
+                        app:layout_constraintBaseline_creator="@+id/tv_name"
+                        app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_real_people"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_14"
+                        android:layout_marginStart="@dimen/dp_4"
+                        android:layout_marginTop="@dimen/dp_13"
+                        android:background="@mipmap/peony_home_xczr_icon"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_sex"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_auth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_14"
+                        android:layout_marginStart="@dimen/dp_3"
+                        android:layout_marginTop="@dimen/dp_13"
+                        android:background="@mipmap/ic_authentication"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_real_people"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_user_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_2"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_11"
+                    android:drawablePadding="3dp"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="芍药号:12345" />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/ll_fff"
+                android:layout_marginTop="@dimen/dp_19"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_width="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_friend"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_friend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_6"
+                        android:paddingBottom="@dimen/dp_2"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_20"
+                        tools:text="0" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_6"
+                        android:paddingBottom="@dimen/dp_2"
+                        android:textColor="#999999"
+                        android:text="@string/friend"
+                        android:textSize="@dimen/sp_12"
+                        tools:text="好友" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_attention"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_attention"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_6"
+                        android:paddingBottom="@dimen/dp_2"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_20"
+                        tools:text="0" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_6"
+                        android:paddingBottom="@dimen/dp_2"
+                        android:textColor="#999999"
+                        android:textSize="@dimen/sp_12"
+                        android:text="@string/attention"
+                        tools:text="关注" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fans"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_fans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_6"
+                        android:paddingBottom="@dimen/dp_2"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_20"
+                        tools:text="0" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_6"
+                        android:paddingBottom="@dimen/dp_2"
+                        android:textColor="#999999"
+                        android:textSize="@dimen/sp_12"
+                        android:text="@string/fans"
+                        tools:text="粉丝" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_user_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/dp_2"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_11"
-                android:drawablePadding="3dp"
-                app:layout_constraintBottom_toTopOf="@id/tv_friend"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_name"
-                app:layout_constraintVertical_chainStyle="packed"
-                tools:text="芍药号:12345" />
-
-            <TextView
-                android:id="@+id/iv_sex"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_13"
-                android:background="@drawable/bg_girl"
-                android:drawablePadding="@dimen/dp_1"
+                android:id="@+id/edit_info"
+                android:text="@string/edit_userInfo"
                 android:gravity="center"
-                android:paddingEnd="@dimen/dp_5"
-                android:text="15"
+                android:textSize="@dimen/sp_14"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_10"
-                android:visibility="gone"
-                app:drawableStartCompat="@drawable/ic_girl"
-                app:layout_constraintBaseline_creator="@+id/tv_name"
-                app:layout_constraintLeft_toRightOf="@+id/tv_name"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_real_people"
+                android:background="@mipmap/edit_info"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_14"
-                android:layout_marginStart="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_13"
-                android:background="@mipmap/peony_home_xczr_icon"
-                android:gravity="center"
-                android:visibility="gone"
-                app:layout_constraintLeft_toRightOf="@+id/iv_sex"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_auth"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_14"
-                android:layout_marginStart="@dimen/dp_3"
-                android:layout_marginTop="@dimen/dp_13"
-                android:background="@mipmap/ic_authentication"
-                android:visibility="gone"
-                app:layout_constraintLeft_toRightOf="@+id/iv_real_people"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_friend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="@dimen/dp_6"
-                android:paddingBottom="@dimen/dp_2"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_11"
-                app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
-                app:layout_constraintEnd_toStartOf="@id/tv_attention"
-                app:layout_constraintStart_toEndOf="@id/iv_avatar"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_user_id"
-                tools:text="0好友丨" />
-
-            <TextView
-                android:id="@+id/tv_attention"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="@dimen/dp_6"
-                android:paddingBottom="@dimen/dp_2"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="@id/tv_friend"
-                app:layout_constraintStart_toEndOf="@id/tv_friend"
-                app:layout_constraintTop_toTopOf="@id/tv_friend"
-                tools:text="0关注丨" />
-
-            <TextView
-                android:id="@+id/tv_fans"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_40"
-                android:gravity="center"
-                android:paddingTop="@dimen/dp_6"
-                android:paddingBottom="@dimen/dp_2"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="@id/tv_friend"
-                app:layout_constraintStart_toEndOf="@id/tv_attention"
-                app:layout_constraintTop_toTopOf="@id/tv_friend"
-                tools:text="0粉丝" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/dp_20"
-                android:src="@mipmap/ic_arrow"
-                app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+                android:layout_marginRight="@dimen/dp_21"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
                 app:layout_constraintTop_toTopOf="@id/iv_avatar"
-                app:tint="@color/color_normal" />
+                android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_mine_mid"
@@ -194,7 +261,7 @@
                 android:paddingStart="@dimen/dp_30"
                 android:paddingEnd="@dimen/dp_30"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/tv_friend" />
+                app:layout_constraintTop_toBottomOf="@id/ll_fff" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_vip"
@@ -203,7 +270,7 @@
                 android:layout_marginHorizontal="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_10"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+                app:layout_constraintTop_toBottomOf="@id/ll_fff"
                 tools:visibility="visible">
 
                 <ImageView
@@ -213,7 +280,8 @@
                     android:layout_marginTop="@dimen/dp_8"
                     app:layout_constraintDimensionRatio="6.7"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:background="@mipmap/default_mine_vip_bg_nor"
+                    android:background="@mipmap/mine_vip_bg"
+                    tools:background="@mipmap/mine_vip_bg"
                     tools:visibility="visible" />
 
                 <ImageView
@@ -226,7 +294,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/vip_nor"
                     app:layout_constraintStart_toStartOf="@id/vip_nor"
                     app:layout_constraintTop_toTopOf="@id/vip_nor"
-                    tools:visibility="visible" />
+                    tools:visibility="gone" />
 
                 <TextView
                     android:id="@+id/vip_nor_hint"
@@ -242,13 +310,26 @@
                     tools:visibility="visible" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:background="@mipmap/mine_vip_btn_bg"
+                    android:text="@string/vip_charge"
+                    android:gravity="center"
+                    android:textColor="#5D3D03"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintTop_toTopOf="@id/vip_nor"
+                    app:layout_constraintBottom_toBottomOf="@id/vip_nor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
                     android:id="@+id/vip_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_6"
-                    android:text="尊贵VIP会员"
-                    android:textColor="#9B7414"
-                    android:textSize="@dimen/sp_13"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/super_vip"
+                    android:textColor="#FCD08F"
+                    android:textSize="@dimen/sp_16"
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@id/expired_time"
                     app:layout_constraintStart_toEndOf="@id/vip_icon"
@@ -260,13 +341,14 @@
                     android:id="@+id/expired_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#9B7414"
+                    android:textColor="#B2A487"
                     android:textSize="@dimen/sp_10"
                     android:visibility="gone"
+                    android:text="@string/vip_special_power"
                     app:layout_constraintBottom_toBottomOf="@id/vip_nor"
                     app:layout_constraintStart_toStartOf="@id/vip_title"
                     app:layout_constraintTop_toBottomOf="@id/vip_title"
-                    tools:text="2021-04-20到期"
+                    tools:text="开通即享视频8折，免费搭讪等8项特权"
                     tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

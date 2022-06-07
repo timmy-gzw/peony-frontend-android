@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -57,6 +58,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private UserProviderService service;
     private TextView mTvName, mTvUserId, mTvSex;   //姓名,芍药号码,好友关注粉丝,性别
     private ImageView mIvAvatar, mIvAuth, mIvRealPeople, mVipIcon;
+    private LinearLayout mLlFriend,mLlFans,mLlAttention;
     private TextView mTvFriend, mTvFans, mTvAttention;
     private RecyclerView mRcMineMid, mRvMineBot;
     private UserInfo mUserInfo;
@@ -87,8 +89,11 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mTvName = getView(R.id.tv_name);
         mTvSetting = getView(R.id.tv_setting);
         mTvUserId = getView(R.id.tv_user_id);
+        mLlFriend = getView(R.id.ll_friend);
         mTvFriend = getView(R.id.tv_friend);
+        mLlFans = getView(R.id.ll_fans);
         mTvFans = getView(R.id.tv_fans);
+        mLlAttention = getView(R.id.ll_attention);
         mTvAttention = getView(R.id.tv_attention);
         mIvAvatar = getView(R.id.iv_avatar);
         mIvAuth = getView(R.id.iv_auth);
@@ -127,9 +132,9 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     }
 
     private void initListener() {
-        mTvFriend.setOnClickListener(this);  //好友
-        mTvAttention.setOnClickListener(this);  ///关注
-        mTvFans.setOnClickListener(this);  //粉丝
+        mLlFriend.setOnClickListener(this);  //好友
+        mLlAttention.setOnClickListener(this);  ///关注
+        mLlFans.setOnClickListener(this);  //粉丝
         getView(R.id.tv_setting).setOnClickListener(this);  //设置
         getView(R.id.cl_vip).setOnClickListener(this);  //会员
         getView(R.id.cl_top).setOnClickListener(this);   //我的
@@ -208,9 +213,9 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
             mTvUserId.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         }
 
-        mTvFriend.setText(new SpannableStringUtils.Builder().append("好友 ").append(String.valueOf(userInfo.getFriend_number())).append("丨").create());
-        mTvAttention.setText(new SpannableStringUtils.Builder().append("关注 ").append(String.valueOf(userInfo.getWatch_number())).append("丨").create());
-        mTvFans.setText(new SpannableStringUtils.Builder().append("粉丝 ").append(String.valueOf(userInfo.getFans_number())).create());
+        mTvFriend.setText(String.valueOf(userInfo.getFriend_number()));
+        mTvAttention.setText(String.valueOf(userInfo.getWatch_number()));
+        mTvFans.setText(String.valueOf(userInfo.getFans_number()));
         mVip_title.setText(new SpannableStringUtils.Builder().append("VIP会员").setBold().append("·尊享特权").create());
         GlideUtils.loadRouteImage(getActivity(), mIvAvatar, userInfo.getIcon(), userInfo.getSex() == 1 ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
         mTvJifen.setText(userInfo.getIntegral());
@@ -322,10 +327,10 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                         mExpiredTime.setText(userInfo.vip_expiration_time_desc_new);
                         mExpiredTime.setVisibility(View.VISIBLE);
                     } else {
-                        mTopBg.setBackgroundColor(Utils.getColor(R.color.EEEEEE));
+                        mTopBg.setBackgroundResource(R.mipmap.mine_bg);
                         mVipIcon.setVisibility(View.GONE);
-                        mExpiredTime.setVisibility(View.GONE);
-                        mVip_title.setVisibility(View.GONE);
+                        mExpiredTime.setVisibility(View.VISIBLE);
+                        mVip_title.setVisibility(View.VISIBLE);
                         if (TextUtils.isEmpty(userInfo.getVip_desc())) {
                             mVipNorHint.setVisibility(View.INVISIBLE);
                         } else {
@@ -365,11 +370,11 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.tv_friend) {  // 个人朋友
+        if (id == R.id.ll_friend) {  // 个人朋友
             startMineFriend(MineFriendActivity.TYPE_FRIEND);
-        } else if (id == R.id.tv_fans) {  // 个人粉丝
+        } else if (id == R.id.ll_fans) {  // 个人粉丝
             startMineFriend(MineFriendActivity.TYPE_FANS);
-        } else if (id == R.id.tv_attention) {  // 个人/关注
+        } else if (id == R.id.ll_attention) {  // 个人/关注
             startMineFriend(MineFriendActivity.TYPE_WATCH);
         } else if (id == R.id.cl_top) {   //我的资料
             ARouterUtils.toMineDetailActivity("");
