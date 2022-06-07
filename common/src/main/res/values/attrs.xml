@@ -97,16 +97,16 @@
     <string-array name="host_url">
         <item>http://config.peony125.com/</item>
         <item>http://config.peony126.com/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com:28409/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com:28408/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com:28406/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com:28407/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com:28601/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com:28507/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com:28410/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com:28511/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com/</item>
-        <item>http://config.office-local.peony.taifangsz.com.com/</item>
+        <item>http://config.dev.peony.taifangsz.com.com:28409/</item>
+        <item>http://config.dev.peony.taifangsz.com.com:28408/</item>
+        <item>http://config.dev.peony.taifangsz.com.com:28406/</item>
+        <item>http://config.dev.peony.taifangsz.com.com:28407/</item>
+        <item>http://config.dev.peony.taifangsz.com.com:28601/</item>
+        <item>http://config.dev.peony.taifangsz.com.com:28507/</item>
+        <item>http://config.dev.peony.taifangsz.com.com:28410/</item>
+        <item>http://config.dev.peony.taifangsz.com.com:28511/</item>
+        <item>http://config.dev.peony.taifangsz.com.com/</item>
+        <item>http://config.dev.peony.taifangsz.com.com/</item>
     </string-array>
 
     <declare-styleable name="AutofitTextView">

@@ -110,15 +110,15 @@ public class ExchangeDetailsActivity extends BaseMvpActivity<IExchangeDetailView
             mBotLink.removeAllViews();
             List<ConfigInfo.MineInfo> list = new ArrayList<>();
             ConfigInfo.MineInfo mineInfo = new ConfigInfo.MineInfo();
-            mineInfo.link = "https://m.office-local.peony.taifangsz.com.com/page/haolinggong.html";
+            mineInfo.link = "https://m.dev.peony.taifangsz.com.com/page/haolinggong.html";
             mineInfo.title = "《好灵工服务协议》";
             list.add(mineInfo);
             ConfigInfo.MineInfo mineInfo1 = new ConfigInfo.MineInfo();
-            mineInfo1.link = "https://m.office-local.peony.taifangsz.com.com/page/yunxiang.html";
+            mineInfo1.link = "https://m.dev.peony.taifangsz.com.com/page/yunxiang.html";
             mineInfo1.title = "《云享服务协议》";
             list.add(mineInfo1);
             ConfigInfo.MineInfo mineInfo2 = new ConfigInfo.MineInfo();
-            mineInfo2.link = "https://m.office-local.peony.taifangsz.com.com/page/zongxiang.html";
+            mineInfo2.link = "https://m.dev.peony.taifangsz.com.com/page/zongxiang.html";
             mineInfo2.title = "《众享服务协议》";
             list.add(mineInfo2);
             for (int i = 0, j = list.size(); i < j; i++) {

@@ -18,7 +18,7 @@ public class Constants {
     public static final String HOST_IM = "://im.";
     public static final String HOST_CONFIG = "://config.";
     public static final String HOST_UPLOAD = "://upload.";
-    public static final String HOST_TEST = "http://config.api.office-local.peony.taifangsz.com:8080/";   // 测试
+    public static final String HOST_TEST = "http://config.api.dev.peony.taifangsz.com:8080/";   // 测试
     public static final String HOST = "http://config.peony.taifangsz.com/";
     public static final String HOST_DOWN = "http://peony-public.oss-cn-shenzhen.aliyuncs.com/config/launch.txt";
     public static final String HOST_TEST_DOWN = "http://peony-public.oss-cn-shenzhen.aliyuncs.com/config/launch_dev.txt";

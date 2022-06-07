@@ -806,7 +806,7 @@ public final class Utils {
         return false;
     }
 
-    public static String performUrl(String url) { // http://m.office-local.peony.taifangsz.com.com/policy.html?v=2021011310002&__app_name={app_name}
+    public static String performUrl(String url) { // http://m.dev.peony.taifangsz.com.com/policy.html?v=2021011310002&__app_name={app_name}
         if (TextUtils.isEmpty(url)) {
             return "";
         }
