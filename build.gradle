@@ -24,7 +24,12 @@ buildscript {
 allprojects {
     repositories {
         google()
-        maven { url 'https://jitpack.io' }
+        maven {
+            url 'https://jitpack.io'
+            content {
+                includeGroupByRegex '(com|io)\\.(github|gitee)\\..*'
+            }
+        }
 //        maven {url'https://maven.google.com'}
         maven { url 'https://dl.google.com/dl/android/maven2/' }
         //maven { url 'https://dl.bintray.com/umsdk/release' }  //友盟+于2021年5月6日将各业务线的最新版SDK已经迁移至maven center  https://developer.umeng.com/docs/119267/detail/214727
