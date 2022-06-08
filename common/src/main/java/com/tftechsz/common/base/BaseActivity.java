@@ -20,13 +20,13 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.AppUtils;
 import com.gyf.immersionbar.ImmersionBar;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.umeng.analytics.MobclickAgent;
 import com.tftechsz.common.R;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.KeyBoardUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.widget.LoadingDialog;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.umeng.analytics.MobclickAgent;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -161,7 +161,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
         private String rightText;
         private boolean isBackShow;
         private boolean isRightImgShow, isRightTxtShow = true;
-        private int titleTextColor, rightTextColor, rightTextBg;
+        private int backgroundColor = -1, titleTextColor, rightTextColor, rightTextBg;
         private int backRes = -1;
 
         public ToolBarBuilder() {
@@ -237,6 +237,9 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             if (!TextUtils.isEmpty(title)) {
                 titleTv.setText(title);
             }
+            if (backgroundColor >= 0) {
+                baseTitle.setBackgroundResource(0);
+            }
             rightTv.setVisibility(isRightTxtShow ? View.VISIBLE : View.GONE);
             rightIv.setVisibility(isRightImgShow ? View.VISIBLE : View.GONE);
             if (titleTextColor > 0) {
@@ -272,7 +275,9 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             }
         }
 
-        public void setBackgroundColor() {
+        public ToolBarBuilder setBackgroundColor(int color) {
+            this.backgroundColor = color;
+            return this;
         }
     }
 

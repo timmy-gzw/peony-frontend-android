@@ -3,91 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:paddingStart="@dimen/dp_20">
-
-
-    <ImageView
-        android:id="@+id/iv_avatar"
-        android:layout_width="@dimen/dp_32"
-        android:layout_height="@dimen/dp_32"
-        android:layout_marginTop="@dimen/dp_20"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    android:layout_height="90dp"
+    android:background="@drawable/selector_recharge_item">
 
     <TextView
         android:id="@+id/tv_coin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_28"
+        android:gravity="center"
+        android:maxLines="1"
         android:textColor="@color/color_normal"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/sp_18"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_desc"
-        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:autoSizeMinTextSize="@dimen/sp_10"
+        app:autoSizeTextType="uniform"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/tv_rmb"
+        app:layout_constraintEnd_toStartOf="@id/tv_coin_symbol"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="喵了个咪儿" />
+        tools:text="12345566" />
 
+    <TextView
+        android:id="@+id/tv_coin_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_4"
+        android:text="@string/coin"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_12"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_coin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_coin"
+        app:layout_constraintTop_toTopOf="@id/tv_coin"
+        tools:text="@string/coin" />
+
+    <TextView
+        android:id="@+id/tv_rmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:gravity="center"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_coin"
+        tools:text="￥123" />
 
     <TextView
         android:id="@+id/tv_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_12"
-        android:layout_marginTop="@dimen/dp_4"
-        android:textColor="#CFB78A"
-        android:textSize="@dimen/sp_14"
-        app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/tv_coin"
-        tools:text="638208" />
-
-
-    <TextView
-        android:id="@+id/tv_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_6"
-        android:layout_marginBottom="@dimen/dp_6"
         android:background="@drawable/shape_pay_hint_bg2"
-        android:text="多送40金币"
+        android:paddingStart="@dimen/dp_4"
+        android:paddingTop="@dimen/dp_2"
+        android:paddingEnd="@dimen/dp_4"
+        android:paddingBottom="@dimen/dp_2"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_12"
-        app:layout_constraintBottom_toTopOf="@+id/tv_desc"
-        app:layout_constraintStart_toEndOf="@+id/tv_coin" />
-
-
-    <TextView
-        android:id="@+id/tv_rmb"
-        android:layout_width="@dimen/dp_66"
-        android:layout_height="@dimen/dp_size_32"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:background="@drawable/bg_recharge"
-        android:gravity="center"
-        android:text="a"
-        android:textColor="@color/blue_7F89F3"
-        android:textSize="@dimen/sp_15"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        android:textSize="@dimen/sp_10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-
-        />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/dp_20"
-        android:background="@color/driver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
-
-        />
-
+        tools:text="多送40金币" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

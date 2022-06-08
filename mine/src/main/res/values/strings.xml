@@ -16,4 +16,17 @@
     <string name="vip_special_power">开通即享视频8折，免费搭讪等8项特权</string>
     <string name="edit_userInfo">编辑资料</string>
     <string name="login_out">退出登录</string>
+
+    <string name="coin">金币</string>
+    <string name="coin_balance">金币余额</string>
+    <string name="coin_recharge">金币充值</string>
+    <string name="income_and_expenditude_records">收支记录</string>
+
+    <string name="recharge_agreement">充值即代表同意伊糖用户充值协议</string>
+    <string name="pay_now_format">立即支付%s元</string>
+    <string name="pay_now">立即充值</string>
+    <string name="recharge_amount">充值金额</string>
+    <string name="pay_ali">支付宝支付</string>
+    <string name="pay_wechat">微信支付</string>
+
 </resources>
