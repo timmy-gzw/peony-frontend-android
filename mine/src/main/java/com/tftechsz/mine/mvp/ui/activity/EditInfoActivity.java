@@ -1,11 +1,14 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -89,6 +92,7 @@ public class EditInfoActivity extends BaseMvpActivity<IEditInfoView, EditInfoPre
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initData() {
         super.initData();
@@ -97,14 +101,14 @@ public class EditInfoActivity extends BaseMvpActivity<IEditInfoView, EditInfoPre
         String mSign = getIntent().getStringExtra("sign");
 
         if (type == TYPE_NAME) {
-            mTvTitle.setText("设置昵称");
+            mTvTitle.setText("修改昵称");
             mEtContent.setText(service.getUserInfo().getNickname());
             mEtContent.setHint("昵称仅支持中文");
             length = Constants.MAX_NAME_LENGTH;
             p.setLength(mEtContent, length);
 //            mEtContent.setFilters(new InputFilter[]{new ChineseFilter()});
         } else if (type == TYPE_JOB) {
-            mTvTitle.setText("设置工作");
+            mTvTitle.setText("填写工作");
             if (!TextUtils.equals("待完善", mJob))
                 mEtContent.setText(mJob);
             else
@@ -139,7 +143,22 @@ public class EditInfoActivity extends BaseMvpActivity<IEditInfoView, EditInfoPre
 
             }
         });
-
+        mEtContent.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Drawable drawable = mEtContent.getCompoundDrawables()[2];
+                if(drawable == null){
+                    return false;
+                }
+                if(event.getAction() != MotionEvent.ACTION_UP){
+                    return false;
+                }
+                if(event.getX()>mEtContent.getWidth()-mEtContent.getPaddingRight()-drawable.getIntrinsicWidth()){
+                    mEtContent.setText("");
+                }
+                return false;
+            }
+        });
 
     }
 

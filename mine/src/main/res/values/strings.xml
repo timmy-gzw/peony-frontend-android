@@ -16,6 +16,7 @@
     <string name="vip_special_power">开通即享视频8折，免费搭讪等8项特权</string>
     <string name="edit_userInfo">编辑资料</string>
     <string name="login_out">退出登录</string>
+    <string name="vip_can_set">（VIP用户可设置）</string>
 
     <string name="coin">金币</string>
     <string name="coin_balance">金币余额</string>

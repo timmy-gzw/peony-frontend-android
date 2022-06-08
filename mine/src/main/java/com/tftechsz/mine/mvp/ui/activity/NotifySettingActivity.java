@@ -59,7 +59,7 @@ public class NotifySettingActivity extends BaseMvpActivity<IPrivacySettingView,P
         mItemVibrate.getMySwitch().setChecked(UserPreferences.getVibrateToggle());
         mItemRing.getMySwitch().setChecked(UserPreferences.getRingToggle());
         TextView tvTip = findViewById(R.id.tv_tip);
-        tvTip.setText(String.format("当%s运行时,您可以设置是否需要声音或者振动提醒",getString(R.string.app_name)));
+        tvTip.setText(String.format("当%s运行时，您可以设置是否需要声音或者振动提醒",getString(R.string.app_name)));
     }
 
 
