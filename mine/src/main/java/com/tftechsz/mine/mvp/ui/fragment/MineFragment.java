@@ -42,7 +42,6 @@ import com.tftechsz.mine.entity.BaseItemBean;
 import com.tftechsz.mine.mvp.IView.IMineView;
 import com.tftechsz.mine.mvp.presenter.MinePresenter;
 import com.tftechsz.mine.mvp.ui.activity.MineFriendActivity;
-import com.tftechsz.mine.mvp.ui.activity.MineIntegralActivity;
 import com.tftechsz.mine.mvp.ui.activity.SettingActivity;
 import com.tftechsz.mine.mvp.ui.activity.VipActivity;
 
@@ -58,7 +57,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private UserProviderService service;
     private TextView mTvName, mTvUserId, mTvSex;   //姓名,芍药号码,好友关注粉丝,性别
     private ImageView mIvAvatar, mIvAuth, mIvRealPeople, mVipIcon;
-    private LinearLayout mLlFriend,mLlFans,mLlAttention;
+    private LinearLayout mLlFriend, mLlFans, mLlAttention;
     private TextView mTvFriend, mTvFans, mTvAttention;
     private RecyclerView mRcMineMid, mRvMineBot;
     private UserInfo mUserInfo;
@@ -284,7 +283,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                             if (beanList.size() != size2) {
                                 mBotAdapter.setList(beanList);
                             } else {
-                                if(mTimeAssign == 0)
+                                if (mTimeAssign == 0)
                                     mBotAdapter.setList(beanList);
                                 //更新访客记录
                                 for (int j = 0; j < size2; j++) {
@@ -381,7 +380,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         } else if (id == R.id.tv_setting) {  //设置
             startActivity(SettingActivity.class);
         } else if (id == R.id.ll_jifen) {  //收益
-            startActivity(MineIntegralActivity.class);
+            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_INTEGRAL_NEW);
         } else if (id == R.id.ll_jinbi) {  //金币充值
             if (null != mUserInfo) {
                 ARouterUtils.toRechargeActivity(mUserInfo.getCoin());

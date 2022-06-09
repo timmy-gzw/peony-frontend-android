@@ -42,6 +42,7 @@ public class ARouterApi {
     public static final String ACTIVITY_REAL_AUTHENTICATION_NEW = "/mine/RealAuthenticationActivityNew";  //真人认证
     public static final String ACTIVITY_REAL_AUTHENTICATION_STATUS = "/mine/RealAuthenticationStatusActivity";  //真人认证状态
     public static final String ACTIVITY_MINE_INTEGRAL = "/mine/MineIntegralActivity";  //我的积分
+    public static final String ACTIVITY_MINE_INTEGRAL_NEW = "/mine/MineIntegralActivityNew";  //我的积分
     public static final String ACTIVITY_MINE_PHOTO = "/mine/MinePhotoActivity";  //我的相册
     public static final String ACTIVITY_CHARGE_LIST = "/mine/ChargeListActivity";  //金币充值列表
     public static final String ACTIVITY_CHARGE_LIST_NEW = "/mine/ChargeListNewActivity";  //金币充值列表

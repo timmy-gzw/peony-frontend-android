@@ -111,9 +111,11 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
                 .setRightText(getString(R.string.income_and_expenditude_records), v -> ARouterUtils.toIntegralDetailedActivity(1))
                 .setRightTextColor(R.color.white)
                 .setBackgroundColor(0)
-                .setBackImg(R.mipmap.mine_ic_back_white)
+                .setBackTint(R.color.white)
                 .build();
-        baseTitle.setBackgroundResource(0);
+        if (baseTitle != null) {
+            baseTitle.setBackgroundResource(0);
+        }
         mTvCoin = findViewById(R.id.tv_coin_num);
         mVpBg = findViewById(R.id.vp_bg);
         mRecy = findViewById(R.id.recycleview);

@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.AppUtils;
@@ -161,7 +163,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
         private String rightText;
         private boolean isBackShow;
         private boolean isRightImgShow, isRightTxtShow = true;
-        private int backgroundColor = -1, titleTextColor, rightTextColor, rightTextBg;
+        private int backgroundColor = -1, backViewColor = -1, titleTextColor, rightTextColor, rightTextBg;
         private int backRes = -1;
 
         public ToolBarBuilder() {
@@ -182,11 +184,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
 
         public ToolBarBuilder setTitle(String title) {
             this.title = title;
-            return this;
-        }
-
-        public ToolBarBuilder setBackImg(int res) {
-            this.backBtn.setImageResource(res);
             return this;
         }
 
@@ -233,6 +230,16 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             return this;
         }
 
+        public ToolBarBuilder setBackTint(int color) {
+            this.backViewColor = color;
+            return this;
+        }
+
+        public ToolBarBuilder setBackgroundColor(@IdRes int color) {
+            this.backgroundColor = color;
+            return this;
+        }
+
         public void build() {
             if (!TextUtils.isEmpty(title)) {
                 titleTv.setText(title);
@@ -273,11 +280,9 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             if (backRes != -1) {
                 backBtn.setImageResource(backRes);
             }
-        }
-
-        public ToolBarBuilder setBackgroundColor(int color) {
-            this.backgroundColor = color;
-            return this;
+            if (backViewColor != -1) {
+                backBtn.setColorFilter(ContextCompat.getColor(BaseApplication.getInstance(), backViewColor));
+            }
         }
     }
 

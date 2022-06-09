@@ -3,6 +3,9 @@ package com.tftechsz.mine.mvp.ui.activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseListActivity;
@@ -21,8 +24,6 @@ import com.tftechsz.mine.entity.dto.ShopInfoDto;
 
 import java.util.List;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Consumer;
 

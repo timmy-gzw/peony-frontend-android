@@ -259,6 +259,10 @@
             android:name="com.tftechsz.mine.mvp.ui.activity.NoteValueShopActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.MineIntegralNewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>
