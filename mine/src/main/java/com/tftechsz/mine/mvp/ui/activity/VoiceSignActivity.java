@@ -44,6 +44,8 @@ public class VoiceSignActivity extends BaseVoiceRecordActivity {
         llRecordView = findViewById(R.id.ll_record_view);
         llRecordView.setOnClickListener(this);
         waveLineView = findViewById(R.id.waveLineView);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        toolbarTitle.setText("语音签名");
         waveLineView.setLineColor(ColorUtils.getColor(R.color.driver));
         waveLineView.setSensibility(3);
         waveLineView.setVolume(60);
@@ -97,6 +99,7 @@ public class VoiceSignActivity extends BaseVoiceRecordActivity {
     @Override
     protected void initData() {
         super.initData();
+        setTitle("语音签名");
     }
 
 

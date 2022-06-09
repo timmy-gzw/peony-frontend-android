@@ -145,24 +145,14 @@
             android:layout_weight="2"
             android:gravity="center">
 
-            <com.tftechsz.mine.widget.CircleProgressBar
-                android:id="@+id/circleProgressBar"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                app:progress="0"
-                app:progress_style="STROKE"
-                app:strokewidth="5" />
+
 
             <LinearLayout
                 android:id="@+id/id_record"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_circle"
+                android:background="@mipmap/record_red_bg_stop"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -175,14 +165,14 @@
                         android:id="@+id/iv_record_icon"
                         android:layout_width="43dp"
                         android:layout_height="43dp"
-                        android:src="@drawable/ic_record" />
+                        android:src="@mipmap/micphone" />
 
 
                     <ImageView
                         android:id="@+id/iv_record_ing"
                         android:layout_width="43dp"
                         android:layout_height="43dp"
-                        android:src="@drawable/voice_record_ing"
+                        android:src="@mipmap/stop_play"
                         android:visibility="gone" />
 
                     <ImageView
@@ -202,6 +192,20 @@
                 </FrameLayout>
 
             </LinearLayout>
+
+            <com.tftechsz.mine.widget.CircleProgressBar
+                android:id="@+id/circleProgressBar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:normal_color="#F9D8D5"
+                app:progress_color="#F5857A"
+                android:layout_gravity="center"
+                android:gravity="center"
+                app:progress="0"
+                app:progress_style="STROKE"
+                app:strokewidth="5" />
         </FrameLayout>
         <!--录制图标和圆圈结束-->
 

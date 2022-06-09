@@ -62,13 +62,14 @@ public abstract class BaseVoiceRecordActivity extends BaseMvpActivity<IVoiceSign
     public LinearLayout recordUpload, llRecordView;
     public Chronometer recordTime;
 
-    public TextView tvRecordMsg, tvDuration;
+    public TextView tvRecordMsg, tvDuration,toolbarTitle;
     public VoiceImageView voiceImageView;   //录音动画
     public int mRecordTime;
     public boolean touched = false; // 是否按着
     public CountDownTimer mCountDownTimer;
     private CustomPopWindow popWindow;
     public PartyService partyService;
+
 
     @Override
     public VoiceSignPresenter initPresenter() {

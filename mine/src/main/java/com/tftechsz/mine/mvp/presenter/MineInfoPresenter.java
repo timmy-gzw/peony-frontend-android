@@ -236,7 +236,7 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                     .setCancelText("取消")//取消按钮文字
                     .setSubmitText("确定")//确认按钮文字
                     .setTitleSize(20)//标题文字大小
-                    .setTitleText("")//标题文字
+                    .setTitleText("日期")//标题文字
                     .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
                     .isCyclic(false)//是否循环滚动
                     .setTitleColor(Color.BLACK)//标题文字颜色
