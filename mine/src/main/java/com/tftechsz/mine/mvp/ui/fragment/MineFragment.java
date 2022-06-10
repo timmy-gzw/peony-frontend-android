@@ -58,7 +58,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private TextView mTvName, mTvUserId, mTvSex;   //姓名,芍药号码,好友关注粉丝,性别
     private ImageView mIvAvatar, mIvAuth, mIvRealPeople, mVipIcon;
     private LinearLayout mLlFriend, mLlFans, mLlAttention;
-    private TextView mTvFriend, mTvFans, mTvAttention;
+    private TextView mTvFriend, mTvFans, mTvAttention,mVipCharge;
     private RecyclerView mRcMineMid, mRvMineBot;
     private UserInfo mUserInfo;
     private boolean isFragmentVisible;
@@ -110,6 +110,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mPicFrame = getView(R.id.pic_frame);
         mVip_title = getView(R.id.vip_title);
         mVipIcon = getView(R.id.vip_icon);
+        mVipCharge = getView(R.id.vip_charge);
         initListener();
 
     }
@@ -321,13 +322,16 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                     if (userInfo.isVip()) {
                         mTopBg.setBackgroundResource(R.drawable.shape_vip_top_bg);
                         mVipIcon.setVisibility(View.VISIBLE);
+                        mVipCharge.setVisibility(View.GONE);
                         mVip_title.setVisibility(View.VISIBLE);
                         mVipNorHint.setVisibility(View.INVISIBLE);
                         mExpiredTime.setText(userInfo.vip_expiration_time_desc_new);
                         mExpiredTime.setVisibility(View.VISIBLE);
                     } else {
+//                        mTopBg.setBackgroundColor(Utils.getColor(R.color.EEEEEE));
                         mTopBg.setBackgroundResource(R.mipmap.mine_bg);
                         mVipIcon.setVisibility(View.GONE);
+                        mVipCharge.setVisibility(View.VISIBLE);
                         mExpiredTime.setVisibility(View.VISIBLE);
                         mVip_title.setVisibility(View.VISIBLE);
                         if (TextUtils.isEmpty(userInfo.getVip_desc())) {

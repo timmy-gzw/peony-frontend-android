@@ -63,7 +63,8 @@ public class RealAuthenticationActivity extends BaseMvpActivity<IRealAuthView, R
             recy.setAdapter(adapter);
         }
 
-        ivAvatar.setBackgroundResource(service.getUserInfo().isBoy() ? R.mipmap.ic_boy_true_avatar : R.mipmap.ic_true_avatar);
+//        ivAvatar.setBackgroundResource(service.getUserInfo().isBoy() ? R.mipmap.ic_boy_true_avatar : R.mipmap.ic_true_avatar);
+        ivAvatar.setBackgroundResource(R.mipmap.right_avater);
         findViewById(R.id.tv_authentication).setOnClickListener(this);
 
         TextView tops = findViewById(R.id.tv_tip);

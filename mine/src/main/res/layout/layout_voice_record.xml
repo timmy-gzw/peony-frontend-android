@@ -179,14 +179,14 @@
                         android:id="@+id/iv_record_play"
                         android:layout_width="43dp"
                         android:layout_height="43dp"
-                        android:src="@mipmap/ic_record_play"
+                        android:src="@mipmap/stop_white_icon"
                         android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_record_play_pause"
                         android:layout_width="43dp"
                         android:layout_height="43dp"
-                        android:src="@mipmap/play_pause"
+                        android:src="@mipmap/play_white_icon"
                         android:visibility="gone" />
 
                 </FrameLayout>

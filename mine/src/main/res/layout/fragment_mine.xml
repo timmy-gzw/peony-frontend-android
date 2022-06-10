@@ -7,6 +7,7 @@
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <View
@@ -245,7 +246,8 @@
                 android:textColor="@color/white"
                 android:background="@mipmap/edit_info"
                 android:layout_width="wrap_content"
-                android:layout_marginRight="@dimen/dp_21"
+                android:width="@dimen/dp_96"
+                android:height="@dimen/dp_34"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
                 app:layout_constraintTop_toTopOf="@id/iv_avatar"
@@ -310,6 +312,7 @@
                     tools:visibility="visible" />
 
                 <TextView
+                    android:id="@+id/vip_charge"
                     android:layout_width="wrap_content"
                     android:background="@mipmap/mine_vip_btn_bg"
                     android:text="@string/vip_charge"
@@ -356,7 +359,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@drawable/bg_white_top_radius20"
+                android:background="@drawable/bg_gray_top_radius10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_vip" />
 
@@ -438,6 +441,9 @@
                 android:id="@+id/rv_mine_bot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="@drawable/bg_white_radius"
                 android:overScrollMode="never"
                 app:layout_constraintTop_toBottomOf="@id/ll_jifen" />
 
