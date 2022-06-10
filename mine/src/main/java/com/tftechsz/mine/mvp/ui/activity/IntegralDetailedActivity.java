@@ -3,6 +3,9 @@ package com.tftechsz.mine.mvp.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.tftechsz.common.ARouterApi;
@@ -16,9 +19,6 @@ import com.tftechsz.mine.mvp.presenter.IntegralDetailedPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 清单
@@ -54,12 +54,12 @@ public class IntegralDetailedActivity extends BaseMvpActivity<IIntegralDetailVie
         super.initData();
         mType = getIntent().getIntExtra(Interfaces.EXTRA_TYPE, 0);
         String title = "";
-        if (mType == 0) {   //清单
-            title = "积分清单";
-            mTvEmpty.setText("暂无清单数据");
-        } else if (mType == 1) {   //金币清单
-            title = "金币清单";
-            mTvEmpty.setText("暂无金币清单数据");
+        if (mType == 0) {   //清单/收益记录
+            title = "收益记录";
+            mTvEmpty.setText("暂无收益记录");
+        } else if (mType == 1) {   //金币清单/收支记录
+            title = "收支记录";
+            mTvEmpty.setText("暂无收支记录");
         } else if (mType == 2 || mType == 5) {   //兑换记录
             title = "兑换记录";
             mTvEmpty.setText("暂无兑换记录");

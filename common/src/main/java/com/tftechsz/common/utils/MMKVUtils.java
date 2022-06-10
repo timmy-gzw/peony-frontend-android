@@ -23,7 +23,7 @@ public class MMKVUtils {
     }
 
     public MMKVUtils() {
-        mmkv = MMKV.defaultMMKV(1, "tfpeony_sp");
+        mmkv = MMKV.defaultMMKV(1, "tfpeony-pref");
     }
 
 

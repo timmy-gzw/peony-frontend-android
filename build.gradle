@@ -39,6 +39,7 @@ allprojects {
             allowInsecureProtocol = true
         }
         maven { url "https://s01.oss.sonatype.org/content/groups/public" }
+        maven { url "https://nexus-sdk.cm253.com/repository/maven-public/" }
         mavenCentral()
         flatDir {
             dirs project(':common').file('libs')

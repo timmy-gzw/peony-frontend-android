@@ -198,6 +198,8 @@ dependencies {
     //跑马灯
     api rootProject.ext.dependencies["marquee"]
     api rootProject.ext.dependencies["vap"]
+    implementation 'com.chuanglan.android.sdk:shanyan:2.3.4.4'
+
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test.ext:junit:1.1.3"
 }

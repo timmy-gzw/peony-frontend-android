@@ -145,6 +145,8 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
 
 
     private void initPermission() {
+        getP().initShanyanSDK(this);
+
         long time = MMKVUtils.getInstance().decodeLong(Constants.CURRENT_TIME);
         //判断是否为今天
         if (time != 0 && TimeUtils.isToday(new Date(time))) {
@@ -156,7 +158,6 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
                         //   MdidSdkHelper.InitSdk()
                         MMKVUtils.getInstance().encode(Constants.CURRENT_TIME, System.currentTimeMillis());
                         getP().uploadDeviceInfo(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID), 0, "", "default", "");
-                        getP().initShanyanSDK(this);
                         loadData();
                     }));
         }
