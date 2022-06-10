@@ -175,12 +175,21 @@
             android:theme="@style/Theme.ActivityDialogStyle" />
 
         <activity-alias
-            android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
+          android:name="com.cmic.gen.sdk.view.GenLoginAuthActivity"
+          android:configChanges="keyboardHidden|orientation|screenSize"
+          android:launchMode="singleTop"
+          android:screenOrientation="behind"
+          android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
+          />
+
+        <activity-alias
+            android:name="com.cmic.sso.sdk.view.LoginAuthActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"
             android:launchMode="singleTop"
             android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
             android:theme="@style/Theme.ActivityDialogStyle" /> <!-- **********************电信授权页activity************************** -->
+
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.ShanYanOneKeyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
