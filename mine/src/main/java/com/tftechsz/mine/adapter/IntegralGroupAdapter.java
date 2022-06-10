@@ -5,14 +5,13 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
 import com.tftechsz.common.utils.GlideUtils;
-import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.widget.sticky.BaseViewHolder;
 import com.tftechsz.common.widget.sticky.GroupedRecyclerViewAdapter;
 import com.tftechsz.mine.R;
@@ -21,9 +20,6 @@ import com.tftechsz.mine.entity.dto.ExchangeRecordDto;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 /**
  * 我的
@@ -92,12 +88,7 @@ public class IntegralGroupAdapter extends GroupedRecyclerViewAdapter {
     @Override
     public void onBindChildViewHolder(com.tftechsz.common.widget.sticky.BaseViewHolder helper, int groupPosition, int childPosition) {
         ExchangeRecordDto item = mGroups.get(groupPosition).getChildren().get(childPosition);
-        ConstraintLayout root = helper.get(R.id.root);
         View view = helper.get(R.id.view);
-        ImageView right_arrow = helper.get(R.id.right_arrow);
-
-        TextView coin = helper.get(R.id.coin);
-        TextView free_coin = helper.get(R.id.free_coin);
 
         if (mType == 2 || mType == 5) {   // 兑换记录
             GlideUtils.loadRouteImage(mContext, helper.get(R.id.iv_shop), item.image_small);
@@ -115,34 +106,13 @@ public class IntegralGroupAdapter extends GroupedRecyclerViewAdapter {
             setContent(tvContent, item.title);
             view.setVisibility(childPosition == mGroups.get(groupPosition).getChildren().size() - 1 ? View.INVISIBLE : View.VISIBLE);
         } else {
-            LinearLayout ll_free = helper.get(R.id.ll_free);
             TextView tvContent = helper.get(R.id.tv_content);
             helper.setText(R.id.tv_time, item.created_at)
                     .setText(R.id.tv_integral, item.cost)
                     .setText(R.id.tv_balance, item.cost_balance);  // 余额
-            int color = !TextUtils.isEmpty(item.cost) && item.cost.contains("-") ? ContextCompat.getColor(mContext, R.color.red) : ContextCompat.getColor(mContext, R.color.green);
+            int color = !TextUtils.isEmpty(item.cost) && item.cost.contains("-") ? ContextCompat.getColor(mContext, R.color.green) : ContextCompat.getColor(mContext, R.color.c_ff4951);
             helper.setTextColor(R.id.tv_integral, color);
             setContent(tvContent, item.title);
-
-            if (mType == 1) { //金币清单
-                coin.setText(new SpannableStringUtils.Builder().append("金币 ").append(item.coin).setForegroundColor(color).create());
-                free_coin.setText(new SpannableStringUtils.Builder().append("绑定金币 ").append(item.free_coin).setForegroundColor(color).create());
-                right_arrow.setVisibility(View.VISIBLE);
-                right_arrow.setImageResource(item.isActive() ? R.mipmap.ic_arrow_down : R.mipmap.ic_arrow_up);
-                ll_free.setVisibility(item.isActive() ? View.VISIBLE : View.GONE);
-
-                root.setOnClickListener(v -> {
-                    if (item.isActive()) {
-                        item.setActive(false);
-                        right_arrow.setImageResource(R.mipmap.ic_arrow_up);
-                        ll_free.setVisibility(View.GONE);
-                    } else {
-                        item.setActive(true);
-                        right_arrow.setImageResource(R.mipmap.ic_arrow_down);
-                        ll_free.setVisibility(View.VISIBLE);
-                    }
-                });
-            }
         }
     }
 

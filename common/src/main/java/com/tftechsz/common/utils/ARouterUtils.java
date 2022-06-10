@@ -85,7 +85,7 @@ public class ARouterUtils {
     /**
      * 跳转清单列表
      */
-    public static void toIntegralDetailedActivity(int type) { //0积分清单  1:金币清单  2.积分兑换记录   3金币消耗记录   4音符消耗记录   5音符兑换记录
+    public static void toIntegralDetailedActivity(int type) { //0积分清单/收益记录  1:金币清单/收支记录  2.积分兑换记录   3金币消耗记录   4音符消耗记录   5音符兑换记录
         ARouter.getInstance().build(ARouterApi.ACTIVITY_INTEGRAL_DETAILED)
                 .withInt(Interfaces.EXTRA_TYPE, type)
                 .navigation();
