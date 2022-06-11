@@ -458,12 +458,12 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         if (mHome_top_nav.nav_2 != null) {
             topSize += 1;
         }
-//        if (mHome_top_nav.nav_3 != null) {
-//            topSize += 1;
-//        }
-//        if (mHome_top_nav.nav_4 != null) {
-//            topSize += 1;
-//        }
+        if (mHome_top_nav.nav_3 != null) {
+            topSize += 1;
+        }
+        if (mHome_top_nav.nav_4 != null) {
+            topSize += 1;
+        }
         ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) mLl_home_top_item.getLayoutParams();
         LinearLayout.LayoutParams lp2 = (LinearLayout.LayoutParams) mHomeItem2.getLayoutParams();
         if (topSize > 2) {
@@ -479,13 +479,13 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         }
         mLl_home_top_item.setLayoutParams(lp);
         mHomeItem2.setLayoutParams(lp2);
-//        mHomeItem3.setLayoutParams(lp2);
-//        mHomeItem4.setLayoutParams(lp2);
+        mHomeItem3.setLayoutParams(lp2);
+        mHomeItem4.setLayoutParams(lp2);
 
         setTopData(mHomeItem1, mHome_top_nav.nav_1);
         setTopData(mHomeItem2, mHome_top_nav.nav_2);
-//        setTopData(mHomeItem3, mHome_top_nav.nav_3);
-//        setTopData(mHomeItem4, mHome_top_nav.nav_4);
+        setTopData(mHomeItem3, mHome_top_nav.nav_3);
+        setTopData(mHomeItem4, mHome_top_nav.nav_4);
     }
 
     private void setTopData(HomeTopItemLayout homeTopItemLayout, @Nullable ConfigInfo.Nav nav) {

@@ -15,20 +15,34 @@
     android:layout_height="match_parent"
     android:scaleType="centerCrop" />
 
+  <ImageView
+    android:id="@+id/right_img"
+    android:layout_width="@dimen/dp_46"
+    android:layout_height="@dimen/dp_46"
+    android:scaleType="centerCrop"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/animation_view"
+    app:layout_constraintVertical_chainStyle="packed"
+    android:visibility="gone"
+    tools:visibility="visible" />
+
   <com.airbnb.lottie.LottieAnimationView
     android:id="@+id/animation_view"
     android:layout_width="@dimen/dp_46"
     android:layout_height="@dimen/dp_46"
-    app:layout_constraintBottom_toTopOf="@id/ll_avatar2"
-    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/right_img"
+    app:layout_constraintBottom_toTopOf="@id/ll_avatar2"
     app:lottie_autoPlay="true"
     app:lottie_imageAssetsFolder="gift/"
     app:lottie_loop="true"
     tools:background="@color/black"
     android:visibility="gone"
     tools:visibility="visible" />
+
 
   <!-- 因为第一个动画位置不同所以单独提出来-->
   <LinearLayout
@@ -39,10 +53,10 @@
     android:focusable="false"
     android:gravity="center"
     android:orientation="horizontal"
-    app:layout_constraintBottom_toTopOf="@id/tv_content"
-    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/animation_view"
+    app:layout_constraintBottom_toTopOf="@id/tv_content"
     android:visibility="gone"
     tools:visibility="visible" />
 
