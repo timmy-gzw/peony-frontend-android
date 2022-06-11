@@ -58,7 +58,7 @@ import static com.netease.nis.alivedetected.ActionType.ACTION_ERROR;
 public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPresenter> implements IRealAuthView, CustomPopWindow.OnSelectListener {
     private AliveDetector mAliveDetector;
     private final boolean isUsedCustomStateTip = true; // 是否使用自定义活体状态文案
-    private static final String BUSINESS_ID = "c63760381dbd454b8297296896e7f008";
+    private static final String BUSINESS_ID = "e1fe05ed42df45cdb52d8ea152504b34";
     private final Map<String, String> stateTipMap = new HashMap();
     private static final String KEY_STRAIGHT_AHEAD = "straight_ahead";
     private static final String KEY_OPEN_MOUTH = "open_mouth";
