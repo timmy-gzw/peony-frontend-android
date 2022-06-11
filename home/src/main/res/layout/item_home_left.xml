@@ -27,15 +27,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-      android:id="@+id/right_img"
-      android:layout_width="@dimen/dp_60"
-      android:layout_height="@dimen/dp_46"
-      android:scaleType="centerCrop"
-      android:visibility="gone"
-      tools:visibility="visible"
-      />
-
     <com.airbnb.lottie.LottieAnimationView
       android:id="@+id/animation_view"
       android:layout_width="@dimen/dp_60"

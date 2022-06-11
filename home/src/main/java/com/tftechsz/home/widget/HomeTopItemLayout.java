@@ -59,7 +59,6 @@ public class HomeTopItemLayout extends LinearLayout {
             View.inflate(mContext, R.layout.item_home_left, this);
         }
         ImageView bg = findViewById(R.id.bg_frame);
-        ImageView rightImg = findViewById(R.id.right_img);
         LinearLayout llAvatar2 = findViewById(R.id.ll_avatar2);
 
         TextView tvContent = findViewById(R.id.tv_content);
@@ -99,8 +98,7 @@ public class HomeTopItemLayout extends LinearLayout {
                     lottieAnimationView.setFailureListener(result -> result.printStackTrace());
                     lottieAnimationView.playAnimation();
                 } else {
-                    rightImg.setVisibility(View.VISIBLE);
-                    GlideUtils.loadRouteImage(mContext, rightImg, data.right_img);
+                    GlideUtils.loadRouteImage(mContext, lottieAnimationView, data.right_img);
                 }
             });
         }
