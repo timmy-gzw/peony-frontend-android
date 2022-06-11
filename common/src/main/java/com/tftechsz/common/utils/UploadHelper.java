@@ -55,7 +55,7 @@ public class UploadHelper {
     public static final String PATH_USER_REAL_AUTH = "user/auth/";   //真人认证
     public static final String PATH_USER_REAL_NAME = "user/real_name/";   //实名认证
     public static final String PATH_USER_ACCOST = "user/accost/";   //打招呼相册
-    public static final String PATH_BLOG = "blog/blog/";  //动态
+    public static final String PATH_MOMENT = "moment/";  //动态
     public static final String PATH_MUSIC = "music/";  //音乐
 
     public static final String TYPE_IMAGE = "images";
@@ -107,17 +107,17 @@ public class UploadHelper {
         listener = l;
         if (ossType == OSS_TYPE) {
             getOssInfo(() -> {
-                upload(PATH_BLOG, type, file);
+                upload(PATH_MOMENT, type, file);
             });
 
         } else if (ossType == OSS_USER_TYPE) {
             getUserOssInfo(() -> {
-                upload(PATH_BLOG, type, file);
+                upload(PATH_MOMENT, type, file);
             });
 
         } else if (ossType == OSS_PHOTO_TYPE) {
             getPhotoOssInfo(() -> {
-                upload(PATH_BLOG, type, file);
+                upload(PATH_MOMENT, type, file);
             });
 
         }

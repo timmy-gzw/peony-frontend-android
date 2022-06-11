@@ -479,7 +479,7 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
 
             @Override
             public void run() {
-                UploadHelper.getInstance(BaseApplication.getInstance()).doUpload(UploadHelper.OSS_TYPE, UploadHelper.PATH_BLOG,
+                UploadHelper.getInstance(BaseApplication.getInstance()).doUpload(UploadHelper.OSS_TYPE, UploadHelper.PATH_MOMENT,
                         isSelVideo ? UploadHelper.TYPE_M_VIDEOS : UploadHelper.TYPE_IMAGE, new File(path), new UploadHelper.OnUploadListener() {
                             @Override
                             public void onStart() {
