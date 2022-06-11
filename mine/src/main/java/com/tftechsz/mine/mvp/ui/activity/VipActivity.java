@@ -11,11 +11,14 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.ConfigInfo;
-import com.netease.nim.uikit.common.util.VipUtils;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -40,9 +43,6 @@ import com.tftechsz.mine.widget.pop.VipPayPopWindow;
 
 import java.util.List;
 
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -84,7 +84,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
         mBind.ivBack.setOnClickListener(v -> finish());
 
         GlideUtils.loadRouteImage(this, mBind.icon, service.getUserInfo().getIcon(), service.getUserInfo().isBoy() ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
-        GlideUtils.loadRouteImage(this, mBind.userIcon, service.getUserInfo().getIcon(), service.getUserInfo().isBoy() ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
+//        GlideUtils.loadRouteImage(this, mBind.userIcon, service.getUserInfo().getIcon(), service.getUserInfo().isBoy() ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
 
         mBind.name.setText(service.getUserInfo().getNickname());
         mBind.toolbar.setPadding(0, ImmersionBar.getStatusBarHeight(mActivity), 0, 0);
@@ -121,6 +121,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
                     mPriceAdapter.setData(i, item);
                 }
             }
+            setPayButton(position);
             oldSel = position;
         });
 
@@ -155,9 +156,9 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
         mPop = new VipPayPopWindow(mActivity);
         mBind.xf.setOnClickListener(this);
         mBind.getVip.setOnClickListener(this);
-        mBind.vipBubbleBg.setOnClickListener(this);
-        mBind.vipFrameBg.setOnClickListener(this);
-        mBind.loadMore.setOnClickListener(this);
+//        mBind.vipBubbleBg.setOnClickListener(this);
+//        mBind.vipFrameBg.setOnClickListener(this);
+//        mBind.loadMore.setOnClickListener(this);
 
         if (service.getUserInfo().isVip()) {
             p.getVipConfig();
@@ -203,8 +204,18 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
             mPop.showPopupWindow();
         } else if (id == R.id.vip_frame_bg) {//头像框
             ARouterUtils.toVipDressUp(1, false);
-        } else if (id == R.id.vip_bubble_bg || id == R.id.load_more) { //聊天起泡 ||加载更多
-            ARouterUtils.toVipDressUp(2, false);
+        }
+//        else if (id == R.id.vip_bubble_bg || id == R.id.load_more) { //聊天起泡 ||加载更多
+//            ARouterUtils.toVipDressUp(2, false);
+//        }
+    }
+
+    private void setPayButton(int position) {
+        VipPriceBean item = mPriceAdapter.getItem(position);
+        if (service.getUserInfo().isVip()) {
+            mBind.getVip.setText(getString(R.string.renewal_now_format, item.price));
+        } else {
+            mBind.getVip.setText(getString(R.string.open_now_format, item.price));
         }
     }
 
@@ -224,6 +235,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
             VipPriceBean vipPriceBean = bean.get(i);
             if (vipPriceBean.isSel()) {
                 oldSel = i;
+                setPayButton(i);
                 break;
             }
         }
@@ -236,8 +248,8 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
 
     @Override
     public void getVipConfigSuccess(VipConfigBean data) {
-        VipUtils.setPersonalise(mBind.chatBubble, data.chat_bubble, true);
-        VipUtils.setPersonalise(mBind.picFrame, data.picture_frame, false, true);
+//        VipUtils.setPersonalise(mBind.chatBubble, data.chat_bubble, true);
+//        VipUtils.setPersonalise(mBind.picFrame, data.picture_frame, false, true);
     }
 
     @Override

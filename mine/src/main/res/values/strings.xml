@@ -36,5 +36,15 @@
     <string name="benifit_record">收益记录</string>
     <string name="integral_exchange">积分兑换</string>
     <string name="exchange_coin">兑换金币</string>
+    <string name="vip_center">会员中心</string>
+    <string name="vip_un_open">VIP会员未开通</string>
+    <string name="vip_privilege">8大特权，提升个性化体验</string>
+    <string name="vip_activated">已开通</string>
+    <string name="nonactivated">未开通</string>
+    <string name="vip_privilege_8">会员特权8项</string>
+    <string name="open_now">立即开通</string>
+    <string name="open_now_format">¥%s 立即开通</string>
+    <string name="renewal_now">立即续费</string>
+    <string name="renewal_now_format">¥%s 立即续费</string>
 
 </resources>

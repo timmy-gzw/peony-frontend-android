@@ -28,8 +28,8 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="@dimen/dp_51"
-                android:layout_height="@dimen/dp_51"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_record"
                 app:imageUrl="@{item.icon}" />
@@ -37,9 +37,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_7"
+                android:layout_marginTop="@dimen/dp_8"
                 android:text="@{item.title}"
-                android:textColor="#ff333333"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 tools:text="文字聊天5折" />
         </LinearLayout>

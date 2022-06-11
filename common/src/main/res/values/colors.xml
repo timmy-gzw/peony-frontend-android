@@ -106,4 +106,12 @@
     <color name="c_15f76576">#26F76576</color>
     <color name="c_ffc4cb">#FFC4CB</color>
     <color name="c_ff4951">#FF4951</color>
+    <color name="c_fadb9a">#FADB9A</color>
+    <color name="c_c89c5d">#C89C5D</color>
+    <color name="c_fff2db">#FFF2DB</color>
+
+    <color name="c_bd8f52">#BD8F52</color>
+    <color name="c_763d06">#763D06</color>
+    <color name="c_1d1d1d">#1D1D1D</color>
+    <color name="c_f4d9a4">#F4D9A4</color>
 </resources>
