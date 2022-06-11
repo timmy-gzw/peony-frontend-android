@@ -97,6 +97,7 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
                         if (aBoolean) {
                             startActivity(FaceCheckActivity.class);
                         } else {
+                            // TODO: fix this
                             PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
                         }
                     }));
