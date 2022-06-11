@@ -65,6 +65,7 @@ public class ConfigInfo {
         public String json;
         public String link;
         public String bg_img;
+        public String right_img;
         public int radius;
     }
 

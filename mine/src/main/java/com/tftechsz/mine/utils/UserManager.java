@@ -10,6 +10,7 @@ import com.tftechsz.common.base.BaseApplication;
 import com.netease.nim.uikit.common.UserInfo;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.SPUtils;
+import timber.log.Timber;
 
 public class UserManager {
 

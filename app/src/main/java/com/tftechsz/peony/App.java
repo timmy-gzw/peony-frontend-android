@@ -14,6 +14,8 @@ import com.umeng.socialize.PlatformConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.refresh.MyClassicsHeader;
+import timber.log.Timber;
+
 
 
 public class App extends BaseApplication {
@@ -42,6 +44,10 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 //        if (LeakCanary.isInAnalyzerProcess(this)) {
 //            return;
 //        }

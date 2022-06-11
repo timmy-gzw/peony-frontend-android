@@ -338,12 +338,13 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
      * 获取config后进入页面
      */
     private void enter() {
-//        if (service.getConfigInfo() == null) {
-//            p.getConfig(0);
-//        } else {
-//            p.getConfig(1);
-//
-//        }
+        /* XXX: check this */
+        if (service.getConfigInfo() == null) {
+            p.getConfig(0);
+        } else {
+            p.getConfig(1);
+
+        }
         if (!NetworkUtil.isNetworkAvailable(BaseApplication.getInstance()) && service.getConfigInfo() != null) {
             enterMain();
         } else {
