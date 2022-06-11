@@ -59,6 +59,7 @@ public class HomeTopItemLayout extends LinearLayout {
             View.inflate(mContext, R.layout.item_home_left, this);
         }
         ImageView bg = findViewById(R.id.bg_frame);
+        ImageView rightImg = findViewById(R.id.right_img);
         LinearLayout llAvatar2 = findViewById(R.id.ll_avatar2);
 
         TextView tvContent = findViewById(R.id.tv_content);
@@ -72,9 +73,6 @@ public class HomeTopItemLayout extends LinearLayout {
         GlideUtils.loadImageNew(mContext, bg, data.bg_img, data.radius == 0 ? 10 : data.radius);
         if (!TextUtils.isEmpty(data.link) && data.link.equals(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_JOIN_VIDEO_MATCH)) {
             if (data.img_list != null && data.img_list.size() >= 2) {
-//                GlideUtils.loadRouteImage(mContext, mIvAvatar1, data.img_list.get(0));
-//                GlideUtils.loadRouteImage(mContext, mIvAvatar2, data.img_list.get(1));
-//                GlideUtils.loadRouteImage(mContext, mIvAvatar3, data.img_list.get(2));
                 Utils.runOnUiThread(() -> {
                     if (llAvatar2.getChildCount() == 0) {
                         View topLeft = LayoutInflater.from(mContext).inflate(R.layout.item_home_banner_ani, null);
@@ -89,19 +87,21 @@ public class HomeTopItemLayout extends LinearLayout {
                         llAvatar2.addView(topLeft);
                     }
                     llAvatar2.setVisibility(View.VISIBLE);
-
-                    lottieAnimationView.setVisibility(GONE);
-
                 });
             }
         } else {
             Utils.runOnUiThread(() -> {
                 llAvatar2.setVisibility(View.GONE);
-                lottieAnimationView.setVisibility(VISIBLE);
-                lottieAnimationView.setImageAssetsFolder(Constants.ACCOST_GIFT);
-                lottieAnimationView.setAnimationFromUrl(data.json);
-                lottieAnimationView.setFailureListener(result -> result.printStackTrace());
-                lottieAnimationView.playAnimation();
+                if (!TextUtils.isEmpty(data.json)) {
+                    lottieAnimationView.setVisibility(VISIBLE);
+                    lottieAnimationView.setImageAssetsFolder(Constants.ACCOST_GIFT);
+                    lottieAnimationView.setAnimationFromUrl(data.json);
+                    lottieAnimationView.setFailureListener(result -> result.printStackTrace());
+                    lottieAnimationView.playAnimation();
+                } else {
+                    rightImg.setVisibility(View.VISIBLE);
+                    GlideUtils.loadRouteImage(mContext, rightImg, data.right_img);
+                }
             });
         }
     }
