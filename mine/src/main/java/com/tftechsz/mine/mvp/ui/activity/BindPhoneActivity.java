@@ -2,6 +2,8 @@ package com.tftechsz.mine.mvp.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import com.umeng.analytics.MobclickAgent;
 import com.tftechsz.common.Constants;
@@ -37,13 +39,10 @@ import androidx.fragment.app.Fragment;
  */
 public class BindPhoneActivity extends BaseMvpActivity<IBindPhoneView, BindPhonePresenter> implements BindPhoneFragment_1.EdtCallBack, IBindPhoneView, BindPhoneFragment_2.CodeCallBack {
     private ActBindPhoneBinding mBind;
-    private final List<Fragment> fragments = new ArrayList<>();
-    private String tell;
+    private String tell,code;
     private int mType; // 0:注册绑定  1:换绑  2:未绑定
     private String mPhone;
     private CountBackUtils countBackUtils;
-    private BindPhoneFragment_2 mFragment2;
-    private BindPhoneFragment_1 mFragment1;
     private CompleteReq mCompleteReq;
 
     @Override
@@ -67,19 +66,6 @@ public class BindPhoneActivity extends BaseMvpActivity<IBindPhoneView, BindPhone
 
         countBackUtils = new CountBackUtils();
 
-        mFragment1 = new BindPhoneFragment_1();
-        Bundle args = new Bundle();
-        args.putString(Interfaces.EXTRA_PHONE, mPhone);
-        mFragment1.setEdtCallBack(this);
-        mFragment1.setArguments(args);
-
-        mFragment2 = new BindPhoneFragment_2();
-        mFragment2.setCodeCallBack(this);
-        fragments.add(mFragment1);
-        fragments.add(mFragment2);
-        FragmentVpAdapter myFragmentPagerAdapter = new FragmentVpAdapter(getSupportFragmentManager(), fragments);
-        mBind.viewpager.setAdapter(myFragmentPagerAdapter);
-
         mBind.btn.setOnClickListener(v -> {
             if (Utils.checkNoTell(tell)) {
                 return;
@@ -91,6 +77,51 @@ public class BindPhoneActivity extends BaseMvpActivity<IBindPhoneView, BindPhone
             req.phone = tell;
             req.type = "bind";
             p.sendCode(req);
+        });
+        mBind.phoneEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                tell = s.toString();
+            }
+        });
+        mBind.sure.setOnClickListener(v->{
+            if (Utils.checkNoTell(tell)) {
+                return;
+            }
+            if (code.length()<4) {
+                Utils.toast("请输入正确的验证码");
+                return;
+            }
+            if (!ClickUtil.canOperate()) {
+                return;
+            }
+            codeChange(code);
+        });
+        mBind.codeEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                    code = s.toString();
+            }
         });
     }
 
@@ -117,8 +148,8 @@ public class BindPhoneActivity extends BaseMvpActivity<IBindPhoneView, BindPhone
     @SuppressLint("SetTextI18n")
     @Override
     public void getCodeSuccess(String data) {
-        mBind.viewpager.setCurrentItem(1, true);
-        mFragment2.showSoftInput();
+//        mBind.viewpager.setCurrentItem(1, true);
+//        mFragment2.showSoftInput();
         mBind.topHint.setText("输入验证码");
         mBind.tvTip.setText("验证码已发送到 " + StringUtils.hintPhone(tell));
         performBtn(true, Interfaces.WAITING_TIME);
