@@ -258,7 +258,6 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
                             }
                             mData = mAdapter.getItem(position);
                             if (mData != null) {
-                                tvToPay.setEnabled(true);
                                 tvToPay.setText(getString(R.string.pay_now_format, mData.rmb));
                             }
                             form_type = 2;
@@ -321,8 +320,10 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (null == mData)
+        if (null == mData) {
+            toastTip("您还未选择金额");
             return;
+        }
         if (id == R.id.rl_zfb) {  //支付宝
             checkBox1.setChecked(true);
             checkBox2.setChecked(false);
