@@ -65,4 +65,6 @@
     <string name="chat_ta">@Ta</string>
     <string name="not_enough_backpacks">背包礼物数量不足</string>
     <string name="alipay_type">支付宝支付</string>
+
+    <string name="privacy_short_desc">请您充分阅读并理解《用户服务协议》及《用户隐私政策》。 \n1、在您浏览使用时，我们会收集您的设备信息、操作日志等用于平台安全风控，并申请存储权限用于下载及缓存。 \n2、在您使用上传、分享等服务时，我们需要获取您设备的摄像头、麦克风、相册、地理位置、存储空间等权限，但该等权限均需经您明示授权才会为实现功能或服务时使用。 \n您可以在相关页面访问、修改、删除您的个人信息或管理您的授权。</string>
 </resources>
