@@ -114,6 +114,7 @@
     <color name="white_alpha_45">#73FFFFFF</color>
     <color name="white_alpha_50">#80FFFFFF</color>
     <color name="white_alpha_60">#99FFFFFF</color>
+    <color name="white_alpha_70">#B3FFFFFF</color>
     <color name="white_opacity_80">@color/_ccffffff</color>
     <color name="_ccffffff">#ccffffff</color>
     <color name="_4dffffff">#4DFFFFFF</color>

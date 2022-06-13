@@ -4,17 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <TextView
         android:id="@+id/tv_other_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginEnd="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
         android:text="其他手机号登录"
-        android:textColor="#cccccc"
+        android:textColor="@color/white_alpha_70"
         android:textSize="@dimen/sp_15"
         app:layout_constraintBottom_toTopOf="@+id/ll_login"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -36,7 +35,7 @@
         <View
             style="@style/Driver"
             android:layout_width="100dp"
-            android:background="#716F70" />
+            android:background="@color/white_alpha_45" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +43,7 @@
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
             android:text="其他登录方式"
-            android:textColor="#716F70"
+            android:textColor="@color/white_alpha_45"
             android:textSize="@dimen/sp_15"
             app:layout_constraintBottom_toTopOf="@+id/ll_login"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -53,7 +52,7 @@
         <View
             style="@style/Driver"
             android:layout_width="100dp"
-            android:background="#716F70" />
+            android:background="@color/white_alpha_45" />
 
 
     </LinearLayout>
@@ -78,10 +77,10 @@
         <TextView
             android:id="@+id/tv_qq_login"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
-            android:background="@mipmap/mine_ic_qq_login" />
+            android:background="@mipmap/mine_ic_qq_login"
+            android:visibility="gone" />
 
 
     </LinearLayout>

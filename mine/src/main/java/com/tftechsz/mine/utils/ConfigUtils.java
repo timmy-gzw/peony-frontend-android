@@ -51,7 +51,7 @@ public class ConfigUtils {
             }
         }
         /************************************************自定义控件**************************************************************/
-        Drawable logBtnImgPath = context.getResources().getDrawable(R.drawable.bg_orange_raduis60);
+        Drawable logBtnImgPath = context.getResources().getDrawable(R.drawable.shape_login_btn);
         Drawable background = context.getResources().getDrawable(R.drawable.bg_trans);
 
         Drawable check = context.getResources().getDrawable(R.mipmap.icon_protocol_check);
@@ -90,7 +90,7 @@ public class ConfigUtils {
             @Override
             public void ActionListner(int type, int code, String message) {
                 //type=2 ，checkbox点击事件，code分为0,1（0为未选中，1为选中
-                if(type == 2){
+                if (type == 2) {
                     MMKVUtils.getInstance().encode(Constants.AGREED_TO_TOS, code != 0);
                 }
             }
@@ -117,7 +117,7 @@ public class ConfigUtils {
                 .setNumFieldHeight(50)
                 //授权页登录按钮：
                 .setLogBtnText("本机号码一键登录")  //设置登录按钮文字
-                .setLogBtnTextColor(context.getResources().getColor(R.color.color_normal))   //设置登录按钮文字颜色
+                .setLogBtnTextColor(context.getResources().getColor(R.color.white))   //设置登录按钮文字颜色
                 .setLogBtnImgPath(logBtnImgPath)   //设置登录按钮图片
                 .setLogBtnTextSize(18)
                 .setLogBtnHeight(60)
@@ -133,12 +133,14 @@ public class ConfigUtils {
                 .setUncheckedImgPath(unCheck)
                 .setCheckedImgPath(check)
                 .setPrivacyOffsetBottomY(20) //设置隐私条款相对于屏幕下边缘y偏
-                .setcheckBoxOffsetXY(0,1)
+                .setcheckBoxOffsetXY(0, 1)
                 .setPrivacyState(MMKVUtils.getInstance().decodeBoolean(Constants.AGREED_TO_TOS))
-                .setPrivacyTextSize(10)
-                .setPrivacyOffsetX(10)
+                .setPrivacyTextSize(12)
+                .setPrivacyOffsetX(5)
                 .setSloganHidden(true)
                 .setCheckBoxHidden(false)
+                .setCheckBoxWH(16, 16)
+                .setcheckBoxOffsetXY(0, 4)
                 .setPrivacyGravityHorizontalCenter(true)
                 .setShanYanSloganTextColor(Color.parseColor("#ffffff"))
 //                .addCustomView(numberLayout, false, false, null)
@@ -157,28 +159,26 @@ public class ConfigUtils {
         TextView qqLoginView = relativeLayout.findViewById(R.id.tv_qq_login);
         TextView otherPhoneView = relativeLayout.findViewById(R.id.tv_other_phone);
         wxLoginView.setOnClickListener(v -> {
-            showLogin(loginWay,context,0);    //微信登陆
+            showLogin(loginWay, context, 0);    //微信登陆
         });
         qqLoginView.setOnClickListener(v -> {
-            showLogin(loginWay,context,1);    //qq登陆
+            showLogin(loginWay, context, 1);    //qq登陆
         });
         otherPhoneView.setOnClickListener(v -> {   //其他手机号码
-            showLogin(loginWay,context,2);   //其他手机号码
+            showLogin(loginWay, context, 2);   //其他手机号码
         });
     }
 
 
-
-    private static void showLogin(LoginWay loginWay,Activity context,int type){
+    private static void showLogin(LoginWay loginWay, Activity context, int type) {
         if (showPop(context))
             return;
-        if(!MMKVUtils.getInstance().decodeBoolean(Constants.AGREED_TO_TOS)){
+        if (!MMKVUtils.getInstance().decodeBoolean(Constants.AGREED_TO_TOS)) {
             Utils.toast("请阅读并勾选协议");
             return;
         }
         loginWay.otherLoginWay(type);   //其他手机号码
     }
-
 
 
     public interface LoginWay {

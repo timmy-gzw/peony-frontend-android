@@ -36,8 +36,9 @@
         style="@style/CustomButton"
         android:layout_height="@dimen/dp_60"
         android:layout_marginBottom="@dimen/dp_20"
-        android:background="@drawable/bg_orange_raduis60"
+        android:background="@drawable/shape_login_btn"
         android:text="手机号码登录"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/other_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -64,9 +65,10 @@
         <CheckBox
             android:id="@+id/checkbox"
             android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_30"
             android:background="@color/transparent"
-            android:button="@drawable/check_protocol" />
+            android:button="@drawable/check_protocol"
+            android:gravity="center" />
 
 
         <TextView
