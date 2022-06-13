@@ -46,5 +46,6 @@
     <string name="open_now_format">¥%s 立即开通</string>
     <string name="renewal_now">立即续费</string>
     <string name="renewal_now_format">¥%s 立即续费</string>
+    <string name="edit_account">修改账号</string>
 
 </resources>

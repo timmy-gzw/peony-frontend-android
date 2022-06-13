@@ -64,4 +64,5 @@
     <string name="unknown">未知</string>
     <string name="chat_ta">@Ta</string>
     <string name="not_enough_backpacks">背包礼物数量不足</string>
+    <string name="alipay_type">支付宝支付</string>
 </resources>
