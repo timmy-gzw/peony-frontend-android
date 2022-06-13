@@ -1,6 +1,8 @@
 <resources>
 
     <string name="mine_phone_number">手机号</string>
+    <string name="mobile_input">请输入手机号</string>
+    <string name="code_input">请输入验证码</string>
     <string name="main_get_phone_code">获取验证码</string>
     <string name="mine_share_money">邀请赚钱</string>
     <string name="mine_red_pack">红包福利</string>
@@ -17,6 +19,8 @@
     <string name="edit_userInfo">编辑资料</string>
     <string name="login_out">退出登录</string>
     <string name="vip_can_set">（VIP用户可设置）</string>
+    <string name="login">登录</string>
+    <string name="login_by_one_ley">去使用一键登录</string>
 
     <string name="coin">金币</string>
     <string name="coin_balance">金币余额</string>
@@ -47,5 +51,6 @@
     <string name="renewal_now">立即续费</string>
     <string name="renewal_now_format">¥%s 立即续费</string>
     <string name="edit_account">修改账号</string>
+    <string name="_86">+86</string>
 
 </resources>

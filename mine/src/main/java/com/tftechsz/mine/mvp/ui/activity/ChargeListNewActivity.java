@@ -113,9 +113,6 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
                 .setBackgroundColor(0)
                 .setBackTint(R.color.white)
                 .build();
-        if (baseTitle != null) {
-            baseTitle.setBackgroundResource(0);
-        }
         mTvCoin = findViewById(R.id.tv_coin_num);
         mVpBg = findViewById(R.id.vp_bg);
         mRecy = findViewById(R.id.recycleview);
