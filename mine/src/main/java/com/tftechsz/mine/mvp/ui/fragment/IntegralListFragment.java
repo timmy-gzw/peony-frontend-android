@@ -127,10 +127,12 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
             root.postDelayed(() -> mPageManager.showError(null), 300);
         }
         adapter.setOnItemClickListener((adapter1, view, position) ->
-                checkExChange(adapter.getData().get(position).id, position));
+                checkExChange(position));
     }
 
-    private void checkExChange(int type, int position) {
+    private void checkExChange(int position) {
+        ShopInfoDto item = adapter.getItem(position);
+        int type = item.id;
         FragmentActivity activity = getActivity();
         String integral = activity instanceof IntegralShopActivity ? ((IntegralShopActivity) activity).integral : "";
         if (service == null)
@@ -140,7 +142,7 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
             public void onSuccess(BaseResponse<CheckExchangeDto> response) {
                 if (response.getData() == null) return;
                 if (response.getData().is_lock == 0)
-                    ExchangeDetailsActivity.startActivity(getContext(), adapter.getData().get(position), integral);
+                    ExchangeDetailsActivity.startActivity(getContext(), item, integral);
                 else
                     toastTip(response.getData().is_lock_msg);
             }

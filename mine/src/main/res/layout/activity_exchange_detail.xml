@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_20"
         android:textColor="@color/red"
-        android:textSize="@dimen/sp_18"
+        android:textSize="@dimen/sp_15"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/tv_exchange_num"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,15 +85,16 @@
         tools:text="提现必看\n1.目前只支持支付宝提现，提现需扣除3%手续费；
 \n2.不填写真实资料会造成无法汇款，提现后3个工作日内到账；
 \n3.身份证信息需要跟当前绑定的支付宝账号信息一致；
-\n4.积分兑换人民币规则最终解释权归芍药所有。"
+\n4.积分兑换人民币规则最终解释权归伊糖所有。"
         tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tv_exchange"
         style="@style/CustomButton"
         android:layout_marginTop="@dimen/dp_40"
-        android:background="@drawable/bg_orange_enable"
+        android:background="@drawable/bg_pay_btn"
         android:text="兑换"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tips" />
 
