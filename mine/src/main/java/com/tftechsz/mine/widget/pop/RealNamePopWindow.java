@@ -10,12 +10,12 @@ import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.R;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.CommonUtil;
-import com.tftechsz.common.widget.pop.BaseBottomPop;
+import com.tftechsz.common.widget.pop.BaseCenterPop;
 
 /**
  *  兑换详情弹窗
  */
-public class RealNamePopWindow extends BaseBottomPop implements View.OnClickListener {
+public class RealNamePopWindow extends BaseCenterPop implements View.OnClickListener {
 
     private int mType;
     private ConfigInfo configInfo;
@@ -36,16 +36,19 @@ public class RealNamePopWindow extends BaseBottomPop implements View.OnClickList
     }
 
     private void initUI() {
+        setOutSideDismiss(false);
         TextView mTvTip = findViewById(R.id.tv_tip);
         mTvTip.setOnClickListener(this);
         findViewById(R.id.tv_real_name).setOnClickListener(this);   // 去认证
+        findViewById(R.id.tv_cancel).setOnClickListener(this);
+        findViewById(R.id.iv_cancel).setOnClickListener(this);
         mTvTip.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//画线
         mTvTip.getPaint().setAntiAlias(true);//抗锯齿
         TextView tvTitle = findViewById(R.id.tv_title);
         service = ARouter.getInstance().navigation(UserProviderService.class);
         configInfo = service.getConfigInfo();
         if (mType == 1) {   //真人认证
-            tvTitle.setText("真人认证后才能申请兑换");
+            tvTitle.setText("您还未进行真人认证，真人认证才可以发起提现哦～");
             mTvTip.setText("真人认证不了怎么办？");
             if (null != configInfo.api && null != configInfo.api.integral_exchange_how_to_real_1) {
                 mTvTip.setVisibility(View.VISIBLE);
@@ -53,7 +56,7 @@ public class RealNamePopWindow extends BaseBottomPop implements View.OnClickList
                 mTvTip.setVisibility(View.GONE);
             }
         } else {
-            tvTitle.setText("实名认证后才能申请兑换");
+            tvTitle.setText("您还未进行实名认证，实名认证后才可以发起提现哦～");
             mTvTip.setText("实名认证不了怎么办？");
             if (null != configInfo.api && null != configInfo.api.integral_exchange_how_to_real_2) {
                 mTvTip.setVisibility(View.VISIBLE);
@@ -68,7 +71,9 @@ public class RealNamePopWindow extends BaseBottomPop implements View.OnClickList
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.tv_real_name) {
+        if (id == R.id.iv_cancel || id == R.id.tv_cancel) {
+            dismiss();
+        } else if (id == R.id.tv_real_name) {
             if (listener != null)
                 listener.onRealName();
             dismiss();
