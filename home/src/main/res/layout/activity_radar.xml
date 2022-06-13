@@ -4,15 +4,8 @@
     android:id="@+id/cl_radar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_video_radar">
+    android:background="@mipmap/radar_voice_bg">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:lottie_imageAssetsFolder="gift/"
-        android:scaleType="centerCrop"
-        app:lottie_loop="true" />
 
     <ImageView
         android:id="@+id/toolbar_back_all"
@@ -29,27 +22,156 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="语音速配"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_back_all"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar_back_all" />
+
+    <ImageView
+        android:id="@+id/music_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_10"
+        android:src="@mipmap/radar_music_icon"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_back_all"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar_back_all" />
+
+    <TextView
         android:id="@+id/tv_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_30"
         android:gravity="center"
-        android:text="正在为您匹配有缘人\n请稍等…"
+        android:text="正在为你寻找有缘人..."
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_27"
+        android:textSize="@dimen/sp_18"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_back_all" />
+        app:layout_constraintTop_toBottomOf="@id/radar_view" />
+
+    <LinearLayout
+        android:id="@+id/ll_pair"
+        android:layout_width="@dimen/dp_200"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@id/radar_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/bg_pink"
+        android:gravity="center"
+        android:layout_height="@dimen/dp_57">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="继续速配"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="（3S后自动参与速配）"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 
-    <com.tftechsz.home.widget.RadarView
+    <com.tftechsz.home.widget.BarrageView.BarrageView
+        android:id="@+id/barrage_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        app:allow_repeat="true"
+        app:layout_constraintBottom_toTopOf="@id/radar_view"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_back_all"
+        app:line_height="@dimen/dp_30"
+        app:text_left_padding="30"
+        app:text_right_padding="17" />
+
+    <ImageView
+        android:id="@+id/scale_im1"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:src="@drawable/bg_circle_white2"
+        app:layout_constraintBottom_toBottomOf="@id/radar_view"
+        app:layout_constraintLeft_toLeftOf="@id/radar_view"
+        app:layout_constraintRight_toRightOf="@id/radar_view"
+        app:layout_constraintTop_toTopOf="@id/radar_view" />
+
+    <ImageView
+        android:id="@+id/scale_im2"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:src="@drawable/bg_circle_white2"
+        app:layout_constraintBottom_toBottomOf="@id/radar_view"
+        app:layout_constraintLeft_toLeftOf="@id/radar_view"
+        app:layout_constraintRight_toRightOf="@id/radar_view"
+        app:layout_constraintTop_toTopOf="@id/radar_view" />
+
+    <ImageView
         android:id="@+id/radar_view"
-        android:layout_width="1000dp"
-        android:layout_height="1000dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/radar_fan_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/rule_im"
+        android:src="@mipmap/radar_pair_rule"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/radar_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.tftechsz.common.widget.CircleImageView
+        android:id="@+id/sa_im1"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_60"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/dp_1"
+        android:src="@mipmap/mine_ic_boy_default"
+        app:layout_constraintRight_toRightOf="@id/radar_view"
+        app:layout_constraintTop_toTopOf="@id/radar_view" />
+
+    <com.tftechsz.common.widget.CircleImageView
+        android:id="@+id/sa_im2"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_100"
+        android:layout_marginBottom="@dimen/dp_70"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/dp_1"
+        android:src="@mipmap/mine_ic_girl_default"
+        app:layout_constraintBottom_toBottomOf="@id/radar_view"
+        app:layout_constraintRight_toRightOf="@id/radar_view" />
+
+    <com.tftechsz.common.widget.CircleImageView
+        android:id="@+id/sa_im3"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_100"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/dp_1"
+        android:src="@mipmap/pic_front_2x"
+        app:layout_constraintLeft_toLeftOf="@id/radar_view"
+        app:layout_constraintTop_toTopOf="@id/radar_view" />
 
     <com.tftechsz.common.widget.CircleImageView
         android:id="@+id/iv_avatar"
@@ -57,6 +179,9 @@
         android:layout_height="@dimen/dp_100"
         android:layout_centerVertical="true"
         android:scaleType="centerCrop"
+        android:src="@mipmap/mine_ic_boy_default"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/dp_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

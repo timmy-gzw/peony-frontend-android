@@ -125,6 +125,46 @@ public class AnimationUtil {
         imageView.startAnimation(animation);
     }
 
+    public static void createRotateRevertAnimation(ImageView imageView) {
+        RotateAnimation animation = new RotateAnimation(0f, -360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        animation.setDuration(1500);
+        animation.setRepeatCount(-1);
+        animation.setFillAfter(true);
+        animation.setRepeatMode(Animation.RESTART);
+        animation.setInterpolator(new LinearInterpolator());
+        imageView.startAnimation(animation);
+    }
+
+    public static void createScaleAnimation(View target) {
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1f, 3f, 1f, 3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setRepeatMode(Animation.RESTART);
+        scaleAnimation.setRepeatCount(Animation.INFINITE);
+        scaleAnimation.setDuration(1500);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(1f,0f);
+        alphaAnimation.setRepeatMode(Animation.RESTART);
+        alphaAnimation.setRepeatCount(Animation.INFINITE);
+        alphaAnimation.setDuration(1500);
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(scaleAnimation);
+        animationSet.addAnimation(alphaAnimation);
+        target.startAnimation(animationSet);
+    }
+
+    public static void createScaleAlphaAnimation(View target) {
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1f, 1.1f, 1f, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setRepeatMode(Animation.REVERSE);
+        scaleAnimation.setRepeatCount(Animation.INFINITE);
+        scaleAnimation.setDuration(700);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0,1f);
+        alphaAnimation.setRepeatMode(Animation.REVERSE);
+        alphaAnimation.setRepeatCount(Animation.INFINITE);
+        alphaAnimation.setDuration(700);
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(scaleAnimation);
+        animationSet.addAnimation(alphaAnimation);
+        target.startAnimation(animationSet);
+    }
+
 
     public static void invisibleAnimator(final View view, boolean showGone) {
         if (view != null) {

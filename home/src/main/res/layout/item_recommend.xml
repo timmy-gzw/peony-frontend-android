@@ -11,9 +11,9 @@
         android:id="@+id/start_view"
         android:layout_width="@dimen/dp_size_80"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/middle"
+        app:layout_constraintBottom_toBottomOf="@id/ll_box"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/middle">
+        app:layout_constraintTop_toTopOf="@id/ll_box">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -40,14 +40,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/iv_real_people"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bg_frame_margin"
-            android:src="@mipmap/ic_real_people2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/bg_frame"
@@ -68,111 +60,127 @@
 
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/middle"
+    <LinearLayout
+        android:id="@+id/ll_box"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:minHeight="@dimen/dp_80"
-        android:paddingEnd="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_8"
+        android:gravity="center"
         app:layout_constraintEnd_toStartOf="@id/ll_like"
         app:layout_constraintStart_toEndOf="@+id/start_view"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_5"
-            android:layout_marginTop="@dimen/dp_3"
-            android:maxLength="12"
-            android:singleLine="true"
-            android:textColor="@color/color_normal"
-            android:textSize="@dimen/sp_16"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toStartOf="@id/tv_distance"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:drawableEnd="@mipmap/vip_icon_bg"
-            tools:drawablePadding="@dimen/dp_3"
-            tools:text="喵了个喵" />
-
-        <TextView
-            android:id="@+id/tv_online"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_4"
-            android:background="@drawable/bg_online_status"
-            android:drawablePadding="@dimen/dp_2"
-            android:paddingStart="@dimen/dp_5"
-            android:paddingTop="@dimen/dp_2"
-            android:paddingEnd="@dimen/dp_5"
-            android:paddingBottom="@dimen/dp_2"
-            android:textColor="@color/color_cccccc"
-            android:textSize="@dimen/sp_10"
-            app:layout_constraintBottom_toBottomOf="@id/tv_name"
-            app:layout_constraintStart_toEndOf="@id/tv_name"
-            app:layout_constraintTop_toTopOf="@id/tv_name"
-            tools:text="一小时前" />
-
-        <TextView
-            android:id="@+id/tv_distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_4"
-            android:background="@drawable/bg_near_distance"
-            android:paddingStart="@dimen/dp_5"
-            android:paddingTop="@dimen/dp_2"
-            android:paddingEnd="@dimen/dp_5"
-            android:paddingBottom="@dimen/dp_2"
-            android:textColor="@color/blue_7F89F3"
-            android:textSize="@dimen/sp_10"
-            app:drawableStartCompat="@mipmap/home_ic_near"
-            app:layout_constraintBottom_toBottomOf="@id/tv_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_name"
-            app:layout_constraintTop_toTopOf="@id/tv_name"
-            tools:text="一小时前" />
-
-        <TextView
-            android:id="@+id/tv_info"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/middle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_5"
-            android:ellipsize="end"
-            android:paddingTop="@dimen/dp_3"
-            android:singleLine="true"
-            android:textColor="#9a9a9a"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintStart_toStartOf="@+id/tv_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            tools:text="深圳 | 21岁 | 166cm | 护士" />
+            android:paddingEnd="@dimen/dp_10">
 
-        <TextView
-            android:id="@+id/tv_sign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_info"
-            android:paddingTop="@dimen/dp_3"
-            android:singleLine="true"
-            android:textColor="#9a9a9a"
-            android:textSize="@dimen/sp_13"
-            app:layout_constraintStart_toStartOf="@+id/tv_info"
-            app:layout_constraintTop_toBottomOf="@id/tv_info"
-            tools:text="你开心就好" />
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_3"
+                android:maxLength="12"
+                android:singleLine="true"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_16"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@id/tv_distance"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:drawableEnd="@mipmap/vip_icon_bg"
+                tools:drawablePadding="@dimen/dp_3"
+                tools:text="喵了个喵" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleview"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_4"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="@+id/tv_sign"
-            app:layout_constraintTop_toBottomOf="@id/tv_sign" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/iv_real_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/bg_frame_margin"
+                android:src="@mipmap/home_icon_real_people"
+                app:layout_constraintTop_toTopOf="@id/tv_name"
+                app:layout_constraintBottom_toBottomOf="@id/tv_name"
+                app:layout_constraintLeft_toRightOf="@id/tv_name"/>
 
+            <TextView
+                android:id="@+id/tv_online"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:background="@drawable/bg_online_status"
+                android:drawablePadding="@dimen/dp_2"
+                android:paddingStart="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingEnd="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_2"
+                android:textColor="@color/color_cccccc"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintBottom_toBottomOf="@id/iv_real_people"
+                app:layout_constraintStart_toEndOf="@id/iv_real_people"
+                app:layout_constraintTop_toTopOf="@id/iv_real_people"
+                tools:text="一小时前" />
+
+            <TextView
+                android:id="@+id/tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:background="@drawable/bg_near_distance"
+                android:paddingStart="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingEnd="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_2"
+                android:textColor="@color/blue_7F89F3"
+                android:textSize="@dimen/sp_10"
+                app:drawableStartCompat="@mipmap/home_ic_near"
+                app:layout_constraintBottom_toBottomOf="@id/iv_real_people"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_real_people"
+                app:layout_constraintTop_toTopOf="@id/iv_real_people"
+                tools:text="500米" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_5"
+                android:ellipsize="end"
+                android:paddingTop="@dimen/dp_3"
+                android:singleLine="true"
+                android:textColor="#9a9a9a"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="@+id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                tools:text="深圳 | 21岁 | 166cm | 护士" />
+
+            <TextView
+                android:id="@+id/tv_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_info"
+                android:paddingTop="@dimen/dp_3"
+                android:singleLine="true"
+                android:textColor="#9a9a9a"
+                android:textSize="@dimen/sp_13"
+                app:layout_constraintStart_toStartOf="@+id/tv_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_info"
+                tools:text="你开心就好" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleview"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_4"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/tv_sign"
+                app:layout_constraintTop_toBottomOf="@id/tv_sign" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
     <!--<TextView
         android:id="@+id/tv_sex"
@@ -199,7 +207,6 @@
         android:layout_height="@dimen/dp_50"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginEnd="@dimen/dp_16"
-        android:background="@drawable/shape_e6e6e6_bg"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -217,15 +224,22 @@
         <RelativeLayout
             android:id="@+id/ll_accost"
             android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_accost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/home_ic_chat_up_normal" />
+                android:src="@mipmap/home_icon_chat_self" />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_accost"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="@dimen/dp_10"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src="@mipmap/home_ic_chat_up_normal" />-->
 
             <TextView
                 android:id="@+id/tv_accost"
@@ -234,6 +248,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dp_30"
                 android:text="搭讪"
+                android:visibility="gone"
                 android:textColor="#ff999999"
                 android:textSize="@dimen/sp_10" />
         </RelativeLayout>

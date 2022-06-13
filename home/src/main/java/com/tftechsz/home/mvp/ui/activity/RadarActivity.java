@@ -2,20 +2,26 @@ package com.tftechsz.home.mvp.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.netease.nim.uikit.common.adapter.AdvancedAdapter;
 import com.tftechsz.home.R;
 import com.tftechsz.home.mvp.iview.IRadarView;
 import com.tftechsz.home.mvp.presenter.RadarPresenter;
+import com.tftechsz.home.widget.BarrageView.Barrage;
+import com.tftechsz.home.widget.BarrageView.BarrageView;
 import com.tftechsz.home.widget.RadarView;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -27,6 +33,9 @@ import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.functions.Consumer;
 
 /**
@@ -36,18 +45,22 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
 
     private final int DELAY_TIME = 10 * 1000;
     public static final String EXTRA_TYPE = "type";
-    private RadarView mRadarView;
+    private ImageView mRadarView,mScaleImageView1,mScaleImageView2,mScaleAlphaImageView1,mScaleAlphaImageView2,mScaleAlphaImageView3;
     private ConstraintLayout mClRadar;  //背景图片
     private ImageView mIvRound, mIvRoundBig;  //圆圈图片
     private int mType;
     private MediaPlayer mediaPlayer;
-    private LottieAnimationView mLottie;
-    private ImageView mIvAvatar;
+    private ImageView mIvAvatar,mMusicImageView,mRuleImageView;
+    private TextView mTitleTv;
+    private BarrageView mBarrageView;
+    private TextView mTvTip;
+    private LinearLayout mllPair;
 
 
     @Autowired
     UserProviderService service;
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private boolean mMediaIsClose = false;
 
     public static void startActivity(Context context, int value) {
         Intent intent = new Intent(context, RadarActivity.class);
@@ -65,12 +78,23 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         StatusBarUtil.fullScreen(this);
         mIvAvatar = findViewById(R.id.iv_avatar);
         mRadarView = findViewById(R.id.radar_view);
+        mScaleImageView1 = findViewById(R.id.scale_im1);
+        mScaleImageView2 = findViewById(R.id.scale_im2);
+        mTitleTv = findViewById(R.id.title_tv);
+        mBarrageView = findViewById(R.id.barrage_view);
+        mScaleAlphaImageView1 = findViewById(R.id.sa_im1);
+        mScaleAlphaImageView2 = findViewById(R.id.sa_im2);
+        mScaleAlphaImageView3 = findViewById(R.id.sa_im3);
+        mMusicImageView = findViewById(R.id.music_iv);
+        mTvTip = findViewById(R.id.tv_tip);
+        mllPair = findViewById(R.id.ll_pair);
+        mllPair.setOnClickListener(this);
+        findViewById(R.id.rule_im).setOnClickListener(this);
+        mMusicImageView.setOnClickListener(this);
         mClRadar = findViewById(R.id.cl_radar);
         mIvRound = findViewById(R.id.iv_round);
         mIvRoundBig = findViewById(R.id.iv_round_big);
         findViewById(R.id.toolbar_back_all).setOnClickListener(this);
-        mLottie = findViewById(R.id.animation_view);
-        mLottie.setImageAssetsFolder(Constants.ACCOST_GIFT);//设置data.json引用的图片资源文件夹名称
     }
 
 
@@ -85,34 +109,60 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         super.initData();
         mType = getIntent().getIntExtra(EXTRA_TYPE, 1);
         if (mType == 2) {   //视频
-            mClRadar.setBackgroundResource(R.drawable.bg_video_radar);
+            mTitleTv.setText("视频速配");
+            mClRadar.setBackgroundResource(R.mipmap.radar_video_bg);
             mIvRound.setBackgroundResource(R.drawable.round_video);
             mIvRoundBig.setBackgroundResource(R.drawable.round_video);
         } else {  //语音
-            mClRadar.setBackgroundResource(R.drawable.bg_voice_radar);
+            mClRadar.setBackgroundResource(R.mipmap.radar_voice_bg);
             mIvRound.setBackgroundResource(R.drawable.round_voice);
             mIvRoundBig.setBackgroundResource(R.drawable.round_video);
         }
-        mRadarView.setScanningListener(this);
-        mRadarView.startScan();
-//        mRadarView.setImage(service.getUserInfo().getIcon());
         if (service.getUserInfo() != null)
             GlideUtils.loadRouteImage(this, mIvAvatar, service.getUserInfo().getIcon());
-        AnimationUtil.createAvatarAnimation(mIvAvatar);
-        mRadarView.setMaxScanItemCount(1);
-        mLottie.setAnimation("radar.json");//通过AE生成的图文件(json格式)
-        Utils.runOnUiThreadDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mLottie.playAnimation();//开始动画
-            }
-        }, 1000);
-        if (mType == 2) {   //视频
+        startAnimation();
+        if (mType == 2) {   //视频˛˛
             p.videoMatch();
         } else {  //语音
             p.voiceMatch();
         }
         initBus();
+        List<Barrage> mBarrages = new ArrayList<>();
+        String[] datas = {"衣衣 和 雨啊 速配成功","阿里 和 深爱的 速配成功","东方 和 爱笑的机器狗 速配成功","阿苏妲 和 马小龙 速配成功","小迷糊 和 雨啊 速配成功"};
+        for (int i = 0; i < datas.length; i++) {
+            mBarrages.add(new Barrage(datas[i],getResources().getColor(R.color.white)));
+        }
+        mBarrageView.setBarrages(mBarrages);
+    }
+
+    private void startAnimation() {
+        AnimationUtil.createAvatarAnimation(mIvAvatar);
+        AnimationUtil.createRotateRevertAnimation(mRadarView);
+        AnimationUtil.createScaleAnimation(mScaleImageView1);
+        AnimationUtil.createScaleAlphaAnimation(mScaleAlphaImageView1);
+        Utils.runOnUiThreadDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimationUtil.createScaleAnimation(mScaleImageView2);
+                AnimationUtil.createScaleAlphaAnimation(mScaleAlphaImageView2);
+            }
+        }, 1000);
+        Utils.runOnUiThreadDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimationUtil.createScaleAlphaAnimation(mScaleAlphaImageView3);
+            }
+        }, 700);
+    }
+
+    private void clearAnimation(){
+        mIvAvatar.clearAnimation();
+        mRadarView.clearAnimation();
+        mScaleImageView1.clearAnimation();
+        mScaleAlphaImageView1.clearAnimation();
+        mScaleImageView2.clearAnimation();
+        mScaleAlphaImageView2.clearAnimation();
+        mScaleAlphaImageView3.clearAnimation();
     }
 
     private final Runnable runnable = new Runnable() {
@@ -155,7 +205,9 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     @Override
     protected void onResume() {
         super.onResume();
-        start();
+        if(!mMediaIsClose) {
+            start();
+        }
         if (mType == 1)
             p.voiceBeat();
         else
@@ -174,10 +226,16 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         handler.removeCallbacksAndMessages(null);
         if (runnable != null)
             handler.removeCallbacks(runnable);
+        release();
+        mMediaIsClose = false;
+    }
+    
+    private void release(){
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
+            mMediaIsClose = true;
         }
     }
 
@@ -188,6 +246,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         if (mediaPlayer != null) {
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
+            mMediaIsClose = false;
         }
     }
 
@@ -195,11 +254,14 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mBarrageView.destroy();
     }
 
     @Override
     public void onScanSuccess() {
-        mRadarView.stopScan();
+        clearAnimation();
+        mTvTip.setVisibility(View.GONE);
+        mllPair.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -207,6 +269,22 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         int id = v.getId();
         if (id == R.id.toolbar_back_all) {
             finish();
+        }
+        if(id == R.id.music_iv){
+            if(!mMediaIsClose){
+                release();
+                mMusicImageView.setImageResource(R.mipmap.radar_musice_icon_un);
+            }else {
+                start();
+                mMusicImageView.setImageResource(R.mipmap.radar_music_icon);
+            }
+        }
+        if(id == R.id.rule_im){
+            //匹配规则‰
+        }
+        if(id == R.id.ll_pair){
+            mTvTip.setVisibility(View.VISIBLE);
+            mllPair.setVisibility(View.GONE);
         }
     }
 
