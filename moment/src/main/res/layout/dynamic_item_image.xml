@@ -21,10 +21,10 @@
         android:layout_marginTop="@dimen/dp_5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:vip_height="@dimen/dp_size_60"
-        app:vip_width="@dimen/dp_size_60"
-        tools:layout_height="@dimen/dp_60"
-        tools:layout_width="@dimen/dp_60" />
+        app:vip_height="@dimen/dp_size_40"
+        app:vip_width="@dimen/dp_size_40"
+        tools:layout_height="@dimen/dp_40"
+        tools:layout_width="@dimen/dp_40" />
 
     <!--昵称-->
     <TextView
@@ -33,25 +33,37 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_4"
         android:paddingEnd="@dimen/dp_4"
-        android:textColor="@color/color_mid_font"
+        android:textColor="@color/red"
         android:textSize="@dimen/text_size_15"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/iv_sex"
         app:layout_constraintLeft_toRightOf="@id/iv_avatar"
         app:layout_constraintTop_toTopOf="@id/iv_avatar"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="test" />
 
+    <ImageView
+        android:id="@+id/img_vip_dii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_3"
+        android:src="@mipmap/vip_icon_bg"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/iv_sex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginStart="@dimen/dp_6"
         android:gravity="center"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
-        app:layout_constraintStart_toStartOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@id/img_vip_dii"
+        app:layout_constraintStart_toEndOf="@id/img_vip_dii"
+        app:layout_constraintTop_toTopOf="@id/img_vip_dii"
         tools:background="@drawable/bg_girl"
         tools:drawablePadding="@dimen/dp_2"
         tools:drawableStart="@drawable/ic_girl"
@@ -59,26 +71,15 @@
         tools:text="15"
         tools:textSize="@dimen/sp_10" />
 
-    <ImageView
-        android:id="@+id/img_vip_dii"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_3"
-        android:src="@mipmap/vip_icon_bg"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/iv_sex"
-        app:layout_constraintStart_toEndOf="@id/iv_sex"
-        app:layout_constraintTop_toTopOf="@id/iv_sex" />
-
     <!--是否真人-->
     <ImageView
         android:id="@+id/iv_real"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_3"
+        android:layout_marginStart="@dimen/dp_6"
         android:src="@mipmap/peony_home_xczr_icon"
         app:layout_constraintBottom_toBottomOf="@id/img_vip_dii"
-        app:layout_constraintStart_toEndOf="@id/img_vip_dii"
+        app:layout_constraintStart_toEndOf="@id/iv_sex"
         app:layout_constraintTop_toTopOf="@id/img_vip_dii" />
 
 
@@ -91,7 +92,8 @@
         android:src="@mipmap/ic_authentication"
         android:visibility="gone"
         app:layout_constraintLeft_toRightOf="@id/iv_real"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <!--文本-->
     <com.tftechsz.common.widget.ShowAllTextView
@@ -114,7 +116,7 @@
         android:id="@+id/fragme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_12"
+        android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_10"
         app:layout_constraintTop_toBottomOf="@id/tv_content">
 
@@ -147,9 +149,8 @@
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_2"
-        android:textColor="@color/color_light_font"
+        android:layout_marginTop="@dimen/dp_16"
+        android:textColor="@color/color_cccccc"
         android:textSize="@dimen/text_size_12"
         app:layout_constraintStart_toStartOf="@id/fragme"
         app:layout_constraintTop_toBottomOf="@id/fragme"
@@ -161,11 +162,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_2"
-        android:textColor="@color/color_light_font"
+        android:textColor="@color/color_cccccc"
         android:textSize="@dimen/text_size_12"
-        app:layout_constraintLeft_toRightOf="@id/tv_time"
-        app:layout_constraintTop_toBottomOf="@id/fragme" />
+        app:layout_constraintStart_toEndOf="@id/tv_time"
+        app:layout_constraintTop_toTopOf="@id/tv_time"
+        tools:text="12" />
 
     <!--地址-->
     <TextView
@@ -173,11 +174,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_2"
-        android:textColor="@color/color_light_font"
+        android:textColor="@color/color_cccccc"
         android:textSize="@dimen/text_size_12"
         app:layout_constraintLeft_toRightOf="@id/tv_look_times"
-        app:layout_constraintTop_toBottomOf="@id/fragme"
+        app:layout_constraintTop_toTopOf="@id/tv_time"
         tools:text="深圳市" />
 
     <!--地址-->
@@ -186,14 +186,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_2"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="删除"
         android:textColor="@color/color_5F6392"
         android:textSize="@dimen/text_size_12"
         app:layout_constraintLeft_toRightOf="@id/tv_address"
-        app:layout_constraintTop_toBottomOf="@id/fragme" />
+        app:layout_constraintTop_toTopOf="@id/tv_time" />
 
     <com.like.LikeButton
         android:id="@+id/btn_like"
@@ -287,7 +286,8 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:src="@mipmap/home_ic_chat_up_selector"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <!--搭讪-->
         <ImageView
