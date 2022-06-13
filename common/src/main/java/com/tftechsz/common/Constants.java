@@ -29,8 +29,8 @@ public class Constants {
 
     public static final String CURRENT_HOST = "current_host";  //当前地址
 
-    public static final String YUNXIN_APP_ID = "dc20a28621c05eb4e77a019e098acf99";   //云信
-    public static final String YUNXIN_ROOM_APP_ID = "dc20a28621c05eb4e77a019e098acf99";   //语音房云信
+    public static final String YUNXIN_APP_ID = "9c3106de8f4c4b69e7ff47b6b6c7aad3";   //云信
+    public static final String YUNXIN_ROOM_APP_ID = "9c3106de8f4c4b69e7ff47b6b6c7aad3";   //语音房云信
     public static final String YUNXIN_PRODUCT_NUMBER = "TBD";   //云信反作弊产品编号
     public static final String SANYAN_APP_ID = "qYz3RbpO";   //闪验
     public static final String WX_APP_ID = "__TBD__";  //微信

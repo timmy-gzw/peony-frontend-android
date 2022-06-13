@@ -123,7 +123,7 @@
 
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="dc20a28621c05eb4e77a019e098acf99" />
+            android:value="9c3106de8f4c4b69e7ff47b6b6c7aad3" />
 
         <!-- 云信后台服务，请使用独立进程。 -->
         <service
