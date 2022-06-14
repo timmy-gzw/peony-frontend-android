@@ -58,7 +58,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
         ImmersionBar.with(mActivity).transparentStatusBar().navigationBarDarkIcon(false).navigationBarColor(R.color.black).statusBarDarkFont(false, 0.2f).init();
         countBackUtils = new CountBackUtils();
         new ToolBarBuilder().showBack(true)
-                .setTitle("手机号登录")
+                .setTitle("手机号码登录/注册")
                 .setTitleColor(R.color.white)
                 .setRightTextColor(R.color.white)
                 .setBackgroundColor(0)
@@ -80,6 +80,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
             return false;
         });
         mEtPhone.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/gilroy-bold-4.otf"));
+        mEtCode.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/gilroy-bold-4.otf"));
         mEtPhone.addTextChangedListener(new MyInputFilter());
         mEtCode.addTextChangedListener(new MyInputFilter());
         new AddSpaceTextWatcher(mEtPhone, AddSpaceTextWatcher.SpaceType.mobilePhoneNumberType);

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+
+    <item android:drawable="@mipmap/yt_dl_girl01_icon" android:state_selected="false" />
+    <item android:drawable="@mipmap/yt_dl_girl02_icon" android:state_selected="true" />
+
+</selector>

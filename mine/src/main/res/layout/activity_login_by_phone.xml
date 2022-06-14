@@ -16,23 +16,25 @@
     <View
         android:id="@+id/view_header"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="313dp"
         android:background="@drawable/shape_login_by_code_header"
-        app:layout_constraintBottom_toBottomOf="@id/tv_tip"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/tool_bar" />
+    <include
+        layout="@layout/tool_bar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_default"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_105"
-        android:layout_marginTop="@dimen/dp_30"
         android:background="@mipmap/mine_bg_phone_login"
         android:textSize="@dimen/sp_15"
+        app:layout_constraintBottom_toTopOf="@id/tv_tip"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/base_tool_bar"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -43,9 +45,9 @@
         android:gravity="center"
         android:paddingStart="@dimen/dp_16"
         android:paddingEnd="@dimen/dp_16"
-        android:paddingBottom="@dimen/dp_40"
         android:textColor="@color/color_normal"
         android:textSize="@dimen/sp_15"
+        app:layout_constraintBottom_toTopOf="@id/space"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_default"

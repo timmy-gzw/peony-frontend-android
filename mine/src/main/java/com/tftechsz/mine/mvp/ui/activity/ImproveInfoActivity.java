@@ -2,7 +2,6 @@ package com.tftechsz.mine.mvp.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,8 +26,6 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tftechsz.mine.BuildConfig;
-import com.umeng.analytics.MobclickAgent;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
@@ -46,10 +43,12 @@ import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.CustomFilter;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.mine.BuildConfig;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.req.CompleteReq;
 import com.tftechsz.mine.mvp.IView.IImproveInfoView;
 import com.tftechsz.mine.mvp.presenter.ImproveInfoPresenter;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -75,12 +74,13 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
     @Autowired
     UserProviderService service;
     private ImageView mIvRotate;
-    private TextView mTvBoy;
-    private TextView mTvGirl;
+    private ImageView mIvBoy;
+    private ImageView mIvGirl;
     private LinearLayout mRandomView;
     private CustomPopWindow mNoDataPop;
     private CustomPopWindow mGirlPop;
     private CustomPopWindow mBackPop;
+    private View ivBack;
 
     @Override
     public ImproveInfoPresenter initPresenter() {
@@ -89,15 +89,15 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        ImmersionBar.with(mActivity).barColor(R.color.white).fitsSystemWindows(true).init();
         SoftHideKeyBoardUtil.assistActivity(this);
+        ivBack = findViewById(R.id.toolbar_back_all);
+        ImmersionBar.with(mActivity).titleBar(ivBack).transparentStatusBar().navigationBarDarkIcon(false).navigationBarColor(R.color.black).statusBarDarkFont(false, 0.2f).init();
+        ivBack.setOnClickListener(this);
         findViewById(R.id.tv_complete).setOnClickListener(this);
-        mLlBoy = findViewById(R.id.ll_boy);
-        mLlBoy.setOnClickListener(this);
-        mTvBoy = findViewById(R.id.tv_boy);
-        mTvGirl = findViewById(R.id.tv_girl);
-        mLlGirl = findViewById(R.id.ll_girl);
-        mLlGirl.setOnClickListener(this);
+        mIvBoy = findViewById(R.id.iv_sex_boy);
+        mIvBoy.setOnClickListener(this);
+        mIvGirl = findViewById(R.id.iv_sex_girl);
+        mIvGirl.setOnClickListener(this);
         mTvBirthday = findViewById(R.id.tv_birthday);
         mTvBirthday.setOnClickListener(this);
         mIvRotate = findViewById(R.id.iv_rotate);
@@ -106,7 +106,6 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
         mIvIcon = findViewById(R.id.iv_icon);
         mRandomView = findViewById(R.id.ll_random);
         findViewById(R.id.rl_icon).setOnClickListener(this);
-        findViewById(R.id.toolbar_back_all).setOnClickListener(this);
         mRandomView.setOnClickListener(this);
 
         mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
@@ -182,25 +181,25 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
             } else {
                 choosePic();
             }
-        } else if (id == R.id.ll_boy) {   //男孩
+        } else if (id == R.id.iv_sex_boy) {   //男孩
             if (mCompleteReq.sex == 1) {
                 return;
             }
             tempGirlName = Utils.getText(mEtName);
             tempGirlBir = Utils.getText(mTvBirthday);
             if (!isChangedIcon) {//未修改过头像
-                mIvIcon.setImageResource(R.mipmap.peony_tx_boy02_img);
+                mIvIcon.setImageResource(R.mipmap.ic_avatar_male);
             }
             mCompleteReq.sex = 1;
             setSexView(0);
-        } else if (id == R.id.ll_girl) {   //女孩
+        } else if (id == R.id.iv_sex_girl) {   //女孩
             if (mCompleteReq.sex == 2) {
                 return;
             }
             tempBoyName = Utils.getText(mEtName);
             tempBoyBir = Utils.getText(mTvBirthday);
             if (!isChangedIcon) {//未修改过头像
-                mIvIcon.setImageResource(R.mipmap.peony_tx_girl02_img);
+                mIvIcon.setImageResource(R.mipmap.ic_avatar_female);
             }
             mCompleteReq.sex = 2;
             setSexView(1);
@@ -300,6 +299,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                                     getP().uploadAvatar(mPath);
                                 }
                             }
+
                             @Override
                             public void onCancel() {
 
@@ -444,9 +444,6 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
         }
     }
 
-    Typeface normal = Typeface.defaultFromStyle(Typeface.NORMAL);
-    Typeface bold = Typeface.defaultFromStyle(Typeface.BOLD);
-
     private void setSexView(int i) {
         switch (i) {
             case 0: //男
@@ -459,14 +456,8 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                 mTvBirthday.setText(tempBoyBir);
 
                 mRandomView.setVisibility(View.VISIBLE);
-                mTvBoy.setTypeface(bold);
-                mTvGirl.setTypeface(normal);
-                mLlBoy.setBackgroundResource(R.drawable.bg_register_bg_boy);
-                mLlGirl.setBackgroundResource(R.drawable.bg_register_bg_noraml);
-                mTvBoy.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.mine_ic_white_authenticate, 0, 0, 0);
-                mTvGirl.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
-                mTvBoy.setTextColor(Utils.getColor(R.color.white));
-                mTvGirl.setTextColor(Utils.getColor(R.color.color_999999));
+                mIvBoy.setSelected(true);
+                mIvGirl.setSelected(false);
                 break;
 
             case 1: //女
@@ -478,14 +469,8 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                     mEtName.setSelection(tempGirlName.length());
                 mTvBirthday.setText(tempGirlBir);
                 mRandomView.setVisibility(View.GONE);
-                mTvBoy.setTypeface(normal);
-                mTvGirl.setTypeface(bold);
-                mLlBoy.setBackgroundResource(R.drawable.bg_register_bg_noraml);
-                mLlGirl.setBackgroundResource(R.drawable.bg_register_bg_girl);
-                mTvGirl.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.mine_ic_white_authenticate, 0, 0, 0);
-                mTvBoy.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
-                mTvGirl.setTextColor(Utils.getColor(R.color.white));
-                mTvBoy.setTextColor(Utils.getColor(R.color.color_999999));
+                mIvBoy.setSelected(false);
+                mIvGirl.setSelected(true);
                 break;
         }
     }

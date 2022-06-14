@@ -102,10 +102,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name="com.tftechsz.mine.mvp.ui.activity.ImproveInfoActivity_New"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
-        <activity
             android:name="com.tftechsz.mine.mvp.ui.activity.IntegralShopActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -175,12 +171,11 @@
             android:theme="@style/Theme.ActivityDialogStyle" />
 
         <activity-alias
-          android:name="com.cmic.gen.sdk.view.GenLoginAuthActivity"
-          android:configChanges="keyboardHidden|orientation|screenSize"
-          android:launchMode="singleTop"
-          android:screenOrientation="behind"
-          android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
-          />
+            android:name="com.cmic.gen.sdk.view.GenLoginAuthActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="behind"
+            android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity" />
 
         <activity-alias
             android:name="com.cmic.sso.sdk.view.LoginAuthActivity"

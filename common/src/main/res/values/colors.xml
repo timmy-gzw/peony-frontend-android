@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#FFD400</color>
-    <color name="colorPrimaryDark">#FFD400</color>
-    <color name="colorAccent">#FFD400</color>
+    <color name="colorPrimary">#FE4D6B</color>
+    <color name="colorPrimaryDark">#FE4D6B</color>
+    <color name="colorAccent">#FE4D6B</color>
     <color name="transparent">#00000000</color>
     <color name="half_transparent">#80000000</color>
     <color name="white">#FFFFFF</color>

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -130,7 +131,7 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
      *
      * @param context
      */
-    public void timeChoose(Context context, RelativeLayout relativeLayout, int year, int moth, int day) {
+    public void timeChoose(Context context, ViewGroup decorView, int year, int moth, int day) {
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
@@ -161,7 +162,7 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
                 .setRangDate(startDate, endDate)//起始终止年月日设定
                 .setLabel("年", "月", "日", "时", "分", "秒")//默认设置为年月日时分秒
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setDecorView(relativeLayout)
+                .setDecorView(decorView)
                 .build();
         pvTime.show();
     }
