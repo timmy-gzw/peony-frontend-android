@@ -71,7 +71,6 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
     public void setData(BaseViewHolder helper, UserInfo item) {
 
         TextView tvName = helper.getView(R.id.tv_name);
-        TextView tvAccost = helper.getView(R.id.tv_accost);
         TextView tvOnline = helper.getView(R.id.tv_online);
         ImageView ivAvatar = helper.getView(R.id.iv_avatar);
         View bgFrame = helper.getView(R.id.bg_frame);
@@ -88,12 +87,10 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
                 lottieAnimationViewBtn.setProgress(0);
             }
             //helper.setBackgroundResource(R.id.iv_accost, R.mipmap.img_0_mainnew2);
-            helper.setText(R.id.tv_accost, "喜欢");
             helper.setBackgroundResource(R.id.iv_accost1, R.mipmap.peony_xxym_sx_icon_new);
             helper.setVisible(R.id.tv_distance, false);
         } else {
-            helper.setBackgroundResource(R.id.iv_accost, R.mipmap.home_ic_chat_up_normal);
-            helper.setText(R.id.tv_accost, "搭讪");
+            helper.setImageResource(R.id.iv_accost, R.mipmap.home_icon_chat_self);
             helper.setBackgroundResource(R.id.iv_accost1, R.mipmap.home_ic_chat_up_selector);
         }
         if (mType == 1) {   //推荐
@@ -139,7 +136,6 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
         //helper.setVisible(R.id.animation_view, false);
         helper.setVisible(R.id.iv_accost1, item.getIs_accost() == 1);
         helper.setVisible(R.id.ll_accost, item.getIs_accost() != 1);
-        tvAccost.setVisibility(item.getIs_accost() == 1 ? View.GONE : View.VISIBLE);
 
         helper.getView(R.id.ll_accost).clearAnimation();
         helper.getView(R.id.iv_accost1).clearAnimation();
@@ -150,7 +146,7 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
             helper.setVisible(R.id.iv_accost1, true);
             helper.setVisible(R.id.ll_accost, false);
         } else {
-            helper.setImageResource(R.id.iv_real_people, R.mipmap.ic_real_people2);
+            helper.setImageResource(R.id.iv_real_people, R.mipmap.home_icon_real_people);
             helper.setVisible(R.id.iv_accost1, item.getIs_accost() == 1);
             helper.setVisible(R.id.ll_accost, item.getIs_accost() != 1);
         }
