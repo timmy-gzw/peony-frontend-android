@@ -1,8 +1,8 @@
 package com.tftechsz.moment.mvp.ui.fragment;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -10,9 +10,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.ScreenUtils;
 import com.flyco.tablayout.SlidingScaleTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tftechsz.common.ARouterApi;
@@ -32,10 +35,6 @@ import com.tftechsz.moment.widget.SendTrendPop;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 /**
  * 动态主页
  */
@@ -44,7 +43,6 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
 
     private TextView mTrendBadge;
     private ImageView mIvPublish;
-    private int moveDistance; //偏移距离
     private boolean isFragmentVisible;
     private SendTrendPop mPop;
     @Autowired
@@ -126,16 +124,6 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
 
     @Override
     protected void initData() {
-        //控件绘制完成之后再获取其宽高
-        mIvPublish.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                //动画移动的距离 屏幕的宽度减去图片距左边的宽度 就是图片距右边的宽度，再加上隐藏的一半
-                moveDistance = ScreenUtils.getScreenWidth() - mIvPublish.getRight() + mIvPublish.getWidth() / 2;
-                //监听结束之后移除监听事件
-                mIvPublish.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
         initRxBus();
     }
 
@@ -195,9 +183,8 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
             if (mPop == null) {
                 mPop = new SendTrendPop(mActivity, false);
             }
-            int botHeight = ScreenUtils.getScreenHeight() - mIvPublish.getTop();
-            mPop.setBotLayoutParams(botHeight - (botHeight == 354 ? 0 : ImmersionBar.getNavigationBarHeight(mActivity)));
-            mPop.showPopupWindow();
+            mPop.setPopupGravity(Gravity.TOP);
+            mPop.showPopupWindow(mIvPublish);
             //ChoosePicUtils.picMultiple(getActivity(), mMaxSize, PictureConfig.CHOOSE_REQUEST, null, true);
         } else if (id == R.id.iv_search) {//动态通知
             TrendNoticeActivity.startActivity(mContext);

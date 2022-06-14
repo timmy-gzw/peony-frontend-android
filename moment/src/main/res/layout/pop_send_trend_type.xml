@@ -5,6 +5,9 @@
     android:id="@+id/root"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_6"
+    android:layout_marginEnd="@dimen/dp_20"
+    android:layout_marginBottom="@dimen/dp_6"
     android:orientation="vertical"
     tools:background="@color/red">
 
@@ -30,7 +33,7 @@
                 android:drawablePadding="8dp"
                 android:gravity="center"
                 android:text="图片"
-                android:textColor="#ff333333"
+                android:textColor="#5ABCFF"
                 android:textSize="15sp"
                 app:drawableStartCompat="@mipmap/pop_st_1" />
 
@@ -65,7 +68,7 @@
                 android:drawablePadding="8dp"
                 android:gravity="center"
                 android:text="视频"
-                android:textColor="#ff333333"
+                android:textColor="#FF6091"
                 android:textSize="15sp"
                 app:drawableStartCompat="@mipmap/pop_st_2" />
 
