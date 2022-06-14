@@ -18,7 +18,7 @@
         android:id="@+id/view_header"
         android:layout_width="match_parent"
         android:layout_height="313dp"
-        android:background="@drawable/shape_login_by_code_header"
+        android:background="@mipmap/yt_dl_bg_img"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

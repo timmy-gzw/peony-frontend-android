@@ -17,7 +17,7 @@
         android:id="@+id/view_header"
         android:layout_width="match_parent"
         android:layout_height="313dp"
-        android:background="@drawable/shape_login_by_code_header"
+        android:background="@mipmap/yt_dl_bg_img"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
@@ -45,7 +45,7 @@
         android:gravity="center"
         android:paddingStart="@dimen/dp_16"
         android:paddingEnd="@dimen/dp_16"
-        android:textColor="@color/color_normal"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_15"
         app:layout_constraintBottom_toTopOf="@id/space"
         app:layout_constraintLeft_toLeftOf="parent"
