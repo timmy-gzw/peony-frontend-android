@@ -31,7 +31,7 @@ public class Constants {
 
     public static final String YUNXIN_APP_ID = "9c3106de8f4c4b69e7ff47b6b6c7aad3";   //云信
     public static final String YUNXIN_ROOM_APP_ID = "9c3106de8f4c4b69e7ff47b6b6c7aad3";   //语音房云信
-    public static final String YUNXIN_PRODUCT_NUMBER = "TBD";   //云信反作弊产品编号
+    public static final String YUNXIN_PRODUCT_NUMBER = "YD00357078827886";   //云信反作弊产品编号
     public static final String SANYAN_APP_ID = "qYz3RbpO";   //闪验
     public static final String WX_APP_ID = "__TBD__";  //微信
     public static final String WX_APP_SC = "__TBD__";  //微信
