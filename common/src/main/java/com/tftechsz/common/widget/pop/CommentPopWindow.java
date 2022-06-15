@@ -3,6 +3,11 @@ package com.tftechsz.common.widget.pop;
 import android.content.Context;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -12,11 +17,6 @@ import com.tftechsz.common.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 包 名 : com.tftechsz.common.widget.pop
@@ -96,8 +96,8 @@ public class CommentPopWindow extends BaseBottomPop {
                 helper.setVisible(R.id.view, true);
             }
             if ("删除".equals(item)) {
-                helper.setTextColor(R.id.id_report, Utils.getColor(R.color.red));
-            }else {
+                helper.setTextColor(R.id.id_report, Utils.getColor(R.color.colorPrimary));
+            } else {
                 helper.setTextColor(R.id.id_report, Utils.getColor(R.color.color_normal));
             }
         }

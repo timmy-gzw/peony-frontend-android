@@ -1,17 +1,12 @@
 package com.tftechsz.moment.mvp.presenter;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.airbnb.lottie.LottieAnimationViewNew;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.netease.nim.uikit.bean.AccostDto;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.constant.Interfaces;
-import com.netease.nim.uikit.bean.AccostDto;
 import com.tftechsz.common.entity.CircleBean;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.http.BaseResponse;
@@ -181,28 +176,29 @@ public class DynamicRecommendPresenter extends BasePresenter<IDynamicView> {
     public void startAnimation(ImageView ivAccost, ImageView ivChat, LottieAnimationViewNew lottieAnimationView) { //搭讪按钮动画  头像特效   播放声音
         if (lottieAnimationView != null) {
             ChatSoundPlayer.instance().play(ChatSoundPlayer.RingerTypeEnum.ACCOST);
-            lottieAnimationView.setVisibility(View.VISIBLE);
-            if (ivAccost != null)
-                ivAccost.setVisibility(View.INVISIBLE);
-            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    lottieAnimationView.setVisibility(View.GONE);
-                    if (ivAccost != null) {
-                        ivAccost.setVisibility(View.GONE);
-                    }
-                    if (ivChat != null) {
-                        ivChat.setVisibility(View.VISIBLE);
-                        ObjectAnimator oa3 = ObjectAnimator.ofFloat(ivChat, "scaleX", 0.0f, 1.0f);
-                        ObjectAnimator oa4 = ObjectAnimator.ofFloat(ivChat, "scaleY", 0.0f, 1.0f);
-                        AnimatorSet as2 = new AnimatorSet();
-                        as2.play(oa3).with(oa4);
-                        as2.setDuration(300);
-                        as2.start();
-                    }
-                }
-            });
-            lottieAnimationView.playAnimation();
+            //TODO 搭讪全屏动画
+//            lottieAnimationView.setVisibility(View.VISIBLE);
+//            if (ivAccost != null)
+//                ivAccost.setVisibility(View.INVISIBLE);
+//            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    lottieAnimationView.setVisibility(View.GONE);
+//                    if (ivAccost != null) {
+//                        ivAccost.setVisibility(View.GONE);
+//                    }
+//                    if (ivChat != null) {
+//                        ivChat.setVisibility(View.VISIBLE);
+//                        ObjectAnimator oa3 = ObjectAnimator.ofFloat(ivChat, "scaleX", 0.0f, 1.0f);
+//                        ObjectAnimator oa4 = ObjectAnimator.ofFloat(ivChat, "scaleY", 0.0f, 1.0f);
+//                        AnimatorSet as2 = new AnimatorSet();
+//                        as2.play(oa3).with(oa4);
+//                        as2.setDuration(300);
+//                        as2.start();
+//                    }
+//                }
+//            });
+//            lottieAnimationView.playAnimation();
         }
 
 

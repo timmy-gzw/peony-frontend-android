@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -93,8 +94,16 @@ public class TrendNoticeActivity extends BaseMvpActivity<INoticeView, INoticePre
         tcSend.setOnClickListener(this);
 
         mNotDataView = getLayoutInflater().inflate(R.layout.base_empty_view, (ViewGroup) mRecy.getParent(), false);
+        ImageView ivEmpty = mNotDataView.findViewById(R.id.iv_empty);
         TextView tvEmpty = mNotDataView.findViewById(R.id.tv_empty);
-        tvEmpty.setText("暂无通知，去发个动态吧");
+        tvEmpty.setVisibility(View.GONE);
+        ivEmpty.setVisibility(View.VISIBLE);
+        ivEmpty.setImageResource(R.mipmap.ph_moment_empty);
+        TextView tvSend = mNotDataView.findViewById(R.id.tv_send);
+        tvSend.setVisibility(View.VISIBLE);
+        tvSend.setOnClickListener(v -> {
+            //todo 缺省页-发布动态
+        });
         setSmartRefreshLayoutListner();
         initBus();
     }

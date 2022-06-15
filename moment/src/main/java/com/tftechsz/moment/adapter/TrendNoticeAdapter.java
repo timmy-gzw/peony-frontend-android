@@ -5,6 +5,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -16,9 +19,6 @@ import com.tftechsz.moment.R;
 import com.tftechsz.moment.mvp.entity.NoticeBean;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * 动态适配器
@@ -67,7 +67,7 @@ public class TrendNoticeAdapter extends BaseQuickAdapter<NoticeBean, BaseViewHol
         }
 
         if (item.getStatus() == 0) { //判断删除状态
-            content.setBackgroundResource(R.drawable.shape_noble_item_bg);
+            content.setBackgroundResource(R.drawable.sp_eee_c_2);
             content.setTextSize(12);
         } else {
             content.setBackgroundResource(0);

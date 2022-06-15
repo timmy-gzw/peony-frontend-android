@@ -32,10 +32,10 @@
             android:clickable="true"
             android:focusable="true"
             android:hint="请输入评论…"
+            android:imeOptions="actionDone"
             android:inputType="textAutoCorrect|textAutoComplete|textMultiLine|textCapSentences"
             android:maxLength="400"
             android:maxLines="4"
-            android:imeOptions="actionDone"
             android:minHeight="@dimen/dp_40"
             android:padding="@dimen/dp_8"
             android:scrollbars="none"
@@ -50,10 +50,10 @@
             android:layout_height="@dimen/dp_40"
             android:layout_gravity="end|center_vertical"
             android:layout_marginStart="@dimen/dp_10"
-            android:background="@drawable/bg_orange_radius6"
+            android:background="@drawable/sp_primary_r_6"
             android:gravity="center"
             android:text="发送"
-            android:textColor="@color/color_normal"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_15" />
 
     </LinearLayout>

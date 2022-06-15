@@ -27,6 +27,7 @@ import com.tftechsz.common.entity.CircleBean;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.entity.NavigationLogEntity;
 import com.tftechsz.common.entity.VideoInfo;
+import com.tftechsz.common.event.AccostSuccessEvent;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
@@ -49,7 +50,6 @@ import com.tftechsz.moment.mvp.IView.IDynamicView;
 import com.tftechsz.moment.mvp.presenter.DynamicRecommendPresenter;
 import com.tftechsz.moment.mvp.ui.activity.MineTrendActivity;
 import com.tftechsz.moment.mvp.ui.activity.TrendDetailActivity;
-import com.tftechsz.common.event.AccostSuccessEvent;
 import com.tftechsz.moment.other.CommentEvent;
 import com.tftechsz.moment.other.CommentPraiseAccostEvent;
 
@@ -627,10 +627,10 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
         if (null == data || !CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
             CircleBean item = mAdapter.getItem(position);
             //RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_ACCOST_SUCCESS, data.gift.animation));
-            RxBus.getDefault().post(new AccostSuccessEvent(3, item.getUser_id() + "", item.getNickname(), item.getIcon()));
             if (item != null) {
                 RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PIC_ACCOST_SUCCESS, item.getUser_id()));
                 RxBus.getDefault().post(new CommentPraiseAccostEvent(item.getUser_id()));
+                RxBus.getDefault().post(new AccostSuccessEvent(AccostSuccessEvent.ACCOUST_MOMENT, item.getUser_id() + "", item.getNickname(), item.getIcon()));
                 CommonUtil.sendAccostGirlBoy(service, item.getUser_id(), data, 4);
             }
            /* mAdapter.getItem(position).setIs_accost(1);
