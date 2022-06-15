@@ -96,7 +96,7 @@
         <!--百度地图-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="baidu_app_key" />
+            android:value="hPHNLUSasPjeRQjpQYeFBj13lTESGRee" />
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
