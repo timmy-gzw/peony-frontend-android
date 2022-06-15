@@ -24,16 +24,20 @@ import com.tftechsz.common.adapter.FragmentVpAdapter;
 import com.tftechsz.common.base.BaseMvpFragment;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.bus.RxBus;
+import com.tftechsz.common.event.AccostSuccessEvent;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.common.widget.pop.AccostChatPop;
 import com.tftechsz.moment.R;
 import com.tftechsz.moment.mvp.ui.activity.TrendNoticeActivity;
 import com.tftechsz.moment.widget.SendTrendPop;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import razerdp.basepopup.BasePopupWindow;
 
 /**
  * 动态主页
@@ -42,9 +46,11 @@ import java.util.List;
 public class TrendFragment extends BaseMvpFragment implements View.OnClickListener, CustomTrendFragment.SrcollowInterface {
 
     private TextView mTrendBadge;
+    private View rootView;
     private ImageView mIvPublish;
     private boolean isFragmentVisible;
     private SendTrendPop mPop;
+    private AccostChatPop mAccostPop;
     @Autowired
     UserProviderService service;
     private CustomTrendFragment customTrendFragment1, customTrendFragment2;
@@ -58,6 +64,7 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
     @Override
     public void initUI(Bundle savedInstanceState) {
         ImmersionBar.with(this).titleBarMarginTop(R.id.tabLayout).init();
+        rootView = getView(R.id.cl_trend_root);
         mIvPublish = getView(R.id.iv_publish);
         ImageView ivSearch = getView(R.id.iv_search);
         mTrendBadge = getView(R.id.tv_blog_badge);
@@ -137,7 +144,13 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
                             }
                         }
                 ));
-
+        mCompositeDisposable.add(RxBus.getDefault().toObservable(AccostSuccessEvent.class)
+                .subscribe(event -> {
+                            if (event.getEventFrom() == 3) {
+                                showAccostChatPop(event.getToUserId(), event.getToUsername(), event.getToUserAvatar());
+                            }
+                        }
+                ));
     }
 
 
@@ -200,6 +213,16 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
     @Override
     public void hideImage() {
 //        hideFloatImage(moveDistance);
+    }
+
+    private void showAccostChatPop(String toUserId, String toUsername, String toUserAvatar) {
+        if (mAccostPop == null) {
+            mAccostPop = new AccostChatPop(getContext(), toUserId, toUsername, toUserAvatar);
+        } else {
+            mAccostPop.setChatUserInfo(toUserId, toUsername, toUserAvatar);
+        }
+        mAccostPop.setPopupGravityMode(BasePopupWindow.GravityMode.ALIGN_TO_ANCHOR_SIDE);
+        mAccostPop.showPopupWindow(rootView);
     }
 
     //隐藏动画

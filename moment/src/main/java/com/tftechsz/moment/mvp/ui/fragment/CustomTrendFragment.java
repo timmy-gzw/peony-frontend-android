@@ -49,6 +49,7 @@ import com.tftechsz.moment.mvp.IView.IDynamicView;
 import com.tftechsz.moment.mvp.presenter.DynamicRecommendPresenter;
 import com.tftechsz.moment.mvp.ui.activity.MineTrendActivity;
 import com.tftechsz.moment.mvp.ui.activity.TrendDetailActivity;
+import com.tftechsz.common.event.AccostSuccessEvent;
 import com.tftechsz.moment.other.CommentEvent;
 import com.tftechsz.moment.other.CommentPraiseAccostEvent;
 
@@ -626,6 +627,7 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
         if (null == data || !CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
             CircleBean item = mAdapter.getItem(position);
             //RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_ACCOST_SUCCESS, data.gift.animation));
+            RxBus.getDefault().post(new AccostSuccessEvent(3, item.getUser_id() + "", item.getNickname(), item.getIcon()));
             if (item != null) {
                 RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PIC_ACCOST_SUCCESS, item.getUser_id()));
                 RxBus.getDefault().post(new CommentPraiseAccostEvent(item.getUser_id()));
