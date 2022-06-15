@@ -74,6 +74,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresenter> implements View.OnClickListener, ITrendView {
     private final int REQUEST_CODE = 10000;
+    private TextView tvPublish;
     private EditText mEditText;
     private RecyclerView mRecyclerViewGrallyPic;
     private final Object lock = new Object();
@@ -123,7 +124,8 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
         mFlVideo = findViewById(R.id.fl_video);
         mIvVideo = findViewById(R.id.iv_video);
         ImageView ivVideoDel = findViewById(R.id.iv_video_del);
-        findViewById(R.id.pubish).setOnClickListener(this);
+        tvPublish = findViewById(R.id.pubish);
+        tvPublish.setOnClickListener(this);
         mFlVideo.setOnClickListener(this);
         ivVideoDel.setOnClickListener(this);
         mRecyclerViewGrallyPic = findViewById(R.id.rv_report_pic);
@@ -146,7 +148,6 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
                 ));
     }
 
-
     @Override
     protected void initData() {
         setData(getIntent().getParcelableArrayListExtra(Interfaces.EXTRA_TREND));
@@ -166,6 +167,7 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
             adapter.notifyDataSetChanged();
             isSelVideo = false;
         }
+        checkPublishButtonEnable();
     }
 
     private final GridImageAdapter.onAddPicClickListener onAddPicClickListener = () -> {
@@ -221,6 +223,7 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
             @Override
             public void onItemDel(int pos) {
                 selectList.remove(pos);
+                checkPublishButtonEnable();
             }
         });
 
@@ -344,6 +347,7 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
                             int adapterPosition = viewHolder.getAdapterPosition();
                             adapter.delete(adapterPosition);
                             selectList.remove(adapterPosition);
+                            checkPublishButtonEnable();
                             resetState();
                             return;
                         }
@@ -421,6 +425,7 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
             //FileUtils.delete(videoPath);
             videoPath = "";
             selectList.clear();
+            checkPublishButtonEnable();
             mFlVideo.setVisibility(View.GONE);
             mRecyclerViewGrallyPic.setVisibility(View.VISIBLE);
         }
@@ -568,8 +573,14 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
         }
     }
 
+    private void checkPublishButtonEnable() {
+//        String content = mEditText.getText().toString().trim();
+        tvPublish.setEnabled(/*!TextUtils.isEmpty(content) || */selectList.size() > 0);
+    }
+
     private void setVideo(LocalMedia localMedia) {
         selectList.add(localMedia);
+        checkPublishButtonEnable();
         videoPath = !TextUtils.isEmpty(localMedia.getRealPath()) ? localMedia.getRealPath() : localMedia.getPath();
         int[] videoWidthHeight = Utils.getVideoWidthHeight(videoPath);
         mFlVideo.setVisibility(View.VISIBLE);
@@ -663,5 +674,6 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
         } else {
             selectList.add(localMedia);
         }
+        checkPublishButtonEnable();
     }
 }

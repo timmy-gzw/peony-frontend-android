@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:clipChildren="false"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:clipChildren="false"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -33,7 +33,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:singleLine="true"
-            android:text="添加描述"
+            android:text="@string/publish_moment"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold" />
@@ -45,13 +45,14 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp_20"
-            android:background="@drawable/bg_orange_enable"
+            android:background="@drawable/sel_primary_r_25_enable"
+            android:enabled="false"
             android:paddingStart="@dimen/dp_15"
             android:paddingTop="@dimen/dp_5"
             android:paddingEnd="@dimen/dp_15"
             android:paddingBottom="@dimen/dp_5"
-            android:text="发布"
-            android:textColor="#79650A"
+            android:text="@string/publish"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_14"
             android:textStyle="bold" />
 
@@ -65,7 +66,7 @@
         android:layout_marginBottom="@dimen/dp_10"
         android:background="@null"
         android:gravity="start"
-        android:hint="写点什么呢？"
+        android:hint="@string/write_something"
         android:maxLength="1000"
         android:maxLines="8"
         android:minHeight="@dimen/dp_120"
@@ -74,7 +75,8 @@
         android:paddingEnd="@dimen/dp_20"
         android:paddingBottom="@dimen/dp_15"
         android:textColor="@color/color_normal"
-        android:textColorHint="@color/color_cc"
+        android:textColorHint="@color/color_light_font"
+        android:textSize="@dimen/sp_17"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -107,8 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_7"
-            android:scaleType="centerCrop"
-        />
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -125,22 +126,21 @@
             android:background="@mipmap/ic_del" />
     </FrameLayout>
 
-
     <TextView
         android:id="@+id/tv_delete_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/red"
-        android:drawableTop="@drawable/picture_icon_delete"
+        android:background="@color/colorPrimary"
         android:drawablePadding="5dp"
         android:gravity="center"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:text="拖动到此处删除"
+        android:text="@string/drag_to_delete"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:visibility="gone"
+        app:drawableTopCompat="@drawable/picture_icon_delete"
         tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -150,8 +150,8 @@
         android:layout_below="@id/tv_number"
         android:layout_marginStart="@dimen/dp_15"
         android:layout_marginTop="10dp"
-        android:overScrollMode="never"
         android:layout_marginEnd="@dimen/dp_15"
+        android:overScrollMode="never"
         android:visibility="visible" />
 
 </RelativeLayout>

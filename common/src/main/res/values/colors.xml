@@ -115,5 +115,6 @@
     <color name="c_1d1d1d">#1D1D1D</color>
     <color name="c_f4d9a4">#F4D9A4</color>
     <color name="c_fe4f6b">#FE4D6B</color>
+    <color name="c_40fe4f6b">#66FE4D6B</color>
     <color name="c_f78765">#F78765</color>
 </resources>
