@@ -1,5 +1,6 @@
 package com.tftechsz.moment.mvp.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,17 +17,19 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.moment.R;
 import com.tftechsz.moment.mvp.ui.fragment.CustomTrendFragment;
-import com.tftechsz.moment.widget.SendTrendPop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +48,6 @@ public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFra
     private CustomPopWindow mTipsPopWindow;
     private LinearLayoutManager mLinearLayoutManager;
     private CustomTrendFragment customTrendFragment;
-    private SendTrendPop mPop;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -115,12 +117,24 @@ public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFra
             finish();
         } else if (id == R.id.iv_publish || id == R.id.tv_send) {
             if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
-            if (mPop == null) {
-                mPop = new SendTrendPop(mActivity, true);
-            }
-            mPop.showPopupWindow(mIvPublish);
-            //ChoosePicUtils.picMultiple(this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+            showMediaSelector();
         }
+    }
+
+    /**
+     * 打开图片/视频选择器
+     */
+    private void showMediaSelector() {
+        mCompositeDisposable.add(new RxPermissions(this)
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+                    } else {
+                        Utils.toast("请允许摄像头权限");
+                    }
+                })
+        );
     }
 
     private void setData() {

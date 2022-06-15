@@ -1,7 +1,7 @@
 package com.tftechsz.moment.mvp.ui.fragment;
 
+import android.Manifest;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -18,21 +19,24 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.SlidingScaleTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
+import com.luck.picture.lib.config.PictureConfig;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.adapter.FragmentVpAdapter;
 import com.tftechsz.common.base.BaseMvpFragment;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.bus.RxBus;
+import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.event.AccostSuccessEvent;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.AccostChatPop;
 import com.tftechsz.moment.R;
 import com.tftechsz.moment.mvp.ui.activity.TrendNoticeActivity;
-import com.tftechsz.moment.widget.SendTrendPop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +53,6 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
     private View rootView;
     private ImageView mIvPublish;
     private boolean isFragmentVisible;
-    private SendTrendPop mPop;
     private AccostChatPop mAccostPop;
     @Autowired
     UserProviderService service;
@@ -193,17 +196,27 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
         if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
         int id = v.getId();
         if (id == R.id.iv_publish) {   // 发布
-            if (mPop == null) {
-                mPop = new SendTrendPop(mActivity, false);
-            }
-            mPop.setPopupGravity(Gravity.TOP);
-            mPop.showPopupWindow(mIvPublish);
-            //ChoosePicUtils.picMultiple(getActivity(), mMaxSize, PictureConfig.CHOOSE_REQUEST, null, true);
+            showMediaSelector();
         } else if (id == R.id.iv_search) {//动态通知
             TrendNoticeActivity.startActivity(mContext);
         }
     }
 
+    /**
+     * 打开图片/视频选择器
+     */
+    private void showMediaSelector() {
+        mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+                    } else {
+                        Utils.toast("请允许摄像头权限");
+                    }
+                })
+        );
+    }
 
     @Override
     public void showImage() {

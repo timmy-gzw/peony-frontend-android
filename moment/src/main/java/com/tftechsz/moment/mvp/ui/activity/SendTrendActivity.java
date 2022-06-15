@@ -160,6 +160,8 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
         selectList.clear();
         if (images.size() == 1 && Utils.fileIsVideo(images.get(0).getMimeType())) {
             //ARouterUtils.toVideoTrimmerActivity(mActivity, images.get(0).getRealPath());
+            adapter.setList(selectList);
+            adapter.notifyDataSetChanged();
             setVideo(images.get(0));
         } else {
             selectList.addAll(images);
@@ -174,16 +176,14 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             // 先判断有没有权限
             if (Environment.isExternalStorageManager()) {
-                ChoosePicUtils.picMultiple(SendTrendActivity.this, Interfaces.PIC_SELCTED_NUM,
-                        PictureConfig.CHOOSE_REQUEST, selectList, SPUtils.getInstance().getBoolean(Interfaces.SP_SEL_VIDEO));
+                ChoosePicUtils.picMultiple(SendTrendActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, selectList, true);
             } else {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 intent.setData(Uri.parse("package:" + getPackageName()));
                 startActivityForResult(intent, REQUEST_CODE);
             }
         } else {
-            ChoosePicUtils.picMultiple(SendTrendActivity.this, Interfaces.PIC_SELCTED_NUM,
-                    PictureConfig.CHOOSE_REQUEST, selectList, SPUtils.getInstance().getBoolean(Interfaces.SP_SEL_VIDEO));
+            ChoosePicUtils.picMultiple(SendTrendActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, selectList, true);
         }
     };
 

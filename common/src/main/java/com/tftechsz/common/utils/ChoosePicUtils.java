@@ -95,13 +95,13 @@ public class ChoosePicUtils {
     public static void picMultiple(Activity activity, int size, int requestCode, List<LocalMedia> selectList
             , boolean isSelVideo) {
         PictureSelector.create(activity)
-                .openGallery(isSelVideo ? /*PictureMimeType.ofImage() &*/ PictureMimeType.ofVideo() : PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频
+                .openGallery(isSelVideo ? /*PictureMimeType.ofImage() &*/ PictureMimeType.ofAll() : PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频
                 .imageEngine(GlideEngine.createGlideEngine()) // 外部传入图片加载引擎，必传项
                 //.isWeChatStyle(true)//开启R.style.picture_WeChat_style样式
                 // .ofVideo()、音频.ofAudio()
 //                    .theme(themeId)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
                 .imageSpanCount(4)// 每行显示个数
-                .selectionMode(isSelVideo ? PictureConfig.SINGLE : PictureConfig.MULTIPLE)// 多选 or 单选
+                .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
                 .isPreviewImage(true)// 是否可预览图片
                 .isPreviewVideo(isSelVideo)// 是否可预览视频
                 //.isAndroidQTransform(true)//Android Q版本下是否需要拷贝文件至应用沙盒内
