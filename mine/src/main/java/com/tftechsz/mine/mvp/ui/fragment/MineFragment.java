@@ -160,6 +160,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mRvMineBot.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBotAdapter = new BaseItemAdapter();
         mRvMineBot.setAdapter(mBotAdapter);
+        mRvMineBot.setNestedScrollingEnabled(false);
         mBotAdapter.setList(null);
         if (((SimpleItemAnimator) mRvMineBot.getItemAnimator()) != null)
             ((SimpleItemAnimator) mRvMineBot.getItemAnimator()).setSupportsChangeAnimations(false);

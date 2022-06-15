@@ -7,7 +7,7 @@
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="@color/white"
+    android:background="#F4F4F6"
     android:orientation="vertical">
 
     <View
@@ -34,6 +34,7 @@
             android:orientation="vertical"
             android:layout_marginTop="@dimen/dp_54"
             android:paddingTop="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_60"
             app:layout_constraintLeft_toLeftOf="parent">
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -448,6 +449,7 @@
                 app:layout_constraintTop_toBottomOf="@id/ll_jifen" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <ImageView

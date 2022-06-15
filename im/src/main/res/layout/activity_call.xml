@@ -8,7 +8,9 @@
     <com.netease.lava.nertc.sdk.video.NERtcVideoView
         android:id="@+id/remote_video_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </com.netease.lava.nertc.sdk.video.NERtcVideoView>
 
     <com.netease.lava.nertc.sdk.video.NERtcVideoView
         android:id="@+id/video_view"
@@ -22,96 +24,6 @@
         android:layout_alignParentEnd="true"
         android:background="@color/black"
         android:visibility="gone" />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_40"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:background="@drawable/bg_half_tran20_radius20"
-        android:padding="@dimen/dp_3">
-
-        <com.tftechsz.common.widget.CircleImageView
-            android:id="@+id/ci_small_avatar"
-            android:layout_width="@dimen/dp_36"
-            android:layout_height="@dimen/dp_36"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/tv_video_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_6"
-            android:layout_marginEnd="@dimen/dp_26"
-            android:text="123"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_15"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ci_small_avatar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/tv_call_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cl_video"
-        android:layout_marginStart="@dimen/dp_20"
-        android:text="等待对方接听……"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_14" />
-
-
-    <LinearLayout
-        android:id="@+id/ll_video_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cl_video"
-        android:layout_marginStart="@dimen/dp_10"
-        android:background="@drawable/bg_half_tran20_radius20"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_8"
-        android:paddingEnd="@dimen/dp_18"
-        android:paddingBottom="@dimen/dp_8"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/dp_3"
-            android:text="视频时长"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_12"
-            app:drawableStartCompat="@mipmap/chat_ic_small_video" />
-
-        <Chronometer
-            android:id="@+id/video_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="@dimen/dp_3"
-            android:gravity="center"
-            android:shadowColor="@color/white"
-            android:shadowDy="1"
-            android:shadowRadius="1"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_12"
-            android:textStyle="normal" />
-
-
-    </LinearLayout>
 
 
     <TextView
@@ -134,18 +46,6 @@
         app:drawableStartCompat="@mipmap/chat_ic_small_close_face" />
 
 
-    <TextView
-        android:id="@+id/tv_call_tip2"
-        android:layout_width="@dimen/dp_200"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_call_comment"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_6"
-        android:background="@drawable/bg_half_tran20"
-        android:padding="@dimen/dp_10"
-        android:text="@string/chat_call_tip"
-        android:textColor="@color/color_99_ff"
-        android:textSize="@dimen/sp_10" />
 
 
     <FrameLayout
@@ -178,70 +78,93 @@
         android:clipToPadding="false"
         android:visibility="gone">
 
-        <RelativeLayout
-            android:id="@+id/cv_head"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_white_radius15"
-            app:elevation="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_voice_small_avatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/dp_2"
-                android:scaleType="centerCrop" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_voice_name"
+        <LinearLayout
+            android:id="@+id/ll_video_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_18"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_head"
-
-            />
-
-        <TextView
-            android:id="@+id/tv_voice_wait"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/dp_55"
-            android:background="@drawable/bg_half_tran20_radius20"
-            android:drawablePadding="@dimen/dp_4"
-            android:paddingStart="@dimen/dp_10"
-            android:paddingTop="@dimen/dp_6"
-            android:paddingEnd="@dimen/dp_10"
-            android:paddingBottom="@dimen/dp_6"
-            android:text="等待对方接听..."
+            android:layout_marginBottom="@dimen/dp_30"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/iv_cancel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <Chronometer
+                android:id="@+id/video_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/dp_3"
+                android:gravity="center"
+                android:shadowColor="@color/white"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_audio_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/iv_cancel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <Chronometer
+                android:id="@+id/audio_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/dp_3"
+                android:gravity="center"
+                android:shadowColor="@color/color_99_ff"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_call_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/iv_cancel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:text="连接中……"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_14"
-            android:textStyle="bold"
-            app:drawableStartCompat="@mipmap/chat_ic_call"
+            android:textSize="@dimen/sp_14" />
+
+
+        <TextView
+            android:id="@+id/iv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dp_60"
+            android:drawablePadding="@dimen/dp_17"
+            android:gravity="center"
+            android:text="挂断"
+            android:textColor="@color/color_99_ff"
+            android:textSize="@dimen/sp_15"
+            app:drawableTopCompat="@mipmap/call_reject"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <ImageView
-        android:id="@+id/iv_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/dp_44"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:src="@mipmap/ic_close_pop" />
 
 
     <RelativeLayout
@@ -300,38 +223,6 @@
             android:textColor="@color/color_99_ff"
             android:textSize="@dimen/sp_12"
             android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/ll_audio_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_call_user_city"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/tv_call_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="通话时长"
-                android:textColor="@color/color_99_ff"
-                android:textSize="@dimen/sp_12" />
-
-            <Chronometer
-                android:id="@+id/audio_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/dp_3"
-                android:gravity="center"
-                android:shadowColor="@color/color_99_ff"
-                android:shadowDy="1"
-                android:shadowRadius="1"
-                android:textColor="@color/color_99_ff"
-                android:textSize="@dimen/sp_12"
-                android:textStyle="normal" />
-        </LinearLayout>
 
     </RelativeLayout>
 
@@ -396,54 +287,63 @@
 
     <LinearLayout
         android:id="@+id/lly_dialog_operation"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_22"
+        android:layout_marginBottom="@dimen/dp_60"
         android:orientation="horizontal"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/iv_face_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:src="@mipmap/chat_ic_face_off" />
+        android:visibility="invisible">
 
 
-        <ImageView
-            android:id="@+id/iv_switch_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:src="@mipmap/chat_ic_capture_switch" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/iv_mute_control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:drawablePadding="@dimen/dp_17"
+                android:text="静音"
+                android:textColor="@color/color_99_ff"
+                android:textSize="@dimen/sp_15"
+                app:drawableTopCompat="@mipmap/chat_ic_mute_off"
+                android:layout_marginStart="@dimen/dp_34"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
 
-        <ImageView
-            android:id="@+id/iv_face_unity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:src="@mipmap/chat_ic_call_face_unity" />
+            <TextView
+                android:id="@+id/iv_speaker_control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:drawablePadding="@dimen/dp_17"
+                android:text="免提"
+                android:textColor="@color/color_99_ff"
+                android:textSize="@dimen/sp_15"
+                app:drawableTopCompat="@mipmap/chat_ic_speaker_off"
+                android:layout_marginEnd="@dimen/dp_34"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/iv_speaker_control"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:src="@mipmap/chat_ic_speaker_off" />
-
-        <ImageView
-            android:id="@+id/iv_gift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:src="@mipmap/chat_ic_call_gift" />
 
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_gift"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/dp_260"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:src="@mipmap/chat_ic_call_gift" />
 
     <TextView
         android:id="@+id/tv_face_off_tip1"
@@ -555,7 +455,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_80"
         android:background="@drawable/bg_recharge_radius16"
         android:gravity="center"
         android:paddingVertical="@dimen/dp_5"
@@ -574,7 +474,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_80"
         android:background="@drawable/bg_recharge_radius16"
         android:gravity="center"
         android:paddingVertical="@dimen/dp_5"
@@ -589,46 +489,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_55"
+        android:layout_marginBottom="@dimen/dp_60"
         android:gravity="center"
         android:orientation="horizontal"
         android:visibility="invisible">
 
-        <TextView
-            android:id="@+id/tv_camera_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginEnd="@dimen/dp_46"
-            android:drawablePadding="@dimen/dp_17"
-            android:text="切换摄像头"
-            android:textColor="@color/color_99_ff"
-            android:textSize="@dimen/sp_15"
-            app:drawableTopCompat="@mipmap/chat_ic_capture_switch" />
 
-        <TextView
-            android:id="@+id/tv_call_face_unity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:drawablePadding="@dimen/dp_17"
-            android:gravity="center"
-            android:text="美颜"
-            android:textColor="@color/color_99_ff"
-            android:textSize="@dimen/sp_15"
-            app:drawableTopCompat="@mipmap/chat_ic_call_face_unity" />
 
-        <TextView
-            android:id="@+id/tv_face_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="@dimen/dp_46"
-            android:drawablePadding="@dimen/dp_17"
-            android:text="不露脸视频"
-            android:textColor="@color/color_99_ff"
-            android:textSize="@dimen/sp_15"
-            app:drawableTopCompat="@mipmap/chat_ic_face_off" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_face_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:drawablePadding="@dimen/dp_17"
+                android:text="不露脸视频"
+                android:textColor="@color/color_99_ff"
+                android:textSize="@dimen/sp_15"
+                app:drawableTopCompat="@mipmap/chat_ic_face_off"
+                android:layout_marginStart="@dimen/dp_34"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_call_face_unity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:drawablePadding="@dimen/dp_17"
+                android:text="美颜"
+                android:textColor="@color/color_99_ff"
+                android:textSize="@dimen/sp_15"
+                app:drawableTopCompat="@mipmap/chat_ic_call_face_unity"
+                android:layout_marginStart="@dimen/dp_34"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_camera_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:drawablePadding="@dimen/dp_17"
+                android:text="切换摄像头"
+                android:textColor="@color/color_99_ff"
+                android:textSize="@dimen/sp_15"
+                app:drawableTopCompat="@mipmap/chat_ic_capture_switch"
+                android:layout_marginEnd="@dimen/dp_34"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </LinearLayout>
 
@@ -639,21 +553,6 @@
         android:layout_height="@dimen/dp_180"
         android:layout_above="@+id/tv_call_tip"
         android:layout_marginStart="@dimen/dp_20"
-        android:visibility="gone" />
-
-
-    <TextView
-        android:id="@+id/tv_call_tip"
-        android:layout_width="@dimen/dp_200"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_90"
-        android:background="@drawable/bg_half_tran20"
-        android:padding="@dimen/dp_10"
-        android:text="@string/chat_call_tip"
-        android:textColor="@color/color_99_ff"
-        android:textSize="@dimen/sp_10"
         android:visibility="gone" />
 
 
@@ -769,5 +668,40 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_video"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:padding="@dimen/dp_3">
+
+        <ImageView
+            android:id="@+id/iv_small_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/call_small_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_report_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/call_report_user"
+            android:gravity="center"
+            android:text="举报"
+            android:textColor="#ffffffff"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
