@@ -45,7 +45,7 @@
     <ImageView
         android:id="@+id/img_vip_dii"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_14"
         android:layout_marginTop="@dimen/dp_3"
         android:src="@mipmap/vip_icon_bg"
         android:visibility="gone"
@@ -57,13 +57,14 @@
     <TextView
         android:id="@+id/iv_sex"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_14"
         android:layout_marginStart="@dimen/dp_6"
         android:gravity="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/img_vip_dii"
         app:layout_constraintStart_toEndOf="@id/img_vip_dii"
         app:layout_constraintTop_toTopOf="@id/img_vip_dii"
+        app:layout_goneMarginStart="0dp"
         tools:background="@drawable/bg_girl"
         tools:drawablePadding="@dimen/dp_2"
         tools:drawableStart="@drawable/ic_girl"
@@ -75,13 +76,13 @@
     <ImageView
         android:id="@+id/iv_real"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_14"
         android:layout_marginStart="@dimen/dp_6"
         android:src="@mipmap/peony_home_xczr_icon"
         app:layout_constraintBottom_toBottomOf="@id/img_vip_dii"
         app:layout_constraintStart_toEndOf="@id/iv_sex"
-        app:layout_constraintTop_toTopOf="@id/img_vip_dii" />
-
+        app:layout_constraintTop_toTopOf="@id/img_vip_dii"
+        app:layout_goneMarginStart="0dp" />
 
     <ImageView
         android:id="@+id/iv_auth"
@@ -92,8 +93,7 @@
         android:src="@mipmap/ic_authentication"
         android:visibility="gone"
         app:layout_constraintLeft_toRightOf="@id/iv_real"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--文本-->
     <com.tftechsz.common.widget.ShowAllTextView
@@ -164,6 +164,7 @@
         android:layout_marginStart="@dimen/dp_5"
         android:textColor="@color/color_cccccc"
         android:textSize="@dimen/text_size_12"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/tv_time"
         app:layout_constraintTop_toTopOf="@id/tv_time"
         tools:text="12" />
@@ -176,6 +177,7 @@
         android:layout_marginStart="@dimen/dp_5"
         android:textColor="@color/color_cccccc"
         android:textSize="@dimen/text_size_12"
+        android:visibility="gone"
         app:layout_constraintLeft_toRightOf="@id/tv_look_times"
         app:layout_constraintTop_toTopOf="@id/tv_time"
         tools:text="深圳市" />
@@ -199,6 +201,7 @@
         android:layout_width="@dimen/dp_30"
         android:layout_height="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginEnd="@dimen/dp_3_5"
         app:anim_scale_factor="2"
         app:circle_end_color="@color/colorAccent"
         app:circle_start_color="@color/colorPrimary"
@@ -207,8 +210,9 @@
         app:icon_size="@dimen/dp_19"
         app:icon_type="Star"
         app:is_enabled="true"
-        app:layout_constraintStart_toStartOf="@id/fragme"
-        app:layout_constraintTop_toBottomOf="@id/tv_time"
+        app:layout_constraintBottom_toBottomOf="@id/tv_time"
+        app:layout_constraintEnd_toStartOf="@id/tv_like_count"
+        app:layout_constraintTop_toTopOf="@id/tv_time"
         app:like_drawable="@mipmap/peony_dt_dz01_icon"
         app:liked="false"
         app:unlike_drawable="@mipmap/peony_dt_dz02_icon" />
@@ -218,12 +222,13 @@
         android:id="@+id/tv_like_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_40"
         android:gravity="center"
         android:textColor="@color/color_light_font"
         android:textSize="@dimen/sp_12"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/btn_like"
-        app:layout_constraintLeft_toRightOf="@id/btn_like"
+        app:layout_constraintEnd_toStartOf="@id/iv_comment"
         app:layout_constraintTop_toTopOf="@id/btn_like"
         app:ticker_animationDuration="0"
         app:ticker_defaultCharacterList="number"
@@ -234,11 +239,12 @@
         android:id="@+id/iv_comment"
         android:layout_width="@dimen/dp_18"
         android:layout_height="@dimen/dp_18"
-        android:layout_marginStart="@dimen/dp_35"
+        android:layout_marginEnd="@dimen/dp_3_5"
         android:src="@mipmap/ic_comment"
         app:layout_constraintBottom_toBottomOf="@id/btn_like"
-        app:layout_constraintLeft_toRightOf="@id/tv_like_count"
-        app:layout_constraintTop_toTopOf="@id/btn_like" />
+        app:layout_constraintEnd_toStartOf="@id/tv_discuss_count"
+        app:layout_constraintTop_toTopOf="@id/btn_like"
+        tools:ignore="ContentDescription" />
 
     <!--评论数-->
     <com.robinhood.ticker.TickerView
@@ -250,9 +256,9 @@
         android:textColor="@color/color_light_font"
         android:textSize="@dimen/sp_12"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@id/btn_like"
-        app:layout_constraintLeft_toRightOf="@id/iv_comment"
-        app:layout_constraintTop_toTopOf="@id/btn_like"
+        app:layout_constraintBottom_toBottomOf="@id/iv_comment"
+        app:layout_constraintEnd_toEndOf="@id/fragme"
+        app:layout_constraintTop_toTopOf="@id/iv_comment"
         app:ticker_animationDuration="0"
         app:ticker_defaultCharacterList="number"
         app:ticker_defaultPreferredScrollingDirection="down"
@@ -274,10 +280,8 @@
         android:id="@+id/rl_accost"
         android:layout_width="@dimen/dp_50"
         android:layout_height="@dimen/dp_50"
-        app:layout_constraintBottom_toBottomOf="@id/btn_like"
         app:layout_constraintEnd_toEndOf="@id/fragme"
-        app:layout_constraintTop_toBottomOf="@id/tv_time"
-        app:layout_constraintTop_toTopOf="@id/btn_like">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_chat"
@@ -286,8 +290,7 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:src="@mipmap/home_ic_chat_up_selector"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            android:visibility="gone" />
 
         <!--搭讪-->
         <ImageView
@@ -295,7 +298,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@mipmap/home_ic_chat_up_normal" />
+            android:src="@mipmap/home_icon_chat_self" />
     </RelativeLayout>
 
     <View
@@ -314,28 +317,25 @@
         android:id="@+id/animation_view"
         android:layout_width="@dimen/dp_50"
         android:layout_height="@dimen/dp_50"
-        android:layout_marginStart="@dimen/dp_20"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/btn_like"
-        app:layout_constraintEnd_toEndOf="@id/fragme"
-        app:layout_constraintTop_toBottomOf="@id/tv_time"
-        app:layout_constraintTop_toTopOf="@id/btn_like"
+        app:layout_constraintBottom_toBottomOf="@id/rl_accost"
+        app:layout_constraintEnd_toEndOf="@id/rl_accost"
+        app:layout_constraintStart_toStartOf="@id/rl_accost"
+        app:layout_constraintTop_toTopOf="@id/rl_accost"
         app:lottie_autoPlay="false"
         app:lottie_fileName="hit_up_animation.json"
         app:lottie_imageAssetsFolder="gift/"
         app:lottie_loop="false" />
 
-
     <com.airbnb.lottie.LottieAnimationViewNew
         android:id="@+id/animation_view_btn"
         android:layout_width="@dimen/dp_50"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginBottom="@dimen/dp_20"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/btn_like"
-        app:layout_constraintEnd_toEndOf="@id/fragme"
-        app:layout_constraintTop_toBottomOf="@id/tv_time"
-        app:layout_constraintTop_toTopOf="@id/btn_like"
+        app:layout_constraintBottom_toBottomOf="@id/rl_accost"
+        app:layout_constraintEnd_toEndOf="@id/rl_accost"
+        app:layout_constraintStart_toStartOf="@id/rl_accost"
+        app:layout_constraintTop_toTopOf="@id/rl_accost"
         app:lottie_autoPlay="false"
         app:lottie_fileName="aixin.zip"
         app:lottie_imageAssetsFolder="gift/"

@@ -2,8 +2,6 @@ package com.tftechsz.moment.adapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.text.TextUtils;
@@ -13,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieAnimationViewNew;
@@ -44,11 +47,6 @@ import net.mikaelzero.mojito.impl.DefaultPercentProgress;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 
 /**
  * 动态适配器
@@ -76,16 +74,16 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
 
         holder.tvTime.setText(item.getCreated_at());
 //        helper.setText(R.id.tv_look_times, item.getProvince());  //浏览次数iv_accost
-        holder.ivAccost.setVisibility(item.isAccost() ? View.GONE : View.VISIBLE);
-        holder.ivAccost.setImageResource(CommonUtil.isBtnTextTrend(service, item.getSex() == 1) ? R.mipmap.img_0_mainnew2 : R.mipmap.home_ic_chat_up_normal);
-        holder.ivChat.setVisibility(item.isAccost() ? View.VISIBLE : View.GONE);
-        holder.ivChat.setImageResource(CommonUtil.isBtnTextTrend(service, item.getSex() == 1) ? R.mipmap.peony_xxym_sx_icon_new : R.mipmap.home_ic_chat_up_selector);
-        holder.ivAccost.clearAnimation();
-        holder.ivChat.clearAnimation();
+//        holder.ivAccost.setVisibility(item.isAccost() ? View.GONE : View.VISIBLE);
+//        holder.ivAccost.setImageResource(CommonUtil.isBtnTextTrend(service, item.getSex() == 1) ? R.mipmap.img_0_mainnew2 : R.mipmap.home_ic_chat_up_normal);
+//        holder.ivChat.setVisibility(item.isAccost() ? View.VISIBLE : View.GONE);
+//        holder.ivChat.setImageResource(CommonUtil.isBtnTextTrend(service, item.getSex() == 1) ? R.mipmap.peony_xxym_sx_icon_new : R.mipmap.home_ic_chat_up_selector);
+//        holder.ivAccost.clearAnimation();
+//        holder.ivChat.clearAnimation();
         holder.getView(R.id.animation_view).clearAnimation();
         holder.getView(R.id.animation_view).setVisibility(View.GONE);
-        holder.ivAccost.setVisibility(item.isAccost() ? View.GONE : View.VISIBLE);
-        holder.ivChat.setVisibility(item.isAccost() ? View.VISIBLE : View.GONE);
+//        holder.ivAccost.setVisibility(item.isAccost() ? View.GONE : View.VISIBLE);
+//        holder.ivChat.setVisibility(item.isAccost() ? View.VISIBLE : View.GONE);
         //设置文本内容
         String content = item.getContent().trim();
         if (!TextUtils.isEmpty(content)) {
@@ -150,12 +148,12 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
 
             holder.setVisible(R.id.tv_del, service.getUserId() == item.getUser_id());   //自己时可见
             holder.setVisible(R.id.rl_accost, service.getUserId() != item.getUser_id());   //自己时可见
-            if (!TextUtils.isEmpty(item.getCity())) {
-                holder.tvAddress.setText(item.getCity());  //城市
-                holder.tvAddress.setVisibility(View.VISIBLE);
-            } else {
-                holder.tvAddress.setVisibility(View.GONE);
-            }
+//            if (!TextUtils.isEmpty(item.getCity())) {
+//                holder.tvAddress.setText(item.getCity());  //城市
+//                holder.tvAddress.setVisibility(View.VISIBLE);
+//            } else {
+//                holder.tvAddress.setVisibility(View.GONE);
+//            }
         }
     }
 
@@ -196,38 +194,38 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
     }
 
     public void startAnimation(int position) { //搭讪按钮动画  头像特效   播放声音
-        View rl_accost = getViewByPosition(position, R.id.iv_accost);
-        View iv_accost1 = getViewByPosition(position, R.id.iv_chat);
+//        View rl_accost = getViewByPosition(position, R.id.iv_accost);
+//        View iv_accost1 = getViewByPosition(position, R.id.iv_chat);
         LottieAnimationViewNew lottieAnimationView;
         if (CommonUtil.isBtnTextTrend(service, getData().get(position).getSex() == 1)) {
             lottieAnimationView = (LottieAnimationViewNew) getViewByPosition(position, R.id.animation_view_btn);
         } else {
             lottieAnimationView = (LottieAnimationViewNew) getViewByPosition(position, R.id.animation_view);
         }
-        View ivAccost = getViewByPosition(position, R.id.iv_accost);
+//        View ivAccost = getViewByPosition(position, R.id.iv_accost);
         if (lottieAnimationView != null) {
             ChatSoundPlayer.instance().play(ChatSoundPlayer.RingerTypeEnum.ACCOST);
             lottieAnimationView.setVisibility(View.VISIBLE);
-            if (ivAccost != null)
-                ivAccost.setVisibility(View.INVISIBLE);
-            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    lottieAnimationView.setVisibility(View.GONE);
-                    if (rl_accost != null) {
-                        rl_accost.setVisibility(View.GONE);
-                    }
-                    if (iv_accost1 != null) {
-                        iv_accost1.setVisibility(View.VISIBLE);
-                        ObjectAnimator oa3 = ObjectAnimator.ofFloat(iv_accost1, "scaleX", 0.0f, 1.0f);
-                        ObjectAnimator oa4 = ObjectAnimator.ofFloat(iv_accost1, "scaleY", 0.0f, 1.0f);
-                        AnimatorSet as2 = new AnimatorSet();
-                        as2.play(oa3).with(oa4);
-                        as2.setDuration(300);
-                        as2.start();
-                    }
-                }
-            });
+//            if (ivAccost != null)
+//                ivAccost.setVisibility(View.INVISIBLE);
+//            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    lottieAnimationView.setVisibility(View.GONE);
+//                    if (rl_accost != null) {
+//                        rl_accost.setVisibility(View.GONE);
+//                    }
+//                    if (iv_accost1 != null) {
+//                        iv_accost1.setVisibility(View.VISIBLE);
+//                        ObjectAnimator oa3 = ObjectAnimator.ofFloat(iv_accost1, "scaleX", 0.0f, 1.0f);
+//                        ObjectAnimator oa4 = ObjectAnimator.ofFloat(iv_accost1, "scaleY", 0.0f, 1.0f);
+//                        AnimatorSet as2 = new AnimatorSet();
+//                        as2.play(oa3).with(oa4);
+//                        as2.setDuration(300);
+//                        as2.start();
+//                    }
+//                }
+//            });
             lottieAnimationView.playAnimation();
         }
 
@@ -326,8 +324,8 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
     public class TendHolder extends BaseViewHolder {
         public int mPosition;
         public ConstraintLayout constraintLayout;
-        public ImageView mThumb, ivAccost, ivChat /*,videoBg*/;
-        public TextView tvName, tvTime, tvSex, tvContent, tvAddress;
+        public ImageView mThumb /*, ivAccost, ivChat,videoBg*/;
+        public TextView tvName, tvTime, tvSex, tvContent/*, tvAddress*/;
         public TickerView tvLikeCount, tvDiscussCount;
         public PrepareView mPrepareView;
         public FrameLayout mPlayerContainer;
@@ -347,12 +345,12 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             tvSex = view.findViewById(R.id.iv_sex);
             mPlayerContainer = view.findViewById(R.id.player_container);
             btnLike = view.findViewById(R.id.btn_like);
-            ivAccost = view.findViewById(R.id.iv_accost);
-            ivChat = view.findViewById(R.id.iv_chat);//私信
+//            ivAccost = view.findViewById(R.id.iv_accost);
+//            ivChat = view.findViewById(R.id.iv_chat);//私信
             tvLikeCount = view.findViewById(R.id.tv_like_count); //点赞数
             tvDiscussCount = view.findViewById(R.id.tv_discuss_count);//评论数
             tvContent = view.findViewById(R.id.tv_content);
-            tvAddress = view.findViewById(R.id.tv_address);
+//            tvAddress = view.findViewById(R.id.tv_address);
             rvTrendImage = view.findViewById(R.id.rv_trend_image);
             mPlayerContainer.setOnClickListener(v -> mOnItemChildClickListener.onItemChildClick(mPosition, mPlayerContainer));
             //通过tag将ViewHolder和itemView绑定
