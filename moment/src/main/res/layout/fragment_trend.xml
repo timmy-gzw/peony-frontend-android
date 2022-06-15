@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_trend_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -20,7 +21,6 @@
         app:tl_indicator_color="#FE4D6B"
         app:tl_indicator_corner_radius="@dimen/dp_2"
         app:tl_indicator_height="@dimen/dp_4"
-        app:tl_textBold="SELECT"
         app:tl_indicator_margin_top="@dimen/dp_10"
         app:tl_indicator_width="@dimen/dp_10"
         app:tl_tab_marginBottom="@dimen/dp_12"
@@ -28,12 +28,12 @@
         app:tl_tab_space_equal="true"
         app:tl_tab_vertical_gravity="Bottom"
         app:tl_tab_width="@dimen/dp_size_56"
+        app:tl_textBold="SELECT"
         app:tl_textSelectColor="@color/color_normal"
         app:tl_textSelectSize="@dimen/sp_18"
         app:tl_textUnSelectColor="@color/color_light_font"
         app:tl_textUnSelectSize="@dimen/sp_18"
         app:tl_underline_gravity="BOTTOM" />
-
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -96,4 +96,5 @@
         android:background="@mipmap/trend_ic_publish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
