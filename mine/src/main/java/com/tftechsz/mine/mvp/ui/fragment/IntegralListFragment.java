@@ -27,6 +27,8 @@ import com.tftechsz.mine.mvp.ui.activity.IntegralShopActivity;
 
 import java.util.List;
 
+import com.tftechsz.mine.mvp.ui.activity.MineIntegralActivity;
+import com.tftechsz.mine.mvp.ui.activity.MineIntegralNewActivity;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -65,19 +67,19 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
     public void setData(List<ShopInfoDto> datas, int page) {
         mPageManager.showContent();
         Disposable disposable = Observable.fromIterable(datas)
-                .filter(shopInfoDto -> {
-                    if (TYPE_INTEGRAL_TO_RMB.equals(mType)) {
-                        return "rmb".equals(shopInfoDto.type);
-                    } else if (TYPE_INTEGRAL_TO_COIN.equals(mType)) {
-                        return "coin".equals(shopInfoDto.type);
-                    }
-                    return false;
-                }).toList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(lists -> {
-                    super.setData(lists, page);
-                });
+            .filter(shopInfoDto -> {
+                if (TYPE_INTEGRAL_TO_RMB.equals(mType)) {
+                    return "rmb".equals(shopInfoDto.type);
+                } else if (TYPE_INTEGRAL_TO_COIN.equals(mType)) {
+                    return "coin".equals(shopInfoDto.type);
+                }
+                return false;
+            }).toList()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(lists -> {
+                super.setData(lists, page);
+            });
         mCompositeDisposable.add(disposable);
     }
 
@@ -91,7 +93,7 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
     public void bingViewHolder(BaseViewHolder helper, ShopInfoDto item, int position) {
         GlideUtils.loadRouteImage(getContext(), helper.getView(R.id.iv_shop), item.image_small);
         helper.setText(R.id.tv_coin, item.cost)
-                .setText(R.id.tv_integral, item.integral);
+            .setText(R.id.tv_integral, item.integral);
     }
 
     @Override
@@ -127,14 +129,16 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
             root.postDelayed(() -> mPageManager.showError(null), 300);
         }
         adapter.setOnItemClickListener((adapter1, view, position) ->
-                checkExChange(position));
+            checkExChange(position));
     }
 
     private void checkExChange(int position) {
         ShopInfoDto item = adapter.getItem(position);
         int type = item.id;
         FragmentActivity activity = getActivity();
-        String integral = activity instanceof IntegralShopActivity ? ((IntegralShopActivity) activity).integral : "";
+        String integral = activity instanceof IntegralShopActivity ? ((IntegralShopActivity) activity).integral :
+            activity instanceof MineIntegralNewActivity ? ((MineIntegralNewActivity) activity).integral :
+            activity instanceof MineIntegralActivity ? ((MineIntegralActivity) activity).integral : "";
         if (service == null)
             service = RetrofitManager.getInstance().createExchApi(MineApiService.class);
         mCompositeDisposable.add(service.checkExchange(type).compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<CheckExchangeDto>>() {
