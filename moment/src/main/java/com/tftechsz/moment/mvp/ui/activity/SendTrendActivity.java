@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,16 +21,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.tftechsz.common.Constants;
-import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
@@ -41,15 +36,11 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.EventBusConstant;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.ChoosePicUtils;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
-import com.tftechsz.common.utils.UploadHelper;
 import com.tftechsz.common.utils.Utils;
-import com.tftechsz.common.videocompressor.VideoCompress;
 import com.tftechsz.common.widget.NumIndicator;
 import com.tftechsz.moment.R;
 import com.tftechsz.moment.adapter.GridImageAdapter;
-import com.tftechsz.moment.entity.req.PublishReq;
 import com.tftechsz.moment.mvp.IView.ITrendView;
 import com.tftechsz.moment.mvp.presenter.TrendPresenter;
 import com.tftechsz.moment.other.DragListener;
@@ -63,12 +54,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -77,10 +65,7 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
     private TextView tvPublish;
     private EditText mEditText;
     private RecyclerView mRecyclerViewGrallyPic;
-    private final Object lock = new Object();
     private List<LocalMedia> selectList = new ArrayList<>();
-    //保存获取到的阿里云oss图片Url
-    private final List<String> uploadServerUrlList = new ArrayList<>();
     private GridImageAdapter adapter;
     private FrameLayout mFlVideo;
     private TextView tvDeleteText;
@@ -143,7 +128,7 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
                                 toastTip("最多上传9张照片");
                                 return;
                             }
-                            p.beforeCheck();
+                            p.beforeCheck(selectList, isSelVideo);
                         }
                 ));
     }
@@ -438,9 +423,6 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
         if (selectList != null && selectList.size() > 0) {
             selectList.clear();
         }
-        if (uploadServerUrlList != null && uploadServerUrlList.size() > 0) {
-            uploadServerUrlList.clear();
-        }
         EventBus.getDefault().unregister(this);
     }
 
@@ -448,98 +430,9 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void event(String event) {
         if (event != null && !event.equals("") && event.equals(EventBusConstant.UPLOADPUBLISHDATA)) {
-//            EventBus.getDefault().post(EventBusConstant.PUBLISHEDAFTERCLEARDATA);
-            PublishReq mPublishReq = new PublishReq();
-            mPublishReq.setContent(mEditText.getEditableText().toString());
-            //BaseURL    https://peony-blob.oss-cn-shenzhen.aliyuncs.com
-            //拼接后变成  https://peony-user.oss-cn-shenzhen.aliyuncs.com/upload/images/watch1-1140x713.png
-            // https://peony-user.oss-cn-shenzhen.aliyuncs.com/upload/images/af901004a52bdc367a54c19d2f3c17811de63002f8e07276ed13ab8e0ce601b4.0.JPG
-            JSONArray medias = new JSONArray();
-            for (String url : uploadServerUrlList) {
-                medias.put(url);
-            }
-            mPublishReq.setMedia(medias.toString());
-            mPublishReq.setType(isSelVideo ? "1" : "3");//图片类型是3
-            if (isSelVideo) {
-                ArrayList<Integer> size = new ArrayList<>();
-                int[] videoWidthHeight = Utils.getVideoWidthHeight(selectList.get(0).getRealPath());
-                size.add(videoWidthHeight[0]);
-                size.add(videoWidthHeight[1]);
-                mPublishReq.setVideoSize(size);
-            }
-            uploadToBendServer(mPublishReq, uploadServerUrlList);
+            p.publish(mEditText.getEditableText().toString(), selectList, isSelVideo);
         }
     }
-
-    public void publish(List<LocalMedia> list) {
-        final LinkedList<Runnable> taskList = new LinkedList<>();
-        final Handler handler = new Handler(Looper.myLooper());
-
-        class Task implements Runnable {
-            final String path;
-
-            Task(String path) {
-                this.path = path;
-            }
-
-            @Override
-            public void run() {
-                UploadHelper.getInstance(BaseApplication.getInstance()).doUpload(UploadHelper.OSS_TYPE, UploadHelper.PATH_MOMENT,
-                        isSelVideo ? UploadHelper.TYPE_M_VIDEOS : UploadHelper.TYPE_IMAGE, new File(path), new UploadHelper.OnUploadListener() {
-                            @Override
-                            public void onStart() {
-                            }
-
-                            @Override
-                            public void onLoading(long cur, long total) {
-
-                            }
-
-                            @Override
-                            public void onSuccess(String url) {
-                                Utils.logE("url:  https://peony-blog.oss-cn-shenzhen.aliyuncs.com" + url);
-                                synchronized (lock) {
-                                    uploadServerUrlList.add(url);
-                                    if (!taskList.isEmpty()) {
-                                        Runnable runnable = taskList.pop();
-                                        handler.post(runnable);
-                                    } else {
-                                        //完成之后的个人操作
-                                        EventBus.getDefault().post(EventBusConstant.UPLOADPUBLISHDATA);
-                                    }
-                                }
-                            }
-
-
-                            @Override
-                            public void onError() {
-                                GlobalDialogManager.getInstance().dismiss();
-                            }
-                        });
-            }
-        }
-        //循环遍历原始路径 添加至linklist中
-        for (LocalMedia localMedia : list) {
-            taskList.add(new Task(!TextUtils.isEmpty(localMedia.getRealPath()) ? localMedia.getRealPath() : localMedia.getPath()));
-        }
-        handler.post(taskList.pop());
-    }
-
-
-    /**
-     * "content": "你好",    //动态内容文字
-     * "media": "http://www.baidu.com",  //音频、视频url
-     * "type": 1,  //1-视频 2-音频 3-图片
-     */
-    public void uploadToBendServer(PublishReq mPublishReq, List<String> uploadServerUrlList) {
-        CommonUtil.getToken(new com.tftechsz.common.utils.CommonUtil.OnSelectListener() {
-            @Override
-            public void onSure() {
-                p.publish(mPublishReq, mEditText, uploadServerUrlList);
-            }
-        });
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -607,73 +500,5 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
     @Override
     public void beforeCheckSuccess() {
         GlobalDialogManager.getInstance().show(getFragmentManager(), "正在发布...");
-        String realPath = selectList.get(0).getRealPath();
-        int videoFilter = SPUtils.getInstance().getInt(Interfaces.SP_VIDEO_COMPRESS_FILTER);
-        if (isSelVideo && SPUtils.getInstance().getBoolean(Interfaces.SP_IS_VIDEO_COMPRESS, true)
-                && FileUtils.getLength(realPath) > 1024L * 1024 * (videoFilter == 0 ? 5 : videoFilter)) {
-            String compressPath = getCacheDir() + File.separator + "video-compress/" + FileUtils.getFileName(realPath);
-            if (FileUtils.isFileExists(compressPath)) {
-                Utils.logE("压缩文件存在, 大小: " + FileUtils.getSize(compressPath) + "  路径:" + compressPath);
-                LocalMedia localMedia = new LocalMedia();
-                if (FileUtils.getLength(compressPath) < 10240) { //如果小于10k就属于不正常视频
-                    localMedia.setRealPath(realPath);
-                } else {
-                    localMedia.setRealPath(compressPath);
-                }
-                setList(localMedia);
-                publish(selectList);
-                return;
-            }
-            FileUtils.createOrExistsFile(compressPath);
-            VideoCompress.compressVideoLow(realPath, compressPath, new VideoCompress.CompressListener() {
-                long time;
-
-                @Override
-                public void onStart() {
-                    time = System.currentTimeMillis();
-                    Utils.logE("onStart");
-                }
-
-                @Override
-                public void onSuccess() {
-                    long SuccessTime = System.currentTimeMillis();
-                    Utils.logE("原大小: " + FileUtils.getSize(realPath)
-                            + " ,压缩耗时: " + (SuccessTime - time) / 1000 + "秒" + (SuccessTime - time) % 1000
-                            + " ,压缩后大小: " + FileUtils.getSize(compressPath));
-                    if (FileUtils.getLength(compressPath) < 10240) { //如果小于10k就属于不正常视频
-                        publish(selectList);
-                        return;
-                    }
-                    LocalMedia localMedia = new LocalMedia();
-                    localMedia.setRealPath(compressPath);
-                    setList(localMedia);
-                    publish(selectList);
-                }
-
-                @Override
-                public void onFail() {
-                    publish(selectList);
-                    Utils.logE("onFail");
-
-                }
-
-                @Override
-                public void onProgress(float percent) {
-                    Utils.logE("onProgress: " + percent);
-
-                }
-            });
-        } else {
-            publish(selectList);
-        }
-    }
-
-    private void setList(LocalMedia localMedia) {
-        if (selectList.size() > 0) {
-            selectList.set(0, localMedia);
-        } else {
-            selectList.add(localMedia);
-        }
-        checkPublishButtonEnable();
     }
 }

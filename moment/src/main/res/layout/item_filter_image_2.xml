@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="86dp"
+    android:layout_height="@dimen/dp_96"
+    android:clipToPadding="false">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/root"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="@dimen/dp_5"
+        app:cardElevation="0px"
+        app:cardUseCompatPadding="false"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:scaleType="centerCrop"
+            tools:background="@color/c_f7f7f7"
+            tools:ignore="ContentDescription" />
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/iv_del"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_gravity="end"
+        android:background="@mipmap/ic_del"
+        app:layout_constraintBottom_toTopOf="@id/root"
+        app:layout_constraintEnd_toEndOf="@id/root"
+        app:layout_constraintStart_toEndOf="@id/root"
+        app:layout_constraintTop_toTopOf="@id/root"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

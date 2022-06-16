@@ -20,6 +20,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.SlidingScaleTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.config.PictureConfig;
+import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
@@ -33,10 +34,12 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.AccostChatPop;
 import com.tftechsz.moment.R;
 import com.tftechsz.moment.mvp.ui.activity.TrendNoticeActivity;
+import com.tftechsz.moment.widget.PublishMomentGuidePop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,7 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
     UserProviderService service;
     private CustomTrendFragment customTrendFragment1, customTrendFragment2;
     private int mTagRefreshItemFragment;
+    private boolean needShowGuide = true;//是否需要显示发布动态引导页
 
     @Override
     protected BasePresenter initPresenter() {
@@ -137,6 +141,22 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
         initRxBus();
     }
 
+    /**
+     * 显示发布动态引导页，一天只显示一次
+     */
+    private void showMomentGuide() {
+        if (needShowGuide) {
+            long lastShowMomentTime = MMKVUtils.getInstance().decodeLong(Constants.LAST_SHOW_MOMENT_GUIDE_TIME);//上次显示动态引导页的时间戳ms
+            long l = System.currentTimeMillis();
+            boolean sameDay = TimeUtil.isSameDay(lastShowMomentTime, l);
+            if (l > lastShowMomentTime && !sameDay) {
+                PublishMomentGuidePop pop = new PublishMomentGuidePop(getActivity());
+                pop.showPopupWindow();
+                MMKVUtils.getInstance().encode(Constants.LAST_SHOW_MOMENT_GUIDE_TIME, l);
+            }
+            needShowGuide = false;
+        }
+    }
 
     private void initRxBus() {
         mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
@@ -160,6 +180,7 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
+        showMomentGuide();
         if (!isFragmentVisible) {
             return;
         }

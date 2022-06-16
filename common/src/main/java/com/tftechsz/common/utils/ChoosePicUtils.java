@@ -155,4 +155,20 @@ public class ChoosePicUtils {
                 //.recordVideoSecond()//录制视频秒数 默认60s
                 .forResult(requestCode);//结果回调onActivityResult code
     }
+
+    public static void picMultiple(Activity activity, int maxSize, List<LocalMedia> selectList, OnResultCallbackListener<LocalMedia> listener) {
+        PictureSelector.create(activity)
+                .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频
+                .imageEngine(GlideEngine.createGlideEngine()) // 外部传入图片加载引擎，必传项
+                .imageSpanCount(4)// 每行显示个数
+                .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
+                .isPreviewImage(true)// 是否可预览图片
+                .isPreviewVideo(false)// 是否可预览视频
+                .maxSelectNum(maxSize) // 最大图片选择数量
+                .selectionData(selectList)
+                .isMaxSelectEnabledMask(true)//选择条件达到阀时列表是否启用蒙层效果
+                .isCamera(true)// 是否显示拍照按钮
+                .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
+                .forResult(listener);//结果回调onActivityResult code
+    }
 }
