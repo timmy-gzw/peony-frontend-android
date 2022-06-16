@@ -3,4 +3,6 @@
     <string name="write_something">写点什么呢？</string>
     <string name="publish">发布</string>
     <string name="drag_to_delete">拖动到此处删除</string>
+    <string name="ph_empty_notice">暂无通知，去发个动态吧</string>
+    <string name="ph_empty_comment">暂无任何评论,快来评论吧~</string>
 </resources>

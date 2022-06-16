@@ -5,7 +5,11 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpFragment;
@@ -23,9 +27,6 @@ import com.tftechsz.moment.mvp.presenter.TrendCommentPresenter;
 import com.tftechsz.moment.other.CommentEvent;
 
 import java.util.List;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 动态评论
@@ -154,7 +155,9 @@ public class TrendCommentFragment extends BaseMvpFragment<ITrendCommentView, Tre
     protected void initData() {
         mEmptyView = getListEmptyView();
         TextView tvEmpty = mEmptyView.findViewById(R.id.tv_empty);
-        tvEmpty.setText("暂无任何评论,快来评论吧~");
+        tvEmpty.setText(R.string.ph_empty_comment);
+        ImageView ivEmpty = mEmptyView.findViewById(com.tftechsz.common.R.id.iv_empty);
+        ivEmpty.setImageResource(com.tftechsz.common.R.mipmap.ph_empty_notice);
 
         p.getTrendComment(mPage, blogId);
 

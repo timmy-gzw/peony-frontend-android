@@ -1,5 +1,6 @@
 package com.tftechsz.moment.mvp.ui.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,18 +15,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.CircleBean;
 import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.ScreenUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
@@ -36,6 +44,7 @@ import com.tftechsz.moment.mvp.entity.NoticeBean;
 import com.tftechsz.moment.mvp.presenter.INoticePresenter;
 import com.tftechsz.moment.other.CommentEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import razerdp.util.KeyboardUtils;
@@ -96,13 +105,13 @@ public class TrendNoticeActivity extends BaseMvpActivity<INoticeView, INoticePre
         mNotDataView = getLayoutInflater().inflate(R.layout.base_empty_view, (ViewGroup) mRecy.getParent(), false);
         ImageView ivEmpty = mNotDataView.findViewById(R.id.iv_empty);
         TextView tvEmpty = mNotDataView.findViewById(R.id.tv_empty);
-        tvEmpty.setVisibility(View.GONE);
+        tvEmpty.setText(R.string.ph_empty_notice);
         ivEmpty.setVisibility(View.VISIBLE);
-        ivEmpty.setImageResource(R.mipmap.ph_moment_empty);
+        ivEmpty.setImageResource(R.mipmap.ph_empty_moment);
         TextView tvSend = mNotDataView.findViewById(R.id.tv_send);
         tvSend.setVisibility(View.VISIBLE);
         tvSend.setOnClickListener(v -> {
-            //todo 缺省页-发布动态
+            showMediaSelector();
         });
         setSmartRefreshLayoutListner();
         initBus();
@@ -276,6 +285,33 @@ public class TrendNoticeActivity extends BaseMvpActivity<INoticeView, INoticePre
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PictureConfig.CHOOSE_REQUEST) {
+            List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+            if (selectList.size() > 0) {
+                ArrayList<LocalMedia> list = new ArrayList<>(selectList);
+                Intent intent = new Intent(this, SendTrendActivity.class);
+                intent.putParcelableArrayListExtra(Interfaces.EXTRA_TREND, list);
+                startActivity(intent);
+            }
+        }
+    }
+
+    private void showMediaSelector() {
+        mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+                    } else {
+                        Utils.toast("请允许摄像头权限");
+                    }
+                })
+        );
     }
 
     private boolean isShouldHideInput(View v, MotionEvent event) {
