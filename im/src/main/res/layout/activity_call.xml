@@ -25,33 +25,11 @@
         android:background="@color/black"
         android:visibility="gone" />
 
-
-    <TextView
-        android:id="@+id/tv_close_face"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_video_time"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="@drawable/bg_half_tran20_radius20"
-        android:drawablePadding="@dimen/dp_3"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_8"
-        android:paddingEnd="@dimen/dp_18"
-        android:paddingBottom="@dimen/dp_8"
-        android:text="对方正在使用不露脸视频"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_12"
-        android:visibility="gone"
-        app:drawableStartCompat="@mipmap/chat_ic_small_close_face" />
-
-
-
-
     <FrameLayout
         android:id="@+id/fl_voice_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:visibility="visible"
         android:visibility="gone">
 
         <ImageView
@@ -86,7 +64,7 @@
             android:layout_marginBottom="@dimen/dp_30"
             android:orientation="horizontal"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/iv_cancel"
+            app:layout_constraintBottom_toTopOf="@id/tv_cancel"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
@@ -116,7 +94,7 @@
             android:layout_marginBottom="@dimen/dp_30"
             android:orientation="horizontal"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/iv_cancel"
+            app:layout_constraintBottom_toTopOf="@id/tv_cancel"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
@@ -139,17 +117,17 @@
             android:id="@+id/tv_call_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/iv_cancel"
+            app:layout_constraintBottom_toTopOf="@id/tv_cancel"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginBottom="@dimen/dp_30"
-            android:text="连接中……"
+            android:text="连接中..."
             android:textColor="@color/white"
             android:textSize="@dimen/sp_14" />
 
 
         <TextView
-            android:id="@+id/iv_cancel"
+            android:id="@+id/tv_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -173,7 +151,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_100"
+        android:layout_marginTop="@dimen/dp_150"
         android:layout_marginEnd="@dimen/dp_50"
         android:layout_marginBottom="@dimen/dp_100">
 
@@ -208,20 +186,7 @@
             android:singleLine="true"
             android:textColor="@color/color_99_ff"
             android:textSize="@dimen/sp_12"
-            android:visibility="gone" />
-
-
-        <TextView
-            android:id="@+id/tv_voice_accept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_call_user_city"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="连接中..."
-            android:textColor="@color/color_99_ff"
-            android:textSize="@dimen/sp_12"
+            tools:visibility="visible"
             android:visibility="gone" />
 
     </RelativeLayout>
@@ -254,6 +219,7 @@
         android:layout_marginTop="@dimen/dp_110"
         android:layout_marginEnd="@dimen/dp_15"
         android:visibility="gone"
+        tools:visibility="visible"
         app:lottie_autoPlay="true"
         app:lottie_fileName="weigui.zip"
         app:lottie_imageAssetsFolder="gift/"
@@ -283,6 +249,7 @@
         android:layout_marginTop="@dimen/dp_125"
         android:layout_marginEnd="@dimen/dp_40"
         android:src="@mipmap/chat_ic_close_face"
+        tools:visibility="visible"
         android:visibility="gone" />
 
     <LinearLayout
@@ -357,9 +324,9 @@
         android:paddingTop="@dimen/dp_8"
         android:paddingEnd="@dimen/dp_12"
         android:paddingBottom="@dimen/dp_12"
+        tools:visibility="visible"
         android:text="点击不露脸视频，对方在视频\n中将看不到您这边所做一切"
         android:visibility="gone"
-
         />
 
 
@@ -372,6 +339,7 @@
         android:layout_marginBottom="@dimen/dp_55"
         android:gravity="center"
         android:orientation="horizontal"
+        tools:visibility="visible"
         android:visibility="invisible">
 
         <TextView
@@ -410,7 +378,7 @@
             android:text="不露脸视频"
             android:textColor="@color/color_99_ff"
             android:textSize="@dimen/sp_15"
-            app:drawableTopCompat="@mipmap/chat_ic_video_face_off" />
+            app:drawableTopCompat="@mipmap/chat_ic_face_off" />
 
         <TextView
             android:id="@+id/tv_accept"
@@ -443,7 +411,7 @@
         android:paddingBottom="@dimen/dp_12"
         android:text="点击不露脸视频，对方在视频\n中将看不到您这边所做一切"
         android:visibility="gone"
-
+        tools:visibility="visible"
         />
 
 
@@ -451,7 +419,9 @@
         android:id="@+id/tv_income"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_face_off_tip"
+        android:layout_below="@id/cl_video"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_10"
@@ -463,25 +433,7 @@
         android:paddingEnd="@dimen/dp_16"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_15"
-        android:visibility="gone" />
-
-
-    <TextView
-        android:id="@+id/tv_income1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_face_off_tip1"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_80"
-        android:background="@drawable/bg_recharge_radius16"
-        android:gravity="center"
-        android:paddingVertical="@dimen/dp_5"
-        android:paddingStart="@dimen/dp_16"
-        android:paddingEnd="@dimen/dp_16"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_15"
+        tools:visibility="visible"
         android:visibility="gone" />
 
     <LinearLayout
@@ -551,9 +503,9 @@
         android:id="@+id/rv_call_chat"
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_180"
-        android:layout_above="@+id/tv_call_tip"
+        android:layout_below="@+id/tv_call_tip"
         android:layout_marginStart="@dimen/dp_20"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 
     <com.tftechsz.common.widget.gift.GiftRootLayout
@@ -632,9 +584,10 @@
         android:id="@+id/tv_network"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/cl_video"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/dp_180"
         android:background="@drawable/bg_recharge_radius6"
         android:paddingStart="@dimen/dp_16"
         android:paddingTop="@dimen/dp_11"
@@ -642,6 +595,25 @@
         android:paddingBottom="@dimen/dp_11"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
+        tools:visibility="visible"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_call_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cl_video"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_red_radius6"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_11"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_11"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        tools:visibility="visible"
         android:visibility="gone" />
 
 
@@ -671,11 +643,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_video"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_25"
         android:layout_marginEnd="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_10"
         android:padding="@dimen/dp_3">

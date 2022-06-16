@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.ReportPopWindow;
 import com.tftechsz.moment.R;
@@ -61,8 +62,7 @@ public class TrendDetailPopWindow extends BasePopupWindow implements View.OnClic
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_report) {
-            ReportPopWindow pop = new ReportPopWindow(mContext, blogId, 2);
-            pop.showPopupWindow();
+            ARouterUtils.toBeforeReportActivity(blogId, 2);
             dismiss();
         } else if (id == R.id.tv_attention) {  //关注
             if (listener != null)

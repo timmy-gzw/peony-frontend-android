@@ -3,51 +3,50 @@
     package="com.tftechsz.moment">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application android:requestLegacyExternalStorage="true">
-
         <activity
-            android:name="com.tftechsz.moment.mvp.ui.activity.TrendDetailActivity"
+            android:name=".mvp.ui.activity.BeforeReportActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateHidden"/>
+        <activity
+            android:name=".mvp.ui.activity.TrendDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateHidden" />
-
         <activity
-            android:name="com.tftechsz.moment.mvp.ui.activity.ReportActivity"
+            android:name=".mvp.ui.activity.ReportActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateHidden" />
-
         <activity
-            android:name="com.tftechsz.moment.mvp.ui.activity.SendTrendActivity"
+            android:name=".mvp.ui.activity.SendTrendActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateHidden" />
-
         <activity
-            android:name="com.tftechsz.moment.mvp.ui.activity.MineTrendActivity"
+            android:name=".mvp.ui.activity.MineTrendActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateHidden" />
-
         <activity
-            android:name="com.tftechsz.moment.mvp.ui.activity.MyPicViewActivity"
+            android:name=".mvp.ui.activity.MyPicViewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityAnim2"
             android:windowSoftInputMode="adjustNothing|stateHidden" />
-
         <activity
             android:name="com.tftechsz.common.player.view.MyVideoViewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityAnim2"
             android:windowSoftInputMode="adjustNothing|stateHidden" />
-
         <activity
-            android:name="com.tftechsz.moment.mvp.ui.activity.TrendNoticeActivity"
+            android:name=".mvp.ui.activity.TrendNoticeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateHidden" />
-
     </application>
+
 </manifest>

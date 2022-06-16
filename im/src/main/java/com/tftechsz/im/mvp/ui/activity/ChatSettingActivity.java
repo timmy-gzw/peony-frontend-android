@@ -153,8 +153,7 @@ public class ChatSettingActivity extends BaseMvpActivity<IChatSettingView, ChatS
         } else if (id == R.id.rl_avatar) {   //跳转个人页面
             ARouterUtils.toMineDetailActivity(sessionId);
         } else if (id == R.id.tv_report) {   //举报
-            ReportPopWindow pop = new ReportPopWindow(ChatSettingActivity.this, Integer.parseInt(sessionId), 1);
-            pop.showPopupWindow();
+            ARouterUtils.toBeforeReportActivity(Integer.parseInt(sessionId), 1);
         } else if (id == R.id.tv_bg_setting) { //个性化设置
             Intent intent = new Intent(mContext, BgSettingActivity.class);
             intent.putExtra(Interfaces.EXTRA_UID, sessionId);

@@ -416,8 +416,7 @@ public class FamilyMemberActivity extends BaseMvpActivity<IFamilyMemberView, Fam
 
             @Override
             public void reportUser() {
-                ReportPopWindow pop = new ReportPopWindow(FamilyMemberActivity.this, userId == service.getUserId() ? 0 : userId, 1);
-                pop.showPopupWindow();
+                ARouterUtils.toBeforeReportActivity(userId == service.getUserId() ? 0 : userId, 1);
             }
 
             @Override

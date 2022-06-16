@@ -349,6 +349,18 @@ public class ARouterUtils {
                 .navigation();
     }
 
+    /**
+     * 跳转举报页面
+     *
+     * @param fromType 1:个人  2：动态 3：帮助反馈
+     */
+    public static void toBeforeReportActivity(int blogId, int fromType) {
+        ARouter.getInstance().build(ARouterApi.ACTIVITY_BEFORE_REPORT)
+                .withInt("blogId", blogId)
+                .withInt("fromType", fromType)
+                .navigation();
+    }
+
     public static void toSettingActivity() {
         ARouter.getInstance().build(ARouterApi.ACTIVITY_SETTING)
                 .navigation();

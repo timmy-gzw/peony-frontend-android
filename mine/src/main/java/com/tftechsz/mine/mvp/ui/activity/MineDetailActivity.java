@@ -946,7 +946,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         }
 
         mRlIsSelf.setVisibility(mUserInfo.isPartyGirl() ? View.GONE : View.VISIBLE);// 语音房女用户进入个人主页，不显示真人认证
-        CommonUtil.setUserName(mTvName, mUserInfo.getNickname(), mUserInfo.isVip(), false);
+        CommonUtil.setUserName(mTvName, mUserInfo.getNickname(), mUserInfo.isVip(), TextUtils.isEmpty(mUserId));
         mTvName.setText(mUserInfo.getNickname());
         GlideUtils.loadImage(this, mIvAvatar, mUserInfo.getIcon(), mUserInfo.getSex() == 1 ? R.mipmap.mine_ic_big_boy_default : R.mipmap.mine_ic_big_girl_default);   //头像
         if (TextUtils.isEmpty(mUserId)) {    //自己进入不传userId进入
@@ -1275,8 +1275,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             popWindow.addOnClickListener(new MineDetailMorePopWindow.OnSelectListener() {
                 @Override
                 public void reportUser() {
-                    ReportPopWindow pop = new ReportPopWindow(mContext, Integer.parseInt(mUserId), 1);
-                    pop.showPopupWindow();
+                    ARouterUtils.toBeforeReportActivity(Integer.parseInt(mUserId), 1);
                 }
 
                 @Override

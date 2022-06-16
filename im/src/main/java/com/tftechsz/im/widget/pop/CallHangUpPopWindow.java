@@ -13,6 +13,7 @@ import com.tftechsz.common.utils.CountBackUtils;
 
 import razerdp.basepopup.BasePopupWindow;
 import razerdp.util.animation.AnimationHelper;
+import razerdp.util.animation.ScaleConfig;
 import razerdp.util.animation.TranslationConfig;
 
 /**
@@ -75,14 +76,14 @@ public class CallHangUpPopWindow extends BasePopupWindow implements View.OnClick
     @Override
     protected Animation onCreateShowAnimation() {
         return AnimationHelper.asAnimation()
-                .withTranslation(TranslationConfig.FROM_TOP)
+                .withScale(ScaleConfig.CENTER)
                 .toShow();
     }
 
     @Override
     protected Animation onCreateDismissAnimation() {
         return AnimationHelper.asAnimation()
-                .withTranslation(TranslationConfig.TO_TOP)
+                .withScale(ScaleConfig.CENTER)
                 .toDismiss();
     }
 

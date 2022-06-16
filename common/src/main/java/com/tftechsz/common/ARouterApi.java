@@ -25,6 +25,7 @@ public class ARouterApi {
 
 
     //trend
+    public final static String ACTIVITY_BEFORE_REPORT = "/trend/BeforeReportActivity";
     public final static String ACTIVITY_REPORT = "/trend/reportActivity";
     public final static String ACTIVITY_MINE_TREND = "/trend/mineTrendActivity";
 

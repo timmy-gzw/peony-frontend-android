@@ -984,8 +984,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
             dismiss();
         } else if (id == R.id.report) { //举报
             dismiss();
-            ReportPopWindow pop = new ReportPopWindow(mContext, TextUtils.isEmpty(sessionId) ? 0 : Integer.parseInt(sessionId), 1);
-            pop.showPopupWindow();
+            ARouterUtils.toBeforeReportActivity(TextUtils.isEmpty(sessionId) ? 0 : Integer.parseInt(sessionId), 1);
         } else if (id == R.id.view_dismiss)   //隐藏pop
             dismiss();
     }
@@ -1122,8 +1121,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
 
             @Override
             public void reportUser() {
-                ReportPopWindow pop = new ReportPopWindow(mContext, userId == service.getUserId() ? 0 : userId, 1);
-                pop.showPopupWindow();
+                ARouterUtils.toBeforeReportActivity(userId == service.getUserId() ? 0 : userId, 1);
             }
 
             @Override
