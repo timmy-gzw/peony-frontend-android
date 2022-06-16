@@ -110,6 +110,7 @@ public class ExchangeDetailsActivity extends BaseMvpActivity<IExchangeDetailView
             mBotLink.removeAllViews();
             List<ConfigInfo.MineInfo> list = new ArrayList<>();
             ConfigInfo.MineInfo mineInfo = new ConfigInfo.MineInfo();
+            // TODO: update this
             mineInfo.link = "https://m.dev.peony.taifangsz.com.com/page/haolinggong.html";
             mineInfo.title = "《好灵工服务协议》";
             list.add(mineInfo);
