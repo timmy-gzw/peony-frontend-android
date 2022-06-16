@@ -47,6 +47,7 @@ import java.io.File;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import timber.log.Timber;
 
 /**
  * 实名认证
@@ -291,7 +292,7 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
             mBackPath = data;
             runOnUiThread(() -> GlobalDialogManager.getInstance().show(getFragmentManager(), "正在识别中，请稍等..."));
             Utils.isOpenAuth(data1 -> {
-                if (data1) {
+                if (true || data1) {
                     p.ocrCheck(mFontPath, mBackPath);
                 } else {
                     p.uploadRealNameInfo("", "", mFontPath, mBackPath);
