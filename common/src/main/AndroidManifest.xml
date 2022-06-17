@@ -270,10 +270,10 @@
 
         <meta-data
             android:name="com.vivo.push.api_key"
-            android:value="__TBD__" />
+            android:value="e677afe37c0e8667a2972d3076a7f953" />
         <meta-data
             android:name="com.vivo.push.app_id"
-            android:value="__TBD__" />
+            android:value="105568848" />
 
         <receiver android:name="com.netease.nimlib.mixpush.vivo.VivoPushReceiver">
             <intent-filter>

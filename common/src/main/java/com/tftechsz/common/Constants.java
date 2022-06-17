@@ -35,6 +35,19 @@ public class Constants {
     public static final String SANYAN_APP_ID = "qYz3RbpO";   //闪验
     public static final String WX_APP_ID = "wx4d4897cbee9c06d9";  //微信
     public static final String WX_APP_SC = "20c726d79aa9b7d809300b1f58aca89c";  //微信
+    public static final String PUSH_XM_APP_ID = "2882303761520165940";//小米推送
+    public static final String PUSH_XM_APP_KEY = "5562016512940";//小米推送
+    public static final String PUSH_XM_CERT_NAME = "peony-push-cert-xm";//小米推送
+    public static final String PUSH_HW_APP_ID = "106353275";//华为推送
+    public static final String PUSH_HW_CERT_NAME = "peony-push-cert-hw";//华为推送
+    public static final String PUSH_MZ_APP_ID = "148885";//魅族推送
+    public static final String PUSH_MZ_APP_KEY = "da1af0c8faac4c1f889f7302ebb2224d";//魅族推送
+    public static final String PUSH_MZ_CERT_NAME = "peony-push-cert-meizu";//魅族推送
+    public static final String PUSH_VIVO_CERT_NAME = "peony-push-cert-vivo";//vivo推送
+    public static final String PUSH_OPPO_APP_ID = "";//oppo推送
+    public static final String PUSH_OPPO_APP_KEY = "";//oppo推送
+    public static final String PUSH_OPPO_APP_SECRET = "";//oppo推送
+    public static final String PUSH_OPPO_CERT_NAME = "";//oppo推送
 
 
     public static final String IS_COMPLETE_INFO = "is_complete_info";   //是否完善了个人信息

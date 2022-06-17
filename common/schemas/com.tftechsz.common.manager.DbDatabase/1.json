@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e4ac9bc44af545f5f148b81b40e50df0",
+    "identityHash": "55155e4d05f8f1aaa2090a5c382a2e2c",
     "entities": [
       {
         "tableName": "intimacy",
@@ -51,7 +51,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e4ac9bc44af545f5f148b81b40e50df0\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"55155e4d05f8f1aaa2090a5c382a2e2c\")"
     ]
   }
 }

@@ -191,28 +191,28 @@ public class NimSDKOptionConfig {
         // 第三方推送配置
         MixPushConfig config = new MixPushConfig();
         // 小米推送
-        config.xmAppId = "xm_app_id";
-        config.xmAppKey = "xm_app_key";
-        config.xmCertificateName = "xiaomi_1";
+        config.xmAppId = Constants.PUSH_XM_APP_ID;
+        config.xmAppKey = Constants.PUSH_XM_APP_KEY;
+        config.xmCertificateName = Constants.PUSH_XM_CERT_NAME;
 
         // 华为推送
-        config.hwAppId = "hw_app_id";
-        config.hwCertificateName = "huawei_1";
+        config.hwAppId = Constants.PUSH_HW_APP_ID;
+        config.hwCertificateName = Constants.PUSH_HW_CERT_NAME;
 
 
         // 魅族推送
-        config.mzAppId = "mz_app_id";
-        config.mzAppKey = "ma_app_key";
-        config.mzCertificateName = "meizu_1";
+        config.mzAppId = Constants.PUSH_MZ_APP_ID;
+        config.mzAppKey = Constants.PUSH_MZ_APP_KEY;
+        config.mzCertificateName = Constants.PUSH_MZ_CERT_NAME;
 
         // vivo推送
-        config.vivoCertificateName = "vivo_1";
+        config.vivoCertificateName = Constants.PUSH_VIVO_CERT_NAME;
 
         // oppo推送
-        config.oppoAppId = "oppo_app_id";
-        config.oppoAppKey = "oppo_app_key";
-        config.oppoAppSercet = "oppo_app_sercet";
-        config.oppoCertificateName = "oppo_1";
+        config.oppoAppId = Constants.PUSH_OPPO_APP_ID;
+        config.oppoAppKey = Constants.PUSH_OPPO_APP_KEY;
+        config.oppoAppSercet = Constants.PUSH_OPPO_APP_SECRET;
+        config.oppoCertificateName = Constants.PUSH_OPPO_CERT_NAME;
         return config;
     }
 }
