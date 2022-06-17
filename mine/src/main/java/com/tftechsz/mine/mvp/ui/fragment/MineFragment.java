@@ -368,6 +368,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private void startMineFriend(int type) {
         Intent intent = new Intent(getContext(), MineFriendActivity.class);
         intent.putExtra(MineFriendActivity.TYPE_MINE_FRIEND, type);
+        intent.putExtra("username",service.getUserInfo().getNickname());
         startActivity(intent);
     }
 

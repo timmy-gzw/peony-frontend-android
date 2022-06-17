@@ -221,6 +221,9 @@ public class MsgViewHolderAudio extends MsgViewHolderBase {
         } else {
             unreadIndicator.setVisibility(View.GONE);
         }
+        if(!isReceivedMessage()){
+            durationLabel.setTextColor(NimUIKit.getContext().getResources().getColor(R.color.white));
+        }
     }
 
     private void controlPlaying() {

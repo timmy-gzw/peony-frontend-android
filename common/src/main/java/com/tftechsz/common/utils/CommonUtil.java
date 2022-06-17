@@ -956,7 +956,7 @@ public class CommonUtil {
         textview.setText(userName);
 
         if (isVip) {
-            textview.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.vip_icon_bg, 0);
+            textview.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.vip_icon_bg2, 0);
             textview.setCompoundDrawablePadding(ConvertUtils.dp2px(6));
         } else {
             textview.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);

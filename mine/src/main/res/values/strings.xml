@@ -52,5 +52,9 @@
     <string name="renewal_now_format">¥%s 立即续费</string>
     <string name="edit_account">修改账号</string>
     <string name="_86">+86</string>
+    <string name="title_activity_user_level">UserLevelActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

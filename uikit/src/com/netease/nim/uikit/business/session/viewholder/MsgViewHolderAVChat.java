@@ -1,5 +1,6 @@
 package com.netease.nim.uikit.business.session.viewholder;
 
+import android.graphics.Color;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.Utils;
 import com.netease.nim.uikit.R;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
@@ -123,6 +125,10 @@ public class MsgViewHolderAVChat extends MsgViewHolderBase {
             } else if (callMsg.state == ChatMsg.EVENT_ERROR) {
                 textString = "网络异常，通话结束";
             }
+        }
+        if(!isReceivedMessage()){
+            statusLabel.setTextColor(NimUIKit.getContext().getResources().getColor(R.color.white));
+            typeImage.setColorFilter(Color.WHITE);
         }
         statusLabel.setText(textString);
     }

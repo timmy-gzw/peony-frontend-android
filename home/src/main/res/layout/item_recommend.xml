@@ -92,7 +92,7 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:drawableEnd="@mipmap/vip_icon_bg"
+                tools:drawableEnd="@mipmap/vip_icon_bg2"
                 tools:drawablePadding="@dimen/dp_3"
                 tools:text="喵了个喵" />
 

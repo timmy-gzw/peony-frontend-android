@@ -156,6 +156,44 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ll_info" />
 
+                <LinearLayout
+                    android:id="@+id/ll_auth"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sign"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:background="@drawable/bg_red_alpha20"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_49">
+
+                    <ImageView
+                        android:src="@mipmap/icon_auth_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginEnd="@dimen/dp_15"
+                        android:text="完成真人认证，交友成功率提升10倍"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/tv_auth"
+                        android:text="去认证"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/dp_5"
+                        android:layout_width="@dimen/dp_48"
+                        android:textSize="@dimen/sp_12"
+                        android:background="@drawable/shape_play_message"
+                        android:layout_height="@dimen/dp_27"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/cl_vip_rich"
@@ -172,7 +210,7 @@
                     android:paddingBottom="@dimen/dp_10"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_sign"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_auth"
                     tools:visibility="visible">
 
                     <TextView
@@ -762,7 +800,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_44"
                 android:layout_weight="1"
-                android:background="@drawable/bg_accost"
+                android:background="@drawable/bg_red"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -778,7 +816,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_10"
                     android:text="搭讪"
-                    android:textColor="@color/color_normal"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
 
             </LinearLayout>

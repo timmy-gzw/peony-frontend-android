@@ -85,6 +85,7 @@ public class MsgViewHolderText extends MsgViewHolderBase {
             tvIntegral.setVisibility(View.GONE);
             int rightBg = getRightBg();
             VipUtils.setPersonalise(bodyTextView, rightBg, true);
+            bodyTextView.setTextColor(NimUIKit.getContext().getResources().getColor(R.color.white));
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) bodyTextView.getLayoutParams();
             params.gravity = Gravity.END;
             bodyTextView.setLayoutParams(params);

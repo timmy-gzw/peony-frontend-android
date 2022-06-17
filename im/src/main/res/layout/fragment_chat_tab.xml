@@ -12,53 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 
-    <RelativeLayout
-        android:id="@+id/rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:background="@drawable/shape_chat_tab_top_bg"
-        android:visibility="visible">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:layout_toStartOf="@id/go_setting"
-            android:gravity="center_vertical"
-            android:text="开启消息通知，交友成功率提升10倍"
-            android:textColor="@color/color_333333"
-            android:textSize="@dimen/sp_13"
-            android:textStyle="bold"
-            app:drawableStartCompat="@drawable/peony_tz_icon" />
-
-        <TextView
-            android:id="@+id/go_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:layout_toStartOf="@id/iv_del"
-            android:background="@drawable/bg_white_radius15"
-            android:paddingStart="@dimen/dp_10"
-            android:paddingTop="@dimen/dp_size_5"
-            android:paddingEnd="@dimen/dp_10"
-            android:paddingBottom="@dimen/dp_5"
-            android:text="去设置"
-            android:textColor="#ff333333"
-            android:textSize="11sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/iv_del"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
-            android:layout_alignParentEnd="true"
-            android:scaleType="center"
-            android:src="@drawable/peony_tz_gb_icon" />
-
-    </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_tab"
@@ -183,6 +137,54 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@drawable/shape_chat_tab_top_bg"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toStartOf="@id/go_setting"
+            android:gravity="center_vertical"
+            android:text="开启消息通知，交友成功率提升10倍"
+            android:textColor="#FE4E6B"
+            android:textSize="@dimen/sp_13"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/peony_tz_icon" />
+
+        <TextView
+            android:id="@+id/go_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_toStartOf="@id/iv_del"
+            android:background="@drawable/bg_red"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_size_5"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_5"
+            android:text="立即开启"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_del"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/peony_tz_gb_icon" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_net_error"

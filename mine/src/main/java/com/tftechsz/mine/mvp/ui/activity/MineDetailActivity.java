@@ -93,7 +93,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private final int MAX_SIZE = 9;
 
     private Banner mBanner;
-    private TextView mTvCurrentNum;
+    private TextView mTvCurrentNum,mTvEditInfo;
     private ImageView mIvAvatar;   //头像
     private ImageView mIvBack, mTobBack, mTobMore;
     private AppBarLayout mAppBarLayout;
@@ -121,6 +121,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private TextView mTvIsSelf;   //是否真人
     private TextView mTvSelfStatus;
     private TextView mTvSelfTip;
+    private  LinearLayout mllAuth;
 
     private RecyclerView mRvTrend;   //动态
     private RecyclerView mRvUserInfo;  //基本信息
@@ -214,6 +215,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         mTvTobTitle = findViewById(R.id.tob_title);  //名称
         mTobMore = findViewById(R.id.tob_more);
+        mTvEditInfo = findViewById(R.id.edit_info);
         mTvName = findViewById(R.id.tv_name);   //姓名
         mTvSign = findViewById(R.id.tv_sign);   //个性签名
         //土豪值response
@@ -238,6 +240,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mTvIsReal = findViewById(R.id.tv_is_real);
         mTvRealStatus = findViewById(R.id.tv_real_status);
         mTvRealTip = findViewById(R.id.tv_real_tip);
+        mllAuth = findViewById(R.id.ll_auth);
 
         mLlAccost = findViewById(R.id.ll_accost);
         mLlOperate = findViewById(R.id.ll_operate);
@@ -301,6 +304,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mTobBack.setOnClickListener(this);
         mTvAttention.setOnClickListener(this);
         mTobMore.setOnClickListener(this);
+        mTvEditInfo.setOnClickListener(this);
         mLottieVoice.setOnClickListener(this);
         mLlAccost.setOnClickListener(this);   //搭讪
         findViewById(R.id.tv_chat_message).setOnClickListener(this);  //私信
@@ -309,6 +313,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         findViewById(R.id.cl_charm).setOnClickListener(this);  //亲密度
         findViewById(R.id.rl_guard).setOnClickListener(this);   //守护
         findViewById(R.id.cl_family).setOnClickListener(this);   //家族
+        findViewById(R.id.ll_auth).setOnClickListener(this);
 
         mLlVoice.setOnClickListener(this);  //去录音
         mIvVoice.setOnClickListener(this);
@@ -987,6 +992,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             mTvSelfStatus.setText("去认证");
         }
         if (mUserInfo.getIs_real() == 1) {   //已经真人认证
+            mllAuth.setVisibility(View.GONE);
             mTvIsReal.setText("已完成真人认证");
             mTvRealStatus.setText("已认证");
             mTvRealStatus.setEnabled(false);
@@ -1015,7 +1021,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 mTvSelfStatus.setVisibility(View.GONE);
             }
             mTobMore.setVisibility(View.VISIBLE);
-
+            mTvEditInfo.setVisibility(View.GONE);
+            mllAuth.setVisibility(View.GONE);
         } else {
             Drawable drawable = ContextCompat.getDrawable(this, R.drawable.mine_ic_gray_authenticate);
             if (mUserInfo.getIs_real() == 1) {
@@ -1031,7 +1038,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 mTvSelfStatus.setBackgroundResource(R.drawable.bg_gray_authenticate);
             }
             mTobMore.setVisibility(View.GONE);
-
+            mTvEditInfo.setVisibility(View.VISIBLE);
             //vip 设置相关
             if (mUserInfo.open_hidden_rank == 0) {
                 mClVipRich.setBackgroundResource(0);
@@ -1168,7 +1175,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         }
         if (null == mUserInfo)
             return;
-        if (id == R.id.tv_real_status) {  //是否真人
+        if (id == R.id.tv_real_status || id == R.id.ll_auth) {  //是否真人
             p.getRealInfo();
         } else if (id == R.id.tv_self_status) {  //是否实名
             if (mUserInfo.isPartyGirl() || mUserInfo.getIs_real() == 1) {
@@ -1176,7 +1183,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             } else {
                 toastTip("请先完成真人认证");
             }
-        } else if (id == R.id.tv_edit) {   //编辑资料
+        } else if (id == R.id.tv_edit || id == R.id.edit_info) {   //编辑资料
             MineInfoActivity.startActivity(this, mUserInfo);
         } else if (id == R.id.tv_attention) {
             p.attentionUser(mUserInfo.getUser_id());

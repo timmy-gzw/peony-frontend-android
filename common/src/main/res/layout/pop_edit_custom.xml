@@ -15,11 +15,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_15">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_pop_pic" />
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -75,6 +70,7 @@
             android:paddingTop="@dimen/dp_13"
             android:paddingBottom="@dimen/dp_13"
             android:text="取消"
+            android:background="@drawable/bg_gray"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_18" />
 
@@ -93,7 +89,8 @@
             android:paddingTop="@dimen/dp_13"
             android:paddingBottom="@dimen/dp_13"
             android:text="确定"
-            android:textColor="@color/blue_7F89F3"
+            android:background="@drawable/bg_red"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_18" />
     </LinearLayout>
 

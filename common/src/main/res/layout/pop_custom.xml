@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="sans-serif-condensed-medium"
+            android:background="@drawable/bg_gray"
             android:gravity="center"
             android:paddingTop="@dimen/dp_13"
             android:paddingBottom="@dimen/dp_13"
@@ -85,8 +86,9 @@
             android:gravity="center"
             android:paddingTop="@dimen/dp_13"
             android:paddingBottom="@dimen/dp_13"
+            android:background="@drawable/bg_red"
             android:text="确定"
-            android:textColor="@color/blue_7F89F3"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_18" />
     </LinearLayout>
 

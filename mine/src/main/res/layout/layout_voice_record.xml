@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="0''"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_15" />
 
         <com.tftechsz.mine.widget.VoiceImageView
@@ -41,7 +41,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:src="@drawable/community_chat_voice_play_anim_right"
-            android:tint="@color/black" />
+            android:tint="@color/white" />
 
     </LinearLayout>
 
@@ -115,6 +115,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:layout_weight="2"
             android:orientation="vertical"
+            tools:visibility="visible"
             android:visibility="gone">
 
             <ImageView
@@ -218,6 +219,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:layout_weight="2"
             android:orientation="vertical"
+            tools:visibility="visible"
             android:visibility="gone">
 
             <ImageView
@@ -248,7 +250,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginBottom="20dp"
         android:text="长按录制"
-        android:textColor="@color/color_light_font"
+        android:textColor="#FE4E6B"
         android:textSize="@dimen/sp_15"
         android:textStyle="normal" />
 

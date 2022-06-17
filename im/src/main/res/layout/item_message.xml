@@ -54,6 +54,16 @@
             android:textColor="@color/white"
             android:textSize="@dimen/sp_10"
             tools:text="9" />
+
+        <View
+            android:id="@+id/iv_online"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_10"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/bg_frame_margin"
+            android:background="@drawable/bg_dot_online"
+            android:visibility="gone"
+            />
     </FrameLayout>
 
     <TextView
@@ -70,6 +80,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="喵了个咪儿" />
+
+    <TextView
+        android:id="@+id/tv_age"
+        android:layout_width="wrap_content"
+        tools:text="[24岁]"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name"
+        app:layout_constraintLeft_toRightOf="@id/tv_name"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_height="wrap_content"/>
 
     <ImageView
         android:id="@+id/iv_office"

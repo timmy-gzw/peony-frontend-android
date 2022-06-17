@@ -18,13 +18,17 @@
 
         />
 
-    <com.tftechsz.common.widget.CommonFrameView
+    <TextView
         android:id="@+id/fl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:text="温馨提示"
+        android:textSize="@dimen/sp_18"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:layout_marginTop="@dimen/dp_15"
-        app:text_content="温馨提示" />
+        android:paddingTop="@dimen/dp_15"/>
 
 
     <com.tftechsz.common.widget.AlignTextView
@@ -49,15 +53,15 @@
         android:id="@+id/tv_open"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_30"
         android:layout_below="@+id/tv_content"
+        android:layout_marginStart="@dimen/dp_30"
         android:layout_marginEnd="@dimen/dp_30"
         android:layout_marginBottom="@dimen/dp_20"
         android:background="@drawable/bg_open_vip1"
         android:gravity="center"
         android:padding="@dimen/dp_15"
         android:text="立即开通VIP会员"
-        android:textColor="@color/color_normal"
+        android:textColor="#CB7C1B"
         android:textSize="@dimen/sp_15"
         android:textStyle="bold" />
 

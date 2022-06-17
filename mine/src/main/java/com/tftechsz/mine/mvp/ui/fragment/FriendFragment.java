@@ -72,13 +72,12 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
     @Override
     public void bingViewHolder(BaseViewHolder helper, FriendDto item, int position) {
         AvatarVipFrameView ivAvatar = helper.getView(R.id.iv_avatar);
-        helper.setText(R.id.tv_user_code, item.user_code);
-        helper.setText(R.id.tv_user, String.format("%s号", mContext.getString(R.string.app_name)));
-        CommonUtil.setUserName(helper.getView(R.id.tv_name), item.nickname, item.is_vip == 1);
+        CommonUtil.setUserName(helper.getView(R.id.tv_name), item.nickname, false,item.is_vip == 1);
         GlideUtils.loadRoundImageRadius(getActivity(), ivAvatar.getImageView(), item.icon);
         ivAvatar.setBgFrame(item.picture_frame);
         CommonUtil.setSexAndAge(getContext(), item.sex, item.age, helper.getView(R.id.iv_sex));
         helper.setGone(R.id.iv_real_people, item.is_real != 1);  //是否真人
+        helper.setGone(R.id.tv_vip, item.is_vip != 1);  //是否vip
         helper.setVisible(R.id.view, helper.getLayoutPosition() != getData().size() - 1);
 
     }

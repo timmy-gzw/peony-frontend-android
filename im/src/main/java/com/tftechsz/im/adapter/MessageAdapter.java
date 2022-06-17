@@ -78,6 +78,8 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
         ConstraintLayout root = helper.getView(R.id.root);
         AvatarVipFrameView ivAvatar = helper.getView(R.id.iv_avatar);
         ivAvatar.setOnline(mType == 1 && item.is_online);
+        //是否在线
+        helper.setVisible(R.id.iv_online,item.is_online);
         //文本颜色
         helper.setTextColor(R.id.tv_content, getContext().getResources().getColor(R.color.color_light_font));
         if (StickTopCache.isStickTop(item)) {  //y已经置顶
@@ -149,7 +151,10 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
                 } else {
                     ivAvatar.setAvatar(item.getContactId());
                 }
-
+                //获取不到年龄 22.6.17
+//                NimUserInfo userInfo = NIMClient.getService(UserService.class).getUserInfo(item.getContactId());
+//                helper.setVisible(R.id.tv_age,true);
+//                helper.setText(R.id.tv_age,"["+userInfo.getAvatar()+"]");
                 CommonUtil.setUserName(tvName, UserInfoHelper.getUserTitleName(item.getContactId(), item.getSessionType()), false);
             }
             NimUserInfo userInfo = NIMClient.getService(UserService.class).getUserInfo(item.getContactId());

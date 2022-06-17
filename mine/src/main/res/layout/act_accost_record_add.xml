@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
                 android:text="小提示:"
-                android:textColor="#9B7414"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_12" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_6"
                 android:text="@string/mine_accost_record"
-                android:textColor="#9B7414"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_14" />
 
         </LinearLayout>

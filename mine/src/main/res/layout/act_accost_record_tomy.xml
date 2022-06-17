@@ -29,11 +29,11 @@
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginEnd="@dimen/dp_28"
         android:layout_marginBottom="@dimen/dp_22"
-        android:background="@drawable/bg_accost"
+        android:background="@drawable/bg_red"
         android:gravity="center"
         android:orientation="horizontal"
         android:text="添加语音招呼"
-        android:textColor="@color/color_333333"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_15"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
