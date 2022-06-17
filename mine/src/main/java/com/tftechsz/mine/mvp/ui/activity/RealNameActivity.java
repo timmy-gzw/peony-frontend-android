@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.FileUtils;
@@ -28,6 +31,7 @@ import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.other.GlobalDialogManager;
@@ -39,15 +43,10 @@ import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.dto.OcrCheckDto;
-import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.mine.mvp.IView.IRealNameView;
 import com.tftechsz.mine.mvp.presenter.RealNamePresenter;
 
 import java.io.File;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import timber.log.Timber;
 
 /**
  * 实名认证
@@ -292,7 +291,7 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
             mBackPath = data;
             runOnUiThread(() -> GlobalDialogManager.getInstance().show(getFragmentManager(), "正在识别中，请稍等..."));
             Utils.isOpenAuth(data1 -> {
-                if (true || data1) {
+                if (data1) {
                     p.ocrCheck(mFontPath, mBackPath);
                 } else {
                     p.uploadRealNameInfo("", "", mFontPath, mBackPath);

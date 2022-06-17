@@ -70,4 +70,5 @@
 
     <string name="accosted">已搭讪</string>
     <string name="to_private_chat">去私聊</string>
+	<string name="auth_for_obtain_permission">完成认证，可获得以下权限</string>
 </resources>
