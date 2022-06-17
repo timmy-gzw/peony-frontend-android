@@ -33,8 +33,8 @@ public class Constants {
     public static final String YUNXIN_ROOM_APP_ID = "9c3106de8f4c4b69e7ff47b6b6c7aad3";   //语音房云信
     public static final String YUNXIN_PRODUCT_NUMBER = "YD00357078827886";   //云信反作弊产品编号
     public static final String SANYAN_APP_ID = "qYz3RbpO";   //闪验
-    public static final String WX_APP_ID = "__TBD__";  //微信
-    public static final String WX_APP_SC = "__TBD__";  //微信
+    public static final String WX_APP_ID = "wx4d4897cbee9c06d9";  //微信
+    public static final String WX_APP_SC = "20c726d79aa9b7d809300b1f58aca89c";  //微信
 
 
     public static final String IS_COMPLETE_INFO = "is_complete_info";   //是否完善了个人信息
