@@ -1,9 +1,5 @@
 package com.tftechsz.home.adapter;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,23 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieAnimationViewNew;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.util.VipUtils;
-import com.tftechsz.home.R;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.nim.ChatSoundPlayer;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.StringUtils;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.home.R;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -75,24 +68,6 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
         ImageView ivAvatar = helper.getView(R.id.iv_avatar);
         View bgFrame = helper.getView(R.id.bg_frame);
 
-        LottieAnimationView lottieAnimationViewBtn = helper.getView(R.id.animation_view_btn);
-        lottieAnimationViewBtn.setVisibility(View.GONE);
-        lottieAnimationViewBtn.clearAnimation();
-
-        helper.setVisible(R.id.iv_accost, item.getIs_accost() != 1);
-        if (CommonUtil.isBtnTextHome(service)) {  //新的逻辑喜欢配置
-            if (!item.isAccost()) {
-                helper.setVisible(R.id.iv_accost, false);
-                lottieAnimationViewBtn.setVisibility(View.VISIBLE);
-                lottieAnimationViewBtn.setProgress(0);
-            }
-            //helper.setBackgroundResource(R.id.iv_accost, R.mipmap.img_0_mainnew2);
-            helper.setBackgroundResource(R.id.iv_accost1, R.mipmap.peony_xxym_sx_icon_new);
-            helper.setVisible(R.id.tv_distance, false);
-        } else {
-            helper.setImageResource(R.id.iv_accost, R.mipmap.home_icon_chat_self);
-            helper.setBackgroundResource(R.id.iv_accost1, R.mipmap.home_ic_chat_up_selector);
-        }
         if (mType == 1) {   //推荐
             tvOnline.setText(item.getOnline_message());
             helper.setVisible(R.id.tv_online, !TextUtils.isEmpty(item.getOnline_message()) && item.getIs_online() == 0);
@@ -133,86 +108,13 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
 //        GlideUtils.loadUserIcon(ivAvatar, item.getIcon());
         helper.setGone(R.id.iv_real_people, item.getIs_real() != 1);  //是否真人
 //        helper.setGone(R.id.iv_auth, item.getIs_self() != 1);  //是否实名
-        //helper.setVisible(R.id.animation_view, false);
-        helper.setVisible(R.id.iv_accost1, item.getIs_accost() == 1);
-        helper.setVisible(R.id.ll_accost, item.getIs_accost() != 1);
-
-        helper.getView(R.id.ll_accost).clearAnimation();
-        helper.getView(R.id.iv_accost1).clearAnimation();
-        helper.getView(R.id.animation_view).clearAnimation();
-        helper.getView(R.id.animation_view).setVisibility(View.GONE);
         if (isShow == 1) {   //只显示私信   图片显示认证图片
             helper.setImageResource(R.id.iv_real_people, R.mipmap.ic_attestation);
-            helper.setVisible(R.id.iv_accost1, true);
-            helper.setVisible(R.id.ll_accost, false);
         } else {
             helper.setImageResource(R.id.iv_real_people, R.mipmap.home_icon_real_people);
-            helper.setVisible(R.id.iv_accost1, item.getIs_accost() == 1);
-            helper.setVisible(R.id.ll_accost, item.getIs_accost() != 1);
         }
 
     }
-
-    public void startAnimation(View rl_accost, View iv_accost1, LottieAnimationViewNew lottieAnimationView) { //搭讪按钮动画  头像特效   播放声音
-        if (lottieAnimationView != null) {
-            lottieAnimationView.setVisibility(View.VISIBLE);
-            lottieAnimationView.flagLAV = true;
-            lottieAnimationView.playAnimation();
-            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    if (lottieAnimationView != null) {
-                        lottieAnimationView.setVisibility(View.GONE);
-                        if (rl_accost != null && iv_accost1 != null) {
-                            Utils.playAccostAnimation(getContext(), rl_accost, iv_accost1);
-                            lottieAnimationView.flagLAV = false;
-                        }
-                    }
-
-                }
-            });
-        }
-    }
-
-
-    public void startAnimationNew(int position) {
-        getData().get(position).setIs_accost(1);
-        LottieAnimationView lottieAnimationView;
-        if (CommonUtil.isBtnTextHome(service)) {
-            lottieAnimationView = (LottieAnimationView) getViewByPosition(position, R.id.animation_view_btn);
-        } else{
-            lottieAnimationView = (LottieAnimationView) getViewByPosition(position, R.id.animation_view);
-        }
-        View rl_accost = getViewByPosition(position, R.id.ll_accost);
-        View iv_accost1 = getViewByPosition(position, R.id.iv_accost1);
-        View ivAccost = getViewByPosition(position, R.id.iv_accost);
-        if (lottieAnimationView != null) {
-            ChatSoundPlayer.instance().play(ChatSoundPlayer.RingerTypeEnum.ACCOST);
-            lottieAnimationView.setVisibility(View.VISIBLE);
-            if (ivAccost != null)
-                ivAccost.setVisibility(View.INVISIBLE);
-            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    lottieAnimationView.setVisibility(View.GONE);
-                    if (rl_accost != null) {
-                        rl_accost.setVisibility(View.GONE);
-                    }
-                    if (iv_accost1 != null) {
-                        iv_accost1.setVisibility(View.VISIBLE);
-                        ObjectAnimator oa3 = ObjectAnimator.ofFloat(iv_accost1, "scaleX", 0.0f, 1.0f);
-                        ObjectAnimator oa4 = ObjectAnimator.ofFloat(iv_accost1, "scaleY", 0.0f, 1.0f);
-                        AnimatorSet as2 = new AnimatorSet();
-                        as2.play(oa3).with(oa4);
-                        as2.setDuration(300);
-                        as2.start();
-                    }
-                }
-            });
-            lottieAnimationView.playAnimation();
-        }
-    }
-
 
     public void notifyItemChangeSinge(int position) {
         getData().get(position).setIs_accost(1);

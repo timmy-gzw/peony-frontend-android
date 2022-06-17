@@ -1,8 +1,5 @@
 package com.tftechsz.moment.mvp.presenter;
 
-import android.widget.ImageView;
-
-import com.airbnb.lottie.LottieAnimationViewNew;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.bean.AccostDto;
 import com.tftechsz.common.base.BasePresenter;
@@ -15,7 +12,6 @@ import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.AccostService;
 import com.tftechsz.common.iservice.AttentionService;
 import com.tftechsz.common.iservice.MineService;
-import com.tftechsz.common.nim.ChatSoundPlayer;
 import com.tftechsz.moment.api.TrendApiService;
 import com.tftechsz.moment.mvp.IView.IDynamicView;
 
@@ -171,39 +167,6 @@ public class DynamicRecommendPresenter extends BasePresenter<IDynamicView> {
 
                 }));
     }
-
-
-    public void startAnimation(ImageView ivAccost, ImageView ivChat, LottieAnimationViewNew lottieAnimationView) { //搭讪按钮动画  头像特效   播放声音
-        if (lottieAnimationView != null) {
-            ChatSoundPlayer.instance().play(ChatSoundPlayer.RingerTypeEnum.ACCOST);
-            //TODO 搭讪全屏动画
-//            lottieAnimationView.setVisibility(View.VISIBLE);
-//            if (ivAccost != null)
-//                ivAccost.setVisibility(View.INVISIBLE);
-//            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
-//                @Override
-//                public void onAnimationEnd(Animator animation) {
-//                    lottieAnimationView.setVisibility(View.GONE);
-//                    if (ivAccost != null) {
-//                        ivAccost.setVisibility(View.GONE);
-//                    }
-//                    if (ivChat != null) {
-//                        ivChat.setVisibility(View.VISIBLE);
-//                        ObjectAnimator oa3 = ObjectAnimator.ofFloat(ivChat, "scaleX", 0.0f, 1.0f);
-//                        ObjectAnimator oa4 = ObjectAnimator.ofFloat(ivChat, "scaleY", 0.0f, 1.0f);
-//                        AnimatorSet as2 = new AnimatorSet();
-//                        as2.play(oa3).with(oa4);
-//                        as2.setDuration(300);
-//                        as2.start();
-//                    }
-//                }
-//            });
-//            lottieAnimationView.playAnimation();
-        }
-
-
-    }
-
 
     /**
      * 删除动态

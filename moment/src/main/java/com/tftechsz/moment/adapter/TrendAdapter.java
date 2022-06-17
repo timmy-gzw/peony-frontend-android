@@ -1,7 +1,5 @@
 package com.tftechsz.moment.adapter;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.text.TextUtils;
@@ -17,8 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieAnimationViewNew;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ScreenUtils;
@@ -32,7 +28,6 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.CircleBean;
 import com.tftechsz.common.entity.UserViewInfo;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.nim.ChatSoundPlayer;
 import com.tftechsz.common.player.interfaces.OnItemChildVideoClickListener;
 import com.tftechsz.common.player.view.PrepareView;
 import com.tftechsz.common.utils.CommonUtil;
@@ -74,16 +69,6 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
 
         holder.tvTime.setText(item.getCreated_at());
 //        helper.setText(R.id.tv_look_times, item.getProvince());  //浏览次数iv_accost
-//        holder.ivAccost.setVisibility(item.isAccost() ? View.GONE : View.VISIBLE);
-//        holder.ivAccost.setImageResource(CommonUtil.isBtnTextTrend(service, item.getSex() == 1) ? R.mipmap.img_0_mainnew2 : R.mipmap.home_ic_chat_up_normal);
-//        holder.ivChat.setVisibility(item.isAccost() ? View.VISIBLE : View.GONE);
-//        holder.ivChat.setImageResource(CommonUtil.isBtnTextTrend(service, item.getSex() == 1) ? R.mipmap.peony_xxym_sx_icon_new : R.mipmap.home_ic_chat_up_selector);
-//        holder.ivAccost.clearAnimation();
-//        holder.ivChat.clearAnimation();
-        holder.getView(R.id.animation_view).clearAnimation();
-        holder.getView(R.id.animation_view).setVisibility(View.GONE);
-//        holder.ivAccost.setVisibility(item.isAccost() ? View.GONE : View.VISIBLE);
-//        holder.ivChat.setVisibility(item.isAccost() ? View.VISIBLE : View.GONE);
         //设置文本内容
         String content = item.getContent().trim();
         if (!TextUtils.isEmpty(content)) {
@@ -193,65 +178,6 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         }
     }
 
-    public void startAnimation(int position) { //搭讪按钮动画  头像特效   播放声音
-//        View rl_accost = getViewByPosition(position, R.id.iv_accost);
-//        View iv_accost1 = getViewByPosition(position, R.id.iv_chat);
-        LottieAnimationViewNew lottieAnimationView;
-        if (CommonUtil.isBtnTextTrend(service, getData().get(position).getSex() == 1)) {
-            lottieAnimationView = (LottieAnimationViewNew) getViewByPosition(position, R.id.animation_view_btn);
-        } else {
-            lottieAnimationView = (LottieAnimationViewNew) getViewByPosition(position, R.id.animation_view);
-        }
-//        View ivAccost = getViewByPosition(position, R.id.iv_accost);
-        if (lottieAnimationView != null) {
-            ChatSoundPlayer.instance().play(ChatSoundPlayer.RingerTypeEnum.ACCOST);
-            lottieAnimationView.setVisibility(View.VISIBLE);
-//            if (ivAccost != null)
-//                ivAccost.setVisibility(View.INVISIBLE);
-//            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
-//                @Override
-//                public void onAnimationEnd(Animator animation) {
-//                    lottieAnimationView.setVisibility(View.GONE);
-//                    if (rl_accost != null) {
-//                        rl_accost.setVisibility(View.GONE);
-//                    }
-//                    if (iv_accost1 != null) {
-//                        iv_accost1.setVisibility(View.VISIBLE);
-//                        ObjectAnimator oa3 = ObjectAnimator.ofFloat(iv_accost1, "scaleX", 0.0f, 1.0f);
-//                        ObjectAnimator oa4 = ObjectAnimator.ofFloat(iv_accost1, "scaleY", 0.0f, 1.0f);
-//                        AnimatorSet as2 = new AnimatorSet();
-//                        as2.play(oa3).with(oa4);
-//                        as2.setDuration(300);
-//                        as2.start();
-//                    }
-//                }
-//            });
-            lottieAnimationView.playAnimation();
-        }
-
-
-    }
-
-    public void startAnimation(View rl_accost, View iv_accost1, LottieAnimationView lottieAnimationView) { //用下面都不能播放声音了！搭讪按钮动画  头像特效   播放声音
-        if (rl_accost != null && iv_accost1 != null) {
-            Utils.playAccostAnimation(getContext(), rl_accost, iv_accost1);
-        }
-        if (lottieAnimationView != null) {
-            lottieAnimationView.setVisibility(View.VISIBLE);
-            lottieAnimationView.playAnimation();
-            lottieAnimationView.addAnimatorListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    if (lottieAnimationView != null) {
-                        lottieAnimationView.setVisibility(View.GONE);
-                        lottieAnimationView.clearAnimation();
-                    }
-
-                }
-            });
-        }
-    }
-
     public void notifyItemChangeSinge(int position) {
         getData().get(position).setIs_accost(1);
         getData().get(position).transitionAnima = true;
@@ -324,7 +250,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
     public class TendHolder extends BaseViewHolder {
         public int mPosition;
         public ConstraintLayout constraintLayout;
-        public ImageView mThumb /*, ivAccost, ivChat,videoBg*/;
+        public ImageView mThumb /*, videoBg*/;
         public TextView tvName, tvTime, tvSex, tvContent/*, tvAddress*/;
         public TickerView tvLikeCount, tvDiscussCount;
         public PrepareView mPrepareView;
@@ -337,7 +263,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             super(view);
             mImgVip = view.findViewById(R.id.img_vip_dii);
             constraintLayout = view.findViewById(R.id.dynamic_item_image_root_view);
-            mPrepareView = itemView.findViewById(R.id.prepare_view);
+            mPrepareView = view.findViewById(R.id.prepare_view);
             mThumb = mPrepareView.findViewById(R.id.thumb);
             //videoBg = view.findViewById(R.id.video_bg);
             tvName = view.findViewById(R.id.tv_name);
@@ -345,8 +271,6 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             tvSex = view.findViewById(R.id.iv_sex);
             mPlayerContainer = view.findViewById(R.id.player_container);
             btnLike = view.findViewById(R.id.btn_like);
-//            ivAccost = view.findViewById(R.id.iv_accost);
-//            ivChat = view.findViewById(R.id.iv_chat);//私信
             tvLikeCount = view.findViewById(R.id.tv_like_count); //点赞数
             tvDiscussCount = view.findViewById(R.id.tv_discuss_count);//评论数
             tvContent = view.findViewById(R.id.tv_content);

@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.airbnb.lottie.LottieAnimationViewNew;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ScreenUtils;
@@ -100,7 +99,6 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     private TextView mTvContent;   //动态内容
     private TextView mTvTime;
     private TextView mTvDel;
-//    private ImageView mIvAccost, mIvChat;   //搭讪，私信按钮
 
     private TextView mTvTrendTimeAddressInfo;
 
@@ -121,8 +119,6 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     private ImageView mIvComment;
     private ConstraintLayout mDynamic_item_image_root_view;
     private AvatarVipFrameView mIvAvatar;
-    private LottieAnimationViewNew lottieAnimationView;   //搭讪动画
-    private LottieAnimationViewNew lottieAnimationViewNew;   //搭讪动画
 
     @Override
     protected int getLayout() {
@@ -231,8 +227,6 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     }
 
     private void initViewById() {
-        lottieAnimationViewNew = findViewById(R.id.animation_view_btn);
-        lottieAnimationView = findViewById(R.id.animation_view);
         mDynamic_item_image_root_view = findViewById(R.id.dynamic_item_image_root_view);
         mRootview = findViewById(R.id.root_view);
         mIvAvatar = findViewById(R.id.iv_avatar);
@@ -266,9 +260,6 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
 //        mEtComment.setFilters(new InputFilter[]{mEtComment.getFilters()[0],mInputFilter});
         mTvSend = findViewById(R.id.tv_send);//发送
         mRlAccost = findViewById(R.id.rl_accost);
-//        mIvAccost = findViewById(R.id.iv_accost);
-//
-//        mIvChat = findViewById(R.id.iv_chat);
         mTvTrendTimeAddressInfo = findViewById(R.id.tv_address);  // 时间浏览次数，地址
     }
 
@@ -299,8 +290,6 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
 
     private void setData() {
         if (dataBean == null) return;
-//        mIvAccost.setImageResource(CommonUtil.isBtnTextTrend(service, dataBean.getSex() == 1) ? R.mipmap.img_0_mainnew2 : R.mipmap.home_ic_chat_up_normal);
-//        mIvChat.setImageResource(CommonUtil.isBtnTextTrend(service, dataBean.getSex() == 1) ? R.mipmap.peony_xxym_sx_icon_new : R.mipmap.home_ic_chat_up_selector);
         GlideUtils.loadRoundImageRadius(this, mIvAvatar.getImageView(), dataBean.getIcon());
         mIvAvatar.setBgFrame(dataBean.picture_frame);
         CommonUtil.setUserName(dynamicDetailname, dataBean.getNickname(), dataBean.isVip());
@@ -325,8 +314,6 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
 
         //搭讪是否显示
         mRlAccost.setVisibility(service.getUserId() == dataBean.getUser_id() ? View.INVISIBLE : View.VISIBLE);    //自己的动态不可发消息
-//        mIvAccost.setVisibility(dataBean.is_accost == 1 ? View.GONE : View.VISIBLE);
-//        mIvChat.setVisibility(dataBean.is_accost == 1 ? View.VISIBLE : View.GONE);
         mTvTime.setText(dataBean.getCreated_at());
         mTvTrendTimeAddressInfo.setText(dataBean.getCity());
         SlidingScaleTabLayout mTabLayout = findViewById(R.id.tabLayout);
@@ -522,11 +509,8 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     @Override
     public void accostUserSuccess(int position, AccostDto data) {
         if (null == data || !CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
-//            Utils.playAccostAnimation(this, mIvAccost, mIvChat);
-            if (CommonUtil.isBtnTextTrend(service, dataBean.getSex() == 1)) {
-                getP().startAnimation(null, null, lottieAnimationViewNew);
-            } else {
-                getP().startAnimation(null, null, lottieAnimationView);
+            if (data != null && data.gift != null) {
+                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
             }
             dataBean.setIs_accost(1);
             CommonUtil.sendAccostGirlBoy(service, dataBean.getUser_id(), data, 4);

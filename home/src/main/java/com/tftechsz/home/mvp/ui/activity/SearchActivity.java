@@ -17,11 +17,6 @@ import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.bean.AccostDto;
 import com.netease.nim.uikit.common.UserInfo;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.umeng.analytics.MobclickAgent;
-import com.tftechsz.home.R;
-import com.tftechsz.home.adapter.RecommendAdapter;
-import com.tftechsz.home.mvp.iview.ISearchView;
-import com.tftechsz.home.mvp.presenter.SearchPresenter;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
@@ -30,6 +25,12 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.Utils;
+import com.tftechsz.home.R;
+import com.tftechsz.home.adapter.RecommendAdapter;
+import com.tftechsz.home.mvp.iview.ISearchView;
+import com.tftechsz.home.mvp.presenter.SearchPresenter;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -165,9 +166,11 @@ public class SearchActivity extends BaseMvpActivity<ISearchView, SearchPresenter
             //mAdapter.notifyItemChanged(position);
             try {
                 mAdapter.getItem(position).setIs_accost(1);
-                mAdapter.startAnimationNew(position);
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+            if (data != null && data.gift != null) {
+                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
             }
             //首页搭讪 2  个人资料页搭讪 3  动态搭讪 4  相册搭讪 5
             CommonUtil.sendAccostGirlBoy(service, mAdapter.getItem(position).getUser_id(), data, 2);

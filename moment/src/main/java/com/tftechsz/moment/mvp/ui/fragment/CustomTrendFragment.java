@@ -298,16 +298,10 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
                                 }
                             } else if (event.type == Constants.NOTIFY_PIC_ACCOST_SUCCESS) {
                                 List<CircleBean> data = mAdapter.getData();
-                                int firstVisibleItemPosition = mLinearLayoutManager.findFirstVisibleItemPosition();
-                                int lastVisibleItemPosition = mLinearLayoutManager.findLastVisibleItemPosition();
                                 for (int i = 0; i < data.size(); i++) {
                                     if (data.get(i).getUser_id() == event.familyId) {
                                         CircleBean userInfo = data.get(i);
                                         userInfo.setIs_accost(1);
-                                        if (i >= firstVisibleItemPosition && i <= lastVisibleItemPosition) { //只在可见的item执行动画
-                                            mAdapter.startAnimation(i);
-//                                            mAdapter.notifyItemChangeSinge(i);
-                                        }
                                     }
                                 }
 
@@ -342,20 +336,8 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
         mCompositeDisposable.add(RxBus.getDefault().toObservable(CommentPraiseAccostEvent.class)
                 .compose(this.bindToLifecycle())
                 .subscribe(event -> {
-                            switch (event.type) {
-                                case 0:
-                                    mAdapter.praiseSuccess(event.blog_id, event.praises);
-                                    break;
-
-                                case 1:
-                                   /* List<CircleBean> data = mAdapter.getData();
-                                    for (int i = 0, j = data.size(); i < j; i++) {
-                                        CircleBean circleBean = data.get(i);
-                                        if (event.userId == circleBean.getUser_id()) {
-                                            mAdapter.startAnimation(recyclerView, i);
-                                        }
-                                    }*/
-                                    break;
+                            if (event.type == 0) {
+                                mAdapter.praiseSuccess(event.blog_id, event.praises);
                             }
                         }
                 ));
@@ -633,8 +615,9 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
                 RxBus.getDefault().post(new AccostSuccessEvent(AccostSuccessEvent.ACCOUST_MOMENT, item.getUser_id() + "", item.getNickname(), item.getIcon()));
                 CommonUtil.sendAccostGirlBoy(service, item.getUser_id(), data, 4);
             }
-           /* mAdapter.getItem(position).setIs_accost(1);
-            mAdapter.startAnimation(recyclerView, position);*/
+            if (data != null && data.gift != null) {
+                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
+            }
             //首页搭讪 2  个人资料页搭讪 3  动态搭讪 4  相册搭讪 5
         }
     }

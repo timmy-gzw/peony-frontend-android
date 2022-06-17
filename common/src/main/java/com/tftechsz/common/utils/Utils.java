@@ -1,5 +1,7 @@
 package com.tftechsz.common.utils;
 
+import static com.tftechsz.common.constant.Interfaces.LINK_WEBVIEW;
+
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -69,8 +71,6 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.tools.DateUtils;
 import com.luck.picture.lib.tools.ValueOf;
 import com.netease.nim.uikit.common.ConfigInfo;
-import com.umeng.analytics.AnalyticsConfig;
-import com.umeng.commonsdk.statistics.common.DeviceConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.constant.Interfaces;
@@ -83,6 +83,9 @@ import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.nim.ChatSoundPlayer;
 import com.tftechsz.common.player.view.MyVideoViewActivity;
 import com.tftechsz.common.widget.CustomFilter;
+import com.tftechsz.common.widget.pop.SVGAPlayerPop;
+import com.umeng.analytics.AnalyticsConfig;
+import com.umeng.commonsdk.statistics.common.DeviceConfig;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -112,8 +115,6 @@ import java.util.concurrent.Executors;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-
-import static com.tftechsz.common.constant.Interfaces.LINK_WEBVIEW;
 
 /**
  * <pre>
@@ -506,6 +507,16 @@ public final class Utils {
         }, 50);
     }
 
+    /**
+     * 全屏播放搭讪成功动画以及播放音效
+     */
+    public static void playAccostAnimationAndSound(String giftName, String giftAnimationOfSVGA) {
+        if (TextUtils.isEmpty(giftAnimationOfSVGA)) return;
+        SVGAPlayerPop svgaPop = new SVGAPlayerPop(BaseApplication.getInstance());
+        svgaPop.addSvga(giftName, giftAnimationOfSVGA);
+        //播放音频
+        ChatSoundPlayer.instance().play(ChatSoundPlayer.RingerTypeEnum.ACCOST);
+    }
 
     public static void playAccostAnimation(Context context, View v1, View v2) {
 

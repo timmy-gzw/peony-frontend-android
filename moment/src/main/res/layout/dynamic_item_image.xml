@@ -312,32 +312,4 @@
         app:layout_constraintStart_toStartOf="@id/tv_time"
         app:layout_constraintTop_toBottomOf="@id/tv_like_count" />
 
-    <com.airbnb.lottie.LottieAnimationViewNew
-        android:id="@+id/animation_view"
-        android:layout_width="@dimen/dp_50"
-        android:layout_height="@dimen/dp_50"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/rl_accost"
-        app:layout_constraintEnd_toEndOf="@id/rl_accost"
-        app:layout_constraintStart_toStartOf="@id/rl_accost"
-        app:layout_constraintTop_toTopOf="@id/rl_accost"
-        app:lottie_autoPlay="false"
-        app:lottie_fileName="hit_up_animation.json"
-        app:lottie_imageAssetsFolder="gift/"
-        app:lottie_loop="false" />
-
-    <com.airbnb.lottie.LottieAnimationViewNew
-        android:id="@+id/animation_view_btn"
-        android:layout_width="@dimen/dp_50"
-        android:layout_height="@dimen/dp_40"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/rl_accost"
-        app:layout_constraintEnd_toEndOf="@id/rl_accost"
-        app:layout_constraintStart_toStartOf="@id/rl_accost"
-        app:layout_constraintTop_toTopOf="@id/rl_accost"
-        app:lottie_autoPlay="false"
-        app:lottie_fileName="aixin.zip"
-        app:lottie_imageAssetsFolder="gift/"
-        app:lottie_loop="false" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

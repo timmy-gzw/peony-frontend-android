@@ -25,12 +25,6 @@ import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.UserInfo;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
-import com.umeng.analytics.MobclickAgent;
-import com.tftechsz.home.R;
-import com.tftechsz.home.adapter.RecommendAdapter;
-import com.tftechsz.home.entity.req.RecommendReq;
-import com.tftechsz.home.mvp.iview.IHomeView;
-import com.tftechsz.home.mvp.presenter.HomePresenter;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpFragment;
@@ -38,6 +32,7 @@ import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.entity.NavigationLogEntity;
+import com.tftechsz.common.event.AccostSuccessEvent;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.UpdateEvent;
 import com.tftechsz.common.iservice.MineService;
@@ -51,6 +46,12 @@ import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.home.R;
+import com.tftechsz.home.adapter.RecommendAdapter;
+import com.tftechsz.home.entity.req.RecommendReq;
+import com.tftechsz.home.mvp.iview.IHomeView;
+import com.tftechsz.home.mvp.presenter.HomePresenter;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -313,7 +314,6 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
 //                                                UserInfo userInfo = data.get(i);
 //                                                userInfo.setIs_accost(1);
 //                                                mAdapter.setData(i, userInfo);
-                                                mAdapter.startAnimationNew(i);//新动画
                                                 mAdapter.getData().get(i).setIs_accost(1);
                                                 break;
                                             }
@@ -432,8 +432,13 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
         if (null == data || !CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
             RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_ACCOST_SUCCESS, data.gift.animation));
             RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PIC_ACCOST_SUCCESS, mAdapter.getData().get(position).getUser_id()));
-//            mAdapter.getData().get(position).setIs_accost(1);
-//            mAdapter.startAnimation(mRvUser, position);
+            UserInfo item = mAdapter.getItem(position);
+            if (item != null) {
+                RxBus.getDefault().post(new AccostSuccessEvent(AccostSuccessEvent.ACCOUST_HOME, item.getUser_id() + "", item.getNickname(), item.getIcon()));
+            }
+            if (data != null && data.gift != null) {
+                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
+            }
             //首页搭讪 2  个人资料页搭讪 3  动态搭讪 4  相册搭讪 5
             CommonUtil.sendAccostGirlBoy(service, mAdapter.getData().get(position).getUser_id(), data, 2);
             if (service.getUserInfo().isGirl()) {
