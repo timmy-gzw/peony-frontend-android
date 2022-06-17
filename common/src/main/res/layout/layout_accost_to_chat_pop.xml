@@ -5,10 +5,11 @@
     android:id="@+id/cl_accost_pop"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/dp_16"
-    android:layout_marginEnd="@dimen/dp_16"
-    android:layout_marginBottom="@dimen/dp_10"
-    android:background="@drawable/sp_fff_c_10_s_primary">
+    android:background="@mipmap/bg_accost_chat_pop"
+    android:paddingStart="@dimen/dp_16"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingEnd="@dimen/dp_16"
+    android:paddingBottom="@dimen/dp_10">
 
     <com.tftechsz.common.widget.RoundImageView
         android:id="@+id/iv_accost_avatar"
