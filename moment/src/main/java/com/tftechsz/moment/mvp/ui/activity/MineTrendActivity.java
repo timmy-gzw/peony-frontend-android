@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -41,7 +40,7 @@ import java.util.List;
 public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFragment.SrcollowInterface, View.OnClickListener {
 
     private TextView mTvTitle;
-    private ImageView mIvPublish;
+    private TextView mTvPublish;
     private CustomPopWindow mDelPop;
     @Autowired
     UserProviderService service;
@@ -52,8 +51,8 @@ public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFra
     @Override
     protected void initView(Bundle savedInstanceState) {
         findViewById(R.id.toolbar_back_all).setOnClickListener(this);
-        mIvPublish = findViewById(R.id.iv_publish);
-        mIvPublish.setOnClickListener(this);
+        mTvPublish = findViewById(R.id.tv_publish);
+        mTvPublish.setOnClickListener(this);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mTvTitle = findViewById(R.id.toolbar_title);
         setData();
@@ -115,7 +114,7 @@ public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFra
         int id = v.getId();
         if (id == R.id.toolbar_back_all) {
             finish();
-        } else if (id == R.id.iv_publish || id == R.id.tv_send) {
+        } else if (id == R.id.tv_publish || id == R.id.tv_send) {
             if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
             showMediaSelector();
         }
@@ -143,15 +142,15 @@ public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFra
         String mUserName = getIntent().getStringExtra("name");
         LottieAnimationView lottie = findViewById(R.id.animation_view);
         lottie.setImageAssetsFolder(Constants.ACCOST_GIFT);//设置data.json引用的图片资源文件夹名称
-        mIvPublish.setVisibility(TextUtils.isEmpty(userId) ? View.VISIBLE : View.GONE);
+        mTvPublish.setVisibility(TextUtils.isEmpty(userId) ? View.VISIBLE : View.GONE);
 
         if (TextUtils.isEmpty(userId)) {
-            mIvPublish.setVisibility(View.VISIBLE);
+            mTvPublish.setVisibility(View.VISIBLE);
             mTvTitle.setText("我的动态");
             customTrendFragment = CustomTrendFragment.newInstance(0, -1, this);
         } else {
             mTvTitle.setText(String.format("%s的动态", mUserName));
-            mIvPublish.setVisibility(View.GONE);
+            mTvPublish.setVisibility(View.GONE);
             customTrendFragment = CustomTrendFragment.newInstance(0, Integer.parseInt(userId), this);
         }
         getSupportFragmentManager()    //
