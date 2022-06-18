@@ -34,7 +34,6 @@ import com.flyco.tablayout.SlidingScaleTabLayout;
 import com.like.LikeButton;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.bean.AccostDto;
-import com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView;
 import com.robinhood.ticker.TickerView;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.adapter.FragmentVpAdapter;
@@ -90,6 +89,8 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     private TextView dynamicDetailsex;
     //是否真人
     private ImageView dynamicDetailreal_people;
+    //是否VIP
+    private ImageView ivVip;
     //评论数
     private TickerView dynamicDetailcommentNum;
     //点赞数
@@ -118,7 +119,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     protected VideoView mVideoView;
     private ImageView mIvComment;
     private ConstraintLayout mDynamic_item_image_root_view;
-    private AvatarVipFrameView mIvAvatar;
+    private ImageView mIvAvatar;
 
     @Override
     protected int getLayout() {
@@ -239,6 +240,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
         dynamicDetailname = findViewById(R.id.tv_name);
         dynamicDetailsex = findViewById(R.id.iv_sex);
         dynamicDetailreal_people = findViewById(R.id.iv_real);
+        ivVip = findViewById(R.id.img_vip_dii);
         dynamicDetailcommentNum = findViewById(R.id.tv_discuss_count);
         // mVideoBg = findViewById(R.id.video_bg);
         mIvComment = findViewById(R.id.iv_comment);
@@ -290,9 +292,10 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
 
     private void setData() {
         if (dataBean == null) return;
-        GlideUtils.loadRoundImageRadius(this, mIvAvatar.getImageView(), dataBean.getIcon());
-        mIvAvatar.setBgFrame(dataBean.picture_frame);
-        CommonUtil.setUserName(dynamicDetailname, dataBean.getNickname(), dataBean.isVip());
+//        GlideUtils.loadRoundImageRadius(this, mIvAvatar.getImageView(), dataBean.getIcon());
+//        mIvAvatar.setBgFrame(dataBean.picture_frame);
+        GlideUtils.loadRoundImageRadius(this, mIvAvatar, dataBean.getIcon());
+        CommonUtil.setUserName(dynamicDetailname, dataBean.getNickname(), false, dataBean.isVip());
 
         //内容
         String content = dataBean.getContent().trim();
@@ -306,6 +309,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
         int sex = dataBean.getSex();
         CommonUtil.setSexAndAge(this, sex, dataBean.age, dynamicDetailsex);
         dynamicDetailreal_people.setVisibility(dataBean.getIs_real() == 1 ? View.VISIBLE : View.GONE);  //是否真人
+        ivVip.setVisibility(dataBean.isVip() ? View.VISIBLE : View.GONE);  //是否vip
         mLikeButton.setLiked(dataBean.getIs_praise() == 1);//点赞了
         dynamicDetailpraise.setText(dataBean.getPraises() == 0 ? "点赞" : String.valueOf(dataBean.getPraises()));
         //评论数

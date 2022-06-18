@@ -63,9 +63,10 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
     protected void convert(@NonNull TendHolder holder, CircleBean item) {
         if (item == null)
             return;
-        AvatarVipFrameView ivAvatar = holder.getView(R.id.iv_avatar);
-        GlideUtils.loadRoundImageRadius(getContext(), ivAvatar.getImageView(), item.getIcon());
-        ivAvatar.setBgFrame(item.picture_frame);
+//        AvatarVipFrameView ivAvatar = holder.getView(R.id.iv_avatar);
+//        ivAvatar.setBgFrame(item.picture_frame);
+        ImageView ivAvatar = holder.getView(R.id.iv_avatar);
+        GlideUtils.loadRoundImageRadius(getContext(), ivAvatar, item.getIcon());
 
         holder.tvTime.setText(item.getCreated_at());
 //        helper.setText(R.id.tv_look_times, item.getProvince());  //浏览次数iv_accost
@@ -92,7 +93,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         CommonUtil.setSexAndAge(getContext(), item.getSex(), item.age, holder.tvSex);
 
         //if (true) { //vip
-        CommonUtil.setUserName(holder.tvName, item.getNickname(), false);
+        CommonUtil.setUserName(holder.tvName, item.getNickname(), false, item.isVip());
         holder.mImgVip.setVisibility(item.isVip() ? View.VISIBLE : View.GONE);
        /* new ConstraintUtil(holder.constraintLayout)
                 .begin()

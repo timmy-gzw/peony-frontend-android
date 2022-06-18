@@ -13,31 +13,26 @@
 
     <!--头像-->
 
-    <com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
         android:layout_marginStart="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_12"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:vip_height="@dimen/dp_size_40"
-        app:vip_width="@dimen/dp_size_40"
-        tools:layout_height="@dimen/dp_40"
-        tools:layout_width="@dimen/dp_40" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--昵称-->
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_4"
-        android:paddingEnd="@dimen/dp_4"
+        android:layout_marginStart="@dimen/dp_10"
         android:textColor="@color/red"
         android:textSize="@dimen/text_size_15"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/iv_sex"
-        app:layout_constraintLeft_toRightOf="@id/iv_avatar"
+        app:layout_constraintStart_toEndOf="@id/iv_avatar"
         app:layout_constraintTop_toTopOf="@id/iv_avatar"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="test" />
@@ -46,12 +41,12 @@
         android:id="@+id/img_vip_dii"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_14"
-        android:layout_marginTop="@dimen/dp_3"
-        android:src="@mipmap/vip_icon_bg2"
+        android:src="@mipmap/vip_icon_bg"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+        app:layout_constraintBottom_toBottomOf="@id/iv_sex"
+        app:layout_constraintEnd_toStartOf="@id/iv_sex"
         app:layout_constraintStart_toStartOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        app:layout_constraintTop_toTopOf="@id/iv_sex"
         tools:visibility="visible" />
 
     <TextView
@@ -59,11 +54,12 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_14"
         android:layout_marginStart="@dimen/dp_6"
+        android:layout_marginTop="@dimen/dp_3"
         android:gravity="center"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/img_vip_dii"
+        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
         app:layout_constraintStart_toEndOf="@id/img_vip_dii"
-        app:layout_constraintTop_toTopOf="@id/img_vip_dii"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
         app:layout_goneMarginStart="0dp"
         tools:background="@drawable/bg_girl"
         tools:drawablePadding="@dimen/dp_2"
@@ -79,9 +75,9 @@
         android:layout_height="@dimen/dp_14"
         android:layout_marginStart="@dimen/dp_6"
         android:src="@mipmap/peony_home_xczr_icon"
-        app:layout_constraintBottom_toBottomOf="@id/img_vip_dii"
+        app:layout_constraintBottom_toBottomOf="@id/iv_sex"
         app:layout_constraintStart_toEndOf="@id/iv_sex"
-        app:layout_constraintTop_toTopOf="@id/img_vip_dii"
+        app:layout_constraintTop_toTopOf="@id/iv_sex"
         app:layout_goneMarginStart="0dp" />
 
     <ImageView
