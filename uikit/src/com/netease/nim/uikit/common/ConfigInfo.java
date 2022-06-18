@@ -250,6 +250,7 @@ public class ConfigInfo {
     public static class DownH5Resource {
         public String icon;
         public String zip_source;
+        public String url;
     }
 
 

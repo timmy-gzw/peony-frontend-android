@@ -504,7 +504,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_VIDEO_COMPRESS_FILTER, configInfo.sys.video_compress_filter);
             com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_VIDEO_COMPRESS_BITRATE, configInfo.sys.video_compress_bitrate);
             com.blankj.utilcode.util.SPUtils.getInstance().put("sp_vip_pic_host", configInfo.sys.vip_pic_host);
-            if (configInfo.sys.loading_h5 != null && configInfo.sys.loading_h5.onhot != null) {
+            if (configInfo.sys.loading_h5 != null && configInfo.sys.loading_h5.onhot != null && configInfo.sys.loading_h5.onhot.zip_source != null) {
                 final File file = new File(DownloadHelper.FILE_PATH + File.separator + MD5Util.toMD516(configInfo.sys.loading_h5.onhot.zip_source) + ".zip");
                 if (!file.exists()) {
                     DownloadHelper.downloadZip(configInfo.sys.loading_h5.onhot.zip_source, new DownloadHelper.DownloadListener() {

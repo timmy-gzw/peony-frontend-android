@@ -341,16 +341,19 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
 
     private void showHot() {
         Utils.runOnUiThread(() -> {
-            if (service.getConfigInfo().sys.loading_h5.onhot != null) {
-                if (StringUtils.isTrimEmpty(service.getConfigInfo().sys.loading_h5.onhot.zip_source)) {
-                    return;
-                }
+            ConfigInfo.DownH5Resource onHot = service.getConfigInfo().sys.loading_h5.onhot;
+
+            if (StringUtils.isTrimEmpty(onHot.url)) {
+                webView.loadUrl(onHot.url);
+                webView.setVisibility(View.VISIBLE);
+            } else if (StringUtils.isTrimEmpty(onHot.zip_source)) {
                 final File file = new File(DownloadHelper.FILE_PATH + File.separator + MD5Util.toMD516(service.getConfigInfo().sys.loading_h5.onhot.zip_source) + ".zip");
                 if (file.exists())
                     webView.loadUrl("file://" + DownloadHelper.FILE_PATH + "/onhot.html");
                 webView.setVisibility(View.VISIBLE);
             } else {
                 webView.setVisibility(View.GONE);
+                return;
             }
         });
 
