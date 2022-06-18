@@ -56,5 +56,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="cert_requirements">认证要求</string>
+    <string name="cert_complete_will_grant">认证完成后，你将获得以下权限</string>
+    <string name="cert_now">马上认证</string>
 
 </resources>

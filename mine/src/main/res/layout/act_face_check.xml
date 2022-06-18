@@ -109,7 +109,7 @@
                 android:layout_marginRight="10dp"
                 app:backgroundColorCenter="@android:color/transparent"
                 app:borderBottomColor="@android:color/darker_gray"
-                app:borderDrawColor="#7C49F2"
+                app:borderDrawColor="@color/colorPrimary"
                 app:borderWidth="2dp"
                 app:clockwise="true"
                 app:countTime="30000"

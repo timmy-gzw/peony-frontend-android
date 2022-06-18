@@ -269,7 +269,7 @@ public class RealCameraActivity extends BaseMvpActivity {
                 }
                 mBind.send.setVisibility(View.VISIBLE);
                 mBind.pb.setVisibility(View.GONE);
-                mBind.rlBtn.setBackgroundResource(R.drawable.bg_orange_enable);
+                mBind.rlBtn.setBackgroundResource(R.drawable.sp_primary_r_25);
                 writeToFile(bitmap);
             }
             image.close();

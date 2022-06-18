@@ -4,8 +4,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -16,17 +19,13 @@ import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.adapter.RealPopAdapter;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.mine.R;
-import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.mine.mvp.IView.IRealAuthView;
 import com.tftechsz.mine.mvp.presenter.RealAuthPresenter;
-
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 真人认证
@@ -49,8 +48,9 @@ public class RealAuthenticationActivity extends BaseMvpActivity<IRealAuthView, R
     @Override
     protected void initView(Bundle savedInstanceState) {
         new ToolBarBuilder().showBack(true)
+                .setTitle("真人认证")
                 .build();
-        ImageView ivAvatar = findViewById(R.id.iv_true_avatar);
+//        ImageView ivAvatar = findViewById(R.id.iv_true_avatar);
         mRelaTips = findViewById(R.id.rela_tips);
         mRelaTips.setVisibility(service.getUserInfo().isBoy() ? View.GONE : View.VISIBLE);
         RecyclerView recy = findViewById(R.id.real_recy);
@@ -64,15 +64,14 @@ public class RealAuthenticationActivity extends BaseMvpActivity<IRealAuthView, R
         }
 
 //        ivAvatar.setBackgroundResource(service.getUserInfo().isBoy() ? R.mipmap.ic_boy_true_avatar : R.mipmap.ic_true_avatar);
-        ivAvatar.setBackgroundResource(R.mipmap.right_avater);
+//        ivAvatar.setBackgroundResource(R.mipmap.right_avater);
         findViewById(R.id.tv_authentication).setOnClickListener(this);
 
         TextView tops = findViewById(R.id.tv_tip);
         tops.setText(new SpannableStringUtils.Builder()
-                .append(service.getUserInfo().isGirl() ? "- 请露出正脸和上半身，并保持手戳脸姿势拍照" : "- 请露出正脸和上半身")
-                .append("\n- 请保证头像和真人认证为同一人")
-                .append("\n- 不满足上述认证要求将被驳回真人认证")
-                .append("\n- 拍摄图片仅用做认证，官方将对图片保密")
+                .append(service.getUserInfo().isGirl() ? "· 请露出正脸和上半身，并寻找光线明亮环境拍照" : "· 请露出正脸和上半身")
+                .append("\n· 请保证头像与真人为同一人")
+                .append("\n· 拍摄照片仅用作认证，官方将对照片保密")
                 .create()
         );
     }

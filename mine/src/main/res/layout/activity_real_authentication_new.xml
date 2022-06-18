@@ -17,11 +17,11 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_icon"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="182dp"
+            android:layout_height="182dp"
             android:layout_margin="@dimen/dp_60"
             android:scaleType="centerCrop"
-            android:src="@mipmap/mine_ic_girl_default"
+            android:src="@mipmap/right_avater"
             app:layout_constraintBottom_toBottomOf="@id/real_bg"
             app:layout_constraintEnd_toEndOf="@id/real_bg"
             app:layout_constraintStart_toStartOf="@id/real_bg"
@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/real_bg"
-            android:layout_width="@dimen/dp_250"
-            android:layout_height="@dimen/dp_250"
+            android:layout_width="@dimen/dp_340"
+            android:layout_height="@dimen/dp_340"
             android:src="@mipmap/peony_zrrz_img"
             app:layout_constraintBottom_toTopOf="@id/msg"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,8 @@
                 android:paddingHorizontal="@dimen/dp_12"
                 android:text="与照片进行真人对比"
                 android:textColor="@color/color_black_333333"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +81,8 @@
                 android:lineSpacingExtra="@dimen/dp_2"
                 android:text="-  请确保头像是你本人照片\n-  请露出正脸，并按要求进行认证\n-  人脸识别仅用于认证，官方将对此严格保密"
                 android:textColor="#ff666666"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -89,10 +91,10 @@
             style="@style/CustomButton"
             android:layout_marginHorizontal="@dimen/dp_28"
             android:layout_marginBottom="@dimen/dp_20"
-            android:background="@drawable/bg_orange_selector"
+            android:background="@drawable/sel_primary_r_25_enable"
             android:enabled="false"
             android:text="马上认证"
-            android:textColor="@color/color_999999"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

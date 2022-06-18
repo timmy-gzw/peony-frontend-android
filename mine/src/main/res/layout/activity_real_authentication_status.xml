@@ -30,10 +30,12 @@
         android:layout_below="@+id/tv_real"
         android:layout_marginStart="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_5"
+        android:drawablePadding="@dimen/dp_4"
         android:gravity="center"
         android:lineSpacingExtra="@dimen/dp_3"
         android:textColor="@color/red"
         android:textSize="@dimen/sp_12"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_status"
         tools:drawableStart="@mipmap/peony_sy_lt_wcg_icon"
@@ -98,7 +100,7 @@
                 android:drawableStart="@mipmap/peony_zrrz_pz_icon"
                 android:drawablePadding="@dimen/dp_6"
                 android:text="点击更换"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_12" />
         </RelativeLayout>
 
@@ -152,7 +154,7 @@
                 android:layout_centerInParent="true"
                 android:drawableStart="@mipmap/peony_zrrz_pz_icon"
                 android:drawablePadding="@dimen/dp_6"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_12"
                 tools:text="点击更换" />
         </RelativeLayout>
@@ -201,10 +203,13 @@
         <TextView
             android:id="@+id/tv_upload_avatar"
             style="@style/CustomButton"
-            android:background="@drawable/real_btn_selector"
-            android:enabled="true"
+            android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_40"
-            android:text="上传头像" />
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@drawable/sel_primary_r_25_enable"
+            android:enabled="true"
+            android:text="上传头像"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

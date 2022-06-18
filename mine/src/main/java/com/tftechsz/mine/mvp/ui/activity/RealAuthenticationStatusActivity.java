@@ -2,7 +2,6 @@ package com.tftechsz.mine.mvp.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -22,6 +22,7 @@ import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
@@ -29,7 +30,6 @@ import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
-import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.mine.mvp.IView.IRealAuthView;
 import com.tftechsz.mine.mvp.presenter.RealAuthPresenter;
 
@@ -306,12 +306,12 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
         mTvStatus.setText("审核中");
         mRlChange1.setVisibility(View.GONE);
         mRlChange2.setVisibility(View.GONE);
-        mTvTip.setText("您已提交审核，请耐心等待结果...");
+        mTvTip.setText("您已提交审核，请耐心等待结果…");
         mTvTip.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
         mTvTip.setCompoundDrawablePadding(ConvertUtils.dp2px(0));
-        mTvTip.setTextColor(Color.parseColor("#08C160"));
+        mTvTip.setTextColor(ContextCompat.getColor(this, R.color.green));
         mTvUploadAvatar.setText("我知道了");
-        mTvUploadAvatar.setBackgroundResource(R.drawable.bg_orange_enable);
+        mTvUploadAvatar.setBackgroundResource(R.drawable.sp_primary_r_25);
         mIvAvatarError.setVisibility(View.GONE);
         mIvPhotoError.setVisibility(View.GONE);
     }
