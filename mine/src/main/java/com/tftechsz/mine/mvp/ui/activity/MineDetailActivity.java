@@ -64,7 +64,6 @@ import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.MyBannerImageHolder;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
-import com.tftechsz.common.widget.pop.ReportPopWindow;
 import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
@@ -93,7 +92,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private final int MAX_SIZE = 9;
 
     private Banner mBanner;
-    private TextView mTvCurrentNum,mTvEditInfo;
+    private TextView mTvCurrentNum, mTvEditInfo;
     private ImageView mIvAvatar;   //头像
     private ImageView mIvBack, mTobBack, mTobMore;
     private AppBarLayout mAppBarLayout;
@@ -121,7 +120,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private TextView mTvIsSelf;   //是否真人
     private TextView mTvSelfStatus;
     private TextView mTvSelfTip;
-    private  LinearLayout mllAuth;
+    private LinearLayout mllAuth;
 
     private RecyclerView mRvTrend;   //动态
     private RecyclerView mRvUserInfo;  //基本信息
@@ -777,13 +776,13 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         }
         mBanner.setAdapter(new MyBannerImageAdapter<String>(list) {
 
-            @Override
-            public void onBindView(MyBannerImageHolder holder, String data, int position, int size) {
-                holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                GlideUtils.loadPicImage(mContext, holder.imageView, data);
+                    @Override
+                    public void onBindView(MyBannerImageHolder holder, String data, int position, int size) {
+                        holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        GlideUtils.loadPicImage(mContext, holder.imageView, data);
 
-            }
-        })
+                    }
+                })
                 .addOnPageChangeListener(new OnPageChangeListener() {
                     @Override
                     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -805,8 +804,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
                     }
                 }).setOnBannerListener((data1, position) -> {
-            ARouterUtils.toUserPicBrowserActivity(!TextUtils.isEmpty(mUserId) ? Integer.parseInt(mUserId) : service.getUserId(), position, list.get(0), (mUserInfo != null && mUserInfo.isBoy()));
-        });
+                    ARouterUtils.toUserPicBrowserActivity(!TextUtils.isEmpty(mUserId) ? Integer.parseInt(mUserId) : service.getUserId(), position, list.get(0), (mUserInfo != null && mUserInfo.isBoy()));
+                });
         mBanner.addBannerLifecycleObserver(this);
     }
 
@@ -950,7 +949,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             }
         }
 
-        mRlIsSelf.setVisibility(mUserInfo.isPartyGirl() ? View.GONE : View.VISIBLE);// 语音房女用户进入个人主页，不显示真人认证
+//        mRlIsSelf.setVisibility(mUserInfo.isPartyGirl() ? View.GONE : View.VISIBLE);// 语音房女用户进入个人主页，不显示真人认证
         CommonUtil.setUserName(mTvName, mUserInfo.getNickname(), mUserInfo.isVip(), TextUtils.isEmpty(mUserId));
         mTvName.setText(mUserInfo.getNickname());
         GlideUtils.loadImage(this, mIvAvatar, mUserInfo.getIcon(), mUserInfo.getSex() == 1 ? R.mipmap.mine_ic_big_boy_default : R.mipmap.mine_ic_big_girl_default);   //头像

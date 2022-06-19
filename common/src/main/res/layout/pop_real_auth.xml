@@ -15,6 +15,7 @@
 		android:visibility="gone"
 		tools:visibility="gone">
 		
+		<!--	TODO 替换图片	-->
 		<ImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -79,7 +80,8 @@
 				android:layout_marginStart="0dp"
 				android:layout_marginTop="@dimen/dp_15"
 				android:layout_marginEnd="0dp"
-				android:background="@drawable/bg_orange_enable"
+				android:background="@drawable/sp_primary_r_25"
+				android:textColor="@color/white"
 				android:gravity="center"
 				android:text="去认证" />
 			

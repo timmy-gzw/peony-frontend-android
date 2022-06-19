@@ -59,5 +59,11 @@
     <string name="cert_requirements">认证要求</string>
     <string name="cert_complete_will_grant">认证完成后，你将获得以下权限</string>
     <string name="cert_now">马上认证</string>
+    <string name="living_person_cart">真人认证</string>
+    <string name="real_name_cert">实名认证</string>
+    <string name="living_person_auth_tip">让更多的Ta关注你</string>
+    <string name="to_cert">去认证</string>
+    <string name="real_name_cert_tip">积分兑换等功能需要</string>
+    <string name="certificated">已认证</string>
 
 </resources>

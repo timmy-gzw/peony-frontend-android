@@ -1,199 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-    </data>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_color"
-        android:orientation="vertical">
-
-        <include layout="@layout/tool_bar" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_10"
-            android:background="@drawable/bg_white_radius10"
-            android:padding="@dimen/dp_20">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:text="实名认证"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_24"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/hint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_12"
-                android:text="请确保填写的实名信息是你本人"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintStart_toStartOf="@id/title"
-                app:layout_constraintTop_toBottomOf="@id/title" />
-
-            <TextView
-                android:id="@+id/tv_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_30"
-                android:paddingVertical="@dimen/dp_10"
-                android:text="身份证号"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintStart_toStartOf="@id/title"
-                app:layout_constraintTop_toBottomOf="@id/hint" />
-
-            <EditText
-                android:id="@+id/edt_card"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@null"
-                android:digits="0123456789xX"
-                android:hint="请输入"
-                android:inputType="number"
-                android:paddingStart="@dimen/dp_18"
-                android:singleLine="true"
-                android:textColor="@color/color_normal"
-                android:textColorHint="@color/color_d1d1d1"
-                android:maxLength="18"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintBottom_toBottomOf="@id/tv_card"
-                app:layout_constraintEnd_toStartOf="@id/iv_del_card"
-                app:layout_constraintStart_toEndOf="@id/tv_card"
-                app:layout_constraintTop_toTopOf="@id/tv_card" />
-
-            <ImageView
-                android:id="@+id/iv_del_card"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:paddingHorizontal="@dimen/dp_8"
-                android:src="@drawable/del"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/edt_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/edt_card"
-                tools:visibility="visible" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_0_5"
-                android:background="@color/EEEEEE"
-                app:layout_constraintBottom_toBottomOf="@id/tv_card"
-                app:layout_constraintEnd_toEndOf="@id/iv_del_card"
-                app:layout_constraintStart_toStartOf="@id/tv_card" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_10"
-                android:text="真实姓名"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintStart_toStartOf="@id/title"
-                app:layout_constraintTop_toBottomOf="@id/tv_card" />
-
-            <EditText
-                android:id="@+id/edt_name"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@null"
-                android:hint="请输入"
-                android:maxLength="10"
-                android:paddingStart="@dimen/dp_18"
-                android:singleLine="true"
-                android:textColor="@color/color_normal"
-                android:textColorHint="@color/color_d1d1d1"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintBottom_toBottomOf="@id/tv_name"
-                app:layout_constraintEnd_toStartOf="@id/iv_del_name"
-                app:layout_constraintStart_toEndOf="@id/tv_name"
-                app:layout_constraintTop_toTopOf="@id/tv_name" />
-
-            <ImageView
-                android:id="@+id/iv_del_name"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:paddingHorizontal="@dimen/dp_8"
-                android:src="@drawable/del"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/edt_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/edt_name"
-                tools:visibility="visible" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_0_5"
-                android:background="@color/EEEEEE"
-                app:layout_constraintBottom_toBottomOf="@id/tv_name"
-                app:layout_constraintEnd_toEndOf="@id/iv_del_name"
-                app:layout_constraintStart_toStartOf="@id/tv_name" />
-
-            <TextView
-                android:id="@+id/error_hint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/dp_5"
-                android:textColor="#ff5959"
-                android:textSize="@dimen/sp_12"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_name"
-                tools:text="请输入正确身份证号码"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/btn"
-                style="@style/CustomButton"
-                android:layout_marginStart="@dimen/dp_0"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginEnd="@dimen/dp_0"
-                android:text="进行实名认证"
-                android:textColor="#ff333333"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/error_hint" />
-
-            <ImageView
-                android:id="@+id/iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_12"
-                android:src="@mipmap/myl_yzm_protect_icon"
-                app:layout_constraintStart_toStartOf="@id/title"
-                app:layout_constraintTop_toBottomOf="@id/btn" />
-
-            <TextView
-                android:id="@+id/bot_tip"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_3"
-                android:layout_marginTop="@dimen/dp_10"
-                android:gravity="start|top"
-                android:text="平台声明：您的身份信息仅用于实名登记，我们将尽全力保障您的信息安全"
-                android:textColor="#ff999999"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv"
-                app:layout_constraintTop_toBottomOf="@id/btn" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+	
+	<data>
+	
+	</data>
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/bg_color"
+		android:orientation="vertical">
+		
+		<include layout="@layout/tool_bar" />
+		
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/dp_10"
+			android:background="@drawable/bg_white_radius10"
+			android:padding="@dimen/dp_20">
+			
+			<TextView
+				android:id="@+id/title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/dp_20"
+				android:text="实名认证"
+				android:textColor="@color/color_normal"
+				android:textSize="@dimen/sp_24"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+			
+			<TextView
+				android:id="@+id/hint"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/dp_12"
+				android:text="请确保填写的实名信息是你本人"
+				android:textColor="@color/color_999999"
+				android:textSize="@dimen/sp_16"
+				app:layout_constraintStart_toStartOf="@id/title"
+				app:layout_constraintTop_toBottomOf="@id/title" />
+			
+			<TextView
+				android:id="@+id/tv_card"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/dp_30"
+				android:paddingVertical="@dimen/dp_10"
+				android:text="身份证号"
+				android:textColor="@color/color_normal"
+				android:textSize="@dimen/sp_16"
+				app:layout_constraintStart_toStartOf="@id/title"
+				app:layout_constraintTop_toBottomOf="@id/hint" />
+			
+			<EditText
+				android:id="@+id/edt_card"
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:background="@null"
+				android:digits="0123456789xX"
+				android:hint="请输入"
+				android:inputType="number"
+				android:maxLength="18"
+				android:paddingStart="@dimen/dp_18"
+				android:singleLine="true"
+				android:textColor="@color/color_normal"
+				android:textColorHint="@color/color_d1d1d1"
+				android:textSize="@dimen/sp_16"
+				app:layout_constraintBottom_toBottomOf="@id/tv_card"
+				app:layout_constraintEnd_toStartOf="@id/iv_del_card"
+				app:layout_constraintStart_toEndOf="@id/tv_card"
+				app:layout_constraintTop_toTopOf="@id/tv_card" />
+			
+			<ImageView
+				android:id="@+id/iv_del_card"
+				android:layout_width="wrap_content"
+				android:layout_height="0dp"
+				android:paddingHorizontal="@dimen/dp_8"
+				android:src="@drawable/del"
+				android:visibility="gone"
+				app:layout_constraintBottom_toBottomOf="@id/edt_card"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@id/edt_card"
+				tools:visibility="visible" />
+			
+			<View
+				android:layout_width="0dp"
+				android:layout_height="@dimen/dp_0_5"
+				android:background="@color/EEEEEE"
+				app:layout_constraintBottom_toBottomOf="@id/tv_card"
+				app:layout_constraintEnd_toEndOf="@id/iv_del_card"
+				app:layout_constraintStart_toStartOf="@id/tv_card" />
+			
+			<TextView
+				android:id="@+id/tv_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/dp_10"
+				android:paddingVertical="@dimen/dp_10"
+				android:text="真实姓名"
+				android:textColor="@color/color_normal"
+				android:textSize="@dimen/sp_16"
+				app:layout_constraintStart_toStartOf="@id/title"
+				app:layout_constraintTop_toBottomOf="@id/tv_card" />
+			
+			<EditText
+				android:id="@+id/edt_name"
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:background="@null"
+				android:hint="请输入"
+				android:maxLength="10"
+				android:paddingStart="@dimen/dp_18"
+				android:singleLine="true"
+				android:textColor="@color/color_normal"
+				android:textColorHint="@color/color_d1d1d1"
+				android:textSize="@dimen/sp_16"
+				app:layout_constraintBottom_toBottomOf="@id/tv_name"
+				app:layout_constraintEnd_toStartOf="@id/iv_del_name"
+				app:layout_constraintStart_toEndOf="@id/tv_name"
+				app:layout_constraintTop_toTopOf="@id/tv_name" />
+			
+			<ImageView
+				android:id="@+id/iv_del_name"
+				android:layout_width="wrap_content"
+				android:layout_height="0dp"
+				android:paddingHorizontal="@dimen/dp_8"
+				android:src="@drawable/del"
+				android:visibility="gone"
+				app:layout_constraintBottom_toBottomOf="@id/edt_name"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@id/edt_name"
+				tools:visibility="visible" />
+			
+			<View
+				android:layout_width="0dp"
+				android:layout_height="@dimen/dp_0_5"
+				android:background="@color/EEEEEE"
+				app:layout_constraintBottom_toBottomOf="@id/tv_name"
+				app:layout_constraintEnd_toEndOf="@id/iv_del_name"
+				app:layout_constraintStart_toStartOf="@id/tv_name" />
+			
+			<TextView
+				android:id="@+id/error_hint"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingVertical="@dimen/dp_5"
+				android:textColor="#ff5959"
+				android:textSize="@dimen/sp_12"
+				android:visibility="invisible"
+				app:layout_constraintStart_toStartOf="@id/tv_name"
+				app:layout_constraintTop_toBottomOf="@id/tv_name"
+				tools:text="请输入正确身份证号码"
+				tools:visibility="visible" />
+			
+			<TextView
+				android:id="@+id/btn"
+				style="@style/CustomButton"
+				android:layout_marginStart="@dimen/dp_0"
+				android:layout_marginTop="@dimen/dp_3"
+				android:layout_marginEnd="@dimen/dp_0"
+				android:background="@drawable/sel_primary_r_25_enable"
+				android:text="进行实名认证"
+				android:textColor="@color/white"
+				android:textSize="18sp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/error_hint" />
+			
+			<ImageView
+				android:id="@+id/iv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/dp_12"
+				android:src="@mipmap/myl_yzm_protect_icon"
+				app:layout_constraintStart_toStartOf="@id/title"
+				app:layout_constraintTop_toBottomOf="@id/btn" />
+			
+			<TextView
+				android:id="@+id/bot_tip"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/dp_3"
+				android:layout_marginTop="@dimen/dp_10"
+				android:gravity="start|top"
+				android:text="平台声明：您的身份信息仅用于实名登记，我们将尽全力保障您的信息安全"
+				android:textColor="#ff999999"
+				android:textSize="12sp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toEndOf="@id/iv"
+				app:layout_constraintTop_toBottomOf="@id/btn" />
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	</LinearLayout>
 </layout>

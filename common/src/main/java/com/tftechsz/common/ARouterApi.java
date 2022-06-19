@@ -36,6 +36,7 @@ public class ARouterApi {
     public static final String USER_INFO_SERVICE = "/mine/userService";  //用户信息
     public static final String ACTIVITY_MINE_DETAIL = "/mine/mineDetailActivity";  //用户信息详情
     public static final String ACTIVITY_LEVEL_DETAIL = "/mine/userLevelActivity";  //用户信息详情
+    public static final String ACTIVITY_MY_CERTIFICATION = "/mine/MyCertificationActivity";  //我的认证
     public static final String ACTIVITY_REAL = "/mine/RealNameActivity";  //实名认证
     public static final String ACTIVITY_SELF_CHECK = "/mine/SelfCheckActivity";  //实名认证
     public static final String ACTIVITY_REAL_CAMERA = "/mine/RealCameraActivity";  //自定义相机

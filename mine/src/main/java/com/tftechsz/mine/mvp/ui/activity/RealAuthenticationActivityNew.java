@@ -16,6 +16,7 @@ import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
+import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ChoosePicUtils;
@@ -26,7 +27,6 @@ import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.UploadAvatarPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ActivityRealAuthenticationNewBinding;
-import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.mine.mvp.IView.IRealAuthView;
 import com.tftechsz.mine.mvp.presenter.RealAuthPresenter;
 
@@ -157,12 +157,10 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
     public void facedetectCheckSuccess(RealCheckDto data) {
         if (data.pass) {
             mBinding.btn.setEnabled(true);
-            mBinding.btn.setTextColor(Utils.getColor(R.color.color_normal));
             mBinding.msg.setText(data.msg);
             mBinding.msg.setTextColor(Utils.getColor(R.color.green));
         } else {
             mBinding.btn.setEnabled(false);
-            mBinding.btn.setTextColor(Utils.getColor(R.color.color_999999));
             mBinding.msg.setText(data.msg);
             mBinding.msg.setTextColor(Utils.getColor(R.color.red));
         }
