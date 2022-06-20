@@ -41,6 +41,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -89,7 +90,6 @@ import com.netease.nim.uikit.common.ui.imageview.AvatarImageView;
 import com.netease.nim.uikit.common.util.DownloadHelper;
 import com.netease.nim.uikit.common.util.EPSoftKeyBoardListener;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
-import com.netease.nim.uikit.impl.preference.UserPreferences;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
@@ -122,8 +122,10 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.qgame.animplayer.AnimConfig;
 import com.tencent.qgame.animplayer.AnimView;
 import com.tencent.qgame.animplayer.inter.IAnimListener;
+import com.tftechsz.common.widget.pop.TopicPop;
 import com.tftechsz.im.R;
 import com.tftechsz.im.adapter.MoreFunAdapter;
+import com.tftechsz.common.adapter.TopicAdapter;
 import com.tftechsz.im.adapter.ViewPagerScrollAdapter;
 import com.tftechsz.im.api.ChatApiService;
 import com.tftechsz.im.api.MultipleItem;
@@ -222,6 +224,8 @@ import com.tftechsz.common.widget.pop.RemoveCouplesPop;
 import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.common.widget.pop.WelcomeToFamilyPopWindow;
 import com.tftechsz.common.widget.rain.RedPacketViewHelper;
+import com.tftechsz.mine.api.MineApiService;
+import com.tftechsz.mine.widget.pop.MineDetailMorePopWindow;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -266,7 +270,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     protected String sessionId;
     protected CompositeDisposable mCompositeDisposable;
 
-    protected ImageView ivChatPhoto, ivChatRed;
+    protected ImageView ivChatPhoto, ivChatRed,mIvVoiceCall;
     protected RelativeLayout ivChatCall;
 
     // modules
@@ -323,6 +327,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private ImageView mIvCall;
     private boolean isFamilyRecruit;
     protected UserProviderService service;
+    private MineApiService mineApiService;
     private SendRedEnvelopePopWindow mRedEnvelopePopWindow;
     private RedEnvelopeReceivePopWindow mGoldRedEnvelopePopWindow;
     private RedEnvelopeDetailsPopWindow mEnvelopeDetailsPopWindow;
@@ -335,6 +340,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private LightenGiftPop lightenGiftPop;//甜蜜值减少
     private IntimacyEntity mIntimacyEntity;
     private LinearLayout mRlOpenVip;
+    private RecyclerView mRvTopic;
     private TextView mTvOpenVip;
     private MineService mineService;
     private IMMessage redImMessage;
@@ -426,11 +432,15 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private RemoveCouplesPop removeCouplesPop;
     private GroupCoupleDto groupCoupleDto;
 
+    private LottieAnimationView mLavLove;
+    private ImageView mIvChatBg,mIvtoolbarmenu;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mCompositeDisposable = new CompositeDisposable();
         service = ARouter.getInstance().navigation(UserProviderService.class);
+        mineApiService = RetrofitManager.getInstance().createUserApi(MineApiService.class);
         mineService = ARouter.getInstance().navigation(MineService.class);
         partyService = ARouter.getInstance().navigation(PartyService.class);
         attentionService = ARouter.getInstance().navigation(AttentionService.class);
@@ -489,7 +499,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mRlToolBar = findView(R.id.base_tool_bar);
         mTvName = findView(R.id.toolbar_title);
         mRelAttention = findView(R.id.rl_group_attention);
-        findView(R.id.toolbar_iv_menu).setOnClickListener(this);
+        mIvtoolbarmenu = findView(R.id.toolbar_iv_menu);
+        mIvtoolbarmenu.setOnClickListener(this);
         findView(R.id.toolbar_back_all).setOnClickListener(this);
         findView(R.id.tv_gone_close).setOnClickListener(this);
         findView(R.id.tv_btn_attention).setOnClickListener(this);
@@ -517,6 +528,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mRlIntimacy = findView(R.id.rl_intimacy);
         mRlIntimacy.setOnClickListener(this);
         mTvIntimacy = findView(R.id.tv_love);
+        mLavLove = findView(R.id.iv_love);
         mTvLove = findView(R.id.tv_love_normal);
         mIvLeft = findView(R.id.iv_left);
         mIvLeft.setOnClickListener(this);
@@ -529,6 +541,22 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         svgaParser = new SVGAParser(getActivity());
         mTvOpenVip = findView(R.id.tv_open_vip);
         mRlOpenVip = findView(R.id.rl_open_vip);
+        //话题列表
+        mRvTopic = findView(R.id.rv_topic);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRvTopic.setLayoutManager(linearLayoutManager);
+        TopicAdapter topicAdapter = new TopicAdapter(0);
+        List<String> testData = new ArrayList<>();
+        testData.add("帅哥，认识一下吧");
+        testData.add("帅哥，认识一下吧");
+        testData.add("帅哥，认识一下吧");
+        testData.add("帅哥，认识一下吧");
+        topicAdapter.addData(testData);
+        mRvTopic.setAdapter(topicAdapter);
+        topicAdapter.setOnItemClickListener((adapter, view, position) -> {
+            inputPanel.getMessageEdit().setText(topicAdapter.getItem(position));
+        });
         mAnimationVip = findView(R.id.animation_vip);
         mAnimationWarn = findView(R.id.animation_warn);
         lottieAnimationView = findView(R.id.animation_view);
@@ -587,6 +615,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mLlFloat = findView(R.id.ll_float);
         mIvCriticalLeft = findView(R.id.iv_critical_left);
         mTvFloatContent = findView(R.id.tv_float_content);
+        mIvChatBg = findView(R.id.iv_chat_bg);
 
         mActivityView.setOnActItemClickListener(new OnActItemClickListener() {
             @Override
@@ -953,6 +982,14 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             }
             if (mIvLeft != null) {
                 mIvLeft.loadBuddyAvatar(sessionId);
+            }
+
+            if(mIvChatBg != null){
+                final com.netease.nimlib.sdk.uinfo.model.UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(sessionId);
+                String url = "";   //头像地址
+                if (userInfo != null && null != service.getConfigInfo() && null != service.getConfigInfo().api && null != service.getConfigInfo().api.oss && null != service.getConfigInfo().api.oss.cdn)
+                    url = service.getConfigInfo().api.oss.cdn_scheme + service.getConfigInfo().api.oss.cdn.user + url + userInfo.getAvatar();
+                GlideUtils.loadImageGaussian(getActivity(), mIvChatBg, url, R.mipmap.ic_default_avatar);
             }
 
             if (inputPanel != null && inputPanel.getChatRed() != null)
@@ -1695,6 +1732,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         mRlIntimacy.setVisibility(View.VISIBLE);
                         mTvName.setVisibility(View.GONE);
                         mTvIntimacy.setText(intimacy.intimacy);
+                        mLavLove.setAnimation("love5.zip");
+                        mLavLove.playAnimation();
                         mTvLove.setVisibility(View.GONE);
                         params.height = ConvertUtils.dp2px(110);
                     } else {
@@ -1744,6 +1783,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     mRlIntimacy.setVisibility(View.VISIBLE);
                     mTvName.setVisibility(View.GONE);
                     mTvIntimacy.setText(chatMsg.msg_intimacy.intimacy);
+                    mLavLove.setAnimation("love5.zip");
+                    mLavLove.playAnimation();
                     mTvLove.setVisibility(View.GONE);
                     params.height = ConvertUtils.dp2px(110);
                 } else {
@@ -1807,7 +1848,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 //            mRlTeam.setBackground(getResources().getDrawable(R.drawable.bg_mine_white_top));
             findView(R.id.ll_function).setVisibility(View.GONE);
         } else {
-            mRlToolBar.setBackgroundResource(R.color.white);
+            mRlToolBar.setBackgroundResource(R.color.transparent);
             mRlTeam.setBackgroundResource(R.color.white);
         }
         mTeamType = arguments.getInt("teamType");
@@ -1840,12 +1881,28 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         } else {
             inputPanel.reload(container, customization);
         }
-
+        //话题icon
+        List<String> testData = new ArrayList<>();
+        testData.add("帅哥，认识一下吧");
+        testData.add("帅哥，认识一下吧");
+        testData.add("帅哥，认识一下吧");
+        testData.add("帅哥，认识一下吧");
+        inputPanel.getmIvTopicBtn().setOnClickListener(v->{
+            TopicPop topicPop = new TopicPop(getActivity(),testData);
+            topicPop.setTopicItemClickListener(new TopicPop.TopicItemOnClickListener() {
+                @Override
+                public void onTopicItemClick(String text) {
+                    inputPanel.getMessageEdit().setText(text);
+                }
+            });
+            topicPop.showPopupWindow();
+        });
         mRvMore = inputPanel.getRvMore();
         mRvMore.setLayoutManager(new GridLayoutManager(getActivity(), 4));
 
         ivChatPhoto = inputPanel.getChatPhone();
         ivChatCall = inputPanel.getChatCall();
+        mIvVoiceCall = inputPanel.getmIvVoiceCallBtn();
         ivChatRed = inputPanel.getChatRed();
         ivChatGift = (LottieAnimationView) inputPanel.getChatGift();
 
@@ -1861,8 +1918,12 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             messageListPanel.setChattingBackground(customization.backgroundUri, customization.backgroundColor);
         }
 
-        //音视频
+        //视频通话
         ivChatCall.setOnClickListener(v -> {
+            checkCallMsg(1);
+        });
+        //语音通话
+        mIvVoiceCall.setOnClickListener(v->{
             checkCallMsg(2);
         });
 
@@ -3252,15 +3313,80 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         return actions;
     }
 
+    /**
+     * 移出黑名单
+     * @param userId
+     */
+    public void cancelBlack(int userId) {
+        mCompositeDisposable.add(mineApiService.cancelBlack(userId).compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
+            @Override
+            public void onSuccess(BaseResponse<Boolean> response) {
+                ToastHelper.showToast(getActivity(), "解除拉黑成功");
+            }
+        }));
+    }
+
+
+    public void showBlackPop(Context context, int userId) {
+        CustomPopWindow pop = new CustomPopWindow(context);
+        pop.addOnClickListener(new CustomPopWindow.OnSelectListener() {
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onSure() {
+                blackUser(userId);
+            }
+        });
+        pop.setTitle("确定要拉黑TA吗");
+        pop.setContent("拉黑后你将收不到对方的消息和呼叫，且在好友列表互相看不到对方");
+        pop.showPopupWindow();
+    }
+
+
+    /**
+     * 拉黑用户
+     */
+    public void blackUser(int userId) {
+        attentionService.blackUser(userId, new ResponseObserver<BaseResponse<Boolean>>() {
+            @Override
+            public void onSuccess(BaseResponse<Boolean> response) {
+                ToastHelper.showToast(getActivity(), "拉黑成功");
+            }
+
+            @Override
+            public void onFail(int code, String msg) {
+                super.onFail(code, msg);
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (!ClickUtil.canOperate()) return;
         if (id == R.id.toolbar_iv_menu) {
-            Intent intent = new Intent(getActivity(), ChatSettingActivity.class);
-            intent.putExtra("sessionId", sessionId);
-            intent.putExtra("sessionType", sessionType);
-            startActivity(intent);
+//            Intent intent = new Intent(getActivity(), ChatSettingActivity.class);
+//            intent.putExtra("sessionId", sessionId);
+//            intent.putExtra("sessionType", sessionType);
+//            startActivity(intent);
+            MineDetailMorePopWindow popWindow = new MineDetailMorePopWindow(getActivity(), sessionId);
+            popWindow.addOnClickListener(new MineDetailMorePopWindow.OnSelectListener() {
+                @Override
+                public void reportUser() {
+                    ARouterUtils.toBeforeReportActivity(Integer.parseInt(sessionId), 1);
+                }
+
+                @Override
+                public void blackUser(boolean isBlack) {
+                    if (isBlack) {
+                        cancelBlack(Integer.parseInt(sessionId));
+                    } else
+                        showBlackPop(getActivity(), Integer.parseInt(sessionId));
+                }
+            });
+            popWindow.showPopupWindow(mIvtoolbarmenu);
         } else if (id == R.id.toolbar_back_all) {  //返回
             if (getActivity() != null)
                 getActivity().finish();
@@ -3272,9 +3398,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             chatMessagePopWindow.showPopupWindow(0, 0);
             chatMessagePopWindow.getIntimacy();
         } else if (id == R.id.iv_left) {   // 头像点击
-            ARouterUtils.toMineDetailActivity(sessionId);
+            ARouterUtils.toMineDetailActivity(sessionId);//对方
         } else if (id == R.id.iv_right) {
-            ARouterUtils.toMineDetailActivity("");
+            ARouterUtils.toMineDetailActivity("");//自己
         } else if (id == R.id.toolbar_team_iv_menu) {  //点击家族更多
             if (mTeamType == 0) {
                 getFamilyId(true, false);
@@ -4089,6 +4215,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     }
 
 
+    //type 1 视频通话 2 语音通话
     private void call(int type) {
         mineService.getCallCheck(sessionId, 2, new ResponseObserver<BaseResponse<CallCheckDto>>() {
             @Override
@@ -4096,16 +4223,30 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 CallCheckDto data = response.getData();
                 if (null == data || !com.tftechsz.common.utils.CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
                     if (type == 2) {
-                        if (null == videoCallPopWindow)
-                            videoCallPopWindow = new VideoCallPopWindow(getActivity(), 1, sessionId);
-                        videoCallPopWindow.setData(data);
-                        UserPreferences.setIsClickCall(true);
-                        videoCallPopWindow.addOnClickListener(type -> {
-                            RxBus.getDefault().post(new VoiceChatEvent(Constants.NOTIFY_EXIT_VOICE_ROOM));
-                            service.setMatchType("");
-                            ChatMsgUtil.callMessage(type, String.valueOf(service.getUserId()), sessionId, "", false);
-                        });
-                        videoCallPopWindow.showPopupWindow();
+                        if (null != data && data.list != null && null != data.list.video) {
+                            if (data.list.video.is_lock) {
+                                if (null != data.error && null != data.error.intimacy) {
+                                    showCustomPop(data.error.intimacy.msg);
+                                } else if (null != data.error && null != data.error.video) {
+                                    if (TextUtils.equals(data.error.video.cmd_type, Constants.DIRECT_RECHARGE)) {
+                                        if (service.getConfigInfo() != null && service.getConfigInfo().share_config != null && service.getConfigInfo().share_config.is_limit_from_channel == 1) {
+                                            if (beforePop == null)
+                                                beforePop = new RechargeBeforePop(getActivity());
+                                            beforePop.addOnClickListener(() -> showRechargePop(sessionId));
+                                            beforePop.showPopupWindow();
+                                        } else {
+                                            showRechargePop(sessionId);
+                                        }
+                                    } else {
+                                        showCustomPop(data.error.video.msg);
+                                    }
+                                }
+                            } else {
+                                RxBus.getDefault().post(new VoiceChatEvent(Constants.NOTIFY_EXIT_VOICE_ROOM));
+                                service.setMatchType("");
+                                ChatMsgUtil.callMessage(1, String.valueOf(service.getUserId()), sessionId, "", false);
+                            }
+                        }
                     } else {
                         if (null != data && data.list != null && null != data.list.video) {
                             if (data.list.video.is_lock) {

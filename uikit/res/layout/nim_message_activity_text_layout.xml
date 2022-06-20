@@ -12,7 +12,6 @@
         android:id="@+id/switchLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editTextMessage"
         android:layout_marginLeft="@dimen/dp_size_15"
         android:layout_marginRight="@dimen/bottom_component_margin_horizontal">
 
@@ -51,8 +50,7 @@
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/switchLayout"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginRight="@dimen/bottom_component_margin_horizontal"
+        android:layout_marginStart="@dimen/dp_size_5"
         android:layout_toLeftOf="@+id/sendLayout"
         android:layout_toRightOf="@+id/switchLayout"
         android:minHeight="@dimen/dp_40">
@@ -68,28 +66,25 @@
             android:textColor="@color/color_black_333333"
             android:textSize="16sp"
             android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/bottom_component_margin_horizontal"
+            android:autoLink="web|email|phone"
+            android:background="@drawable/bg_gray_radius"
+            android:hint="请输入消息…"
+            android:maxHeight="72dip"
+            android:maxLines="4"
+            android:minHeight="@dimen/dp_40"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="#CCCCCC"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="16sp" />
     </FrameLayout>
 
-
-    <EditText
-        android:id="@+id/editTextMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="@dimen/bottom_component_margin_horizontal"
-        android:layout_toRightOf="@+id/switchLayout"
-        android:autoLink="web|email|phone"
-        android:background="@drawable/bg_gray_radius"
-        android:hint="请输入消息…"
-        android:maxHeight="72dip"
-        android:maxLines="4"
-        android:minHeight="@dimen/dp_40"
-        android:paddingStart="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="#CCCCCC"
-        android:textCursorDrawable="@drawable/color_cursor"
-        android:textSize="16sp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -101,6 +96,18 @@
         android:contentDescription="@string/empty"
         android:scaleType="center"
         android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/emoji_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/audioTextSwitchLayout"
+        android:layout_toLeftOf="@+id/sendLayout"
+        android:paddingTop="@dimen/dp_size_3"
+        android:paddingBottom="@dimen/dp_size_3"
+        android:layout_marginRight="@dimen/dp_size_6"
+        android:src="@drawable/nim_message_input_emotion_pressed"
+        android:visibility="visible" />
 
     <FrameLayout
         android:id="@+id/sendLayout"
@@ -125,13 +132,13 @@
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_40"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_size_5"
             android:layout_marginRight="@dimen/dp_4"
-            android:background="@drawable/bg_orange_radius"
+            android:background="@drawable/bg_red_radius"
             android:contentDescription="@string/empty"
             android:gravity="center"
             android:text="@string/send"
-            android:textColor="@color/color_black_333333"
+            android:textColor="@color/white"
             android:textSize="15sp" />
     </FrameLayout>
 
@@ -153,31 +160,8 @@
             android:paddingTop="@dimen/dp_10"
             android:paddingBottom="@dimen/dp_10"
             android:scaleType="center"
+            android:visibility="gone"
             android:src="@drawable/chat_ic_emoji" />
-
-        <RelativeLayout
-            android:id="@+id/rl_call"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/chat_input_call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:src="@drawable/chat_ic_call" />
-
-            <ImageView
-                android:id="@+id/iv_click_me"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_4"
-                android:layout_toEndOf="@+id/chat_input_call"
-                android:src="@drawable/nin_ic_click_me" />
-
-        </RelativeLayout>
-
 
         <ImageView
             android:id="@+id/chat_input_photo"
@@ -190,11 +174,23 @@
             android:src="@drawable/chat_ic_pic" />
 
         <ImageView
+            android:id="@+id/voice_call_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:scaleType="center"
+            android:src="@drawable/chat_ic_voice_call" />
+
+
+        <ImageView
             android:id="@+id/chat_input_red"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="center"
+            android:visibility="gone"
             android:src="@drawable/chat_ic_red" />
 
 
@@ -215,10 +211,43 @@
 
         </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_call"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/chat_input_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/chat_ic_call" />
+
+            <ImageView
+                android:id="@+id/iv_click_me"
+                android:layout_width="@dimen/dp_size_15"
+                android:layout_height="@dimen/dp_size_15"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/nin_ic_click_me" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/topic_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:visibility="visible"
+            android:src="@drawable/chat_ic_topic" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/chat_add_root"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_weight="1">
 
             <ImageView

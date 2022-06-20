@@ -79,7 +79,7 @@ public class P2PMessageActivity extends BaseMessageActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.fullScreen(this);
-        StatusBarUtil.setLightStatusBar(this, true, true);
+        StatusBarUtil.setLightStatusBar(this, false, true);
         if (!isDialogMenu()) {
             SoftHideKeyBoardUtil.assistActivity(this);
         }

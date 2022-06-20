@@ -515,7 +515,7 @@ public class VipUtils {
             case 2005:
             case 2006:
             case 2007:
-                color = R.color.white;
+                color = R.color.black;
                 break;
         }
         if (tv != null) {

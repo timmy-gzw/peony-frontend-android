@@ -3,6 +3,6 @@
 
     <item android:drawable="@drawable/nim_message_input_emotion_pressed" android:state_pressed="true"/>
     <item android:drawable="@drawable/nim_message_input_emotion_pressed" android:state_focused="true"/>
-    <item android:drawable="@drawable/nim_message_input_emotion"/>
+    <item android:drawable="@drawable/nim_message_input_emotion_pressed"/>
 
 </selector>

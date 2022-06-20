@@ -92,7 +92,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp_25"
-            android:background="@mipmap/ic_more"
+            android:background="@mipmap/ic_clear_message"
             android:padding="@dimen/dp_5"
             app:layout_constraintBottom_toBottomOf="@id/tabLayout"
             app:layout_constraintEnd_toEndOf="parent"

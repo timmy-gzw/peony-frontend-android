@@ -109,7 +109,7 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
 
     private ImageView mIvPhoto;   //图片发送
 
-    private ImageView mIvCall;    //电话
+    private ImageView mIvCall,mIvEmojiBtn3,mIvVoiceCallBtn,mIvTopicBtn;    //电话
     private ImageView mIvClickMe;
     private RelativeLayout mRlCall;
 
@@ -260,6 +260,9 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
         mIvCall = view.findViewById(R.id.chat_input_call);
         mIvClickMe = view.findViewById(R.id.iv_click_me);
         mRlCall = view.findViewById(R.id.rl_call);
+        mIvEmojiBtn3 = view.findViewById(R.id.emoji_button3);
+        mIvVoiceCallBtn = view.findViewById(R.id.voice_call_button);
+        mIvTopicBtn = view.findViewById(R.id.topic_btn);
 
         mIvRed = view.findViewById(R.id.chat_input_red);
         mIvAdd = view.findViewById(R.id.chat_add);
@@ -311,6 +314,7 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
         mIvPhoto.setOnClickListener(clickListener);
         mRlCall.setOnClickListener(clickListener);
         mIvAdd.setOnClickListener(clickListener);
+        mIvEmojiBtn3.setOnClickListener(clickListener);
 
         EPSoftKeyBoardListener.setListener(container.activity, new EPSoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
 
@@ -326,6 +330,13 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
         });
     }
 
+    public ImageView getmIvTopicBtn() {
+        return mIvTopicBtn;
+    }
+
+    public ImageView getmIvVoiceCallBtn() {
+        return mIvVoiceCallBtn;
+    }
 
     public RelativeLayout getChatCall() {
         return mRlCall;
@@ -489,6 +500,10 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
                     inputListener.onEmojiClick();
             } else if (v == cancelReplyImg) {
                 cancelReply();
+            }else if(v == mIvEmojiBtn3){
+                toggleEmojiLayout();
+                if (inputListener != null)
+                    inputListener.onEmojiClick();
             }
         }
     };
@@ -500,7 +515,9 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
 
         audioRecordBtn.setVisibility(View.GONE);
         messageEditText.setVisibility(View.VISIBLE);
+        mIvEmojiBtn3.setVisibility(View.VISIBLE);
         switchToTextButtonInInputBar.setVisibility(View.GONE);
+        sendMessageButtonInInputBar.setVisibility(View.VISIBLE);
         if (!mFlagIsShowGiftMenu) {
             switchToAudioButtonInInputBar.setVisibility(View.VISIBLE);
         }
@@ -561,7 +578,8 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
     private void switchToAudioLayout() {
         messageEditText.setVisibility(View.GONE);
         audioRecordBtn.setVisibility(View.VISIBLE);
-//        sendMessageButtonInInputBar.setVisibility(View.GONE);
+        mIvEmojiBtn3.setVisibility(View.GONE);
+        sendMessageButtonInInputBar.setVisibility(View.GONE);
         hideInputMethod();
         hideEmojiLayout();
         hideActionPanelLayout();
@@ -1058,12 +1076,12 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
         isRobotSession = isRobot;
         if (isRobot) {
             textAudioSwitchLayout.setVisibility(View.VISIBLE);
-            emojiButtonInInputBar.setVisibility(View.GONE);
+//            emojiButtonInInputBar.setVisibility(View.GONE);
             sendMessageButtonInInputBar.setVisibility(View.VISIBLE);
             moreFuntionButtonInInputBar.setVisibility(View.GONE);
         } else {
             textAudioSwitchLayout.setVisibility(View.VISIBLE);
-            emojiButtonInInputBar.setVisibility(View.VISIBLE);
+//            emojiButtonInInputBar.setVisibility(View.VISIBLE);
             sendMessageButtonInInputBar.setVisibility(View.VISIBLE);
             moreFuntionButtonInInputBar.setVisibility(View.GONE);
         }

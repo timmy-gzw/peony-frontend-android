@@ -5,13 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/iv_chat_bg"
+        android:layout_width="match_parent"
+        android:src="@mipmap/mine_ic_boy_default"
+        android:scaleType="centerCrop"
+        android:layout_height="match_parent"/>
+
     <LinearLayout
         android:id="@+id/message_activity_list_view_container"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/messageActivityBottomLayout"
+        app:layout_constraintBottom_toTopOf="@+id/rv_topic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -19,7 +26,6 @@
             android:id="@+id/base_team_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48"
-            android:background="@drawable/bg_mine_white_top"
             android:gravity="center_vertical"
             android:visibility="gone"
             tools:visibility="visible">
@@ -30,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dp_15"
-                android:src="@mipmap/ic_back" />
+                android:src="@mipmap/ic_back_white" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="@dimen/dp_0"
@@ -91,7 +97,7 @@
                 android:layout_centerVertical="true"
                 android:paddingStart="@dimen/dp_10"
                 android:paddingEnd="@dimen/dp_17"
-                android:src="@mipmap/ic_more"
+                android:src="@mipmap/ic_more_white"
                 tools:ignore="UseAppTint" />
 
 
@@ -102,7 +108,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/bg_mine_white_top"
             android:gravity="center_vertical">
 
             <ImageView
@@ -112,17 +117,16 @@
                 android:layout_centerVertical="true"
                 android:paddingStart="@dimen/dp_20"
                 android:paddingEnd="@dimen/dp_15"
-                android:src="@mipmap/ic_back" />
+                android:src="@mipmap/ic_back_white" />
 
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textColor="@color/color_normal"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
                 tools:text="马保国 不讲武德马保国" />
@@ -150,12 +154,15 @@
                     android:layout_width="@dimen/dp_40"
                     android:layout_height="@dimen/dp_40" />
 
-                <ImageView
+                <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/iv_love"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
                     android:layout_toEndOf="@+id/iv_left"
-                    android:background="@mipmap/chat_ic_love" />
+                    android:layout_centerVertical="true"
+                    app:lottie_fileName="love1.zip"
+                    app:lottie_loop="true" />
+
 
                 <TextView
                     android:id="@+id/tv_love"
@@ -164,7 +171,7 @@
                     android:layout_below="@+id/iv_love"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="false"
-                    android:textColor="#BDB6B2"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_14" />
 
                 <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
@@ -187,7 +194,7 @@
                 android:paddingTop="@dimen/dp_5"
                 android:paddingEnd="@dimen/dp_17"
                 android:paddingBottom="@dimen/dp_5"
-                android:src="@mipmap/ic_more"
+                android:src="@mipmap/ic_more_white"
                 tools:ignore="UseAppTint" />
         </RelativeLayout>
 
@@ -492,6 +499,14 @@
                     android:visibility="gone" />
 
             </RelativeLayout>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:lottie_autoPlay="true"
+                app:lottie_imageAssetsFolder="gift/"
+                app:lottie_loop="false" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
@@ -635,6 +650,14 @@
         </LinearLayout>
 
     </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_topic"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_5"
+        app:layout_constraintBottom_toTopOf="@+id/messageActivityBottomLayout"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/rl_open_vip"
@@ -858,14 +881,6 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.56" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:lottie_autoPlay="true"
-        app:lottie_imageAssetsFolder="gift/"
-        app:lottie_loop="false" />
 
 
     <!--  <com.tftechsz.im.widget.DoubleGiftView
