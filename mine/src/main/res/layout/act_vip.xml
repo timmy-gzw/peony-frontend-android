@@ -16,6 +16,10 @@
         <variable
             name="vip_expiration_time"
             type="String" />
+
+        <variable
+            name="vip_privilege_count"
+            type="int" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -151,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_20"
                         android:layout_marginBottom="@dimen/dp_8"
-                        android:text="@string/vip_privilege"
+                        android:text="@{@string/vip_privilege(vip_privilege_count)}"
                         android:textColor="@color/c_c89c5d"
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -350,7 +354,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dp_20"
-                        android:text="@string/vip_privilege_8"
+                        android:text="@{@string/vip_privilege_8(vip_privilege_count)}"
                         android:textColor="@color/c_f4d9a4"
                         android:textSize="@dimen/sp_18"
                         android:textStyle="bold"

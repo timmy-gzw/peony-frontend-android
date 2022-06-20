@@ -244,6 +244,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
     @Override
     public void getVipPrivilegeSuccess(List<VipPrivilegeBean> bean) {
         mPrivilegeAdapter.setList(bean);
+        mBind.setVipPrivilegeCount(bean == null ? 0 : bean.size());
     }
 
     @Override

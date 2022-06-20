@@ -4,9 +4,11 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.faceunity.nama.FURenderer;
 import com.faceunity.nama.ui.FaceUnityView;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.custom.CameraRenderer;
@@ -24,12 +26,14 @@ import me.jessyan.autosize.internal.CancelAdapt;
 /**
  * 美颜设置
  */
+@Route(path = ARouterApi.ACTIVITY_FACIAL_SETTING)
 public class FaceUnitySettingActivity extends BaseMvpActivity implements CameraRenderer.OnRendererStatusListener
         , FURenderer.OnDebugListener, LifeCycleSensorManager.OnAccelerometerChangedListener,
         FURenderer.OnTrackStatusChangedListener, FURenderer.OnSystemErrorListener, CancelAdapt {
     private CameraRenderer mCameraRenderer;
     private FURenderer mFuRenderer;
     private MineService mineService;
+
     @Override
     public BasePresenter initPresenter() {
         return null;
@@ -132,7 +136,7 @@ public class FaceUnitySettingActivity extends BaseMvpActivity implements CameraR
 
     @Override
     public void onSystemError(int code, String message) {
-        mineService.trackEvent("faceUnity", "faceUnityOpen", ""+ code, message, new ResponseObserver<BaseResponse<Boolean>>() {
+        mineService.trackEvent("faceUnity", "faceUnityOpen", "" + code, message, new ResponseObserver<BaseResponse<Boolean>>() {
             @Override
             public void onSuccess(BaseResponse<Boolean> response) {
             }

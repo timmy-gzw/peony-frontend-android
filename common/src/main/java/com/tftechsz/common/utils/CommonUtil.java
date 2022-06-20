@@ -15,6 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
@@ -69,8 +71,6 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class CommonUtil {
 
@@ -522,6 +522,8 @@ public class CommonUtil {
             Interfaces.LINK_PEONY_VISITOR,
             Interfaces.LINK_PEONY_ACCOST_SETTING,
             Interfaces.LINK_PEONY_HELP_FEEDBACK,
+            Interfaces.LINK_PEONY_MY_CERTIFICATION,
+            Interfaces.LINK_PEONY_FACIAL,
             Interfaces.LINK_PEONY_MY_OUTFIT,
             Interfaces.LINK_PEONY_MY_NOBLE,
             Interfaces.LINK_PEONY_NOTE_VALUE
@@ -643,6 +645,10 @@ public class CommonUtil {
             }
             if (substring.equals(Interfaces.LINK_PEONY_MY_CERTIFICATION)) {//我的认证
                 ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MY_CERTIFICATION);
+                return;
+            }
+            if (substring.equals(Interfaces.LINK_PEONY_FACIAL)) {//美颜设置
+                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
                 return;
             }
             if (substring.equals(Interfaces.LINK_PEONY_ACCOST_SETTING)) {//招呼设置
@@ -1135,6 +1141,7 @@ public class CommonUtil {
         return result;
 
     }
+
     public static String getUmengChannel() {
         return getMetaData("UMENG_CHANNEL");
     }

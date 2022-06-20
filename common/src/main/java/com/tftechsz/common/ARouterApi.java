@@ -67,6 +67,7 @@ public class ARouterApi {
     public static final String ACTIVITY_MY_NOBLE = "/mine/NobleActivity";  //我的贵族
     public static final String ACTIVITY_FACE_CHECK = "/mine/FaceCheckActivity";
     public static final String ACTIVITY_ABOUT_US = "/mine/AboutUsActivity";
+    public static final String ACTIVITY_FACIAL_SETTING = "/mine/facial";//美颜设置
 
 
     //family
