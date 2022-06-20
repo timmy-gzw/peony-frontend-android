@@ -43,7 +43,6 @@ public class RetainPopWindow extends BaseCenterPop implements View.OnClickListen
         tvName = findViewById(R.id.tv_name);
         ivPeople = findViewById(R.id.iv_people);
         tvNum = findViewById(R.id.tv_message_num);
-        findViewById(R.id.iv_close).setOnClickListener(this);
         findViewById(R.id.tv_quit).setOnClickListener(this);
         findViewById(R.id.tv_stay).setOnClickListener(this);
     }
@@ -82,9 +81,7 @@ public class RetainPopWindow extends BaseCenterPop implements View.OnClickListen
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.iv_close) {
-            dismiss();
-        } else if (id == R.id.tv_quit) {
+         if (id == R.id.tv_quit) {
             dismiss();
             AppManager.getAppManager().finishAllActivity();
         } else if (id == R.id.tv_stay) {

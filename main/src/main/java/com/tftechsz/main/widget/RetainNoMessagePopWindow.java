@@ -24,9 +24,9 @@ public class RetainNoMessagePopWindow extends BaseCenterPop implements View.OnCl
         findViewById(R.id.tv_quit).setOnClickListener(this);
         findViewById(R.id.tv_stay).setOnClickListener(this);
         if (service.getUserInfo() != null && service.getUserInfo().isBoy()) {
-            tvTip.setText("小哥哥确定要离开了嘛？\n嘤嘤嘤～");
+            tvTip.setText("小哥哥要离开了吗，嘤嘤嘤～");
         } else {
-            tvTip.setText("小姐姐确定要离开了嘛？\n嘤嘤嘤～");
+            tvTip.setText("小姐姐要离开了吗，嘤嘤嘤～");
         }
     }
 
