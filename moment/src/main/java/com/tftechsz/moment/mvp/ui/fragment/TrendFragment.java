@@ -169,7 +169,7 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
                 ));
         mCompositeDisposable.add(RxBus.getDefault().toObservable(AccostSuccessEvent.class)
                 .subscribe(event -> {
-                            if (event.getEventFrom() == AccostSuccessEvent.ACCOUST_MOMENT) {
+                            if (event.getEventFrom() == AccostSuccessEvent.ACCOUST_MOMENT || event.getEventFrom() == AccostSuccessEvent.ACCOUST_HOME) {
                                 showAccostChatPop(event.getToUserId(), event.getToUsername(), event.getToUserAvatar());
                             }
                         }

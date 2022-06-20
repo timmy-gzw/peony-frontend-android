@@ -31,9 +31,9 @@
                     android:id="@+id/ll_home_top_item"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginEnd="@dimen/dp_20"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:baselineAligned="false"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
@@ -55,24 +55,26 @@
                     <com.tftechsz.home.widget.HomeTopItemLayout
                         android:id="@+id/home_top_item3"
                         android:layout_width="0dp"
-                        android:visibility="gone"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/dp_7"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:visibility="gone" />
 
                     <com.tftechsz.home.widget.HomeTopItemLayout
                         android:id="@+id/home_top_item4"
                         android:layout_width="0dp"
-                        android:visibility="gone"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/dp_7"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <com.tftechsz.common.widget.X5WebView
                     android:id="@+id/webView"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:scrollbars="none"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +104,6 @@
             app:tl_indicator_color="#FE4D6B"
             app:tl_indicator_corner_radius="@dimen/dp_2"
             app:tl_indicator_height="@dimen/dp_4"
-            app:tl_textBold="SELECT"
             app:tl_indicator_margin_top="@dimen/dp_10"
             app:tl_indicator_width="@dimen/dp_10"
             app:tl_tab_marginBottom="@dimen/dp_12"
@@ -110,11 +111,12 @@
             app:tl_tab_space_equal="true"
             app:tl_tab_vertical_gravity="Bottom"
             app:tl_tab_width="@dimen/dp_size_56"
+            app:tl_textBold="SELECT"
             app:tl_textSelectColor="@color/color_normal"
             app:tl_textSelectSize="@dimen/sp_18"
             app:tl_textUnSelectColor="@color/color_light_font"
             app:tl_textUnSelectSize="@dimen/sp_18"
-            app:tl_underline_gravity="BOTTOM"/>
+            app:tl_underline_gravity="BOTTOM" />
 
         <ImageView
             android:id="@+id/iv_search"
@@ -153,18 +155,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.tftechsz.home.widget.ScrollerForbidView
-      android:id="@+id/sv_message"
-      android:layout_width="142dp"
-      android:layout_height="@dimen/dp_40"
-      android:layout_gravity="end|bottom"
-      android:layout_marginEnd="@dimen/dp_16"
-      android:layout_marginBottom="@dimen/dp_22"
-      android:background="@drawable/shape_play_message"
-      android:clickable="true"
-      android:focusable="true"
-      android:gravity="center_vertical"
-      android:paddingEnd="@dimen/dp_5"
-      android:visibility="gone" />
+        android:id="@+id/sv_message"
+        android:layout_width="142dp"
+        android:layout_height="@dimen/dp_40"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_22"
+        android:background="@drawable/shape_play_message"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/dp_5"
+        android:visibility="gone" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
