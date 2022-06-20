@@ -15,10 +15,10 @@
         android:id="@+id/recy"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="@dimen/dp_10"
         android:background="@color/white"
-        android:visibility="gone"
         android:overScrollMode="never"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ar_top_hint" />
 
@@ -31,11 +31,11 @@
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginEnd="@dimen/dp_28"
         android:layout_marginBottom="@dimen/dp_22"
-        android:background="@drawable/bg_accost"
+        android:background="@drawable/sp_primary_r_25"
         android:gravity="center"
         android:orientation="horizontal"
         android:text="上传靓照"
-        android:textColor="@color/color_333333"
+        android:textColor="@color/white"
         android:textSize="@dimen/dp_15"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
