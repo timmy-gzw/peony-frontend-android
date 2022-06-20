@@ -641,6 +641,10 @@ public class CommonUtil {
                 ARouterUtils.toReportActivity(-1, -1, 3);
                 return;
             }
+            if (substring.equals(Interfaces.LINK_PEONY_MY_CERTIFICATION)) {//我的认证
+                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MY_CERTIFICATION);
+                return;
+            }
             if (substring.equals(Interfaces.LINK_PEONY_ACCOST_SETTING)) {//招呼设置
                 ARouterUtils.toAccostSettingActivity(info.title);
                 return;

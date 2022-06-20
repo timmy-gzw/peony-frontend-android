@@ -308,12 +308,12 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
     @Override
     public void ocrCheckSuccess(OcrCheckDto data) {
         SpannableStringBuilder ssb = new SpannableStringUtils.Builder()
-                .append("姓名: ")
+                .append("真实姓名: ")
                 .setFontSize(15, true)
                 .append(data.realname)
                 .setFontSize(17, true)
                 .setBold()
-                .append("\n身份证: ")
+                .append("\n身份证号: ")
                 .setFontSize(15, true)
                 .append(data.identity)
                 .setFontSize(17, true)

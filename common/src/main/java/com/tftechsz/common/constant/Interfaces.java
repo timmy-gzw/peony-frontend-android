@@ -57,6 +57,7 @@ interface Interfaces {
     String LINK_PEONY_INCOME = "income"; //收益
     String LINK_PEONY_SETTING = "setting"; //设置
     String LINK_PEONY_HELP_FEEDBACK = "help_feedback"; //反馈
+    String LINK_PEONY_MY_CERTIFICATION = "my_auth"; //我的认证
     String LINK_PEONY_ACCOST_SETTING = "accost_setting"; //搭讪设置
     String LINK_PEONY_ACCOST_SETTING_AUDIO = "accost_setting_audio"; //语音招呼
     String LINK_PEONY_ACCOST_SETTING_PIC = "accost_setting_pic"; //招呼相册
