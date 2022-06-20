@@ -76,7 +76,6 @@ public class CustomPopWindow extends BaseCenterPop implements View.OnClickListen
     }
 
 
-
     public CustomPopWindow setSingleButtong() {
         return setSingleButtong("我知道了");
     }
@@ -173,12 +172,29 @@ public class CustomPopWindow extends BaseCenterPop implements View.OnClickListen
         return this;
     }
 
+    public CustomPopWindow setRightBackgroundRes(int redId) {
+        if (style == 0) {
+            mTvSure.setBackgroundResource(redId);
+        } else {
+            mTvSure1.setBackgroundResource(redId);
+        }
+        return this;
+    }
 
     public CustomPopWindow setLeftColor(int color) {
         if (style == 0) {
             mTvCancel.setTextColor(Utils.getColor(color));
         } else {
             mTvCancel1.setTextColor(Utils.getColor(color));
+        }
+        return this;
+    }
+
+    public CustomPopWindow setLeftBackgroundRes(int redId) {
+        if (style == 0) {
+            mTvCancel.setBackgroundResource(redId);
+        } else {
+            mTvCancel1.setBackgroundResource(redId);
         }
         return this;
     }

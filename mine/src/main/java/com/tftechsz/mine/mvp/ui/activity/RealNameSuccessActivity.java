@@ -1,14 +1,14 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -16,8 +16,6 @@ import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.mine.R;
-
-import androidx.core.content.ContextCompat;
 
 /**
  * 实名认证提交成功
@@ -28,6 +26,7 @@ public class RealNameSuccessActivity extends BaseMvpActivity implements View.OnC
     private ImageView mIvStatus;
     private TextView mTvStatus, mTvTip;
     private TextView mTvBackHome;
+    private View mIvFail;
     private String mErrorMsg;
     private boolean isInPartySelf;
 
@@ -43,6 +42,7 @@ public class RealNameSuccessActivity extends BaseMvpActivity implements View.OnC
         mIvStatus = findViewById(R.id.iv_status);
         mTvStatus = findViewById(R.id.tv_status);
         mTvTip = findViewById(R.id.tv_tip);
+        mIvFail = findViewById(R.id.iv_tip_status);
         mTvBackHome = findViewById(R.id.tv_back_home);
         initListener();
 
@@ -81,12 +81,9 @@ public class RealNameSuccessActivity extends BaseMvpActivity implements View.OnC
         } else {
             mIvStatus.setBackgroundResource(R.mipmap.mine_ic_real_name_fail);
             mTvStatus.setText("实名认证失败");
-            mTvTip.setText(TextUtils.isEmpty(mErrorMsg) ? mErrorMsg : "证件信息与真人认证不匹配");
+            mTvTip.setText(!TextUtils.isEmpty(mErrorMsg) ? mErrorMsg : "证件信息与真人认证不匹配");
             mTvTip.setTextColor(ContextCompat.getColor(this, R.color.red));
-            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.nim_ic_failed);
-            mTvTip.setCompoundDrawablesWithIntrinsicBounds(drawable,
-                    null, null, null);
-            mTvTip.setCompoundDrawablePadding(DensityUtils.dp2px(this, 5));
+            mIvFail.setVisibility(View.VISIBLE);
             mTvBackHome.setText("重新认证");
         }
     }

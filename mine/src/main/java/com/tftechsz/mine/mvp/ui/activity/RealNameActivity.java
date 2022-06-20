@@ -311,16 +311,12 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
                 .append("真实姓名: ")
                 .setFontSize(15, true)
                 .append(data.realname)
-                .setFontSize(17, true)
                 .setBold()
                 .append("\n身份证号: ")
-                .setFontSize(15, true)
                 .append(data.identity)
-                .setFontSize(17, true)
-                .setBold()
                 .append("\n\n")
                 .append(data.tips)
-                .setFontSize(13, true)
+                .setFontSize(12, true)
                 .setForegroundColor(Utils.getColor(R.color.color_cc))
                 .create();
 
@@ -328,8 +324,11 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
             mPopWindow = new CustomPopWindow(mContext)
                     .setTitle("识别结果")
                     .setLeftButton("返回重拍")
+                    .setLeftBackgroundRes(0)
+                    .setLeftColor(R.color.color_normal)
                     .setRightButton("立即认证")
-
+                    .setRightBackgroundRes(0)
+                    .setRightColor(R.color.colorPrimary)
                     .addOnClickListener(new CustomPopWindow.OnSelectListener() {
                         @Override
                         public void onCancel() {
