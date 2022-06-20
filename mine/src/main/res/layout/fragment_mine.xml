@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F4F6"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="#F4F4F6"
     android:orientation="vertical">
 
     <View
@@ -31,8 +31,8 @@
             android:id="@+id/cl_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="@dimen/dp_54"
+            android:orientation="vertical"
             android:paddingTop="@dimen/dp_12"
             android:paddingBottom="@dimen/dp_60"
             app:layout_constraintLeft_toLeftOf="parent">
@@ -62,14 +62,16 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/pic_frame"
-                app:layout_constraintLeft_toRightOf="@id/pic_frame"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="@id/pic_frame"
-                android:layout_height="wrap_content">
+                app:layout_constraintLeft_toRightOf="@id/pic_frame"
+                app:layout_constraintTop_toTopOf="@id/pic_frame">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
@@ -77,10 +79,11 @@
                         android:layout_marginTop="@dimen/dp_4"
                         android:textColor="@color/color_normal"
                         android:textSize="@dimen/sp_21"
-                        app:layout_constraintLeft_toLeftOf="parent"
                         android:textStyle="bold"
-                        tools:text="喵了个咪儿"
-                        tools:ignore="MissingConstraints" />
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        tools:ignore="MissingConstraints"
+                        tools:text="喵了个咪儿" />
+
                     <TextView
                         android:id="@+id/iv_sex"
                         android:layout_width="wrap_content"
@@ -129,10 +132,10 @@
                     android:id="@+id/tv_user_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawablePadding="3dp"
                     android:paddingTop="@dimen/dp_2"
                     android:textColor="@color/color_normal"
                     android:textSize="@dimen/sp_11"
-                    android:drawablePadding="3dp"
                     app:layout_constraintVertical_chainStyle="packed"
                     tools:text="芍药号:12345" />
 
@@ -140,25 +143,25 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:id="@+id/ll_fff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_19"
+                android:layout_marginBottom="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:layout_width="match_parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_avatar"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toBottomOf="@id/iv_avatar">
 
                 <LinearLayout
                     android:id="@+id/ll_friend"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/tv_friend"
                         android:layout_width="wrap_content"
@@ -169,24 +172,27 @@
                         android:textColor="@color/color_normal"
                         android:textSize="@dimen/sp_20"
                         tools:text="0" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
-                        android:textColor="#999999"
                         android:text="@string/friend"
+                        android:textColor="#999999"
                         android:textSize="@dimen/sp_12"
                         tools:text="好友" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_attention"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/tv_attention"
                         android:layout_width="wrap_content"
@@ -197,24 +203,27 @@
                         android:textColor="@color/color_normal"
                         android:textSize="@dimen/sp_20"
                         tools:text="0" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
+                        android:text="@string/attention"
                         android:textColor="#999999"
                         android:textSize="@dimen/sp_12"
-                        android:text="@string/attention"
                         tools:text="关注" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_fans"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/tv_fans"
                         android:layout_width="wrap_content"
@@ -225,15 +234,16 @@
                         android:textColor="@color/color_normal"
                         android:textSize="@dimen/sp_20"
                         tools:text="0" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
+                        android:text="@string/fans"
                         android:textColor="#999999"
                         android:textSize="@dimen/sp_12"
-                        android:text="@string/fans"
                         tools:text="粉丝" />
                 </LinearLayout>
 
@@ -259,18 +269,6 @@
                 app:layout_constraintTop_toTopOf="@id/iv_avatar"
                 app:layout_constraintVertical_bias="0.48" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_mine_mid"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_110"
-                android:layout_marginTop="@dimen/dp_25"
-                android:background="@drawable/bg_mine_white_top"
-                android:overScrollMode="never"
-                android:paddingStart="@dimen/dp_30"
-                android:paddingEnd="@dimen/dp_30"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/ll_fff" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_vip"
                 android:layout_width="match_parent"
@@ -286,9 +284,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="@dimen/dp_8"
+                    android:background="@mipmap/mine_vip_bg"
                     app:layout_constraintDimensionRatio="6.7"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:background="@mipmap/mine_vip_bg"
                     tools:background="@mipmap/mine_vip_bg"
                     tools:visibility="visible" />
 
@@ -320,16 +318,16 @@
                 <TextView
                     android:id="@+id/vip_charge"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp_20"
                     android:background="@mipmap/mine_vip_btn_bg"
-                    android:text="@string/vip_charge"
                     android:gravity="center"
+                    android:text="@string/vip_charge"
                     android:textColor="#5D3D03"
                     android:textSize="@dimen/sp_12"
-                    app:layout_constraintTop_toTopOf="@id/vip_nor"
                     app:layout_constraintBottom_toBottomOf="@id/vip_nor"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:layout_height="wrap_content"/>
+                    app:layout_constraintTop_toTopOf="@id/vip_nor" />
 
                 <TextView
                     android:id="@+id/vip_title"
@@ -350,10 +348,10 @@
                     android:id="@+id/expired_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/vip_special_power"
                     android:textColor="#B2A487"
                     android:textSize="@dimen/sp_10"
                     android:visibility="gone"
-                    android:text="@string/vip_special_power"
                     app:layout_constraintBottom_toBottomOf="@id/vip_nor"
                     app:layout_constraintStart_toStartOf="@id/vip_title"
                     app:layout_constraintTop_toBottomOf="@id/vip_title"
@@ -369,6 +367,23 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_vip" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mine_mid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:background="@drawable/bg_white_radius"
+                android:overScrollMode="never"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/cl_vip"
+                tools:itemCount="4"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_mine_mid"
+                tools:spanCount="4"
+                tools:visibility="visible" />
+
             <LinearLayout
                 android:id="@+id/ll_jifen"
                 android:layout_width="0dp"
@@ -383,7 +398,7 @@
                 app:layout_constraintDimensionRatio="1.48"
                 app:layout_constraintEnd_toStartOf="@id/ll_jinbi"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_vip">
+                app:layout_constraintTop_toBottomOf="@id/rv_mine_mid">
 
                 <TextView
                     android:layout_width="wrap_content"

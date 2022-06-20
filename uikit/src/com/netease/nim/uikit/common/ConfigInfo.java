@@ -15,6 +15,7 @@ public class ConfigInfo {
 
     public static class ShareConfig {
         public List<MineInfo> my;
+        public List<MineInfo> my_main_nav;
         public HomeTopNav home_top_nav;
         public List<PaymentTypeDto> payment_type;
         public int matching_wait_time;

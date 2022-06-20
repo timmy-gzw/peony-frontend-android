@@ -2,32 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_12"
+    android:paddingBottom="@dimen/dp_12">
 
-    <LinearLayout
-        android:id="@+id/root_view"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/mine_ic_guard"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
         android:gravity="center"
-        android:orientation="vertical">
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_12"
+        tools:text="守护" />
 
-        <ImageView
-            android:id="@+id/img_icon"
-            android:layout_width="@dimen/dp_60"
-            android:layout_height="@dimen/dp_60"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/mine_ic_guard" />
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/color_mid_font"
-            android:textSize="@dimen/sp_12"
-            tools:text="守护" />
-
-    </LinearLayout>
 </LinearLayout>

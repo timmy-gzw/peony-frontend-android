@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
@@ -38,6 +39,7 @@ import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseItemAdapter;
+import com.tftechsz.mine.adapter.MineMidAdapter;
 import com.tftechsz.mine.entity.BaseItemBean;
 import com.tftechsz.mine.mvp.IView.IMineView;
 import com.tftechsz.mine.mvp.presenter.MinePresenter;
@@ -58,7 +60,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private TextView mTvName, mTvUserId, mTvSex;   //姓名,芍药号码,好友关注粉丝,性别
     private ImageView mIvAvatar, mIvAuth, mIvRealPeople, mVipIcon;
     private LinearLayout mLlFriend, mLlFans, mLlAttention;
-    private TextView mTvFriend, mTvFans, mTvAttention,mVipCharge;
+    private TextView mTvFriend, mTvFans, mTvAttention, mVipCharge;
     private RecyclerView mRcMineMid, mRvMineBot;
     private UserInfo mUserInfo;
     private boolean isFragmentVisible;
@@ -186,6 +188,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                 }
             }
         });
+
         if (mUserInfo != null) {
             setUserInfo(mUserInfo);
         } else {
@@ -309,6 +312,21 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                         }
                     }
                 }
+
+
+                //渲染中部RecyclerView
+                List<ConfigInfo.MineInfo> myMainNavlist = CommonUtil.addMineInfo(configInfo.share_config.my_main_nav);
+                if (myMainNavlist.size() > 0) {
+                    mRcMineMid.setLayoutManager(new GridLayoutManager(mContext, myMainNavlist.size()));
+                    MineMidAdapter adapter = new MineMidAdapter(myMainNavlist);
+                    mRcMineMid.setAdapter(adapter);
+                    adapter.setOnItemClickListener((a, view, position) -> {
+                        CommonUtil.performLink(mActivity, adapter.getItem(position), position, 0);
+                    });
+                    mRcMineMid.setVisibility(View.VISIBLE);
+                } else {
+                    mRcMineMid.setVisibility(View.GONE);
+                }
             }
 
             if (null != configInfo && configInfo.share_config != null) {
@@ -368,7 +386,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private void startMineFriend(int type) {
         Intent intent = new Intent(getContext(), MineFriendActivity.class);
         intent.putExtra(MineFriendActivity.TYPE_MINE_FRIEND, type);
-        intent.putExtra("username",service.getUserInfo().getNickname());
+        intent.putExtra("username", service.getUserInfo().getNickname());
         startActivity(intent);
     }
 

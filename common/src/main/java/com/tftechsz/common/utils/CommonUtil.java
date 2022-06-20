@@ -632,7 +632,7 @@ public class CommonUtil {
                 return;
             }
             if (substring.equals(Interfaces.LINK_PEONY_INCOME)) {  //收益
-                ARouterUtils.toMineIntegralActivity(0);
+                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_INTEGRAL_NEW);
                 return;
             }
             if (substring.equals(Interfaces.LINK_PEONY_SETTING)) { //设置
