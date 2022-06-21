@@ -128,8 +128,7 @@
                 android:singleLine="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_18"
-                android:textStyle="bold"
-                tools:text="马保国 不讲武德马保国" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_love_normal"
@@ -147,19 +146,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                tools:visibility="visible"
                 android:visibility="gone">
 
                 <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
                     android:id="@+id/iv_left"
                     android:layout_width="@dimen/dp_40"
+                    android:layout_centerVertical="true"
                     android:layout_height="@dimen/dp_40" />
+
+                <ImageView
+                    android:id="@+id/iv_h1"
+                    android:layout_toRightOf="@id/iv_left"
+                    android:src="@mipmap/love_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"/>
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/iv_love"
                     android:layout_width="@dimen/dp_40"
                     android:layout_height="@dimen/dp_40"
-                    android:layout_toEndOf="@+id/iv_left"
                     android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_h1"
                     app:lottie_fileName="love1.zip"
                     app:lottie_loop="true" />
 
@@ -174,11 +183,20 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_14" />
 
+                <ImageView
+                    android:id="@+id/iv_h2"
+                    android:layout_toRightOf="@id/iv_love"
+                    android:src="@mipmap/love_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"/>
+
                 <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
                     android:id="@+id/iv_right"
                     android:layout_width="@dimen/dp_40"
                     android:layout_height="@dimen/dp_40"
-                    android:layout_toEndOf="@+id/iv_love" />
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_h2" />
 
 
             </RelativeLayout>
