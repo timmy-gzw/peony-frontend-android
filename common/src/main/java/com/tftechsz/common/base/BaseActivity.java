@@ -165,6 +165,8 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
         private boolean isRightImgShow, isRightTxtShow = true;
         private int backgroundColor = -1, backViewColor = -1, titleTextColor, rightTextColor, rightTextBg;
         private int backRes = -1;
+        private LinearLayout toolbarMenu;
+        private int toolbarMenubgColor;
 
         public ToolBarBuilder() {
             if (null == baseTitle) {
@@ -174,7 +176,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
                 titleTv = findViewById(R.id.toolbar_title);
                 rightIv = findViewById(R.id.toolbar_iv_menu);
                 rightTv = findViewById(R.id.toolbar_tv_menu);
+                toolbarMenu = findViewById(R.id.toolbar_menu);
             }
+        }
+
+        public ToolBarBuilder setToolbarMenuBackground(@DrawableRes int color){
+            toolbarMenubgColor = color;
+            return this;
         }
 
         public ToolBarBuilder showBack(boolean isShow) {
@@ -282,6 +290,9 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             }
             if (backViewColor != -1) {
                 backBtn.setColorFilter(ContextCompat.getColor(BaseApplication.getInstance(), backViewColor));
+            }
+            if(toolbarMenubgColor >0){
+                toolbarMenu.setBackgroundResource(toolbarMenubgColor);
             }
         }
     }

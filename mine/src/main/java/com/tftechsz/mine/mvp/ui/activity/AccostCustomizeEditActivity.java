@@ -50,8 +50,8 @@ public class AccostCustomizeEditActivity extends BaseMvpActivity<IAccostSettingV
         mExtraContent = getIntent().getStringExtra(Interfaces.EXTRA_CUSTOMIZE_EDIT_CONTENT);
         new ToolBarBuilder().showBack(true)
                 .setTitle(mEditType == 0 ? "编辑内容" : "新建内容")
-                .setRightTextColor(Color.parseColor("#79650A"))
-                .setRightTextBackground(R.drawable.bg_red)
+                .setRightTextColor(R.color.white)
+                .setToolbarMenuBackground(R.drawable.bg_red)
                 .setRightText("提交", v -> commit())
                 .build();
         mEdit = findViewById(R.id.edit_accost);
