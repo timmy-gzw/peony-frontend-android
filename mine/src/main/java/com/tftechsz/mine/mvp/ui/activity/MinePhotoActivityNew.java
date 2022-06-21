@@ -46,7 +46,6 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
     private MinePhotoAdapterNew mAdapter;
     private RecyclerView mRvPhoto;
     private DelPicPopWindow mDelPicPopWindow;
-    private MinePhotoDto mAddLocalMedia;
     private List<MinePhotoDto> mTemp = new ArrayList<>();
     private TextView mBtnUpload;
     @Autowired
@@ -60,7 +59,7 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
     @Override
     protected void initView(Bundle savedInstanceState) {
         new ToolBarBuilder().showBack(true)
-                .setTitle("我的相册")
+                .setTitle("个人相册")
                 .build();
         mRvPhoto = findViewById(R.id.rv_photo);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
@@ -72,12 +71,8 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
     @Override
     protected void initData() {
         super.initData();
-        mAddLocalMedia = new MinePhotoDto("ADD", 0);
-        mTemp.add(mAddLocalMedia);
-
         mAdapter = new MinePhotoAdapterNew();
         mRvPhoto.setAdapter(mAdapter);
-        mAdapter.addData(mAddLocalMedia);
         mAdapter.setOnItemClickListener((ad, view, position) -> {
             if (mAdapter.getItemViewType(position) == Interfaces.TYPE_CAMERA) {
                 if (mAdapter.getItemCount() < 9) {
@@ -111,6 +106,8 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
                     mDelPicPopWindow = new DelPicPopWindow(MinePhotoActivityNew.this);
                 }
                 mDelPicPopWindow.setOnClickListener(() -> {
+                    MinePhotoDto mAddLocalMedia = new MinePhotoDto("ADD", 0);
+                    mAdapter.addData(mAddLocalMedia);
                     p.remove(item.getUrl());
                     mBtnUpload.setEnabled(isUpdate());
                 });
@@ -263,9 +260,13 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
     @Override
     public void getPhotoSuccess(List<MinePhotoDto> data) {
         List<MinePhotoDto> dtos = new ArrayList<>();
-        dtos.add(mAddLocalMedia);
         if (data != null) {
             dtos.addAll(data);
+        }
+        int len = 8-dtos.size();
+        for (int i = 0; i < len ; i++) {
+            MinePhotoDto mAddLocalMedia = new MinePhotoDto("ADD", 0);
+            dtos.add(mAddLocalMedia);
         }
         mTemp = dtos;
         mAdapter.setList(mTemp);

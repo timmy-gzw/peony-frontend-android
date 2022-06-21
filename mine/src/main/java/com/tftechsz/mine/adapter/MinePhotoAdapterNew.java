@@ -24,7 +24,7 @@ public class MinePhotoAdapterNew extends BaseQuickAdapter<MinePhotoDto, BaseView
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
+        if (getData().get(position).getUrl().equals("ADD")) {
             return Interfaces.TYPE_CAMERA;
         }
         return Interfaces.TYPE_PICTURE;
@@ -33,12 +33,17 @@ public class MinePhotoAdapterNew extends BaseQuickAdapter<MinePhotoDto, BaseView
     @Override
     protected void convert(@NonNull BaseViewHolder helper, MinePhotoDto item) {
         ImageView ivClose = helper.getView(R.id.img);
+        ImageView ivDel = helper.getView(R.id.iv_del);
         TextView tips = helper.getView(R.id.tips);
+        ivDel.setVisibility(View.GONE);
         if (item.getUrl().equals("ADD")) {
             ivClose.setImageResource(R.mipmap.ic_add);
             tips.setVisibility(View.GONE);
         } else {
             tips.setVisibility(item.isShow() ? View.VISIBLE : View.GONE);
+            if(!item.isShow()){
+                ivDel.setVisibility(View.VISIBLE);
+            }
             GlideUtils.loadRoundImage(getContext(), helper.getView(R.id.img), item.getUrl());
         }
     }
