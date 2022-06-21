@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import androidx.core.content.ContextCompat;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -24,6 +26,7 @@ import com.tftechsz.common.iservice.AttentionService;
 import com.tftechsz.common.utils.TimeUtils;
 import com.tftechsz.common.utils.UploadHelper;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.mine.R;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.mvp.IView.IMineInfoView;
 
@@ -164,9 +167,11 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
 
             }).setOptionsSelectChangeListener((options1, options2, options3) -> {
 
-            }).setSubmitText("确定")//确定按钮文字
+                    }).setSubmitText("确定")//确定按钮文字
                     .setCancelText("取消")//取消按钮文字
                     .setSubCalSize(18)//确定和取消文字大小
+                    .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                    .setCancelColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .setTitleSize(20)//标题文字大小
                     .setContentTextSize(18)//滚轮文字大小
                     .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
@@ -240,8 +245,8 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                     .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
                     .isCyclic(false)//是否循环滚动
                     .setTitleColor(Color.BLACK)//标题文字颜色
-                    .setSubmitColor(Color.BLUE)//确定按钮文字颜色
-                    .setCancelColor(Color.BLUE)//取消按钮文字颜色
+                    .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))//确定按钮文字颜色
+                    .setCancelColor(ContextCompat.getColor(context, R.color.colorPrimary))//取消按钮文字颜色
                     .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
                     .setRangDate(startDate, endDate)//起始终止年月日设定
                     .setLabel("年", "月", "日", "时", "分", "秒")//默认设置为年月日时分秒
@@ -275,6 +280,8 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                 }
             })
                     .setDecorView(relativeLayout)
+                    .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                    .setCancelColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .build();
         }
         pvHeight.setSelectOptions(position);
@@ -307,6 +314,8 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                 }
             })
                     .setDecorView(relativeLayout)
+                    .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                    .setCancelColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .build();
         }
         pvWeight.setSelectOptions(position);
@@ -342,6 +351,8 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                 }
             })
                     .setDecorView(relativeLayout)
+                    .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                    .setCancelColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .build();
         }
         pvIncome.setSelectOptions(position);
