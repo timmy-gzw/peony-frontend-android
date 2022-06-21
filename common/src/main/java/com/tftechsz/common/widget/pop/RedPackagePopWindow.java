@@ -5,8 +5,9 @@ import android.graphics.drawable.AnimationDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.netease.nim.uikit.common.ChatMsg;
 import com.tftechsz.common.R;
@@ -28,7 +29,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
     private final ChatMsg.RedPacket redPacket;
     private ImageView mIvOpen;
     private final PublicService service;
-    private RelativeLayout mRlPrice;  //金额布局
+    private ConstraintLayout mClPrice;  //金额布局
     private TextView mTvPrice, mTvPriceUnit; //金额
     private TextView mTvTitle;
     protected CompositeDisposable mCompositeDisposable;
@@ -51,7 +52,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
     private void initUI() {
         mIvOpen = findViewById(R.id.iv_open);  //开红包
         mIvOpen.setOnClickListener(this);
-        mRlPrice = findViewById(R.id.rl_price);
+        mClPrice = findViewById(R.id.cl_price);
         mTvPrice = findViewById(R.id.tv_price);
         mTvPriceUnit = findViewById(R.id.tv_price_unit);
         mTvTitle = findViewById(R.id.tv_title); // 标题
@@ -103,7 +104,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
                             @Override
                             public void run() {
                                 mIvOpen.setVisibility(View.INVISIBLE);
-                                mRlPrice.setVisibility(View.VISIBLE);
+                                mClPrice.setVisibility(View.VISIBLE);
                                 mTvPrice.setText(response.getData().coin);
                                 mTvPriceUnit.setText(response.getData().unit);
                             }

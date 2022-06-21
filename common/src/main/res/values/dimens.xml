@@ -156,6 +156,7 @@
     <dimen name="sp_27">27sp</dimen>
     <dimen name="sp_32">32sp</dimen>
     <dimen name="sp_34">34sp</dimen>
+    <dimen name="sp_36">36sp</dimen>
     <dimen name="sp_50">50sp</dimen>
 
     <dimen name="dkplayer_controller_height">46dp</dimen>
