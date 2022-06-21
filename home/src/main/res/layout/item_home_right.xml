@@ -79,8 +79,10 @@
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_46"
             app:lottie_autoPlay="true"
+            android:visibility="gone"
             app:lottie_imageAssetsFolder="gift/"
-            app:lottie_loop="true" />
+            app:lottie_loop="true"
+            tools:visibility="visible"/>
 
 
     </LinearLayout>
