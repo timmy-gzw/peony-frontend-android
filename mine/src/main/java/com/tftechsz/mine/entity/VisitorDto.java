@@ -8,4 +8,5 @@ import java.util.List;
  */
 public class VisitorDto {
     public List<VisitorBean> list;
+    public int num;
 }

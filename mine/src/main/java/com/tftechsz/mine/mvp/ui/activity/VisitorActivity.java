@@ -5,6 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
@@ -23,9 +26,6 @@ import com.tftechsz.mine.mvp.IView.IVisitorView;
 import com.tftechsz.mine.mvp.presenter.VisitorPresenter;
 
 import java.util.List;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 /**
  * 包 名 : com.tftechsz.mine.mvp.ui.activity
@@ -92,7 +92,6 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
 
         if (service.getUserInfo() != null) {
             mBind.setBotVisibility(!service.getUserInfo().isVip());
-            mBind.setVisitorCount(service.getUserInfo().visitor_count);
         }
         mBind.tvUnlock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +134,7 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
     public void getVisitorSuccess(VisitorDto data) {
         mPageManager.showContent();
         setData(mPage, data.list);
+        mBind.setVisitorCount(data.num);
     }
 
 
