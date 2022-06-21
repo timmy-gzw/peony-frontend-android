@@ -14,8 +14,8 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,7 +26,6 @@ import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.R;
 import com.tftechsz.common.entity.UpdateInfo;
 import com.tftechsz.common.utils.AppUtils;
-import com.tftechsz.common.utils.GlideUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,9 +41,8 @@ import zlc.season.rxdownload4.utils.HttpUtilKt;
 public class UpdateDialog extends Dialog {
     private UpdateInfo updateInfo;
     private ImageView mIvProgress;
-    private LinearLayout mLlProgress;
+    private FrameLayout mFlProgress;
     private ProgressBar mPbProgress;
-    private TextView mTvProgress;
     private OnSureClick mSureClick;
     private TextView mTvContent, mTvSure, mTvVersion;
     private ImageView mIvClose;
@@ -64,34 +62,25 @@ public class UpdateDialog extends Dialog {
             switch (msg.what) {
                 case DOWN_UPDATE:
                     mIvClose.setVisibility(View.INVISIBLE);
-                    mLlProgress.setVisibility(View.VISIBLE);
+                    mFlProgress.setVisibility(View.VISIBLE);
                     mTvSure.setVisibility(View.GONE);
-                    mTvProgress.setText(progress + "%");
-                    int textStart = 0;
                     int imageStart = 0;
                     if (mPbProgress.getProgress() > 0) {
                         int right = (int) ((mPbProgress.getWidth() - mPbProgress.getPaddingLeft() - mPbProgress.getPaddingRight()) / (mPbProgress.getMax() * 1.0f) * mPbProgress.getProgress() - DensityUtils.dp2px(mContext, 3) + mPbProgress.getPaddingLeft());
-                        textStart = (right + DensityUtils.dp2px(mContext, 5));
                         imageStart = (right - DensityUtils.dp2px(mContext, 3));
-                    }
-                    if ((textStart + mTvProgress.getWidth()) >= mPbProgress.getWidth() - mPbProgress.getPaddingRight()) {
-                        textStart = mPbProgress.getWidth() - mPbProgress.getPaddingRight() - mTvProgress.getWidth() - DensityUtils.dp2px(mContext, 3);
                     }
                     if ((imageStart + mIvProgress.getWidth()) >= mPbProgress.getWidth() - mPbProgress.getPaddingRight()) {
                         imageStart = mPbProgress.getWidth() - mPbProgress.getPaddingRight() - mIvProgress.getWidth();
                     }
-                    mTvProgress.setX(textStart);
                     mIvProgress.setX(imageStart);
 //                    mIvProgress.setX((progress * (mPbProgress.getWidth() / 100f)) - DensityUtils.dp2px(mContext, 45));
                     mPbProgress.setProgress(progress);
                     if (mContext == null || mContext.isFinishing() || mContext.isDestroyed()) {
                         return;
                     }
-                    GlideUtils.loadGif(mContext, mIvProgress, R.mipmap.ic_update_fly);
                     break;
 
                 case DOWN_OVER:
-                    mTvProgress.setVisibility(View.INVISIBLE);
                     mIvProgress.setVisibility(View.INVISIBLE);
                     /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         boolean hasInstallPermission = isHasInstallPermissionWithO(mContext);
@@ -131,9 +120,8 @@ public class UpdateDialog extends Dialog {
         mTvSure = findViewById(R.id.tv_update);
         mTvVersion = findViewById(R.id.tv_version);
         mIvClose = findViewById(R.id.iv_close);
-        mLlProgress = findViewById(R.id.ll_progress);
+        mFlProgress = findViewById(R.id.fl_progress);
         mPbProgress = findViewById(R.id.pb_progress);
-        mTvProgress = findViewById(R.id.tv_progress);
         mIvProgress = findViewById(R.id.iv_progress);
         initData();
     }
@@ -194,7 +182,7 @@ public class UpdateDialog extends Dialog {
     public void downloadApk() {
         //updateInfo.link = "https://public-cdn.peony125.com/download_apk/prod_market/1/PEONY_OFFICE_sign.apk";
         mApkFile = new File(downloadApkDir + HttpUtilKt.getFileNameFromUrl(updateInfo.link));
-       Thread downloadThread = new Thread(mDownloadApkRunnable);
+        Thread downloadThread = new Thread(mDownloadApkRunnable);
         downloadThread.start();
 //        Disposable subscribe = RxDownloadKt.download(new Task(updateInfo.link, HttpUtilKt.getFileNameFromUrl(updateInfo.link),
 //                HttpUtilKt.getFileNameFromUrl(updateInfo.link), downloadApkDir, ""))
@@ -228,8 +216,8 @@ public class UpdateDialog extends Dialog {
                 do {
                     int numRead = ins.read(buf);
                     count += numRead;
-                    long nowPro =(int) (((float) count / length) * 100);
-                    if(nowPro - progress > 1){
+                    long nowPro = (int) (((float) count / length) * 100);
+                    if (nowPro - progress > 1) {
                         progress = (int) (((float) count / length) * 100);
                         mHandler.sendEmptyMessage(DOWN_UPDATE);
                     }

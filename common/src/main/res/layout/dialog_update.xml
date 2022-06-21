@@ -26,10 +26,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_34"
+            android:layout_marginTop="@dimen/dp_50"
             android:background="@mipmap/ic_new_version"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_version"
@@ -37,14 +38,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
-            android:layout_marginStart="@dimen/dp_20"
-            android:alpha="0.8"
-            android:gravity="end"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_12"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_new_version" />
+            android:layout_marginStart="@dimen/dp_5"
+            android:background="@drawable/bg_white_radius10"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            android:textColor="#EE2C40"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_new_version"
+            app:layout_constraintStart_toEndOf="@id/iv_new_version"
+            tools:text="1.2.3" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,46 +57,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_version">
 
-            <LinearLayout
-                android:id="@+id/rl_version"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_15"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_0_5"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:layout_marginEnd="@dimen/dp_10"
-                    android:layout_weight="1"
-                    android:background="@color/driver" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="新版本特性"
-                    android:textColor="@color/color_light_font"
-                    android:textSize="@dimen/sp_12" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_0_5"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:layout_marginEnd="@dimen/dp_10"
-                    android:layout_weight="1"
-                    android:background="@color/driver" />
-            </LinearLayout>
-
             <TextView
                 android:id="@+id/tv_update_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
                 android:lineSpacingExtra="@dimen/dp_4"
                 android:text="更新内容"
                 android:textColor="@color/color_mid_font"
@@ -101,48 +70,40 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rl_version" />
 
-            <TextView
-                android:id="@+id/tv_update"
-                style="@style/CustomButton"
-                android:layout_height="@dimen/dp_40"
-                android:layout_marginTop="@dimen/dp_18"
-                android:layout_marginBottom="@dimen/dp_20"
-                android:background="@drawable/bg_family_leader"
-                android:text="立即更新"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_update_content" />
-
-            <LinearLayout
-                android:id="@+id/ll_progress"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_49"
                 android:layout_marginHorizontal="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_30"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:layout_marginVertical="@dimen/dp_20">
 
                 <TextView
-                    android:id="@+id/tv_progress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/dp_3"
-                    android:textColor="@color/color_F8D423"
-                    android:textSize="@dimen/sp_12"
-                    tools:text="50%" />
+                    android:id="@+id/tv_update"
+                    style="@style/CustomButton"
+                    android:layout_height="@dimen/dp_49"
+                    android:layout_margin="0dp"
+                    android:background="@drawable/sp_primary_r_25"
+                    android:text="立即体验"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_update_content" />
 
                 <FrameLayout
+                    android:id="@+id/fl_progress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <ProgressBar
                         android:id="@+id/pb_progress"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_13"
+                        android:layout_height="@dimen/dp_16"
                         android:layout_gravity="center_vertical"
                         android:max="100"
                         android:progressDrawable="@drawable/progressbar_horizontal"
@@ -150,18 +111,15 @@
 
                     <ImageView
                         android:id="@+id/iv_progress"
-                        android:layout_width="@dimen/dp_35"
-                        android:layout_height="@dimen/dp_25"
+                        android:layout_width="@dimen/dp_16"
+                        android:layout_height="@dimen/dp_16"
                         android:layout_gravity="center_vertical"
-                        android:src="@mipmap/ic_update_fly" />
+                        android:src="@mipmap/ic_update_process_dot" />
 
                 </FrameLayout>
-
-            </LinearLayout>
-
+            </FrameLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <ImageView
         android:id="@+id/iv_close"
