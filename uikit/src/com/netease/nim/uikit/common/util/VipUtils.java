@@ -369,18 +369,18 @@ public class VipUtils {
             setPadding(id, view, isParty);
             if (view instanceof TextView) { //气泡文字颜色设置
                 TextView tv = (TextView) view;
-                setTextColor(id, tv, null);
+                setTextColor(id, tv, null,isEnd);
             } else if (view instanceof FrameLayout) {
                 FrameLayout frameLayout = (FrameLayout) view;
                 for (int i = 0; i < frameLayout.getChildCount(); i++) {
                     View childAt = frameLayout.getChildAt(i);
                     if (childAt instanceof TextView) {
                         TextView tv = (TextView) childAt;
-                        setTextColor(id, tv, null);
+                        setTextColor(id, tv, null,isEnd);
                     }
                     if (childAt instanceof ImageView) {
                         ImageView img = (ImageView) childAt;
-                        setTextColor(id, null, img);
+                        setTextColor(id, null, img,isEnd);
                     }
                 }
             }
@@ -481,8 +481,11 @@ public class VipUtils {
                 ConvertUtils.dp2px(isParty ? paddingVertical + 3 : paddingVertical));
     }
 
-    private static void setTextColor(int id, TextView tv, ImageView img) {
+    private static void setTextColor(int id, TextView tv, ImageView img,boolean isEnd) {
         int color = R.color.color_333333;
+        if(isEnd){
+            color = R.color.white;
+        }
         switch (id) {
             case 8:
                 color = R.color.color_4D92DA;
@@ -515,7 +518,7 @@ public class VipUtils {
             case 2005:
             case 2006:
             case 2007:
-                color = R.color.black;
+                color = R.color.white;
                 break;
         }
         if (tv != null) {

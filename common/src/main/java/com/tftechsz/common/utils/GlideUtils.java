@@ -347,7 +347,7 @@ public class GlideUtils {
         Glide.with(context)
                 .load(url)
                 .apply(RequestOptions
-                        .bitmapTransform(new BlurTransformation(25, 10)))
+                        .bitmapTransform(new BlurTransformation(12, 3)))
                 .placeholder(placeImage)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

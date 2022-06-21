@@ -12,6 +12,12 @@
         android:scaleType="centerCrop"
         android:layout_height="match_parent"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:background="#7d000000"
+        android:scaleType="centerCrop"
+        android:layout_height="match_parent"/>
+
     <LinearLayout
         android:id="@+id/message_activity_list_view_container"
         android:layout_width="match_parent"

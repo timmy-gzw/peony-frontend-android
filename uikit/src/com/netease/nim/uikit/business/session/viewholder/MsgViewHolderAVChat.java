@@ -126,10 +126,6 @@ public class MsgViewHolderAVChat extends MsgViewHolderBase {
                 textString = "网络异常，通话结束";
             }
         }
-        if(!isReceivedMessage()){
-            statusLabel.setTextColor(NimUIKit.getContext().getResources().getColor(R.color.white));
-            typeImage.setColorFilter(Color.WHITE);
-        }
         statusLabel.setText(textString);
     }
 

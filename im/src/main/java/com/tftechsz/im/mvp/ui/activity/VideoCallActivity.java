@@ -145,7 +145,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private TextView tvSwitch;  //切换摄像头
     private HeadImageView ivUserIcon;
     private TextView tvCallUser, tvCallComment;
-    private TextView tvSpeaker,tvMute;
+    private TextView tvSpeaker, tvMute;
     private TextView mTvCancel;
     private LinearLayout llyBingCall;
     private LinearLayout llyDialogOperation;
@@ -165,7 +165,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private int mChannelType;  // 1 语音， 2 视频
     private boolean isMatch;  //是否自动接听
     private String matchType;  //是否强制匹配
-    private boolean isOpen,isMute = false;//是否开启扬声器
+    private boolean isOpen, isMute = false;//是否开启扬声器
     private MediaPlayer mediaPlayer;
     private boolean mIsAccept = false;   //是否接听语音
     private FrameLayout mFlVoiceBg;  //语音背景
@@ -247,7 +247,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     //new
     private ImageView mIvSmallVoice;
-    private TextView mTvReportUser,tvCallTip;
+    private TextView mTvReportUser, tvCallTip;
     private ConstraintLayout mClVideo;
 
     private void initPhoneStateListener() {
@@ -570,7 +570,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     }
 
-    private void setTipViewVisible(View view){
+    private void setTipViewVisible(View view) {
         tvNetwork.setVisibility(View.GONE);
         mTvIncome.setVisibility(View.GONE);
         tvCallTip.setVisibility(View.GONE);
@@ -731,6 +731,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     @Override
     protected void initData() {
         initIntent();
+//        tvCallComment.setText("速配成功，即将开始语音通话");
+//        tvCallComment.setVisibility(View.VISIBLE);
         p.startThread(this, svgaImageView, mPlayerView);
         callMessage = new ArrayList<>();
         mAdapter = new CallMessageAdapter(callMessage);
@@ -749,7 +751,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             rlyTopUserInfo.setVisibility(View.GONE);
             //判断男生和女生不同逻辑
             int grader = service.getUserInfo().getSex();
-            if ( grader == 1) {
+            if (grader == 1) {
                 tvCallFaceUnity.setVisibility(View.GONE);  //男生不显示美颜
                 tvFaceUnity.setVisibility(View.GONE);
                 tvVideoFace.setVisibility(View.VISIBLE);
@@ -1072,7 +1074,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             url = service.getConfigInfo().api.oss.cdn_scheme + service.getConfigInfo().api.oss.cdn.user + url + userInfo.getAvatar();
         if (mCallDir == 0) {
 //            if (mChannelType == 1) {   // 拨打语音电话
-                clVoiceCall.setVisibility(View.VISIBLE);
+            clVoiceCall.setVisibility(View.VISIBLE);
 //            }
             if (null != callOutUser) {   //打出
                 ivUserIcon.loadBuddyAvatar(String.valueOf(callOutUser.getUser_id()));
@@ -1105,7 +1107,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         }
         if (id == R.id.iv_gift) {  //礼物相关
             getP().getGiftData(this, sessionId, 1);
-        } else if ( id == R.id.tv_camera_switch) {   //切换摄像头
+        } else if (id == R.id.tv_camera_switch) {   //切换摄像头
             if (nertcVideoCall != null) {
                 nertcVideoCall.switchCamera();
             }
@@ -1203,10 +1205,10 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                         mTvViolationTip.setVisibility(View.VISIBLE);
                 }
             });
-        }else if(id == R.id.iv_small_voice){
+        } else if (id == R.id.iv_small_voice) {
             //音视频通话进入后台模式，显示悬浮按钮
 
-        }else if(id == R.id.tv_report_user){
+        } else if (id == R.id.tv_report_user) {
             //举报
         }
     }
