@@ -8,15 +8,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.blankj.utilcode.util.ConvertUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.entity.UpdateInfo;
@@ -79,18 +76,16 @@ public class AboutUsActivity extends BaseMvpActivity<IAboutUsView, AboutUsPresen
         mTvVersion.setText(getString(R.string.app_name) + ":" + AppUtils.getVersionName(this));
         ConfigInfo configInfo = service.getConfigInfo();
         if (null != configInfo) {
-            AboutAdapter adapter = new AboutAdapter(configInfo.api.about);
+            AboutAdapter adapter = new AboutAdapter(configInfo.api.about_bot);
             mRvAbout.setAdapter(adapter);
-            adapter.setOnItemClickListener(new OnItemClickListener() {
-                @Override
-                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> ad, @NonNull View view, int position) {
-                    if (null != configInfo.api.about.get(position)) {
-                        String down = "peony://update_app";
-                        if (configInfo.api.about.get(position).link.contains(down)) {
-                            p.getUpdateCheck();
-                        } else {
-                            CommonUtil.performLink(mActivity, configInfo.api.about.get(position), position, 0);
-                        }
+            adapter.setOnItemClickListener((ad, view, position) -> {
+                ConfigInfo.MineInfo mineInfo = configInfo.api.about_bot.get(position);
+                if (null != mineInfo) {
+                    String down = "peony://update_app";
+                    if (mineInfo.link.contains(down)) {
+                        p.getUpdateCheck();
+                    } else {
+                        CommonUtil.performLink(mActivity, mineInfo, position, 0);
                     }
                 }
             });

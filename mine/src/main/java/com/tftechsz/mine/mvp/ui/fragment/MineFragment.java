@@ -77,6 +77,8 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private TextView mVip_title;
     private NestedScrollView mNestedScrollView;
     private long mCurrentTime;
+    private View llIntegral;
+    private View llCoin;
 
     @Override
     protected MinePresenter initPresenter() {
@@ -113,6 +115,8 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mVip_title = getView(R.id.vip_title);
         mVipIcon = getView(R.id.vip_icon);
         mVipCharge = getView(R.id.vip_charge);
+        llIntegral = getView(R.id.ll_jifen);
+        llCoin = getView(R.id.ll_jinbi);
         initListener();
 
     }
@@ -140,8 +144,8 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         getView(R.id.tv_setting).setOnClickListener(this);  //设置
         getView(R.id.cl_vip).setOnClickListener(this);  //会员
         getView(R.id.cl_top).setOnClickListener(this);   //我的
-        getView(R.id.ll_jifen).setOnClickListener(this);   //积分
-        getView(R.id.ll_jinbi).setOnClickListener(this);   //金币
+        llIntegral.setOnClickListener(this);   //积分
+        llCoin.setOnClickListener(this);   //金币
     }
 
 
@@ -324,8 +328,12 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                         CommonUtil.performLink(mActivity, adapter.getItem(position), position, 0);
                     });
                     mRcMineMid.setVisibility(View.VISIBLE);
+                    llIntegral.setVisibility(View.GONE);
+                    llCoin.setVisibility(View.GONE);
                 } else {
                     mRcMineMid.setVisibility(View.GONE);
+                    llIntegral.setVisibility(View.VISIBLE);
+                    llCoin.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -86,7 +86,6 @@ public class ConfigInfo {
     public static class Api {
         public WeChat wechat;
         public List<MineInfo> my;
-        public List<MineInfo> about;
         public List<MineInfo> about_bot;
         public List<MineInfo> my_integral;
         public MineInfo integral_exchange_how_to_real_1;

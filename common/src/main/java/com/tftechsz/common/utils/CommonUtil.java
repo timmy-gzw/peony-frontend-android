@@ -526,7 +526,8 @@ public class CommonUtil {
             Interfaces.LINK_PEONY_FACIAL,
             Interfaces.LINK_PEONY_MY_OUTFIT,
             Interfaces.LINK_PEONY_MY_NOBLE,
-            Interfaces.LINK_PEONY_NOTE_VALUE
+            Interfaces.LINK_PEONY_NOTE_VALUE,
+            Interfaces.LINK_PEONY_TREND
     );
 
 
