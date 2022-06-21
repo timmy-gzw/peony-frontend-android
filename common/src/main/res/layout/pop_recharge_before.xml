@@ -7,18 +7,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_36"
         android:background="@drawable/bg_recharge_before_pop"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/dp_20">
+        android:paddingBottom="@dimen/dp_23">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_55"
+            android:layout_marginTop="@dimen/dp_80"
             android:text="您的金币不足"
-            android:textColor="@color/family_box_color"
+            android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_21"
             android:textStyle="bold" />
 
@@ -26,29 +26,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_3"
-            android:alpha="0.6"
+            android:layout_marginTop="@dimen/dp_4"
             android:text="金币余额不足，马上充值别错过缘分～"
-            android:textColor="@color/family_box_color"
+            android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_14" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_leader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_30"
             android:background="@drawable/bg_recharge_pop"
-            android:paddingStart="@dimen/dp_20"
-            android:paddingTop="@dimen/dp_10"
-            android:paddingEnd="@dimen/dp_20"
-            android:paddingBottom="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_16"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/iv_avatar"
-                android:layout_width="@dimen/dp_55"
-                android:layout_height="@dimen/dp_55"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_pop_recharge"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_12"
                 android:text="立即充值"
-                android:textColor="#FD9334"
+                android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tv_number"
@@ -76,12 +75,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_16"
                 android:layout_marginStart="@dimen/dp_12"
-                android:alpha="0.6"
                 android:drawablePadding="@dimen/dp_1"
                 android:gravity="center"
                 android:paddingEnd="@dimen/dp_5"
                 android:text="现在充值立享更多优惠"
-                android:textColor="#FD9334"
+                android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_avatar"
@@ -98,6 +96,7 @@
                 android:text="去充值"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -105,23 +104,22 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
             android:background="@drawable/bg_task_pop"
-            android:paddingStart="@dimen/dp_20"
-            android:paddingTop="@dimen/dp_10"
-            android:paddingEnd="@dimen/dp_20"
-            android:paddingBottom="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_16"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/iv_task"
-                android:layout_width="@dimen/dp_55"
-                android:layout_height="@dimen/dp_55"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_pop_task"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -134,8 +132,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_12"
-                android:text="获得金币 "
-                android:textColor="#78A1FF"
+                android:text="获得金币"
+                android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tv_task_tip"
@@ -149,12 +147,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_16"
                 android:layout_marginStart="@dimen/dp_12"
-                android:alpha="0.6"
                 android:drawablePadding="@dimen/dp_1"
                 android:gravity="center"
                 android:paddingEnd="@dimen/dp_5"
                 android:text="完成任务即领免费金币"
-                android:textColor="#78A1FF"
+                android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_task"
@@ -171,6 +168,7 @@
                 android:text="做任务"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -193,7 +191,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/dp_50"
-        android:src="@mipmap/ic_close_pop" />
+        android:src="@mipmap/ic_close_pop"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
