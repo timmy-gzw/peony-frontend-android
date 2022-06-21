@@ -38,8 +38,7 @@ public class VisitorAdapter extends BaseQuickAdapter<VisitorBean, DataBindBaseVi
         ItemVisitorBinding mBinding = (ItemVisitorBinding) helper.getBind();
         mBinding.setVariable(BR.item, bean);
         mBinding.executePendingBindings();
-        CommonUtil.setUserName(mBinding.tvVisName, bean.nickname, bean.is_vip == 1);
-        mBinding.ivAvatar.setBgFrame(bean.picture_frame);
+        CommonUtil.setUserName(mBinding.tvVisName, bean.nickname, false, bean.isVip());
 
         mBinding.visSign.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mBinding.tvVisName.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -55,11 +54,11 @@ public class VisitorAdapter extends BaseQuickAdapter<VisitorBean, DataBindBaseVi
                     0, ss1.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
             mBinding.visSign.setText(ss1);
 
-            GlideUtils.loadImageGaussian(getContext(), mBinding.ivAvatar.getImageView(), bean.icon);
+            GlideUtils.loadImageGaussian(getContext(), mBinding.ivAvatar, bean.icon);
         } else {
             mBinding.tvVisName.setText(bean.nickname);
             mBinding.visSign.setText(bean.desc);
-            GlideUtils.loadRoundImageRadius(getContext(), mBinding.ivAvatar.getImageView(), bean.icon);
+            GlideUtils.loadRoundImageRadius(getContext(), mBinding.ivAvatar, bean.icon);
         }
     }
 }

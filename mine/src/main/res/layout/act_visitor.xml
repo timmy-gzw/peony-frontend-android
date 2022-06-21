@@ -68,9 +68,9 @@
                 android:background="@mipmap/mine_ic_visitor"
                 android:drawablePadding="@dimen/dp_5"
                 android:gravity="center"
-                android:paddingHorizontal="@dimen/dp_22"
+                android:paddingHorizontal="@dimen/dp_20"
                 android:text='@{"有"+visitorCount+"人看过你"}'
-                android:textColor="@color/color_normal"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_12"
                 android:visibility="@{botVisibility ? View.VISIBLE : View.GONE}"
                 app:drawableStartCompat="@mipmap/iv_unlock_tip"

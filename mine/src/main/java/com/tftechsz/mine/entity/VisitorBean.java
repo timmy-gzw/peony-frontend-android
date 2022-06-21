@@ -12,6 +12,8 @@ public class VisitorBean {
     public boolean isShow;
     public int sex;
     public int is_vip;
+    public int is_real;  //  //是否真人 0 不是，1是
+    public int is_self;//是否实名认证
     public int picture_frame;
     public int to_user_id;
     public int from_user_id;
@@ -20,5 +22,13 @@ public class VisitorBean {
 
     public boolean isGirl() {
         return sex == 2;
+    }
+
+    public boolean isVip() {
+        return is_vip == 1;
+    }
+
+    public boolean isReal() {
+        return is_real == 1;
     }
 }
