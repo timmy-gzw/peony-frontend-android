@@ -77,7 +77,7 @@ public class AccostPicActivity extends BaseMvpActivity<IAccostSettingView, IAcco
     protected void initData() {
         mTopHint.setText("照片越多，越容易让Ta喜欢你哦~");
         mEmpty.setText("暂无图片，去上传靓照吧~");
-        mRecy.setLayoutManager(new GridLayoutManager(mContext, 3));
+        mRecy.setLayoutManager(new GridLayoutManager(mContext, 4));
         mAdapter = new AccostPicAdapter();
         mAdapter.addChildClickViewIds(R.id.del);
         mRecy.setAdapter(mAdapter);

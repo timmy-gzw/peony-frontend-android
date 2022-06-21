@@ -555,7 +555,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         topicAdapter.addData(testData);
         mRvTopic.setAdapter(topicAdapter);
         topicAdapter.setOnItemClickListener((adapter, view, position) -> {
-            inputPanel.getMessageEdit().setText(topicAdapter.getItem(position));
+            formrtAndSendMessage(topicAdapter.getItem(position));
         });
         mAnimationVip = findView(R.id.animation_vip);
         mAnimationWarn = findView(R.id.animation_warn);
@@ -1892,7 +1892,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             topicPop.setTopicItemClickListener(new TopicPop.TopicItemOnClickListener() {
                 @Override
                 public void onTopicItemClick(String text) {
-                    inputPanel.getMessageEdit().setText(text);
+                    formrtAndSendMessage(text);
                 }
             });
             topicPop.showPopupWindow();
@@ -1999,6 +1999,19 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             });
             customPopWindow.showPopupWindow();
         });
+    }
+
+    private void formrtAndSendMessage(String text) {
+        if (TextUtils.isEmpty(text) || TextUtils.isEmpty(text.trim())) {
+            ToastHelper.showToast(getActivity(), "发送消息不能为空");
+            return;
+        }
+        IMMessage textMessage = MessageBuilder.createTextMessage(sessionId, sessionType, text);
+        if (sessionType == SessionTypeEnum.P2P) {
+            String spamExt = "{\"level\":\"" + mIntimacy + "\",\"gender\":\"" + (service.getUserInfo() == null ? 0 : service.getUserInfo().getSex()) + "\"}";
+            textMessage.setYidunAntiSpamExt(spamExt);
+        }
+        sendMessage(textMessage);
     }
 
 
