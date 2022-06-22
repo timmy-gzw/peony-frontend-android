@@ -22,7 +22,6 @@
     <string name="login">登录</string>
     <string name="login_by_one_ley">去使用一键登录</string>
 
-    <string name="coin">金币</string>
     <string name="coin_balance">金币余额</string>
     <string name="coin_recharge">金币充值</string>
     <string name="income_and_expenditude_records">收支记录</string>

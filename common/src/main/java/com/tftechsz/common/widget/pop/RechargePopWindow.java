@@ -1,5 +1,9 @@
 package com.tftechsz.common.widget.pop;
 
+import static com.tftechsz.common.base.BasePresenter.applySchedulers;
+import static com.tftechsz.common.constant.Interfaces.FIY_NUMBER;
+import static com.tftechsz.common.constant.Interfaces.SCENE_NUMBER;
+
 import android.app.Activity;
 import android.content.Context;
 import android.text.SpannableStringBuilder;
@@ -9,16 +13,14 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -32,7 +34,6 @@ import com.netease.nim.uikit.common.UserInfo;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.umeng.analytics.MobclickAgent;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
 import com.tftechsz.common.base.BaseApplication;
@@ -63,6 +64,7 @@ import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.PayTextClick;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -72,10 +74,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
-import static com.tftechsz.common.base.BasePresenter.applySchedulers;
-import static com.tftechsz.common.constant.Interfaces.FIY_NUMBER;
-import static com.tftechsz.common.constant.Interfaces.SCENE_NUMBER;
 
 public class RechargePopWindow extends BaseBottomPop implements View.OnClickListener {
     private CompositeDisposable mCompositeDisposable;
@@ -90,10 +88,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
     private IWXAPI mApi;
     private PayService service;
     private PublicService payService;
-    private TextView mPay_hint;
     private TextView mTvPay;
-    private ConstraintLayout mClFirstRecharge, mClNormal;
-    private ImageView mIvFirstRecharge;
     private int formType; //0默认   1家族  2派对
 
     /**
@@ -152,17 +147,12 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         mCompositeDisposable = new CompositeDisposable();
         mTvCoin = findViewById(R.id.tv_coin);
         mRvRecharge = findViewById(R.id.rv_recharge);
-        mPay_hint = findViewById(R.id.pay_hint);
         mTvPay = findViewById(R.id.tv_pay);
-        mClFirstRecharge = findViewById(R.id.cl_first_recharge);
-        mClNormal = findViewById(R.id.cl_normal);
-        mIvFirstRecharge = findViewById(R.id.iv_first_recharge);
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3);
         mRvRecharge.setLayoutManager(layoutManager);
         findViewById(R.id.iv_close).setOnClickListener(v -> dismiss());
         findViewById(R.id.tv_pay).setOnClickListener(this);
         findViewById(R.id.tv_more).setOnClickListener(this);
-        findViewById(R.id.iv_first_close).setOnClickListener(v -> dismiss());
         mTvContact = findViewById(R.id.tv_contact);
         setOutSideDismiss(false);
         initRxBus();
@@ -179,29 +169,6 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
     private void initData() {
         if (mRechargeDto == null) return;
         if (userService.getUserInfo() == null) return;
-        mTvPay.setTextColor(ContextCompat.getColor(mContext, R.color.color_normal));
-        if (!TextUtils.isEmpty(mRechargeDto.pay_hint)) {
-            mPay_hint.setText(mRechargeDto.pay_hint);
-            //男用户变更首冲展示
-            if (userService.getUserInfo().getSex() == 1) {
-                mTvPay.setBackgroundResource(R.drawable.bg_first_recharge25);
-                mPay_hint.setVisibility(View.INVISIBLE);
-                mTvPay.setTextColor(ContextCompat.getColor(mContext, R.color.white));
-                mClFirstRecharge.setVisibility(View.VISIBLE);
-                mClNormal.setVisibility(View.GONE);
-                GlideUtils.loadImage(mContext, mIvFirstRecharge, mRechargeDto.banner);
-            } else {
-                mTvPay.setBackgroundResource(R.drawable.shape_pay_btn_bg);
-                mPay_hint.setVisibility(View.VISIBLE);
-                mClFirstRecharge.setVisibility(View.GONE);
-                mClNormal.setVisibility(View.VISIBLE);
-            }
-        } else {
-            mPay_hint.setVisibility(View.INVISIBLE);
-            mTvPay.setBackgroundResource(R.drawable.bg_orange_radius25);
-            mClFirstRecharge.setVisibility(View.GONE);
-            mClNormal.setVisibility(View.VISIBLE);
-        }
 
         ConfigInfo configInfo = userService.getConfigInfo();
         if (configInfo != null && configInfo.api != null && configInfo.api.recharge_bottom != null && configInfo.api.recharge_bottom.size() > 0) {
@@ -221,7 +188,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         mRvRecharge.setAdapter(adapter);
         View footerView = LayoutInflater.from(mContext).inflate(R.layout.pop_recharge_footer, null);
         RecyclerView mRvPayWay = footerView.findViewById(R.id.rv_pay_way);
-        GridLayoutManager layoutManager1 = new GridLayoutManager(mContext, 2);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(mContext);
         mRvPayWay.setLayoutManager(layoutManager1);
         adapter.addFooterView(footerView);
         PayWayAdapter wayAdapter = new PayWayAdapter(mRechargeDto.payment_type, mRechargeDto, userService.getUserInfo());
@@ -393,10 +360,10 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
      */
     public void wakeUpAliPay(final String orderInfo) {
         Disposable disposable = Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            PayTask alipay = new PayTask((Activity) mContext);
-            String result = alipay.pay(orderInfo, true);
-            emitter.onNext(result);
-        }).subscribeOn(Schedulers.newThread())
+                    PayTask alipay = new PayTask((Activity) mContext);
+                    String result = alipay.pay(orderInfo, true);
+                    emitter.onNext(result);
+                }).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
                     AlipayResultInfo payResult = new AlipayResultInfo(s);
                     String resultStatus = payResult.getResultStatus();
@@ -494,28 +461,12 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         protected void convert(@NonNull BaseViewHolder helper, RechargeDto item) {
             RelativeLayout rlRoot = helper.getView(R.id.rl_root);
             TextView tvDesc = helper.getView(R.id.tv_desc);
-            helper.setText(R.id.tv_coin, item.coin.replace("金币", ""))
-                    .setText(R.id.tv_rmb, item.rmb + "元");
+            helper.setText(R.id.tv_coin, item.coin.replace(getContext().getResources().getString(R.string.coin), ""))
+                    .setText(R.id.tv_rmb, "¥" + item.rmb);
             helper.setGone(R.id.ll_desc, TextUtils.isEmpty(item.title));
-            if (!TextUtils.isEmpty(rechargeQuickDto.pay_hint)) {
-                //男用户变更首冲展示
-                if (userInfo.getSex() == 1) {
-                    helper.setBackgroundResource(R.id.tv_desc, R.drawable.bg_first_recharge_coin);
-                    helper.setImageResource(R.id.iv_desc, R.mipmap.chat_ic_first_recharge_bottom);
-                }
-            }
             tvDesc.setText(item.title);
             if (checkPosition == helper.getLayoutPosition()) {
-                if (!TextUtils.isEmpty(rechargeQuickDto.pay_hint)) {
-                    //男用户变更首冲展示
-                    if (userInfo.getSex() == 1) {
-                        rlRoot.setBackgroundResource(R.drawable.bg_first_rechargepay_choose);
-                    } else {
-                        rlRoot.setBackgroundResource(R.drawable.bg_quick_pay_choose);
-                    }
-                } else {
-                    rlRoot.setBackgroundResource(R.drawable.bg_quick_pay_choose);
-                }
+                rlRoot.setBackgroundResource(R.drawable.bg_quick_pay_choose);
             } else {
                 rlRoot.setBackgroundResource(R.drawable.bg_recharge_normal);
             }
@@ -541,26 +492,12 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
             notifyDataSetChanged();
         }
 
-
         @Override
         protected void convert(@NonNull BaseViewHolder helper, PaymentTypeDto item) {
-            LinearLayout rlRoot = helper.getView(R.id.ll_root);
             GlideUtils.loadRouteImage(getContext(), helper.getView(R.id.iv_icon), item.image);
             helper.setText(R.id.tv_pay_title, item.title);
-            if (checkPosition == helper.getLayoutPosition()) {
-                if (!TextUtils.isEmpty(rechargeQuickDto.pay_hint)) {
-                    //男用户变更首冲展示
-                    if (userInfo.getSex() == 1) {
-                        rlRoot.setBackgroundResource(R.drawable.bg_first_rechargepay_choose);
-                    } else {
-                        rlRoot.setBackgroundResource(R.drawable.bg_quick_pay_choose);
-                    }
-                } else {
-                    rlRoot.setBackgroundResource(R.drawable.bg_quick_pay_choose);
-                }
-            } else {
-                rlRoot.setBackgroundResource(R.drawable.bg_quick_pay_normal);
-            }
+            CheckBox checkBox = helper.getView(R.id.checkbox);
+            checkBox.setChecked(checkPosition == helper.getLayoutPosition());
         }
     }
 

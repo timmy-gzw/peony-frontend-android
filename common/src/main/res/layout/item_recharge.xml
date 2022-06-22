@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/dp_6">
+    android:layout_marginEnd="@dimen/dp_8">
 
     <RelativeLayout
         android:id="@+id/rl_root"
         android:layout_width="match_parent"
         android:layout_height="92dp"
-        android:layout_marginTop="@dimen/dp_4"
-        android:layout_marginEnd="@dimen/dp_4"
         android:layout_marginBottom="@dimen/dp_10"
         android:gravity="center">
 
@@ -26,9 +24,8 @@
                 android:layout_height="wrap_content"
                 android:text="111"
                 android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_18"
                 android:textStyle="bold" />
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,10 +33,7 @@
                 android:layout_marginStart="@dimen/dp_6"
                 android:text="金币"
                 android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_10"
-
-
-                />
+                android:textSize="@dimen/sp_10" />
         </LinearLayout>
 
 
@@ -62,14 +56,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/dp_4"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_recharge_coin"
+            android:background="@drawable/shape_pay_hint_bg2"
             android:paddingStart="@dimen/dp_5"
             android:paddingTop="@dimen/dp_1"
             android:paddingEnd="@dimen/dp_5"
@@ -77,15 +70,6 @@
             android:text="首冲"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_11" />
-
-        <ImageView
-            android:id="@+id/iv_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/chat_ic_recharge_bottom"
-            android:layout_gravity="end"
-            />
-
     </LinearLayout>
 
 </RelativeLayout>
