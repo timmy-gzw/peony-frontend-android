@@ -143,30 +143,10 @@
 
         </RelativeLayout>
 
-
-        <ImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_340"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40"
-            android:layout_marginStart="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_28"
-            android:src="@mipmap/ic_back_radius"
-            android:visibility="gone" />
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_80"
-            android:paddingTop="@dimen/dp_28"
+            android:layout_height="@dimen/dp_50"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:layout_collapseMode="pin">
@@ -182,11 +162,8 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/dp_15"
                     android:padding="@dimen/dp_6"
-                    android:src="@mipmap/mine_ic_back_white" />
-
-                <!--
-                                        android:background="@drawable/bg_black_circle"
-                -->
+                    android:src="@mipmap/mine_ic_back_white"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tob_title"
@@ -218,21 +195,43 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:background="@mipmap/edit_info"
-                    android:drawableLeft="@mipmap/mine_edit"
+                    android:background="@drawable/sp_30black_lt_25_lb_25"
                     android:drawablePadding="@dimen/dp_10"
                     android:gravity="center"
-                    android:paddingLeft="@dimen/dp_15"
-                    android:paddingTop="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_10"
-                    android:paddingBottom="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_16"
+                    android:paddingTop="@dimen/dp_8"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_8"
                     android:text="@string/edit_userInfo"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_12"
+                    app:drawableStartCompat="@mipmap/mine_edit" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_42"
+        android:layout_marginTop="@dimen/dp_10"
+        app:tl_divider_padding="@dimen/dp_26"
+        app:tl_indicator_color="@color/color_normal"
+        app:tl_indicator_corner_radius="@dimen/dp_2"
+        app:tl_indicator_height="@dimen/dp_2"
+        app:tl_indicator_margin_top="@dimen/dp_10"
+        app:tl_indicator_width="@dimen/dp_20"
+        app:tl_tab_marginBottom="@dimen/dp_12"
+        app:tl_tab_msg_marginRight="@dimen/dp_10"
+        app:tl_tab_space_equal="true"
+        app:tl_tab_vertical_gravity="Bottom"
+        app:tl_textBold="SELECT"
+        app:tl_textSelectColor="@color/color_normal"
+        app:tl_textSelectSize="@dimen/sp_16"
+        app:tl_textUnSelectColor="@color/color_light_font"
+        app:tl_textUnSelectSize="@dimen/sp_16"
+        app:tl_underline_gravity="BOTTOM" />
 
 </com.google.android.material.appbar.AppBarLayout>
