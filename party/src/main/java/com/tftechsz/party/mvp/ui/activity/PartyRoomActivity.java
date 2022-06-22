@@ -1518,7 +1518,6 @@ public class PartyRoomActivity extends BasePartyRoomActivity implements Function
             mBind.playerView.startPlay(file);
             return;
         }
-        mBind.svgaImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         try {
             BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
             svgaParser.decodeFromInputStream(bis, file.getAbsolutePath(), mParseCompletionCallback, true, null, null);

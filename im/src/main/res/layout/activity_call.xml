@@ -684,7 +684,7 @@
         android:id="@+id/svg_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         app:autoPlay="true"
         app:clearsAfterStop="true"
         app:loopCount="1" />

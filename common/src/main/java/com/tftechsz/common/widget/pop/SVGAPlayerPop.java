@@ -125,11 +125,6 @@ public class SVGAPlayerPop extends BaseCenterPop {
         if (data == null) {
             return;
         }
-        if (TextUtils.equals("鹊桥", data.getName()) || TextUtils.equals("airdrops_luxury_send", data.getName())) {
-            mBind.svgaImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        } else {
-            mBind.svgaImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        }
         if (null == svgaParser) svgaParser = new SVGAParser(getContext());
         File file = new File(DownloadHelper.FILE_PATH + File.separator + data.getName());
         myGiftList.poll();

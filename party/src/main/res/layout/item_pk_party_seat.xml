@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             app:autoPlay="true"
             app:clearsAfterStop="true" />
 

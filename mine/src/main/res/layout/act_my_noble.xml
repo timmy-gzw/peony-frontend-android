@@ -88,6 +88,7 @@
             android:focusableInTouchMode="false"
             app:autoPlay="true"
             app:clearsAfterStop="true"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@id/lottie_bg"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="@id/lottie_bg"

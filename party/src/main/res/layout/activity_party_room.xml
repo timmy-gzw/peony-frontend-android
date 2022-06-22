@@ -222,7 +222,7 @@
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="@dimen/dp_80"
                     android:layout_centerInParent="true"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     app:autoPlay="true"
                     app:clearsAfterStop="true" />
 
@@ -325,7 +325,7 @@
                     android:layout_width="60dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     app:autoPlay="true"
                     app:clearsAfterStop="true"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -389,7 +389,7 @@
             android:layout_width="@dimen/dp_85"
             android:layout_height="@dimen/dp_85"
             android:layout_marginBottom="@dimen/dp_15"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:visibility="gone"
             app:autoPlay="true"
             app:clearsAfterStop="true"
@@ -548,7 +548,7 @@
             android:id="@+id/svga_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:visibility="gone"
             app:autoPlay="true"
             app:clearsAfterStop="true"
@@ -768,6 +768,7 @@
                 android:layout_width="@dimen/dp_200"
                 android:layout_height="match_parent"
                 app:autoPlay="true"
+                android:scaleType="fitCenter"
                 app:clearsAfterStop="true"
                 app:loopCount="1"
                 app:lottie_loop="false" />

@@ -639,13 +639,6 @@ public class CallPresenter extends BasePresenter<ICallView> {
             animView.startPlay(file);
             return;
         }
-        if (svgaImageView != null) {
-            if (TextUtils.equals("鹊桥", data.name) || TextUtils.equals("airdrops_luxury_send", data.name)) {
-                svgaImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            } else {
-                svgaImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            }
-        }
         BufferedInputStream bis;
         try {
             bis = new BufferedInputStream(new FileInputStream(file));

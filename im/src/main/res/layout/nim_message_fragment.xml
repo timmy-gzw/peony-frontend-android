@@ -828,6 +828,7 @@
             android:layout_width="@dimen/dp_200"
             android:layout_height="match_parent"
             app:autoPlay="true"
+            android:scaleType="fitCenter"
             app:clearsAfterStop="true"
             app:loopCount="1"
             app:lottie_loop="false" />
@@ -838,6 +839,7 @@
             android:layout_height="match_parent"
             app:autoPlay="true"
             app:clearsAfterStop="true"
+            android:scaleType="fitCenter"
             app:loopCount="1"
             app:lottie_loop="false" />
     </FrameLayout>
@@ -887,7 +889,7 @@
         android:id="@+id/svg_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         app:autoPlay="true"
         app:clearsAfterStop="true"
         app:loopCount="1" />

@@ -19,7 +19,7 @@
         android:layout_width="64dp"
         android:layout_height="78dp"
         android:layout_above="@+id/tv_airdrop"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/tv_airdrop_num"

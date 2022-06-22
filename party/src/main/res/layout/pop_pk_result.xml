@@ -10,7 +10,7 @@
         android:id="@+id/sv_pk_result"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_250"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         app:autoPlay="true"
         app:clearsAfterStop="true" />
 
