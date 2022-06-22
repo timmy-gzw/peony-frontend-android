@@ -176,18 +176,73 @@
             android:textColor="@color/white"
             android:textSize="@dimen/sp_26" />
 
-        <TextView
-            android:id="@+id/tv_call_user_city"
+        <LinearLayout
+            android:id="@+id/ll_voice_user"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_call_user"
+            android:layout_below="@id/tv_call_user"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:singleLine="true"
-            android:textColor="@color/color_99_ff"
-            android:textSize="@dimen/sp_12"
-            tools:visibility="visible"
-            android:visibility="gone" />
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_call_user_gender_age"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                android:drawableLeft="@drawable/ic_boy"
+                android:drawablePadding="@dimen/dp_5"
+                android:background="@drawable/shape_blue_alpha30"
+                android:textColor="@color/color_99_ff"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textSize="@dimen/sp_10"
+                tools:visibility="visible"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_call_user_city"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="深圳市"
+                android:background="@drawable/shape_black_alpha30"
+                android:textColor="@color/color_99_ff"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textSize="@dimen/sp_10"
+                tools:visibility="visible"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_call_user_constellation"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="射手座"
+                android:background="@drawable/shape_black_alpha30"
+                android:textColor="@color/color_99_ff"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textSize="@dimen/sp_10"
+                tools:visibility="visible"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_call_user_job"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="市场营销"
+                android:background="@drawable/shape_black_alpha30"
+                android:textColor="@color/color_99_ff"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textSize="@dimen/sp_10"
+                tools:visibility="visible"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -660,6 +715,77 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_video_user"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_small_voice"
+            app:layout_constraintRight_toLeftOf="@id/tv_report_user"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_video_user_gender_age"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"
+                android:drawableLeft="@drawable/ic_boy"
+                android:drawablePadding="@dimen/dp_5"
+                android:background="@drawable/shape_blue_alpha30"
+                android:textColor="@color/color_99_ff"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textSize="@dimen/sp_10"
+                tools:visibility="visible"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_video_user_city"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="深圳市"
+                android:background="@drawable/shape_black_alpha30"
+                android:textColor="@color/color_99_ff"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textSize="@dimen/sp_10"
+                tools:visibility="visible"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_video_user_constellation"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="射手座"
+                android:background="@drawable/shape_black_alpha30"
+                android:textColor="@color/color_99_ff"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textSize="@dimen/sp_10"
+                tools:visibility="visible"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_video_user_job"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="市场营销"
+                android:background="@drawable/shape_black_alpha30"
+                android:textColor="@color/color_99_ff"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:textSize="@dimen/sp_10"
+                tools:visibility="visible"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_report_user"

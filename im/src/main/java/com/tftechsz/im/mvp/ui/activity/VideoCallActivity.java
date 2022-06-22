@@ -249,6 +249,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private ImageView mIvSmallVoice;
     private TextView mTvReportUser, tvCallTip;
     private ConstraintLayout mClVideo;
+    private LinearLayout mllVoiceUserInfo,mllVideoUserInfo;
+    private TextView mtvGenderAge,mtvCity,mtvConstellation,mtvJob;//语音通话：对方性别年龄，城市，星座，工作
+    private TextView mtvVideoGenderAge,mtvVideoCity,mtvVideoConstellation,mtvVideoJob;//视屏通话：对方性别年龄，城市，星座，工作
 
     private void initPhoneStateListener() {
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -660,6 +663,17 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
         tvNetwork = findViewById(R.id.tv_network);
 
+        mtvGenderAge = findViewById(R.id.tv_call_user_gender_age);
+        mtvCity = findViewById(R.id.tv_call_user_city);
+        mtvConstellation = findViewById(R.id.tv_call_user_constellation);
+        mtvJob = findViewById(R.id.tv_call_user_job);
+
+        mtvVideoGenderAge = findViewById(R.id.tv_video_user_gender_age);
+        mtvVideoCity = findViewById(R.id.tv_video_user_city);
+        mtvVideoConstellation = findViewById(R.id.tv_video_user_constellation);
+        mtvVideoJob = findViewById(R.id.tv_video_user_job);
+
+
         //余额不足
         mClRecharge = findViewById(R.id.cl_recharge);
         tvRecharge = findViewById(R.id.tv_recharge);
@@ -731,6 +745,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     @Override
     protected void initData() {
         initIntent();
+        //获取对方用户信息
+        getP().getImUserInfo(fromId == null ? callOutUser.getUser_id()+"" : fromId);
 //        tvCallComment.setText("速配成功，即将开始语音通话");
 //        tvCallComment.setVisibility(View.VISIBLE);
         p.startThread(this, svgaImageView, mPlayerView);
@@ -2152,7 +2168,58 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     @Override
     public void getChatUserInfo(List<UserInfo> infoList) {
+        System.out.println("userinfo----:" + infoList.toString());
+        //显示来电/拨出用户的个人信息
+        if (infoList.size() == 0) {
+            return;
+        }
+        System.out.println("--------");
+        UserInfo userInfo = infoList.get(0);
+        if(mChannelType == 1) {
+            if (userInfo.getAge() > 0) {
+                mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
+                mtvGenderAge.setText(userInfo.getAge() + "");
+                mtvGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
+                mtvGenderAge.setVisibility(View.VISIBLE);
+            }
 
+            if (!TextUtils.isEmpty(userInfo.getCity())) {
+                mtvCity.setText(userInfo.getCity());
+                mtvCity.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(userInfo.getConstellation())) {
+                mtvConstellation.setText(userInfo.getConstellation());
+                mtvConstellation.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(userInfo.getJob())) {
+                mtvJob.setText(userInfo.getJob());
+                mtvJob.setVisibility(View.VISIBLE);
+            }
+        }else{
+            if (userInfo.getAge() > 0) {
+                mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
+                mtvVideoGenderAge.setText(userInfo.getAge() + "");
+                mtvVideoGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
+                mtvVideoGenderAge.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(userInfo.getCity())) {
+                mtvVideoCity.setText(userInfo.getCity());
+                mtvVideoCity.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(userInfo.getConstellation())) {
+                mtvVideoConstellation.setText(userInfo.getConstellation());
+                mtvVideoConstellation.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(userInfo.getJob())) {
+                mtvVideoJob.setText(userInfo.getJob());
+                mtvVideoJob.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
 
