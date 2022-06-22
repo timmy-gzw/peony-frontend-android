@@ -741,7 +741,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/dp_10"
-                        android:background="@drawable/shape_bg_f9f9f9_radius"
                         android:gravity="center_vertical"
                         android:paddingVertical="@dimen/dp_4"
                         android:paddingStart="@dimen/dp_3"
@@ -760,20 +759,26 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_4"
                             android:gravity="center"
-                            android:textColor="@color/color_normal"
-                            android:textSize="@dimen/sp_10"
+                            android:textColor="#FAB105"
+                            android:textSize="@dimen/sp_14"
                             android:textStyle="bold"
                             android:visibility="visible"
                             app:ticker_animationDuration="0"
                             app:ticker_defaultCharacterList="number"
                             tools:text="10" />
 
-                        <ImageView
+                        <TextView
+                            android:paddingRight="@dimen/dp_10"
+                            android:paddingBottom="@dimen/dp_5"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingTop="@dimen/dp_5"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:background="@drawable/bg_pink_redborder_radius100"
+                            android:textColor="#FF5A7B"
+                            android:text="充值"
+                            android:textSize="@dimen/sp_14"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
-                            android:src="@mipmap/ly03_jz_next_icon"
-                            app:tint="@color/color_999999" />
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
 
                     <View
@@ -937,7 +942,7 @@
                         android:background="@drawable/shape_bg_f9f9f9_radius"
                         android:visibility="@{is_choose_num ? View.VISIBLE : View.INVISIBLE }"
                         app:layout_constraintBottom_toBottomOf="@id/st_layout"
-                        app:layout_constraintEnd_toEndOf="@id/tv_more"
+                        app:layout_constraintEnd_toEndOf="@id/tv_send_gift"
                         app:layout_constraintStart_toStartOf="@id/st_layout"
                         app:layout_constraintTop_toTopOf="@id/st_layout" />
 
@@ -949,7 +954,7 @@
                         android:layout_marginStart="@dimen/dp_6"
                         android:visibility="@{is_choose_num ? View.VISIBLE : View.INVISIBLE }"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tv_more"
+                        app:layout_constraintEnd_toStartOf="@id/tv_send_gift"
                         app:layout_constraintHorizontal_weight="4"
                         app:layout_constraintStart_toEndOf="@id/num"
                         app:layout_constraintTop_toTopOf="parent"
@@ -957,46 +962,29 @@
                         app:tl_bar_stroke_color="@color/color_f9f9f9"
                         app:tl_indicator_anim_enable="true"
                         app:tl_indicator_bounce_enable="false"
-                        app:tl_indicator_color="@color/white"
+                        app:tl_indicator_color="@color/colorPrimary"
                         app:tl_tab_padding="@dimen/dp_2"
                         app:tl_textBold="BOTH"
-                        app:tl_textSelectColor="@color/color_normal"
+                        app:tl_textSelectColor="@color/white"
                         app:tl_textSize="@dimen/sp_12"
                         app:tl_textUnSelectColor="#999999"
                         tools:tl_tab_padding="7dp" />
 
-                    <com.tftechsz.common.widget.AutoFitTextView
-                        android:id="@+id/tv_more"
-                        android:layout_width="@dimen/dp_0"
-                        android:layout_height="@dimen/dp_36"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="更多"
-                        android:textColor="@color/color_999999"
-                        android:textSize="@dimen/sp_12"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tv_send_gift"
-                        app:layout_constraintHorizontal_weight="1"
-                        app:layout_constraintStart_toEndOf="@id/st_layout"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/tv_send_gift"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginStart="@dimen/dp_6"
-                        android:background="@drawable/bg_orange_radius100"
+                        android:background="@drawable/bg_red_radius100"
                         android:gravity="center"
                         android:paddingHorizontal='@dimen/dp_14'
-                        android:text="发送"
-                        android:textColor="@color/color_normal"
+                        android:text="赠送"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/sp_14"
                         app:layout_constraintBottom_toBottomOf="@id/st_layout"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_more"
+                        app:layout_constraintStart_toEndOf="@id/st_layout"
                         app:layout_constraintTop_toTopOf="@id/st_layout" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

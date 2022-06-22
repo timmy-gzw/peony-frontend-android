@@ -118,7 +118,8 @@ public class GiftAdapter extends BaseQuickAdapter<GiftDto, GiftAdapter.ViewHolde
         if (checkPosition == position) {
             if (mGradientDrawable == null) {
                 if (color == null) {
-                    color = new int[]{Color.parseColor("#FFD400"), Color.parseColor("#F36A54"), Color.parseColor("#F74767"), Color.parseColor("#DA2AF9")};
+//                    color = new int[]{Color.parseColor("#FFD400"), Color.parseColor("#F36A54"), Color.parseColor("#F74767"), Color.parseColor("#DA2AF9")};
+                    color = new int[]{Color.parseColor("#FF5A7B"), Color.parseColor("#FF5A7B"), Color.parseColor("#FF5A7B"), Color.parseColor("#FF5A7B")};
                 }
                 mGradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TL_BR, color);
                 mGradientDrawable.setCornerRadius(ConvertUtils.dp2px(8));

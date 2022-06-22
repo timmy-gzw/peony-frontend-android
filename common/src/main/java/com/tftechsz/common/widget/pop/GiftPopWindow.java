@@ -265,7 +265,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
 
         mStLayout = findViewById(R.id.st_layout);
         segmentData_temp = Interfaces.SEGMENT_DATA;
-        mStLayout.setTabData(Interfaces.SEGMENT_DATA_LUCKY);
+        mStLayout.setTabData(Interfaces.SEGMENT_DATA);
         mStLayout.setOnTabSelectListener(this);
 
         serListener();
@@ -381,7 +381,6 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         mIvVoice.setOnClickListener(this);
         mTvAddVoice.setOnClickListener(this);
         findViewById(R.id.ll_coin).setOnClickListener(this);
-        findViewById(R.id.tv_more).setOnClickListener(this);
         mRlAtUser.setOnClickListener(this);
         findViewById(R.id.tv_at_team_user).setOnClickListener(this); //@
         findViewById(R.id.tv_user_detail).setOnClickListener(this); //主页
@@ -1337,7 +1336,6 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
                 }
                 mStLayout.post(() -> {
                     mStLayout.setTabData(Interfaces.SEGMENT_DATA_LUCKY);
-                    mBind.tvMore.setVisibility(View.GONE);
                 });
             } else {
                 if (mStLayout.getTabCount() != segmentData_temp.length) {
@@ -1346,12 +1344,10 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
                 }
                 mStLayout.post(() -> {
                     mStLayout.setTabData(segmentData_temp);
-                    mBind.tvMore.setVisibility(View.VISIBLE);
 
                 });
             }
         } else {
-            mBind.tvMore.setVisibility(View.GONE);
             mBind.setIsChooseNum(false);
 
         }

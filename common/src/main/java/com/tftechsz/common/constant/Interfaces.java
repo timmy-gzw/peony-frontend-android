@@ -171,7 +171,7 @@ interface Interfaces {
     int USER_ILLEGAL = 20014;  // 非派对女用户不可收礼
     String MAIN_TAB_LOTTIE_FOLDER = "main_tab_lottie";
     String[] SEGMENT_DATA_LUCKY = {"1", "9", "66", "188", "520"};
-    String[] SEGMENT_DATA = {"1", "5", "10", "99"};
+    String[] SEGMENT_DATA = {"1", "10", "52", "188", "520","1314"};
     String RECHARGE_NUMBER = "recharge_number";
     String FIY_NUMBER = "fiy_number";
     String SCENE_NUMBER = "scene_number";
