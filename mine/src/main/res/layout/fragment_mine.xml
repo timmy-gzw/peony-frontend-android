@@ -14,7 +14,7 @@
         android:id="@+id/top_bg"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:background="@mipmap/mine_bg"
+        android:background="@mipmap/yt_dl_bg_img"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
@@ -69,15 +69,16 @@
                 app:layout_constraintTop_toTopOf="@id/pic_frame">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="0dp">
 
                     <TextView
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_4"
-                        android:textColor="@color/color_normal"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/sp_21"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -129,12 +130,13 @@
 
 
                 <TextView
+                    android:layout_marginTop="@dimen/dp_15"
                     android:id="@+id/tv_user_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="3dp"
                     android:paddingTop="@dimen/dp_2"
-                    android:textColor="@color/color_normal"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_11"
                     app:layout_constraintVertical_chainStyle="packed"
                     tools:text="芍药号:12345" />
@@ -169,8 +171,8 @@
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
-                        android:textColor="@color/color_normal"
-                        android:textSize="@dimen/sp_20"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_18"
                         tools:text="0" />
 
                     <TextView
@@ -180,7 +182,7 @@
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
                         android:text="@string/friend"
-                        android:textColor="#999999"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/sp_12"
                         tools:text="好友" />
                 </LinearLayout>
@@ -200,8 +202,8 @@
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
-                        android:textColor="@color/color_normal"
-                        android:textSize="@dimen/sp_20"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_18"
                         tools:text="0" />
 
                     <TextView
@@ -211,7 +213,7 @@
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
                         android:text="@string/attention"
-                        android:textColor="#999999"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/sp_12"
                         tools:text="关注" />
                 </LinearLayout>
@@ -231,8 +233,8 @@
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
-                        android:textColor="@color/color_normal"
-                        android:textSize="@dimen/sp_20"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_18"
                         tools:text="0" />
 
                     <TextView
@@ -242,7 +244,7 @@
                         android:paddingTop="@dimen/dp_6"
                         android:paddingBottom="@dimen/dp_2"
                         android:text="@string/fans"
-                        android:textColor="#999999"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/sp_12"
                         tools:text="粉丝" />
                 </LinearLayout>
@@ -254,14 +256,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/edit_info"
-                android:drawableRight="@mipmap/ic_arrow2"
                 android:drawablePadding="@dimen/dp_10"
                 android:gravity="center"
-                android:paddingLeft="@dimen/dp_15"
-                android:paddingTop="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10"
-                android:paddingBottom="@dimen/dp_10"
-                android:text="@string/edit_userInfo"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
@@ -269,11 +265,11 @@
                 app:layout_constraintTop_toTopOf="@id/iv_avatar"
                 app:layout_constraintVertical_bias="0.48" />
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_vip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_10"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/ll_fff"
@@ -284,23 +280,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:background="@mipmap/mine_vip_bg"
                     app:layout_constraintDimensionRatio="6.7"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:background="@mipmap/mine_vip_bg"
+                    android:background="@mipmap/mine_vip_bg2"
                     tools:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/vip_icon"
                     android:layout_width="@dimen/dp_30"
                     android:layout_height="@dimen/dp_30"
-                    android:layout_marginStart="@dimen/dp_12"
+                    android:layout_marginStart="@dimen/dp_28"
                     android:src="@drawable/default_mine_member_icon_bg"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/vip_nor"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="@id/vip_nor"
+                    android:layout_marginTop="@dimen/dp_10"
                     app:layout_constraintTop_toTopOf="@id/vip_nor"
-                    tools:visibility="gone" />
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/vip_nor_hint"
@@ -315,70 +310,79 @@
                     tools:text="聊天5折起"
                     tools:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/vip_charge"
+
+                <LinearLayout
+                    app:layout_constraintLeft_toRightOf="@id/vip_icon"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:background="@mipmap/mine_vip_btn_bg"
-                    android:gravity="center"
-                    android:text="@string/vip_charge"
-                    android:textColor="#5D3D03"
-                    android:textSize="@dimen/sp_12"
-                    app:layout_constraintBottom_toBottomOf="@id/vip_nor"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/vip_nor" />
+                    android:paddingTop="@dimen/dp_14"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_height="@dimen/dp_60">
+
+                    <TextView
+                        android:id="@+id/vip_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="会员 | 开通立享8大特权"
+                        android:textColor="#6A4224"
+                        android:textSize="@dimen/sp_16"
+                        android:visibility="gone"
+                        android:drawableLeft="@drawable/mine_vip2"
+                        android:drawablePadding="@dimen/dp_3"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:id="@+id/expired_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2022/07/15"
+                        android:textColor="#ff6a4224"
+                        android:textSize="@dimen/sp_10"
+                        android:visibility="gone"
+                        tools:text="2022/07/15"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/vip_title"
+                    android:layout_marginRight="@dimen/dp_40"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/vip_icon"
+                    app:layout_constraintTop_toTopOf="@id/vip_icon"
+                    android:id="@+id/member_open"
+                    android:paddingHorizontal="@dimen/dp_11"
+                    android:paddingVertical="@dimen/dp_4"
+                    android:textColor="#FFE2AA"
+                    android:background="@drawable/bg_brown_radius10"
+                    android:text="立即开通"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/super_vip"
-                    android:textColor="#FCD08F"
-                    android:textSize="@dimen/sp_16"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toTopOf="@id/expired_time"
-                    app:layout_constraintStart_toEndOf="@id/vip_icon"
-                    app:layout_constraintTop_toTopOf="@id/vip_nor"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    tools:visibility="visible" />
-
-                <TextView
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:id="@+id/expired_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vip_special_power"
-                    android:textColor="#B2A487"
-                    android:textSize="@dimen/sp_10"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/vip_nor"
-                    app:layout_constraintStart_toStartOf="@id/vip_title"
-                    app:layout_constraintTop_toBottomOf="@id/vip_title"
-                    tools:text="开通即享视频8折，免费搭讪等8项特权"
-                    tools:visibility="visible" />
+                    android:layout_height="wrap_content"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@drawable/bg_gray_top_radius10"
+                android:background="@drawable/bg_gray_no_radio"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_vip" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_mine_mid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_80"
                 android:layout_marginEnd="@dimen/dp_16"
                 android:background="@drawable/bg_white_radius"
                 android:overScrollMode="never"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/cl_vip"
+                app:layout_constraintTop_toBottomOf="@id/ll_fff"
                 tools:itemCount="4"
                 tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/item_mine_mid"
@@ -465,12 +469,14 @@
                 android:id="@+id/rv_mine_bot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_16"
                 android:background="@drawable/bg_white_radius"
                 android:overScrollMode="never"
                 app:layout_constraintTop_toBottomOf="@id/ll_jifen"
-                app:layout_goneMarginTop="@dimen/dp_10" />
+                app:layout_goneMarginTop="@dimen/dp_10"
+                tools:layout_editor_absoluteX="0dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

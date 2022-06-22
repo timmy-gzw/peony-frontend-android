@@ -57,11 +57,12 @@
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/iv_arrow"
         android:layout_toEndOf="@id/tv_name"
-        android:singleLine="true"
         android:gravity="center_vertical|end"
         android:paddingEnd="@dimen/dp_4"
+        android:singleLine="true"
+        android:textStyle="bold"
         android:textColor="@color/color_black_ff666666"
-        android:textSize="@dimen/sp_15"
+        android:textSize="@dimen/sp_12"
         tools:text="@string/app_name" />
 
     <View

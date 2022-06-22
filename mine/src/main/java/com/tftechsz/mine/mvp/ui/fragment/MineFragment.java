@@ -2,6 +2,7 @@ package com.tftechsz.mine.mvp.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -57,10 +58,10 @@ import java.util.List;
 public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> implements IMineView, View.OnClickListener {
 
     private UserProviderService service;
-    private TextView mTvName, mTvUserId, mTvSex;   //姓名,芍药号码,好友关注粉丝,性别
+    private TextView mTvName, mTvUserId, mTvSex,mTvMember;   //姓名,芍药号码,好友关注粉丝,性别
     private ImageView mIvAvatar, mIvAuth, mIvRealPeople, mVipIcon;
     private LinearLayout mLlFriend, mLlFans, mLlAttention;
-    private TextView mTvFriend, mTvFans, mTvAttention, mVipCharge;
+    private TextView mTvFriend, mTvFans, mTvAttention;
     private RecyclerView mRcMineMid, mRvMineBot;
     private UserInfo mUserInfo;
     private boolean isFragmentVisible;
@@ -94,10 +95,13 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mTvUserId = getView(R.id.tv_user_id);
         mLlFriend = getView(R.id.ll_friend);
         mTvFriend = getView(R.id.tv_friend);
+        mTvFriend.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/DIN-Bold.otf"));
         mLlFans = getView(R.id.ll_fans);
         mTvFans = getView(R.id.tv_fans);
+        mTvFans.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/DIN-Bold.otf"));
         mLlAttention = getView(R.id.ll_attention);
         mTvAttention = getView(R.id.tv_attention);
+        mTvAttention.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/DIN-Bold.otf"));
         mIvAvatar = getView(R.id.iv_avatar);
         mIvAuth = getView(R.id.iv_auth);
         mIvRealPeople = getView(R.id.iv_real_people);
@@ -114,7 +118,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mPicFrame = getView(R.id.pic_frame);
         mVip_title = getView(R.id.vip_title);
         mVipIcon = getView(R.id.vip_icon);
-        mVipCharge = getView(R.id.vip_charge);
+        mTvMember = getView(R.id.member_open);
         llIntegral = getView(R.id.ll_jifen);
         llCoin = getView(R.id.ll_jinbi);
         initListener();
@@ -210,7 +214,8 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     @SuppressLint("SetTextI18n")
     private void setUserInfo(UserInfo userInfo) {
         initConfig();
-        CommonUtil.setUserName(mTvName, userInfo.getNickname(), false, false);
+        mTvName.setText(userInfo.getNickname());
+        mTvName.setTextColor(getActivity().getResources().getColor(R.color.white));
         VipUtils.setPersonalise(mPicFrame, userInfo.picture_frame, false, true);
         //mPicFrame.setBackgroundResource(userInfo.picture_frame == 0 ? 0 : VipUtils.getPictureFrameBackground(userInfo.picture_frame));
         mTvUserId.setText(String.format("%s号: ", getString(R.string.app_name)) + userInfo.getUser_code());
@@ -279,7 +284,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                         } else if (mineInfo.link.equals(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_NOTE_VALUE)) { //音符值
                             beanList.add(new BaseItemBean(mineInfo.icon, mineInfo.title, mUserInfo != null ? mUserInfo.getNote_value() : "", "#999999"));
                         } else {
-                            beanList.add(new BaseItemBean(mineInfo.icon, mineInfo.title, mineInfo.complete_msg, mineInfo.complete_msg_color));
+                            beanList.add(new BaseItemBean(mineInfo.icon, mineInfo.title, mineInfo.desc, "#FF2F2F"));
                         }
                     }
                     mBotConfigList = list;
@@ -338,27 +343,27 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
             }
 
             if (null != configInfo && configInfo.share_config != null) {
-                mClVip.setVisibility(configInfo.share_config.is_show_vip == 0 && !service.getUserInfo().isVip() ? View.GONE : View.VISIBLE);
+                mClVip.setVisibility(View.VISIBLE);
                 if (configInfo.share_config.is_show_vip == 0) {
                     show_vip_desc = configInfo.share_config.show_vip_desc;
                 }
                 if (service.getUserInfo() != null) {
                     UserInfo userInfo = service.getUserInfo();
                     mVipNor.setVisibility(View.VISIBLE);
-                    GlideUtils.loadBackGround(mContext, userInfo.getVip_background_icon(), mVipNor);
+//                    GlideUtils.loadBackGround(mContext, userInfo.getVip_background_icon(), mVipNor);
                     if (userInfo.isVip()) {
                         mTopBg.setBackgroundResource(R.drawable.shape_vip_top_bg);
                         mVipIcon.setVisibility(View.VISIBLE);
-                        mVipCharge.setVisibility(View.GONE);
                         mVip_title.setVisibility(View.VISIBLE);
                         mVipNorHint.setVisibility(View.INVISIBLE);
+                        mTvMember.setText("立即续费");
                         mExpiredTime.setText(userInfo.vip_expiration_time_desc_new);
                         mExpiredTime.setVisibility(View.VISIBLE);
                     } else {
 //                        mTopBg.setBackgroundColor(Utils.getColor(R.color.EEEEEE));
-                        mTopBg.setBackgroundResource(R.mipmap.mine_bg);
-                        mVipIcon.setVisibility(View.GONE);
-                        mVipCharge.setVisibility(View.VISIBLE);
+                        mTopBg.setBackgroundResource(R.mipmap.yt_dl_bg_img);
+                        mVipIcon.setVisibility(View.VISIBLE);
+                        mTvMember.setText("立即开通");
                         mExpiredTime.setVisibility(View.VISIBLE);
                         mVip_title.setVisibility(View.VISIBLE);
                         if (TextUtils.isEmpty(userInfo.getVip_desc())) {

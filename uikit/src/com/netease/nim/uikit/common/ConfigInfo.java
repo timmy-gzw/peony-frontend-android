@@ -121,6 +121,7 @@ public class ConfigInfo {
         public int is_remove;
         public String complete_msg;
         public String complete_msg_color;
+        public String desc;
 
         public MineInfo() {
         }
