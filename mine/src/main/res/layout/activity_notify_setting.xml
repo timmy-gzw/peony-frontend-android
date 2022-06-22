@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/dp_10"
-            android:text="月老牵线推荐"
+            android:text="缘分天使推荐"
             android:layout_marginStart="@dimen/dp_20"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_16"

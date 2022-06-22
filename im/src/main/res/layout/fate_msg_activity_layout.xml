@@ -94,7 +94,7 @@
             android:singleLine="true"
             android:textColor="@color/color_light_font"
             android:textSize="@dimen/sp_14"
-            android:text="以下为系统“缘分牵线”消息"
+            android:text="以下为系统“缘分天使”消息"
             android:textStyle="bold" />
 
         <View
