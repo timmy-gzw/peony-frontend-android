@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -24,6 +25,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
@@ -34,6 +36,7 @@ import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.netease.nim.uikit.common.UserInfo;
+import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.netease.nimlib.sdk.media.player.AudioPlayer;
 import com.netease.nimlib.sdk.media.player.OnPlayListener;
 import com.tftechsz.common.ARouterApi;
@@ -68,7 +71,7 @@ import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
 import com.tftechsz.mine.adapter.GiftAdapter;
-import com.tftechsz.mine.adapter.PhotoAdapter;
+import com.tftechsz.mine.adapter.ProfilePhotoAdapter;
 import com.tftechsz.mine.adapter.TrendAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.entity.dto.TrendDto;
@@ -92,7 +95,9 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private final int MAX_SIZE = 9;
 
     private Banner mBanner;
-    private TextView mTvCurrentNum, mTvEditInfo;
+    private RecyclerView mRvPic;//相册
+    private ImageView ivPicAdd;
+    private TextView mTvEditInfo;
     private ImageView mIvAvatar;   //头像
     private ImageView mIvBack, mTobBack, mTobMore;
     private AppBarLayout mAppBarLayout;
@@ -125,13 +130,11 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private RecyclerView mRvTrend;   //动态
     private RecyclerView mRvUserInfo;  //基本信息
     private RecyclerView mRvGift;  //礼物
-    private RecyclerView mRvPhoto;  //相册
 
     private ConstraintLayout mClPhoto;   //相册
 
     private TrendAdapter mTrendAdapter;   //动态
-
-    private PhotoAdapter mPhotoAdapter;   //相册
+    private ProfilePhotoAdapter profilePhotoAdapter; //相册
 
     private UserInfo mUserInfo;
     private int MAX_SCROLL;
@@ -145,7 +148,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private TextView mTvTrend, mTvTrendMore;   //动态
 
     private List<TrendDto> mTrendList;
-    private List<String> mPhotoList;
     private LottieAnimationView mLottie;
     private VideoCallPopWindow mVideoCallPopWindow;   //语音视频弹窗
 
@@ -159,7 +161,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private ConfigInfo mConfig;
 
     private GestureDetector gestureDetector;
-    private GestureDetector gesturePhoto;
     @Autowired(name = "user_id")
     public String mUserId;
 
@@ -210,7 +211,13 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         //banner
         mBanner = findViewById(R.id.banner);
-        mTvCurrentNum = findViewById(R.id.tv_current_num);
+        //个人相册
+        ivPicAdd = findViewById(R.id.iv_profile_add);
+        ivPicAdd.setOnClickListener(this);
+        ivPicAdd.setVisibility(TextUtils.isEmpty(mUserId) ? View.VISIBLE : View.GONE);
+        mRvPic = findViewById(R.id.rv_profile_pic);
+        mRvPic.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        mRvPic.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(6), 0, false));
 
         mTvTobTitle = findViewById(R.id.tob_title);  //名称
         mTobMore = findViewById(R.id.tob_more);
@@ -269,11 +276,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mRvTrend = findViewById(R.id.rv_trend);
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this, 4);
         mRvTrend.setLayoutManager(gridLayoutManager2);
-
-        //相册
-        mRvPhoto = findViewById(R.id.rv_photo);
-        GridLayoutManager gridLayoutManager3 = new GridLayoutManager(this, 4);
-        mRvPhoto.setLayoutManager(gridLayoutManager3);
 
         //用户基本信息
         mRvUserInfo = findViewById(R.id.rv_user_info);
@@ -357,41 +359,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 return false;
             }
         });
-        gesturePhoto = new GestureDetector(this, new GestureDetector.OnGestureListener() {
-
-            @Override
-            public boolean onDown(MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onShowPress(MotionEvent e) {
-
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                if (TextUtils.isEmpty(mUserId)) {
-                    ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_PHOTO);
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                return false;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-
-            }
-
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                return false;
-            }
-        });
         findViewById(R.id.ns_info).setMinimumHeight(ScreenUtils.getScreenHeight(this));
 
     }
@@ -404,7 +371,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             TrendDto trendDto = new TrendDto();
             trendDto.image = "ADD";
             mTrendList.add(trendDto);
-            mPhotoList.add("ADD");
             p.getUserInfoDetail();
             p.getSelfGift(mPageSize);
             p.getSelfTrend(3);
@@ -456,7 +422,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     protected void initData() {
         super.initData();
         mTrendList = new ArrayList<>();
-        mPhotoList = new ArrayList<>();
         MAX_SCROLL = DensityUtils.dp2px(this, 340);
         mConfig = service.getConfigInfo();
         mIjkPlayer = new AudioPlayer(BaseApplication.getInstance());
@@ -487,14 +452,20 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             initNet();
         }
 
+        profilePhotoAdapter = new ProfilePhotoAdapter();
+        mRvPic.setAdapter(profilePhotoAdapter);
+        profilePhotoAdapter.setOnItemClickListener((adapter, view, position) -> {
+            mBanner.post(() -> {
+                //fixme 位置错误
+                mBanner.setCurrentItem(position, true);
+            });
+        });
+
         mLottie = findViewById(R.id.animation_view);
         mLottie.setImageAssetsFolder(Constants.ACCOST_GIFT);//设置data.json引用的图片资源文件夹名称
         mTrendAdapter = new TrendAdapter(mTrendList, mUserId);
         mRvTrend.setAdapter(mTrendAdapter);
         mRvTrend.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
-        mPhotoAdapter = new PhotoAdapter(mPhotoList);
-        mRvPhoto.setAdapter(mPhotoAdapter);
-        mRvPhoto.setOnTouchListener((v, event) -> gesturePhoto.onTouchEvent(event));
         mAppBarLayout.addOnOffsetChangedListener((appBarLayout, i) -> {
             int dy = Math.abs(i);
             mToolbar.setSelected(dy > 10);
@@ -756,23 +727,14 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     public void getPhotoSuccess(List<String> data) {
         List<String> list = new ArrayList<>();
         list.add(mUserInfo.getIcon());
-        mPhotoList.clear();
-        if (TextUtils.isEmpty(mUserId)) {   //自己
-            mPhotoList.add("ADD");
-        }
         if (null != data) {
             list.addAll(data);
-            mPhotoList.addAll(data);
         }
-        mPhotoAdapter.setList(mPhotoList);
+        profilePhotoAdapter.setList(list);
         if (list.size() > 1) {
-            mTvCurrentNum.setVisibility(View.VISIBLE);
-            mTvCurrentNum.setText("1/" + list.size());
             for (int i = 0; i < list.size(); i++) {
                 Glide.with(mContext).load(list.get(i)).preload(mBanner.getWidth(), mBanner.getHeight());
             }
-        } else {
-            mTvCurrentNum.setVisibility(View.GONE);
         }
         mBanner.setAdapter(new MyBannerImageAdapter<String>(list) {
 
@@ -780,7 +742,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                     public void onBindView(MyBannerImageHolder holder, String data, int position, int size) {
                         holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         GlideUtils.loadPicImage(mContext, holder.imageView, data);
-
                     }
                 })
                 .addOnPageChangeListener(new OnPageChangeListener() {
@@ -791,17 +752,14 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
                     @Override
                     public void onPageSelected(int position) {
-                        if (list.size() <= 1) {
-                            mTvCurrentNum.setVisibility(View.GONE);
-                        } else {
-                            mTvCurrentNum.setVisibility(View.VISIBLE);
-                            mTvCurrentNum.setText((position + 1) + "/" + list.size());
-                        }
+                        mRvPic.post(() -> {
+                            mRvPic.smoothScrollToPosition(position);
+                            profilePhotoAdapter.setIndex(position);
+                        });
                     }
 
                     @Override
                     public void onPageScrollStateChanged(int state) {
-
                     }
                 }).setOnBannerListener((data1, position) -> {
                     ARouterUtils.toUserPicBrowserActivity(!TextUtils.isEmpty(mUserId) ? Integer.parseInt(mUserId) : service.getUserId(), position, list.get(0), (mUserInfo != null && mUserInfo.isBoy()));
@@ -985,7 +943,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         Drawable notAttention = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_normal);
         mTvAttention.setCompoundDrawablesWithIntrinsicBounds(null,
                 mUserInfo.is_follow == 1 ? attention : notAttention, null, null);
-        mTvAttention.setTextColor(Utils.getColor(mUserInfo.is_follow == 1 ?R.color.colorPrimary:R.color.black));
+        mTvAttention.setTextColor(Utils.getColor(mUserInfo.is_follow == 1 ? R.color.colorPrimary : R.color.black));
         if (mUserInfo.getIs_self() == 1) {   //已经是否实名
             mTvIsSelf.setText("已完成实名认证");
             mTvSelfStatus.setText("已认证");
@@ -1149,10 +1107,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             mTrendList.clear();
             mTrendList = null;
         }
-        if (mPhotoList != null) {
-            mPhotoList.clear();
-            mPhotoList = null;
-        }
         if (mVideoCallPopWindow != null) {
             if (mVideoCallPopWindow.isShowing())
                 mVideoCallPopWindow.dismiss();
@@ -1163,7 +1117,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             mLottie = null;
         }
         gestureDetector = null;
-        gesturePhoto = null;
         mRvTrend = null;
         mRvGift = null;
     }
@@ -1190,8 +1143,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             MineInfoActivity.startActivity(this, mUserInfo);
         } else if (id == R.id.tv_attention) {
             p.attentionUser(mUserInfo.getUser_id());
-        } else if (id == R.id.tv_more_photo) {   //查看更多照片
-            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_PHOTO);
         } else if (id == R.id.tv_mine_trend) {   //查看更多动态
             ARouterUtils.toTrendActivity(mUserId, mUserInfo.getNickname());
         } else if (id == R.id.ll_accost) {   //搭讪
@@ -1312,7 +1263,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 //进入 互动语音房间
                 ARouterUtils.joinRoom(mUserInfo.play_party.room_id, mUserInfo.play_party.id);
             }
-
+        } else if (id == R.id.iv_profile_add) { //查看/添加更多照片
+            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_PHOTO);
         }
     }
 
