@@ -837,12 +837,16 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     @Override
     public void attentionSuccess(boolean isAttention) {
         Drawable drawable;
+        int color;
         if (isAttention) {
             drawable = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_selector);
+            color = Utils.getColor(R.color.colorPrimary);
         } else {
             drawable = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_normal);
+            color = Utils.getColor(R.color.black);
         }
         mTvAttention.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
+        mTvAttention.setTextColor(color);
         RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_FOLLOW));
     }
 
@@ -981,7 +985,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         Drawable notAttention = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_normal);
         mTvAttention.setCompoundDrawablesWithIntrinsicBounds(null,
                 mUserInfo.is_follow == 1 ? attention : notAttention, null, null);
-
+        mTvAttention.setTextColor(Utils.getColor(mUserInfo.is_follow == 1 ?R.color.colorPrimary:R.color.black));
         if (mUserInfo.getIs_self() == 1) {   //已经是否实名
             mTvIsSelf.setText("已完成实名认证");
             mTvSelfStatus.setText("已认证");
