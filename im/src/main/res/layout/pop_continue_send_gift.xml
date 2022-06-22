@@ -88,7 +88,7 @@
             android:gravity="end"
             android:maxLength="5"
             android:text="1个"
-            android:textColor="#9B7414"
+            android:textColor="@color/black"
             android:textSize="@dimen/sp_15" />
 
 
@@ -112,7 +112,7 @@
         android:layout_marginTop="@dimen/dp_30"
         android:layout_marginBottom="@dimen/dp_20"
         android:text="继续送礼"
-        android:textColor="@color/color_normal"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

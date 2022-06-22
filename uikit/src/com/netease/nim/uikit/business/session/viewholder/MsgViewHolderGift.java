@@ -1,5 +1,8 @@
 package com.netease.nim.uikit.business.session.viewholder;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,26 +18,34 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.netease.nim.uikit.R;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.business.session.module.list.MsgAdapter;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.ChatMsgUtil;
+import com.netease.nim.uikit.common.ConfigInfo;
+import com.netease.nim.uikit.common.ui.imageview.AvatarImageView;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
 import com.netease.nim.uikit.common.ui.recyclerview.holder.BaseViewHolder;
 import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
+import com.netease.nimlib.sdk.uinfo.model.UserInfo;
 
 /**
  * 个人礼物消息
  */
 public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.OnScrollListener  {
 
-    private ImageView typeImage;
+    private ImageView typeImage,mIvFromUserAvatar;
     private FrameLayout mFlGift;
     private FrameLayout mFlImage;
-    private LinearLayout mLlContent;
+    private LinearLayout mLlContent,mLlTotal;
     private TextView tvSend;
-    private TextView mTvGift;
+    private TextView mTvGift,mTvGiftNum,mTvFromUserName,mTvGiftBtn;
+    private LinearLayout mLlLeft,mLlRight;
+    private ImageView mIvFromUserAvatarRight;
+    private TextView mTvFromUserNameRight;
     public MsgViewHolderGift(BaseMultiItemFetchLoadAdapter adapter) {
         super(adapter);
     }
@@ -46,12 +57,21 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
 
     @Override
     public void inflateContentView() {
+        mLlTotal = findViewById(R.id.message_item_avchat_content);
         typeImage = findViewById(R.id.message_item_img);
         mFlGift = findViewById(R.id.fl_gift);
         mLlContent = findViewById(R.id.ll_content);
         mFlImage = findViewById(R.id.fl_image);
         tvSend = findViewById(R.id.tv_send);
         mTvGift = findViewById(R.id.tv_gift);
+        mTvGiftNum = findViewById(R.id.tv_gift_num);
+        mTvFromUserName = findViewById(R.id.tv_from_user_name);
+        mIvFromUserAvatar = findViewById(R.id.iv_from_user_avatar);
+        mTvGiftBtn = findViewById(R.id.tv_gift_btn);
+        mLlLeft = findViewById(R.id.ll_left);
+        mLlRight = findViewById(R.id.ll_right);
+        mIvFromUserAvatarRight = findViewById(R.id.iv_from_user_avatar_right);
+        mTvFromUserNameRight = findViewById(R.id.tv_from_user_name_right);
         getMsgAdapter().addOnScrollListener(this);
     }
 
@@ -67,25 +87,29 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
 
     private void layoutByDirection() {
         if (isReceivedMessage()) {   //接收消息
-            setGravity(mLlContent, Gravity.END | Gravity.CENTER_VERTICAL);
+            mLlTotal.setBackgroundResource(R.drawable.bg_chat_gift_left);
+            setGravity(mLlContent, Gravity.START);
             setGravity(mFlImage, Gravity.END | Gravity.CENTER_VERTICAL);
-            tvSend.setText("收到礼物");
-            mLlContent.setPadding(0, 0, ScreenUtil.dip2px(100), 0);
-            mLlContent.setGravity(Gravity.END);
-            mFlGift.setPadding(ScreenUtil.dip2px(37), 0, 0, 0);
-            typeImage.setPadding(ScreenUtil.dip2px(5), 0, 0, 0);
-            mFlImage.setBackgroundResource(R.drawable.chat_ic_accost_left);
-            mTvGift.setGravity(Gravity.END);
-        } else {
-            setGravity(mFlImage, Gravity.START | Gravity.CENTER_VERTICAL);
-            setGravity(mLlContent, Gravity.START | Gravity.CENTER_VERTICAL);
+            mLlContent.setPadding(0, 0, ScreenUtil.dip2px(0), 0);
             mLlContent.setGravity(Gravity.START);
+            mFlGift.setPadding(ScreenUtil.dip2px(0), 0, 0, 0);
+            typeImage.setPadding(ScreenUtil.dip2px(5), 0, 0, 0);
+            mTvGift.setGravity(Gravity.END);
+            mTvGiftBtn.setText("回礼");
+            mLlRight.setVisibility(View.GONE);
+            mLlLeft.setVisibility(View.VISIBLE);
+        } else {
+            mLlTotal.setBackgroundResource(R.drawable.bg_chat_gift_right);
+            setGravity(mFlImage, Gravity.START | Gravity.CENTER_VERTICAL);
+            setGravity(mLlContent, Gravity.END );
+            mLlContent.setGravity(Gravity.END);
             mTvGift.setGravity(Gravity.START);
-            mFlGift.setPadding(0, 0, ScreenUtil.dip2px(17), 0);
-            mLlContent.setPadding(ScreenUtil.dip2px(98), 0, 0, 0);
+            mFlGift.setPadding(0, 0, ScreenUtil.dip2px(0), 0);
+            mLlContent.setPadding(ScreenUtil.dip2px(0), 0, 0, 0);
             typeImage.setPadding(0, 0, ScreenUtil.dip2px(5), 0);
-            tvSend.setText("送出礼物");
-            mFlImage.setBackgroundResource(R.drawable.chat_ic_accost_right);
+            mTvGiftBtn.setText("继续送礼");
+            mLlLeft.setVisibility(View.GONE);
+            mLlRight.setVisibility(View.VISIBLE);
         }
     }
 
@@ -94,8 +118,11 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
         if (chatMsg == null)
             return;
         ChatMsg.Gift gift = JSON.parseObject(chatMsg.content, ChatMsg.Gift.class);
+        TextView targetTextView = isReceivedMessage()?mTvFromUserName:mTvFromUserNameRight;
+        ImageView targetImageView = isReceivedMessage()?mIvFromUserAvatar:mIvFromUserAvatarRight;
         if (gift != null) {
-            mTvGift.setText(gift.gift_info.name + "x" + gift.gift_num);
+            mTvGift.setText(gift.gift_info.name);
+            mTvGiftNum.setText("x" + gift.gift_num);
             RequestOptions options = new RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .transforms(new CenterCrop(), new RoundedCorners(ScreenUtil.dip2px(4)))
@@ -105,7 +132,28 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
                     .apply(options)
                     .load(gift.gift_info.image)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                     .into(typeImage);
+            if(null != gift.from_user_nickname) {
+                targetTextView.setText(gift.from_user_nickname);
+            }
+            if(null != gift.from_user_id) {
+                UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(gift.from_user_id);
+                String avaterUrl = getConfig(context).api.oss.cdn_scheme + getConfig(context).api.oss.cdn.user + userInfo.getAvatar();
+                Glide.with(context)                             //配置上下文
+                        .asDrawable()
+                        .apply(options)
+                        .load(avaterUrl)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
+                        .into(targetImageView);
+            }
         }
+    }
+
+    private ConfigInfo getConfig(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("tfpeony_sp",
+                Context.MODE_PRIVATE);
+        String configInfo = sp.getString("configInfo", "");
+        Gson gson = new Gson();
+        ConfigInfo c = gson.fromJson(configInfo, ConfigInfo.class);
+        return c;
     }
 
     @Override
@@ -122,7 +170,7 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
 
     @Override
     protected boolean isShowHeadImage() {
-        return false;
+        return true;
     }
 
     @Override

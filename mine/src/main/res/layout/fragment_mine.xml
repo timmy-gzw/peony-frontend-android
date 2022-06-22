@@ -253,17 +253,21 @@
 
             <TextView
                 android:id="@+id/edit_info"
+                android:text="@string/edit_userInfo"
+                android:gravity="center"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/white"
+                android:paddingLeft="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_10"
+                android:background="@mipmap/edit_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/edit_info"
-                android:drawablePadding="@dimen/dp_10"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_14"
+                android:drawablePadding="@dimen/dp_5"
+                android:drawableRight="@mipmap/ic_arrow2"
                 app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_avatar"
-                app:layout_constraintVertical_bias="0.48" />
+                app:tint="@color/color_normal" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

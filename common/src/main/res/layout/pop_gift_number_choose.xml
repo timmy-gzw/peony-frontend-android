@@ -39,10 +39,10 @@
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_40"
             android:layout_marginStart="@dimen/dp_10"
-            android:background="@drawable/bg_orange_radius6"
+            android:background="@drawable/bg_red_radius10"
             android:gravity="center"
             android:text="确定"
-            android:textColor="@color/color_normal"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_15" />
 
     </LinearLayout>

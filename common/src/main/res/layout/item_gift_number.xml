@@ -12,9 +12,9 @@
         android:id="@+id/tv_number"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_30"
-        android:background="@drawable/bg_orange_radius15"
+        android:background="@drawable/bg_red_radius100"
         android:gravity="center"
-        android:textColor="@color/color_normal"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_15" />
 
 

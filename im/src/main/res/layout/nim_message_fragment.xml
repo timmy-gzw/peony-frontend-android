@@ -158,8 +158,8 @@
                 <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
                     android:id="@+id/iv_left"
                     android:layout_width="@dimen/dp_40"
-                    android:layout_centerVertical="true"
-                    android:layout_height="@dimen/dp_40" />
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_centerVertical="true" />
 
                 <ImageView
                     android:id="@+id/iv_h1"
