@@ -1,15 +1,18 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tftechsz.common.ARouterApi;
@@ -40,6 +43,7 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
     @Autowired
     UserProviderService service;
     private PageStateManager mPageManager;
+    private TextView tvBottomTip;
 
     @Override
     public VisitorPresenter initPresenter() {
@@ -130,6 +134,25 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
         }
     }
 
+    private void addFootView() {
+        if (service.getUserInfo().isVip()) return;
+        if (mAdapter.getItemCount() > 0) {
+            if (tvBottomTip == null) {
+                tvBottomTip = new TextView(this);
+                tvBottomTip.setTextSize(12);
+                tvBottomTip.setTextColor(ContextCompat.getColor(this, R.color.color_light_font));
+                tvBottomTip.setText(getString(R.string.visitor_vip_tip));
+                tvBottomTip.setGravity(Gravity.CENTER);
+                int padding = ConvertUtils.dp2px(16f);
+                tvBottomTip.setPadding(padding, padding, padding, padding);
+            }
+            mAdapter.addFooterView(tvBottomTip);
+        } else {
+            if (tvBottomTip != null)
+                mAdapter.removeFooterView(tvBottomTip);
+        }
+    }
+
     @Override
     public void getVisitorSuccess(VisitorDto data) {
         mPageManager.showContent();
@@ -159,6 +182,8 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
         }
         mBind.smartRefresh.finishRefresh();
         mBind.smartRefresh.finishLoadMore();
+
+        addFootView();
     }
 
 

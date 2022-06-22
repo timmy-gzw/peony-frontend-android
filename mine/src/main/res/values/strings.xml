@@ -64,5 +64,6 @@
     <string name="to_cert">去认证</string>
     <string name="real_name_cert_tip">积分兑换等功能需要</string>
     <string name="certificated">已认证</string>
+    <string name="visitor_vip_tip">除了他们，还有不少人也看过你哦\n开通会员看看他们都是谁吧</string>
 
 </resources>
