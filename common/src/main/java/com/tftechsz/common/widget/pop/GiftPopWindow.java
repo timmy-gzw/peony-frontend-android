@@ -570,7 +570,6 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
                                 GifTitleDto dto = response.getData().get(i);
                                 if (dto.isIs_active()) {
                                     is_active = i;
-//                                    getGiftList(getScene(), dto.getChild_cate());
                                 }
                             }
                             mGiftChildVpAdapter.setList(lists);

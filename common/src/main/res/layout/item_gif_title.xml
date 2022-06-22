@@ -57,7 +57,7 @@
                 android:layout_height="@dimen/dp_2"
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginBottom="@dimen/dp_5"
-                android:background="@drawable/shape_black_radius_100"
+                android:background="@drawable/shape_pink_radius_100"
                 android:visibility="@{item.is_active ? View.VISIBLE : View.INVISIBLE }" />
 
         </LinearLayout>

@@ -547,12 +547,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRvTopic.setLayoutManager(linearLayoutManager);
         TopicAdapter topicAdapter = new TopicAdapter(0);
-        List<String> testData = new ArrayList<>();
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
-        topicAdapter.addData(testData);
+        ConfigInfo configInfo = service.getConfigInfo();
+        topicAdapter.addData(service.getUserInfo().getSex() == 1?configInfo.share_config.boy_quick_topic:configInfo.share_config.girl_quick_topic);
         mRvTopic.setAdapter(topicAdapter);
         topicAdapter.setOnItemClickListener((adapter, view, position) -> {
             formrtAndSendMessage(topicAdapter.getItem(position));
@@ -1881,14 +1877,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         } else {
             inputPanel.reload(container, customization);
         }
-        //话题icon
-        List<String> testData = new ArrayList<>();
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
         inputPanel.getmIvTopicBtn().setOnClickListener(v->{
-            TopicPop topicPop = new TopicPop(getActivity(),testData);
+            //话题icon
+            ConfigInfo configInfo = service.getConfigInfo();
+            TopicPop topicPop = new TopicPop(getActivity(),service.getUserInfo().getSex() == 1?configInfo.share_config.boy_quick_topic:configInfo.share_config.girl_quick_topic);
             topicPop.setTopicItemClickListener(new TopicPop.TopicItemOnClickListener() {
                 @Override
                 public void onTopicItemClick(String text) {
@@ -2130,7 +2122,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 mVoiceChat.microphone(2, userId, voiceStatus != 2 ? VoiceRoomSeat.Status.ON : VoiceRoomSeat.Status.AUDIO_MUTED);
             }
         });
-        //giftPopWindow.showPopupWindow();
 
     }
 

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tftechsz.common.R;
 import com.tftechsz.common.adapter.TopicAdapter;
+import com.tftechsz.common.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +28,14 @@ public class TopicPop extends BaseBottomPop{
     }
 
     private void init() {
+        setHeight(1000);
         RecyclerView rv = findViewById(R.id.rv_topic);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(linearLayoutManager);
         TopicAdapter topicAdapter = new TopicAdapter(1);
         rv.setAdapter(topicAdapter);
-        List<String> testData = new ArrayList<>();
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
-        testData.add("帅哥，认识一下吧");
-        topicAdapter.addData(testData);
+        topicAdapter.addData(this.data);
         topicAdapter.setOnItemClickListener((adapter, view, position) -> {
             dismiss();
             if(null != itemOnClickListener){

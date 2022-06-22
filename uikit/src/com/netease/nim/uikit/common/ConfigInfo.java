@@ -41,6 +41,9 @@ public class ConfigInfo {
         public int is_open_boy_charge;  // 男用户是否开启收费设置 1：开启
         public int is_open_chat_card;  // 是否开启聊天卡
         public int is_girl_open_party_accost;   //0 隐藏 1显示
+
+        public List<String> boy_quick_topic;//男生热聊话题
+        public List<String> girl_quick_topic;//女生热聊话题
     }
 
     public static class UserDisable {
