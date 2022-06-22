@@ -106,8 +106,6 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
                     mDelPicPopWindow = new DelPicPopWindow(MinePhotoActivityNew.this);
                 }
                 mDelPicPopWindow.setOnClickListener(() -> {
-                    MinePhotoDto mAddLocalMedia = new MinePhotoDto("ADD", 0);
-                    mAdapter.addData(mAddLocalMedia);
                     p.remove(item.getUrl());
                     mBtnUpload.setEnabled(isUpdate());
                 });
@@ -263,8 +261,7 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
         if (data != null) {
             dtos.addAll(data);
         }
-        int len = 8-dtos.size();
-        for (int i = 0; i < len ; i++) {
+        if(dtos.size()<8){
             MinePhotoDto mAddLocalMedia = new MinePhotoDto("ADD", 0);
             dtos.add(mAddLocalMedia);
         }

@@ -249,7 +249,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private ImageView mIvSmallVoice;
     private TextView mTvReportUser, tvCallTip;
     private ConstraintLayout mClVideo;
-    private LinearLayout mllVoiceUserInfo,mllVideoUserInfo;
     private TextView mtvGenderAge,mtvCity,mtvConstellation,mtvJob;//语音通话：对方性别年龄，城市，星座，工作
     private TextView mtvVideoGenderAge,mtvVideoCity,mtvVideoConstellation,mtvVideoJob;//视屏通话：对方性别年龄，城市，星座，工作
 
