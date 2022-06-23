@@ -281,8 +281,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 }).setOnBannerListener((data1, position) -> {
                     BannerAdapter adapter = mBanner.getAdapter();
                     if (adapter != null && adapter.getItemCount() > 0) {
-                        Object data = adapter.getData(0);
-                        ARouterUtils.toUserPicBrowserActivity(!TextUtils.isEmpty(mUserId) ? Integer.parseInt(mUserId) : service.getUserId(), position, (String) data, (mUserInfo != null && mUserInfo.isBoy()));
+                        Object firstIcon = adapter.getData(0);
+                        ARouterUtils.toUserPicBrowserActivity(!TextUtils.isEmpty(mUserId) ? Integer.parseInt(mUserId) : service.getUserId(), position, (String) firstIcon, (mUserInfo != null && mUserInfo.isBoy()));
                     }
 
                 });
@@ -362,29 +362,36 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         mLottie = findViewById(R.id.animation_view);
         mLottie.setImageAssetsFolder(Constants.ACCOST_GIFT);//设置data.json引用的图片资源文件夹名称
-        mAppBarLayout.addOnOffsetChangedListener((appBarLayout, i) -> {
-            int dy = Math.abs(i);
-            mToolbar.setSelected(dy > 10);
-            float alpha = Math.min(MAX_SCROLL, dy) / (float) MAX_SCROLL;
-            if (alpha > 0.5 && mUserInfo != null) {
-                mTvTobTitle.setText(mUserInfo.getNickname());
-            }
-            int backgroundAlpha = (int) (alpha * 255);
-            int backgroundBlack = Color.argb(backgroundAlpha, 0, 0, 0);
-            if (backgroundAlpha > 150) {
-                mTobBack.setImageResource(R.mipmap.mine_ic_back);
-                mTobMore.setImageResource(R.mipmap.mine_ic_more);
-            } else {
-                mTobBack.setImageResource(R.mipmap.mine_ic_back_white);
-                mTobMore.setImageResource(R.mipmap.mine_ic_more_white);
-            }
-            mTvTobTitle.setTextColor(backgroundBlack);
-            mTobBack.setColorFilter(backgroundBlack);
-            mTobMore.setColorFilter(backgroundBlack);
-            if (backgroundAlpha > 150) {
-                StatusBarUtil.setLightStatusBar(mActivity, true, true);
-            } else {
-                StatusBarUtil.setLightStatusBar(mActivity, false, true);
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            final int colorBlack = Color.argb(255, 0, 0, 0);
+            final int colorWhite = Color.argb(255, 255, 255, 255);
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                {
+                    int dy = Math.abs(i);
+                    mToolbar.setSelected(dy > 10);
+                    float alpha = Math.min(MAX_SCROLL, dy) / (float) MAX_SCROLL;
+                    if (alpha > 0.5 && mUserInfo != null) {
+                        mTvTobTitle.setText(mUserInfo.getNickname());
+                    }
+                    int backgroundAlpha = (int) (alpha * 255);
+                    int backgroundBlack = Color.argb(backgroundAlpha, 0, 0, 0);
+                    if (backgroundAlpha > 150) {
+                        mTobBack.setColorFilter(colorBlack);
+                        mTobMore.setImageResource(R.mipmap.mine_ic_more);
+                    } else {
+                        mTobBack.setColorFilter(colorWhite);
+                        mTobMore.setImageResource(R.mipmap.mine_ic_more_white);
+                    }
+                    mTvTobTitle.setTextColor(backgroundBlack);
+                    mTobMore.setColorFilter(backgroundBlack);
+                    if (backgroundAlpha > 150) {
+                        StatusBarUtil.setLightStatusBar(mActivity, true, true);
+                    } else {
+                        StatusBarUtil.setLightStatusBar(mActivity, false, true);
+                    }
+                }
             }
         });
 
