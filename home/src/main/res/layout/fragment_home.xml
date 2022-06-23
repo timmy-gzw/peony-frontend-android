@@ -44,7 +44,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                     <com.tftechsz.home.widget.HomeTopItemLayout
                         android:id="@+id/home_top_item2"
@@ -52,7 +52,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/dp_7"
                         android:layout_weight="1"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                     <com.tftechsz.home.widget.HomeTopItemLayout
                         android:id="@+id/home_top_item3"
@@ -97,7 +97,7 @@
             android:id="@+id/tabLayout"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/home_tab_height"
-            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_6"
             android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

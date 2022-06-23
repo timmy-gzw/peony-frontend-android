@@ -335,6 +335,7 @@ public class ChatMsg implements Serializable {
     public static class UserLevelUp {
         public String user_tips;
         public String user_title;
+        public String user_level_icon;
         public String user_type; //rich：土豪  charm：魅力
     }
 

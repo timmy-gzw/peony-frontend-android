@@ -58,7 +58,7 @@ import java.util.List;
 public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> implements IMineView, View.OnClickListener {
 
     private UserProviderService service;
-    private TextView mTvName, mTvUserId, mTvSex,mTvMember;   //姓名,芍药号码,好友关注粉丝,性别
+    private TextView mTvName, mTvUserId, mTvSex, mTvMember;   //姓名,芍药号码,好友关注粉丝,性别
     private ImageView mIvAvatar, mIvAuth, mIvRealPeople, mVipIcon;
     private LinearLayout mLlFriend, mLlFans, mLlAttention;
     private TextView mTvFriend, mTvFans, mTvAttention;
@@ -148,6 +148,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         getView(R.id.tv_setting).setOnClickListener(this);  //设置
         getView(R.id.cl_vip).setOnClickListener(this);  //会员
         getView(R.id.cl_top).setOnClickListener(this);   //我的
+        getView(R.id.edit_info).setOnClickListener(this);   //编辑资料
         llIntegral.setOnClickListener(this);   //积分
         llCoin.setOnClickListener(this);   //金币
     }
@@ -428,6 +429,8 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
             } else {
                 startActivity(VipActivity.class);
             }
+        } else if (id == R.id.edit_info) {
+            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_INFO);
         }
         /* else if (id == R.id.tv_family) {
             if (mUserInfo != null) {
