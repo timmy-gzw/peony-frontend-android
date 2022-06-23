@@ -45,20 +45,35 @@
                         android:id="@+id/tv_name"
                         android:text="糊涂小美女"
                         android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
                         android:textColor="#EDD398"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:id="@+id/tv_title"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/bg_wealth1"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/dp_20"
-                        android:text="我是称号"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/sp_11" />
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_title"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:src="@mipmap/bg_wealth1"
+                            android:layout_width="@dimen/dp_size_94"
+                            android:layout_height="@dimen/dp_size_32"/>
+
+                        <TextView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:id="@+id/tv_title"
+                            android:layout_width="@dimen/dp_size_94"
+                            android:layout_height="@dimen/dp_size_32"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/dp_20"
+                            android:text="我是称号"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp_11" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
 

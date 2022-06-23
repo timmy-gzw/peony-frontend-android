@@ -1,5 +1,7 @@
 package com.tftechsz.mine.mvp.ui.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.base.BaseMvpFragment;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.http.BaseResponse;
@@ -26,7 +30,9 @@ import com.tftechsz.mine.adapter.LevelUpgradeAdapter;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.GradeLevelDto;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class WealthFragment extends BaseMvpFragment {
 
@@ -36,6 +42,8 @@ public class WealthFragment extends BaseMvpFragment {
     private TextView mTvName, mTvTitle, mTvLevel, mTvNextLevelNum, mTvNextLevel;
     private ProgressBar mProgressbar;
     private RecyclerView mRvUpgrade, mRvLevelTitle;
+    private ImageView mIvTitle;
+    private UserProviderService service;
 
     //type 0 财富 1 魅力
     //userId 空为自己，有值则是他人
@@ -64,6 +72,18 @@ public class WealthFragment extends BaseMvpFragment {
                         BigDecimal next = new BigDecimal(dto.total + "").add(new BigDecimal(dto.diff + ""));
                         BigDecimal progress = myl.divide(next, 2, BigDecimal.ROUND_UP).multiply(new BigDecimal("100"));
                         mProgressbar.setProgress(progress.intValue());
+                        if(null != service){
+                            List<ConfigInfo.LevelLadder> levelDatas =  type == "0" ? service.getConfigInfo().share_config.wealth_level_ladder : service.getConfigInfo().share_config.charm_level_ladder;
+                            ConfigInfo.LevelLadder temp = levelDatas.get(levelDatas.size()-1);
+                            for (int i = 0; i < levelDatas.size(); i++) {
+                                ConfigInfo.LevelLadder levelLadder = levelDatas.get(i);
+                                if(dto.level>=levelLadder.min_level&&dto.level<levelLadder.max_level){
+                                    temp = levelLadder;
+                                }
+                            }
+                            ConfigInfo config = getConfig(mContext);
+                            Glide.with(getActivity()).load(config.api.oss.cdn_scheme + config.api.oss.cdn.pl+temp.icon).into(mIvTitle);
+                        }
                     }
                 }));
 
@@ -78,6 +98,7 @@ public class WealthFragment extends BaseMvpFragment {
     public void initUI(Bundle savedInstanceState) {
         mClBg = getView(R.id.cl_userinfo);
         mIvAvatar = getView(R.id.iv_avatar);
+        mIvTitle = getView(R.id.iv_title);
         mTvName = getView(R.id.tv_name);
         mTvTitle = getView(R.id.tv_title);
         mTvLevel = getView(R.id.tv_level);
@@ -99,7 +120,7 @@ public class WealthFragment extends BaseMvpFragment {
     @Override
     protected void initData() {
         getData();
-        UserProviderService service = ARouter.getInstance().navigation(UserProviderService.class);
+        service = ARouter.getInstance().navigation(UserProviderService.class);
         if (!TextUtils.isEmpty(userId)) {//他人
             mClBg.setVisibility(View.GONE);
         } else {//自己
@@ -122,7 +143,6 @@ public class WealthFragment extends BaseMvpFragment {
             if (null != service) {
                 mTvName.setText(service.getUserInfo().getNickname());
                 Glide.with(getActivity()).load(service.getUserInfo().getIcon()).into(mIvAvatar);
-//                mTvTitle.setText(type.equals("0")?service.getUserInfo().getLevels().rich.value:service.getUserInfo().getLevels().charm.value);
             }
         }
         LevelUpgradeAdapter upgradeAdapter = new LevelUpgradeAdapter(getActivity());
@@ -131,11 +151,20 @@ public class WealthFragment extends BaseMvpFragment {
         LevelTitleAdapter titleAdapter = new LevelTitleAdapter(getActivity(), getArguments().getString("sex"));
         mRvLevelTitle.setAdapter(titleAdapter);
         titleAdapter.setList(type == "0" ? service.getConfigInfo().share_config.wealth_level_ladder : service.getConfigInfo().share_config.charm_level_ladder);
-
     }
 
     @Override
     protected BasePresenter initPresenter() {
         return null;
     }
+
+    public ConfigInfo getConfig(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("tfpeony-pref",
+                Context.MODE_PRIVATE);
+        String config = sp.getString("configInfo", "");
+        Gson gson = new Gson();
+        ConfigInfo configInfo = gson.fromJson(config, (Type) ConfigInfo.class);
+        return configInfo;
+    }
+
 }

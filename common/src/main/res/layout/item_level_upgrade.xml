@@ -25,6 +25,8 @@
             <TextView
                 android:id="@+id/tv_title"
                 android:text="收礼物"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_14"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -33,6 +35,7 @@
                 android:id="@+id/tv_tip"
                 android:text="收礼物可帮助你快速提升魅力等级"
                 android:layout_marginTop="@dimen/dp_8"
+                android:textSize="@dimen/sp_12"
                 android:textColor="@color/gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
