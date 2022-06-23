@@ -26,6 +26,7 @@ import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 import com.tftechsz.mine.mvp.presenter.MineAboutMePresenter;
 import com.tftechsz.mine.mvp.ui.activity.GradeIntroduceActivity;
+import com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity;
 
 import java.util.List;
 
@@ -181,14 +182,15 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             if (!TextUtils.isEmpty(mUserId))
                 return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.rich) {
-                GradeIntroduceActivity.startActivity(getContext(), 1, mUserInfo.levels.rich);
+                MyWealthCharmLevelActivity.startActivity(getActivity(), "0", mUserInfo.getSex()+"",mUserId); //用户性别：0.未知，1.男，2.女
             }
         } else if (id == R.id.cl_charm) {    //魅力值
             if (!TextUtils.isEmpty(mUserId))
                 return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.charm) {
-                GradeIntroduceActivity.startActivity(getContext(), 2, mUserInfo.levels.charm);
+                MyWealthCharmLevelActivity.startActivity(getActivity(), "1", mUserInfo.getSex()+"",mUserId); //用户性别：0.未知，1.男，2.女
             }
         }
+
     }
 }
