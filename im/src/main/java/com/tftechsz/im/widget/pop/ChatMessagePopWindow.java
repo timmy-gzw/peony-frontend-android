@@ -86,6 +86,15 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
         mRvIntmacyPop = findViewById(R.id.intmacy_pop);
         mBootom = findViewById(R.id.bottom);
         mTvLevelName = findViewById(R.id.img_algin_pcm_ablow10);
+        findViewById(R.id.tv_strategy).setOnClickListener(v->{
+            IntmacyUpgradePopWindow popWindow = new IntmacyUpgradePopWindow(context, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+            popWindow.showPopupWindow();
+        });
         mRv = findViewById(R.id.rv);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
