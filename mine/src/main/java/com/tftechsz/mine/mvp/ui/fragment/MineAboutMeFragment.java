@@ -25,7 +25,6 @@ import com.tftechsz.mine.adapter.GiftAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 import com.tftechsz.mine.mvp.presenter.MineAboutMePresenter;
-import com.tftechsz.mine.mvp.ui.activity.GradeIntroduceActivity;
 import com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity;
 
 import java.util.List;

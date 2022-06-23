@@ -59,9 +59,6 @@
 			android:launchMode="singleTop"
 			android:screenOrientation="portrait" />
 		<activity
-			android:name="com.tftechsz.mine.mvp.ui.activity.GradeIntroduceActivity"
-			android:screenOrientation="portrait" />
-		<activity
 			android:name="com.tftechsz.mine.mvp.ui.activity.RealAuthenticationActivity"
 			android:screenOrientation="portrait" />
 		<activity
