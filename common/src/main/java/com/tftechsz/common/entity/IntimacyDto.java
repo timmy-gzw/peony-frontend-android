@@ -38,6 +38,8 @@ public class IntimacyDto {
         public Integer type;
         public String imTips;
         public Integer day;
+        public Integer status;
+        public Integer level;
     }
 
 

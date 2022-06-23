@@ -132,6 +132,7 @@
     <dimen name="dp_384">384dp</dimen>
     <dimen name="dp_492">492dp</dimen>
     <dimen name="dp_500">500dp</dimen>
+    <dimen name="dp_600">600dp</dimen>
 
 
     <dimen name="sp_5">5sp</dimen>

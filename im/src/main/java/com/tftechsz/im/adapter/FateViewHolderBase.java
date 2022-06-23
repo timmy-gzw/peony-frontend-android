@@ -270,7 +270,7 @@ public abstract class FateViewHolderBase extends RecyclerViewHolder<BaseMultiIte
     }
 
     public ConfigInfo getConfig(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("tfpeony_sp",
+        SharedPreferences sp = context.getSharedPreferences("tfpeony-pref",
                 Context.MODE_PRIVATE);
         String config = null;
         if (TextUtils.isEmpty(config)) {

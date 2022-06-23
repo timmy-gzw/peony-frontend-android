@@ -690,7 +690,7 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
 
 
     public UserInfo getUserInfo(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("tfpeony_sp",
+        SharedPreferences sp = context.getSharedPreferences("tfpeony-pref",
                 Context.MODE_PRIVATE);
         if (TextUtils.isEmpty(userInfo)) {
             userInfo = sp.getString("userInfo", "");

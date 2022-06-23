@@ -3396,10 +3396,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 getActivity().finish();
             KeyboardUtils.close(getActivity());
         } else if (id == R.id.rl_intimacy) {   //亲密度
-            if (null == chatMessagePopWindow)
-                chatMessagePopWindow = new ChatMessagePopWindow(getActivity(), sessionId);
+            chatMessagePopWindow = new ChatMessagePopWindow(getActivity(), sessionId);
             chatMessagePopWindow.setHeightWindow(mHeight);
-            chatMessagePopWindow.showPopupWindow(0, 0);
+            chatMessagePopWindow.showPopupWindow();
             chatMessagePopWindow.getIntimacy();
         } else if (id == R.id.iv_left) {   // 头像点击
             ARouterUtils.toMineDetailActivity(sessionId);//对方

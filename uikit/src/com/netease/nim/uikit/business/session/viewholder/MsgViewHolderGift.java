@@ -132,11 +132,13 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
                     .apply(options)
                     .load(gift.gift_info.image)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                     .into(typeImage);
-            if(null != gift.from_user_nickname) {
-                targetTextView.setText(gift.from_user_nickname);
+
+            UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(isReceivedMessage()?chatMsg.from:chatMsg.to);
+            if(null != userInfo.getName()) {
+                targetTextView.setText(userInfo.getName());
             }
-            if(null != gift.from_user_id) {
-                UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(gift.from_user_id);
+
+            if(null != userInfo.getAvatar()) {
                 String avaterUrl = getConfig(context).api.oss.cdn_scheme + getConfig(context).api.oss.cdn.user + userInfo.getAvatar();
                 Glide.with(context)                             //配置上下文
                         .asDrawable()
@@ -148,7 +150,7 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
     }
 
     private ConfigInfo getConfig(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("tfpeony_sp",
+        SharedPreferences sp = context.getSharedPreferences("tfpeony-pref",
                 Context.MODE_PRIVATE);
         String configInfo = sp.getString("configInfo", "");
         Gson gson = new Gson();

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:id="@+id/ll_item"
+    android:paddingHorizontal="@dimen/dp_15"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_unlock"
+        app:layout_constraintTop_toTopOf="@id/cl_right"
+        app:layout_constraintBottom_toBottomOf="@id/cl_right"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@mipmap/icon_level_unlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/iv_to_unlock"
+        app:layout_constraintTop_toBottomOf="@id/iv_unlock"
+        app:layout_constraintRight_toRightOf="@id/iv_unlock"
+        app:layout_constraintLeft_toLeftOf="@id/iv_unlock"
+        android:src="@mipmap/icon_lock_to_lock"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_right"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toRightOf="@id/iv_unlock"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:paddingVertical="8dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:background="@drawable/bg_white_radius10"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_level_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="#50CD5C33"
+            android:textSize="@dimen/sp_16"
+            android:text="LV.3 心心相印"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_lock"
+            android:textColor="#50CD5C33"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginLeft="@dimen/dp_15"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_level_name"
+            app:layout_constraintLeft_toRightOf="@id/tv_level_name"
+            android:text="已解锁"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

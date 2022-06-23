@@ -1,7 +1,10 @@
 package com.tftechsz.im.widget.pop;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -11,10 +14,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.common.DensityUtils;
+import com.tftechsz.common.utils.ClickUtil;
+import com.tftechsz.common.utils.ScreenUtils;
+import com.tftechsz.common.utils.Utils;
+import com.tftechsz.common.widget.pop.BaseTopPop;
 import com.tftechsz.im.R;
+import com.tftechsz.im.adapter.IntmacyLevelAdapter;
 import com.tftechsz.im.api.ChatApiService;
 import com.tftechsz.common.entity.IntimacyDto;
 import com.tftechsz.common.http.BaseResponse;
@@ -24,29 +34,35 @@ import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.widget.CircleImageView;
 import com.tftechsz.common.widget.pop.BaseCenterPop;
+import com.tftechsz.im.model.dto.MultiIntmacyItem;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
  *  亲密度消息弹窗
  */
-public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickListener {
+public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickListener {
 
     private CircleImageView ivTo, ivFrom;
-    private TextView mTvUpLevel, mTvHintText, mTvHinttext2;  //升级提示
+    private TextView mTvUpLevel;  //升级提示
     private final UserProviderService service;
     private final String sessionId;
     private ChatApiService chatApiService;
     protected CompositeDisposable mCompositeDisposable;
-    private LinearLayout mLinViewRoot;
     private Context context;
     private IntimacyDto mIntimacyDateTemp;
-    private TextView mTvLevText;
-    private TextView mTvSex;
+    private TextView mTvLevelName;
     private int mHeightWindow;//派对弹窗高度
-    private NestedScrollView nestedScrollView;
+    private ImageView mIvPushPull;
+    private boolean isPush = false;//是否展开
+    private ImageView mRvIntmacyPop;
+    private View mBootom;
+    private RecyclerView mRv;
+    private IntmacyLevelAdapter adapter;
 
     public ChatMessagePopWindow(Context context, String sessionId) {
         super(context);
@@ -62,18 +78,91 @@ public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickL
 
 
     private void initUI() {
-        nestedScrollView = findViewById(R.id.nsv_pcm);
-        mTvHinttext2 = findViewById(R.id.algintv_qmdtj1);
-        mTvHintText = findViewById(R.id.tv_align_pcm2);
-        mTvLevText = findViewById(R.id.tv_pcm_clstexttop);
         ivFrom = findViewById(R.id.iv_from);
         ivTo = findViewById(R.id.iv_to);
         mTvUpLevel = findViewById(R.id.tv_up_level);  //升级
-        mLinViewRoot = findViewById(R.id.rv_award);
-        mTvSex = findViewById(R.id.tv_sex_pcm);
 
-        findViewById(R.id.img_close_pcm).setOnClickListener(v -> dismiss());
+        mIvPushPull = findViewById(R.id.iv_push_pull);
+        mRvIntmacyPop = findViewById(R.id.intmacy_pop);
+        mBootom = findViewById(R.id.bottom);
+        mTvLevelName = findViewById(R.id.img_algin_pcm_ablow10);
+        mRv = findViewById(R.id.rv);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRv.setLayoutManager(linearLayoutManager);
+        adapter = new IntmacyLevelAdapter();
+        mRv.setAdapter(adapter);
+        mBootom.setOnClickListener(v->{
+            dismiss();
+        });
+        mIvPushPull.setOnClickListener(v->{
+            if(!ClickUtil.canOperate())
+                return;
+            if(!isPush){
+                isPush = true;
+                ValueAnimator valueAnimator = ValueAnimator.ofInt(Utils.dp2px(context,200), 1);
+                valueAnimator.addUpdateListener(value->{
+                    int h = (int) value.getAnimatedValue();
+                    mBootom.getLayoutParams().height = h;
+                    mBootom.requestLayout();
+                });
+                valueAnimator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
 
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mIvPushPull.setImageResource(R.mipmap.icon_intmacy_pull);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                valueAnimator.setDuration(300);
+                valueAnimator.start();
+
+            }else{
+                isPush = false;
+                ValueAnimator valueAnimator = ValueAnimator.ofInt(1, Utils.dp2px(context,200));
+                valueAnimator.addUpdateListener(value->{
+                    int h = (int) value.getAnimatedValue();
+                    mBootom.getLayoutParams().height = h;
+                    mBootom.requestLayout();
+                });
+                valueAnimator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mIvPushPull.setImageResource(R.mipmap.icon_intamcy_push);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                valueAnimator.setDuration(300);
+                valueAnimator.start();
+            }
+        });
         initData();
 
     }
@@ -82,9 +171,6 @@ public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickL
      * 加载数据
      */
     private void initData() {
-        if (service.getUserInfo().isBoy()) {
-            mTvSex.setText(service.getUserInfo().isBoy() ? "送她礼物" : "送他礼物");
-        }
         ivTo.loadBuddyAvatar(String.valueOf(service.getUserId()));
         ivFrom.loadBuddyAvatar(sessionId);
 
@@ -111,13 +197,6 @@ public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickL
     public void setHeightWindow(int height) {
         this.mHeightWindow = height;
 
-        if (mHeightWindow != 0) {//弹窗模式 兼容高度
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) nestedScrollView.getLayoutParams();
-            if (mHeightWindow < 1200) {
-                layoutParams.height = DensityUtils.dp2px(mContext, 200);
-            }
-            nestedScrollView.setLayoutParams(layoutParams);
-        }
 
     }
 
@@ -126,6 +205,7 @@ public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickL
         if (data != null) {
             mIntimacyDateTemp = data;
             mTvUpLevel.setText("亲密度 " + data.intimacy);
+            mTvLevelName.setText("LV."+data.level+" "+data.message_title);
             try {
 //                mTvHintText.setText(data.message_intimacy);
                 if (data.level != 10) {
@@ -133,13 +213,17 @@ public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickL
                     double s = (mIntimacyDateTemp.intimacy_config.get(data.level + 1).min - d);
                     BigDecimal bigDecimal = new BigDecimal(s);
                     double result = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
-                    mTvHintText.setText("还差" + result + "℃, 升级至LV." + (data.level + 1) + mIntimacyDateTemp.intimacy_config.get(data.level + 1).title);
                 }
-                mTvHinttext2.setText(data.content);
-                mTvLevText.setText("LV." + (data.level) + " " + mIntimacyDateTemp.intimacy_config.get(data.level).title);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            List<MultiIntmacyItem> lists = new ArrayList<>();
+            for (IntimacyDto.IntimacyConfigDTO intimacyConfigDTO : data.intimacy_config) {
+                lists.add(new MultiIntmacyItem(intimacyConfigDTO));
+            }
+            adapter.setmCurrentLevel(data.level);
+            adapter.setList(lists);
+            mRv.scrollToPosition(data.level-1);
             setinTimacyList();
             setIntimacy();
         }
@@ -147,31 +231,12 @@ public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickL
     }
 
     private void setIntimacy() {
-        TextView mTvName = findViewById(R.id.tv_iia_namenew);
-        EditText mTvTip = findViewById(R.id.tv_iia_tipnew);
-        RelativeLayout relativeLayout = findViewById(R.id.rel_root_iia2);
-        ImageView mImgHeart = findViewById(R.id.img_iianew);
 
-        mTvTip.setText(mIntimacyDateTemp.message_friend);
-        mTvName.setText(mIntimacyDateTemp.message_title);
-        if (mIntimacyDateTemp.is_friend == 1) {
-            mTvName.setTextColor(Color.parseColor("#ffffff"));
-            mTvTip.setTextColor(Color.parseColor("#ffffff"));
-            relativeLayout.setBackgroundResource(R.drawable.bg_colorf66097_to_f593b7_radius8);
-            mImgHeart.setImageResource(R.mipmap.peony_js_icon);
-        } else {
-            mTvName.setTextColor(Color.parseColor("#ff886471"));
-            mTvTip.setTextColor(Color.parseColor("#ffc2b5ba"));
-            relativeLayout.setBackgroundResource(R.drawable.bg_f9f9f9_radius14);
-        }
     }
 
     private void setinTimacyList() {
         if (mIntimacyDateTemp.intimacy_config == null)
             return;
-        if (mLinViewRoot.getChildCount() > 0) {
-            mLinViewRoot.removeAllViews();
-        }
         //亲密度-等级奖励
         for (int i = 0; i < mIntimacyDateTemp.intimacy_config.size(); i++) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_intimacy_award, null);
@@ -229,11 +294,6 @@ public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickL
             mTvTip.setText(mIntimacyDateTemp.intimacy_config.get(i).tips);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.topMargin += 20;
-            mLinViewRoot.addView(view, layoutParams);
-        }
-        //10级之后手动设置 文字
-        if (mIntimacyDateTemp.level == 10) {
-            mTvHintText.setText("更多等级和奖励正在紧张筹备中");
         }
     }
 
@@ -250,7 +310,6 @@ public class ChatMessagePopWindow extends BaseCenterPop implements View.OnClickL
             mCompositeDisposable.clear();
         }
     }
-
 
     @Override
     public void onClick(View v) {

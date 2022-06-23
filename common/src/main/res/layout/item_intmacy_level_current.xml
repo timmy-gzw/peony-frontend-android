@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:id="@+id/ll_item"
+    android:paddingHorizontal="@dimen/dp_15"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_unlock"
+        app:layout_constraintTop_toTopOf="@id/cl_right"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/dp_10"
+        android:src="@mipmap/icon_level_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/iv_to_unlock"
+        app:layout_constraintTop_toBottomOf="@id/iv_unlock"
+        app:layout_constraintRight_toRightOf="@id/iv_unlock"
+        app:layout_constraintLeft_toLeftOf="@id/iv_unlock"
+        android:src="@mipmap/icon_level_curret_next"
+        android:layout_marginVertical="@dimen/dp_5"
+        android:layout_width="wrap_content"
+        android:visibility="visible"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_right"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toRightOf="@id/iv_unlock"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_8"
+        android:background="@drawable/shape_intmacy_level_current"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:id="@+id/tv_level"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="#FFE98E"
+            android:textSize="@dimen/sp_16"
+            android:text="LV.3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_level_name"
+            app:layout_constraintLeft_toRightOf="@id/tv_level"
+            app:layout_constraintTop_toTopOf="@id/tv_level"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:text=" 心心相印"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_level_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginTop="@dimen/dp_7"
+            app:layout_constraintTop_toBottomOf="@id/tv_level"
+            app:layout_constraintLeft_toLeftOf="@id/tv_level"
+            android:text="亲密度1.5℃，解锁语音和视频通话权限"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/iv_tip"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@mipmap/icon_intmacy_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

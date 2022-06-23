@@ -364,7 +364,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                         mTopBg.setBackgroundResource(R.mipmap.yt_dl_bg_img);
                         mVipIcon.setVisibility(View.VISIBLE);
                         mTvMember.setText("立即开通");
-                        mExpiredTime.setVisibility(View.VISIBLE);
+                        mExpiredTime.setVisibility(View.GONE);
                         mVip_title.setVisibility(View.VISIBLE);
                         if (TextUtils.isEmpty(userInfo.getVip_desc())) {
                             mVipNorHint.setVisibility(View.INVISIBLE);
