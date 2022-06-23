@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.bean.AccostDto;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.AppManager;
 import com.tftechsz.common.base.BaseApplication;
@@ -57,6 +59,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 
+@Route(path = ARouterApi.FRAGMENT_TREND_LIST)
 public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRecommendPresenter> implements IDynamicView, OnItemChildVideoClickListener {
     public RecyclerView recyclerView;
     private TrendAdapter mAdapter;

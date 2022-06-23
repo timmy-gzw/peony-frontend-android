@@ -73,4 +73,7 @@
 	<string name="auth_for_obtain_permission">完成认证，可获得以下权限</string>
 
     <string name="coin">金币</string>
+
+    <string name="rich_lv_format">财富LV.%s</string>
+    <string name="charm_lv_format">魅力LV.%s</string>
 </resources>

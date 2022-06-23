@@ -93,6 +93,8 @@ public class UserInfo implements Serializable {
 
     public static class LevelValue implements Serializable {
 
+        public String name; //财富等级/魅力等级
+        public String icon; //背景图
         public String title; //魅力头衔
         public String level; //等级 lv.0",
         public String value; //  土豪值 99"  //总经验值

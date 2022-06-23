@@ -2,7 +2,6 @@ package com.tftechsz.mine.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tftechsz.common.adapter.DataBindBaseViewHolder;
-import com.tftechsz.mine.BR;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ItemDressUpBinding;
 import com.tftechsz.mine.entity.DressUpBean;
@@ -21,7 +20,7 @@ public class DressUpAdapter extends BaseQuickAdapter<DressUpBean, DataBindBaseVi
     @Override
     protected void convert(@NotNull DataBindBaseViewHolder vh, DressUpBean bean) {
         ItemDressUpBinding bind = (ItemDressUpBinding) vh.getBind();
-        bind.setVariable(BR.item, bean);
+        bind.setItem(bean);
         bind.executePendingBindings();
 
     }

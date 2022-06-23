@@ -1,5 +1,7 @@
 package com.tftechsz.common.widget.pop;
 
+import static com.tftechsz.common.constant.Interfaces.FIY_NUMBER;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +11,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
@@ -97,17 +106,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 import io.reactivex.disposables.CompositeDisposable;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-
-import static com.tftechsz.common.constant.Interfaces.FIY_NUMBER;
 
 public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener, IGiftVpOnItemClick, OnTabSelectListener {
 
@@ -1271,12 +1272,10 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
             mBind.llLevel.setVisibility(View.VISIBLE);
             //土豪值
             mBind.level.tvLocalTyrantTitle.setText(data.rich.title);
-            mBind.level.tvLocalTyrantValue.setText(data.rich.value);
-            mBind.level.tvLocalTyrantLevel.setText(data.rich.level);
+            mBind.level.tvLocalTyrantLevel.setText(mContext.getString(R.string.rich_lv_format, data.rich.level));
             //魅力值
-            mBind.level.tvCharmTitle.setText(data.charm.title);
-            mBind.level.tvCharmValue.setText(data.charm.value);
-            mBind.level.tvCharmLevel.setText(data.charm.level);
+            mBind.level.tvCharmTitle.setText(data.charm.value);
+            mBind.level.tvCharmLevel.setText(mContext.getString(R.string.charm_lv_format, data.charm.level));
         } else {
             mBind.llLevel.setVisibility(View.GONE);
         }

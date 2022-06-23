@@ -4,7 +4,6 @@ import android.graphics.Paint;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tftechsz.common.adapter.DataBindBaseViewHolder;
-import com.tftechsz.mine.BR;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ItemVipPriceBinding;
 import com.tftechsz.mine.entity.VipPriceBean;
@@ -24,7 +23,7 @@ public class VipPriceAdapter extends BaseQuickAdapter<VipPriceBean, DataBindBase
     @Override
     protected void convert(@NotNull DataBindBaseViewHolder helper, VipPriceBean bean) {
         ItemVipPriceBinding mBind = (ItemVipPriceBinding) helper.getBind();
-        mBind.setVariable(BR.item, bean);
+        mBind.setItem(bean);
         mBind.executePendingBindings();
         if (bean.is_mid_line) {
             mBind.price3.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);

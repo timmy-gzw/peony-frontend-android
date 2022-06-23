@@ -28,6 +28,7 @@ public class ARouterApi {
     public final static String ACTIVITY_BEFORE_REPORT = "/trend/BeforeReportActivity";
     public final static String ACTIVITY_REPORT = "/trend/reportActivity";
     public final static String ACTIVITY_MINE_TREND = "/trend/mineTrendActivity";
+    public static final String FRAGMENT_TREND_LIST = "/trend/trendFragment";   //动态列表
 
     //mine
     public static final String ACTIVITY_SPLASH = "/mine/SplashActivity";   //启动
@@ -68,6 +69,7 @@ public class ARouterApi {
     public static final String ACTIVITY_FACE_CHECK = "/mine/FaceCheckActivity";
     public static final String ACTIVITY_ABOUT_US = "/mine/AboutUsActivity";
     public static final String ACTIVITY_FACIAL_SETTING = "/mine/facial";//美颜设置
+    public static final String FRAGMENT_USER_INFO = "/mine/userInfo";   //我的基本信息
 
 
     //family

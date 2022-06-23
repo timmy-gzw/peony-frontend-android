@@ -5,19 +5,15 @@ import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -29,7 +25,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.google.android.material.appbar.AppBarLayout;
@@ -65,23 +60,17 @@ import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.AnimationUtil;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
-import com.tftechsz.common.utils.MMKVUtils;
-import com.tftechsz.common.utils.ScreenUtils;
 import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.MyBannerImageHolder;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.mine.R;
-import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
-import com.tftechsz.mine.adapter.GiftAdapter;
 import com.tftechsz.mine.adapter.ProfilePhotoAdapter;
-import com.tftechsz.mine.adapter.TrendAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.entity.dto.TrendDto;
 import com.tftechsz.mine.mvp.IView.IMineDetailView;
 import com.tftechsz.mine.mvp.presenter.MineDetailPresenter;
-import com.tftechsz.mine.mvp.ui.fragment.IntegralListFragment;
 import com.tftechsz.mine.widget.pop.GuardPopWindow;
 import com.tftechsz.mine.widget.pop.MineDetailMorePopWindow;
 import com.youth.banner.Banner;
@@ -108,26 +97,21 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private Toolbar mToolbar;
     private TextView mTvTobTitle;
     private TextView mTvName, mTvSign;    //姓名,个性签名
-    private TextView mTvLocalTyrantTitle, mTvLocalTyrantValue, mTvLocalTyrantLevel;    //土豪值相关
-    private TextView mTvCharmTitle, mTvCharmValue, mTvCharmLevel;   //魅力值相关
 
     private TextView mTvAttention;   //关注
     private TextView mTvEdit;   //编辑资料
     private LinearLayout mLlOther;  //他人
 
     private TextView mIvSex;  //性别，是否真人，是否认证
-    private ImageView mIvIsRealPeople, mIvIsAuth;
+    private ImageView mIvIsRealPeople, mIvIsAuth, mIvIsVIP;
 
     //女性用户逻辑私信
     private LinearLayout mLlAccost, mLlOperate, llBottom;
     private TextView mTvChatMessage, mTvAccost;
     private ImageView mIvAccost;
 
-    private RecyclerView mRvTrend;   //动态
-    private RecyclerView mRvUserInfo;  //基本信息
-    private RecyclerView mRvGift;  //礼物
+    private LinearLayout mllAuth;
 
-    private TrendAdapter mTrendAdapter;   //动态
     private ProfilePhotoAdapter profilePhotoAdapter; //相册
 
     private UserInfo mUserInfo;
@@ -139,22 +123,11 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
     private AudioPlayer mIjkPlayer;
 
-    private TextView mTvTrend, mTvTrendMore;   //动态
-
-    private List<TrendDto> mTrendList;
     private LottieAnimationView mLottie;
     private VideoCallPopWindow mVideoCallPopWindow;   //语音视频弹窗
 
-    //会员相关
-    private LinearLayout mClVipRich;
-    private ConstraintLayout mClVipGift;
-    private TextView mTvRichSetting, mTvGiftSetting;
-
-    private TextView mTvGift;
-
     private ConfigInfo mConfig;
 
-    private GestureDetector gestureDetector;
     @Autowired(name = "user_id")
     public String mUserId;
 
@@ -163,13 +136,9 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private Timer mTimer;
     private int mediaTime, mediaTimeTemp;
     private PageStateManager mPageManager;
-    private ConstraintLayout constraintLayoutFamily;
-    private View mViewLineVisible;
-    private ImageView mImgFamily;
-    private TextView mTvFamilyName, mTvFamilyHint, mTvFamilyWw, mTvFamilyNumber, mTxtFamilyOtherText;
     private LottieAnimationView mLottieVoice;
-    private RelativeLayout mRelRoomAudio;
-    private ImageView mImgHeaders;
+    private SlidingTabLayout mTabLayout;
+    private ViewPager mViewPager;
 
     @Override
     public MineDetailPresenter initPresenter() {
@@ -182,17 +151,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         ImmersionBar.with(this).fullScreen(true).titleBar(mToolbar).statusBarDarkFont(true)
                 .transparentStatusBar()
                 .init();
-        mRelRoomAudio = findViewById(R.id.rel_room_audio);
-        mRelRoomAudio.setOnClickListener(this);
-        mTxtFamilyOtherText = findViewById(R.id.tv_photofamily);
-        mTvFamilyWw = findViewById(R.id.tv_family_respect);
-        mTvFamilyNumber = findViewById(R.id.tv_family_number);
-        mImgHeaders = findViewById(R.id.img_agl_);
-        mTvFamilyHint = findViewById(R.id.tv_family_hint);
-        mTvFamilyName = findViewById(R.id.tv_amd_family_title);
-        mImgFamily = findViewById(R.id.iv_familyimg);
-        mViewLineVisible = findViewById(R.id.view13);
-        constraintLayoutFamily = findViewById(R.id.cl_family);
         mAppBarLayout = findViewById(R.id.app_bar_layout);
         mTobBack = findViewById(R.id.tob_back);
         mLottieVoice = findViewById(R.id.lottie_voice);
@@ -213,17 +171,11 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mTvEditInfo = findViewById(R.id.edit_info);
         mTvName = findViewById(R.id.tv_name);   //姓名
         mTvSign = findViewById(R.id.tv_sign);   //个性签名
-        //土豪值response
-        mTvLocalTyrantTitle = findViewById(R.id.tv_local_tyrant_title);
-        mTvLocalTyrantValue = findViewById(R.id.tv_local_tyrant_value);
-        mTvLocalTyrantLevel = findViewById(R.id.tv_local_tyrant_level);
-        //魅力值
-        mTvCharmTitle = findViewById(R.id.tv_charm_title);
-        mTvCharmValue = findViewById(R.id.tv_charm_value);
-        mTvCharmLevel = findViewById(R.id.tv_charm_level);
 
         mTvEdit = findViewById(R.id.tv_edit);  //编辑资料
         mTvEdit.setOnClickListener(this);
+
+        mllAuth = findViewById(R.id.ll_auth);
 
         mLlAccost = findViewById(R.id.ll_accost);
         mLlOperate = findViewById(R.id.ll_operate);
@@ -234,6 +186,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mIvSex = findViewById(R.id.iv_sex);
         mIvIsRealPeople = findViewById(R.id.iv_real_people);
         mIvIsAuth = findViewById(R.id.iv_auth);
+        mIvIsVIP = findViewById(R.id.iv_vip);
 
         mLlOther = findViewById(R.id.ll_other);  //他人
 
@@ -243,57 +196,43 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mTvVoiceTime = findViewById(R.id.tv_voice_time);   //录音
         mIvVoice = findViewById(R.id.iv_voice);
 
-        mTvTrend = findViewById(R.id.tv_trend);
-        mTvTrendMore = findViewById(R.id.tv_mine_trend);  //动态
-
         //心
         //搭讪
         mIvAccost = findViewById(R.id.iv_accost);
-        //动态
-        mRvTrend = findViewById(R.id.rv_trend);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this, 4);
-        mRvTrend.setLayoutManager(gridLayoutManager2);
 
-        //用户基本信息
-        mRvUserInfo = findViewById(R.id.rv_user_info);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        mRvUserInfo.setLayoutManager(gridLayoutManager);
-
-        //礼物
-        mRvGift = findViewById(R.id.rv_gift);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 4);
-        mRvGift.setLayoutManager(gridLayoutManager1);
-
-
-        //vip相关
-        mClVipRich = findViewById(R.id.cl_vip_rich);
-        mClVipGift = findViewById(R.id.cl_vip_gift);
-        mTvGiftSetting = findViewById(R.id.tv_gift_vip_setting);
-        mTvRichSetting = findViewById(R.id.tv_rich_vip_setting);
-
-        mTvGift = findViewById(R.id.tv_gift);
-
-        SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
-        ViewPager mViewPager = findViewById(R.id.vp_mine_detail);
-        List<String> titles = new ArrayList<>();
-        if (TextUtils.isEmpty(mUserId)) {
-            titles.add("关于我");
-        } else {
-            if (service.getUserInfo().getSex() == 1) {
-                titles.add("关于他");
-            } else {
-                titles.add("关于她");
-            }
-        }
-        titles.add("动态");
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(IntegralListFragment.newInstance(IntegralListFragment.TYPE_INTEGRAL_TO_RMB));
-        fragments.add(IntegralListFragment.newInstance(IntegralListFragment.TYPE_INTEGRAL_TO_COIN));
-        mViewPager.setAdapter(new FragmentVpAdapter(getSupportFragmentManager(), fragments, titles));
-        tabLayout.setViewPager(mViewPager);
+        mTabLayout = findViewById(R.id.tabLayout);
+        mViewPager = findViewById(R.id.vp_mine_detail);
 
         setSupportActionBar(mToolbar);
         initListener();
+    }
+
+    private void setupTabAndViewPager() {
+        if (mUserInfo == null) return;
+        List<String> titles = new ArrayList<>();
+        if (TextUtils.isEmpty(mUserId)) {
+            titles.add(getString(R.string.about_me));
+        } else {
+            if (mUserInfo.isGirl()) {
+                titles.add(getString(R.string.about_her));
+            } else {
+                titles.add(getString(R.string.about_he));
+            }
+        }
+        titles.add(getString(R.string.moment));
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add((Fragment) ARouter.getInstance()
+                .build(ARouterApi.FRAGMENT_USER_INFO)
+                .withSerializable("user_info", mUserInfo)
+                .withString("user_id", mUserId)
+                .navigation());
+        fragments.add((Fragment) ARouter.getInstance()
+                .build(ARouterApi.FRAGMENT_TREND_LIST)
+                .withInt("type", 0)
+                .withInt("uid", TextUtils.isEmpty(mUserId) ? -1 : Integer.parseInt(mUserId))
+                .navigation());
+        mViewPager.setAdapter(new FragmentVpAdapter(getSupportFragmentManager(), fragments, titles));
+        mTabLayout.setViewPager(mViewPager);
     }
 
     private void initListener() {
@@ -304,75 +243,21 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mLottieVoice.setOnClickListener(this);
         mLlAccost.setOnClickListener(this);   //搭讪
         findViewById(R.id.tv_chat_message).setOnClickListener(this);  //私信
-        findViewById(R.id.cl_local_tyrant).setOnClickListener(this);  //土豪值
         findViewById(R.id.tv_call_video).setOnClickListener(this);   //语音视频
-        findViewById(R.id.cl_charm).setOnClickListener(this);  //亲密度
         findViewById(R.id.rl_guard).setOnClickListener(this);   //守护
-        findViewById(R.id.cl_family).setOnClickListener(this);   //家族
         findViewById(R.id.ll_auth).setOnClickListener(this);
 
         mLlVoice.setOnClickListener(this);  //去录音
         mIvVoice.setOnClickListener(this);
-        mTvTrendMore.setOnClickListener(this);   //更多动态
-        gestureDetector = new GestureDetector(this, new GestureDetector.OnGestureListener() {
-
-            @Override
-            public boolean onDown(MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onShowPress(MotionEvent e) {
-
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                if (null != mUserInfo)
-                    ARouterUtils.toTrendActivity(mUserId, mUserInfo.getNickname());
-                return true;
-            }
-
-            @Override
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                return false;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-
-            }
-
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                return false;
-            }
-        });
-//        findViewById(R.id.ns_info).setMinimumHeight(ScreenUtils.getScreenHeight(this));
-
     }
-
-    private View mViewPot;
 
     private void initNet() {
         if (TextUtils.isEmpty(mUserId)) {   //自己
-            //默认添加第一条数据
-            TrendDto trendDto = new TrendDto();
-            trendDto.image = "ADD";
-            mTrendList.add(trendDto);
             p.getUserInfoDetail();
-            p.getSelfGift(mPageSize);
-            p.getSelfTrend(3);
         } else {
-            mViewPot = findViewById(R.id.view1);
-            mViewPot.setVisibility(View.GONE);
-
             p.getUserInfoById(mUserId);
-            p.getUserGift(mPageSize, mUserId);
-            p.getUserTrend(4, mUserId);
 
             if (service.getUserInfo() != null && service.getUserInfo().getSex() != 1) {   //女性用户看其他人信息
-
                 if (!CommonUtil.infoBtnTextUpdate3(service)) {
                     LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                             0, LinearLayout.LayoutParams.MATCH_PARENT, 2.0f);
@@ -395,19 +280,12 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 mIvAccost.setImageResource(R.mipmap.mine_ic_accost);
                 AnimationUtil.createAnimation(mIvAccost);
             }
-            //vip 设置相关
-            mClVipRich.setBackgroundResource(0);
-            mClVipGift.setBackgroundResource(0);
-            mTvRichSetting.setVisibility(View.GONE);
-            mTvGiftSetting.setVisibility(View.GONE);
-
         }
     }
 
     @Override
     protected void initData() {
         super.initData();
-        mTrendList = new ArrayList<>();
         MAX_SCROLL = DensityUtils.dp2px(this, 340);
         mConfig = service.getConfigInfo();
         mIjkPlayer = new AudioPlayer(BaseApplication.getInstance());
@@ -448,9 +326,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         mLottie = findViewById(R.id.animation_view);
         mLottie.setImageAssetsFolder(Constants.ACCOST_GIFT);//设置data.json引用的图片资源文件夹名称
-        mTrendAdapter = new TrendAdapter(mTrendList, mUserId);
-        mRvTrend.setAdapter(mTrendAdapter);
-        mRvTrend.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
         mAppBarLayout.addOnOffsetChangedListener((appBarLayout, i) -> {
             int dy = Math.abs(i);
             mToolbar.setSelected(dy > 10);
@@ -575,6 +450,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     @Override
     public void getUserInfoSuccess(UserInfo userInfo) {
         mUserInfo = userInfo;
+        setupTabAndViewPager();
         if (mPageManager != null)
             mPageManager.showContent();
         if (mUserInfo.isDisable()) { //如果用户被禁用
@@ -587,13 +463,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         }
         if (mUserInfo.isLogout()) { //用户不存在
             new CustomPopWindow(mContext).setContent(getString(R.string.user_no_exist)).setRightGone().setRightButton("我知道了").showPopupWindow();
-        }
-        //显示派对语音房 样式
-        if (mUserInfo.play_party != null && mUserInfo.play_party.id != 0 && mUserInfo.play_party.room_name != null && mUserInfo.play_party.icon != null) {
-            mRelRoomAudio.setVisibility(View.VISIBLE);
-            GlideUtils.loadCircleImage(this, mImgHeaders, mUserInfo.play_party.icon);
-        } else {
-            mRelRoomAudio.setVisibility(View.GONE);
         }
         if (service.getUserInfo() != null) {
             if (TextUtils.isEmpty(mUserId)) { //如果是自己
@@ -621,31 +490,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         } else {
             getP().getUserPhoto(MAX_SIZE, mUserId);
         }
-        //家族
-        if (userInfo.family != null) {
-            GlideUtils.loadRoundImage(this, mImgFamily, userInfo.family.icon);
-            mTvFamilyName.setText(userInfo.family.tname);
-            mTvFamilyNumber.setText(userInfo.family.userCount + "人");
-            if (!StringUtils.isTrimEmpty(userInfo.family.prestige)) {
-                mTvFamilyWw.setVisibility(View.VISIBLE);
-                mTvFamilyWw.setText("总威望值" + userInfo.family.prestige);
-            }
-            if (!StringUtils.isTrimEmpty(userInfo.family.intro)) {
-                mTvFamilyHint.setText(userInfo.family.intro);
-            }
-
-            ImageView mIvLevel = findViewById(R.id.iv_level);
-            TextView mTvLevel = findViewById(R.id.tv_level);
-            if (!StringUtils.isTrimEmpty(userInfo.family.level) && !StringUtils.isTrimEmpty(userInfo.family.level_icon)) {
-                mTvLevel.setText(userInfo.family.level);
-                GlideUtils.loadRouteImage(this, mIvLevel, userInfo.family.level_icon);
-            }
-            mViewLineVisible.setVisibility(View.VISIBLE);
-            constraintLayoutFamily.setVisibility(View.VISIBLE);
-        } else {
-            mViewLineVisible.setVisibility(View.GONE);
-            constraintLayoutFamily.setVisibility(View.GONE);
-        }
     }
 
     /**
@@ -655,23 +499,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
      */
     @Override
     public void getGiftSuccess(List<GiftDto> data) {
-        GiftAdapter adapter = new GiftAdapter(data);
-        mRvGift.setAdapter(adapter);
-        if (null == data || data.size() <= 0) {
-            mClVipGift.setVisibility(View.GONE);
-            mTvGift.setVisibility(View.GONE);
-            mClVipGift.setBackgroundResource(0);
-            mTvGiftSetting.setVisibility(View.GONE);
-        } else {
-            mClVipGift.setVisibility(View.VISIBLE);
-            mTvGift.setVisibility(View.VISIBLE);
-            findViewById(R.id.view4).setVisibility(View.VISIBLE);
-        }
-
-        if (mUserInfo != null && mUserInfo.open_hidden_gift == 1 && !TextUtils.isEmpty(mUserId)) {
-            mClVipGift.setVisibility(View.GONE);
-            mTvGift.setVisibility(View.GONE);
-        }
     }
 
     /**
@@ -681,24 +508,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
      */
     @Override
     public void getTrendSuccess(List<TrendDto> data) {
-        final int size = data == null ? 0 : data.size();
-        mTrendList.clear();
-        if (TextUtils.isEmpty(mUserId)) {   //自己
-            TrendDto trendDto = new TrendDto();
-            trendDto.image = "ADD";
-            mTrendList.add(trendDto);
-        }
-        if (size > 0) {
-            mTvTrendMore.setVisibility(View.VISIBLE);
-            mTvTrend.setVisibility(View.VISIBLE);
-            mTrendList.addAll(data);
-        } else {
-            if (TextUtils.isEmpty(mUserId)) {
-                mTvTrendMore.setVisibility(View.VISIBLE);
-                mTvTrend.setVisibility(View.VISIBLE);
-            }
-        }
-        mTrendAdapter.setList(mTrendList);
     }
 
     /**
@@ -874,7 +683,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private void setUserInfo() {
         if (null == mUserInfo)
             return;
-        mTxtFamilyOtherText.setText(String.format("%s的家族", TextUtils.isEmpty(mUserId) ? "我" : mUserInfo.isBoy() ? "他" : "她"));
         if (!TextUtils.isEmpty(mUserInfo.audit_voice)) {
             mTvVoiceTime.setText("审核中");
             mIvVoice.setBackgroundResource(R.mipmap.mine_ic_voice_record);
@@ -895,29 +703,17 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         }
 
 //        mRlIsSelf.setVisibility(mUserInfo.isPartyGirl() ? View.GONE : View.VISIBLE);// 语音房女用户进入个人主页，不显示真人认证
-        CommonUtil.setUserName(mTvName, mUserInfo.getNickname(), mUserInfo.isVip(), TextUtils.isEmpty(mUserId));
-        mTvName.setText(mUserInfo.getNickname());
+        CommonUtil.setUserName(mTvName, mUserInfo.getNickname(), false, mUserInfo.isVip());
         if (TextUtils.isEmpty(mUserId)) {    //自己进入不传userId进入
             mTvSign.setText(TextUtils.isEmpty(mUserInfo.getDesc()) ? "填写交友宣言更容易获得别人关注哦~" : mUserInfo.getDesc());
         } else {   //他人
             mTvSign.setText(TextUtils.isEmpty(mUserInfo.getDesc()) ? "对方很懒，还没有交友宣言~" : mUserInfo.getDesc());
         }
-        if (mUserInfo.levels != null && mUserInfo.levels.rich != null && mUserInfo.levels.charm != null) {
-            mClVipRich.setVisibility(View.VISIBLE);
-            //土豪值
-            mTvLocalTyrantTitle.setText(mUserInfo.levels.rich.title);
-            mTvLocalTyrantValue.setText(mUserInfo.levels.rich.value);
-            mTvLocalTyrantLevel.setText(mUserInfo.levels.rich.level);
-            //魅力值
-            mTvCharmTitle.setText(mUserInfo.levels.charm.title);
-            mTvCharmValue.setText(mUserInfo.levels.charm.value);
-            mTvCharmLevel.setText(mUserInfo.levels.charm.level);
-        } else {
-            mClVipRich.setVisibility(View.GONE);
-        }
+
         //性别  真人 是否认证
         mIvIsRealPeople.setVisibility(mUserInfo.getIs_real() == 1 ? View.VISIBLE : View.GONE);  //是否真人
         mIvIsAuth.setVisibility(mUserInfo.getIs_self() == 1 ? View.VISIBLE : View.GONE);  //是否实名
+        mIvIsVIP.setVisibility(mUserInfo.isVip() ? View.VISIBLE : View.GONE);  //是否vip
         //1.男，2.女
         CommonUtil.setSexAndAge(mContext, mUserInfo.getSex(), String.valueOf(mUserInfo.getAge()), mIvSex);
         //关注
@@ -926,27 +722,17 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mTvAttention.setCompoundDrawablesWithIntrinsicBounds(null,
                 mUserInfo.is_follow == 1 ? attention : notAttention, null, null);
         mTvAttention.setTextColor(Utils.getColor(mUserInfo.is_follow == 1 ? R.color.colorPrimary : R.color.black));
+
+        if (mUserInfo.getIs_real() == 1) {   //已经真人认证
+            mllAuth.setVisibility(View.GONE);
+        }
         if (!TextUtils.isEmpty(mUserId)) {   //其他用户
             mTobMore.setVisibility(View.VISIBLE);
             mTvEditInfo.setVisibility(View.GONE);
+            mllAuth.setVisibility(View.GONE);
         } else {
             mTobMore.setVisibility(View.GONE);
             mTvEditInfo.setVisibility(View.VISIBLE);
-            //vip 设置相关
-            if (mUserInfo.open_hidden_rank == 0) {
-                mClVipRich.setBackgroundResource(0);
-                mTvRichSetting.setVisibility(View.GONE);
-            } else {
-                mClVipRich.setBackgroundResource(R.drawable.bg_vip_rich);
-                mTvRichSetting.setVisibility(View.VISIBLE);
-            }
-            if (mUserInfo.open_hidden_gift == 0) {
-                mClVipGift.setBackgroundResource(0);
-                mTvGiftSetting.setVisibility(View.GONE);
-            } else {
-                mClVipGift.setBackgroundResource(R.drawable.bg_vip_rich);
-                mTvGiftSetting.setVisibility(View.VISIBLE);
-            }
         }
         if (mConfig != null && mConfig.share_config != null && service.getUserInfo().getSex() != 1) {   //女性用户看其他人信息
             if (mConfig.share_config.is_detail_style_new == 1) {  //搭讪后显示私信
@@ -978,11 +764,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 }
             }
         }
-        mIvIsRealPeople = findViewById(R.id.iv_real_people);
-        mIvIsAuth = findViewById(R.id.iv_auth);
-        //用户基本信息
-        BaseUserInfoAdapter adapter = new BaseUserInfoAdapter(mUserInfo.info, mUserInfo.is_show_icon);
-        mRvUserInfo.setAdapter(adapter);
     }
 
     /**
@@ -1035,10 +816,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         stopTimer();
         if (mBanner != null)
             mBanner.destroy();
-        if (mTrendList != null) {
-            mTrendList.clear();
-            mTrendList = null;
-        }
         if (mVideoCallPopWindow != null) {
             if (mVideoCallPopWindow.isShowing())
                 mVideoCallPopWindow.dismiss();
@@ -1048,9 +825,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             mLottie.clearAnimation();
             mLottie = null;
         }
-        gestureDetector = null;
-        mRvTrend = null;
-        mRvGift = null;
     }
 
     @Override
@@ -1063,18 +837,12 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         }
         if (null == mUserInfo)
             return;
-        if (id == R.id.tv_self_status) {  //是否实名
-            if (mUserInfo.isPartyGirl() || mUserInfo.getIs_real() == 1) {
-                p.getSelfInfo();
-            } else {
-                toastTip("请先完成真人认证");
-            }
+        if (id == R.id.ll_auth) {  //是否真人
+            p.getRealInfo();
         } else if (id == R.id.tv_edit || id == R.id.edit_info) {   //编辑资料
             MineInfoActivity.startActivity(this, mUserInfo);
         } else if (id == R.id.tv_attention) {
             p.attentionUser(mUserInfo.getUser_id());
-        } else if (id == R.id.tv_mine_trend) {   //查看更多动态
-            ARouterUtils.toTrendActivity(mUserId, mUserInfo.getNickname());
         } else if (id == R.id.ll_accost) {   //搭讪
             if (!isPerformClick()) {
                 return;
@@ -1144,18 +912,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                     }
                 }
             }
-        } else if (id == R.id.cl_local_tyrant) {    //土豪值
-            if (!TextUtils.isEmpty(mUserId))
-                return;
-            if (null != mUserInfo.levels && null != mUserInfo.levels.rich) {
-                GradeIntroduceActivity.startActivity(this, 1, mUserInfo.levels.rich);
-            }
-        } else if (id == R.id.cl_charm) {    //魅力值
-            if (!TextUtils.isEmpty(mUserId))
-                return;
-            if (null != mUserInfo.levels && null != mUserInfo.levels.charm) {
-                GradeIntroduceActivity.startActivity(this, 2, mUserInfo.levels.charm);
-            }
         } else if (id == R.id.tv_call_video) {  //语音视频聊天
             if (!isPerformClick()) {
                 return;
@@ -1183,16 +939,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             GuardPopWindow popWindow = new GuardPopWindow(mActivity);
             popWindow.showPopupWindow();
 
-        } else if (id == R.id.cl_family) {
-            if (mUserInfo.family != null && mUserInfo.family.id != 0) {
-                ARouterUtils.toFamilyDetail(mUserInfo.family.id, "0", MMKVUtils.getInstance().decodeInt(Constants.VOICE_IS_OPEN));
-            }
-
-        } else if (id == R.id.rel_room_audio) {
-            if (mUserInfo != null && mUserInfo.play_party != null) {
-                //进入 互动语音房间
-                ARouterUtils.joinRoom(mUserInfo.play_party.room_id, mUserInfo.play_party.id);
-            }
         } else if (id == R.id.iv_profile_add) { //查看/添加更多照片
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_PHOTO);
         }

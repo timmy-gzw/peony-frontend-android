@@ -1,13 +1,12 @@
 package com.tftechsz.mine.adapter;
 
+import androidx.annotation.NonNull;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tftechsz.common.adapter.DataBindBaseViewHolder;
-import com.tftechsz.mine.BR;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ItemNoblePriceBinding;
 import com.tftechsz.mine.entity.NobleBean;
-
-import androidx.annotation.NonNull;
 
 /**
  * 包 名 : com.tftechsz.mine.adapter
@@ -21,7 +20,7 @@ public class NoblePriceAdapter extends BaseQuickAdapter<NobleBean.PriceDTO, Data
     @Override
     protected void convert(@NonNull DataBindBaseViewHolder helper, NobleBean.PriceDTO bean) {
         ItemNoblePriceBinding mBind = (ItemNoblePriceBinding) helper.getBind();
-        mBind.setVariable(BR.item, bean);
+        mBind.setItem(bean);
         mBind.executePendingBindings();
     }
 }

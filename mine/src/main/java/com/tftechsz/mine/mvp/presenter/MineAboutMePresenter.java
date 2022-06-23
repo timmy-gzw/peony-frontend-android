@@ -1,6 +1,5 @@
 package com.tftechsz.mine.mvp.presenter;
 
-import com.netease.nim.uikit.common.UserInfo;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
@@ -16,40 +15,9 @@ public class MineAboutMePresenter extends BasePresenter<IMineAboutMeView> {
     public MineApiService service;
     public MineApiService exchService;
 
-
     public MineAboutMePresenter() {
         service = RetrofitManager.getInstance().createUserApi(MineApiService.class);
         exchService = RetrofitManager.getInstance().createExchApi(MineApiService.class);
-    }
-
-
-    /**
-     * 获取他人用户信息
-     */
-    public void getUserInfoById(String userId) {
-        addNet(service.getUserInfoById(userId).compose(BasePresenter.applySchedulers())
-                .subscribeWith(new ResponseObserver<BaseResponse<UserInfo>>() {
-                    @Override
-                    public void onSuccess(BaseResponse<UserInfo> response) {
-                        if (getView() == null) return;
-                        getView().getUserInfoSuccess(response.getData());
-                    }
-                }));
-    }
-
-
-    /**
-     * 获取用户信息
-     */
-    public void getUserInfoDetail() {
-        addNet(service.getUserInfoDetail().compose(BasePresenter.applySchedulers())
-                .subscribeWith(new ResponseObserver<BaseResponse<UserInfo>>() {
-                    @Override
-                    public void onSuccess(BaseResponse<UserInfo> response) {
-                        if (getView() == null) return;
-                        getView().getUserInfoSuccess(response.getData());
-                    }
-                }));
     }
 
     /**

@@ -10,7 +10,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tftechsz.common.adapter.DataBindBaseViewHolder;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
-import com.tftechsz.mine.BR;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ItemVisitorBinding;
 import com.tftechsz.mine.entity.VisitorBean;
@@ -36,7 +35,7 @@ public class VisitorAdapter extends BaseQuickAdapter<VisitorBean, DataBindBaseVi
     @Override
     protected void convert(@NotNull DataBindBaseViewHolder helper, VisitorBean bean) {
         ItemVisitorBinding mBinding = (ItemVisitorBinding) helper.getBind();
-        mBinding.setVariable(BR.item, bean);
+        mBinding.setItem(bean);
         mBinding.executePendingBindings();
         CommonUtil.setUserName(mBinding.tvVisName, bean.nickname, false, bean.isVip());
 

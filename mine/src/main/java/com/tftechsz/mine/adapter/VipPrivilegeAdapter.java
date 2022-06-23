@@ -2,7 +2,6 @@ package com.tftechsz.mine.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tftechsz.common.adapter.DataBindBaseViewHolder;
-import com.tftechsz.mine.BR;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ItemVipPrivilegeBinding;
 import com.tftechsz.mine.entity.VipPrivilegeBean;
@@ -21,8 +20,8 @@ public class VipPrivilegeAdapter extends BaseQuickAdapter<VipPrivilegeBean, Data
 
     @Override
     protected void convert(@NotNull DataBindBaseViewHolder vh, VipPrivilegeBean bean) {
-       ItemVipPrivilegeBinding mBind = (ItemVipPrivilegeBinding) vh.getBind();
-        mBind.setVariable(BR.item, bean);
+        ItemVipPrivilegeBinding mBind = (ItemVipPrivilegeBinding) vh.getBind();
+        mBind.setItem(bean);
         mBind.executePendingBindings();
     }
 }
