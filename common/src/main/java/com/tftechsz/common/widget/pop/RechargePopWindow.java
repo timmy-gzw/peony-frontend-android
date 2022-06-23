@@ -14,6 +14,7 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -79,6 +80,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
     private CompositeDisposable mCompositeDisposable;
     private final Context mContext;
     private TextView mTvCoin;
+    private ImageView mIvBanner;
     private TextView mTvContact;
     private RecyclerView mRvRecharge;
     private RechargeQuickDto mRechargeDto;
@@ -145,6 +147,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         payService = RetrofitManager.getInstance().createConfigApi(PublicService.class);
         service = ARouter.getInstance().navigation(PayService.class);
         mCompositeDisposable = new CompositeDisposable();
+        mIvBanner = findViewById(R.id.iv_quick_recharge_banner);
         mTvCoin = findViewById(R.id.tv_coin);
         mRvRecharge = findViewById(R.id.rv_recharge);
         mTvPay = findViewById(R.id.tv_pay);
@@ -215,6 +218,12 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
             wayAdapter.setCheckPositions(position);
             mPayTypeData = wayAdapter.getItem(position);
         });
+
+        if (!TextUtils.isEmpty(mRechargeDto.banner)) {
+            GlideUtils.loadImage(mContext, mIvBanner, mRechargeDto.banner);
+        } else {
+            mIvBanner.setImageResource(R.mipmap.quick_recharge);
+        }
     }
 
 
