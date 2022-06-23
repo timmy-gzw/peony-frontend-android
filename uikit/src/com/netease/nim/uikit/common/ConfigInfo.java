@@ -44,7 +44,29 @@ public class ConfigInfo {
 
         public List<String> boy_quick_topic;//男生热聊话题
         public List<String> girl_quick_topic;//女生热聊话题
+
+        public List<LevelLadder> wealth_level_ladder;//财富等级
+        public List<LevelLadder> charm_level_ladder;//魅力等级
+
+        public List<LevelIntroduction> charm_level_introduction;//财富/魅力升级攻略
+        public List<LevelIntroduction> wealth_level_introduction;//财富/魅力升级攻略
     }
+
+    public static class LevelIntroduction{
+        public String description;
+        public String title;
+        public String icon;
+    }
+
+    public static class LevelLadder{
+        public int min_level;
+        public int max_level;
+        public String boy_title;
+        public String girl_title;
+        public String title;
+        public String icon;
+    }
+
 
     public static class UserDisable {
         public String link;
@@ -78,6 +100,7 @@ public class ConfigInfo {
         public String user;
         public String blog;
         public String photo;
+        public String pl;
     }
 
     public static class Oss {

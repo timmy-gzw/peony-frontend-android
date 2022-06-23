@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp_15"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_userinfo"
+                android:layout_width="match_parent"
+                android:background="@mipmap/bg_wealth_level"
+                android:padding="@dimen/dp_20"
+                android:layout_height="wrap_content">
+
+                <com.netease.nim.uikit.common.ui.imageview.CircleImageView
+                    android:id="@+id/iv_avatar"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="@dimen/dp_80"
+                    app:civ_border_color="#EDD398"
+                    app:civ_border_width="1dp"
+                    android:src="@drawable/default_cover"
+                    android:layout_height="@dimen/dp_80"/>
+
+                <LinearLayout
+                    app:layout_constraintLeft_toRightOf="@id/iv_avatar"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    app:layout_constraintTop_toTopOf="@id/iv_avatar"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:text="糊涂小美女"
+                        android:textSize="@dimen/sp_18"
+                        android:textColor="#EDD398"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/bg_wealth1"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp_20"
+                        android:text="我是称号"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_11" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_level"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_level"
+                        android:textSize="@dimen/sp_12"
+                        android:text="Lv.1"
+                        android:textColor="#EDD398"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/tv_level_to_next"
+                        android:textSize="@dimen/sp_12"
+                        android:text="距离升级还差：35"
+                        android:textColor="#EDD398"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/tv_level_next"
+                        android:textSize="@dimen/sp_12"
+                        android:text="Lv.2"
+                        android:textColor="#EDD398"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:minHeight="@dimen/dp_6"
+                    android:progressDrawable="@drawable/progress_drawable_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_level"
+                    tools:progress="50" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="什么是财富等级"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_20"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_width="match_parent"
+                android:background="#EEEEEE"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="如何升级"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_20"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_upgrade"
+                android:layout_marginTop="@dimen/dp_22"
+                android:layout_width="match_parent"
+                android:overScrollMode="never"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/dp_40"
+                android:text="等级&amp;称号"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_20"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp_22"
+                android:layout_width="match_parent"
+                android:background="@drawable/shape_level_border"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="等级"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingVertical="@dimen/dp_15"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <View
+                        android:background="#eeeeee"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="魅力称号"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <View
+                    android:background="#eeeeee"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_level_title"
+                    android:layout_width="match_parent"
+                    android:overScrollMode="never"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

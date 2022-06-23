@@ -32,9 +32,9 @@
             <shape>
                 <corners android:radius="9dp" />
                 <gradient
-                    android:endColor="#FFBC00"
-                    android:centerColor="#FF9840"
-                    android:startColor="#F8E5AD" />
+                    android:endColor="#4734FD"
+                    android:centerColor="#A389FF"
+                    android:startColor="#FEB4FF" />
             </shape>
         </clip>
     </item>
