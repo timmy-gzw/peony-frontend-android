@@ -51,27 +51,16 @@ import razerdp.util.KeyboardUtils;
  * 包 名 : com.tftechsz.moment.widget
  * 描 述 : 发布动态引导弹窗
  */
-public class PublishMomentGuidePop extends BaseBottomPop implements View.OnClickListener, ITrendView {
+public class PublishMomentGuidePop extends BaseBottomPop implements  ITrendView {
 
     private final FragmentActivity mActivity;
     private final CompositeDisposable mCompositeDisposable;
     private final List<LocalMedia> selectList = new ArrayList<>();
     private EditText etContent;
-    private TextView tvContentPh;
-    private View llContentPh;
     private RecyclerView recyclerView;
     private FrameLayout flContent;
-    private TextView tvOtherWords;
     private TextView tvContentCount;
     private MomentImageAdapter adapter;
-    //TODO 2022/6/16 替换动态引导文案
-    private final String[] randomAccost = {
-            "有来找另一半的人吗，可以互相认识一下",
-            "22222222222222222222222222222222222222222",
-            "3333333333333333",
-            "4444444444444444",
-            "5555555555555555555555555555555555555"
-    };
 
     public TrendPresenter presenter;
 
@@ -94,31 +83,16 @@ public class PublishMomentGuidePop extends BaseBottomPop implements View.OnClick
         recyclerView = findViewById(R.id.rv_pic);
         flContent = findViewById(R.id.fl_publish_moment);
         flContent.setEnabled(false);
-        tvOtherWords = findViewById(R.id.tv_other_words);
-        tvOtherWords.setOnClickListener(this);
         tvContentCount = findViewById(R.id.tv_content_count);
-        tvContentPh = findViewById(R.id.tv_content_ph);
-        llContentPh = findViewById(R.id.ll_content_ph);
-        llContentPh.setOnClickListener(v -> {
-            setEtContent();
-            etContent.requestFocus();
-            KeyboardUtils.open(etContent);
-        });
         etContent = findViewById(R.id.et_content);
         etContent.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                if (llContentPh.getVisibility() == View.VISIBLE) {
-                    setEtContent();
-                }
-                tvOtherWords.setVisibility(View.GONE);
                 tvContentCount.setVisibility(View.VISIBLE);
             } else {
-                tvOtherWords.setVisibility(View.VISIBLE);
                 tvContentCount.setVisibility(View.GONE);
             }
         });
         Utils.setEditCardTextChangedListener(etContent, tvContentCount, 250, false);
-        randomAccost();
         initRecyclerView();
         mCompositeDisposable.add(RxView.clicks(flContent)
                 .throttleFirst(2, TimeUnit.SECONDS)
@@ -137,13 +111,6 @@ public class PublishMomentGuidePop extends BaseBottomPop implements View.OnClick
                             }
                         }
                 ));
-    }
-
-    private void setEtContent() {
-        CharSequence text = tvContentPh.getText();
-        llContentPh.setVisibility(View.GONE);
-        etContent.setText(text);
-        etContent.setSelection(text.length());
     }
 
     private void initRecyclerView() {
@@ -232,19 +199,6 @@ public class PublishMomentGuidePop extends BaseBottomPop implements View.OnClick
     @Override
     protected View createPopupById() {
         return createPopupById(R.layout.pop_publish_moment_guide);
-    }
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.tv_other_words) {
-            randomAccost();
-        }
-    }
-
-    private void randomAccost() {
-        int i = new Random().nextInt(randomAccost.length);
-        tvContentPh.setText(randomAccost[i]);
     }
 
     @Override
