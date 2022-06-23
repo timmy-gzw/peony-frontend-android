@@ -74,6 +74,7 @@ import com.tftechsz.mine.mvp.presenter.MineDetailPresenter;
 import com.tftechsz.mine.widget.pop.GuardPopWindow;
 import com.tftechsz.mine.widget.pop.MineDetailMorePopWindow;
 import com.youth.banner.Banner;
+import com.youth.banner.adapter.BannerAdapter;
 import com.youth.banner.listener.OnPageChangeListener;
 
 import java.util.ArrayList;
@@ -158,6 +159,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         //banner
         mBanner = findViewById(R.id.banner);
+        mBanner.addBannerLifecycleObserver(this);
         //个人相册
         ivPicAdd = findViewById(R.id.iv_profile_add);
         ivPicAdd.setOnClickListener(this);
@@ -249,6 +251,41 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         mLlVoice.setOnClickListener(this);  //去录音
         mIvVoice.setOnClickListener(this);
+
+        MyBannerImageAdapter<String> bannerImageAdapter = new MyBannerImageAdapter<String>(null) {
+
+            @Override
+            public void onBindView(MyBannerImageHolder holder, String data, int position, int size) {
+                holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                GlideUtils.loadPicImage(mContext, holder.imageView, data);
+            }
+        };
+        mBanner.setAdapter(bannerImageAdapter)
+                .addOnPageChangeListener(new OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        mRvPic.post(() -> {
+                            mRvPic.smoothScrollToPosition(position);
+                            profilePhotoAdapter.setIndex(position);
+                        });
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                    }
+                }).setOnBannerListener((data1, position) -> {
+                    BannerAdapter adapter = mBanner.getAdapter();
+                    if (adapter != null && adapter.getItemCount() > 0) {
+                        Object data = adapter.getData(0);
+                        ARouterUtils.toUserPicBrowserActivity(!TextUtils.isEmpty(mUserId) ? Integer.parseInt(mUserId) : service.getUserId(), position, (String) data, (mUserInfo != null && mUserInfo.isBoy()));
+                    }
+
+                });
     }
 
     private void initNet() {
@@ -319,7 +356,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mRvPic.setAdapter(profilePhotoAdapter);
         profilePhotoAdapter.setOnItemClickListener((adapter, view, position) -> {
             mBanner.post(() -> {
-                //fixme 位置错误
                 mBanner.setCurrentItem(position, true);
             });
         });
@@ -528,35 +564,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 Glide.with(mContext).load(list.get(i)).preload(mBanner.getWidth(), mBanner.getHeight());
             }
         }
-        mBanner.setAdapter(new MyBannerImageAdapter<String>(list) {
-
-                    @Override
-                    public void onBindView(MyBannerImageHolder holder, String data, int position, int size) {
-                        holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                        GlideUtils.loadPicImage(mContext, holder.imageView, data);
-                    }
-                })
-                .addOnPageChangeListener(new OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                    }
-
-                    @Override
-                    public void onPageSelected(int position) {
-                        mRvPic.post(() -> {
-                            mRvPic.smoothScrollToPosition(position);
-                            profilePhotoAdapter.setIndex(position);
-                        });
-                    }
-
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
-                    }
-                }).setOnBannerListener((data1, position) -> {
-                    ARouterUtils.toUserPicBrowserActivity(!TextUtils.isEmpty(mUserId) ? Integer.parseInt(mUserId) : service.getUserId(), position, list.get(0), (mUserInfo != null && mUserInfo.isBoy()));
-                });
-        mBanner.addBannerLifecycleObserver(this);
+        mBanner.setDatas(list);
     }
 
     /**
@@ -795,15 +803,11 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     @Override
     protected void onStart() {
         super.onStart();
-        if (mBanner != null)
-            mBanner.start();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (mBanner != null)
-            mBanner.stop();
     }
 
     @Override
@@ -814,8 +818,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             mIjkPlayer = null;
         }
         stopTimer();
-        if (mBanner != null)
-            mBanner.destroy();
         if (mVideoCallPopWindow != null) {
             if (mVideoCallPopWindow.isShowing())
                 mVideoCallPopWindow.dismiss();

@@ -160,6 +160,7 @@
                         android:layout_marginTop="@dimen/dp_1"
                         android:background="@mipmap/vip_icon_bg"
                         android:gravity="center"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/tv_sign"
                         app:layout_constraintLeft_toRightOf="@+id/iv_sex"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -171,6 +172,7 @@
                         android:layout_marginStart="@dimen/dp_3"
                         android:layout_marginTop="@dimen/dp_1"
                         android:textColor="@color/white"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/tv_sign"
                         app:layout_constraintTop_toTopOf="@+id/tv_name"
                         tools:background="@drawable/bg_girl"
@@ -187,6 +189,7 @@
                         android:layout_marginTop="@dimen/dp_1"
                         android:background="@mipmap/peony_home_xczr_icon"
                         android:gravity="center"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/tv_sign"
                         app:layout_constraintLeft_toRightOf="@+id/iv_sex"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -198,6 +201,7 @@
                         android:layout_marginStart="@dimen/dp_3"
                         android:layout_marginTop="@dimen/dp_1"
                         android:background="@mipmap/ic_authentication"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/tv_sign"
                         app:layout_constraintLeft_toRightOf="@+id/iv_real_people"
                         app:layout_constraintTop_toTopOf="parent" />
