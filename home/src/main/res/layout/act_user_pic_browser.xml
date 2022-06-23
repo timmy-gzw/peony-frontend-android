@@ -23,8 +23,7 @@
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -145,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="@dimen/dp_35"
-            android:textColor="@color/color_normal"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_14"
             tools:text="搭讪" />
 
