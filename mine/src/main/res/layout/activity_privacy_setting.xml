@@ -42,11 +42,11 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
             android:textColor="#D8B888"
             app:layout_constraintLeft_toRightOf="@id/tv_rich"
-            app:layout_constraintTop_toTopOf="@id/tv_rich"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="@id/tv_rich" />
 
         <TextView
             android:id="@+id/tv_rich_tip"
@@ -119,11 +119,11 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
             android:textColor="#D8B888"
             app:layout_constraintLeft_toRightOf="@id/tv_gift"
-            app:layout_constraintTop_toTopOf="@id/tv_gift"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="@id/tv_gift" />
 
         <TextView
             android:id="@+id/tv_gift_tip"
@@ -176,6 +176,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
         android:paddingStart="@dimen/dp_20"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_gift">
 
@@ -194,11 +195,11 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
             android:textColor="#D8B888"
             app:layout_constraintLeft_toRightOf="@id/tv_rank"
-            app:layout_constraintTop_toTopOf="@id/tv_rank"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="@id/tv_rank" />
 
         <TextView
             android:id="@+id/tv_rank_tip"
@@ -267,11 +268,11 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
             android:textColor="#D8B888"
             app:layout_constraintLeft_toRightOf="@id/tv_stories"
-            app:layout_constraintTop_toTopOf="@id/tv_stories"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="@id/tv_stories" />
 
         <TextView
             android:id="@+id/tv_stories_tip"
@@ -340,11 +341,11 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
             android:textColor="#D8B888"
             app:layout_constraintLeft_toRightOf="@id/tv_location"
-            app:layout_constraintTop_toTopOf="@id/tv_location"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="@id/tv_location" />
 
         <TextView
             android:id="@+id/tv_location_tip"
@@ -395,6 +396,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
         android:paddingStart="@dimen/dp_20"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_location">
 
@@ -413,11 +415,11 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
             android:textColor="#D8B888"
             app:layout_constraintLeft_toRightOf="@id/tv_ycgr_title"
-            app:layout_constraintTop_toTopOf="@id/tv_ycgr_title"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="@id/tv_ycgr_title" />
 
         <TextView
             android:id="@+id/tv_ycgr_context"
