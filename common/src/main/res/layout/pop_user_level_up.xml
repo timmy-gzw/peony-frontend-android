@@ -79,6 +79,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/iv_level_up_icon"
         app:layout_constraintEnd_toEndOf="@id/iv_level_up_icon"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="@id/iv_level_up_icon"
         app:layout_constraintTop_toTopOf="@id/iv_level_up_icon"
         tools:text="我是称号" />

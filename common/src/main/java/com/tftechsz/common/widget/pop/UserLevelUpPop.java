@@ -61,7 +61,10 @@ public class UserLevelUpPop extends BaseCenterPop {
     public void setData(ChatMsg.UserLevelUp data) {
         levelTips.setText(data.user_tips);
         tvLevelTitle.setText(data.user_title);
-        GlideUtils.loadImage(mContext, ivLevelIcon, data.user_level_icon);
+        String cdn_scheme = service.getConfigInfo().api.oss.cdn_scheme;
+        String pl = service.getConfigInfo().api.oss.cdn.pl;
+        String url = cdn_scheme + pl + data.user_level_icon;
+        GlideUtils.loadImage(mContext, ivLevelIcon, url);
         if (data.user_type.equals("charm")) {
             ivRotate.setBackgroundResource(R.mipmap.peony_qd_bbg_icon_2);
             ivLevelBg.setImageResource(R.mipmap.peony_bpqtt_img_2);

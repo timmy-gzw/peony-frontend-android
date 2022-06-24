@@ -1,5 +1,7 @@
 package com.tftechsz.mine.adapter;
 
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,13 +14,24 @@ import com.tftechsz.mine.R;
  */
 public class BaseUserInfoAdapter extends BaseQuickAdapter<UserInfo.BaseInfo, BaseViewHolder> {
 
+    private int minEms = 0;
+
     public BaseUserInfoAdapter() {
         super(R.layout.item_base_info);
     }
 
+    public void setMinEms(int minEms) {
+        this.minEms = minEms;
+    }
+
     @Override
     protected void convert(@NonNull BaseViewHolder helper, UserInfo.BaseInfo item) {
-        helper.setText(R.id.tv_name, item.title)
-                .setText(R.id.tv_value, item.value);
+        helper.setText(R.id.tv_value, item.value);
+
+        TextView textView = helper.getView(R.id.tv_name);
+        textView.setText(item.title);
+        if (minEms > 0) {
+            textView.setMinEms(minEms);
+        }
     }
 }

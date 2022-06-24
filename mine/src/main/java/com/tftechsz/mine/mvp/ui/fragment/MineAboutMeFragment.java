@@ -111,7 +111,16 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
 
     private void setUserInfo() {
         if (mUserInfo == null) return;
-        if (userInfoAdapter != null) userInfoAdapter.setList(mUserInfo.info);
+        if (userInfoAdapter != null) {
+            List<UserInfo.BaseInfo> infoList = mUserInfo.info;
+            int max = 0;
+            for (UserInfo.BaseInfo baseInfo : infoList) {
+                int length = baseInfo.title.length();
+                max = Math.max(max, length);
+            }
+            userInfoAdapter.setMinEms(max);
+            userInfoAdapter.setList(infoList);
+        }
         if (mUserInfo.levels != null && mUserInfo.levels.rich != null && mUserInfo.levels.charm != null) {
             mClLevel.setVisibility(View.VISIBLE);
             //土豪值
@@ -181,13 +190,13 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             if (!TextUtils.isEmpty(mUserId))
                 return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.rich) {
-                MyWealthCharmLevelActivity.startActivity(getActivity(), "0", mUserInfo.getSex()+"",mUserId); //用户性别：0.未知，1.男，2.女
+                MyWealthCharmLevelActivity.startActivity(getActivity(), "0", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
         } else if (id == R.id.cl_charm) {    //魅力值
             if (!TextUtils.isEmpty(mUserId))
                 return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.charm) {
-                MyWealthCharmLevelActivity.startActivity(getActivity(), "1", mUserInfo.getSex()+"",mUserId); //用户性别：0.未知，1.男，2.女
+                MyWealthCharmLevelActivity.startActivity(getActivity(), "1", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
         }
 
