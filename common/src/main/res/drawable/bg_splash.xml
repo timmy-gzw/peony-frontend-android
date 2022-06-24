@@ -6,15 +6,21 @@
         </shape>
     </item>
 
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/bg_splash_yt" />
+    </item>
+
     <item android:bottom="@dimen/dp_200">
         <bitmap
             android:gravity="center"
-            android:src="@drawable/splash_bg_center" />
+            android:src="@mipmap/yt_qdy_logo" />
     </item>
 
     <item android:bottom="@dimen/dp_20">
         <bitmap
-            android:gravity="bottom"
-            android:src="@drawable/splash_bg_bottom" />
+            android:gravity="center"
+            android:src="@mipmap/yt_qdy_zt" />
     </item>
 </layer-list>

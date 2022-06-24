@@ -75,7 +75,7 @@
                 app:layout_constraintDimensionRatio="2.14"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:id="@+id/top_space"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,8 +105,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/top_space"
                 app:layout_constraintEnd_toEndOf="@id/top_space"
                 app:layout_constraintStart_toStartOf="@id/top_space"
-                app:layout_constraintTop_toTopOf="@id/top_space"
-                tools:src="@mipmap/huawei_icon" />
+                app:layout_constraintTop_toTopOf="@id/top_space" />
 
             <View
                 android:layout_width="match_parent"
@@ -259,9 +258,9 @@
                 android:layout_width="@dimen/dp_38"
                 android:layout_height="@dimen/dp_38"
                 android:layout_marginBottom="5dp"
-                android:visibility="gone"
                 android:background="@mipmap/tv_not_avatar_hint_bg"
                 android:gravity="center"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tv_avatar_hint_btn"
                 app:layout_constraintLeft_toLeftOf="@id/tv_avatar_hint_btn"
                 app:layout_constraintRight_toRightOf="@id/tv_avatar_hint_btn">
@@ -288,14 +287,14 @@
                 android:layout_height="@dimen/dp_32"
                 android:layout_marginBottom="5dp"
                 android:scaleType="centerCrop"
-                android:visibility="gone"
                 android:src="@mipmap/ic_default_avatar"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tv_avatar_hint_btn"
                 app:layout_constraintLeft_toLeftOf="@id/tv_avatar_hint_btn"
                 app:layout_constraintRight_toRightOf="@id/tv_avatar_hint_btn"
                 app:riv_corner_radius="@dimen/dp_100" />
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:id="@+id/tv_avatar_hint_btn_space"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -318,11 +317,11 @@
                 android:background="@drawable/bg_nor_rec_confession"
                 android:paddingHorizontal="5dp"
                 android:paddingVertical="2dp"
-                android:visibility="gone"
                 android:text="跟TA表白"
                 android:textColor="#3D5B94"
                 android:textSize="7sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tv_avatar_hint_btn_space"
                 app:layout_constraintRight_toRightOf="@id/tv_avatar_hint_btn_space" />
 
@@ -657,7 +656,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/gift_all_wheat_normal" />
 
-                <Space
+                <androidx.legacy.widget.Space
                     android:id="@+id/space"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_0"
@@ -768,17 +767,17 @@
                             tools:text="10" />
 
                         <TextView
-                            android:paddingRight="@dimen/dp_10"
-                            android:paddingBottom="@dimen/dp_5"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingTop="@dimen/dp_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dp_10"
                             android:background="@drawable/bg_pink_redborder_radius100"
-                            android:textColor="#FF5A7B"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingTop="@dimen/dp_5"
+                            android:paddingRight="@dimen/dp_10"
+                            android:paddingBottom="@dimen/dp_5"
                             android:text="充值"
-                            android:textSize="@dimen/sp_14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:textColor="#FF5A7B"
+                            android:textSize="@dimen/sp_14" />
                     </LinearLayout>
 
                     <View
@@ -809,9 +808,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_10"
                     android:background="@color/white"
-                    android:visibility="gone"
                     android:gravity="center"
-                    android:orientation="horizontal" />
+                    android:orientation="horizontal"
+                    android:visibility="gone" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_bottom"

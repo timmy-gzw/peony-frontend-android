@@ -121,22 +121,22 @@ android {
 
     productFlavors {
         OFFICE {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OFFICE", app_label: appName, app_icon: "@mipmap/ic_near_people"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OFFICE", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         YINGYONGBAO {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "YINGYONGBAO", app_label: appName, app_icon: "@mipmap/ic_near_peopley"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "YINGYONGBAO", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         HUAWEI {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "HUAWEI", app_label: appName, app_icon: "@mipmap/huawei_icon"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "HUAWEI", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         XIAOMI {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "XIAOMI", app_label: appName, app_icon: "@mipmap/ic_near_people"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "XIAOMI", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         OPPO {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OPPO", app_label: appName2, app_icon: "@mipmap/ic_near_people"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OPPO", app_label: appName2, app_icon: "@mipmap/ic_launcher"]
         }
         VIVO {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "VIVO", app_label: appName2, app_icon: "@mipmap/ic_near_people"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "VIVO", app_label: appName2, app_icon: "@mipmap/ic_launcher"]
         }
     }
 }

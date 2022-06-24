@@ -42,7 +42,7 @@
         <activity-alias
             android:name="com.tftechsz.peony.SplashActivity1"
             android:enabled="false"
-            android:icon="@mipmap/ic_near_people"
+            android:icon="@mipmap/ic_launcher"
             android:targetActivity="com.tftechsz.peony.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
