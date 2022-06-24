@@ -531,8 +531,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mLavLove = findView(R.id.iv_love);
         mTvLove = findView(R.id.tv_love_normal);
         mIvLeft = findView(R.id.iv_left);
+        mIvLeft.setRoundIcon(true);
         mIvLeft.setOnClickListener(this);
         mIvRight = findView(R.id.iv_right);
+        mIvRight.setRoundIcon(true);
         mIvRight.setOnClickListener(this);
         //礼物相关
         giftRoot = findView(R.id.gift_root);
@@ -1722,14 +1724,14 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         }));
                     }
                 } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.INTIMACY_TYPE)) {  //亲密度通知
+                    ////{"intimacy":"2822.3℃","change":"0℃","is_show_heart":true}
                     ChatMsg.Intimacy intimacy = JSON.parseObject(chatMsg.content, ChatMsg.Intimacy.class);
                     ViewGroup.LayoutParams params = mRlToolBar.getLayoutParams();
                     if (intimacy.is_show_heart) {
                         mRlIntimacy.setVisibility(View.VISIBLE);
                         mTvName.setVisibility(View.GONE);
-                        mTvIntimacy.setText(intimacy.intimacy);
-                        mLavLove.setAnimation("love5.zip");
-                        mLavLove.playAnimation();
+                        mTvIntimacy.setText("亲密度"+intimacy.intimacy);
+                        setIntimacLottie(intimacy);
                         mTvLove.setVisibility(View.GONE);
                         params.height = ConvertUtils.dp2px(110);
                     } else {
@@ -1762,6 +1764,39 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         }
     }
 
+    /**
+     * 显示爱心lottie动画
+     * @param intimacy
+     */
+    private void setIntimacLottie(ChatMsg.Intimacy intimacy) {
+        String s = intimacy.intimacy.replace("℃", "");
+        double intimacyInt = Double.parseDouble(s);
+        String lottieZipFileNameLast;
+        if (intimacyInt>90){
+            lottieZipFileNameLast = "10";
+        }else if (intimacyInt>80){
+            lottieZipFileNameLast = "9";
+        } else if (intimacyInt>70){
+            lottieZipFileNameLast = "8";
+        } else if (intimacyInt>60){
+            lottieZipFileNameLast = "7";
+        } else if (intimacyInt>50){
+            lottieZipFileNameLast = "6";
+        }else if (intimacyInt>40){
+            lottieZipFileNameLast = "5";
+        }else if (intimacyInt>30){
+            lottieZipFileNameLast = "4";
+        }else if (intimacyInt>20){
+            lottieZipFileNameLast = "3";
+        }else if (intimacyInt>10){
+            lottieZipFileNameLast = "2";
+        }else {
+            lottieZipFileNameLast = "1";
+        }
+        mLavLove.setAnimation("love"+lottieZipFileNameLast+".zip");
+        mLavLove.playAnimation();
+    }
+
 
     public void onKeyBack() {
 
@@ -1778,9 +1813,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 if (chatMsg.msg_intimacy.is_show_heart) {
                     mRlIntimacy.setVisibility(View.VISIBLE);
                     mTvName.setVisibility(View.GONE);
-                    mTvIntimacy.setText(chatMsg.msg_intimacy.intimacy);
-                    mLavLove.setAnimation("love5.zip");
-                    mLavLove.playAnimation();
+                    mTvIntimacy.setText("亲密度"+chatMsg.msg_intimacy.intimacy);
+                    setIntimacLottie(chatMsg.msg_intimacy);
                     mTvLove.setVisibility(View.GONE);
                     params.height = ConvertUtils.dp2px(110);
                 } else {

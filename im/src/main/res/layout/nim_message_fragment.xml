@@ -181,13 +181,14 @@
 
                 <TextView
                     android:id="@+id/tv_love"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_love"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="false"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_10" />
 
                 <ImageView
                     android:id="@+id/iv_h2"
