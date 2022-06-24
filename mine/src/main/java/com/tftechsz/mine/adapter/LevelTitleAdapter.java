@@ -33,7 +33,7 @@ public class LevelTitleAdapter extends BaseQuickAdapter<ConfigInfo.LevelLadder, 
         TextView tvLevel = baseViewHolder.getView(R.id.tv_level);
         tvLevel.setText(levelLadder.min_level+"-"+levelLadder.max_level);
         TextView tvTitle = baseViewHolder.getView(R.id.tv_title);
-        tvTitle.setText(levelLadder.boy_title != null ?(gendar == "1"?levelLadder.boy_title:levelLadder.girl_title):levelLadder.title);
+        tvTitle.setText(levelLadder.boy_title != null ?(gendar.equals("1")?levelLadder.boy_title:levelLadder.girl_title):levelLadder.title);
         ImageView ivBg = baseViewHolder.getView(R.id.iv_bg);
         ConfigInfo config = getConfig(mContext);
         String url = config.api.oss.cdn_scheme + config.api.oss.cdn.pl + levelLadder.icon;

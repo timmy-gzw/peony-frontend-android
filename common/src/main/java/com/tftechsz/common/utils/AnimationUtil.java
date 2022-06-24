@@ -125,9 +125,9 @@ public class AnimationUtil {
         imageView.startAnimation(animation);
     }
 
-    public static void createRotateRevertAnimation(ImageView imageView) {
+    public static void createRotateRevertAnimation(ImageView imageView,long millSecondTime) {
         RotateAnimation animation = new RotateAnimation(0f, -360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        animation.setDuration(1500);
+        animation.setDuration(millSecondTime);
         animation.setRepeatCount(-1);
         animation.setFillAfter(true);
         animation.setRepeatMode(Animation.RESTART);

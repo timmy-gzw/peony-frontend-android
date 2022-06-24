@@ -17,7 +17,7 @@
         android:paddingTop="@dimen/dp_10"
         android:paddingEnd="@dimen/dp_15"
         android:paddingBottom="@dimen/dp_10"
-        android:src="@mipmap/ic_back_radius"
+        android:src="@mipmap/ic_back_white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,10 +37,7 @@
         android:id="@+id/music_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/dp_20"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingEnd="@dimen/dp_15"
-        android:paddingBottom="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_16"
         android:src="@mipmap/radar_music_icon"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_back_all"
         app:layout_constraintRight_toRightOf="parent"
@@ -52,12 +49,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_30"
         android:gravity="center"
-        android:text="正在为你寻找有缘人..."
+        android:text="正在为你寻找有缘人"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_18"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/radar_view" />
+
+    <TextView
+        android:id="@+id/tv_matching"
+        android:text="."
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintLeft_toRightOf="@id/tv_tip"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/ll_pair"

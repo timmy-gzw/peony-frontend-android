@@ -85,6 +85,7 @@ import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 import com.opensource.svgaplayer.SVGAImageView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.qgame.animplayer.AnimView;
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.im.R;
 import com.tftechsz.im.adapter.CallMessageAdapter;
 import com.tftechsz.im.model.CallStatusInfo;
@@ -891,6 +892,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                         });
                     }
                     callHangUpPopWindow.startTime();
+                    callHangUpPopWindow.setPopupGravity(Gravity.CENTER);
                     callHangUpPopWindow.showPopupWindow();
                 } else {
                     isSelfEnd = true;
@@ -1225,6 +1227,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
         } else if (id == R.id.tv_report_user) {
             //举报
+            ARouterUtils.toBeforeReportActivity(mCallDir == 0?callOutUser.getUser_id():Integer.parseInt(fromId),1);//0 call out 1 call in
         }
     }
 

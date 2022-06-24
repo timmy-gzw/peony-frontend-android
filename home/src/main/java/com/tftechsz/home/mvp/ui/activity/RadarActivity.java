@@ -17,6 +17,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.airbnb.lottie.LottieAnimationView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.netease.nim.uikit.common.adapter.AdvancedAdapter;
+import com.netease.nim.uikit.common.util.sys.TimeUtil;
+import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.common.widget.pop.MatchPopWindow;
 import com.tftechsz.home.R;
 import com.tftechsz.home.mvp.iview.IRadarView;
 import com.tftechsz.home.mvp.presenter.RadarPresenter;
@@ -43,7 +47,7 @@ import io.reactivex.functions.Consumer;
  */
 public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> implements RadarView.IScanningListener, View.OnClickListener, IRadarView {
 
-    private final int DELAY_TIME = 10 * 1000;
+    private final int DELAY_TIME = 10 * 1000,TEXT_ANIMATION_TIME = 400;
     public static final String EXTRA_TYPE = "type";
     private ImageView mRadarView,mScaleImageView1,mScaleImageView2,mScaleAlphaImageView1,mScaleAlphaImageView2,mScaleAlphaImageView3;
     private ConstraintLayout mClRadar;  //背景图片
@@ -53,9 +57,9 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     private ImageView mIvAvatar,mMusicImageView,mRuleImageView;
     private TextView mTitleTv;
     private BarrageView mBarrageView;
-    private TextView mTvTip;
+    private TextView mTvTip,mTvMatching;
     private LinearLayout mllPair;
-
+    private MatchPopWindow matchPopWindow;
 
     @Autowired
     UserProviderService service;
@@ -95,12 +99,25 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         mIvRound = findViewById(R.id.iv_round);
         mIvRoundBig = findViewById(R.id.iv_round_big);
         findViewById(R.id.toolbar_back_all).setOnClickListener(this);
+        mTvMatching = findViewById(R.id.tv_matching);
     }
 
 
     @Override
     protected int getLayout() {
         return R.layout.activity_radar;
+    }
+
+    private boolean needShowPop() {
+            long lastShowMomentTime = MMKVUtils.getInstance().decodeLong(Constants.LAST_SHOW_MATCH_POP_TIME);//上次显示动态引导页的时间戳ms
+            long l = System.currentTimeMillis();
+            boolean sameDay = TimeUtil.isSameDay(lastShowMomentTime, l);
+            if (l > lastShowMomentTime && !sameDay) {
+                showPopWindow();
+                MMKVUtils.getInstance().encode(Constants.LAST_SHOW_MATCH_POP_TIME, l);
+                return true;
+            }
+            return false;
     }
 
 
@@ -120,13 +137,16 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         }
         if (service.getUserInfo() != null)
             GlideUtils.loadRouteImage(this, mIvAvatar, service.getUserInfo().getIcon());
-        startAnimation();
-        if (mType == 2) {   //视频˛˛
-            p.videoMatch();
-        } else {  //语音
-            p.voiceMatch();
-        }
+//        startAnimation();
+//        if (mType == 2) {   //视频˛˛
+//            p.videoMatch();
+//        } else {  //语音
+//            p.voiceMatch();
+//        }
         initBus();
+    }
+
+    private void startBarrage() {
         List<Barrage> mBarrages = new ArrayList<>();
         String[] datas = {"衣衣 和 雨啊 速配成功","阿里 和 深爱的 速配成功","东方 和 爱笑的机器狗 速配成功","阿苏妲 和 马小龙 速配成功","小迷糊 和 雨啊 速配成功"};
         for (int i = 0; i < datas.length; i++) {
@@ -135,9 +155,16 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         mBarrageView.setBarrages(mBarrages);
     }
 
+    private void stopBarrage(){
+        mBarrageView.setBarrages(new ArrayList<>());
+    }
+
+
     private void startAnimation() {
-        AnimationUtil.createAvatarAnimation(mIvAvatar);
-        AnimationUtil.createRotateRevertAnimation(mRadarView);
+        startBarrage();
+        handler.postDelayed(run,200);
+//        AnimationUtil.createAvatarAnimation(mIvAvatar);
+        AnimationUtil.createRotateRevertAnimation(mRadarView,2500);
         AnimationUtil.createScaleAnimation(mScaleImageView1);
         AnimationUtil.createScaleAlphaAnimation(mScaleAlphaImageView1);
         Utils.runOnUiThreadDelayed(new Runnable() {
@@ -156,6 +183,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     }
 
     private void clearAnimation(){
+        stopBarrage();
         mIvAvatar.clearAnimation();
         mRadarView.clearAnimation();
         mScaleImageView1.clearAnimation();
@@ -173,6 +201,21 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
             else
                 p.videoBeat();
             handler.postDelayed(this, DELAY_TIME);
+        }
+    };
+
+    private final Runnable run = new Runnable() {
+        @Override
+        public void run() {
+            int len = mTvMatching.length();
+            if(len == 3){
+                mTvMatching.setText(".");
+            }else if(len == 2){
+                mTvMatching.setText("...");
+            }else{
+                mTvMatching.setText("..");
+            }
+            handler.postDelayed(this, TEXT_ANIMATION_TIME);
         }
     };
 
@@ -205,6 +248,13 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     @Override
     protected void onResume() {
         super.onResume();
+        if(!needShowPop()){
+            startMatch();
+        }
+    }
+
+    private void startMatch() {
+        startAnimation();
         if(!mMediaIsClose) {
             start();
         }
@@ -218,6 +268,12 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     @Override
     public void onPause() {
         super.onPause();
+        stopMatch();
+        matchPopWindow.dismiss();
+    }
+
+    private void stopMatch() {
+        clearAnimation();
         if (mType == 2) {   //视频
             p.quitVideoMatch();
         } else {  //语音
@@ -226,16 +282,17 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         handler.removeCallbacksAndMessages(null);
         if (runnable != null)
             handler.removeCallbacks(runnable);
+        if (run != null)
+            handler.removeCallbacks(run);
         release();
-        mMediaIsClose = false;
     }
-    
+
     private void release(){
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
-            mMediaIsClose = true;
+            mMusicImageView.clearAnimation();
         }
     }
 
@@ -246,7 +303,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         if (mediaPlayer != null) {
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
-            mMediaIsClose = false;
+            AnimationUtil.createRotateRevertAnimation(mMusicImageView,1500);
         }
     }
 
@@ -273,19 +330,39 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         if(id == R.id.music_iv){
             if(!mMediaIsClose){
                 release();
+                mMediaIsClose = true;
                 mMusicImageView.setImageResource(R.mipmap.radar_musice_icon_un);
             }else {
                 start();
+                mMediaIsClose = false;
                 mMusicImageView.setImageResource(R.mipmap.radar_music_icon);
             }
         }
         if(id == R.id.rule_im){
-            //匹配规则‰
+            //匹配规则
+            stopMatch();
+            showPopWindow();
         }
         if(id == R.id.ll_pair){
             mTvTip.setVisibility(View.VISIBLE);
             mllPair.setVisibility(View.GONE);
         }
+    }
+
+    private void showPopWindow() {
+        if(null == matchPopWindow)
+            matchPopWindow = new MatchPopWindow(this, v -> finish());
+        matchPopWindow
+                .setTitle(mType==2?"视频速配规则":"语音速配规则")
+                .setContent(mType==2?"1、 视频速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。":
+                        "1、 语音速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。")
+                .onSureClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startMatch();
+                    }
+                })
+                .showPopupWindow();
     }
 
     @Override
@@ -302,4 +379,5 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
             }
         },1000);
     }
+
 }

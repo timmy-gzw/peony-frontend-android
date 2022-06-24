@@ -94,6 +94,9 @@ public class BarrageView extends RelativeLayout {
             barrages.clear();
             barrages.addAll(list);
             mHandler.sendEmptyMessageDelayed(0, INTERVAL);
+        }else {
+            barrages.clear();
+            mHandler.removeMessages(0);
         }
     }
 

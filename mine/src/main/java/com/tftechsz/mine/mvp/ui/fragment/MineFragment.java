@@ -74,7 +74,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private TextView mVipNorHint;
     private TextView mExpiredTime;
     private ConstraintLayout mClVip;
-    private View mPicFrame, mTopBg;
+    private View mPicFrame;
     private TextView mVip_title;
     private NestedScrollView mNestedScrollView;
     private long mCurrentTime;
@@ -114,7 +114,6 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mVipNorHint = getView(R.id.vip_nor_hint);
         mClVip = getView(R.id.cl_vip);
         mExpiredTime = getView(R.id.expired_time);
-        mTopBg = getView(R.id.top_bg);
         mPicFrame = getView(R.id.pic_frame);
         mVip_title = getView(R.id.vip_title);
         mVipIcon = getView(R.id.vip_icon);
@@ -353,7 +352,6 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                     mVipNor.setVisibility(View.VISIBLE);
 //                    GlideUtils.loadBackGround(mContext, userInfo.getVip_background_icon(), mVipNor);
                     if (userInfo.isVip()) {
-                        mTopBg.setBackgroundResource(R.drawable.shape_vip_top_bg);
                         mVipIcon.setVisibility(View.VISIBLE);
                         mVip_title.setVisibility(View.VISIBLE);
                         mVipNorHint.setVisibility(View.INVISIBLE);
@@ -361,8 +359,6 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                         mExpiredTime.setText(userInfo.vip_expiration_time_desc_new);
                         mExpiredTime.setVisibility(View.VISIBLE);
                     } else {
-//                        mTopBg.setBackgroundColor(Utils.getColor(R.color.EEEEEE));
-                        mTopBg.setBackgroundResource(R.mipmap.yt_dl_bg_img);
                         mVipIcon.setVisibility(View.VISIBLE);
                         mTvMember.setText("立即开通");
                         mExpiredTime.setVisibility(View.GONE);
