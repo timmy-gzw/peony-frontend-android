@@ -293,7 +293,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private CoupleGiftBagDetailPop coupleGiftBagDetailPop;
     private SharePopWindow mSharePop;
     private boolean isResume = false;
-    private LottieAnimationView lottieAnimationView, ivChatGift;
+    private LottieAnimationView lottieAnimationView;
+    private ImageView ivChatGift;
     //家族顶部
     private RelativeLayout mRlTeam;
     private TextView mTvTeam, mTvTeamNum;
@@ -1926,7 +1927,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         ivChatCall = inputPanel.getChatCall();
         mIvVoiceCall = inputPanel.getmIvVoiceCallBtn();
         ivChatRed = inputPanel.getChatRed();
-        ivChatGift = (LottieAnimationView) inputPanel.getChatGift();
+        ivChatGift =  inputPanel.getChatGift();
 
 
         initAitManager();
@@ -4609,8 +4610,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             inputPanel = null;
         }
         if (ivChatGift != null) {
-            ivChatGift.cancelAnimation();
-            ivChatGift.removeAllAnimatorListeners();
             ivChatGift = null;
         }
         ViewGroup viewGroup = (ViewGroup) getView();
