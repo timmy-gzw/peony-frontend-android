@@ -1,4 +1,4 @@
-package com.tftechsz.common;
+package com.tftechsz.common.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -9,17 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
-public class MarqueeTextView extends AppCompatTextView {
+public class MarqueeTextView2 extends AppCompatTextView {
 
-    public MarqueeTextView(@NonNull Context context) {
+    public MarqueeTextView2(@NonNull Context context) {
         this(context, null, 0);
     }
 
-    public MarqueeTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MarqueeTextView2(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MarqueeTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MarqueeTextView2(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
