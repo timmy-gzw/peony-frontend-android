@@ -324,7 +324,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     //亲密度可以拨打音视频的时候弹出
     private RelativeLayout mRlIntimacyCall;
     private TextView mTvIntimacyCall;
-    private ImageView mIvCall;
     private boolean isFamilyRecruit;
     protected UserProviderService service;
     private MineApiService mineApiService;
@@ -509,7 +508,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mRlIntimacyCall.setOnClickListener(this);
         mTvIntimacyCall = findView(R.id.tv_content);
         findView(R.id.iv_close_call).setOnClickListener(this);
-        mIvCall = findView(R.id.iv_call);
         //家族相关
         mRlTeam = findView(R.id.base_team_tool_bar);
 
@@ -1578,9 +1576,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 intimacyEndTime = intimacyEntity.getEndTime();
                 if (intimacyEntity.getIsShow() == 1) {
                     mRlIntimacyCall.setVisibility(View.VISIBLE);
-                    if (mIvCall != null) {
-                        AnimationUtil.createAnimation(mIvCall);
-                    }
                 }
                 if (intimacyEndTime > 0) {
                     setContactTip(intimacyEndTime);
@@ -1720,9 +1715,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             public void accept(Long aLong) {
                                 mIntimacyEntity = entity;
                                 mRlIntimacyCall.setVisibility(View.VISIBLE);
-                                if (mIvCall != null) {
-                                    AnimationUtil.createAnimation(mIvCall);
-                                }
                             }
                         }));
                     }
@@ -4652,7 +4644,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mIvRight = null;
         mIvLeft = null;
         mIvGiftMask = null;
-        mIvCall = null;
         lottieAnimationView = null;
         ivChatRed = null;
         ivChatPhoto = null;

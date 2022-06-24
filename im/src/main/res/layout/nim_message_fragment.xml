@@ -750,21 +750,23 @@
             android:background="@drawable/bg_white_radius12"
             android:gravity="center"
             android:paddingStart="@dimen/dp_14"
-            android:paddingTop="@dimen/dp_34"
+            android:paddingTop="@dimen/dp_24"
             android:paddingEnd="@dimen/dp_14"
             android:paddingBottom="@dimen/dp_12"
             android:text="看看她迷人的\n脸庞吧～"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_12" />
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/iv_call"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_160"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp_15"
-            android:src="@mipmap/chat_ic_message_call" />
+            app:lottie_fileName="video_call.zip"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:layout_marginTop="@dimen/dp_15"/>
 
         <ImageView
             android:id="@+id/iv_close_call"

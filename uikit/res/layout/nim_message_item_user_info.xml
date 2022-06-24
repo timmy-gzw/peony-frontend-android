@@ -173,7 +173,7 @@
         android:id="@+id/fl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_gray_ee"
+        android:background="@drawable/bg_black_tran10_radius12"
         android:paddingStart="@dimen/dp_size_30"
         android:layout_marginStart="@dimen/dp_size_41"
         android:layout_marginEnd="@dimen/dp_size_31"
@@ -189,7 +189,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/dp_size_2"
-            android:textColor="@color/color_999999"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_12"
             tools:text="对方已通过真人～在近期使用Glide4." />
     </FrameLayout>
