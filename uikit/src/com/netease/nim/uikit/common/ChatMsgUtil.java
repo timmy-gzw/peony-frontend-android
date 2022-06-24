@@ -548,7 +548,7 @@ public class ChatMsgUtil implements Serializable {
                                 }
                             }, start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             if (TextUtils.isEmpty(color)) {
-                                spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#4287FF")), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#41B2F4")), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             } else {
                                 spanString.setSpan(new ForegroundColorSpan(Color.parseColor(color)), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             }
@@ -584,7 +584,7 @@ public class ChatMsgUtil implements Serializable {
         chatMsg.from = from;
         chatMsg.to = to;
         HashMap<String, Object> map = new HashMap<>();
-        Log.e("ChatMsgUtil.sendFamilyShareMessage", JSON.toJSONString(chatMsg));
+        Log.e("sendFamilyShareMessage", JSON.toJSONString(chatMsg));
         map.put("body", new String(Base64.encodeBase64(JSON.toJSONString(chatMsg).getBytes())));
         String json = JSON.toJSONString(map);
         FamilyInviteAttachment attachment = new FamilyInviteAttachment(json) {

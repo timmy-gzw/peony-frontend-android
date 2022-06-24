@@ -60,7 +60,7 @@ public class RealAuthPopWindow extends BaseCenterPop implements View.OnClickList
                     findViewById(R.id.iv_del).setVisibility(View.VISIBLE);
                     if (TextUtils.equals(popType, Interfaces.SHOW_IS_REAL)) {
                         topbg.setImageResource(R.mipmap.peony_zrrztc_tb_png);
-                        real_btn.setText("真人认证");
+                        real_btn.setText("马上认证");
                         addRecyData(configInfo.sys.content.real_icon);
                         realHint.setText(configInfo.sys.content.real_warn);
                     } else if (TextUtils.equals(popType, Interfaces.SHOW_IS_PARTY_SELF)) {

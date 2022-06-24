@@ -118,7 +118,7 @@ public class CancellationActivity extends BaseMvpActivity<ILogoutView, ILogoutPr
         } else {
             mBtn.setText("下一步");
             mBtn.setBackgroundResource(R.drawable.bg_orange_enable);
-            mBtn.setTextColor(Utils.getColor(R.color.color_normal));
+            mBtn.setTextColor(Utils.getColor(R.color.white));
         }
 
     }
@@ -136,7 +136,7 @@ public class CancellationActivity extends BaseMvpActivity<ILogoutView, ILogoutPr
         isLogout = false;
         mBtn.setText("下一步");
         mBtn.setBackgroundResource(R.drawable.bg_orange_enable);
-        mBtn.setTextColor(Utils.getColor(R.color.color_normal));
+        mBtn.setTextColor(Utils.getColor(R.color.white));
     }
 
     @Override
