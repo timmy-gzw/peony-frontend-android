@@ -194,8 +194,8 @@
                 android:drawablePadding="@dimen/dp_5"
                 android:background="@drawable/shape_blue_alpha30"
                 android:textColor="@color/color_99_ff"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
+                android:paddingVertical="@dimen/dp_1"
+                android:paddingHorizontal="@dimen/dp_6"
                 android:textSize="@dimen/sp_10"
                 tools:visibility="visible"
                 android:visibility="gone" />
@@ -206,10 +206,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="深圳市"
-                android:background="@drawable/shape_black_alpha30"
+                android:background="@drawable/shape_black_alpha60"
                 android:textColor="@color/color_99_ff"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
+                android:paddingVertical="@dimen/dp_1"
+                android:paddingHorizontal="@dimen/dp_6"
                 android:textSize="@dimen/sp_10"
                 tools:visibility="visible"
                 android:visibility="gone" />
@@ -220,10 +220,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="射手座"
-                android:background="@drawable/shape_black_alpha30"
+                android:background="@drawable/shape_black_alpha60"
                 android:textColor="@color/color_99_ff"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
+                android:paddingVertical="@dimen/dp_1"
+                android:paddingHorizontal="@dimen/dp_6"
                 android:textSize="@dimen/sp_10"
                 tools:visibility="visible"
                 android:visibility="gone" />
@@ -234,10 +234,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="市场营销"
-                android:background="@drawable/shape_black_alpha30"
+                android:background="@drawable/shape_black_alpha60"
                 android:textColor="@color/color_99_ff"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
+                android:paddingVertical="@dimen/dp_1"
+                android:paddingHorizontal="@dimen/dp_6"
                 android:textSize="@dimen/sp_10"
                 tools:visibility="visible"
                 android:visibility="gone" />
@@ -367,22 +367,6 @@
         android:layout_marginEnd="@dimen/dp_10"
         android:src="@mipmap/chat_ic_call_gift" />
 
-    <TextView
-        android:id="@+id/tv_face_off_tip1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/lly_invited_operation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:background="@mipmap/chat_ic_face_off_tip_middle"
-        android:paddingStart="@dimen/dp_12"
-        android:paddingTop="@dimen/dp_8"
-        android:paddingEnd="@dimen/dp_12"
-        android:paddingBottom="@dimen/dp_12"
-        tools:visibility="visible"
-        android:text="点击不露脸视频，对方在视频\n中将看不到您这边所做一切"
-        android:visibility="gone"
-        />
 
 
     <LinearLayout
@@ -451,23 +435,6 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/tv_face_off_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ll_call_video"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/dp_30"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:background="@mipmap/chat_ic_face_off_tip2"
-        android:paddingStart="@dimen/dp_12"
-        android:paddingTop="@dimen/dp_8"
-        android:paddingEnd="@dimen/dp_12"
-        android:paddingBottom="@dimen/dp_12"
-        android:text="点击不露脸视频，对方在视频\n中将看不到您这边所做一切"
-        android:visibility="gone"
-        tools:visibility="visible"
-        />
 
 
     <TextView
@@ -738,8 +705,8 @@
                 android:drawablePadding="@dimen/dp_5"
                 android:background="@drawable/shape_blue_alpha30"
                 android:textColor="@color/color_99_ff"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
+                android:paddingVertical="@dimen/dp_1"
+                android:paddingHorizontal="@dimen/dp_6"
                 android:textSize="@dimen/sp_10"
                 tools:visibility="visible"
                 android:visibility="gone" />
@@ -750,10 +717,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="深圳市"
-                android:background="@drawable/shape_black_alpha30"
+                android:paddingVertical="@dimen/dp_1"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:background="@drawable/shape_black_alpha60"
                 android:textColor="@color/color_99_ff"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
                 android:textSize="@dimen/sp_10"
                 tools:visibility="visible"
                 android:visibility="gone" />
@@ -764,10 +731,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="射手座"
-                android:background="@drawable/shape_black_alpha30"
+                android:paddingVertical="@dimen/dp_1"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:background="@drawable/shape_black_alpha60"
                 android:textColor="@color/color_99_ff"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
                 android:textSize="@dimen/sp_10"
                 tools:visibility="visible"
                 android:visibility="gone" />
@@ -778,10 +745,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="市场营销"
-                android:background="@drawable/shape_black_alpha30"
+                android:paddingVertical="@dimen/dp_1"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:background="@drawable/shape_black_alpha60"
                 android:textColor="@color/color_99_ff"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
                 android:textSize="@dimen/sp_10"
                 tools:visibility="visible"
                 android:visibility="gone" />

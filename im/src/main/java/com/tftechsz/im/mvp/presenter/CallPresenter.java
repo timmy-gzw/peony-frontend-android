@@ -54,6 +54,7 @@ import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.GiftPopWindow;
 import com.tftechsz.common.widget.pop.RechargeBeforePop;
 import com.tftechsz.common.widget.pop.RechargePopWindow;
+import com.tftechsz.mine.api.MineApiService;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -86,15 +87,31 @@ public class CallPresenter extends BasePresenter<ICallView> {
     private final MineService mineService;
     private final UserProviderService userService;
     private RechargeBeforePop beforePop;
+    public MineApiService mineApiService;
 
 
     public CallPresenter() {
+        mineApiService = RetrofitManager.getInstance().createUserApi(MineApiService.class);
         service = RetrofitManager.getInstance().createUserApi(ChatApiService.class);
         imService = RetrofitManager.getInstance().createIMApi(ChatApiService.class);
         imService2 = RetrofitManager.getInstance().createIMApi2(ChatApiService.class);
         payService = RetrofitManager.getInstance().createConfigApi(ChatApiService.class);
         mineService = ARouter.getInstance().navigation(MineService.class);
         userService = ARouter.getInstance().navigation(UserProviderService.class);
+    }
+
+    /**
+     * 获取他人用户信息
+     */
+    public void getUserInfoById(String userId) {
+        addNet(mineApiService.getUserInfoById(userId).compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<UserInfo>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<UserInfo> response) {
+                        if (getView() == null) return;
+                        getView().getUserInfoSuccess(response.getData());
+                    }
+                }));
     }
 
     /**

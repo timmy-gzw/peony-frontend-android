@@ -28,4 +28,6 @@ public interface ICallView extends MvpView {
     void showGiftAnimation(GiftDto data);
 
     void cancel();
+
+    void getUserInfoSuccess(UserInfo userInfo);
 }

@@ -216,7 +216,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     //chat
     private RecyclerView rvCallChat;
 
-    private TextView tvFaceOffTip, tvFaceOffTip1;
 
     //相芯美颜相关
     protected FURenderer mFURenderer;
@@ -658,8 +657,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         clVoiceCall = findViewById(R.id.cl_voice_call);
         mIvSmallVoice = findViewById(R.id.iv_small_voice);
 
-        tvFaceOffTip = findViewById(R.id.tv_face_off_tip);
-        tvFaceOffTip1 = findViewById(R.id.tv_face_off_tip1);
 
         tvNetwork = findViewById(R.id.tv_network);
 
@@ -746,7 +743,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     protected void initData() {
         initIntent();
         //获取对方用户信息
-        getP().getImUserInfo(fromId == null ? callOutUser.getUser_id()+"" : fromId);
+        getP().getUserInfoById(fromId == null ? callOutUser.getUser_id()+"" : fromId);
 //        tvCallComment.setText("速配成功，即将开始语音通话");
 //        tvCallComment.setVisibility(View.VISIBLE);
         p.startThread(this, svgaImageView, mPlayerView);
@@ -955,10 +952,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         int faceOffTip = SPUtils.getInt(Constants.IS_SHOW_FACE_OFF, 0);
         if (service.getConfigInfo() != null && service.getConfigInfo().sys != null && service.getConfigInfo().sys.content != null) {
             if (!TextUtils.isEmpty(service.getConfigInfo().sys.content.no_face_protect) && faceOffTip == 0 && service.getUserInfo().getSex() == 1 && mChannelType == 2) {
-                if (mCallDir == 0) {
-                    tvFaceOffTip.setVisibility(View.VISIBLE);
-                } else
-                    tvFaceOffTip1.setVisibility(View.VISIBLE);
                 SPUtils.put(Constants.IS_SHOW_FACE_OFF, 1);
             }
         }
@@ -1921,8 +1914,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             viewVideoView.setVisibility(View.VISIBLE);
             ivSmallCloseFace.setVisibility(View.VISIBLE);
         }
-        tvFaceOffTip.setVisibility(View.GONE);
-        tvFaceOffTip1.setVisibility(View.GONE);
     }
 
     /**
@@ -2177,51 +2168,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         }
         System.out.println("--------");
         UserInfo userInfo = infoList.get(0);
-        if(mChannelType == 1) {
-            if (userInfo.getAge() > 0) {
-                mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
-                mtvGenderAge.setText(userInfo.getAge() + "");
-                mtvGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
-                mtvGenderAge.setVisibility(View.VISIBLE);
-            }
 
-            if (!TextUtils.isEmpty(userInfo.getCity())) {
-                mtvCity.setText(userInfo.getCity());
-                mtvCity.setVisibility(View.VISIBLE);
-            }
-
-            if (!TextUtils.isEmpty(userInfo.getConstellation())) {
-                mtvConstellation.setText(userInfo.getConstellation());
-                mtvConstellation.setVisibility(View.VISIBLE);
-            }
-
-            if (!TextUtils.isEmpty(userInfo.getJob())) {
-                mtvJob.setText(userInfo.getJob());
-                mtvJob.setVisibility(View.VISIBLE);
-            }
-        }else{
-            if (userInfo.getAge() > 0) {
-                mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
-                mtvVideoGenderAge.setText(userInfo.getAge() + "");
-                mtvVideoGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
-                mtvVideoGenderAge.setVisibility(View.VISIBLE);
-            }
-
-            if (!TextUtils.isEmpty(userInfo.getCity())) {
-                mtvVideoCity.setText(userInfo.getCity());
-                mtvVideoCity.setVisibility(View.VISIBLE);
-            }
-
-            if (!TextUtils.isEmpty(userInfo.getConstellation())) {
-                mtvVideoConstellation.setText(userInfo.getConstellation());
-                mtvVideoConstellation.setVisibility(View.VISIBLE);
-            }
-
-            if (!TextUtils.isEmpty(userInfo.getJob())) {
-                mtvVideoJob.setText(userInfo.getJob());
-                mtvVideoJob.setVisibility(View.VISIBLE);
-            }
-        }
     }
 
 
@@ -2411,6 +2358,64 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         } else {
             reject();
         }
+    }
+
+    @Override
+    public void getUserInfoSuccess(UserInfo userInfo) {
+
+        if(mChannelType == 1) {
+            if (userInfo.getAge() > 0) {
+                mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
+                mtvGenderAge.setText(userInfo.getAge() + "");
+                mtvGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
+                mtvGenderAge.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
+                mtvCity.setText(getFiled(userInfo.info,"hometown"));
+                mtvCity.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(getFiled(userInfo.info,"star_sign"))) {
+                mtvConstellation.setText(getFiled(userInfo.info,"star_sign"));
+                mtvConstellation.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(getFiled(userInfo.info,"job"))) {
+                mtvJob.setText(getFiled(userInfo.info,"job"));
+                mtvJob.setVisibility(View.VISIBLE);
+            }
+        }else{
+            if (userInfo.getAge() > 0) {
+                mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
+                mtvVideoGenderAge.setText(userInfo.getAge() + "");
+                mtvVideoGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
+                mtvVideoGenderAge.setVisibility(View.VISIBLE);
+            }
+            if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
+                mtvVideoCity.setText(getFiled(userInfo.info,"hometown"));
+                mtvVideoCity.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(getFiled(userInfo.info,"star_sign"))) {
+                mtvVideoConstellation.setText(getFiled(userInfo.info,"star_sign"));
+                mtvVideoConstellation.setVisibility(View.VISIBLE);
+            }
+
+            if (!TextUtils.isEmpty(getFiled(userInfo.info,"job"))) {
+                mtvVideoJob.setText(getFiled(userInfo.info,"job"));
+                mtvVideoJob.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    private String getFiled(List<UserInfo.BaseInfo> list,String field){
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).name.equals(field)){
+                return list.get(i).value;
+            }
+        }
+        return null;
     }
 
     /**

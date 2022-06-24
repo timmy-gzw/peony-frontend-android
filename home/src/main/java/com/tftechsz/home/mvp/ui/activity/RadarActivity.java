@@ -47,7 +47,7 @@ import io.reactivex.functions.Consumer;
  */
 public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> implements RadarView.IScanningListener, View.OnClickListener, IRadarView {
 
-    private final int DELAY_TIME = 10 * 1000,TEXT_ANIMATION_TIME = 400;
+    private final int DELAY_TIME = 10 * 1000,TEXT_ANIMATION_TIME = 400,MATCH_INTERVAL_TIME = 1000;
     public static final String EXTRA_TYPE = "type";
     private ImageView mRadarView,mScaleImageView1,mScaleImageView2,mScaleAlphaImageView1,mScaleAlphaImageView2,mScaleAlphaImageView3;
     private ConstraintLayout mClRadar;  //背景图片
@@ -57,9 +57,10 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     private ImageView mIvAvatar,mMusicImageView,mRuleImageView;
     private TextView mTitleTv;
     private BarrageView mBarrageView;
-    private TextView mTvTip,mTvMatching;
+    private TextView mTvTip,mTvMatching,mTvMatchInterval;
     private LinearLayout mllPair;
     private MatchPopWindow matchPopWindow;
+    private boolean isFirst = true;
 
     @Autowired
     UserProviderService service;
@@ -100,6 +101,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         mIvRoundBig = findViewById(R.id.iv_round_big);
         findViewById(R.id.toolbar_back_all).setOnClickListener(this);
         mTvMatching = findViewById(R.id.tv_matching);
+        mTvMatchInterval = findViewById(R.id.tv_match_interval);
     }
 
 
@@ -137,12 +139,6 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         }
         if (service.getUserInfo() != null)
             GlideUtils.loadRouteImage(this, mIvAvatar, service.getUserInfo().getIcon());
-//        startAnimation();
-//        if (mType == 2) {   //视频˛˛
-//            p.videoMatch();
-//        } else {  //语音
-//            p.voiceMatch();
-//        }
         initBus();
     }
 
@@ -219,6 +215,26 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         }
     };
 
+    private int interval = 3;
+    private final Runnable runInterval = new Runnable() {
+        @Override
+        public void run() {
+            if(interval == 1){
+                interval = 3;
+                mTvMatchInterval.setText("（"+ interval +"S后自动参与速配）");
+                mTvTip.setVisibility(View.VISIBLE);
+                mTvMatching.setVisibility(View.VISIBLE);
+                mllPair.setVisibility(View.GONE);
+                startMatch();
+            }else{
+                interval --;
+                mTvMatchInterval.setText("（"+ interval +"S后自动参与速配）");
+                handler.postDelayed(this, MATCH_INTERVAL_TIME);
+            }
+
+        }
+    };
+
 
     /**
      * 通知更新
@@ -248,8 +264,13 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     @Override
     protected void onResume() {
         super.onResume();
-        if(!needShowPop()){
-            startMatch();
+        if(isFirst){
+            isFirst = false;
+            if(!needShowPop()){
+                startMatch();
+            }
+        }else{
+            handler.postDelayed(runInterval, MATCH_INTERVAL_TIME);
         }
     }
 
@@ -269,7 +290,11 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     public void onPause() {
         super.onPause();
         stopMatch();
-        matchPopWindow.dismiss();
+        mTvTip.setVisibility(View.GONE);
+        mTvMatching.setVisibility(View.GONE);
+        mllPair.setVisibility(View.VISIBLE);
+        if(null != matchPopWindow)
+            matchPopWindow.dismiss();
     }
 
     private void stopMatch() {
@@ -284,6 +309,8 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
             handler.removeCallbacks(runnable);
         if (run != null)
             handler.removeCallbacks(run);
+        if (runInterval != null)
+            handler.removeCallbacks(runInterval);
         release();
     }
 
@@ -316,9 +343,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
 
     @Override
     public void onScanSuccess() {
-        clearAnimation();
-        mTvTip.setVisibility(View.GONE);
-        mllPair.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -345,7 +370,9 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         }
         if(id == R.id.ll_pair){
             mTvTip.setVisibility(View.VISIBLE);
+            mTvMatching.setVisibility(View.VISIBLE);
             mllPair.setVisibility(View.GONE);
+            startMatch();
         }
     }
 

@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="礼物"
-            android:textColor="#F8D423"
+            android:textColor="#FF5A7B"
             android:textSize="15sp" />
 
     </LinearLayout>
@@ -41,8 +41,7 @@
         android:layout_width="96dp"
         android:layout_height="90dp"
         android:layout_marginStart="@dimen/dp_10"
-        android:layout_toEndOf="@+id/ll_content"
-        android:background="@drawable/chat_ic_accost_left">
+        android:layout_toEndOf="@+id/ll_content">
 
 
         <ImageView

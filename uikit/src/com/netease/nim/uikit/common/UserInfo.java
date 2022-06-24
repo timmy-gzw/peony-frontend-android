@@ -105,6 +105,7 @@ public class UserInfo implements Serializable {
 
         public String title;
         public String value;
+        public String name;
 
     }
 
