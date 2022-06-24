@@ -246,24 +246,24 @@ public class GiftRootLayout extends LinearLayout implements Animation.AnimationL
             case 0:
                 oneItemLayout.startAnimation(oneGiftItemOutAnim);
                 LogUtil.e("GiftRootLayout1礼物显示完毕", giftBean.getUserName() + giftBean.getName() + "x" + giftBean.group);
-                giftRootListener.showGiftInfo(giftBean);
                 if (isEmpty() && giftRootListener != null) {
+                    giftRootListener.showGiftInfo(giftBean);
                     giftRootListener.hideGiftAmin(1, giftBean.id);
                 }
                 break;
             case 1:
                 twoItemLayout.startAnimation(twoGiftItemOutAnim);
                 LogUtil.e("GiftRootLayout2礼物显示完毕", giftBean.getUserName() + giftBean.getName() + "x" + giftBean.group);
-                giftRootListener.showGiftInfo(giftBean);
                 if (isEmpty() && giftRootListener != null) {
+                    giftRootListener.showGiftInfo(giftBean);
                     giftRootListener.hideGiftAmin(2, giftBean.id);
                 }
                 break;
             case 2:
                 threeItemLayout.startAnimation(threeGiftItemOutAnim);
                 LogUtil.e("GiftRootLayout3礼物显示完毕", giftBean.getUserName() + giftBean.getName() + "x" + giftBean.group);
-                giftRootListener.showGiftInfo(giftBean);
                 if (isEmpty() && giftRootListener != null) {
+                    giftRootListener.showGiftInfo(giftBean);
                     giftRootListener.hideGiftAmin(3, giftBean.id);
                 }
                 break;
