@@ -109,24 +109,6 @@
                 app:layout_constraintTop_toTopOf="@id/tv_name" />
 
             <TextView
-                android:id="@+id/tv_online"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_4"
-                android:background="@drawable/bg_online_status"
-                android:drawablePadding="@dimen/dp_2"
-                android:paddingStart="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_2"
-                android:paddingEnd="@dimen/dp_5"
-                android:paddingBottom="@dimen/dp_2"
-                android:textColor="@color/color_cccccc"
-                android:textSize="@dimen/sp_10"
-                app:layout_constraintBottom_toBottomOf="@id/iv_real_people"
-                app:layout_constraintStart_toEndOf="@id/iv_real_people"
-                app:layout_constraintTop_toTopOf="@id/iv_real_people"
-                tools:text="一小时前" />
-
-            <TextView
                 android:id="@+id/tv_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

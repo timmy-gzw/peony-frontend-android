@@ -106,6 +106,9 @@ public class GiftAdapter extends BaseQuickAdapter<GiftDto, GiftAdapter.ViewHolde
             holder.num.setVisibility(View.GONE);
             holder.expired_time.setVisibility(View.GONE);
         }
+
+        //隐藏 20220624
+        holder.tvGiftType.setVisibility(View.GONE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

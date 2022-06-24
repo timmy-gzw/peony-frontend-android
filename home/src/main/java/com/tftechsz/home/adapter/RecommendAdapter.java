@@ -64,18 +64,14 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
     public void setData(BaseViewHolder helper, UserInfo item) {
 
         TextView tvName = helper.getView(R.id.tv_name);
-        TextView tvOnline = helper.getView(R.id.tv_online);
         ImageView ivAvatar = helper.getView(R.id.iv_avatar);
         View bgFrame = helper.getView(R.id.bg_frame);
 
         if (mType == 1) {   //推荐
-            tvOnline.setText(item.getOnline_message());
-            helper.setVisible(R.id.tv_online, !TextUtils.isEmpty(item.getOnline_message()) && item.getIs_online() == 0);
             helper.setVisible(R.id.iv_online, item.getIs_online() == 1); //是否在线  1:在线
             helper.setVisible(R.id.tv_distance, false);
         } else {   //附近
             helper.setVisible(R.id.iv_online, false);
-            helper.setVisible(R.id.tv_online, false);
             helper.setVisible(R.id.tv_distance, !TextUtils.isEmpty(item.tag_distance));
             helper.setText(R.id.tv_distance, item.tag_distance);
         }
