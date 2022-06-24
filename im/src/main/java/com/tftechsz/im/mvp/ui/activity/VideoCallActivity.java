@@ -86,6 +86,8 @@ import com.opensource.svgaplayer.SVGAImageView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.qgame.animplayer.AnimView;
 import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.widget.MarqueeTextView;
+import com.tftechsz.common.widget.MarqueeTextView2;
 import com.tftechsz.im.R;
 import com.tftechsz.im.adapter.CallMessageAdapter;
 import com.tftechsz.im.model.CallStatusInfo;
@@ -247,7 +249,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     //new
     private ImageView mIvSmallVoice;
-    private TextView mTvReportUser, tvCallTip;
+    private TextView mTvReportUser;
+    private TextView tvCallTip;
     private ConstraintLayout mClVideo;
     private TextView mtvGenderAge,mtvCity,mtvConstellation,mtvJob;//语音通话：对方性别年龄，城市，星座，工作
     private TextView mtvVideoGenderAge,mtvVideoCity,mtvVideoConstellation,mtvVideoJob;//视屏通话：对方性别年龄，城市，星座，工作
@@ -1508,7 +1511,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append(msg);
         int start = builder.toString().indexOf(cost);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#F8D423")), start, start + cost.length(),
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF5A7B")), start, start + cost.length(),
                 Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         setTipViewVisible(mTvIncome);
         mTvIncome.setText(builder);

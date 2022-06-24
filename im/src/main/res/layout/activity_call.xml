@@ -54,7 +54,7 @@
         android:layout_marginTop="@dimen/dp_100"
         android:layout_marginEnd="@dimen/dp_20"
         android:clipToPadding="false"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/ll_video_time"
@@ -112,6 +112,29 @@
                 android:textSize="@dimen/sp_14"
                 android:textStyle="normal" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_call_comment"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/bg_recharge_radius16"
+            android:gravity="center"
+            android:paddingVertical="@dimen/dp_5"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_16"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_15"
+            tools:visibility="visible"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_call_comment"
@@ -433,30 +456,6 @@
             app:drawableTopCompat="@mipmap/call_accept" />
 
     </LinearLayout>
-
-
-
-
-    <TextView
-        android:id="@+id/tv_income"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cl_video"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_80"
-        android:background="@drawable/bg_recharge_radius16"
-        android:gravity="center"
-        android:paddingVertical="@dimen/dp_5"
-        android:paddingStart="@dimen/dp_16"
-        android:paddingEnd="@dimen/dp_16"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_15"
-        tools:visibility="visible"
-        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ll_call_video"

@@ -507,6 +507,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mRlIntimacyCall = findView(R.id.rl_intimacy_call);
         mRlIntimacyCall.setOnClickListener(this);
         mTvIntimacyCall = findView(R.id.tv_content);
+        mTvIntimacyCall.setOnClickListener(this);
         findView(R.id.iv_close_call).setOnClickListener(this);
         //家族相关
         mRlTeam = findView(R.id.base_team_tool_bar);
@@ -3441,7 +3442,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             }
         } else if (id == R.id.ll_notice) {   //审核申请
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FAMILY_APPLY);
-        } else if (id == R.id.rl_intimacy_call) {   //拨打视频
+        } else if (id == R.id.tv_content) {   //拨打视频
             initPermissions();
         } else if (id == R.id.iv_close_call) {  //关闭
             mRlIntimacyCall.setVisibility(View.GONE);

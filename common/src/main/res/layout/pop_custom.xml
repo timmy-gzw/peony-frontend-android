@@ -123,9 +123,8 @@
 
         <TextView
             android:id="@+id/tv_sure1"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_150"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:background="@drawable/bg_red_selector"
             android:gravity="center"
             android:text="确定"
