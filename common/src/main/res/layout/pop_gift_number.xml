@@ -34,15 +34,16 @@
                 android:textSize="@dimen/sp_12" />
 
             <TextView
-                android:id="@+id/tv_number_1314"
-                android:layout_width="@dimen/dp_84"
-                android:layout_height="@dimen/dp_62"
-                android:layout_marginStart="@dimen/dp_8"
-                android:background="@mipmap/chat_ic_big_love"
-                android:gravity="center"
-                android:paddingBottom="@dimen/dp_2"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_18" />
+              android:id="@+id/tv_number_1314"
+              android:layout_width="@dimen/dp_84"
+              android:layout_height="@dimen/dp_62"
+              android:layout_marginStart="@dimen/dp_8"
+              android:background="@mipmap/chat_ic_big_love"
+              android:gravity="center"
+              android:paddingBottom="@dimen/dp_2"
+              android:text='"1314"'
+              android:textColor="@color/white"
+              android:textSize="@dimen/sp_18" />
 
             <TextView
                 android:id="@+id/tv_number_666"
