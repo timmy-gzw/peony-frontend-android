@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tftechsz.common.R;
 import com.tftechsz.common.adapter.TopicAdapter;
-import com.tftechsz.common.utils.Utils;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class TopicPop extends BaseBottomPop{
     List<String> data;
@@ -35,7 +38,9 @@ public class TopicPop extends BaseBottomPop{
         rv.setLayoutManager(linearLayoutManager);
         TopicAdapter topicAdapter = new TopicAdapter(1);
         rv.setAdapter(topicAdapter);
-        topicAdapter.addData(this.data);
+        //打乱顺序
+        Collections.shuffle(data);
+        topicAdapter.setList(data);
         topicAdapter.setOnItemClickListener((adapter, view, position) -> {
             dismiss();
             if(null != itemOnClickListener){

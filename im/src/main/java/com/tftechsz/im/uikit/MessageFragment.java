@@ -550,7 +550,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mRvTopic.setLayoutManager(linearLayoutManager);
         TopicAdapter topicAdapter = new TopicAdapter(0);
         ConfigInfo configInfo = service.getConfigInfo();
-        topicAdapter.addData(service.getUserInfo().getSex() == 1?configInfo.share_config.boy_quick_topic:configInfo.share_config.girl_quick_topic);
+        List<String> topics = service.getUserInfo().getSex() == 1?configInfo.share_config.boy_quick_topic:configInfo.share_config.girl_quick_topic;
+        //打乱顺序，取前五个
+        Collections.shuffle(topics);
+        topicAdapter.setList(topics.subList(0, Math.min(topics.size(), 5)));
         mRvTopic.setAdapter(topicAdapter);
         topicAdapter.setOnItemClickListener((adapter, view, position) -> {
             formrtAndSendMessage(topicAdapter.getItem(position));
