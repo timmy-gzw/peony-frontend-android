@@ -14,6 +14,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.FileUtils;
@@ -28,8 +30,6 @@ import com.bumptech.glide.request.target.Target;
 import com.netease.nim.uikit.R;
 
 import java.io.File;
-
-import androidx.annotation.Nullable;
 
 /**
  * 包 名 : com.netease.nim.uikit.common.util
@@ -364,23 +364,25 @@ public class VipUtils {
      * @param isParty    是否派对聊天气泡
      */
     public static void setPersonalise(View view, int id, boolean isEnd, boolean isPicFrame, boolean isParty) {
+        //FIXME 暂不支持vip气泡 根据需求放开
+        id = 0;
         if (!isPicFrame) {
             // view.setBackgroundResource(getChatBubbleBackground(id, isEnd));
             setPadding(id, view, isParty);
             if (view instanceof TextView) { //气泡文字颜色设置
                 TextView tv = (TextView) view;
-                setTextColor(id, tv, null,isEnd);
+                setTextColor(id, tv, null, isEnd);
             } else if (view instanceof FrameLayout) {
                 FrameLayout frameLayout = (FrameLayout) view;
                 for (int i = 0; i < frameLayout.getChildCount(); i++) {
                     View childAt = frameLayout.getChildAt(i);
                     if (childAt instanceof TextView) {
                         TextView tv = (TextView) childAt;
-                        setTextColor(id, tv, null,isEnd);
+                        setTextColor(id, tv, null, isEnd);
                     }
                     if (childAt instanceof ImageView) {
                         ImageView img = (ImageView) childAt;
-                        setTextColor(id, null, img,isEnd);
+                        setTextColor(id, null, img, isEnd);
                     }
                 }
             }
@@ -414,6 +416,7 @@ public class VipUtils {
             return;
         }
         //UIUtils.logE("本地不存在, 开始下载: " + getNetPicUrl(fileName, isPicFrame && id > 17));
+        int finalId = id;
         Glide.with(Utils.getApp())
                 .downloadOnly()
                 .load(getNetPicUrl(fileName, isPicFrame))
@@ -422,9 +425,9 @@ public class VipUtils {
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<File> target, boolean isFirstResource) {
                         //setPersonalise(view, 0, isEnd, isPicFrame); //失败时使用默认
                         if (!isPicFrame) { //失败时使用本地
-                            view.setBackgroundResource(getChatBubbleBackground(id, isEnd, isParty));
+                            view.setBackgroundResource(getChatBubbleBackground(finalId, isEnd, isParty));
                         } else {
-                            view.setBackgroundResource(getPictureFrameBackground(id, isEnd, false));
+                            view.setBackgroundResource(getPictureFrameBackground(finalId, isEnd, false));
                         }
                         return false;
                     }
@@ -438,9 +441,9 @@ public class VipUtils {
                             view.setBackground(getNinePatchDrawable(ImageUtils.getBitmap(localFile), Utils.getApp()));
                         } else {
                             if (!isPicFrame) { //失败时使用本地
-                                view.setBackgroundResource(getChatBubbleBackground(id, isEnd, isParty));
+                                view.setBackgroundResource(getChatBubbleBackground(finalId, isEnd, isParty));
                             } else {
-                                view.setBackgroundResource(getPictureFrameBackground(id));
+                                view.setBackgroundResource(getPictureFrameBackground(finalId));
                             }
                         }
                         //UIUtils.logE("下载成功: " + localFile.getPath());
@@ -481,9 +484,9 @@ public class VipUtils {
                 ConvertUtils.dp2px(isParty ? paddingVertical + 3 : paddingVertical));
     }
 
-    private static void setTextColor(int id, TextView tv, ImageView img,boolean isEnd) {
+    private static void setTextColor(int id, TextView tv, ImageView img, boolean isEnd) {
         int color = R.color.color_333333;
-        if(isEnd){
+        if (isEnd) {
             color = R.color.white;
         }
         switch (id) {
