@@ -113,6 +113,7 @@
                 app:borderWidth="2dp"
                 app:clockwise="true"
                 app:countTime="30000"
+                app:markBallColor="@color/colorPrimary"
                 app:textStyle="second"
                 app:titleCenterColor="#FF222222"
                 app:titleCenterSize="13sp" />
