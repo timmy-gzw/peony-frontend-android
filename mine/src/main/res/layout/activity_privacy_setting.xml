@@ -41,6 +41,7 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
+            android:id="@+id/tv_vip_rich"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
@@ -52,7 +53,6 @@
             android:id="@+id/tv_rich_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_left"
             android:text="打开后，其他用户将看不到您的魅力值与财富值"
             android:textColor="@color/color_light_font"
             android:textSize="@dimen/sp_12"
@@ -118,6 +118,7 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
+            android:id="@+id/tv_vip_gift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
@@ -194,6 +195,7 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
+            android:id="@+id/tv_vip_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
@@ -267,6 +269,7 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
+            android:id="@+id/tv_vip_stories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
@@ -340,6 +343,7 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
+            android:id="@+id/tv_vip_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
@@ -414,6 +418,7 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
+            android:id="@+id/tv_vip_ycgr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vip_can_set"

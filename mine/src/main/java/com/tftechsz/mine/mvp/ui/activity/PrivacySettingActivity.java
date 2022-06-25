@@ -8,7 +8,7 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.netease.nim.uikit.common.UserInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -42,6 +42,15 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
                 .build();
         initListener();
 
+
+        UserInfo userInfo = service.getUserInfo();
+        int visible = userInfo.isVip() || userInfo.isGirl() ? View.GONE : View.VISIBLE;
+        findViewById(R.id.tv_vip_rich).setVisibility(visible);
+        findViewById(R.id.tv_vip_gift).setVisibility(visible);
+        findViewById(R.id.tv_vip_rank).setVisibility(visible);
+        findViewById(R.id.tv_vip_stories).setVisibility(visible);
+        findViewById(R.id.tv_vip_location).setVisibility(visible);
+        findViewById(R.id.tv_vip_ycgr).setVisibility(visible);
     }
 
     private void initListener() {
@@ -57,7 +66,6 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         mSwStories = findViewById(R.id.sw_stories);
         mSwLocation = findViewById(R.id.sw_location);
         mswycgrzy = findViewById(R.id.sw_ycgrzy);
-
     }
 
 
@@ -107,7 +115,6 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         } else if (id == R.id.cl_ycgrzydjzzs) {
             getP().setPrivilege(6, mswycgrzy.isChecked() ? 0 : 1);
         }
-        LogUtil.e("=================", mData + "");
     }
 
 
