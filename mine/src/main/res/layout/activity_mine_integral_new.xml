@@ -25,86 +25,61 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:text="@string/integral_balance"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toTopOf="@id/tv_integral_num"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/base_tool_bar" />
+        app:layout_constraintTop_toBottomOf="@id/base_tool_bar"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tv_integral_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_4"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_withdraw_num"
         app:layout_constraintStart_toStartOf="@id/tv_integral"
         app:layout_constraintTop_toBottomOf="@id/tv_integral"
         tools:text="169.00" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="end"
-        app:constraint_referenced_ids="tv_integral,tv_integral_num" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="@dimen/dp_0_5"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_12"
-        android:layout_marginBottom="@dimen/dp_12"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/tv_integral_num"
-        app:layout_constraintStart_toEndOf="@id/barrier"
-        app:layout_constraintTop_toTopOf="@id/tv_integral" />
-
-    <TextView
-        android:id="@+id/tv_withdraw"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_20"
-        android:gravity="center"
-        android:text="@string/available_to_exchange"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_14"
-        app:layout_constraintStart_toEndOf="@id/view"
-        app:layout_constraintTop_toBottomOf="@id/base_tool_bar" />
 
     <TextView
         android:id="@+id/tv_withdraw_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginBottom="@dimen/dp_10"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/tv_withdraw"
-        app:layout_constraintTop_toBottomOf="@id/tv_withdraw"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintStart_toStartOf="@id/tv_integral_num"
+        app:layout_constraintTop_toBottomOf="@id/tv_integral_num"
         tools:text="0.42" />
 
     <TextView
         android:id="@+id/tv_exchange_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_lt_lb_30ffffff_16"
-        android:paddingStart="@dimen/dp_20"
-        android:paddingTop="@dimen/dp_6"
-        android:paddingEnd="@dimen/dp_20"
-        android:paddingBottom="@dimen/dp_6"
+        android:layout_marginStart="@dimen/dp_8"
+        android:background="@drawable/sp_20881300_c_5"
+        android:paddingStart="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_3"
+        android:paddingEnd="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_3"
         android:text="@string/exchange_record"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_integral" />
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintBottom_toBottomOf="@id/tv_withdraw_num"
+        app:layout_constraintStart_toEndOf="@id/tv_withdraw_num"
+        app:layout_constraintTop_toTopOf="@id/tv_withdraw_num" />
 
     <androidx.legacy.widget.Space
         android:id="@+id/space"
