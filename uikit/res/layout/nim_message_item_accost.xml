@@ -37,6 +37,7 @@
         android:id="@+id/rl_accost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_chat_gift_right"
         android:layout_marginTop="@dimen/dp_10">
 
         <FrameLayout

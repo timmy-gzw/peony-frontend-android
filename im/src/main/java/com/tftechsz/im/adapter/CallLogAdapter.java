@@ -36,10 +36,11 @@ public class CallLogAdapter extends BaseQuickAdapter<CallLogDto, DataBindBaseVie
             binding.desc.setTextColor(Color.parseColor(bean.color));
         }
 
-        if (bean.is_tag) {
-            binding.ivCall.setImageResource(bean.isVideo() ? R.drawable.peony_xx_sp_icon01 : R.drawable.peony_xx_yy_icon01);
-        } else {
-            binding.ivCall.setImageResource(bean.isVideo() ? R.drawable.peony_xx_sp_icon02 : R.drawable.peony_xx_yy_icon02);
-        }
+        //20220625 hide
+//        if (bean.is_tag) {
+//            binding.ivCall.setImageResource(bean.isVideo() ? R.drawable.peony_xx_sp_icon01 : R.drawable.peony_xx_yy_icon01);
+//        } else {
+//            binding.ivCall.setImageResource(bean.isVideo() ? R.drawable.peony_xx_sp_icon02 : R.drawable.peony_xx_yy_icon02);
+//        }
     }
 }
