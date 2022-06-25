@@ -58,7 +58,7 @@
             android:paddingEnd="@dimen/dp_10"
             android:paddingBottom="@dimen/dp_3"
             android:text="解除"
-            android:textColor="@color/color_normal"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

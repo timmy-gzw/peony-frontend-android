@@ -110,7 +110,7 @@ public class BlackListActivity extends BaseListActivity<FriendDto> implements Vi
 
     @Override
     public int setEmptyImg() {
-        return R.mipmap.mine_ic_black_empty;
+        return R.mipmap.ic_empty2;
     }
 
     @Override

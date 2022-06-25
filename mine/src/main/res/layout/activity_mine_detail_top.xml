@@ -67,14 +67,19 @@
                     android:scaleType="centerCrop"
                     android:visibility="gone"
                     app:layout_constraintDimensionRatio="1"
-                    app:layout_constraintLeft_toLeftOf="@id/iv_voice"
-                    app:layout_constraintTop_toTopOf="@id/iv_voice"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_voice"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:lottie_autoPlay="true"
                     app:lottie_fileName="voice_record.json"
                     app:lottie_imageAssetsFolder="gift/"
                     app:lottie_loop="true"
                     tools:visibility="visible" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="iv_voice,lottie_voice" />
 
                 <TextView
                     android:id="@+id/tv_voice_time"
@@ -88,8 +93,8 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_15"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/lottie_voice"
-                    tools:text="1s" />
+                    app:layout_constraintStart_toEndOf="@id/barrier"
+                    tools:text="去录制" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
