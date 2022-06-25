@@ -243,6 +243,7 @@ public class DynamicRecommendPresenter extends BasePresenter<IDynamicView> {
      * 动态评论
      */
     public void trendComment(int blog_id, int comment_id, String content) {
+        getView().showLoadingDialog();
         addNet((comment_id == 0 ?
                 service.trendComment(blog_id, content)
                 : service.trendCommentReply(comment_id, content))
@@ -252,9 +253,15 @@ public class DynamicRecommendPresenter extends BasePresenter<IDynamicView> {
                     @Override
                     public void onSuccess(BaseResponse<Boolean> response) {
                         if (null == getView()) return;
+                        getView().hideLoadingDialog();
                         getView().commentSuccess(response.getData());
                     }
 
+                    @Override
+                    public void onFail(int code, String msg) {
+                        super.onFail(code, msg);
+                        getView().hideLoadingDialog();
+                    }
                 }));
 
     }

@@ -47,6 +47,7 @@ import com.tftechsz.common.entity.UserViewInfo;
 import com.tftechsz.common.entity.VideoInfo;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.player.controller.MyVideoController;
 import com.tftechsz.common.player.other.VideoClickEvent;
 import com.tftechsz.common.player.view.MyErrorView;
@@ -604,6 +605,11 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
         }
         // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditView上，和用户用轨迹球选择其他的焦点
         return false;
+    }
+
+    @Override
+    public void showLoadingDialog() {
+        runOnUiThread(() -> GlobalDialogManager.getInstance().show(getFragmentManager(), "发送中..."));
     }
 
     @Override

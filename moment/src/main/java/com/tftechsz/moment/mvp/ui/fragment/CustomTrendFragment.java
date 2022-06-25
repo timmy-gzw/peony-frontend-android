@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -762,6 +763,17 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
 //        recyclerView.setItemViewCacheSize(mAdapter.getItemCount());
     }
 
+    @Override
+    public View getListEmptyView() {
+        View emptyView = super.getListEmptyView();
+        TextView tvEmpty = emptyView.findViewById(R.id.tv_empty);
+        if (uid == -1) {
+            if (tvEmpty != null) tvEmpty.setText("暂无动态 快去发表动态");
+        } else {
+            if (tvEmpty != null) tvEmpty.setText("暂无动态");
+        }
+        return emptyView;
+    }
 
     @Override
     public void onPause() {
