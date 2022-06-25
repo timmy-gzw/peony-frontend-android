@@ -38,8 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            android:contentDescription="@string/empty"
             android:scaleType="center"
+            android:contentDescription="@string/empty"
             android:src="@drawable/nim_message_input_keyboard_pressed"
             android:visibility="gone" />
     </FrameLayout>
@@ -50,21 +50,22 @@
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/switchLayout"
-        android:layout_marginStart="@dimen/dp_size_5"
         android:layout_toLeftOf="@+id/sendLayout"
         android:layout_toRightOf="@+id/switchLayout"
-        android:minHeight="@dimen/dp_40">
+        android:minHeight="@dimen/dp_size_35">
 
         <Button
             android:id="@+id/audioRecord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_record"
-            android:minHeight="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_size_8"
+            android:minHeight="@dimen/dp_size_35"
             android:stateListAnimator="@null"
             android:text="@string/record_audio"
-            android:textColor="@color/color_black_333333"
-            android:textSize="16sp"
+            android:textColor="#999999"
+            android:textStyle="bold"
+            android:textSize="14sp"
             android:visibility="gone" />
 
         <EditText
@@ -77,12 +78,12 @@
             android:hint="请输入消息…"
             android:maxHeight="72dip"
             android:maxLines="4"
-            android:minHeight="@dimen/dp_40"
+            android:minHeight="@dimen/dp_size_35"
             android:paddingStart="10dp"
             android:textColor="@color/black"
             android:textColorHint="#CCCCCC"
             android:textCursorDrawable="@drawable/color_cursor"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </FrameLayout>
 
 
@@ -105,7 +106,7 @@
         android:layout_toLeftOf="@+id/sendLayout"
         android:paddingTop="@dimen/dp_size_3"
         android:paddingBottom="@dimen/dp_size_3"
-        android:layout_marginRight="@dimen/dp_size_6"
+        android:layout_marginRight="@dimen/dp_size_10"
         android:src="@drawable/nim_message_input_emotion_pressed"
         android:visibility="visible" />
 
@@ -130,7 +131,7 @@
         <TextView
             android:id="@+id/buttonSendMessage"
             android:layout_width="@dimen/dp_60"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_size_35"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/dp_size_5"
             android:layout_marginRight="@dimen/dp_4"
@@ -200,12 +201,14 @@
             android:layout_weight="1"
             android:gravity="center_horizontal">
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/chat_input_gift"
-                android:layout_width="wrap_content"
-                android:src="@drawable/input_panel_gift"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp" />
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="5dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="gift_animation.zip"
+                app:lottie_loop="false" />
 
         </LinearLayout>
 

@@ -89,7 +89,9 @@ public class CallLogFragment extends BaseMvpFragment<ICallLogView, CallLogPresen
                 int ids = from ? data.to_user_id : data.from_user_id;
                 ARouterUtils.toChatP2PActivity(String.valueOf(ids), NimUIKit.getCommonP2PSessionCustomization(), null);
             } else if (id == R.id.icon) { //点击头像
-                ARouterUtils.toMineDetailActivity(String.valueOf(data.to_user_id));
+                boolean from = data.is_from;  // // true-主叫方 false-被叫方
+                int ids = from ? data.to_user_id : data.from_user_id;
+                ARouterUtils.toMineDetailActivity(String.valueOf(ids));
             } else if (id == R.id.end_call) { //拨打电话/视频
                 if (!ClickUtil.canOperate()) return;
                 if (CommonUtil.showCallTip(partyService)) {

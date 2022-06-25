@@ -41,7 +41,7 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
     private FrameLayout mFlGift;
     private FrameLayout mFlImage;
     private LinearLayout mLlContent,mLlTotal;
-    private TextView tvSend;
+    private TextView tvSend,tvSendRight;
     private TextView mTvGift,mTvGiftNum,mTvFromUserName,mTvGiftBtn;
     private LinearLayout mLlLeft,mLlRight;
     private ImageView mIvFromUserAvatarRight;
@@ -63,6 +63,7 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
         mLlContent = findViewById(R.id.ll_content);
         mFlImage = findViewById(R.id.fl_image);
         tvSend = findViewById(R.id.tv_send);
+        tvSendRight = findViewById(R.id.tv_send_right);
         mTvGift = findViewById(R.id.tv_gift);
         mTvGiftNum = findViewById(R.id.tv_gift_num);
         mTvFromUserName = findViewById(R.id.tv_from_user_name);
@@ -95,7 +96,8 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
             mFlGift.setPadding(ScreenUtil.dip2px(0), 0, 0, 0);
             typeImage.setPadding(ScreenUtil.dip2px(5), 0, 0, 0);
             mTvGift.setGravity(Gravity.END);
-            mTvGiftBtn.setText("回礼");
+            mTvGiftBtn.setText("回赠礼物");
+            tvSend.setText("送给你");
             mLlRight.setVisibility(View.GONE);
             mLlLeft.setVisibility(View.VISIBLE);
         } else {
@@ -108,6 +110,7 @@ public class MsgViewHolderGift extends MsgViewHolderBase implements MsgAdapter.O
             mLlContent.setPadding(ScreenUtil.dip2px(0), 0, 0, 0);
             typeImage.setPadding(0, 0, ScreenUtil.dip2px(5), 0);
             mTvGiftBtn.setText("继续送礼");
+            tvSendRight.setText("送出礼物");
             mLlLeft.setVisibility(View.GONE);
             mLlRight.setVisibility(View.VISIBLE);
         }

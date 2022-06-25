@@ -157,8 +157,8 @@
 
                 <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
                     android:id="@+id/iv_left"
-                    android:layout_width="@dimen/dp_40"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
                     android:layout_centerVertical="true" />
 
                 <ImageView
@@ -171,9 +171,10 @@
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/iv_love"
-                    android:layout_width="@dimen/dp_40"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
                     android:layout_centerVertical="true"
+                    android:layout_marginBottom="@dimen/dp_7"
                     android:layout_toEndOf="@+id/iv_h1"
                     app:lottie_fileName="love1.zip"
                     app:lottie_loop="true" />
@@ -181,12 +182,11 @@
 
                 <TextView
                     android:id="@+id/tv_love"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="亲密度6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_love"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_10" />
 
@@ -200,8 +200,8 @@
 
                 <com.netease.nim.uikit.common.ui.imageview.AvatarImageView
                     android:id="@+id/iv_right"
-                    android:layout_width="@dimen/dp_40"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/iv_h2" />
 

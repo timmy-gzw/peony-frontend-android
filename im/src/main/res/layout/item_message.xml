@@ -155,8 +155,8 @@
             android:layout_gravity="center_vertical|end"
             android:drawablePadding="@dimen/dp_3"
             android:text="123"
-            android:textColor="#F77975"
-            android:textSize="@dimen/sp_12"
+            android:textColor="#FF5C97"
+            android:textSize="@dimen/sp_10"
             app:drawableStartCompat="@mipmap/chat_ic_intimacy_red_heart" />
 
     </LinearLayout>

@@ -10,9 +10,9 @@
 
     <FrameLayout
         android:id="@+id/fl_gift"
+        android:layout_marginTop="@dimen/dp_size_5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10">
+        android:layout_height="wrap_content">
 
         <FrameLayout
             android:id="@+id/fl_image"
@@ -49,6 +49,7 @@
                     android:id="@+id/tv_from_user_name"
                     tools:text="时光清浅"
                     android:textSize="@dimen/sp_12"
+                    android:visibility="gone"
                     android:textColor="@color/color_333333"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -56,6 +57,7 @@
                 <com.netease.nim.uikit.common.ui.imageview.CircleImageView
                     android:id="@+id/iv_from_user_avatar"
                     android:layout_width="12dp"
+                    android:visibility="gone"
                     android:src="@drawable/ic_default_avatar"
                     android:layout_margin="3dp"
                     android:layout_height="12dp"/>
@@ -90,6 +92,7 @@
                 <com.netease.nim.uikit.common.ui.imageview.CircleImageView
                     android:id="@+id/iv_from_user_avatar_right"
                     android:layout_width="12dp"
+                    android:visibility="gone"
                     android:src="@drawable/ic_default_avatar"
                     android:layout_margin="3dp"
                     android:layout_height="12dp"/>
@@ -97,6 +100,7 @@
                 <TextView
                     android:id="@+id/tv_from_user_name_right"
                     tools:text="时光清浅"
+                    android:visibility="gone"
                     android:textSize="@dimen/sp_12"
                     android:textColor="@color/color_333333"
                     android:layout_width="wrap_content"
@@ -132,7 +136,6 @@
 
             <TextView
                 android:id="@+id/tv_gift_btn"
-                android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_size_7"
                 android:background="@drawable/bg_record_tip"
                 android:text="继续送礼"
