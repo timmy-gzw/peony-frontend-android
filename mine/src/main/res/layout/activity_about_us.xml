@@ -16,7 +16,7 @@
         android:layout_width="@dimen/dp_96"
         android:layout_height="@dimen/dp_96"
         android:layout_marginTop="@dimen/dp_60"
-        android:background="@mipmap/mine_ic_launcher"
+        android:background="@mipmap/ic_launcher_s"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/base_tool_bar" />
@@ -104,8 +104,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_12"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:textColor="@color/color_mid_font"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -44,7 +44,7 @@
     <string name="video_transitions">video_transitions</string>
     <string name="transition_aac_add">transition_aac_add</string>
     <string name="transition_aac_recy">transition_aac_recy</string>
-    <string name="auditing">真人认证审核中...</string>
+    <string name="auditing">真人认证审核中…</string>
 
     <string name="pagestate_no_network_title">无网络</string>
     <string name="pagestate_no_network_msg">打开网络或者wifi才能获取数据</string>
@@ -52,7 +52,7 @@
     <string name="pagestate_cancel">取消</string>
     <string name="page_loading">加载中…</string>
     <string name="pagestate_click_to_retry">重试</string>
-    <string name="pagestate_error_occurs">哎呀，网络走丢了～</string>
+    <string name="pagestate_error_occurs">网络异常 请刷新</string>
     <string name="pagestate_empty_msg">咦…没有任何内容，先去逛逛别的吧</string>
     <string name="user_no_exist">该用户已不存在</string>
     <string name="user_is_disable">该用户已被封禁</string>
