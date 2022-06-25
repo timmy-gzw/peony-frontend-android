@@ -62,10 +62,6 @@ public class MsgViewHolderReplyAccost extends MsgViewHolderBase {
 
     }
 
-    @Override
-    protected boolean isShowHeadImage() {
-        return false;
-    }
 
     private void refreshContent() {
         ChatMsg chatMsg = ChatMsgUtil.parseMessage(message);
@@ -102,7 +98,7 @@ public class MsgViewHolderReplyAccost extends MsgViewHolderBase {
         @Override
         protected void convert(BaseViewHolder helper, ChatMsg.AccostGift item, int position, boolean isScrolling) {
             ImageView typeImage = helper.getView(R.id.message_item_img);
-            helper.setText(R.id.tv_gift,item.name + "x1");
+            helper.setText(R.id.tv_gift,item.name);
             RequestOptions options = new RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .transforms(new CenterCrop(), new RoundedCorners(ScreenUtil.dip2px(4)))

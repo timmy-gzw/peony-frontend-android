@@ -29,7 +29,7 @@ public class MsgViewHolderAccost extends MsgViewHolderBase {
     private TextView tvContent;
     private ImageView ivRedPackage;
     private LinearLayout avchatContent;
-    private RelativeLayout rlAccost;  //自己搭讪时的图片
+    private LinearLayout rlAccost;  //自己搭讪时的图片
     private TextView mTvGift;
 
     public MsgViewHolderAccost(BaseMultiItemFetchLoadAdapter adapter) {
@@ -86,7 +86,7 @@ public class MsgViewHolderAccost extends MsgViewHolderBase {
                     .dontTransform()//这个方法就是取消图片变化效果
                     .transforms(new CenterCrop(), new RoundedCorners(ScreenUtil.dip2px(4)))
                     .dontAnimate();
-            mTvGift.setText(accostGift.gift_info.name + "x1");
+            mTvGift.setText(accostGift.gift_info.name);
             Glide.with(context)                             //配置上下文
                     .asBitmap()
                     .apply(options)

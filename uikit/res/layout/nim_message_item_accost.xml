@@ -33,17 +33,19 @@
     </LinearLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_size_25"
         android:id="@+id/rl_accost"
         android:layout_width="wrap_content"
+        android:paddingTop="@dimen/dp_8"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_chat_gift_right"
-        android:layout_marginTop="@dimen/dp_10">
+        android:background="@drawable/bg_chat_gift_right">
 
         <FrameLayout
             android:id="@+id/rl_image"
-            android:layout_width="96dp"
-            android:layout_height="90dp">
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/message_item_img"
@@ -55,10 +57,11 @@
         </FrameLayout>
 
         <LinearLayout
+            android:layout_weight="1"
             android:id="@+id/ll_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:gravity="right"
             android:layout_marginStart="@dimen/dp_size_10"
             android:layout_toEndOf="@+id/rl_image"
             android:orientation="vertical"
@@ -69,19 +72,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="送出搭讪礼物"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12" />
 
 
-            <TextView
-                android:id="@+id/tv_gift"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#FF5A7B"
-                android:textSize="15sp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_gift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14" />
+                <TextView
+                    android:id="@+id/tv_gift_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="x1"
+                    android:textStyle="bold"
+                    android:textColor="#FF5A7B"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
 
         </LinearLayout>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
