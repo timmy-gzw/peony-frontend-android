@@ -719,7 +719,7 @@ public class CommonUtil {
                 return;
             }
             if (substring.equals(Interfaces.LINK_PEONY_NOTE_VALUE)) { //音符值
-                ARouterUtils.toMineIntegralActivity(1);
+//                ARouterUtils.toMineIntegralActivity(1);
                 return;
             }
             if (substring.equals(Interfaces.LINK_PEONY_PARTY_SELF_CHECK)) { //派对实名认证
