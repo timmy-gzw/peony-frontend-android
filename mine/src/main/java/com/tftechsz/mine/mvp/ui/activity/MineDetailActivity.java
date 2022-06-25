@@ -585,8 +585,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             //首页搭讪 2  个人资料页搭讪 3  动态搭讪 4  相册搭讪 5
             RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PIC_ACCOST_SUCCESS, mUserInfo.getUser_id()));
             CommonUtil.sendAccostGirlBoy(service, mUserInfo.getUser_id(), data, 3);
-            if (service.getUserInfo().getSex() == 1 && data != null) {
-                CommonUtil.playJsonAnimation(mLottie, data.gift.animation, 0);
+            if (data != null && data.gift != null) {
+                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
             }
             if (mConfig != null && mConfig.share_config != null && service.getUserInfo().getSex() != 1) {   //女性用户看其他人信息
                 if (mConfig.share_config.is_detail_style_new == 1) {   //只显示私信

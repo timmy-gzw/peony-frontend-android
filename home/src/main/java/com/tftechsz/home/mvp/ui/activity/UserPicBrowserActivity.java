@@ -272,6 +272,9 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
             RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PIC_ACCOST_SUCCESS, mPictureBean.getUser_id()));
             //首页搭讪 2  个人资料页搭讪 3  动态搭讪 4  相册搭讪 5
             CommonUtil.sendAccostGirlBoy(service, mPictureBean.getUser_id(), data, 5);
+            if (data != null && data.gift != null) {
+                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
+            }
         }
     }
 
