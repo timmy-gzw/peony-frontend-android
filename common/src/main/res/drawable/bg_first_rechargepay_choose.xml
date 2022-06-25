@@ -32,7 +32,7 @@
             <corners android:radius="@dimen/dp_6" />
             <stroke
                 android:width="@dimen/dp_1"
-                android:color="#F8D423" />
+                android:color="#FE4D6B" />
         </shape>
     </item>
 </layer-list>

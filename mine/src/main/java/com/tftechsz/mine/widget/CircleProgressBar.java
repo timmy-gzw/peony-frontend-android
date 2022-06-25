@@ -19,7 +19,7 @@ public class CircleProgressBar extends View {
     private int strokeWidth = 5;//线条宽度
     private RectF rectF;
     private int normalColor = Color.parseColor("#4DF8D423");//普通的颜色
-    private int progressColor = Color.parseColor("#F8D423");//已经走了的进度条颜色
+    private int progressColor = Color.parseColor("#FE4D6B");//已经走了的进度条颜色
     private int textColor = normalColor;//文字颜色
     private float textSize = 20;//文字大小
     private float progress = 0;//进度条

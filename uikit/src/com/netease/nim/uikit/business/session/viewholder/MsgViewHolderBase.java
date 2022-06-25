@@ -773,11 +773,11 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
         if (tvRead != null && mUserInfo != null && mUserInfo.isVip() && message.getSessionType() == SessionTypeEnum.P2P) {
             tvRead.setVisibility(View.VISIBLE);
             if (message.isRemoteRead()) {
-                tvRead.setTextColor(Color.parseColor("#cccccc"));
+                tvRead.setTextColor(Color.parseColor("#FFFFFF"));
                 tvRead.setText("已读");
             } else {
                 tvRead.setText("未读");
-                tvRead.setTextColor(Color.parseColor("#7F89F3"));
+                tvRead.setTextColor(Color.parseColor("#cccccc"));
             }
         }
 

@@ -252,7 +252,7 @@
                     app:tl_divider_color="#F9F9F9"
                     app:tl_indicator_anim_enable="true"
                     app:tl_indicator_bounce_enable="false"
-                    app:tl_indicator_color="#F8D423"
+                    app:tl_indicator_color="#FE4D6B"
                     app:tl_textSelectColor="#333333"
                     app:tl_textSize="@dimen/sp_12"
                     app:tl_textUnSelectColor="#999999"

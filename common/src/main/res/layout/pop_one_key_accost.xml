@@ -35,11 +35,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_pop_pic" />
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"

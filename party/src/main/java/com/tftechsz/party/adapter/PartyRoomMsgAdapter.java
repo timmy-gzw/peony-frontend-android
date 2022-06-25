@@ -304,7 +304,7 @@ public class PartyRoomMsgAdapter extends BaseMultiItemQuickAdapter<MultipleChatR
                 bgId = Integer.parseInt(chatBubble);
             }
         }
-        String nickNameColor = bgId >= 100 ? "#F8D423" : "#999999";
+        String nickNameColor = bgId >= 100 ? "#FE4D6B" : "#999999";
         if (message.getCallbackExtension() != null) {
             ChatMsg chatMsg = ChatMsgUtil.parseMessage(message.getCallbackExtension());
             try {
@@ -359,7 +359,7 @@ public class PartyRoomMsgAdapter extends BaseMultiItemQuickAdapter<MultipleChatR
                 String content = message.getContent();  // 赠送给 大意的项链 [http://public-cdn1.peony125.com/gift/private_msg/小心心.png] x1
                 String url = content.substring(content.indexOf("[http") + 1, content.lastIndexOf("]"));
                 spannableString.append(content.substring(0, content.indexOf("[")));
-                spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#F8D423")), 0, content.substring(0, content.indexOf("[")).length(),
+                spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FE4D6B")), 0, content.substring(0, content.indexOf("[")).length(),
                         Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                 Map<String, Object> remote = message.getRemoteExtension();
                 if (remote != null) {

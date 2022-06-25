@@ -24,14 +24,15 @@
             android:background="@mipmap/ic_pull_wires"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimary" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/dp_62"
             android:layout_height="@dimen/dp_62"
             android:scaleType="centerCrop"
-            app:riv_border_color="@color/color_F8D423"
+            app:riv_border_color="@color/colorPrimary"
             app:riv_border_width="@dimen/dp_2"
             app:riv_corner_radius="@dimen/dp_100" />
 

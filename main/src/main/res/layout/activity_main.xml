@@ -215,7 +215,7 @@
           android:gravity="center"
           android:padding="0dp"
           android:text="全选"
-          android:textColor="@color/color_333333"
+          android:textColor="@color/white"
           android:textSize="@dimen/sp_18"
           app:layout_constraintEnd_toStartOf="@id/bot_del"
           app:layout_constraintStart_toStartOf="parent" />

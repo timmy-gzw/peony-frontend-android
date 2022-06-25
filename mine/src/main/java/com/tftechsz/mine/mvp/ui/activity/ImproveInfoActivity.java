@@ -43,7 +43,6 @@ import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.CustomFilter;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
-import com.tftechsz.mine.BuildConfig;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.req.CompleteReq;
 import com.tftechsz.mine.mvp.IView.IImproveInfoView;
@@ -226,7 +225,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
             }
         } else if (id == R.id.tv_complete) {   //完成
             if (!ClickUtil.canOperate()) return;
-            if (!BuildConfig.DEBUG && mCompleteReq.sex == 2 && !isChangedIcon) {
+            if (mCompleteReq.sex == 2 && !isChangedIcon) {
                 toastTip("请上传您的头像");
                 return;
             }

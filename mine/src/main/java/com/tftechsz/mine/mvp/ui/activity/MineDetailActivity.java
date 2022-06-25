@@ -705,7 +705,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         } else {
             if (TextUtils.isEmpty(mUserInfo.voice)) {   //没有音视频文件
                 mIvVoice.setBackgroundResource(R.mipmap.mine_ic_voice_record);
-                mTvVoiceTime.setText("去录制");
+                mTvVoiceTime.setText("录制语音");
                 mLlVoice.setVisibility(TextUtils.isEmpty(mUserId) ? View.VISIBLE : View.GONE);
             } else {
                 mIvVoice.setBackgroundResource(R.mipmap.mine_ic_voice_stop);

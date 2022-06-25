@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收到礼物"
-            android:textColor="#F8D423"
+            android:textColor="#FE4D6B"
             android:textSize="15sp" />
 
     </LinearLayout>

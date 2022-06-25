@@ -93,7 +93,7 @@ public class MsgViewHolderAirdropReceive extends MsgViewHolderBase {
                 ds.setUnderlineText(false);
             }
         }, start, start + airdropOpen.text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#F8D423")), start, start + airdropOpen.text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FE4D6B")), start, start + airdropOpen.text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mDesc.setText(builder);
         mDesc.setMovementMethod(LinkMovementMethod.getInstance());
 

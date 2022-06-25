@@ -94,7 +94,7 @@
                     android:textSize="@dimen/sp_15"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/barrier"
-                    tools:text="去录制" />
+                    tools:text="录制语音" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

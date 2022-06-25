@@ -103,7 +103,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
         Random random = new Random();
         int number = random.nextInt(mMax - mMin) + mMin + 1;
         String text1 = "附近有 ";
-        String text2 = number + "“位已真人认证”";
+        String text2 = number + "位“已真人认证”";
         String text3 = " 用户在线\n登录即可查看";
         SpannableStringBuilder spanString = new SpannableStringBuilder();
         StringBuilder stringBuffer = new StringBuilder();
@@ -227,7 +227,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
     private void editListener() {
         String code = Utils.getText(mEtCode);
         tvLogin.setEnabled(!TextUtils.isEmpty(Utils.getText(mEtPhone))
-                && !TextUtils.isEmpty(code) && code.length() >= 4);
+                && !TextUtils.isEmpty(code) && code.length() == 4);
     }
 
     private class MyInputFilter implements TextWatcher {

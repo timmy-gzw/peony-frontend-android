@@ -142,7 +142,7 @@ public class PhoneCode extends RelativeLayout {
      */
     private void setColor() {
         int color_default = Color.parseColor("#EEEEEE");
-        int color_focus = Color.parseColor("#F8D423");
+        int color_focus = Color.parseColor("#FE4D6B");
         v1.setBackgroundColor(color_default);
         v2.setBackgroundColor(color_default);
         v3.setBackgroundColor(color_default);

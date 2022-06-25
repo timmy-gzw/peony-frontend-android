@@ -93,8 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/bg_white_radius20"
-        android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@id/tv_complete"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@id/space">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -253,24 +252,26 @@
                 android:textColor="@color/color_normal"
                 android:textColorHint="@color/color_light_font"
                 android:textSize="@dimen/sp_14"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_birthday" />
 
+            <TextView
+                android:id="@+id/tv_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:background="@drawable/sel_login_btn"
+                android:gravity="center"
+                android:paddingTop="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_12"
+                android:text="完成"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_code" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/tv_complete"
-        style="@style/CustomButton"
-        android:layout_marginStart="@dimen/dp_30"
-        android:layout_marginEnd="@dimen/dp_30"
-        android:layout_marginBottom="@dimen/dp_30"
-        android:background="@drawable/sel_login_btn"
-        android:text="完成"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
