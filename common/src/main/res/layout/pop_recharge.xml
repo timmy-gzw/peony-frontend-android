@@ -65,7 +65,7 @@
                 android:id="@+id/tv_recharge_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="金币余额不足，马上充值别错过缘分～"
+                android:text="金币不足，请充值"
                 android:textColor="@color/color_light_font"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,8 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/tv_recharge"
+                android:layout_marginEnd="@dimen/dp_16"
+                app:layout_constraintBottom_toBottomOf="@id/tv_recharge_tip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_recharge">
 
@@ -83,16 +84,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/dp_4"
-                    android:layout_marginEnd="@dimen/dp_8"
-                    android:background="@drawable/bg_gray_radius15"
+                    android:background="@drawable/bg_gray_radius100"
                     android:gravity="center"
+                    android:includeFontPadding="false"
                     android:paddingStart="@dimen/dp_44"
                     android:paddingTop="@dimen/dp_8"
                     android:paddingEnd="@dimen/dp_12"
                     android:paddingBottom="@dimen/dp_8"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/sp_10"
+                    android:textColor="#F39101"
+                    android:textSize="@dimen/sp_18"
                     tools:text="10金币" />
 
                 <ImageView

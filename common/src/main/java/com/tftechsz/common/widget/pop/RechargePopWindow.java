@@ -27,11 +27,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.alipay.sdk.app.PayTask;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.PaymentTypeDto;
 import com.netease.nim.uikit.common.UserInfo;
+import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -152,6 +154,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         mRvRecharge = findViewById(R.id.rv_recharge);
         mTvPay = findViewById(R.id.tv_pay);
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3);
+        mRvRecharge.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), false));
         mRvRecharge.setLayoutManager(layoutManager);
         findViewById(R.id.iv_close).setOnClickListener(v -> dismiss());
         findViewById(R.id.tv_pay).setOnClickListener(this);
@@ -286,7 +289,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
      * @param coin
      */
     public void setCoin(String coin) {
-        mTvCoin.setText(coin + "金币");
+        mTvCoin.setText(coin);
     }
 
     @Override

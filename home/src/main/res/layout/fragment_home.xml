@@ -7,17 +7,22 @@
     android:background="@color/white"
     android:fillViewport="true">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="196dp"
+        android:background="@mipmap/bg_home_top" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/transparent"
         android:orientation="vertical"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -71,16 +76,23 @@
                         android:visibility="gone" />
                 </LinearLayout>
 
-                <com.tftechsz.common.widget.X5WebView
-                    android:id="@+id/webView"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginEnd="@dimen/dp_16"
-                    android:scrollbars="none"
-                    android:visibility="gone"
+                    app:cardCornerRadius="@dimen/dp_10"
+                    app:cardElevation="0dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_home_top_item" />
+                    app:layout_constraintTop_toBottomOf="@+id/ll_home_top_item">
+
+                    <com.tftechsz.common.widget.X5WebView
+                        android:id="@+id/webView"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:scrollbars="none"
+                        android:visibility="gone" />
+                </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -89,16 +101,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <com.flyco.tablayout.SlidingScaleTabLayout
             android:id="@+id/tabLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/home_tab_height"
-            android:layout_marginStart="@dimen/dp_6"
-            android:background="@color/white"
+            android:background="@drawable/bg_white_top_radius20"
+            android:paddingStart="@dimen/dp_6"
+            android:paddingEnd="@dimen/dp_6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.4"
@@ -118,7 +130,8 @@
             app:tl_textSelectSize="@dimen/sp_18"
             app:tl_textUnSelectColor="@color/color_light_font"
             app:tl_textUnSelectSize="@dimen/sp_18"
-            app:tl_underline_gravity="BOTTOM" />
+            app:tl_underline_gravity="BOTTOM"
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:id="@+id/iv_search"

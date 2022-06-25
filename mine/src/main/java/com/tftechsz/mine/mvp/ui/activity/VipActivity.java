@@ -12,11 +12,13 @@ import android.text.style.UnderlineSpan;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.ARouterApi;
@@ -74,20 +76,27 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
         return 0;
     }
 
+    @Override
+    protected boolean getImmersionBar() {
+        return false;
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void initView(Bundle savedInstanceState) {
         //ImmersionBar.setTitleBar(this, mBind.root);
         mPayId = getIntent().getIntExtra(Interfaces.EXTRA_ID, 0);
-        ImmersionBar.with(this).barColor(R.color.transparent).statusBarDarkFont(false).init();
+        ImmersionBar.with(this).fullScreen(true).titleBar(mBind.toolbar).statusBarDarkFont(false).init();
         mBind.tvTitle.setText("VIP会员");
         mBind.ivBack.setOnClickListener(v -> finish());
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mBind.vipCl1.getLayoutParams();
+        layoutParams.topMargin = ImmersionBar.getStatusBarHeight(mActivity) + ConvertUtils.dp2px(58f);
+        mBind.vipCl1.setLayoutParams(layoutParams);
 
         GlideUtils.loadRouteImage(this, mBind.icon, service.getUserInfo().getIcon(), service.getUserInfo().isBoy() ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
 //        GlideUtils.loadRouteImage(this, mBind.userIcon, service.getUserInfo().getIcon(), service.getUserInfo().isBoy() ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
 
         mBind.name.setText(service.getUserInfo().getNickname());
-        mBind.toolbar.setPadding(0, ImmersionBar.getStatusBarHeight(mActivity), 0, 0);
 
         ConfigInfo configInfo = service.getConfigInfo();
         if (configInfo != null && configInfo.api != null && configInfo.api.vip_recharge != null && configInfo.api.vip_recharge.size() > 0) {

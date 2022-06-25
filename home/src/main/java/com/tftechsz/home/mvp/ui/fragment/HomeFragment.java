@@ -1,5 +1,9 @@
 package com.tftechsz.home.mvp.ui.fragment;
 
+import static android.content.Context.LOCATION_SERVICE;
+import static com.tftechsz.common.Constants.NOTIFY_TOP_SCROLLVIEW;
+import static com.umeng.socialize.utils.ContextUtil.getPackageName;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -20,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -36,12 +42,6 @@ import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.util.DownloadHelper;
 import com.netease.nim.uikit.common.util.MD5Util;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tftechsz.home.R;
-import com.tftechsz.home.api.HomeApiService;
-import com.tftechsz.home.mvp.ui.activity.RadarActivity;
-import com.tftechsz.home.mvp.ui.activity.SearchActivity;
-import com.tftechsz.home.widget.HomeTopItemLayout;
-import com.tftechsz.home.widget.ScrollerForbidView;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpFragment;
@@ -58,22 +58,31 @@ import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.utils.*;
+import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.PermissionUtil;
+import com.tftechsz.common.utils.RxUtil;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.DepthPageTransformer;
 import com.tftechsz.common.widget.X5WebView;
 import com.tftechsz.common.widget.pop.GoStoriesPopWindow;
 import com.tftechsz.common.widget.pop.RechargeBeforePop;
 import com.tftechsz.common.widget.pop.RechargePopWindow;
+import com.tftechsz.home.R;
+import com.tftechsz.home.api.HomeApiService;
+import com.tftechsz.home.mvp.ui.activity.RadarActivity;
+import com.tftechsz.home.mvp.ui.activity.SearchActivity;
+import com.tftechsz.home.widget.HomeTopItemLayout;
+import com.tftechsz.home.widget.ScrollerForbidView;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.LOCATION_SERVICE;
-import static com.tftechsz.common.Constants.NOTIFY_TOP_SCROLLVIEW;
-import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 @Route(path = ARouterApi.FRAGMENT_HOME)
 public class HomeFragment extends BaseMvpFragment implements View.OnClickListener {
@@ -105,13 +114,14 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             updateLocationUi();
         }
     };
+    private SlidingScaleTabLayout mTabLayout;
 
     public void updateLocationUi() {
         boolean enabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         int locationType = enabled ? 1 : 0;
         if (enabled) {
             boolean permission = (PackageManager.PERMISSION_GRANTED == getActivity().getPackageManager()
-                .checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, getPackageName()));
+                    .checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, getPackageName()));
             if (permission) {
                 locationType = 3;
             } else {
@@ -140,7 +150,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
     public void scrollTop() {
         if (coordinatorLayout != null) {
             CoordinatorLayout.Behavior behavior =
-                ((CoordinatorLayout.LayoutParams) coordinatorLayout.getLayoutParams()).getBehavior();
+                    ((CoordinatorLayout.LayoutParams) coordinatorLayout.getLayoutParams()).getBehavior();
             if (behavior instanceof AppBarLayout.Behavior) {
                 AppBarLayout.Behavior appBarLayoutBehavior = (AppBarLayout.Behavior) behavior;
                 int topAndBottomOffset = appBarLayoutBehavior.getTopAndBottomOffset();
@@ -161,7 +171,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             mOpenLocationType = enabled ? 1 : 0;
             if (enabled) {
                 boolean permission = (PackageManager.PERMISSION_GRANTED == getActivity().getPackageManager()
-                    .checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, getPackageName()));
+                        .checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, getPackageName()));
                 if (permission) {
                     mOpenLocationType = 3;
                 } else {
@@ -173,8 +183,16 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         ImmersionBar.with(this).titleBarMarginTop(R.id.appbarlayout).init();
         partyService = ARouter.getInstance().navigation(PartyService.class);
         coordinatorLayout = getView(R.id.appbarlayout);
+        coordinatorLayout.addOnOffsetChangedListener((AppBarLayout.BaseOnOffsetChangedListener) (appBarLayout, verticalOffset) -> {
+            if (verticalOffset < -150) {
+                if (mTabLayout != null) mTabLayout.setBackgroundResource(R.color.white);
+            } else {
+                if (mTabLayout != null) mTabLayout.setBackgroundResource(R.drawable.bg_white_top_radius20);
+            }
+        });
         mLl_home_top_item = getView(R.id.ll_home_top_item);
         webView = getView(R.id.webView);
+        webView.setBackgroundColor(0);
         webView.getSettings().setJavaScriptEnabled(true);// 支持js
         webView.addJavascriptInterface(new AndroidtoJs(), "android");
         mIvSearch = getView(R.id.iv_search);
@@ -184,7 +202,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         mHomeItem3 = getView(R.id.home_top_item3);
         mHomeItem4 = getView(R.id.home_top_item4);
         mSvMessage = getView(R.id.sv_message);
-        SlidingScaleTabLayout mTabLayout = getView(R.id.tabLayout);
+        mTabLayout = getView(R.id.tabLayout);
         mViewPager = getView(R.id.vp);
         initListener();
         fragments = new ArrayList<>();
@@ -236,7 +254,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             }
         }
         if (service.getConfigInfo() == null || service.getConfigInfo().share_config == null
-            || service.getConfigInfo().share_config.home_tab_config == null) {
+                || service.getConfigInfo().share_config.home_tab_config == null) {
             return;
         }
 
@@ -265,7 +283,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         mViewPager.setPageTransformer(true, new DepthPageTransformer());
 
         if (service.getConfigInfo().share_config != null &&
-            (/*AppUtils.isAppDebug() ||*/ service.getConfigInfo().share_config.is_show_search == 1)) {
+                (/*AppUtils.isAppDebug() ||*/ service.getConfigInfo().share_config.is_show_search == 1)) {
             mIvSearch.setVisibility(View.VISIBLE);
         }
     }
@@ -304,38 +322,38 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
      */
     private void initBus() {
         mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
-            .compose(this.bindToLifecycle())
-            .subscribe(
-                event -> {
-                    if (event.type == Constants.NOTIFY_TOP_CONFIG) {
-                        Utils.runOnUiThread(this::initTop);
-                    } else if (event.type == Constants.NOTIFY_DOWN_HOT_SUCCESS) {
-                        if (service.getConfigInfo() != null && service.getConfigInfo().sys != null && service.getConfigInfo().sys.loading_h5 != null) {
-                            showHot();
+                .compose(this.bindToLifecycle())
+                .subscribe(
+                        event -> {
+                            if (event.type == Constants.NOTIFY_TOP_CONFIG) {
+                                Utils.runOnUiThread(this::initTop);
+                            } else if (event.type == Constants.NOTIFY_DOWN_HOT_SUCCESS) {
+                                if (service.getConfigInfo() != null && service.getConfigInfo().sys != null && service.getConfigInfo().sys.loading_h5 != null) {
+                                    showHot();
+                                }
+                            } else if (NOTIFY_TOP_SCROLLVIEW == event.type) {
+                                scrollTop();
+                            } else if (Constants.NOTIFY_NOTICE_H5 == event.type) {
+                                if (webView != null)
+                                    webView.loadUrl("javascript:setNotify('" + event.code + "')");
+                            }
                         }
-                    } else if (NOTIFY_TOP_SCROLLVIEW == event.type) {
-                        scrollTop();
-                    } else if (Constants.NOTIFY_NOTICE_H5 == event.type) {
-                        if (webView != null)
-                            webView.loadUrl("javascript:setNotify('" + event.code + "')");
-                    }
-                }
-            ));
+                ));
 
         mCompositeDisposable.add(RxBus.getDefault().toObservable(MessageEvent.class)
-            .compose(this.bindToLifecycle())
-            .subscribe(event -> {
-                    Utils.runOnUiThread(() -> {
-                        if (event != null && event.messageInfoList != null && event.messageInfoList.size() > 0) {
-                            mSvMessage.setVisibility(View.VISIBLE);
-                            mSvMessage.loadMessage(event.messageInfoList);
-                        } else {
-                            mSvMessage.setVisibility(View.GONE);
-                            mSvMessage.stopLoop();
+                .compose(this.bindToLifecycle())
+                .subscribe(event -> {
+                            Utils.runOnUiThread(() -> {
+                                if (event != null && event.messageInfoList != null && event.messageInfoList.size() > 0) {
+                                    mSvMessage.setVisibility(View.VISIBLE);
+                                    mSvMessage.loadMessage(event.messageInfoList);
+                                } else {
+                                    mSvMessage.setVisibility(View.GONE);
+                                    mSvMessage.stopLoop();
+                                }
+                            });
                         }
-                    });
-                }
-            ));
+                ));
     }
 
 
@@ -581,9 +599,9 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                                 }
                             }
                             ARouter.getInstance()
-                                .navigation(MineService.class)
-                                .trackEvent("家族首页点击", "click", "family_home_click",
-                                    JSON.toJSONString(new BuriedPointExtendDto(new BuriedPointExtendDto.FamilyExtendDto(cusFamilyId))), null);
+                                    .navigation(MineService.class)
+                                    .trackEvent("家族首页点击", "click", "family_home_click",
+                                            JSON.toJSONString(new BuriedPointExtendDto(new BuriedPointExtendDto.FamilyExtendDto(cusFamilyId))), null);
 
                         }
                         CommonUtil.performLink(mActivity, new ConfigInfo.MineInfo(nav.link), 0, 0);
@@ -650,33 +668,33 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
      */
     private void initPermissions(int type) {
         mCompositeDisposable.add(new RxPermissions(this)
-            .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
-            .subscribe(aBoolean -> {
-                if (aBoolean) {
-                    getUserInfo(type);
-                } else {
-                    PermissionUtil.showPermissionPop(getActivity());
-                }
-            }));
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
+                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        getUserInfo(type);
+                    } else {
+                        PermissionUtil.showPermissionPop(getActivity());
+                    }
+                }));
     }
 
 
     public void getUserInfo(int type) {
         HomeApiService homeApiService = RetrofitManager.getInstance().createUserApi(HomeApiService.class);
         mCompositeDisposable.add(homeApiService.getUserInfo().compose(RxUtil.applySchedulers())
-            .subscribeWith(new ResponseObserver<BaseResponse<UserInfo>>() {
-                @Override
-                public void onSuccess(BaseResponse<UserInfo> response) {
-                    if (response.getData() != null) {
-                        if (!TextUtils.isEmpty(response.getData().is_ban_msg)) {
-                            toastTip(response.getData().is_ban_msg);
-                        } else {
-                            RadarActivity.startActivity(getActivity(), type);
+                .subscribeWith(new ResponseObserver<BaseResponse<UserInfo>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<UserInfo> response) {
+                        if (response.getData() != null) {
+                            if (!TextUtils.isEmpty(response.getData().is_ban_msg)) {
+                                toastTip(response.getData().is_ban_msg);
+                            } else {
+                                RadarActivity.startActivity(getActivity(), type);
+                            }
                         }
                     }
-                }
-            }));
+                }));
     }
 
     public class AndroidtoJs {

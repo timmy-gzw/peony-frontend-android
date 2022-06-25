@@ -40,12 +40,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ImageView
+                <View
                     android:id="@+id/iv_vip_head_bg"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:src="@mipmap/bg_vip_header"
-                    app:layout_constraintDimensionRatio="375:238"
+                    android:background="@mipmap/bg_vip_header"
+                    app:layout_constraintBottom_toBottomOf="@id/vip_cl1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -58,8 +58,9 @@
                     android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:background="@mipmap/bg_vip_header_1"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_vip_head_bg"
-                    app:layout_constraintDimensionRatio="343:122">
+                    app:layout_constraintDimensionRatio="343:122"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_marginTop="@dimen/dp_58">
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/icon"
@@ -322,7 +323,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:layout_marginBottom="@dimen/dp_40"
                     android:background="@mipmap/bg_vip_privilege"
@@ -370,6 +371,7 @@
                         android:overScrollMode="never"
                         android:paddingStart="@dimen/dp_14"
                         android:paddingEnd="@dimen/dp_14"
+                        android:paddingBottom="@dimen/dp_10"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/t3"
                         tools:itemCount="8"
