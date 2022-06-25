@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="当前金币余额不足2分钟"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#f8d423"
         android:textSize="@dimen/sp_15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
