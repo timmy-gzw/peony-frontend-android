@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_12"
         app:layout_constraintTop_toBottomOf="@id/tv_content">
 
         <!--图片展示区-->
@@ -125,8 +125,7 @@
             android:id="@+id/player_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_210"
-            android:layout_marginHorizontal="@dimen/dp_3_5"
-            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_12"
             app:round_corner="8dp"
             tools:ignore="MissingConstraints">
 

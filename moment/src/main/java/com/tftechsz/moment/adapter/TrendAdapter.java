@@ -17,12 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.like.LikeButton;
-import com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView;
+import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.robinhood.ticker.TickerView;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.CircleBean;
@@ -187,6 +188,12 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
 
     @SuppressLint("ClickableViewAccessibility")
     private void setImgAdapter(RecyclerView rvTrendImage, CircleBean item, ConstraintLayout constraintLayout) {
+        int itemDecorationCount = rvTrendImage.getItemDecorationCount();
+        if (itemDecorationCount > 0) {
+            RecyclerView.ItemDecoration itemDecoration = rvTrendImage.getItemDecorationAt(0);
+            rvTrendImage.removeItemDecoration(itemDecoration);
+        }
+        rvTrendImage.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(12), ConvertUtils.dp2px(12), false));
         rvTrendImage.setVisibility(View.VISIBLE);
         if (item.getMedia().size() > 0) {
             ArrayList<UserViewInfo> userViewInfos = new ArrayList<>();

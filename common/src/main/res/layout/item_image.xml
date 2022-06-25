@@ -6,9 +6,7 @@
     android:layout_height="wrap_content"
     android:clickable="false"
     android:contentDescription="@null"
-    android:focusable="false"
-    android:paddingHorizontal="@dimen/dp_3_5"
-    android:paddingBottom="@dimen/dp_7">
+    android:focusable="false">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv1"

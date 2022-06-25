@@ -34,6 +34,7 @@ import com.flyco.tablayout.SlidingScaleTabLayout;
 import com.like.LikeButton;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.bean.AccostDto;
+import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.robinhood.ticker.TickerView;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.adapter.FragmentVpAdapter;
@@ -399,6 +400,12 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     }
 
     private void setImgAdapter() {
+        int itemDecorationCount = mRvTrendImage.getItemDecorationCount();
+        if (itemDecorationCount > 0) {
+            RecyclerView.ItemDecoration itemDecoration = mRvTrendImage.getItemDecorationAt(0);
+            mRvTrendImage.removeItemDecoration(itemDecoration);
+        }
+        mRvTrendImage.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(12), ConvertUtils.dp2px(12), false));
         mRvTrendImage.setVisibility(View.VISIBLE);
         ArrayList<UserViewInfo> userViewInfos = new ArrayList<>();
         ArrayList<String> urls = new ArrayList<>(dataBean.getMedia());
