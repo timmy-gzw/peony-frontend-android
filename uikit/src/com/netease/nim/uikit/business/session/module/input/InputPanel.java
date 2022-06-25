@@ -289,8 +289,8 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
             }
         }
         //是否点击了
-        if (mIvClickMe != null)
-            mIvClickMe.setVisibility(UserPreferences.isClickCall() ? View.INVISIBLE : View.VISIBLE);
+//        if (mIvClickMe != null)
+//            mIvClickMe.setVisibility(UserPreferences.isClickCall() ? View.INVISIBLE : View.VISIBLE);
 
     }
 

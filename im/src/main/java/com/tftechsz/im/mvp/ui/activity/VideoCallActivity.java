@@ -148,6 +148,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private TextView tvSwitch;  //切换摄像头
     private HeadImageView ivUserIcon;
     private TextView tvCallUser, tvCallComment;
+    private LinearLayout mLlIncome;
     private TextView tvSpeaker, tvMute;
     private TextView mTvCancel;
     private LinearLayout llyBingCall;
@@ -577,7 +578,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     private void setTipViewVisible(View view) {
         tvNetwork.setVisibility(View.GONE);
-        mTvIncome.setVisibility(View.GONE);
         tvCallTip.setVisibility(View.GONE);
         view.setVisibility(View.VISIBLE);
     }
@@ -625,6 +625,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         ivUserIcon = findViewById(R.id.iv_call_user);
         tvCallUser = findViewById(R.id.tv_call_user);
         tvCallComment = findViewById(R.id.tv_call_comment);
+        mLlIncome = findViewById(R.id.ll_income);
         tvSpeaker = findViewById(R.id.iv_speaker_control);  //扬声器
         tvMute = findViewById(R.id.iv_mute_control);
         mTvCancel = findViewById(R.id.tv_cancel);
@@ -927,7 +928,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 rlyTopUserInfo.setVisibility(View.VISIBLE);
                 clVoiceCall.setVisibility(View.VISIBLE);
             }
-        } else {
+            tvCallComment.setText("等待对方接听...");
+        } else {//接听通话
             ChatMsg chatMsg = new ChatMsg();
             chatMsg.cmd_type = "call";
             chatMsg.from = sessionId;
@@ -939,7 +941,13 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             getP().buriedPoint("callEnter", "enter", callId, JSON.toJSONString(chatMsg));
             callIn();
             clVoiceCall.setVisibility(View.VISIBLE);
-            tvCallComment.setVisibility(View.GONE);
+            int sex = service.getUserInfo().getSex(); //用户性别：0.未知，1.男，2.女
+            String text = "语音";
+            if (mChannelType == 2) {//视频
+                text = "视频";
+            }
+            tvCallComment.setText("邀请你"+text+"通话");
+
         }
         if (mChannelType == 1) {  //语音
             mFlVoiceBg.setVisibility(View.VISIBLE);
@@ -1513,9 +1521,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         int start = builder.toString().indexOf(cost);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF5A7B")), start, start + cost.length(),
                 Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        setTipViewVisible(mTvIncome);
         mTvIncome.setText(builder);
-
+        mTvIncome.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -1602,11 +1609,12 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         nertcVideoCall.setStatsObserver();
         if (mCallDir == 0 && !mIsAccept) {
             rvCallChat.setVisibility(View.VISIBLE);
+            tvCallComment.setVisibility(View.GONE);
             if (mChannelType == 2) {  //视频通话
                 llCallVideo.setVisibility(View.VISIBLE);
                 tvSpeaker.setVisibility(View.GONE);
                 tvMute.setVisibility(View.GONE);
-                tvCallComment.setVisibility(View.GONE);
+
                 llVideoTime.setVisibility(View.VISIBLE);
                 videoTime.setBase(SystemClock.elapsedRealtime());
                 videoTime.start();
@@ -1614,7 +1622,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 llAudioTime.setVisibility(View.VISIBLE);
                 clVoiceCall.setVisibility(View.VISIBLE);
                 rlyTopUserInfo.setVisibility(View.VISIBLE);
-                tvCallComment.setVisibility(View.GONE);
                 audioTime.setBase(SystemClock.elapsedRealtime());
                 audioTime.start();
             }
@@ -1631,11 +1638,12 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         }
         if (mCallDir == 1) {
             setupLocalVideo();
+            tvCallComment.setVisibility(View.GONE);
             if (mChannelType == 1) {   //语音
                 llyDialogOperation.setVisibility(View.VISIBLE);
                 llAudioTime.setVisibility(View.VISIBLE);
                 mTvCancel.setVisibility(View.VISIBLE);
-                tvCallComment.setVisibility(View.GONE);
+
                 audioTime.setBase(SystemClock.elapsedRealtime());
                 audioTime.start();
             } else {  //视频
@@ -1646,7 +1654,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 rlyTopUserInfo.setVisibility(View.GONE);
                 mTvCancel.setVisibility(View.VISIBLE);
                 llVideoTime.setVisibility(View.VISIBLE);
-                tvCallComment.setVisibility(View.GONE);
                 videoTime.setBase(SystemClock.elapsedRealtime());
                 videoTime.start();
             }
@@ -2425,6 +2432,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
      * 启动倒计时
      */
     private void startCount() {
+        //电话接通之后先试试礼物按钮
+        ivGift.setVisibility(View.VISIBLE);
         if (timer != null) {
             timer.cancel();
             timer = null;
