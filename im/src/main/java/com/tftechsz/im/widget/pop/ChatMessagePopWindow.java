@@ -180,8 +180,13 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
      * 加载数据
      */
     private void initData() {
-        ivTo.loadBuddyAvatar(String.valueOf(service.getUserId()));
-        ivFrom.loadBuddyAvatar(sessionId);
+        if(service.getUserInfo().getSex() == 2){
+            ivFrom.loadBuddyAvatar(String.valueOf(service.getUserId()));
+            ivTo.loadBuddyAvatar(sessionId);
+        }else{
+            ivTo.loadBuddyAvatar(String.valueOf(service.getUserId()));
+            ivFrom.loadBuddyAvatar(sessionId);
+        }
 
     }
 

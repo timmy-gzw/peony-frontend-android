@@ -22,7 +22,7 @@
         app:layout_constraintRight_toRightOf="@id/iv_unlock"
         app:layout_constraintLeft_toLeftOf="@id/iv_unlock"
         android:src="@mipmap/icon_level_curret_next"
-        android:layout_marginVertical="@dimen/dp_5"
+        android:layout_marginVertical="@dimen/dp_3"
         android:layout_width="wrap_content"
         android:visibility="visible"
         android:layout_height="wrap_content"/>

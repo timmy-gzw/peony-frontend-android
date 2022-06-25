@@ -10,6 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+        <com.opensource.svgaplayer.SVGAImageView
+            android:id="@+id/svg_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            app:autoPlay="true"
+            app:clearsAfterStop="true"
+            app:loopCount="1" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/chat_ic_message_mask" />
     </com.netease.lava.nertc.sdk.video.NERtcVideoView>
 
     <com.netease.lava.nertc.sdk.video.NERtcVideoView
@@ -38,11 +51,6 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@mipmap/chat_ic_message_mask" />
 
     </FrameLayout>
 
@@ -196,7 +204,7 @@
                 android:layout_height="wrap_content"
                 android:text="深圳市"
                 android:background="@drawable/shape_black_alpha60"
-                android:textColor="@color/color_99_ff"
+                android:textColor="@color/white"
                 android:paddingVertical="@dimen/dp_1"
                 android:paddingHorizontal="@dimen/dp_6"
                 android:textSize="@dimen/sp_10"
@@ -210,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:text="射手座"
                 android:background="@drawable/shape_black_alpha60"
-                android:textColor="@color/color_99_ff"
+                android:textColor="@color/white"
                 android:paddingVertical="@dimen/dp_1"
                 android:paddingHorizontal="@dimen/dp_6"
                 android:textSize="@dimen/sp_10"
@@ -224,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:text="市场营销"
                 android:background="@drawable/shape_black_alpha60"
-                android:textColor="@color/color_99_ff"
+                android:textColor="@color/white"
                 android:paddingVertical="@dimen/dp_1"
                 android:paddingHorizontal="@dimen/dp_6"
                 android:textSize="@dimen/sp_10"
@@ -315,11 +323,11 @@
                 android:id="@+id/iv_mute_control"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:drawablePadding="@dimen/dp_17"
                 android:text="静音"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_15"
+                android:gravity="center"
                 app:drawableTopCompat="@mipmap/chat_ic_mute_off"
                 android:layout_marginStart="@dimen/dp_34"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -330,8 +338,8 @@
                 android:id="@+id/iv_speaker_control"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:drawablePadding="@dimen/dp_17"
+                android:gravity="center"
                 android:text="免提"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_15"
@@ -365,7 +373,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_180"
-        android:background="@drawable/bg_black_tran10_radius12"
+        android:background="@drawable/shape_black_border12_alpha60"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/dp_20"
@@ -592,7 +600,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_10"
-        android:background="@drawable/bg_recharge_radius6"
+        android:background="@drawable/shape_black_border12_alpha60"
         android:gravity="center"
         android:paddingStart="@dimen/dp_16"
         android:paddingTop="@dimen/dp_11"
@@ -650,21 +658,14 @@
         android:visibility="gone" />
 
 
-    <com.opensource.svgaplayer.SVGAImageView
-        android:id="@+id/svg_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        app:autoPlay="true"
-        app:clearsAfterStop="true"
-        app:loopCount="1" />
-
     <com.tencent.qgame.animplayer.AnimView
         android:id="@+id/player_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:visibility="gone" />
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_video"
@@ -677,12 +678,27 @@
         android:layout_marginBottom="@dimen/dp_10"
         android:padding="@dimen/dp_3">
 
+
         <ImageView
             android:id="@+id/iv_small_voice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/call_small_icon"
             android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_report_user2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/call_report_user"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:text="举报"
+            android:textColor="#ffffffff"
+            android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -694,7 +710,7 @@
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/iv_small_voice"
+            app:layout_constraintLeft_toRightOf="@id/tv_report_user2"
             app:layout_constraintRight_toLeftOf="@id/tv_report_user"
             android:layout_height="wrap_content">
 
