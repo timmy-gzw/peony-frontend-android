@@ -90,11 +90,11 @@ public class TrendCommentFragment extends BaseMvpFragment<ITrendCommentView, Tre
             popWindow.putInfo(blogUserId, item.getUser_id());
             popWindow.addOnClickListener(position1 -> {
                 switch (position1) {
-                    case 0://回复
-                        RxBus.getDefault().post(new CommentEvent(item.getComment_id(), item.getNickname()));
-                        break;
+//                    case 0://回复
+//                        RxBus.getDefault().post(new CommentEvent(item.getComment_id(), item.getNickname()));
+//                        break;
 
-                    case 1://复制
+                    case 0://复制
                         //获取剪贴板管理器：
                         ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
                         ClipData mClipData = ClipData.newPlainText("Label", item.getContent());
@@ -103,7 +103,7 @@ public class TrendCommentFragment extends BaseMvpFragment<ITrendCommentView, Tre
                         ToastUtil.showToast(mContext, "复制成功");
                         break;
 
-                    case 2://删除
+                    case 1://删除
                         p.delTrendComment(item.getComment_id());
                         break;
                 }

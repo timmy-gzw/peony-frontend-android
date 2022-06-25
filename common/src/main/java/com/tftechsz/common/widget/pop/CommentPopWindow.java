@@ -40,7 +40,7 @@ public class CommentPopWindow extends BaseBottomPop {
         RecyclerView rv = findViewById(R.id.rv_comment);
         rv.setLayoutManager(new LinearLayoutManager(mContext));
         List<String> list = new ArrayList<>();
-        list.add("回复");
+//        list.add("回复");
         list.add("复制");
         if (blogUserId == service.getUserId() || userId == service.getUserId()) {
             list.add("删除");
