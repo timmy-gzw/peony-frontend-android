@@ -6,6 +6,7 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseWebViewActivity;
 import com.tftechsz.common.iservice.UserProviderService;
@@ -30,11 +31,11 @@ public class TextClick extends ClickableSpan {
         String link;
         String title;
         if (type == 0) {
-            link = "http://m.peonyai.com/agreement.html?__app_name=" + Constants.WEB_PARAMS_APP_NAME;
+            link = (BuildConfig.DEBUG ? Constants.HOST_H5_DEV : Constants.HOST_H5) + "agreement.html?__app_name=" + Constants.WEB_PARAMS_APP_NAME;
             title = "用户协议";
             BaseWebViewActivity.start(mContext, title, link, 0, 8);
         } else {
-            link = "http://m.peonyai.com/policy.html?__app_name=" + Constants.WEB_PARAMS_APP_NAME;
+            link = (BuildConfig.DEBUG ? Constants.HOST_H5_DEV : Constants.HOST_H5) + "policy.html?__app_name=" + Constants.WEB_PARAMS_APP_NAME;
             title = "隐私政策";
             BaseWebViewActivity.start(mContext, title, link, 0, 9);
         }
