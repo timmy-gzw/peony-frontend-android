@@ -941,13 +941,16 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             getP().buriedPoint("callEnter", "enter", callId, JSON.toJSONString(chatMsg));
             callIn();
             clVoiceCall.setVisibility(View.VISIBLE);
-            int sex = service.getUserInfo().getSex(); //用户性别：0.未知，1.男，2.女
+
             String text = "语音";
             if (mChannelType == 2) {//视频
                 text = "视频";
             }
             tvCallComment.setText("邀请你"+text+"通话");
-
+        }
+        int sex = service.getUserInfo().getSex(); //用户性别：0.未知，1.男，2.女
+        if(sex == 2){
+            setCost("接听后将收益更多积分","");
         }
         if (mChannelType == 1) {  //语音
             mFlVoiceBg.setVisibility(View.VISIBLE);
@@ -1518,9 +1521,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private void setCost(String msg, String cost) {
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append(msg);
-        int start = builder.toString().indexOf(cost);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF5A7B")), start, start + cost.length(),
-                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//        int start = builder.toString().indexOf(cost);
+//        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF5A7B")), start, start + cost.length(),
+//                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mTvIncome.setText(builder);
         mTvIncome.setVisibility(View.VISIBLE);
     }
@@ -1609,7 +1612,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         nertcVideoCall.setStatsObserver();
         if (mCallDir == 0 && !mIsAccept) {
             rvCallChat.setVisibility(View.VISIBLE);
-            tvCallComment.setVisibility(View.GONE);
+            mLlIncome.setVisibility(View.GONE);
             if (mChannelType == 2) {  //视频通话
                 llCallVideo.setVisibility(View.VISIBLE);
                 tvSpeaker.setVisibility(View.GONE);
@@ -1638,7 +1641,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         }
         if (mCallDir == 1) {
             setupLocalVideo();
-            tvCallComment.setVisibility(View.GONE);
+            mLlIncome.setVisibility(View.GONE);
             if (mChannelType == 1) {   //语音
                 llyDialogOperation.setVisibility(View.VISIBLE);
                 llAudioTime.setVisibility(View.VISIBLE);
@@ -1948,15 +1951,13 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 //        setupLocalVideo();
         rvCallChat.setVisibility(View.VISIBLE);
         llyBingCall.setVisibility(View.INVISIBLE);
+        mLlIncome.setVisibility(View.GONE);
         if (mChannelType == 1) {   //语音
             Utils.runOnUiThreadDelayed(() -> {
                 llyDialogOperation.setVisibility(View.VISIBLE);
                 mTvCancel.setVisibility(View.VISIBLE);
-                tvCallComment.setVisibility(View.GONE);
             }, 1500);
         } else {  //视频
-            tvCallComment.setVisibility(View.VISIBLE);
-            tvCallComment.setText("连接中...");
             mTvCancel.setVisibility(View.VISIBLE);
             Utils.runOnUiThreadDelayed(() -> {
                 llyDialogOperation.setVisibility(View.VISIBLE);
