@@ -32,7 +32,7 @@
             app:tl_tab_space_equal="true"
             app:tl_textBold="SELECT"
             app:tl_textSelectColor="@color/color_normal"
-            app:tl_textSelectSize="@dimen/sp_18"
+            app:tl_textSelectSize="@dimen/sp_16"
             app:tl_textUnSelectColor="@color/color_mid_font"
             app:tl_textUnSelectSize="@dimen/sp_18"
             app:tl_underline_gravity="BOTTOM" />
