@@ -190,7 +190,7 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
         mAdapter = new RecommendAdapter(mType);
         mAdapter.onAttachedToRecyclerView(mRvUser);
         mRvUser.setAdapter(mAdapter);
-        mAdapter.addChildClickViewIds(R.id.ll_like);
+        mAdapter.addChildClickViewIds(R.id.ll_accost);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
             UserInfo userInfo = mAdapter.getData().get(position);
@@ -199,7 +199,7 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
             int id = view.getId();
-            if (id == R.id.ll_like) {   //搭讪
+            if (id == R.id.ll_accost) {   //搭讪
 
                 UserInfo item = mAdapter.getItem(position);
                 if (item == null || !ClickUtil.canOperate()) {
@@ -315,6 +315,7 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
 //                                                userInfo.setIs_accost(1);
 //                                                mAdapter.setData(i, userInfo);
                                                 mAdapter.getData().get(i).setIs_accost(1);
+                                                mAdapter.notifyItemChanged(i);
                                                 break;
                                             }
                                         }

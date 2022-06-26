@@ -89,9 +89,9 @@ public class OneKeyAccostPopWindow extends BaseCenterPop implements OnItemClickL
         if (ivCheck != null) {
             boolean isSelected = mAdapter.getItem(position).is_selected;
             if (isSelected) {
-                ivCheck.setImageResource(R.mipmap.ic_accost_check_normal);
+                ivCheck.setImageResource(R.mipmap.ic_check_normal);
             } else {
-                ivCheck.setImageResource(R.mipmap.ic_accost_check_selector);
+                ivCheck.setImageResource(R.mipmap.ic_check_selector);
             }
             mAdapter.getItem(position).is_selected = !isSelected;
         }

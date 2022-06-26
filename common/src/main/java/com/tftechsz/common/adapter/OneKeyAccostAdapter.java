@@ -29,9 +29,9 @@ public class OneKeyAccostAdapter extends BaseQuickAdapter<ChatMsg.AccostPopup, B
         GlideUtils.loadRoundImageRadius(getContext(), icon, item.icon);
 
         if (item.is_selected) {
-            iv_check.setImageResource(R.mipmap.ic_accost_check_selector);
+            iv_check.setImageResource(R.mipmap.ic_check_selector);
         } else {
-            iv_check.setImageResource(R.mipmap.ic_accost_check_normal);
+            iv_check.setImageResource(R.mipmap.ic_check_normal);
         }
     }
 }

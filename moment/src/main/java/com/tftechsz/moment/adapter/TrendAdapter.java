@@ -70,7 +70,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         GlideUtils.loadRoundImageRadius(getContext(), ivAvatar, item.getIcon());
 
         holder.tvTime.setText(item.getCreated_at());
-//        helper.setText(R.id.tv_look_times, item.getProvince());  //浏览次数iv_accost
+//        helper.setText(R.id.tv_look_times, item.getProvince());  //浏览次数
         //设置文本内容
         String content = item.getContent().trim();
         if (!TextUtils.isEmpty(content)) {
@@ -134,7 +134,8 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             }
 
             holder.setVisible(R.id.tv_del, service.getUserId() == item.getUser_id());   //自己时可见
-            holder.setVisible(R.id.rl_accost, service.getUserId() != item.getUser_id());   //自己时可见
+            holder.setVisible(R.id.ll_accost, service.getUserId() != item.getUser_id());   //自己时不可见
+            holder.tvAccost.setText(item.isAccost() ? getContext().getString(R.string.private_chat) : getContext().getString(R.string.accost));
 //            if (!TextUtils.isEmpty(item.getCity())) {
 //                holder.tvAddress.setText(item.getCity());  //城市
 //                holder.tvAddress.setVisibility(View.VISIBLE);
@@ -259,7 +260,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         public int mPosition;
         public ConstraintLayout constraintLayout;
         public ImageView mThumb /*, videoBg*/;
-        public TextView tvName, tvTime, tvSex, tvContent/*, tvAddress*/;
+        public TextView tvName, tvTime, tvSex, tvContent/*, tvAddress*/, tvAccost;
         public TickerView tvLikeCount, tvDiscussCount;
         public PrepareView mPrepareView;
         public FrameLayout mPlayerContainer;
@@ -283,6 +284,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             tvDiscussCount = view.findViewById(R.id.tv_discuss_count);//评论数
             tvContent = view.findViewById(R.id.tv_content);
 //            tvAddress = view.findViewById(R.id.tv_address);
+            tvAccost = view.findViewById(R.id.tv_accost);//私信
             rvTrendImage = view.findViewById(R.id.rv_trend_image);
             mPlayerContainer.setOnClickListener(v -> mOnItemChildClickListener.onItemChildClick(mPosition, mPlayerContainer));
             //通过tag将ViewHolder和itemView绑定

@@ -39,7 +39,7 @@
         android:layout_width="@dimen/dp_20"
         android:layout_height="@dimen/dp_20"
         android:layout_margin="@dimen/dp_5"
-        android:src="@mipmap/ic_accost_check_selector"
+        android:src="@mipmap/ic_check_selector"
         app:layout_constraintEnd_toEndOf="@id/icon"
         app:layout_constraintTop_toTopOf="@id/icon" />
 

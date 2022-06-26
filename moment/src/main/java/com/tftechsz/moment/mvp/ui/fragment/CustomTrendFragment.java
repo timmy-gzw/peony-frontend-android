@@ -306,6 +306,7 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
                                     if (data.get(i).getUser_id() == event.familyId) {
                                         CircleBean userInfo = data.get(i);
                                         userInfo.setIs_accost(1);
+                                        mAdapter.notifyItemChanged(i);
                                     }
                                 }
 
@@ -473,7 +474,7 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
         mLinearLayoutManager = new FastScrollLinearLayoutManager(mActivity);
         recyclerView.setLayoutManager(mLinearLayoutManager);
         mAdapter = new TrendAdapter(mActivity, this);
-        mAdapter.addChildClickViewIds(R.id.dynamic_item_image_root_view, R.id.iv_comment, R.id.tv_like_count, R.id.tv_content, R.id.iv_avatar, R.id.tv_name, R.id.btn_like, R.id.tv_discuss_count, R.id.iv_share, R.id.rl_accost, R.id.tv_del);
+        mAdapter.addChildClickViewIds(R.id.dynamic_item_image_root_view, R.id.iv_comment, R.id.tv_like_count, R.id.tv_content, R.id.iv_avatar, R.id.tv_name, R.id.btn_like, R.id.tv_discuss_count, R.id.iv_share, R.id.ll_accost, R.id.tv_del);
         mAdapter.addChildLongClickViewIds(R.id.tv_content);
         mAdapter.onAttachedToRecyclerView(recyclerView);
         recyclerView.setAdapter(mAdapter);
@@ -506,7 +507,7 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
                 BottomShareDialog mBottomShareDialog = BottomShareDialog.newInstance();
                 assert getFragmentManager() != null;
                 mBottomShareDialog.show(getFragmentManager(), "dialog");
-            } else if (id == R.id.rl_accost) {
+            } else if (id == R.id.ll_accost) {
                 assert item != null;
                 if (item.isAccost()) {// 搭讪过 进入聊天
                     if (service.getUserInfo().isGirl()) {   //判断女性

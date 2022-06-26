@@ -41,9 +41,9 @@ public class AccostUserAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder
                 .setText(R.id.tv_city, item.getCity());
         GlideUtils.loadRoundImage(getContext(), (ImageView) helper.getView(R.id.iv_avatar), item.getIcon());
         if (getData().get(helper.getLayoutPosition()).isSelected()) {
-            ivCheck.setImageResource(R.mipmap.ic_accost_check_selector);
+            ivCheck.setImageResource(R.mipmap.ic_check_selector);
         } else {
-            ivCheck.setImageResource(R.mipmap.ic_accost_check_normal);
+            ivCheck.setImageResource(R.mipmap.ic_check_normal);
         }
     }
 

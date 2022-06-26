@@ -114,7 +114,8 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     private LinearLayout mRootview;
     private CustomPopWindow mTipsPopWindow;
     private LikeButton mLikeButton;
-    private RelativeLayout mRlAccost;
+    private LinearLayout mLlAccost;
+    private TextView tvAccost;//搭讪、私聊
     private FrameLayout mPlayerContainer;
     private PrepareView mPrepareView;
     private ImageView mThumb, mVideoBg;
@@ -263,7 +264,8 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
 //        };
 //        mEtComment.setFilters(new InputFilter[]{mEtComment.getFilters()[0],mInputFilter});
         mTvSend = findViewById(R.id.tv_send);//发送
-        mRlAccost = findViewById(R.id.rl_accost);
+        mLlAccost = findViewById(R.id.ll_accost);
+        tvAccost = findViewById(R.id.tv_accost);
         mTvTrendTimeAddressInfo = findViewById(R.id.tv_address);  // 时间浏览次数，地址
     }
 
@@ -274,7 +276,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
         mIvComment.setOnClickListener(this);
         dynamicDetailpraise.setOnClickListener(this);
         mTvDel.setOnClickListener(this);
-        findViewById(R.id.rl_accost).setOnClickListener(this);
+        findViewById(R.id.ll_accost).setOnClickListener(this);
         mTvSend.setOnClickListener(this);
         mEtComment.setOnKeyListener((v, keyCode, event) -> {        // 开始搜索
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -319,7 +321,8 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
         mTvDel.setVisibility(service.getUserId() == dataBean.getUser_id() ? View.VISIBLE : View.GONE); //自己的动态才可删除
 
         //搭讪是否显示
-        mRlAccost.setVisibility(service.getUserId() == dataBean.getUser_id() ? View.INVISIBLE : View.VISIBLE);    //自己的动态不可发消息
+        mLlAccost.setVisibility(service.getUserId() == dataBean.getUser_id() ? View.INVISIBLE : View.VISIBLE);    //自己的动态不可发消息
+        tvAccost.setText(dataBean.isAccost() ? getString(R.string.private_chat) : getString(R.string.accost));
         mTvTime.setText(dataBean.getCreated_at());
         mTvTrendTimeAddressInfo.setText(dataBean.getCity());
         SlidingScaleTabLayout mTabLayout = findViewById(R.id.tabLayout);
@@ -436,7 +439,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
         int id = view.getId();
         if (id == R.id.iv_avatar) {
             ARouterUtils.toMineDetailActivity(String.valueOf(dataBean.getUser_id()));
-        } else if (id == R.id.rl_accost) {  //搭讪私信
+        } else if (id == R.id.ll_accost) {  //搭讪私信
             if (dataBean.isAccost()) {// 搭讪过 进入聊天
                 if (service.getUserInfo().isGirl()) {   //判断女性
                     p.getMsgCheck(dataBean.getUser_id() + "");
@@ -525,6 +528,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
                 Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
             }
             dataBean.setIs_accost(1);
+            tvAccost.setText(dataBean.isAccost() ? getString(R.string.private_chat) : getString(R.string.accost));
             CommonUtil.sendAccostGirlBoy(service, dataBean.getUser_id(), data, 4);
             RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PIC_ACCOST_SUCCESS, dataBean.getUser_id()));
         }
