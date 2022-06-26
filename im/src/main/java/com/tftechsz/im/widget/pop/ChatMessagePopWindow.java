@@ -235,6 +235,7 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
             for (IntimacyDto.IntimacyConfigDTO intimacyConfigDTO : data.intimacy_config) {
                 lists.add(new MultiIntmacyItem(intimacyConfigDTO));
             }
+            adapter.setLastItemDto(lists.get(lists.size()-1));
             adapter.setmCurrentLevel(data.level);
             adapter.setList(lists);
             mRv.scrollToPosition(data.level-1);

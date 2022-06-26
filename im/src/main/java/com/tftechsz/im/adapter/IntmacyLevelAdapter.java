@@ -17,12 +17,19 @@ import com.tftechsz.common.entity.IntimacyDto;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.im.model.dto.MultiIntmacyItem;
 
+import java.util.Objects;
+
 public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyItem,BaseViewHolder> {
 
     private int mCurrentLevel;
+    private MultiIntmacyItem mLastItemDto;
 
     public void setmCurrentLevel(int mCurrentLevel) {
         this.mCurrentLevel = mCurrentLevel;
+    }
+
+    public void setLastItemDto(MultiIntmacyItem multiIntmacyItem){
+        this.mLastItemDto = multiIntmacyItem;
     }
 
     public IntmacyLevelAdapter() {
@@ -50,6 +57,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                         String[] s = dto.title.split(" ");
                         tv_lock.setText(s[1]+s[2].substring(s[2].indexOf("/")+1)+"解锁");
                         imageView.setVisibility(View.VISIBLE);
+                        if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
+                            imageView.setVisibility(View.INVISIBLE);
+                        }
                     }else{//已达成
                         ImageView iv_unlock = helper.getView(R.id.iv_unlock);
                         iv_unlock.setImageResource(R.mipmap.icon_level_unlock);
@@ -77,6 +87,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                 tvLevel.setText("LV."+dto.level);
                 TextView tvLevelTitle = helper.getView(R.id.tv_level_title);
                 tvLevelTitle.setText(dto.tips);
+                if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
+                    ivToUnlock.setVisibility(View.INVISIBLE);
+                }
                 break;
             case 2:
                 ImageView ivUnlock1 = helper.getView(R.id.iv_unlock);
@@ -91,6 +104,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                 tvLevel1.setText("LV."+dto.level);
                 TextView tvLevelTitle1 = helper.getView(R.id.tv_level_title);
                 tvLevelTitle1.setText(dto.tips);
+                if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
+                    ivToUnlock1.setVisibility(View.INVISIBLE);
+                }
                 break;
         }
     }
