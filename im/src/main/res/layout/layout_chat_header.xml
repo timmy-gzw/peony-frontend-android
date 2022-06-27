@@ -43,9 +43,9 @@
             android:id="@+id/iv_pull_wires_avatar"
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_60"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_12"
-            android:layout_marginBottom="@dimen/dp_12"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
             android:id="@+id/ll_pull_wires"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             app:layout_constraintBottom_toBottomOf="@id/iv_pull_wires_avatar"
             app:layout_constraintEnd_toStartOf="@+id/tv_pull_wires_time"
             app:layout_constraintStart_toEndOf="@id/iv_pull_wires_avatar"
@@ -94,7 +94,7 @@
             android:id="@+id/tv_pull_wires_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginBottom="@dimen/dp_10"
             android:singleLine="true"
             android:textColor="@color/color_d6"
@@ -107,11 +107,11 @@
         <View
             style="@style/Driver"
             android:layout_width="0dp"
+            android:layout_marginStart="@dimen/dp_12"
             android:background="@color/driver"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@id/iv_pull_wires_avatar" />
+            app:layout_constraintStart_toStartOf="@id/ll_pull_wires" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -186,12 +186,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
-            android:background="@drawable/bg_play_num"
-            android:visibility="gone"
-            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/bg_play_num"
+            android:gravity="center_vertical"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_12"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/ll_team_content"
             app:layout_constraintStart_toEndOf="@+id/tv_team_name"
             app:layout_constraintTop_toTopOf="parent" />
@@ -332,7 +332,7 @@
         android:id="@+id/view"
         style="@style/Driver"
         android:layout_below="@id/rl_team"
-        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_16"
         android:background="@color/driver"
         android:visibility="gone" />
 
@@ -348,7 +348,8 @@
         android:id="@+id/view2"
         style="@style/Driver"
         android:layout_below="@id/cl_room"
-        android:layout_marginStart="@dimen/dp_20"
-        android:background="@color/driver" />
+        android:layout_marginStart="@dimen/dp_16"
+        android:background="@color/driver"
+        android:visibility="gone" />
 
 </RelativeLayout>

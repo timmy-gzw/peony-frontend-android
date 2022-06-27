@@ -1511,9 +1511,9 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
             }
         }
         emptyBg.setVisibility(empty ? View.VISIBLE : View.GONE);
-        if (mType == 0) {
-            view2.setVisibility(empty ? View.GONE : View.VISIBLE);
-        }
+//        if (mType == 0) {
+//            view2.setVisibility(empty ? View.GONE : View.VISIBLE);
+//        }
     }
 
     @Override

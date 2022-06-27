@@ -13,7 +13,6 @@
         android:layout_height="0dp" />
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_tab"
         android:layout_width="match_parent"
@@ -23,25 +22,25 @@
 
         <com.flyco.tablayout.SlidingScaleTabLayout
             android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/dp_16"
             android:background="@color/white"
+            android:paddingHorizontal="@dimen/dp_4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.4"
-            app:tl_divider_padding="@dimen/dp_26"
-            app:tl_indicator_color="#FE4D6B"
+            app:tl_indicator_color="@color/colorPrimary"
             app:tl_indicator_corner_radius="@dimen/dp_2"
             app:tl_indicator_height="@dimen/dp_4"
-            app:tl_textBold="SELECT"
             app:tl_indicator_margin_top="@dimen/dp_10"
             app:tl_indicator_width="@dimen/dp_10"
+            app:tl_tab_horizontal_gravity="Center"
             app:tl_tab_marginBottom="@dimen/dp_12"
             app:tl_tab_msg_marginRight="@dimen/dp_10"
+            app:tl_tab_padding="@dimen/dp_12"
             app:tl_tab_space_equal="true"
             app:tl_tab_vertical_gravity="Bottom"
-            app:tl_tab_width="@dimen/dp_size_56"
+            app:tl_textBold="SELECT"
             app:tl_textSelectColor="@color/color_normal"
             app:tl_textSelectSize="@dimen/sp_18"
             app:tl_textUnSelectColor="@color/color_light_font"
@@ -91,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_14_5"
             android:background="@mipmap/ic_clear_message"
             android:padding="@dimen/dp_5"
             app:layout_constraintBottom_toBottomOf="@id/tabLayout"
@@ -137,42 +136,44 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="wrap_content"
         android:background="@drawable/shape_chat_tab_top_bg"
+        android:paddingTop="8.5dp"
+        android:paddingBottom="8.5dp"
         android:visibility="visible">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="@dimen/dp_16"
             android:layout_toStartOf="@id/go_setting"
             android:gravity="center_vertical"
+            android:maxLines="1"
             android:text="开启消息通知，交友成功率提升10倍"
-            android:textColor="#FE4E6B"
-            android:textSize="@dimen/sp_13"
-            android:textStyle="bold"
-            app:drawableStartCompat="@drawable/peony_tz_icon" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/go_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_marginEnd="@dimen/dp_2"
             android:layout_toStartOf="@id/iv_del"
-            android:background="@drawable/bg_red"
+            android:background="@drawable/shape_login_btn"
             android:paddingStart="@dimen/dp_10"
-            android:paddingTop="@dimen/dp_size_5"
+            android:paddingTop="@dimen/dp_size_4"
             android:paddingEnd="@dimen/dp_10"
-            android:paddingBottom="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_4"
             android:text="立即开启"
             android:textColor="@color/white"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -181,8 +182,9 @@
             android:layout_height="@dimen/dp_30"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dp_8"
             android:scaleType="center"
-            android:src="@drawable/peony_tz_gb_icon" />
+            android:src="@mipmap/ic_edit_close" />
 
     </RelativeLayout>
 
@@ -190,14 +192,14 @@
         android:id="@+id/tv_net_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FEECED"
+        android:background="@drawable/shape_chat_tab_top_bg"
         android:drawablePadding="@dimen/dp_10"
-        android:paddingVertical="@dimen/dp_12"
-        android:paddingStart="@dimen/dp_20"
-        android:paddingEnd="@dimen/dp_30"
+        android:paddingVertical="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
         android:text="网络不给力，请检查网络设置"
-        android:textColor="@color/red"
-        android:textSize="@dimen/sp_13"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/sp_14"
         android:visibility="gone"
         app:drawableEndCompat="@mipmap/peony_wwjg_jt_icon"
         app:drawableStartCompat="@mipmap/peony_wwjg_icon"

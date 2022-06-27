@@ -101,12 +101,15 @@
 
             <TextView
                 android:id="@+id/price1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:maxLines="2"
                 android:text="@{item.desc}"
                 android:textColor='@color/c_bd8f52'
                 android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toTopOf="@id/price4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/price2"
