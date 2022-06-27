@@ -381,8 +381,8 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
             matchPopWindow = new MatchPopWindow(this, v -> finish());
         matchPopWindow
                 .setTitle(mType==2?"视频速配规则":"语音速配规则")
-                .setContent(mType==2?"1、 视频速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。":
-                        "1、 语音速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。")
+                .setContent(mType==2?"1、 视频速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。":
+                        "1、 语音速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。")
                 .onSureClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
