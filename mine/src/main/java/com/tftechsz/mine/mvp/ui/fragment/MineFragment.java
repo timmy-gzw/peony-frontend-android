@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.UserInfo;
@@ -49,7 +51,9 @@ import com.tftechsz.mine.mvp.ui.activity.SettingActivity;
 import com.tftechsz.mine.mvp.ui.activity.VipActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.config.IndicatorConfig;
 import com.youth.banner.holder.BannerImageHolder;
+import com.youth.banner.indicator.RectangleIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +88,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private View llIntegral;
     private View llCoin;
     private Banner<ConfigInfo.NoticeBannerBean, BannerImageAdapter<ConfigInfo.NoticeBannerBean>> mBanner;
+    private CardView mCvBanner;
 
     @Override
     protected MinePresenter initPresenter() {
@@ -125,6 +130,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         llIntegral = getView(R.id.ll_jifen);
         llCoin = getView(R.id.ll_jinbi);
         mBanner = getView(R.id.banner);
+        mCvBanner = getView(R.id.cv_banner);
         initListener();
 
     }
@@ -381,14 +387,14 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                 if (mUserInfo.isGirl()) {
                     List<ConfigInfo.NoticeBannerBean> girlBanners = configInfo.share_config.girl_banners;
                     if (girlBanners == null || girlBanners.isEmpty()) {
-                        mBanner.setVisibility(View.GONE);
+                        mCvBanner.setVisibility(View.GONE);
                     } else {
                         showBanner(girlBanners);
                     }
                 } else {
                     List<ConfigInfo.NoticeBannerBean> boyBanners = configInfo.share_config.boy_banners;
                     if (boyBanners == null || boyBanners.isEmpty()) {
-                        mBanner.setVisibility(View.GONE);
+                        mCvBanner.setVisibility(View.GONE);
                     } else {
                         showBanner(boyBanners);
                     }
@@ -399,18 +405,20 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
 
     private void showBanner(List<ConfigInfo.NoticeBannerBean> banners) {
         if (mBanner == null || banners == null || banners.isEmpty()) return;
-        mBanner.setVisibility(View.VISIBLE);
+        mCvBanner.setVisibility(View.VISIBLE);
         mBanner.setAdapter(new BannerImageAdapter<ConfigInfo.NoticeBannerBean>(banners) {
             @Override
             public void onBindView(BannerImageHolder holder, ConfigInfo.NoticeBannerBean data, int position, int size) {
                 holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                GlideUtils.loadRoundImage(getActivity(), holder.imageView, data.img, 10);
+                GlideUtils.loadRoundImage(getActivity(), holder.imageView, data.img);
                 holder.imageView.setOnClickListener(v -> {
                     CommonUtil.performLink(getActivity(), new ConfigInfo.MineInfo(data.link, null), position, 2);
                 });
             }
         });
         mBanner.addBannerLifecycleObserver(this);
+        mBanner.setIndicator(new RectangleIndicator(mContext))
+                .setIndicatorMargins(new IndicatorConfig.Margins(0, 0, 0, ConvertUtils.dp2px(4)));
         mBanner.setScrollTime(600); //设置轮播滑动过程的时间
         mBanner.start();
     }

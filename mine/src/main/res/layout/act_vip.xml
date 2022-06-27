@@ -68,7 +68,6 @@
                         android:layout_height="@dimen/dp_50"
                         android:layout_marginStart="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_20"
-                        android:padding="@dimen/dp_2"
                         android:scaleType="centerCrop"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -81,6 +80,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
                         android:textColor="@color/c_fadb9a"
+                        android:textSize="@dimen/sp_18"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/hint"
                         app:layout_constraintStart_toEndOf="@id/icon"
@@ -430,7 +430,8 @@
             android:textColor="@color/color_222222"
             android:textSize="@dimen/sp_18"
             android:visibility="@{is_vip ? View.GONE : View.VISIBLE}"
-            app:layout_constraintBottom_toTopOf="@id/xf" />
+            app:layout_constraintBottom_toTopOf="@id/xf"
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/xf"
@@ -446,7 +447,8 @@
             android:textColor="@color/color_222222"
             android:textSize="@dimen/sp_18"
             android:visibility="@{is_vip ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toTopOf="@id/vip_agree" />
+            app:layout_constraintBottom_toTopOf="@id/vip_agree"
+            app:layout_goneMarginBottom="@dimen/dp_36" />
 
         <TextView
             android:id="@+id/vip_agree"
@@ -462,7 +464,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="成为会员即表示同意会员协议" />
+            tools:text="成为会员即表示同意会员协议"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
