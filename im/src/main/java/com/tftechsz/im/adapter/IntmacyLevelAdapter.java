@@ -29,6 +29,10 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
         this.mCurrentLevel = mCurrentLevel;
     }
 
+    public int getmCurrentLevel() {
+        return mCurrentLevel;
+    }
+
     public void setLastItemDto(MultiIntmacyItem multiIntmacyItem){
         this.mLastItemDto = multiIntmacyItem;
     }

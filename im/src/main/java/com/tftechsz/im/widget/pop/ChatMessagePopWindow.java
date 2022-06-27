@@ -35,6 +35,7 @@ import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.widget.CircleImageView;
 import com.tftechsz.common.widget.pop.BaseCenterPop;
 import com.tftechsz.im.model.dto.MultiIntmacyItem;
+import com.tftechsz.im.utils.TopSmoothScroller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -74,6 +75,19 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
         setPopupFadeEnable(true);
         initUI();
         setOutSideTouchable(false);
+        this.setOnPopupWindowShowListener(() -> {
+           Utils.runOnUiThreadDelayed(new Runnable() {
+               @Override
+               public void run() {
+                   if(mRv != null && adapter != null && adapter.getmCurrentLevel()>1){
+                       TopSmoothScroller smoothScroller = new TopSmoothScroller(mContext);
+                       smoothScroller.setTargetPosition(adapter.getmCurrentLevel()-1);
+
+                       mRv.getLayoutManager().startSmoothScroll(smoothScroller);
+                   }
+               }
+           }, 300);
+        });
     }
 
 
@@ -238,7 +252,8 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
             adapter.setLastItemDto(lists.get(lists.size()-1));
             adapter.setmCurrentLevel(data.level);
             adapter.setList(lists);
-            mRv.scrollToPosition(data.level-1);
+//            mRv.scrollToPosition(data.level-1);
+
             setinTimacyList();
             setIntimacy();
         }
