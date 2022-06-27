@@ -7,10 +7,7 @@
     android:layout_gravity="center"
     android:background="@drawable/shape_black_border12_alpha60"
     android:orientation="vertical"
-    android:paddingStart="@dimen/dp_16"
-    android:paddingTop="@dimen/dp_11"
-    android:paddingEnd="@dimen/dp_16"
-    android:paddingBottom="@dimen/dp_11">
+    android:padding="@dimen/dp_10">
 
 
     <TextView
