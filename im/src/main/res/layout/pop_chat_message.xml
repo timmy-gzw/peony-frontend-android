@@ -21,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="86dp"
-        android:paddingBottom="@dimen/dp_10"
         app:layout_constraintBottom_toTopOf="@id/bottom"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -45,8 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tv_up_level"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="@dimen/dp_30" />
+            android:layout_marginTop="15dp" />
 
     </RelativeLayout>
 

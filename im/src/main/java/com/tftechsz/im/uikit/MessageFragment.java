@@ -433,7 +433,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private GroupCoupleDto groupCoupleDto;
 
     private LottieAnimationView mLavLove;
-    private ImageView mIvChatBg,mIvtoolbarmenu;
+    private ImageView mIvChatBg,mIvtoolbarmenu,mIvIntimacyDetail;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -529,6 +529,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mRlIntimacy.setOnClickListener(this);
         mTvIntimacy = findView(R.id.tv_love);
         mLavLove = findView(R.id.iv_love);
+        mIvIntimacyDetail = findView(R.id.iv_intimacy_detail);
         mTvLove = findView(R.id.tv_love_normal);
         mIvLeft = findView(R.id.iv_left);
         mIvLeft.setRoundIcon(true);
@@ -1769,7 +1770,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         String s = intimacy.intimacy.replace("℃", "");
         double intimacyInt = Double.parseDouble(s);
         String lottieZipFileNameLast;
-        if (intimacyInt>90){
+        if (intimacyInt>100){
+            lottieZipFileNameLast = "11";
+        }else if (intimacyInt>90){
             lottieZipFileNameLast = "10";
         }else if (intimacyInt>80){
             lottieZipFileNameLast = "9";

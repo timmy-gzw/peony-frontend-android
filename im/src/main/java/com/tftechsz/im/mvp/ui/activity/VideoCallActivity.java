@@ -1119,7 +1119,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     @Override
     protected int getLayout() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         return R.layout.activity_call;
     }
 

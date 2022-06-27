@@ -4,6 +4,7 @@ package com.tftechsz.im.adapter;
 
 import android.graphics.Color;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,6 +60,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                         imageView.setVisibility(View.VISIBLE);
                         if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
                             imageView.setVisibility(View.INVISIBLE);
+                            helper.getView(R.id.bottom).setVisibility(View.VISIBLE);
+                        }else {
+                            helper.getView(R.id.bottom).setVisibility(View.GONE);
                         }
                     }else{//已达成
                         ImageView iv_unlock = helper.getView(R.id.iv_unlock);
@@ -89,6 +93,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                 tvLevelTitle.setText(dto.tips);
                 if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
                     ivToUnlock.setVisibility(View.INVISIBLE);
+                    helper.getView(R.id.bottom).setVisibility(View.VISIBLE);
+                }else {
+                    helper.getView(R.id.bottom).setVisibility(View.GONE);
                 }
                 break;
             case 2:
@@ -106,6 +113,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                 tvLevelTitle1.setText(dto.tips);
                 if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
                     ivToUnlock1.setVisibility(View.INVISIBLE);
+                    helper.getView(R.id.bottom).setVisibility(View.VISIBLE);
+                }else {
+                    helper.getView(R.id.bottom).setVisibility(View.GONE);
                 }
                 break;
         }
