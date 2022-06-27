@@ -278,10 +278,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             public void run() {
                 trendFragment = new TrendFragment();
                 fragmentList.add(trendFragment);
-                if (mIsShowParty) {
-                    partyFragment = new PartyFragment();
-                    fragmentList.add(partyFragment);
-                }
                 fragmentList.add(new ChatTabFragment());
                 fragmentList.add(new MineFragment());
                 vp.setOffscreenPageLimit(5);
@@ -655,9 +651,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                 if (tvBadge == null) return;
                                 tvBadge.setVisibility(event.num > 0 ? View.VISIBLE : View.GONE);
                                 tvBadge.setText(event.num > 99 ? "99+" : String.valueOf(event.num));
-                                if (partyFragment != null) {
-                                    partyFragment.setMessageNum(event.p2pNumber);
-                                }
                             }
                         });
 

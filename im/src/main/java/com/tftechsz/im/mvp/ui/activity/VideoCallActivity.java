@@ -1,16 +1,20 @@
 package com.tftechsz.im.mvp.ui.activity;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.provider.Settings;
@@ -94,6 +98,7 @@ import com.tftechsz.im.model.CallStatusInfo;
 import com.tftechsz.im.model.dto.CallMessageDto;
 import com.tftechsz.im.mvp.iview.ICallView;
 import com.tftechsz.im.mvp.presenter.CallPresenter;
+import com.tftechsz.im.service.FloatVideoWindowService;
 import com.tftechsz.im.widget.pop.CallHangUpPopWindow;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
@@ -255,6 +260,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private ConstraintLayout mClVideo;
     private TextView mtvGenderAge,mtvCity,mtvConstellation,mtvJob;//语音通话：对方性别年龄，城市，星座，工作
     private TextView mtvVideoGenderAge,mtvVideoCity,mtvVideoConstellation,mtvVideoJob;//视屏通话：对方性别年龄，城市，星座，工作
+    private boolean ISBOUND;
 
     private void initPhoneStateListener() {
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -1233,10 +1239,24 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             });
         } else if (id == R.id.iv_small_voice) {
             //音视频通话进入后台模式，显示悬浮按钮
+            if(!checkOverlayDisplayPermission()){
+                getP().showAlertPermission(this);
+            }else{
+                smallWindow();
+            }
 
         } else if (id == R.id.tv_report_user) {
             //举报
             ARouterUtils.toBeforeReportActivity(mCallDir == 0?callOutUser.getUser_id():Integer.parseInt(fromId),1);//0 call out 1 call in
+        }
+    }
+
+    private boolean checkOverlayDisplayPermission() {
+        // API23以后需要检查权限
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            return Settings.canDrawOverlays(this);
+        } else {
+            return true;
         }
     }
 
@@ -1699,45 +1719,45 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private void smallWindow() {
 //        startTime = System.currentTimeMillis();
 //        seconds = TimeUtil.getChronometerSeconds(audioTime);
-//        moveTaskToBack(true);//最小化Activity
-//        Intent intent = new Intent(BaseApplication.getInstance(), FloatVideoWindowService.class);//开启服务显示悬浮框
-//        intent.putExtra(CALL_DIR, mCallDir);
-//        intent.putExtra(CALL_TYPE, mChannelType);
-//        intent.putExtra(INVENT_EVENT, invitedEvent);
-//        intent.putExtra(CALL_OUT_USER, callOutUser);
-//        bindService(intent, mVideoServiceConnection, Context.BIND_AUTO_CREATE);
+        moveTaskToBack(true);//最小化Activity
+        Intent intent = new Intent(BaseApplication.getInstance(), FloatVideoWindowService.class);//开启服务显示悬浮框
+        intent.putExtra(CALL_DIR, mCallDir);
+        intent.putExtra(CALL_TYPE, mChannelType);
+        intent.putExtra(INVENT_EVENT, invitedEvent);
+        intent.putExtra(CALL_OUT_USER, callOutUser);
+        bindService(intent, mVideoServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
 
     @Override
     protected void onRestart() {
         super.onRestart();
-//        if (ISBOUND) {
-//            unbindService(mVideoServiceConnection);//不显示悬浮框
-//            Intent intent = new Intent(BaseApplication.getInstance(), FloatVideoWindowService.class);
-//            intent.putExtra(CALL_DIR, mCallDir);
-//            intent.putExtra(CALL_TYPE, mChannelType);
-//            intent.putExtra(INVENT_EVENT, invitedEvent);
-//            intent.putExtra(CALL_OUT_USER, callOutUser);
-//            stopService(intent);
-//            ISBOUND = false;
-//        }
+        if (ISBOUND) {
+            unbindService(mVideoServiceConnection);//不显示悬浮框
+            Intent intent = new Intent(BaseApplication.getInstance(), FloatVideoWindowService.class);
+            intent.putExtra(CALL_DIR, mCallDir);
+            intent.putExtra(CALL_TYPE, mChannelType);
+            intent.putExtra(INVENT_EVENT, invitedEvent);
+            intent.putExtra(CALL_OUT_USER, callOutUser);
+            stopService(intent);
+            ISBOUND = false;
+        }
 
     }
 
-//    ServiceConnection mVideoServiceConnection = new ServiceConnection() {
-//        @Override
-//        public void onServiceConnected(ComponentName name, IBinder service) {
-//            // 获取服务的操作对象
-//            FloatVideoWindowService.MyBinder binder = (FloatVideoWindowService.MyBinder) service;
-//            binder.getService();
-//            ISBOUND = false;
-//        }
-//
-//        @Override
-//        public void onServiceDisconnected(ComponentName name) {
-//        }
-//    };
+    ServiceConnection mVideoServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // 获取服务的操作对象
+            FloatVideoWindowService.MyBinder binder = (FloatVideoWindowService.MyBinder) service;
+            binder.getService();
+            ISBOUND = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 
     /**
      * 打出

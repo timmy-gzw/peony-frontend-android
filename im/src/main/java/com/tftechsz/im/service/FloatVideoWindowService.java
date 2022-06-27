@@ -98,7 +98,7 @@ public class FloatVideoWindowService extends Service {
         // 悬浮窗默认显示以左上角为起始坐标
         wmParams.gravity = Gravity.END | Gravity.TOP;
         //悬浮窗的开始位置，因为设置的是从左上角开始，所以屏幕左上角是x=0;y=0
-        wmParams.x = 70;
+        wmParams.x = 0;
         wmParams.y = 210;
         //得到容器，通过这个inflater来获得悬浮窗控件
         LayoutInflater inflater = LayoutInflater.from(this);

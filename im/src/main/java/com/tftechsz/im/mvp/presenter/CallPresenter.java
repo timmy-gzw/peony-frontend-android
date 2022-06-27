@@ -1,9 +1,15 @@
 package com.tftechsz.im.mvp.presenter;
 
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
+import static com.umeng.socialize.utils.ContextUtil.getPackageName;
+
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -687,6 +693,31 @@ public class CallPresenter extends BasePresenter<ICallView> {
                 if (getView() == null) return;
                 getView().cancel();
                 PermissionUtil.gotoPermission(BaseApplication.getInstance());
+            }
+        });
+        if (!permissionPop.isShowing())
+            permissionPop.showPopupWindow();
+    }
+
+    public void showAlertPermission(Activity activity) {
+        if (permissionPop == null)
+            permissionPop = new CustomPopWindow(activity);
+        permissionPop.setTitle("权限设置");
+        permissionPop.setContent("需要取得权限以使用悬浮窗");
+        permissionPop.setLeftButton("知道了");
+        permissionPop.setRightButton("去设置");
+        permissionPop.setIsDismiss(false);
+        permissionPop.setOutSideDismiss(false);
+        permissionPop.addOnClickListener(new CustomPopWindow.OnSelectListener() {
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onSure() {
+                permissionPop.dismiss();
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                startActivity(intent);
             }
         });
         if (!permissionPop.isShowing())
