@@ -59,7 +59,7 @@ public class SVGAPlayerPop extends BaseCenterPop {
 
     private void initUI() {
         setOutSideDismiss(false);
-        setBackground(R.drawable.bg_trans); //背景透明
+//        setBackground(R.drawable.bg_trans); //背景透明
         startThread();
         setOnDismissListener(new OnDismissListener() {
             @Override
@@ -163,7 +163,7 @@ public class SVGAPlayerPop extends BaseCenterPop {
 
             @Override
             public void onFinished() {
-                mBind.ivGiftMask.setVisibility(View.GONE);
+//                mBind.ivGiftMask.setVisibility(View.GONE);
                 mIsDown = false;
                 if (myGiftList.size() == 0) {
                     dismiss();
@@ -189,7 +189,7 @@ public class SVGAPlayerPop extends BaseCenterPop {
                 @Override
                 public void onComplete(@NotNull SVGAVideoEntity videoItem) {
                     showPopupWindow();
-                    mBind.ivGiftMask.setVisibility(View.VISIBLE);
+//                    mBind.ivGiftMask.setVisibility(View.VISIBLE);
                     mBind.svgaImageView.setVideoItem(videoItem);
                     mBind.svgaImageView.stepToFrame(0, true);
                 }
