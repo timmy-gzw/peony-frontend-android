@@ -140,8 +140,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private MessageEvent mMessageEvent;  //消息
     private HomeFragment mHomeFragment;
     private TrendFragment trendFragment;
-    private boolean mIsShowParty = false;  //是否显示party功能
-    private PartyFragment partyFragment;
     private ComponentName componentName1, componentName2;
     private PackageManager mPackageManager;
 
@@ -175,7 +173,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             }
         };
         NELivePlayer.init(getApplicationContext(), config);
-        mIsShowParty = MMKVUtils.getInstance().decodeBoolean(Constants.SHOW_PARTY_ICON);
         service = ARouter.getInstance().navigation(UserProviderService.class);
         partyService = ARouter.getInstance().navigation(PartyService.class);
         final ConfigInfo configInfo = service.getConfigInfo();
@@ -184,29 +181,18 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         setConfigLottie(viewHome, "main_tab_home.zip", configInfo);
         final LottieAnimationView viewTrend = findViewById(R.id.view_trend);
         setConfigLottie(viewTrend, "main_tab_trend.zip", configInfo);
-        final LottieAnimationView viewParty = findViewById(R.id.view_party);
-        setConfigLottie(viewParty, "main_tab_party.zip", configInfo);
         final LottieAnimationView viewMessage = findViewById(R.id.view_message);
         setConfigLottie(viewMessage, "main_tab_message.zip", configInfo);
         final LottieAnimationView viewMine = findViewById(R.id.view_mine);
         setConfigLottie(viewMine, "main_tab_mine.zip", configInfo);
 
 
-        LinearLayout llParty = findViewById(R.id.btn_party);
-        if (mIsShowParty) {
-            llParty.setVisibility(View.VISIBLE);
-            startCheckPartyService();
-        } else {
-            llParty.setVisibility(View.GONE);
-        }
         TextView tvHome = findViewById(R.id.tv_home);
         setConfigTextColor(tvHome, true, configInfo);
         TextView tvMessage = findViewById(R.id.tv_message);
         setConfigTextColor(tvMessage, true, configInfo);
         TextView tvTrend = findViewById(R.id.tv_trend);
         setConfigTextColor(tvTrend, true, configInfo);
-        TextView tvParty = findViewById(R.id.tv_party);
-        setConfigTextColor(tvParty, true, configInfo);
         TextView tvMine = findViewById(R.id.tv_mine);
         setConfigTextColor(tvMine, true, configInfo);
         tvBadge = findViewById(R.id.tv_badge);
@@ -214,7 +200,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         if (findViewById(R.id.btn_home) != null) {
             findViewById(R.id.btn_home).setOnClickListener(this);
             findViewById(R.id.btn_trend).setOnClickListener(this);
-            llParty.setOnClickListener(this);
             findViewById(R.id.btn_message).setOnClickListener(this);
             findViewById(R.id.btn_mine).setOnClickListener(this);
             mBotChatView.setOnClickListener(this);
@@ -239,13 +224,11 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
 //                    GlideUtils.loadRouteImage(mContext, viewMine, mIcon == null ? "" : mIcon.ic_tab_mine_normal, R.mipmap.ic_tab_mine_normal);
                     if (viewHome.isAnimating()) viewHome.cancelAnimation();
                     if (viewTrend.isAnimating()) viewTrend.cancelAnimation();
-                    if (viewParty.isAnimating()) viewParty.cancelAnimation();
                     if (viewMessage.isAnimating()) viewMessage.cancelAnimation();
                     if (viewMine.isAnimating()) viewMine.cancelAnimation();
 
                     viewHome.setFrame(1);
                     viewTrend.setFrame(1);
-                    viewParty.setFrame(1);
                     viewMessage.setFrame(1);
                     viewMine.setFrame(1);
                     switch (position) {
@@ -259,19 +242,11 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                             //GlideUtils.loadRouteImage(mContext, viewTrend, mIcon == null ? "" : mIcon.ic_tab_trend_selector, R.mipmap.ic_tab_trend_selector);
                             break;
                         case 2:
-                            if (mIsShowParty) {
-                                viewParty.playAnimation();
-                            } else {
-                                viewMessage.playAnimation();
-                            }
+                            viewMessage.playAnimation();
                             //GlideUtils.loadRouteImage(mContext, viewTrend, mIcon == null ? "" : mIcon.ic_tab_trend_selector, R.mipmap.ic_tab_trend_selector);
                             break;
                         case 3:
-                            if (mIsShowParty) {
-                                viewMessage.playAnimation();
-                            } else {
-                                viewMine.playAnimation();
-                            }
+                            viewMine.playAnimation();
                             //GlideUtils.loadRouteImage(mContext, viewMessage, mIcon == null ? "" : mIcon.ic_tab_message_selector, R.mipmap.ic_tab_message_selector);
                             break;
 
@@ -329,12 +304,10 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             viewHome.setEnabled(false);
             views.add(viewHome);
             views.add(viewTrend);
-            views.add(viewParty);
             views.add(viewMessage);
             views.add(viewMine);
             mTextViews.add(tvHome);
             mTextViews.add(tvTrend);
-            if (mIsShowParty) mTextViews.add(tvParty);
             mTextViews.add(tvMessage);
             mTextViews.add(tvMine);
             tvHome.setEnabled(false);
@@ -823,12 +796,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                 }
             }
             vp.setCurrentItem(1, false);
-        } else if (id == R.id.btn_party) {
-            trackNavbarClick(3);
-            if (partyFragment != null) {
-                partyFragment.visitPartyList();
-            }
-            vp.setCurrentItem(fragmentList.size() - 3, false);
         } else if (id == R.id.btn_message) {
             trackNavbarClick(4);
             long now = System.currentTimeMillis();

@@ -1352,14 +1352,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                     mIntimacyGiftPop.setData(ig);
                                     mIntimacyGiftPop.showPopupWindow();
                                 }
-                            } else if (event.type == Constants.NOTIFY_FAMILY_INTO_BANNER || event.type == Constants.NOTIFY_FAMILY_INTO_BANNER_TO_UID) { //家族进场动画
-                                if (sessionType == SessionTypeEnum.P2P) {
-                                    return;
-                                }
-                                ChatMsg.NobleEnterAni nea = JSON.parseObject(event.code, ChatMsg.NobleEnterAni.class);
-                                if (!isDestroyed() && isAdded() && isAttach){
-                                    initSvg(nea);//和语音房统一
-                                }
                             }
                         }
                 ));
@@ -2695,107 +2687,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                         }
                                     }
                                 });
-                    }
-                } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_GIFT_BAG_RECEIVE_IM)) {   //礼物
-                    ChatMsg.AccostGift gift = JSON.parseObject(chatMsg.content, ChatMsg.AccostGift.class);
-                    GiftDto bean = new GiftDto();
-                    bean.name = gift.name;
-                    bean.animation = gift.animation;
-                    if (gift.animationType == 1) {    //动效类型:1.普通PNG 2.炫 3.动
-                        lottie(bean, 1);
-                    } else {
-                        myGiftList.offer(bean);
-                    }
-                } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.GIFT_COMBO_FLY)) {   //处理新版本连击效果
-                    ChatMsg.Gift gift = JSON.parseObject(chatMsg.content, ChatMsg.Gift.class);
-                    if (gift == null || gift.gift_info == null) return;
-                    GiftDto bean = new GiftDto();
-                    bean.group = gift.gift_num;
-                    bean.name = gift.gift_info.name;
-                    bean.image = gift.gift_info.image;
-                    bean.animation = gift.gift_info.animation;
-                    bean.headUrl = gift.gift_info.from_user_id;
-                    bean.userName = gift.gift_info.from_user_nickname;
-                    List<String> to = gift.to;  //发送给哪个用户
-                    if (to != null && to.size() > 0) {
-                        bean.toUserName = UserInfoHelper.getUserDisplayName(to.get(0));
-                    }
-                    if (!TextUtils.equals(service.getUserId() + "", gift.gift_info.from_user_id))
-                        showGiftAnimation(bean);
-                } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_RED_PACKET_RAIN)) {   //红包雨通知
-                    if (!isResume) return;
-                    ChatMsg.Rain rain = JSON.parseObject(chatMsg.content, ChatMsg.Rain.class);
-                    if (rain != null) {
-                        getFamilyId(false, false);
-                        RainRedPackagePopWindow popWindow = new RainRedPackagePopWindow(getActivity());
-                        popWindow.addOnClickListener(() -> {
-                            if (mIvGiftMask != null) {
-                                if (mTvContactWay.isPauseScroll()) {
-                                    mIvGiftMask.setVisibility(View.VISIBLE);
-                                }
-                                RedPacketViewHelper redPacketViewHelper = new RedPacketViewHelper(getActivity());
-                                rain(redPacketViewHelper, rain);
-                            }
-                        });
-                        popWindow.showPopupWindow();
-                        if (rain.num == 0) {//不显示红包雨tab
-                            ChatMsg.Airdrop airdrop = new ChatMsg.Airdrop();
-                            airdrop.num = 0;
-                            airdrop.type = "red_packet_rain";
-                            airdrop.sortId = 3;
-                            mActivityView.updateActivityData(airdrop);
-                        }
-                    }
-                } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_RED_PACKET_RAIN_COUNT_DOWN)) {   //红包雨时间通知 显示图标
-                    if (!isResume || sessionType == SessionTypeEnum.P2P) return;
-                    ChatMsg.Airdrop airdrop = JSON.parseObject(chatMsg.content, ChatMsg.Airdrop.class);
-                    airdrop.type = "red_packet_rain";
-                    airdrop.sortId = 3;
-                    mActivityView.updateActivityData(airdrop);
-                } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_RED_PACKET_RAIN_RECEIVE)) {  //结束红包雨
-                    ChatMsg.Rain rain = JSON.parseObject(chatMsg.content, ChatMsg.Rain.class);
-                    if (rain != null) {
-                        OpenRainRedPackagePopWindow popWindow = new OpenRainRedPackagePopWindow(getActivity(), rain);
-                        popWindow.showPopupWindow();
-                    }
-                } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_USER_NOBILITY_LEVEL_UP_NOTICE)) {   //贵族升级飘萍
-                    if (TextUtils.equals(chatMsg.cmd, "pop_up_windows"))
-                        mFloatGift.offer(chatMsg);
-                } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_GIFT_NOTICE)) {   //幸运礼物中奖
-                    if (TextUtils.equals(chatMsg.cmd, "gift_marquee") || TextUtils.equals(chatMsg.cmd, "gift_marquee_to_uid"))
-                        mFloatGift.offer(chatMsg);
-                } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_COUPLE_LETTER_POPUP)) {   //组情侣官宣
-                    playAirdrop(COUPLE_OFFICIAL_PUBLICITY);
-                    ChatMsg.CoupleLetter coupleLetter = JSON.parseObject(chatMsg.content, ChatMsg.CoupleLetter.class);
-                    if (coupleLetter != null) {
-                        mTvFrom.setText(coupleLetter.from_nickname);
-                        mTvTo.setText(coupleLetter.to_nickname);
-                        GlideUtils.loadImage(getActivity(), mIvFrom, coupleLetter.from_icon);
-                        GlideUtils.loadImage(getActivity(), mIvTo, coupleLetter.to_icon);
-                        if (coupleLetter.from_sex == 1) {  //男
-                            mIvFromHead.setImageResource(R.mipmap.chat_bg_group_couple_head_boy);
-                            mIvToHead.setImageResource(R.mipmap.chat_bg_group_couple_head_girl);
-                            mTvFrom.setTextColor(Color.parseColor("#739BFF"));
-                            mTvTo.setTextColor(Color.parseColor("#FF6A9D"));
-                        } else {
-                            mIvFromHead.setImageResource(R.mipmap.chat_bg_group_couple_head_girl);
-                            mIvToHead.setImageResource(R.mipmap.chat_bg_group_couple_head_boy);
-                            mTvFrom.setTextColor(Color.parseColor("#FF6A9D"));
-                            mTvTo.setTextColor(Color.parseColor("#739BFF"));
-                        }
-                        SpannableStringBuilder span = new SpannableStringBuilder();
-                        StringBuilder stringBuffer = new StringBuilder();
-                        stringBuffer.append(coupleLetter.desc);
-                        span.append(stringBuffer);
-                        int start = stringBuffer.toString().indexOf(coupleLetter.from_nickname);
-                        int start1 = stringBuffer.toString().indexOf(coupleLetter.to_nickname);
-                        if (start >= 0) {
-                            span.setSpan(new ForegroundColorSpan(Color.parseColor("#7F89F3")), start, start + coupleLetter.from_nickname.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        }
-                        if (start1 >= 0) {
-                            span.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6A9D")), start1, start1 + coupleLetter.to_nickname.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        }
-                        mTvGroupCoupleContent.setText(span);
                     }
                 } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.LUCKY_GIFT)) {
                     ChatMsg.LuckyGift luckyGift = JSON.parseObject(chatMsg.content, ChatMsg.LuckyGift.class);

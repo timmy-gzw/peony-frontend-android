@@ -69,46 +69,12 @@
                 app:lottie_imageAssetsFolder="gift/"
                 app:lottie_loop="false" />
 
-            <!--<ImageView
-                android:id="@+id/view_trend"
-                android:layout_width="@dimen/dp_22"
-                android:layout_height="@dimen/dp_22"
-                android:layout_gravity="center"
-                tools:src="@drawable/tab_trend" />-->
-
             <TextView
                 android:id="@+id/tv_trend"
                 style="@style/MainBotTvStyle"
                 android:layout_marginTop="-4dp"
                 android:text="@string/tab_trend" />
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_party"
-            style="@style/MainBotRootStyle">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/view_party"
-                style="@style/MainBotLottieStyle"
-                app:lottie_autoPlay="false"
-                app:lottie_fileName="main_tab_party.zip"
-                app:lottie_imageAssetsFolder="gift/"
-                app:lottie_loop="false" />
-
-            <!--<ImageView
-                android:id="@+id/view_trend"
-                android:layout_width="@dimen/dp_22"
-                android:layout_height="@dimen/dp_22"
-                android:layout_gravity="center"
-                tools:src="@drawable/tab_trend" />-->
-
-            <TextView
-                android:id="@+id/tv_party"
-                style="@style/MainBotTvStyle"
-                android:layout_marginTop="-4dp"
-                android:text="@string/tab_party" />
-        </LinearLayout>
-
 
         <RelativeLayout
             android:id="@+id/btn_message"
