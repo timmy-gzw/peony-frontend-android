@@ -86,7 +86,7 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
                        mRv.getLayoutManager().startSmoothScroll(smoothScroller);
                    }
                }
-           }, 300);
+           }, 500);
         });
     }
 
@@ -98,7 +98,7 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
 
         mIvPushPull = findViewById(R.id.iv_push_pull);
         mRvIntmacyPop = findViewById(R.id.intmacy_pop);
-        mBootom = findViewById(R.id.bottom);
+        mBootom = findViewById(R.id.bottom2);
         mTvLevelName = findViewById(R.id.img_algin_pcm_ablow10);
         findViewById(R.id.tv_strategy).setOnClickListener(v->{
             IntmacyUpgradePopWindow popWindow = new IntmacyUpgradePopWindow(context, new View.OnClickListener() {
@@ -123,71 +123,47 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
                 return;
             if(!isPush){
                 isPush = true;
-                ValueAnimator valueAnimator = ValueAnimator.ofInt(Utils.dp2px(context,200), 1);
-                valueAnimator.addUpdateListener(value->{
-                    int h = (int) value.getAnimatedValue();
-                    mBootom.getLayoutParams().height = h;
-                    mBootom.requestLayout();
-                });
-                valueAnimator.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mIvPushPull.setImageResource(R.mipmap.icon_intmacy_pull);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
-                valueAnimator.setDuration(300);
-                valueAnimator.start();
+                tranlateAnimation(Utils.dp2px(context,200), 1, R.mipmap.icon_intmacy_pull);
 
             }else{
                 isPush = false;
-                ValueAnimator valueAnimator = ValueAnimator.ofInt(1, Utils.dp2px(context,200));
-                valueAnimator.addUpdateListener(value->{
-                    int h = (int) value.getAnimatedValue();
-                    mBootom.getLayoutParams().height = h;
-                    mBootom.requestLayout();
-                });
-                valueAnimator.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mIvPushPull.setImageResource(R.mipmap.icon_intamcy_push);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
-                valueAnimator.setDuration(300);
-                valueAnimator.start();
+                tranlateAnimation(1, Utils.dp2px(context, 200), R.mipmap.icon_intamcy_push);
             }
         });
         initData();
 
+    }
+
+    private void tranlateAnimation(int i, int i2, int p) {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(i, i2);
+        valueAnimator.addUpdateListener(value -> {
+            int h = (int) value.getAnimatedValue();
+            mBootom.getLayoutParams().height = h;
+            mBootom.requestLayout();
+        });
+        valueAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mIvPushPull.setImageResource(p);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        valueAnimator.setDuration(300);
+        valueAnimator.start();
     }
 
     /**

@@ -85,12 +85,12 @@ public class GiftAdapter extends BaseQuickAdapter<GiftDto, GiftAdapter.ViewHolde
         } else {
             if (item.animationType == 2) { // 1.普通PNG 2.炫 3.动 4七夕
                 holder.tvGiftType.setVisibility(View.VISIBLE);
-                GlideUtils.loadImage(getContext(), holder.tvGiftType, R.mipmap.ic_bg_gift_dazzle, R.mipmap.ic_bg_gift_dazzle);
+                GlideUtils.loadImage(getContext(), holder.tvGiftType, R.mipmap.ic_bg_gift_efficacy, R.mipmap.ic_bg_gift_efficacy);
             } else if (item.animationType == 3) {
-                holder.tvGiftType.setVisibility(View.VISIBLE);
+//                holder.tvGiftType.setVisibility(View.VISIBLE);
                 GlideUtils.loadImage(getContext(), holder.tvGiftType, R.mipmap.ic_bg_gift_move, R.mipmap.ic_bg_gift_move);
             } else if (item.animationType == 4) {
-                holder.tvGiftType.setVisibility(View.VISIBLE);
+//                holder.tvGiftType.setVisibility(View.VISIBLE);
                 GlideUtils.loadImage(getContext(), holder.tvGiftType, R.mipmap.ic_bg_gift_qx, R.mipmap.ic_bg_gift_qx);
             } else {
                 holder.tvGiftType.setVisibility(View.GONE);

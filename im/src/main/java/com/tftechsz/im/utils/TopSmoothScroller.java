@@ -35,7 +35,7 @@ public class TopSmoothScroller extends LinearSmoothScroller {
     @Override
     protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
         //返回滑动一个pixel需要多少毫秒
-        return 0.2f/displayMetrics.density;
+        return 0.6f/displayMetrics.density;
     }
 
 

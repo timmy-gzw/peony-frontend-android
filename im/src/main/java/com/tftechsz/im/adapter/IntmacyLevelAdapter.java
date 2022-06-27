@@ -64,9 +64,6 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                         imageView.setVisibility(View.VISIBLE);
                         if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
                             imageView.setVisibility(View.INVISIBLE);
-                            helper.getView(R.id.bottom).setVisibility(View.VISIBLE);
-                        }else {
-                            helper.getView(R.id.bottom).setVisibility(View.GONE);
                         }
                     }else{//已达成
                         ImageView iv_unlock = helper.getView(R.id.iv_unlock);
@@ -80,6 +77,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                         TextView tv_lock = helper.getView(R.id.tv_lock);
                         tv_lock.setTextColor(Color.parseColor("#50CD5C33"));
                         tv_lock.setText("已解锁");
+                        if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
+                            imageView.setVisibility(View.INVISIBLE);
+                        }
                     }
                 break;
             case 1:
@@ -97,9 +97,6 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                 tvLevelTitle.setText(dto.tips);
                 if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
                     ivToUnlock.setVisibility(View.INVISIBLE);
-                    helper.getView(R.id.bottom).setVisibility(View.VISIBLE);
-                }else {
-                    helper.getView(R.id.bottom).setVisibility(View.GONE);
                 }
                 break;
             case 2:
@@ -117,11 +114,13 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                 tvLevelTitle1.setText(dto.tips);
                 if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
                     ivToUnlock1.setVisibility(View.INVISIBLE);
-                    helper.getView(R.id.bottom).setVisibility(View.VISIBLE);
-                }else {
-                    helper.getView(R.id.bottom).setVisibility(View.GONE);
                 }
                 break;
+        }
+        if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
+            helper.getView(R.id.bottom).setVisibility(View.VISIBLE);
+        }else {
+            helper.getView(R.id.bottom).setVisibility(View.GONE);
         }
     }
 
