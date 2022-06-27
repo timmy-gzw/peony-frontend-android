@@ -47,18 +47,20 @@ public class ConfigInfo {
 
         public List<LevelLadder> wealth_level_ladder;//财富等级
         public List<LevelLadder> charm_level_ladder;//魅力等级
+        public List<NoticeBannerBean> boy_banners;//我的页面的轮播图
+        public List<NoticeBannerBean> girl_banners;//我的页面的轮播图
 
         public List<LevelIntroduction> charm_level_introduction;//财富/魅力升级攻略
         public List<LevelIntroduction> wealth_level_introduction;//财富/魅力升级攻略
     }
 
-    public static class LevelIntroduction{
+    public static class LevelIntroduction {
         public String description;
         public String title;
         public String icon;
     }
 
-    public static class LevelLadder{
+    public static class LevelLadder {
         public int min_level;
         public int max_level;
         public String boy_title;
@@ -362,4 +364,8 @@ public class ConfigInfo {
         public String msg_copy;
     }
 
+    public static class NoticeBannerBean {
+        public String img;
+        public String link;
+    }
 }

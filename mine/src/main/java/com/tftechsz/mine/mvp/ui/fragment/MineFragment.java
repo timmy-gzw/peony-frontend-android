@@ -47,6 +47,9 @@ import com.tftechsz.mine.mvp.presenter.MinePresenter;
 import com.tftechsz.mine.mvp.ui.activity.MineFriendActivity;
 import com.tftechsz.mine.mvp.ui.activity.SettingActivity;
 import com.tftechsz.mine.mvp.ui.activity.VipActivity;
+import com.youth.banner.Banner;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.holder.BannerImageHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +83,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private long mCurrentTime;
     private View llIntegral;
     private View llCoin;
+    private Banner<ConfigInfo.NoticeBannerBean, BannerImageAdapter<ConfigInfo.NoticeBannerBean>> mBanner;
 
     @Override
     protected MinePresenter initPresenter() {
@@ -120,6 +124,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mTvMember = getView(R.id.member_open);
         llIntegral = getView(R.id.ll_jifen);
         llCoin = getView(R.id.ll_jinbi);
+        mBanner = getView(R.id.banner);
         initListener();
 
     }
@@ -151,7 +156,6 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         llIntegral.setOnClickListener(this);   //积分
         llCoin.setOnClickListener(this);   //金币
     }
-
 
     @Override
     protected int getLayout() {
@@ -372,7 +376,43 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                     }
                 }
             }
+
+            if (configInfo != null && configInfo.share_config != null) {
+                if (mUserInfo.isGirl()) {
+                    List<ConfigInfo.NoticeBannerBean> girlBanners = configInfo.share_config.girl_banners;
+                    if (girlBanners == null || girlBanners.isEmpty()) {
+                        mBanner.setVisibility(View.GONE);
+                    } else {
+                        showBanner(girlBanners);
+                    }
+                } else {
+                    List<ConfigInfo.NoticeBannerBean> boyBanners = configInfo.share_config.boy_banners;
+                    if (boyBanners == null || boyBanners.isEmpty()) {
+                        mBanner.setVisibility(View.GONE);
+                    } else {
+                        showBanner(boyBanners);
+                    }
+                }
+            }
         });
+    }
+
+    private void showBanner(List<ConfigInfo.NoticeBannerBean> banners) {
+        if (mBanner == null || banners == null || banners.isEmpty()) return;
+        mBanner.setVisibility(View.VISIBLE);
+        mBanner.setAdapter(new BannerImageAdapter<ConfigInfo.NoticeBannerBean>(banners) {
+            @Override
+            public void onBindView(BannerImageHolder holder, ConfigInfo.NoticeBannerBean data, int position, int size) {
+                holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                GlideUtils.loadRoundImage(getActivity(), holder.imageView, data.img, 10);
+                holder.imageView.setOnClickListener(v -> {
+                    CommonUtil.performLink(getActivity(), new ConfigInfo.MineInfo(data.link, null), position, 2);
+                });
+            }
+        });
+        mBanner.addBannerLifecycleObserver(this);
+        mBanner.setScrollTime(600); //设置轮播滑动过程的时间
+        mBanner.start();
     }
 
 

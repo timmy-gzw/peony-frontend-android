@@ -468,6 +468,28 @@
                     tools:text="15.32" />
             </LinearLayout>
 
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:banner_indicator_gravity="center"
+                app:banner_indicator_height="4dp"
+                app:banner_indicator_marginBottom="@dimen/dp_10"
+                app:banner_indicator_normal_color="@color/white_alpha_20"
+                app:banner_indicator_normal_width="4dp"
+                app:banner_indicator_radius="@dimen/dp_100"
+                app:banner_indicator_selected_color="@color/white"
+                app:banner_indicator_selected_width="@dimen/dp_10"
+                app:banner_loop_time="5000"
+                app:layout_constraintDimensionRatio="343:80"
+                app:layout_constraintTop_toBottomOf="@id/ll_jifen"
+                tools:visibility="visible" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_mine_bot"
                 android:layout_width="match_parent"
@@ -477,7 +499,7 @@
                 android:layout_marginEnd="@dimen/dp_16"
                 android:background="@drawable/bg_white_radius"
                 android:overScrollMode="never"
-                app:layout_constraintTop_toBottomOf="@id/ll_jifen"
+                app:layout_constraintTop_toBottomOf="@id/banner"
                 app:layout_goneMarginTop="@dimen/dp_10"
                 tools:layout_editor_absoluteX="0dp" />
 
