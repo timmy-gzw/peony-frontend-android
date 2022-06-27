@@ -636,9 +636,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cl_video"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/bg_red_radius6"
         android:paddingStart="@dimen/dp_16"
         android:paddingTop="@dimen/dp_11"
@@ -646,8 +646,8 @@
         android:paddingBottom="@dimen/dp_11"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
-        tools:visibility="visible"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 
     <com.faceunity.nama.ui.FaceUnityView

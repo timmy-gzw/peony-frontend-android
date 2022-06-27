@@ -3,11 +3,14 @@ package com.tftechsz.mine.mvp.ui.fragment;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView;
+import com.netease.nim.uikit.common.ui.imageview.CircleImageView;
 import com.tftechsz.common.base.BaseListFragment;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.pagestate.PageStateConfig;
@@ -15,6 +18,7 @@ import com.tftechsz.common.pagestate.PageStateManager;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.FriendDto;
@@ -71,10 +75,9 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
 
     @Override
     public void bingViewHolder(BaseViewHolder helper, FriendDto item, int position) {
-        AvatarVipFrameView ivAvatar = helper.getView(R.id.iv_avatar);
+        CircleImageView ivAvatar = helper.getView(R.id.iv_avatar);
         CommonUtil.setUserName(helper.getView(R.id.tv_name), item.nickname, false,item.is_vip == 1);
-        GlideUtils.loadRoundImageRadius(getActivity(), ivAvatar.getImageView(), item.icon);
-        ivAvatar.setBgFrame(item.picture_frame);
+        Glide.with(getActivity()).load(item.icon).into(ivAvatar);
         CommonUtil.setSexAndAge(getContext(), item.sex, item.age, helper.getView(R.id.iv_sex));
         helper.setGone(R.id.iv_real_people, item.is_real != 1);  //是否真人
         helper.setGone(R.id.tv_vip, item.is_vip != 1);  //是否vip
@@ -85,7 +88,7 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
     @Override
     public String setEmptyContent() {
         if (TextUtils.equals(mType, TYPE_WATCH)) {
-            return "你还没有关注美女/帅哥吗？";
+            return "你还没有任何关注的人哦，现在去关注吧";
         } else if (TextUtils.equals(mType, TYPE_FANS)) {
             return "你还没有粉丝呢";
         }
