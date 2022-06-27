@@ -34,7 +34,6 @@
 
 
     <LinearLayout
-        android:layout_marginTop="@dimen/dp_size_25"
         android:id="@+id/rl_accost"
         android:layout_width="wrap_content"
         android:paddingTop="@dimen/dp_8"
