@@ -72,6 +72,7 @@ public class MsgViewHolderAccost extends MsgViewHolderBase {
             ivRedPackage.setVisibility(View.GONE);
             avchatContent.setGravity(Gravity.END);
             VipUtils.setPersonalise(tvContent, getRightBg(), true);
+            tvContent.setVisibility(View.GONE);
         }
     }
 
