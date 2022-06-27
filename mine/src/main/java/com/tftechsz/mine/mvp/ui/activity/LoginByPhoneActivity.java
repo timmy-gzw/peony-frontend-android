@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.KeyboardUtils;
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tftechsz.common.Constants;
@@ -74,7 +75,17 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
         findViewById(R.id.tv_one_key_login).setOnClickListener(this);
         mEtPhone.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                tvGetCode.performClick();
+                if (tvGetCode.isEnabled())
+                    tvGetCode.performClick();
+                else
+                    Utils.setFocus(mEtCode);
+                return true;
+            }
+            return false;
+        });
+        mEtCode.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                toLogin();
                 return true;
             }
             return false;
@@ -83,6 +94,24 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
         mEtCode.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/gilroy-bold-4.otf"));
         mEtPhone.addTextChangedListener(new MyInputFilter());
         mEtCode.addTextChangedListener(new MyInputFilter());
+        mEtCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s != null && s.length() == 4) {
+                    toLogin();
+                }
+            }
+        });
         new AddSpaceTextWatcher(mEtPhone, AddSpaceTextWatcher.SpaceType.mobilePhoneNumberType);
         String spPhone = SPUtils.getInstance().getString(Interfaces.SP_PHONE);
         mEtPhone.setText(spPhone);
@@ -132,13 +161,18 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
             loginReq.phone = mPhone;
             p.sendCode(loginReq, true);
         } else if (id == R.id.tv_login) {
-            mPhone = mEtPhone.getText().toString().replace(" ", "");
-            String code = mEtCode.getText().toString();
-            if (!TextUtils.isEmpty(code) && code.length() >= 4) {
-                login(code);
-            }
+            toLogin();
         } else if (id == R.id.tv_one_key_login) {
             finish();
+        }
+    }
+
+    private void toLogin() {
+        mPhone = mEtPhone.getText().toString().replace(" ", "");
+        String code = mEtCode.getText().toString();
+        if (RegexUtils.isMobileSimple(mPhone) && !TextUtils.isEmpty(code) && code.length() == 4) {
+            KeyboardUtils.hideSoftInput(this);
+            login(code);
         }
     }
 
@@ -177,6 +211,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
      */
     @Override
     public void getCodeSuccess(String data) {
+        mEtCode.setText("");
         Utils.setFocus(mEtCode);
         countTime();
     }

@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
-            android:text="其他登录方式"
+            android:text="其他方式登录"
             android:textColor="@color/white_alpha_45"
             android:textSize="@dimen/sp_15"
             app:layout_constraintBottom_toTopOf="@+id/ll_login"
