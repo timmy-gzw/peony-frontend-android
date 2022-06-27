@@ -190,6 +190,7 @@ public class NimSDKOptionConfig {
     private static MixPushConfig buildMixPushConfig() {
         // 第三方推送配置
         MixPushConfig config = new MixPushConfig();
+        config.autoSelectPushType = true;
         // 小米推送
         config.xmAppId = Constants.PUSH_XM_APP_ID;
         config.xmAppKey = Constants.PUSH_XM_APP_KEY;
