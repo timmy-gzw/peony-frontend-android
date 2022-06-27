@@ -747,7 +747,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     protected void initData() {
         initIntent();
         //获取对方用户信息
-        getP().getUserInfoById(fromId == null ? callOutUser.getUser_id()+"" : fromId);
+        if(!TextUtils.isEmpty(fromId) || null != callOutUser) {
+            getP().getUserInfoById(TextUtils.isEmpty(fromId) ? callOutUser.getUser_id() + "" : fromId);
+        }
 //        tvCallComment.setText("速配成功，即将开始语音通话");
 //        tvCallComment.setVisibility(View.VISIBLE);
         p.startThread(this, svgaImageView, mPlayerView);

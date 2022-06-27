@@ -310,7 +310,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_55"
         android:orientation="horizontal"
         android:visibility="invisible">
 
@@ -474,7 +474,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_55"
         android:gravity="center"
         android:orientation="horizontal"
         android:visibility="invisible">
