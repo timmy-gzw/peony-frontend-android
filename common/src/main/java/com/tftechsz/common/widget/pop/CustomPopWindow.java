@@ -3,6 +3,7 @@ package com.tftechsz.common.widget.pop;
 import android.content.Context;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,10 +11,13 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.netease.nim.uikit.common.ChatMsgUtil;
+import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.R;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.utils.ClickUtil;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.Utils;
 
 /**
@@ -109,7 +113,11 @@ public class CustomPopWindow extends BaseCenterPop implements View.OnClickListen
             if (trim.startsWith("<") && trim.endsWith(">")) {
                 mTvContent.setText(Html.fromHtml(content.toString()));
             } else {
-                mTvContent.setText(content);
+                mTvContent.setText(ChatMsgUtil.getTipContent(trim, "", content1 -> {
+                    String newContent = content1.replaceAll("^['\"]|['\"]$", "");
+                    CommonUtil.performLink(getContext(), new ConfigInfo.MineInfo(newContent));
+                }));
+                mTvContent.setMovementMethod(LinkMovementMethod.getInstance());
             }
             mTvContent.setGravity(gravity);
         }
