@@ -91,7 +91,6 @@ import com.tftechsz.main.entity.UpdateLocationReq;
 import com.tftechsz.main.mvp.IView.IMainView;
 import com.tftechsz.main.mvp.presenter.MainPresenter;
 import com.tftechsz.mine.mvp.ui.fragment.MineFragment;
-import com.tftechsz.party.mvp.ui.fragment.PartyFragment;
 import com.tftechsz.moment.mvp.ui.activity.SendTrendActivity;
 import com.tftechsz.moment.mvp.ui.fragment.TrendFragment;
 import io.reactivex.disposables.CompositeDisposable;
@@ -141,7 +140,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private HomeFragment mHomeFragment;
     private TrendFragment trendFragment;
     private boolean mIsShowParty = false;  //是否显示party功能
-    private PartyFragment partyFragment;
     private ComponentName componentName1, componentName2;
     private PackageManager mPackageManager;
 
@@ -303,10 +301,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             public void run() {
                 trendFragment = new TrendFragment();
                 fragmentList.add(trendFragment);
-                if (mIsShowParty) {
-                    partyFragment = new PartyFragment();
-                    fragmentList.add(partyFragment);
-                }
                 fragmentList.add(new ChatTabFragment());
                 fragmentList.add(new MineFragment());
                 vp.setOffscreenPageLimit(5);
@@ -682,9 +676,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                 if (tvBadge == null) return;
                                 tvBadge.setVisibility(event.num > 0 ? View.VISIBLE : View.GONE);
                                 tvBadge.setText(event.num > 99 ? "99+" : String.valueOf(event.num));
-                                if (partyFragment != null) {
-                                    partyFragment.setMessageNum(event.p2pNumber);
-                                }
                             }
                         });
 
@@ -825,9 +816,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             vp.setCurrentItem(1, false);
         } else if (id == R.id.btn_party) {
             trackNavbarClick(3);
-            if (partyFragment != null) {
-                partyFragment.visitPartyList();
-            }
             vp.setCurrentItem(fragmentList.size() - 3, false);
         } else if (id == R.id.btn_message) {
             trackNavbarClick(4);

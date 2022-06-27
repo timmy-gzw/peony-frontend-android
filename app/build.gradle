@@ -57,12 +57,28 @@ android {
         debug {
             zipAlignEnabled true
             // 移除无用的resource文件
-            shrinkResources false
+            shrinkResources true
             signingConfig signingConfigs.debug
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             manifestPlaceholders = [app_icon: "@mipmap/ic_launcher"]
+            applicationVariants.all { variant ->
+                variant.mergeAssetsProvider.configure {
+                    doLast {
+                        delete(fileTree(dir: outputDir,
+                                includes: ['model/ai_face_processor.bundle',
+                                           'model/ai_gesture.bundle',
+                                           'model/ai_hand_processor.bundle',
+                                           'model/ai_human_processor.bundle',
+                                           'graphics/controller.bundle',
+                                           'graphics/fuzzytoonfilter.bundle',
+                                           'graphics/fxaa.bundle',
+                                           'graphics/face_makeup.bundle',
+                                           'graphics/tongue.bundle']))
+                    }
+                }
+            }
         }
 
         release {
@@ -159,10 +175,8 @@ dependencies {
         implementation project(':main')
         implementation project(':home')
         implementation project(':moment')
-        implementation project(':party')
         implementation project(':im')
         implementation project(':mine')
-        implementation project(':family')
         implementation project(':videotrimmer')
     }
 

@@ -73,7 +73,6 @@ import com.tftechsz.main.widget.RetainNoMessagePopWindow;
 import com.tftechsz.main.widget.RetainPopWindow;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.utils.UserManager;
-import com.tftechsz.party.mvp.ui.activity.PartyRoomActivity;
 
 import java.util.Objects;
 
@@ -657,12 +656,11 @@ public class MainPresenter extends BasePresenter<IMainView> {
         String number = MMKVUtils.getInstance().decodeString(FIY_NUMBER);
         int numberScene = MMKVUtils.getInstance().decodeInt(SCENE_NUMBER);
         RechargePopWindow rechargePopWindow = new RechargePopWindow(BaseApplication.getInstance(), fromType != -1 ? fromType : 1, 2);
-        boolean isInPartyRoom = TextUtils.equals(AppManager.getAppManager().currentActivity().getClass().getSimpleName(), PartyRoomActivity.class.getSimpleName());
         boolean isP2pRoom = TextUtils.equals(AppManager.getAppManager().currentActivity().getClass().getSimpleName(), P2PMessageActivity.class.getSimpleName());
         boolean isTeamRoom = TextUtils.equals(AppManager.getAppManager().currentActivity().getClass().getSimpleName(), TeamMessageActivity.class.getSimpleName());
-        Utils.logE("showPop  是否在partyRoom?--> " + isInPartyRoom + "  是否在单聊界面: " + isP2pRoom + "   是否在群聊: " + isTeamRoom);
+        Utils.logE("showPop 是否在单聊界面: " + isP2pRoom + "   是否在群聊: " + isTeamRoom);
 
-        rechargePopWindow.setFormType(isInPartyRoom ? 2 : isTeamRoom ? 1 : 0);
+        rechargePopWindow.setFormType(0);
         try {
             rechargePopWindow.setFamilyId(!TextUtils.isEmpty(number) && !number.equals("-1") ? Integer.parseInt(number) : isTeamRoom ? 1 : 0);
         } catch (NumberFormatException e) {
