@@ -93,7 +93,7 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
         if (configInfo != null && configInfo.sys != null && configInfo.sys.feedback_contact != null) {
             mWechat = Utils.matchWechatNumber(configInfo.sys.feedback_contact.wechat);
         } else {
-            mWechat = "peonygf";
+            mWechat = "QQ: 3115625757";
         }
     }
 
@@ -111,7 +111,7 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
     @Override
     protected void initData() {
         super.initData();
-        mTvHint.setText(new SpannableStringUtils.Builder().append("无法完成实名认证，添加官方微信公众号: ")
+        mTvHint.setText(new SpannableStringUtils.Builder().append("无法完成实名认证，添加官方客服: ")
                 .append(mWechat)
                 .setClickSpan(new ClickableSpan() {
                     @Override
