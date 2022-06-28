@@ -608,15 +608,19 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     public void attentionSuccess(boolean isAttention) {
         Drawable drawable;
         int color;
+        String text;
         if (isAttention) {
             drawable = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_selector);
             color = Utils.getColor(R.color.colorPrimary);
+            text = "已关注";
         } else {
             drawable = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_normal);
             color = Utils.getColor(R.color.black);
+            text = "关注";
         }
         mTvAttention.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
         mTvAttention.setTextColor(color);
+        mTvAttention.setText(text);
         RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_FOLLOW));
     }
 

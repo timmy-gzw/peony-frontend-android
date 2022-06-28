@@ -103,7 +103,7 @@
                 android:layout_centerVertical="true"
                 android:paddingStart="@dimen/dp_10"
                 android:paddingEnd="@dimen/dp_17"
-                android:src="@mipmap/ic_more_white"
+                android:src="@mipmap/ic_more_white_no_bg"
                 tools:ignore="UseAppTint" />
 
 
@@ -230,7 +230,7 @@
                 android:paddingTop="@dimen/dp_5"
                 android:paddingEnd="@dimen/dp_17"
                 android:paddingBottom="@dimen/dp_5"
-                android:src="@mipmap/ic_more_white"
+                android:src="@mipmap/ic_more_white_no_bg"
                 tools:ignore="UseAppTint" />
         </RelativeLayout>
 

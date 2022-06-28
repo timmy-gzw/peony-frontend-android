@@ -154,8 +154,8 @@
 
         <ImageView
             android:id="@+id/iv_red_packet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_17"
+            android:layout_height="@dimen/dp_20"
             android:layout_gravity="center_vertical|end"
             android:background="@drawable/ic_red_packet"
             android:visibility="gone" />

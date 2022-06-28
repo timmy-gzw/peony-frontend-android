@@ -86,6 +86,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         }
         holder.mPosition = holder.getLayoutPosition();
         holder.tvLikeCount.setText(item.getPraises() == 0 ? "点赞" : String.valueOf(item.getPraises()));
+        holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0?R.color.color_light_font:R.color.color_F8D423));
         holder.tvDiscussCount.setText(item.getComments() == 0 ? "评论" : String.valueOf(item.getComments()));
         holder.setVisible(R.id.iv_real, item.isReal());  //是否真人
         holder.mPlayerContainer.setTransitionName(Utils.getString(R.string.video_transitions));
@@ -175,6 +176,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
                 if (likeCount != null) {
                     likeCount.setAnimationDuration(praises == 1 ? 0 : Interfaces.TICKERVIEW_ANIMATION_LIKE);
                     likeCount.setText(String.valueOf(praises));
+                    likeCount.setTextColor(context.getResources().getColor(praises == 0?R.color.color_light_font:R.color.color_F8D423));
                 }
                 break;
             }
@@ -248,8 +250,10 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             tvTime.setText(data.getCreated_at());
 
         TickerView tvLike = (TickerView) getViewByPosition(clickPosition, R.id.tv_like_count);
-        if (tvLike != null)
+        if (tvLike != null) {
             tvLike.setText(data.getPraises() == 0 ? "点赞" : String.valueOf(data.getPraises()));
+            tvLike.setTextColor(context.getResources().getColor(data.getIs_praise() == 0?R.color.color_light_font:R.color.color_F8D423));
+        }
 
         TickerView tvLikeCount = (TickerView) getViewByPosition(clickPosition, R.id.tv_discuss_count);
         if (tvLikeCount != null)
