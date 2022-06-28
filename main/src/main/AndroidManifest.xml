@@ -1,27 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.tftechsz.main"
-  >
+    package="com.tftechsz.main">
 
-  <application
-    android:allowBackup="true"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme">
-    <activity
-      android:name="com.tftechsz.main.mvp.ui.MainActivity"
-      android:launchMode="singleTask"
-      android:screenOrientation="portrait" />
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.tftechsz.main.mvp.ui.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
 
-    <service
-      android:name="com.tftechsz.common.music.service.PlayService"
-      android:enabled="true" />
 
-    <!--  <receiver android:name="com.tftechsz.common.music.receiver.AudioBroadcastReceiver">
-          <intent-filter>
-              <action android:name="cn.ycbjie.lock" />
-          </intent-filter>
-      </receiver>-->
-    <receiver android:name="com.tftechsz.common.music.receiver.AudioEarPhoneReceiver" />
-  </application>
+            <!--注册scheme-->
+            <intent-filter>
+                <!--必有项-->
+                <action android:name="android.intent.action.VIEW" />
+                <!--表示该页面可以被隐式调用，必须加上该项-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--BROWSABLE指定该Activity能被浏览器安全调用-->
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!--协议部分-->
+                <!--声明自定义scheme，类似于http, https-->
+                <data
+                    android:scheme="http"
+                    android:host="com.yitang"
+                    android:port="8080"
+                    android:path="/peoney/yitang"/>
+            </intent-filter>
+
+        </activity>
+
+        <service
+            android:name="com.tftechsz.common.music.service.PlayService"
+            android:enabled="true" />
+
+        <!--  <receiver android:name="com.tftechsz.common.music.receiver.AudioBroadcastReceiver">
+              <intent-filter>
+                  <action android:name="cn.ycbjie.lock" />
+              </intent-filter>
+          </receiver>-->
+        <receiver android:name="com.tftechsz.common.music.receiver.AudioEarPhoneReceiver" />
+    </application>
 
 </manifest>

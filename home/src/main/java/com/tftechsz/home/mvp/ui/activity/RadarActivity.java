@@ -129,10 +129,12 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         mType = getIntent().getIntExtra(EXTRA_TYPE, 1);
         if (mType == 2) {   //视频
             mTitleTv.setText("视频速配");
+            mllPair.setBackground(getResources().getDrawable(R.drawable.bg_blue_alpha99));
             mClRadar.setBackgroundResource(R.mipmap.radar_video_bg);
             mIvRound.setBackgroundResource(R.drawable.round_video);
             mIvRoundBig.setBackgroundResource(R.drawable.round_video);
         } else {  //语音
+            mllPair.setBackground(getResources().getDrawable(R.drawable.bg_pink));
             mClRadar.setBackgroundResource(R.mipmap.radar_voice_bg);
             mIvRound.setBackgroundResource(R.drawable.round_voice);
             mIvRoundBig.setBackgroundResource(R.drawable.round_video);
