@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -13,14 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.utils.ClickUtil;
-import com.tftechsz.common.utils.ScreenUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.BaseTopPop;
 import com.tftechsz.im.R;
@@ -33,9 +29,8 @@ import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.widget.CircleImageView;
-import com.tftechsz.common.widget.pop.BaseCenterPop;
 import com.tftechsz.im.model.dto.MultiIntmacyItem;
-import com.tftechsz.im.utils.TopSmoothScroller;
+import com.tftechsz.common.utils.TopSmoothScroller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

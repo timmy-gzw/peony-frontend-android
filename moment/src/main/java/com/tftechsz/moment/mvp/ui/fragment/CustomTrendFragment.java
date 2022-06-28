@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -767,6 +768,8 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
     @Override
     public View getListEmptyView() {
         View emptyView = super.getListEmptyView();
+        ImageView imageView = emptyView.findViewById(R.id.iv_empty);
+        imageView.setImageResource(R.mipmap.ic_empty2);
         TextView tvEmpty = emptyView.findViewById(R.id.tv_empty);
         if (uid == -1) {
             if (tvEmpty != null) tvEmpty.setText("暂无动态 快去发表动态");

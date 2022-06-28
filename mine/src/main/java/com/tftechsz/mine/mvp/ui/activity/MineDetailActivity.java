@@ -61,6 +61,7 @@ import com.tftechsz.common.utils.AnimationUtil;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.StatusBarUtil;
+import com.tftechsz.common.utils.TopSmoothScroller;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.MyBannerImageHolder;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
@@ -205,6 +206,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mTabLayout = findViewById(R.id.tabLayout);
         mViewPager = findViewById(R.id.vp_mine_detail);
 
+
         setSupportActionBar(mToolbar);
         initListener();
     }
@@ -270,7 +272,10 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                     @Override
                     public void onPageSelected(int position) {
                         mRvPic.post(() -> {
-                            mRvPic.smoothScrollToPosition(position);
+                            TopSmoothScroller smoothScroller = new TopSmoothScroller(mContext,3f);
+                            smoothScroller.setTargetPosition(position);
+
+                            mRvPic.getLayoutManager().startSmoothScroll(smoothScroller);
                             profilePhotoAdapter.setIndex(position);
                         });
                     }
@@ -356,7 +361,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mRvPic.setAdapter(profilePhotoAdapter);
         profilePhotoAdapter.setOnItemClickListener((adapter, view, position) -> {
             mBanner.post(() -> {
-                mBanner.setCurrentItem(position, true);
+                mBanner.setCurrentItem(position+1, true);
             });
         });
 
@@ -378,10 +383,10 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                     int backgroundAlpha = (int) (alpha * 255);
                     int backgroundBlack = Color.argb(backgroundAlpha, 0, 0, 0);
                     if (backgroundAlpha > 150) {
-                        mTobBack.setColorFilter(colorBlack);
+                        mTobMore.setImageResource(R.mipmap.ic_back_bg_black);
                         mTobMore.setImageResource(R.mipmap.mine_ic_more);
                     } else {
-                        mTobBack.setColorFilter(colorWhite);
+                        mTobMore.setImageResource(R.mipmap.ic_back_bg_white);
                         mTobMore.setImageResource(R.mipmap.mine_ic_more_white);
                     }
                     mTvTobTitle.setTextColor(backgroundBlack);

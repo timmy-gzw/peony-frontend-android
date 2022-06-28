@@ -1,4 +1,4 @@
-package com.tftechsz.im.utils;
+package com.tftechsz.common.utils;
 
 import android.content.Context;
 import android.graphics.PointF;
@@ -12,8 +12,16 @@ import androidx.recyclerview.widget.LinearSmoothScroller;
  */
 public class TopSmoothScroller extends LinearSmoothScroller {
 
+    private float speed = 0;
+    public static float DEFAULT_SPEED = 0.6f;
+
     public TopSmoothScroller(Context context) {
         super(context);
+    }
+
+    public TopSmoothScroller(Context context,float speed) {
+        super(context);
+        this.speed = speed;
     }
 
     @Override
@@ -35,7 +43,11 @@ public class TopSmoothScroller extends LinearSmoothScroller {
     @Override
     protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
         //返回滑动一个pixel需要多少毫秒
-        return 0.6f/displayMetrics.density;
+        float s = DEFAULT_SPEED;
+        if(this.speed >0){
+            s = this.speed;
+        }
+        return s/displayMetrics.density;
     }
 
 
