@@ -86,7 +86,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
     protected void initView(Bundle savedInstanceState) {
         //ImmersionBar.setTitleBar(this, mBind.root);
         mPayId = getIntent().getIntExtra(Interfaces.EXTRA_ID, 0);
-        ImmersionBar.with(this).fullScreen(true).titleBar(mBind.toolbar).statusBarDarkFont(false).init();
+        ImmersionBar.with(this).titleBar(mBind.toolbar).statusBarDarkFont(false).init();
         mBind.tvTitle.setText("VIP会员");
         mBind.ivBack.setOnClickListener(v -> finish());
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mBind.vipCl1.getLayoutParams();

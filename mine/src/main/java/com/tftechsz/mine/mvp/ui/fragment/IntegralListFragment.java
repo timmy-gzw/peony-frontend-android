@@ -128,6 +128,7 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
         if (!NetworkUtils.isConnected()) {
             root.postDelayed(() -> mPageManager.showError(null), 300);
         }
+        smartRefreshLayout.setBackgroundResource(R.color.white);
         adapter.setOnItemClickListener((adapter1, view, position) ->
             checkExChange(position));
     }
