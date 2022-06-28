@@ -6,6 +6,7 @@ import android.graphics.PixelFormat;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -130,12 +131,12 @@ public class FloatVideoWindowService extends Service {
     }
 
     private void initFloating() {
-//        VideoCallActivity.endTime = System.currentTimeMillis();
-//        long timeDiff = VideoCallActivity.endTime - VideoCallActivity.startTime;
+        VideoCallActivity.endTime = System.currentTimeMillis();
+        long timeDiff = VideoCallActivity.endTime - VideoCallActivity.startTime;
 //        //容器父布局
         LinearLayout smallSizePreviewLayout = mFloatingLayout.findViewById(R.id.ll_content);
         chronometer = mFloatingLayout.findViewById(R.id.chronometer2);
-//        chronometer.setBase(SystemClock.elapsedRealtime() - VideoCallActivity.seconds * 1000 - timeDiff);
+        chronometer.setBase(SystemClock.elapsedRealtime() - VideoCallActivity.seconds * 1000 - timeDiff);
         chronometer.start();
         //悬浮框点击事件
         smallSizePreviewLayout.setOnClickListener(new View.OnClickListener() {

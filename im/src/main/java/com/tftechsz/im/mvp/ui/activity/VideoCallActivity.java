@@ -162,10 +162,10 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private TextView tvReject;
     private TextView tvFaceUnity;   //美颜设置
     private RelativeLayout rlyTopUserInfo;
-    //    public static boolean ISBOUND = false;
-//    public static long startTime = 0;
-//    public static long endTime = 0;
-//    public static long seconds = 0;
+        public static boolean ISBOUND = false;
+    public static long startTime = 0;
+    public static long endTime = 0;
+    public static long seconds = 0;
     private Chronometer audioTime;
     private Chronometer videoTime;
     private UserInfo callOutUser;//呼出用户
@@ -260,7 +260,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private ConstraintLayout mClVideo;
     private TextView mtvGenderAge,mtvCity,mtvConstellation,mtvJob;//语音通话：对方性别年龄，城市，星座，工作
     private TextView mtvVideoGenderAge,mtvVideoCity,mtvVideoConstellation,mtvVideoJob;//视屏通话：对方性别年龄，城市，星座，工作
-    private boolean ISBOUND;
 
     private void initPhoneStateListener() {
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -1717,8 +1716,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
 
     private void smallWindow() {
-//        startTime = System.currentTimeMillis();
-//        seconds = TimeUtil.getChronometerSeconds(audioTime);
+        startTime = System.currentTimeMillis();
+        seconds = TimeUtil.getChronometerSeconds(audioTime);
         moveTaskToBack(true);//最小化Activity
         Intent intent = new Intent(BaseApplication.getInstance(), FloatVideoWindowService.class);//开启服务显示悬浮框
         intent.putExtra(CALL_DIR, mCallDir);
