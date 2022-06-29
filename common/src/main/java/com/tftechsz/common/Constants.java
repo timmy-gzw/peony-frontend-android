@@ -19,10 +19,10 @@ public class Constants {
     public static final String HOST_CONFIG = "://config.";
     public static final String HOST_UPLOAD = "://upload.";
     public static final String HOST_TEST = "http://config.api.dev.peony.taifangsz.com:8080/";   // 测试
-    public static final String HOST = "http://config.peony.taifangsz.com/";
+    public static final String HOST = "http://config.api.peony.taifangsz.com/";
     public static final String HOST_DOWN = "http://peony-public.oss-cn-shenzhen.aliyuncs.com/config/launch.txt";
     public static final String HOST_TEST_DOWN = "http://peony-public.oss-cn-shenzhen.aliyuncs.com/config/launch_dev.txt";
-    public static final String HOST_RESERVE = "http://config.backup.peony.taifangsz.com/";
+    public static final String HOST_RESERVE = "http://config.backup.api.peony.taifangsz.com/";
     public static final String HOST_H5_DEV = "http://h5.dev.peony.taifangsz.com/";   // 测试h5 base url
     public static final String HOST_H5 = "http://h5.peony.taifangsz.com/";
 

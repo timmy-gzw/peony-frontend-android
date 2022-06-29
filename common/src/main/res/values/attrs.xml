@@ -88,11 +88,11 @@
     </string-array>
 
     <string-array name="host_url">
-        <item>http://config.peony.taifangsz.com/</item>
-        <item>http://config.stg.peony.taifangsz.com/</item>
-        <item>http://config.dev.peony.taifangsz.com.com/</item>
-        <item>http://config.dev.peony.taifangsz.com.com/</item>
-        <item>http://config.dev.peony.taifangsz.com.com/</item>
+        <item>http://config.api.peony.taifangsz.com/</item>
+        <item>http://config.api.stg.peony.taifangsz.com/</item>
+        <item>http://config.api.dev.peony.taifangsz.com.com/</item>
+        <item>http://config.api.dev.peony.taifangsz.com.com/</item>
+        <item>http://config.api.dev.peony.taifangsz.com.com/</item>
     </string-array>
 
     <declare-styleable name="AutofitTextView">
