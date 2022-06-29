@@ -91,7 +91,8 @@
         style="@style/CustomButton"
         android:layout_marginTop="@dimen/dp_30"
         android:background="@drawable/bg_orange_enable"
-        android:text="积分兑换" />
+        android:text="积分兑换"
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"

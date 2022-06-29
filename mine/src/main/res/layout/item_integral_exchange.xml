@@ -7,13 +7,13 @@
     android:background="@color/white"
     android:paddingStart="@dimen/dp_16"
     android:paddingTop="@dimen/dp_12"
-    android:paddingEnd="@dimen/dp_16"
-    android:paddingBottom="@dimen/dp_12">
+    android:paddingEnd="@dimen/dp_16">
 
     <ImageView
         android:id="@+id/iv_shop"
         android:layout_width="@dimen/dp_40"
         android:layout_height="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_12"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,9 +28,9 @@
         android:layout_marginStart="@dimen/dp_12"
         android:textColor="@color/color_normal"
         android:textSize="@dimen/sp_14"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_shop"
         app:layout_constraintStart_toEndOf="@id/iv_shop"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_shop"
         tools:text="100元人民币" />
 
     <TextView
@@ -46,9 +46,15 @@
         android:textSize="@dimen/sp_14"
         app:autoSizeMinTextSize="@dimen/sp_10"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_shop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_shop"
         tools:text="350 积分" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:background="@color/divider_line_color"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
