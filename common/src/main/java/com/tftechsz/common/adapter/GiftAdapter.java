@@ -87,10 +87,10 @@ public class GiftAdapter extends BaseQuickAdapter<GiftDto, GiftAdapter.ViewHolde
                 holder.tvGiftType.setVisibility(View.VISIBLE);
                 GlideUtils.loadImage(getContext(), holder.tvGiftType, R.mipmap.ic_bg_gift_efficacy, R.mipmap.ic_bg_gift_efficacy);
             } else if (item.animationType == 3) {
-//                holder.tvGiftType.setVisibility(View.VISIBLE);
+                holder.tvGiftType.setVisibility(View.GONE);
                 GlideUtils.loadImage(getContext(), holder.tvGiftType, R.mipmap.ic_bg_gift_move, R.mipmap.ic_bg_gift_move);
             } else if (item.animationType == 4) {
-//                holder.tvGiftType.setVisibility(View.VISIBLE);
+                holder.tvGiftType.setVisibility(View.GONE);
                 GlideUtils.loadImage(getContext(), holder.tvGiftType, R.mipmap.ic_bg_gift_qx, R.mipmap.ic_bg_gift_qx);
             } else {
                 holder.tvGiftType.setVisibility(View.GONE);
@@ -108,7 +108,7 @@ public class GiftAdapter extends BaseQuickAdapter<GiftDto, GiftAdapter.ViewHolde
         }
 
         //隐藏 20220624
-        holder.tvGiftType.setVisibility(View.GONE);
+//        holder.tvGiftType.setVisibility(View.GONE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
