@@ -90,6 +90,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         mTvGiftVip = getView(R.id.tv_gift_vip);
         mRvGift = getView(R.id.rv_gift);
         mRvGift.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        mRvGift.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(8),ConvertUtils.dp2px(12),false));
         giftAdapter = new GiftAdapter();
         mRvGift.setAdapter(giftAdapter);
 

@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.tftechsz.common.Constants;
@@ -169,8 +168,11 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
 
     private void toLogin() {
         mPhone = mEtPhone.getText().toString().replace(" ", "");
+        if (Utils.checkNoTell(mPhone)) {
+            return;
+        }
         String code = mEtCode.getText().toString();
-        if (RegexUtils.isMobileSimple(mPhone) && !TextUtils.isEmpty(code) && code.length() == 4) {
+        if (!TextUtils.isEmpty(code) && code.length() == 4) {
             KeyboardUtils.hideSoftInput(this);
             login(code);
         }
