@@ -88,9 +88,9 @@
     </string-array>
 
     <string-array name="host_url">
-        <item>http://config.peony125.com/</item>
-        <item>http://config.peony126.com/</item>
-        <item>http://config.dev.peony.taifangsz.com.com:28409/</item>
+        <item>http://config.peony.taifangsz.com/</item>
+        <item>http://config.stg.peony.taifangsz.com/</item>
+        <item>http://config.dev.peony.taifangsz.com.com/</item>
         <item>http://config.dev.peony.taifangsz.com.com/</item>
         <item>http://config.dev.peony.taifangsz.com.com/</item>
     </string-array>
