@@ -1,5 +1,7 @@
 package com.tftechsz.peony;
 
+import static java.lang.Boolean.TRUE;
+
 import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
@@ -34,8 +36,6 @@ import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.umeng.umlink.MobclickLink;
-import com.umeng.umlink.UMLinkListener;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -57,6 +57,8 @@ import com.tftechsz.mine.mvp.presenter.LoginPresenter;
 import com.tftechsz.mine.mvp.ui.activity.LoginActivity;
 import com.tftechsz.mine.utils.UserManager;
 import com.tftechsz.mine.widget.pop.PrivacyPopWindow;
+import com.umeng.umlink.MobclickLink;
+import com.umeng.umlink.UMLinkListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -68,8 +70,6 @@ import java.util.List;
 import java.util.Map;
 
 import me.jessyan.autosize.internal.CancelAdapt;
-
-import static java.lang.Boolean.TRUE;
 
 /**
  * 放在包下面处理切换logo找不到资源文件问题
@@ -146,6 +146,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
 
     private void initPermission() {
         getP().initShanyanSDK(this);
+        getP().initUmeng();
 
         long time = MMKVUtils.getInstance().decodeLong(Constants.CURRENT_TIME);
         //判断是否为今天

@@ -1,9 +1,12 @@
 package com.tftechsz.mine.mvp.presenter;
 
+import static com.tftechsz.common.utils.CommonUtil.getUmengPushSecret;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -36,7 +39,14 @@ import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.nim.NimCache;
 import com.tftechsz.common.nim.UserPreferences;
-import com.tftechsz.common.utils.*;
+import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.utils.AesUtil;
+import com.tftechsz.common.utils.AppUtils;
+import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.SPUtils;
+import com.tftechsz.common.utils.ToastUtil;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.BuildConfig;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.LoginDto;
@@ -50,7 +60,8 @@ import com.tftechsz.mine.utils.ConfigUtils;
 import com.tftechsz.mine.utils.UserManager;
 import com.tftechsz.mine.widget.pop.PrivacyPopWindow;
 import com.tftechsz.peony.SplashActivity;
-import okhttp3.*;
+import com.umeng.commonsdk.UMConfigure;
+
 import org.apache.commons.codec.binary.Base64;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,6 +69,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class LoginPresenter extends BasePresenter<ILoginView> {
 
@@ -104,22 +121,22 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 int isUpload = SPUtils.getInt(Constants.IS_UPLOAD_OAID, 0);
                 if (isUpload == 1) return;
                 addNet(configService.uploadDeviceInfo(Utils.getUmId(), AppUtils.getIMEI(BaseApplication.getInstance()), oaid, AppUtils.getOrigAndroidID(BaseApplication.getInstance())
-                        , AppUtils.getOrigMacAddr(BaseApplication.getInstance()), from_channel, from_type, key, isFirst).compose(BasePresenter.applySchedulers())
-                    .subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
-                        @Override
-                        public void onSuccess(BaseResponse<Boolean> response) {
-                            SPUtils.put(Constants.IS_UPLOAD_OAID, 1);
-                        }
-                    }));
+                                , AppUtils.getOrigMacAddr(BaseApplication.getInstance()), from_channel, from_type, key, isFirst).compose(BasePresenter.applySchedulers())
+                        .subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
+                            @Override
+                            public void onSuccess(BaseResponse<Boolean> response) {
+                                SPUtils.put(Constants.IS_UPLOAD_OAID, 1);
+                            }
+                        }));
             }, 1000);
         } else {
             addNet(configService.uploadDeviceInfo(Utils.getUmId(), AppUtils.getIMEI(BaseApplication.getInstance()), oaid, AppUtils.getOrigAndroidID(BaseApplication.getInstance())
-                    , AppUtils.getOrigMacAddr(BaseApplication.getInstance()), from_channel, from_type, key, isFirst).compose(BasePresenter.applySchedulers())
-                .subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
-                    @Override
-                    public void onSuccess(BaseResponse<Boolean> response) {
-                    }
-                }));
+                            , AppUtils.getOrigMacAddr(BaseApplication.getInstance()), from_channel, from_type, key, isFirst).compose(BasePresenter.applySchedulers())
+                    .subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
+                        @Override
+                        public void onSuccess(BaseResponse<Boolean> response) {
+                        }
+                    }));
         }
     }
 
@@ -131,6 +148,14 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public void initShanyanSDK(Context context) {
         OneKeyLoginManager.getInstance().init(context, Constants.SANYAN_APP_ID, (code, result) -> {
         });
+    }
+
+    /**
+     * 友盟初始化
+     */
+    public void initUmeng() {
+        UMConfigure.init(BaseApplication.getInstance(), CommonUtil.getUmengAppKey(), CommonUtil.getUmengChannel(), UMConfigure.DEVICE_TYPE_PHONE, getUmengPushSecret());
+        UMConfigure.setProcessEvent(true);
     }
 
     /**
@@ -159,33 +184,33 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
             configService = RetrofitManager.getInstance().createApi(MineApiService.class, BuildConfig.DEBUG ? Constants.HOST_TEST : Constants.HOST_RESERVE);
         }
         addNet(configService.getConfig().compose(io_main())
-            .subscribeWith(new ResponseObserver<BaseResponse<String>>() {
-                @Override
-                public void onSuccess(BaseResponse<String> response) {
-                    if (!TextUtils.isEmpty(response.getData())) {
-                        try {
-                            String key = response.getData().substring(0, 6);
-                            byte[] data = Base64.decodeBase64(response.getData().substring(6).getBytes());
-                            String iv = MD5Util.toMD532(key).substring(0, 16);
-                            byte[] jsonData = AesUtil.AES_cbc_decrypt(data, MD5Util.toMD532(key).getBytes(), iv.getBytes());
-                            LogUtil.e("------------", new String(jsonData));
-                            userService.setConfigInfo(new String(jsonData));
-                            if ((flag == 0 || flag == 2 || flag == 3) && null != getView()) {
-                                getView().getConfigSuccess(new String(jsonData), flag);
+                .subscribeWith(new ResponseObserver<BaseResponse<String>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<String> response) {
+                        if (!TextUtils.isEmpty(response.getData())) {
+                            try {
+                                String key = response.getData().substring(0, 6);
+                                byte[] data = Base64.decodeBase64(response.getData().substring(6).getBytes());
+                                String iv = MD5Util.toMD532(key).substring(0, 16);
+                                byte[] jsonData = AesUtil.AES_cbc_decrypt(data, MD5Util.toMD532(key).getBytes(), iv.getBytes());
+                                LogUtil.e("------------", new String(jsonData));
+                                userService.setConfigInfo(new String(jsonData));
+                                if ((flag == 0 || flag == 2 || flag == 3) && null != getView()) {
+                                    getView().getConfigSuccess(new String(jsonData), flag);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
                     }
-                }
 
-                @Override
-                public void onFail(int code, String msg) {
-                    super.onFail(code, msg);
-                    if (null == getView()) return;
-                    getView().onFail(flag);
-                }
-            }));
+                    @Override
+                    public void onFail(int code, String msg) {
+                        super.onFail(code, msg);
+                        if (null == getView()) return;
+                        getView().onFail(flag);
+                    }
+                }));
     }
 
     /**
@@ -193,11 +218,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      */
     public void downloadLaunchConfig() {
         OkHttpClient ClientBuilder = new OkHttpClient.Builder()
-            .connectTimeout(2, TimeUnit.SECONDS)
-            .readTimeout(2, TimeUnit.SECONDS)
-            .writeTimeout(2, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(false)
-            .build();
+                .connectTimeout(2, TimeUnit.SECONDS)
+                .readTimeout(2, TimeUnit.SECONDS)
+                .writeTimeout(2, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(false)
+                .build();
         Request.Builder builder = new Request.Builder();
         Request request = builder.get().url(BuildConfig.DEBUG ? Constants.HOST_TEST_DOWN : Constants.HOST_DOWN).build();
         Call call = ClientBuilder.newCall(request);
@@ -286,25 +311,25 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                     public void onSure() {
                         MineApiService service = RetrofitManager.getInstance().createUserApi(MineApiService.class);
                         addNet(service.userLogin(pram).compose(BasePresenter.applySchedulers())
-                            .subscribeWith(new ResponseObserver<BaseResponse<LoginDto>>(getView()) {
-                                @Override
-                                public void onSuccess(BaseResponse<LoginDto> response) {
-                                    UserManager.getInstance().setToken(response.getData().token);
-                                    UserManager.getInstance().setUserId(response.getData().user_id);
-                                    buriedPoint();
-                                    doLogin(context, String.valueOf(response.getData().user_id), response.getData().token, response.getData(), type);
-                                }
-
-                                @Override
-                                public void onFail(int code, String msg) {
-                                    super.onFail(code, msg);
-                                    if (null == getView()) return;
-                                    if (getView() != null) {
-                                        getView().onFail(0);
+                                .subscribeWith(new ResponseObserver<BaseResponse<LoginDto>>(getView()) {
+                                    @Override
+                                    public void onSuccess(BaseResponse<LoginDto> response) {
+                                        UserManager.getInstance().setToken(response.getData().token);
+                                        UserManager.getInstance().setUserId(response.getData().user_id);
+                                        buriedPoint();
+                                        doLogin(context, String.valueOf(response.getData().user_id), response.getData().token, response.getData(), type);
                                     }
 
-                                }
-                            }));
+                                    @Override
+                                    public void onFail(int code, String msg) {
+                                        super.onFail(code, msg);
+                                        if (null == getView()) return;
+                                        if (getView() != null) {
+                                            getView().onFail(0);
+                                        }
+
+                                    }
+                                }));
                     }
                 });
             }
@@ -317,33 +342,33 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public void doLogin(Activity context, String account, String token, LoginDto data, int type) {
         LogUtil.i("TAG", "云信执行登录");
         NimUIKit.login(new LoginInfo(account, token, null, 0),
-            new RequestCallback<LoginInfo>() {
+                new RequestCallback<LoginInfo>() {
 
-                @Override
-                public void onSuccess(LoginInfo param) {
-                    intentMain(context, account, token, data, type);
-                }
+                    @Override
+                    public void onSuccess(LoginInfo param) {
+                        intentMain(context, account, token, data, type);
+                    }
 
-                @Override
-                public void onFailed(int code) {
-                    if (code == 302) {
-                        LogUtil.i("TAG", "云信账号密码错误");
+                    @Override
+                    public void onFailed(int code) {
+                        if (code == 302) {
+                            LogUtil.i("TAG", "云信账号密码错误");
 //                            ToastUtil.showToast(context, "账号密码错误");
-                        Intent intent = new Intent(context, LoginActivity.class);
-                        context.startActivity(intent);
-                    } else {
-                        doLogin(context, account, token, data, type);
+                            Intent intent = new Intent(context, LoginActivity.class);
+                            context.startActivity(intent);
+                        } else {
+                            doLogin(context, account, token, data, type);
+                        }
+                        if (context instanceof SplashActivity) {
+                            context.finish();
+                        }
                     }
-                    if (context instanceof SplashActivity) {
-                        context.finish();
-                    }
-                }
 
-                @Override
-                public void onException(Throwable exception) {
-                    ToastUtil.showToast(context, "登录失败，请退出后重试");
-                }
-            });
+                    @Override
+                    public void onException(Throwable exception) {
+                        ToastUtil.showToast(context, "登录失败，请退出后重试");
+                    }
+                });
     }
 
 
@@ -381,15 +406,15 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     private void getUserInfo() {
         MineApiService service = RetrofitManager.getInstance().createUserApi(MineApiService.class);
         addNet(service.getUserInfo().compose(BasePresenter.applySchedulers())
-            .subscribeWith(new ResponseObserver<BaseResponse<UserInfo>>() {
-                @Override
-                public void onSuccess(BaseResponse<UserInfo> response) {
-                    if (response.getData() != null) {
-                        UserManager.getInstance().setUserInfo(response.getData());
-                        appInitUser(1);
+                .subscribeWith(new ResponseObserver<BaseResponse<UserInfo>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<UserInfo> response) {
+                        if (response.getData() != null) {
+                            UserManager.getInstance().setUserInfo(response.getData());
+                            appInitUser(1);
+                        }
                     }
-                }
-            }));
+                }));
     }
 
     /**
@@ -400,30 +425,30 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public void appInitUser(int type) {
         MineApiService service = RetrofitManager.getInstance().createUserApi(MineApiService.class);
         addNet(service.initNearUser().compose(BasePresenter.applySchedulers())
-            .subscribeWith(new ResponseObserver<BaseResponse<NearUserDto>>() {
-                @Override
-                public void onSuccess(BaseResponse<NearUserDto> response) {
-                    if (response.getData() != null && getView() != null) {
-                        MMKVUtils.getInstance().encode(Constants.SHOW_NEAR_USER, response.getData().show_near_user);
-                        MMKVUtils.getInstance().encode(Constants.SHOW_PARTY_ICON, response.getData().show_party_icon);
-                        if (type == 1) {
-                            ARouterUtils.toPathWithId(ARouterApi.MAIN_MAIN);
-                            AppManager.getAppManager().finishActivity(SplashActivity.class);
-                            AppManager.getAppManager().finishActivity(LoginActivity.class);
-                            AppManager.getAppManager().finishActivity(GetCodeActivity.class);
+                .subscribeWith(new ResponseObserver<BaseResponse<NearUserDto>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<NearUserDto> response) {
+                        if (response.getData() != null && getView() != null) {
+                            MMKVUtils.getInstance().encode(Constants.SHOW_NEAR_USER, response.getData().show_near_user);
+                            MMKVUtils.getInstance().encode(Constants.SHOW_PARTY_ICON, response.getData().show_party_icon);
+                            if (type == 1) {
+                                ARouterUtils.toPathWithId(ARouterApi.MAIN_MAIN);
+                                AppManager.getAppManager().finishActivity(SplashActivity.class);
+                                AppManager.getAppManager().finishActivity(LoginActivity.class);
+                                AppManager.getAppManager().finishActivity(GetCodeActivity.class);
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onFail(int code, String msg) {
-                    super.onFail(code, msg);
-                    if (getView() != null) {
-                        getView().hideLoadingDialog();
+                    @Override
+                    public void onFail(int code, String msg) {
+                        super.onFail(code, msg);
+                        if (getView() != null) {
+                            getView().hideLoadingDialog();
+                        }
+
                     }
-
-                }
-            }));
+                }));
     }
 
 
@@ -480,13 +505,13 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public void sendCode(LoginReq pram, boolean isShow) {
         PublicService service = RetrofitManager.getInstance().createUserApi(PublicService.class);
         addNet(service.sendCode(pram).compose(BasePresenter.applySchedulers())
-            .subscribeWith(new ResponseObserver<BaseResponse<String>>(isShow ? getView() : null) {
-                @Override
-                public void onSuccess(BaseResponse<String> response) {
-                    if (null == getView()) return;
-                    getView().getCodeSuccess(response.getData());
-                }
-            }));
+                .subscribeWith(new ResponseObserver<BaseResponse<String>>(isShow ? getView() : null) {
+                    @Override
+                    public void onSuccess(BaseResponse<String> response) {
+                        if (null == getView()) return;
+                        getView().getCodeSuccess(response.getData());
+                    }
+                }));
     }
 
 

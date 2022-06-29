@@ -1,5 +1,8 @@
 package com.tftechsz.common.base;
 
+import static com.tftechsz.common.utils.CommonUtil.getUmengAppKey;
+import static com.tftechsz.common.utils.CommonUtil.getUmengChannel;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
@@ -33,9 +36,7 @@ import com.netease.nimlib.sdk.util.NIMUtil;
 import com.previewlibrary.ZoomMediaLoader;
 import com.tencent.mmkv.MMKV;
 import com.tencent.tauth.Tencent;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.commonsdk.UMConfigure;
-import com.umeng.socialize.UMShareAPI;
+import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
@@ -51,6 +52,8 @@ import com.tftechsz.common.push.MyPushContentProvider;
 import com.tftechsz.common.utils.ImageLoaderUtil;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.widget.MyToastStyle;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 
 import net.mikaelzero.mojito.Mojito;
 import net.mikaelzero.mojito.loader.glide.GlideImageLoader;
@@ -67,8 +70,6 @@ import iknow.android.utils.BaseUtils;
 import io.reactivex.plugins.RxJavaPlugins;
 import xyz.doikki.videoplayer.ijk.IjkPlayerFactory;
 import xyz.doikki.videoplayer.player.VideoViewConfig;
-
-import static com.tftechsz.common.utils.CommonUtil.*;
 
 
 /**
@@ -117,9 +118,10 @@ public class BaseApplication extends Application implements Application.Activity
     private void setRxJavaErrorHandler() {
         RxJavaPlugins.setErrorHandler(throwable -> {
             throwable.printStackTrace();
-            Trace.e("MyApplication", "MyApplication setRxJavaErrorHandler "  + throwable.getMessage());
+            Trace.e("MyApplication", "MyApplication setRxJavaErrorHandler " + throwable.getMessage());
         });
     }
+
     private String getProcessName(Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
@@ -171,9 +173,8 @@ public class BaseApplication extends Application implements Application.Activity
         }).start();
 
         if (NIMUtil.isMainProcess(this)) {
-            UMConfigure.init(this, getUmengAppKey(), getUmengChannel(), UMConfigure.DEVICE_TYPE_PHONE, getUmengPushSecret());
-            UMConfigure.setProcessEvent(true);
-            UMShareAPI.get(this);
+            UMConfigure.setLogEnabled(BuildConfig.DEBUG);
+            UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
             // 监听的注册，必须在主进程中。
             HeytapPushManager.init(this, true);
             com.huawei.hms.support.common.ActivityMgr.INST.init(this);
