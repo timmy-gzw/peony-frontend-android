@@ -84,7 +84,7 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
         if (animationView.getBackground() instanceof AnimationDrawable) {
             AnimationDrawable animation = (AnimationDrawable) animationView.getBackground();
             animation.stop();
-            animationView.setBackgroundResource(com.netease.nim.uikit.R.drawable.nim_audio_animation_list_left_3);
+            animationView.setBackgroundResource(R.drawable.nim_audio_animation_list_left_3);
             animationView.setColorFilter(Color.WHITE);
         }
     }

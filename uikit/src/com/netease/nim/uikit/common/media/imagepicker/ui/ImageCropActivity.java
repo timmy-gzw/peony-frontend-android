@@ -53,8 +53,6 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
         mOutputY = imagePicker.getOutPutY();
         mIsSaveRectangle = imagePicker.isSaveRectangle();
         mGLImages = imagePicker.getSelectedImages();
-        String imagePath = mGLImages.get(0).getPath();
-
         mCropImageView.setFocusStyle(imagePicker.getStyle());
         mCropImageView.setFocusWidth(imagePicker.getFocusWidth());
         mCropImageView.setFocusHeight(imagePicker.getFocusHeight());
@@ -62,19 +60,22 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         final View loadingView = findViewById(R.id.pb_loading);
         btn_ok.setEnabled(false);
-        ImagePicker.getInstance().getImageLoader().displayImage(this, imagePath, mCropImageView,
-                displayMetrics.widthPixels, displayMetrics.heightPixels, new GlideImageLoader.LoadListener() {
-                    @Override
-                    public void onLoadSuccess() {
-                        loadingView.setVisibility(View.GONE);
-                        btn_ok.setEnabled(true);
-                    }
+        if (mGLImages.size() > 0) {
+            String imagePath = mGLImages.get(0).getPath();
+            ImagePicker.getInstance().getImageLoader().displayImage(this, imagePath, mCropImageView,
+                    displayMetrics.widthPixels, displayMetrics.heightPixels, new GlideImageLoader.LoadListener() {
+                        @Override
+                        public void onLoadSuccess() {
+                            loadingView.setVisibility(View.GONE);
+                            btn_ok.setEnabled(true);
+                        }
 
-                    @Override
-                    public void onLoadFailed() {
+                        @Override
+                        public void onLoadFailed() {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
