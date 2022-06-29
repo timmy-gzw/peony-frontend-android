@@ -179,7 +179,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     }
 
     private void stopBarrage(){
-        mBarrageView.setBarrages(new ArrayList<>());
+        mBarrageView.destroy();
     }
 
 
@@ -406,7 +406,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
 
     private void showPopWindow() {
         if(null == matchPopWindow)
-            matchPopWindow = new MatchPopWindow(this, v -> finish());
+            matchPopWindow = new MatchPopWindow(this, v -> startMatch());
         matchPopWindow.setOutSideTouchable(false);
         matchPopWindow.setOutSideDismiss(false);
         matchPopWindow
