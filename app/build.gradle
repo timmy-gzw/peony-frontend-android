@@ -120,8 +120,8 @@ android {
     }
 
     productFlavors {
-        OFFICE {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OFFICE", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        OFFICIAL {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OFFICIAL", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         YINGYONGBAO {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "YINGYONGBAO", app_label: appName, app_icon: "@mipmap/ic_launcher"]
