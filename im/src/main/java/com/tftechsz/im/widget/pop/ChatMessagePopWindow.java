@@ -119,10 +119,8 @@ public class ChatMessagePopWindow extends BaseTopPop implements View.OnClickList
             if(!isPush){
                 isPush = true;
                 tranlateAnimation(Utils.dp2px(context,200), 1, R.mipmap.icon_intmacy_pull);
-
             }else{
-                isPush = false;
-                tranlateAnimation(1, Utils.dp2px(context, 200), R.mipmap.icon_intamcy_push);
+                dismiss();
             }
         });
         initData();
