@@ -1,5 +1,6 @@
 package com.tftechsz.common.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -41,6 +43,7 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.NIMAntiSpamOption;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
@@ -649,7 +652,20 @@ public class CommonUtil {
                 return;
             }
             if (substring.equals(Interfaces.LINK_PEONY_FACIAL)) {//美颜设置
-                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
+                //Fixme 美颜设置权限申请优化
+                if (context instanceof FragmentActivity) {
+                    FragmentActivity activity = (FragmentActivity) context;
+                    new RxPermissions(activity).request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
+                                } else {
+                                    PermissionUtil.showPermissionPop(activity);
+                                }
+                            });
+                } else {
+                    ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
+                }
                 return;
             }
             if (substring.equals(Interfaces.LINK_PEONY_ACCOST_SETTING)) {//招呼设置
