@@ -45,11 +45,7 @@
         android:layout_below="@+id/fl_title"
         android:layout_marginHorizontal="@dimen/dp_25"
         android:layout_marginVertical="@dimen/dp_20"
-        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center_vertical"
-        android:lineSpacingMultiplier="1.1"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingEnd="@dimen/dp_10"
         android:textColor="#666666"
         android:textSize="@dimen/sp_15"
         tools:text="亲爱的蓝湖用户，为了您的帐号信息安全，我们新增了手机号码绑定功能。请您在2021年12月31日前完成手机号码绑定，若未及时绑定，可能会影响帐号正常使用" />

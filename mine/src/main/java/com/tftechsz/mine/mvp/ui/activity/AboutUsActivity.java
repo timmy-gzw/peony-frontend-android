@@ -53,7 +53,7 @@ public class AboutUsActivity extends BaseMvpActivity<IAboutUsView, AboutUsPresen
         mBotLink = findViewById(R.id.bot_link);
         mRvAbout.setLayoutManager(new LinearLayoutManager(this));
         TextView tvAbout = findViewById(R.id.tv_about);
-        tvAbout.setText(String.format("Copyright ©2021 %s\nAll Rights Reserved", getString(R.string.app_name)));
+        tvAbout.setText(String.format("Copyright ©2022 %s\nAll Rights Reserved", getString(R.string.app_name)));
         initListener();
 
     }
@@ -73,7 +73,7 @@ public class AboutUsActivity extends BaseMvpActivity<IAboutUsView, AboutUsPresen
     @Override
     protected void initData() {
         super.initData();
-        mTvVersion.setText(getString(R.string.app_name) + ":" + AppUtils.getVersionName(this));
+        mTvVersion.setText(getString(R.string.app_name) + " v" + AppUtils.getVersionName(this));
         ConfigInfo configInfo = service.getConfigInfo();
         if (null != configInfo) {
             AboutAdapter adapter = new AboutAdapter(configInfo.api.about_bot);

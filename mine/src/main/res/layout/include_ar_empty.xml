@@ -9,7 +9,7 @@
     android:gravity="center"
     android:textColor="@color/color_cccccc"
     android:textSize="12sp"
-    app:drawableTopCompat="@mipmap/icon_accost_empty"
+    app:drawableTopCompat="@mipmap/ic_empty2"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

@@ -708,13 +708,10 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_vip"
-            android:layout_width="@dimen/dp_66"
-            android:layout_height="@dimen/dp_40"
-            android:layout_gravity="center_vertical"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="open_vip_animation.zip"
-            app:lottie_imageAssetsFolder="gift/"
-            app:lottie_loop="true" />
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@mipmap/ic_violation"
+            android:layout_gravity="center_vertical"/>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_warn"

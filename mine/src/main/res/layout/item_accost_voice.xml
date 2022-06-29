@@ -44,6 +44,7 @@
         android:id="@+id/ll_voice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_4"
         android:background="@mipmap/bg_accost_voice"
         android:gravity="center_vertical"

@@ -1,5 +1,6 @@
 package com.tftechsz.mine.adapter;
 
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,8 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
         helper.setText(R.id.content, item.title);
         helper.setVisible(R.id.tv_under_review, item.is_show == 0);
         helper.setText(R.id.tv_voice_time, item.time + "\"");
-        helper.setBackgroundResource(R.id.iv_voice, R.drawable.nim_audio_animation_list_left_3);
+        ivVoice.setBackgroundResource(R.drawable.nim_audio_animation_list_left_3);
+        ivVoice.setColorFilter(Color.WHITE);
         int currentBubbleWidth = calculateBubbleWidth(item.time);
         ViewGroup.LayoutParams layoutParams = llVoice.getLayoutParams();
         layoutParams.width = currentBubbleWidth;
@@ -71,6 +73,7 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
 
     public void play(ImageView animationView) {
         animationView.setBackgroundResource(R.drawable.nim_audio_animation_list_left);
+        animationView.setColorFilter(Color.WHITE);
         if (animationView.getBackground() instanceof AnimationDrawable) {
             AnimationDrawable animation = (AnimationDrawable) animationView.getBackground();
             animation.start();
@@ -82,17 +85,20 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
             AnimationDrawable animation = (AnimationDrawable) animationView.getBackground();
             animation.stop();
             animationView.setBackgroundResource(com.netease.nim.uikit.R.drawable.nim_audio_animation_list_left_3);
+            animationView.setColorFilter(Color.WHITE);
         }
     }
 
     public void startCurrentPosition(int position) {
         ImageView stopIvVoice = (ImageView) getViewByPosition(mPlayPosition, R.id.iv_voice);
         if (stopIvVoice != null) {
+            stopIvVoice.setColorFilter(Color.WHITE);
             stop(stopIvVoice);
         }
         mPlayPosition = position;
         ImageView PlayIvVoice = (ImageView) getViewByPosition(mPlayPosition, R.id.iv_voice);
         if (PlayIvVoice != null) {
+            PlayIvVoice.setColorFilter(Color.WHITE);
             play(PlayIvVoice);
         }
     }
@@ -100,6 +106,7 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
     public void stopCurrentPosition() {
         ImageView PlayIvVoice = (ImageView) getViewByPosition(mPlayPosition, R.id.iv_voice);
         if (PlayIvVoice != null) {
+            PlayIvVoice.setColorFilter(Color.WHITE);
             stop(PlayIvVoice);
         }
     }

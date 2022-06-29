@@ -1,5 +1,7 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
+import static com.tftechsz.mine.R.mipmap.ic_back_bg_black;
+
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -382,15 +384,17 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                     }
                     int backgroundAlpha = (int) (alpha * 255);
                     int backgroundBlack = Color.argb(backgroundAlpha, 0, 0, 0);
-                    if (backgroundAlpha > 150) {
-                        mTobMore.setImageResource(R.mipmap.ic_back_bg_black);
-                        mTobMore.setImageResource(R.mipmap.mine_ic_more);
-                    } else {
-                        mTobMore.setImageResource(R.mipmap.ic_back_bg_white);
-                        mTobMore.setImageResource(R.mipmap.mine_ic_more_white);
-                    }
+//                    if (backgroundAlpha > 150) {
+//                        mTobMore.setImageResource(R.mipmap.ic_back_bg_black);
+//                        mTobMore.setImageResource(R.mipmap.mine_ic_more);
+//                    } else {
+//                        mTobMore.setImageResource(R.mipmap.ic_back_bg_white);
+//                        mTobMore.setImageResource(R.mipmap.mine_ic_more_white);
+//                    }
+                    mTobMore.setImageResource(R.mipmap.ic_back_bg_white);
+                    mTobMore.setImageResource(R.mipmap.mine_ic_more_white);
                     mTvTobTitle.setTextColor(backgroundBlack);
-                    mTobMore.setColorFilter(backgroundBlack);
+//                    mTobMore.setColorFilter(backgroundBlack);
                     if (backgroundAlpha > 150) {
                         StatusBarUtil.setLightStatusBar(mActivity, true, true);
                     } else {

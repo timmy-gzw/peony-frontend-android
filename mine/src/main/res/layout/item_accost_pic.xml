@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/under_review"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dp_76"
             android:layout_height="@dimen/dp_24"
             android:layout_gravity="bottom"
             android:layout_margin="@dimen/dp_10"
