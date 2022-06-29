@@ -30,7 +30,7 @@
         app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/base_tool_bar"
-        tools:src="@mipmap/mine_ic_big_girl_default" />
+        tools:src="@mipmap/mine_ic_girl_default" />
 
     <TextView
         android:id="@+id/tv_coin"

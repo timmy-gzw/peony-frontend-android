@@ -155,10 +155,10 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
             return;
         }
         if (null == mData) {
-            GlideUtils.loadRouteImage(this, mIvAvatar, service.getUserInfo().getIcon(), service.getUserInfo().isBoy() ? R.mipmap.mine_ic_big_boy_default : R.mipmap.mine_ic_big_girl_default);
+            GlideUtils.loadRouteImage(this, mIvAvatar, service.getUserInfo().getIcon(), service.getUserInfo().isBoy() ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
             GlideUtils.loadRouteImage(this, mIvPhoto, mRealFile);
         } else {
-            GlideUtils.loadRouteImage(this, mIvAvatar, mData.icon, service.getUserInfo().isBoy() ? R.mipmap.mine_ic_big_boy_default : R.mipmap.mine_ic_big_girl_default);
+            GlideUtils.loadRouteImage(this, mIvAvatar, mData.icon, service.getUserInfo().isBoy() ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
             GlideUtils.loadRouteImage(this, mIvPhoto, mData.image_self);
         }
     }
