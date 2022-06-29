@@ -22,8 +22,8 @@
                 <!--协议部分-->
                 <!--声明自定义scheme，类似于http, https-->
                 <data
-                    android:scheme="peoney"
-                    android:host="app"/>
+                    android:scheme="${WEB_OPEN_APP_SCHEME}"
+                    android:host="${WEB_OPEN_APP_HOST}"/>
             </intent-filter>
 
         </activity>

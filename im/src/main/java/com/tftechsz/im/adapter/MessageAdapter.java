@@ -202,8 +202,12 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
                                         textView.setText(item.content);
                                     }
                                 } else {
-                                    item.content = setContent(textView, message, message.getContent());
-                                    textView.setText(setContent(textView, message, message.getContent()));
+                                    String content = message.getContent();
+                                    if(String.valueOf(service.getUserId()).equals(message.getFromAccount()) && content.equals("[对方发来搭讪红包]")){
+                                        content = "[发出搭讪红包]";
+                                    }
+                                    item.content = setContent(textView, message, content);
+                                    textView.setText(setContent(textView, message, content));
                                     break;
                                 }
                             }

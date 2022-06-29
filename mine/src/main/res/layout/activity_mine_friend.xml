@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/base_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -36,8 +36,14 @@
             app:tl_textUnSelectSize="@dimen/sp_16"
             app:tl_underline_gravity="BOTTOM" />
 
-
     </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:background="@color/driver"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp"

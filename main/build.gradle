@@ -3,6 +3,9 @@ if (isModule.toBoolean()) {
 } else {
     apply plugin: 'com.android.application'
 }
+
+def scheme = 'peoney'
+def host = "app"
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -22,6 +25,7 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+        manifestPlaceholders = [WEB_OPEN_APP_SCHEME: scheme, WEB_OPEN_APP_HOST: host]
 
     }
     buildFeatures {

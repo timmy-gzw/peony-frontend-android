@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:paddingHorizontal="@dimen/dp_16"
     android:layout_gravity="center_vertical">
 
 
@@ -11,9 +12,8 @@
         android:id="@+id/iv_avatar"
         android:layout_width="@dimen/dp_40"
         android:layout_height="@dimen/dp_40"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginVertical="@dimen/dp_10"/>
+        android:layout_marginVertical="@dimen/dp_10"
+        android:layout_centerVertical="true"/>
 
 
     <LinearLayout
@@ -91,14 +91,6 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5"
-        android:background="@color/driver"
-        android:layout_alignParentTop="true"
-        />
-
-    <View
-        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0_5"
         android:background="@color/driver"

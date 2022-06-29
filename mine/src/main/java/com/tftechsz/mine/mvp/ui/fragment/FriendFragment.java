@@ -81,7 +81,7 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
         CommonUtil.setSexAndAge(getContext(), item.sex, item.age, helper.getView(R.id.iv_sex));
         helper.setGone(R.id.iv_real_people, item.is_real != 1);  //是否真人
         helper.setGone(R.id.tv_vip, item.is_vip != 1);  //是否vip
-        helper.setVisible(R.id.view, helper.getLayoutPosition() != getData().size() - 1);
+//        helper.setVisible(R.id.view, helper.getLayoutPosition() != getData().size() - 1);
 
     }
 

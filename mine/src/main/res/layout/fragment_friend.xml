@@ -14,7 +14,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_10"
+            android:layout_height="@dimen/dp_0"
             android:background="@color/white" />
 
         <include layout="@layout/base_list" />

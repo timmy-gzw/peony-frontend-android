@@ -17,7 +17,7 @@
         android:id="@+id/ll_tab"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tab_height"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_3"
         android:orientation="horizontal">
 
         <com.flyco.tablayout.SlidingScaleTabLayout
