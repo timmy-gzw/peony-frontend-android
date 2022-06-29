@@ -38,6 +38,7 @@ import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.functions.Consumer;
@@ -49,6 +50,8 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
 
     private final int DELAY_TIME = 10 * 1000,TEXT_ANIMATION_TIME = 400,MATCH_INTERVAL_TIME = 1000;
     public static final String EXTRA_TYPE = "type";
+    private final int[] mBoyDefaultImages = {R.mipmap.default_radar_boy1,R.mipmap.default_radar_boy2,R.mipmap.default_radar_boy3,R.mipmap.default_radar_boy4,R.mipmap.default_radar_boy5,R.mipmap.default_radar_boy6};
+    private final int[] mGirlDefaultImages = {R.mipmap.default_radar_girl1,R.mipmap.default_radar_girl2,R.mipmap.default_radar_girl3,R.mipmap.default_radar_girl4,R.mipmap.default_radar_girl5,R.mipmap.default_radar_girl6};
     private ImageView mRadarView,mScaleImageView1,mScaleImageView2,mScaleAlphaImageView1,mScaleAlphaImageView2,mScaleAlphaImageView3;
     private ConstraintLayout mClRadar;  //背景图片
     private ImageView mIvRound, mIvRoundBig;  //圆圈图片
@@ -90,6 +93,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         mScaleAlphaImageView1 = findViewById(R.id.sa_im1);
         mScaleAlphaImageView2 = findViewById(R.id.sa_im2);
         mScaleAlphaImageView3 = findViewById(R.id.sa_im3);
+        randomImages();
         mMusicImageView = findViewById(R.id.music_iv);
         mTvTip = findViewById(R.id.tv_tip);
         mllPair = findViewById(R.id.ll_pair);
@@ -142,6 +146,27 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         if (service.getUserInfo() != null)
             GlideUtils.loadRouteImage(this, mIvAvatar, service.getUserInfo().getIcon());
         initBus();
+    }
+
+    private void randomImages(){
+        int sex = service.getUserInfo().getSex();
+        int[] targetImages;
+        if(sex == 1){
+            targetImages = mGirlDefaultImages;
+        }else{
+            targetImages = mBoyDefaultImages;
+        }
+        List<Integer> indexs = new ArrayList<>();
+        indexs.add(0);
+        indexs.add(1);
+        indexs.add(2);
+        indexs.add(3);
+        indexs.add(4);
+        indexs.add(5);
+        Collections.shuffle(indexs);
+        mScaleAlphaImageView1.setImageResource(targetImages[indexs.get(1)]);
+        mScaleAlphaImageView2.setImageResource(targetImages[indexs.get(2)]);
+        mScaleAlphaImageView3.setImageResource(targetImages[indexs.get(3)]);
     }
 
     private void startBarrage() {
@@ -207,6 +232,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         public void run() {
             int len = mTvMatching.length();
             if(len == 3){
+                randomImages();
                 mTvMatching.setText(".");
             }else if(len == 2){
                 mTvMatching.setText("...");

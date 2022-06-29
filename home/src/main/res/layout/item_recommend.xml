@@ -148,8 +148,8 @@
 				android:layout_below="@+id/tv_info"
 				android:singleLine="true"
 				android:layout_marginTop="@dimen/dp_5"
-				android:textColor="#9a9a9a"
-				android:textSize="@dimen/sp_13"
+				android:textColor="#999999"
+				android:textSize="@dimen/sp_12"
 				app:layout_constraintStart_toStartOf="@+id/tv_info"
 				app:layout_constraintTop_toBottomOf="@id/tv_info"
 				tools:text="你开心就好" />

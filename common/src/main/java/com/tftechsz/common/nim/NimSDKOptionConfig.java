@@ -146,8 +146,8 @@ public class NimSDKOptionConfig {
 //        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
 //        }
-        config.notificationSmallIconId = R.mipmap.ic_launcher;
-        config.notificationColor = NimCache.getContext().getResources().getColor(R.color.green);
+        config.notificationSmallIconId = R.mipmap.ic_launcher_grey;
+        config.notificationColor = NimCache.getContext().getResources().getColor(R.color.white);
         // 通知铃声的uri字符串
         config.notificationSound = "android.resource://com.tftechsz.common/raw/msg";
         config.notificationFolded = true;

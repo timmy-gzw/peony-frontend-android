@@ -292,6 +292,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 }
                 isShowFace = false;
                 toastTip(errorMsg);
+                stopPlayer();
                 finish();
             }
 

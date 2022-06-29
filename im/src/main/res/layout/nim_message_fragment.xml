@@ -748,7 +748,7 @@
         android:layout_marginEnd="@dimen/dp_10"
         android:orientation="vertical"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/messageActivityBottomLayout"
+        app:layout_constraintBottom_toTopOf="@+id/rv_topic"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
