@@ -48,7 +48,7 @@
 
         <TextView
             android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_10"
             android:id="@+id/tv_level"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

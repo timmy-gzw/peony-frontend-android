@@ -60,7 +60,7 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                         TextView tv_lock = helper.getView(R.id.tv_lock);
                         tv_lock.setTextColor(Color.parseColor("#CD5C33"));
                         String[] s = dto.title.split(" ");
-                        tv_lock.setText(s[1]+s[2].substring(s[2].indexOf("/")+1)+"解锁");
+                        tv_lock.setText(s[1]+(s[2].substring(s[2].indexOf("/")+1)).replace(".1","")+"解锁");
                         imageView.setVisibility(View.VISIBLE);
                         if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
                             imageView.setVisibility(View.INVISIBLE);
@@ -93,6 +93,8 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                 ivTip.setImageResource(R.mipmap.icon_intmacy_current);
                 TextView tvLevel = helper.getView(R.id.tv_level);
                 tvLevel.setText("LV."+dto.level);
+                TextView textView = helper.getView(R.id.tv_level_name);
+                textView.setText(" "+dto.tips.substring(dto.tips.indexOf("“")+1,dto.tips.indexOf("”")));
                 TextView tvLevelTitle = helper.getView(R.id.tv_level_title);
                 tvLevelTitle.setText(dto.tips);
                 if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
@@ -110,6 +112,8 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                 ivTip1.setImageResource(R.mipmap.icon_intmacy_next);
                 TextView tvLevel1 = helper.getView(R.id.tv_level);
                 tvLevel1.setText("LV."+dto.level);
+                TextView textView1 = helper.getView(R.id.tv_level_name);
+                textView1.setText(" "+dto.tips.substring(dto.tips.indexOf("“")+1,dto.tips.indexOf("”")));
                 TextView tvLevelTitle1 = helper.getView(R.id.tv_level_title);
                 tvLevelTitle1.setText(dto.tips);
                 if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
