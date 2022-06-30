@@ -12,13 +12,13 @@
         android:id="@+id/switchLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_size_15"
-        android:layout_marginRight="@dimen/bottom_component_margin_horizontal">
+        android:layout_marginRight="@dimen/dp_size_4"
+        android:layout_marginLeft="@dimen/dp_size_2">
 
         <ImageView
             android:id="@+id/buttonAudioMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/dp_size_35"
+            android:layout_height="@dimen/dp_size_35"
             android:layout_gravity="center_vertical"
             android:contentDescription="@string/empty"
             android:scaleType="center"
@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/emoji_button2"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/dp_size_35"
+            android:layout_height="@dimen/dp_size_35"
             android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:scaleType="center"
@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/buttonTextMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/dp_size_35"
+            android:layout_height="@dimen/dp_size_35"
             android:layout_gravity="center_vertical"
             android:scaleType="center"
             android:contentDescription="@string/empty"
@@ -57,7 +57,7 @@
         <Button
             android:id="@+id/audioRecord"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_size_35"
             android:background="@drawable/bg_record"
             android:layout_marginRight="@dimen/dp_size_8"
             android:minHeight="@dimen/dp_size_35"
@@ -71,7 +71,7 @@
         <EditText
             android:id="@+id/editTextMessage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_size_35"
             android:layout_marginRight="@dimen/bottom_component_margin_horizontal"
             android:autoLink="web|email|phone"
             android:background="@drawable/bg_gray_radius"
@@ -80,6 +80,7 @@
             android:maxLines="4"
             android:minHeight="@dimen/dp_size_35"
             android:paddingStart="10dp"
+            android:paddingEnd="@dimen/dp_size_38"
             android:textColor="@color/black"
             android:textColorHint="#CCCCCC"
             android:textCursorDrawable="@drawable/color_cursor"
@@ -88,24 +89,12 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/audioTextSwitchLayout"
-        android:layout_marginRight="@dimen/bottom_component_margin_horizontal"
-        android:layout_toLeftOf="@+id/sendLayout"
-        android:background="@drawable/nim_message_button_bottom_emoji_selector"
-        android:contentDescription="@string/empty"
-        android:scaleType="center"
-        android:visibility="gone" />
-
-    <ImageView
         android:id="@+id/emoji_button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_size_35"
+        android:layout_height="@dimen/dp_size_35"
+        android:padding="@dimen/dp_size_2"
         android:layout_alignBottom="@id/audioTextSwitchLayout"
         android:layout_toLeftOf="@+id/sendLayout"
-        android:paddingTop="@dimen/dp_size_3"
-        android:paddingBottom="@dimen/dp_size_3"
         android:layout_marginRight="@dimen/dp_size_10"
         android:src="@drawable/nim_message_input_emotion_pressed"
         android:visibility="visible" />
