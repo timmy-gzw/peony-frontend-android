@@ -770,7 +770,8 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
     }
 
     protected void setRead() {
-        if (tvRead != null && mUserInfo != null && mUserInfo.isVip() && message.getSessionType() == SessionTypeEnum.P2P) {
+        //女用户才有的特权
+        if (tvRead != null && mUserInfo != null && mUserInfo.isVip() && message.getSessionType() == SessionTypeEnum.P2P && mUserInfo.getSex() == 2) {
             tvRead.setVisibility(View.VISIBLE);
             if (message.isRemoteRead()) {
                 tvRead.setTextColor(Color.parseColor("#FFFFFF"));
