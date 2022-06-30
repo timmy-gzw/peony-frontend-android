@@ -26,6 +26,8 @@ public class Constants {
     public static final String HOST_H5_DEV = "http://h5.dev.peony.taifangsz.com/";   // 测试h5 base url
     public static final String HOST_H5 = "http://h5.peony.taifangsz.com/";
 
+    public static final String WX_SHARE_H5_THUMB_IMG = "https://public.assets.peony.taifangsz.com/logo.png?adb=123";//微信分享h5缩略图
+
 
     public static int DEVICE_FIRM = -1;
 
