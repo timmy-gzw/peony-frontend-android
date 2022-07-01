@@ -51,6 +51,8 @@ import com.bumptech.glide.Glide;
 import com.faceunity.nama.FURenderer;
 import com.faceunity.nama.IFURenderer;
 import com.faceunity.nama.ui.FaceUnityView;
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 import com.netease.lava.api.model.RTCVideoCropMode;
 import com.netease.lava.nertc.sdk.NERtc;
 import com.netease.lava.nertc.sdk.NERtcConstants;
@@ -616,12 +618,18 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         handler.removeCallbacks(runnable1);
     }
 
+    @Override
+    protected boolean getImmersionBar() {
+        return false;
+    }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        StatusBarUtil.fullScreen(this);
+
+        mClVideo = findViewById(R.id.cl_video);
+        ImmersionBar.with(this).hideBar(BarHide.FLAG_HIDE_BAR).titleBar(mClVideo).init();
         localVideoView = findViewById(R.id.local_video_view);
         viewVideoView = findViewById(R.id.view_video_view);
         videoView = findViewById(R.id.video_view);
@@ -690,7 +698,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         mTvViolationTip = findViewById(R.id.tv_violation_tip);
         mTvIncome = findViewById(R.id.tv_income);
         mTvReportUser = findViewById(R.id.tv_report_user);
-        mClVideo = findViewById(R.id.cl_video);
         tvCallTip = findViewById(R.id.tv_call_tip);
         initListener();
     }
