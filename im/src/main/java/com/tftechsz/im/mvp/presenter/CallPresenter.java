@@ -556,6 +556,7 @@ public class CallPresenter extends BasePresenter<ICallView> {
             mParseCompletionCallback = new SVGAParser.ParseCompletion() {
                 @Override
                 public void onComplete(@NotNull SVGAVideoEntity videoItem) {
+                    svgaImageView.setVisibility(View.VISIBLE);
                     svgaImageView.setVideoItem(videoItem);
                     svgaImageView.stepToFrame(0, true);
                 }
@@ -575,6 +576,7 @@ public class CallPresenter extends BasePresenter<ICallView> {
             @Override
             public void onFinished() {
                 mIsPlay = false;
+                svgaImageView.setVisibility(View.GONE);
             }
 
             @Override
