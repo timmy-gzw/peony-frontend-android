@@ -31,6 +31,7 @@ import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.common.entity.PackageDto;
+import com.tftechsz.common.entity.ReviewBean;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.http.ResponseObserver;
@@ -70,6 +71,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.subscribers.ResourceSubscriber;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -79,6 +81,7 @@ import okhttp3.Response;
 public class LoginPresenter extends BasePresenter<ILoginView> {
 
     private MineApiService configService;
+    private PublicService publicService;
     private UserProviderService userService;
     private IWXAPI api;
 
@@ -87,6 +90,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         String url = SPUtils.getString(Constants.CURRENT_HOST);
         Utils.logE("baseurl=" + url);
         configService = RetrofitManager.getInstance().createApi(MineApiService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? Constants.HOST_TEST : url : Constants.HOST);
+        publicService = RetrofitManager.getInstance().createApi(PublicService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? Constants.HOST_TEST : url : Constants.HOST);
         userService = ARouter.getInstance().navigation(UserProviderService.class);
         regToWx();
     }
@@ -243,6 +247,30 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 }
             }
         });
+    }
+
+    /**
+     * 获取是否审核配置信息
+     */
+    public void getReviewConfig() {
+        addNet(publicService.getReviewConfig(Utils.getApp().getPackageName(), Utils.getChannel())
+                .compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResourceSubscriber<ReviewBean>() {
+                    @Override
+                    public void onNext(ReviewBean reviewBean) {
+                        getView().onGetReviewConfig(reviewBean.isR());
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        getView().onGetReviewConfig(true);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
     }
 
     /**

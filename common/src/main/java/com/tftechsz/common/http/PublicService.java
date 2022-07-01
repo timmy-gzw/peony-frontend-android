@@ -1,6 +1,7 @@
 package com.tftechsz.common.http;
 
 
+import com.tftechsz.common.Constants;
 import com.tftechsz.common.entity.AccostModeDto;
 import com.tftechsz.common.entity.AccostPopupDto;
 import com.tftechsz.common.entity.ActivityGiftInfoDto;
@@ -20,6 +21,7 @@ import com.tftechsz.common.entity.RechargeQuickDto;
 import com.tftechsz.common.entity.RedDetailInfo;
 import com.tftechsz.common.entity.RedOpenDetails;
 import com.tftechsz.common.entity.RedPacketDto;
+import com.tftechsz.common.entity.ReviewBean;
 import com.tftechsz.common.entity.ShareDto;
 import com.tftechsz.common.entity.UserIDs;
 import com.tftechsz.common.entity.UserOnline;
@@ -37,6 +39,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PublicService {
@@ -472,4 +475,10 @@ public interface PublicService {
     @GET("couple_relieve/apply_info")
     Flowable<BaseResponse<CoupleRelieveApplyInfo>> coupleRelieveApply(@Query("apply_id") int apply_id);
 
+    /**
+     * 获取审核相关配置
+     */
+    @GET(Constants.HOST_REVIEW_CONFIG)
+    Flowable<ReviewBean> getReviewConfig(@Path("packageName") String packageName,
+                                         @Path("channel") String channel);
 }

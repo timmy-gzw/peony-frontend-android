@@ -247,6 +247,11 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
         }
     }
 
+    @Override
+    public void onGetReviewConfig(boolean r) {
+
+    }
+
 
     @Override
     protected void onDestroy() {

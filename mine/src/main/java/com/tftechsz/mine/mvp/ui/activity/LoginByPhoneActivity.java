@@ -234,6 +234,11 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
     }
 
     @Override
+    public void onGetReviewConfig(boolean r) {
+
+    }
+
+    @Override
     public void getOpenLoginAuthStatusSuccess() {
     }
 

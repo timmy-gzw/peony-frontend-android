@@ -36,6 +36,7 @@ import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -153,17 +154,17 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
         if (time != 0 && TimeUtils.isToday(new Date(time))) {
             loadData();
         } else {
-            mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.READ_PHONE_STATE)
-                    .subscribe(aBoolean -> {
-                        //   MdidSdkHelper.InitSdk()
-                        MMKVUtils.getInstance().encode(Constants.CURRENT_TIME, System.currentTimeMillis());
-                        getP().uploadDeviceInfo(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID), 0, "", "default", "");
-                        loadData();
-                    }));
+            if (BuildConfig.DEBUG) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(Manifest.permission.READ_PHONE_STATE)
+                        .subscribe(aBoolean -> {
+                            loadMoreData();
+                        }));
+            } else {
+                getP().getReviewConfig();
+            }
         }
     }
-
 
     private void initRxBus() {
         mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
@@ -212,6 +213,13 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
         } else {
             onIntent(); // APP进程还在，Activity被重新调度起来
         }
+    }
+
+    private void loadMoreData() {
+        //   MdidSdkHelper.InitSdk()
+        MMKVUtils.getInstance().encode(Constants.CURRENT_TIME, System.currentTimeMillis());
+        getP().uploadDeviceInfo(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID), 0, "", "default", "");
+        loadData();
     }
 
 
@@ -483,6 +491,17 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
     @Override
     public void agreementSuccess() {
 
+    }
+
+    @Override
+    public void onGetReviewConfig(boolean r) {
+        if (r) {
+            loadMoreData();
+        } else {
+            mCompositeDisposable.add(new RxPermissions(SplashActivity.this)
+                    .request(Manifest.permission.READ_PHONE_STATE)
+                    .subscribe(aBoolean -> loadMoreData()));
+        }
     }
 
     @Override

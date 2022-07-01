@@ -167,4 +167,9 @@ public class GetCodeActivity extends BaseMvpActivity<ILoginView, LoginPresenter>
     public void agreementSuccess() {
 
     }
+
+    @Override
+    public void onGetReviewConfig(boolean r) {
+
+    }
 }
