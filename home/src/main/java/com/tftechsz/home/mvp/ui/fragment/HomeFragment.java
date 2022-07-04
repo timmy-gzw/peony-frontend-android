@@ -186,8 +186,11 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         coordinatorLayout.addOnOffsetChangedListener((AppBarLayout.BaseOnOffsetChangedListener) (appBarLayout, verticalOffset) -> {
             if (verticalOffset < -150) {
                 if (mTabLayout != null) mTabLayout.setBackgroundResource(R.color.white);
+                //fixme 个性化推荐审核开关使用
+                if (mTabLayout != null && mTabLayout.getVisibility() == View.GONE) mViewPager.setBackgroundResource(R.color.white);
             } else {
                 if (mTabLayout != null) mTabLayout.setBackgroundResource(R.drawable.bg_white_top_radius20);
+                if (mTabLayout != null && mTabLayout.getVisibility() == View.GONE) mViewPager.setBackgroundResource(R.drawable.bg_white_top_radius20);
             }
         });
         mLl_home_top_item = getView(R.id.ll_home_top_item);
