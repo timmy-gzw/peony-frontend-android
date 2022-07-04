@@ -166,7 +166,8 @@
             android:layout_marginTop="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+            app:layout_goneMarginTop="@dimen/dp_10" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.tftechsz.home.widget.ScrollerForbidView

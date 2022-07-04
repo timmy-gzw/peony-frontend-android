@@ -9,4 +9,7 @@
     <string name="tip_real_pic">使用清晰真人照片更容易获得大家的互动哦～</string>
     <string name="other_words">换一句</string>
     <string name="trend_guide_hint">这一刻，你想说些什么~</string>
+
+    <string name="personalized_recommend_tip">开启“个性化推荐”后可启用推荐动态</string>
+    <string name="open_personalized_recommendation">立即开启</string>
 </resources>

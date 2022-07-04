@@ -61,8 +61,11 @@ public class MMKVUtils {
     }
 
     public boolean decodeBoolean(String key) {
+        return decodeBoolean(key, false);
+    }
 
-        return mmkv.decodeBool(key, false);
+    public boolean decodeBoolean(String key, boolean defaultValue) {
+        return mmkv.decodeBool(key, defaultValue);
     }
 
 

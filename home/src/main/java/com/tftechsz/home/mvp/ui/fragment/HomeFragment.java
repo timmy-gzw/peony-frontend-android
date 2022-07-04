@@ -275,6 +275,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             titles.add("附近");
 
         }
+        mTabLayout.setVisibility(titles.size() > 1 ? View.VISIBLE : View.GONE);
 
         mViewPager.setAdapter(new FragmentVpAdapter(getChildFragmentManager(), fragments, titles));
         mTabLayout.setViewPager(mViewPager);

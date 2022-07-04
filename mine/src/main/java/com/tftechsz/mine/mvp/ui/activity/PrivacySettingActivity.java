@@ -11,8 +11,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.netease.nim.uikit.common.UserInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
+import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
+import com.tftechsz.common.bus.RxBus;
+import com.tftechsz.common.event.RecommendChangeEvent;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.OpenVipWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.dto.PrivacyDto;
@@ -25,7 +30,7 @@ import com.tftechsz.mine.mvp.presenter.PrivacySettingPresenter;
 @Route(path = ARouterApi.ACTIVITY_PRIVACY_SETTING)
 public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView, PrivacySettingPresenter> implements View.OnClickListener, IPrivacySettingView {
 
-    private SwitchCompat mSwRich, mSwGift, mSwRank, mSwStories, mSwLocation, mswycgrzy;
+    private SwitchCompat mSwRich, mSwGift, mSwRank, mSwStories, mSwLocation, mswycgrzy, mSwRecommend;
     @Autowired
     UserProviderService service;
     private PrivacyDto mData;
@@ -40,8 +45,6 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         new ToolBarBuilder().showBack(true)
                 .setTitle("隐私设置")
                 .build();
-        initListener();
-
 
         UserInfo userInfo = service.getUserInfo();
         int visible = userInfo.isVip() || userInfo.isGirl() ? View.GONE : View.VISIBLE;
@@ -51,6 +54,11 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         findViewById(R.id.tv_vip_stories).setVisibility(visible);
         findViewById(R.id.tv_vip_location).setVisibility(visible);
         findViewById(R.id.tv_vip_ycgr).setVisibility(visible);
+        mSwRecommend = findViewById(R.id.sw_personalized_recommendation);
+        boolean checked = MMKVUtils.getInstance().decodeBoolean(Constants.PARAMS_PERSONALIZED_RECOMMENDATION, true);
+        mSwRecommend.setChecked(checked);
+
+        initListener();
     }
 
     private void initListener() {
@@ -60,6 +68,7 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         findViewById(R.id.cl_stories).setOnClickListener(this);
         findViewById(R.id.cl_location).setOnClickListener(this);
         findViewById(R.id.cl_ycgrzydjzzs).setOnClickListener(this);
+        findViewById(R.id.cl_personalized_recommendation).setOnClickListener(this);
         mSwRich = findViewById(R.id.sw_rich);
         mSwGift = findViewById(R.id.sw_gift);
         mSwRank = findViewById(R.id.sw_rank);
@@ -114,9 +123,38 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
             }
         } else if (id == R.id.cl_ycgrzydjzzs) {
             getP().setPrivilege(6, mswycgrzy.isChecked() ? 0 : 1);
+        } else if (id == R.id.cl_personalized_recommendation) {
+            boolean checked = mSwRecommend.isChecked();
+            if (checked) {
+                showRecommendClosePop();
+            } else {
+                mSwRecommend.setChecked(true);
+                MMKVUtils.getInstance().encode(Constants.PARAMS_PERSONALIZED_RECOMMENDATION, true);
+                RxBus.getDefault().post(new RecommendChangeEvent(true));
+                toastTip("更改成功");
+            }
         }
     }
 
+    private void showRecommendClosePop() {
+        CustomPopWindow popWindow = new CustomPopWindow(this)
+                .setTitle("温馨提示")
+                .setContent("关闭后，无法使用推荐功能，\n确定要关闭吗")
+                .addOnClickListener(new CustomPopWindow.OnSelectListener() {
+                    @Override
+                    public void onCancel() {
+                    }
+
+                    @Override
+                    public void onSure() {
+                        mSwRecommend.setChecked(false);
+                        MMKVUtils.getInstance().encode(Constants.PARAMS_PERSONALIZED_RECOMMENDATION, false);
+                        RxBus.getDefault().post(new RecommendChangeEvent(false));
+                        toastTip("更改成功");
+                    }
+                });
+        popWindow.showPopupWindow();
+    }
 
     @Override
     public void getPrivilegeSuccess(PrivacyDto data) {

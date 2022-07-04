@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ import com.tftechsz.common.entity.NavigationLogEntity;
 import com.tftechsz.common.entity.VideoInfo;
 import com.tftechsz.common.event.AccostSuccessEvent;
 import com.tftechsz.common.event.CommonEvent;
+import com.tftechsz.common.event.RecommendChangeEvent;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.pagestate.PageStateConfig;
@@ -46,6 +48,7 @@ import com.tftechsz.common.refresh.FastScrollLinearLayoutManager;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.moment.R;
@@ -91,6 +94,7 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
     private int mClickPosition;
     private int lastItemCount;
     private PageStateManager mPageStateManager;
+    private LinearLayout llEmptyRecommend;//个性化推荐
 
     @Override
     protected int getLayout() {
@@ -132,6 +136,15 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
             }
         });
 
+        if (dynamicType == 0) {
+            //个性化推荐
+            llEmptyRecommend = getView(R.id.ll_recommend_close);
+            getView(R.id.tv_open_recommend).setOnClickListener(v -> {
+                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_PRIVACY_SETTING);
+            });
+            boolean isRecommend = MMKVUtils.getInstance().decodeBoolean(Constants.PARAMS_PERSONALIZED_RECOMMENDATION, true);
+            if (llEmptyRecommend != null) llEmptyRecommend.setVisibility(isRecommend ? View.GONE : View.VISIBLE);
+        }
 //        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
 //            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -347,6 +360,17 @@ public class CustomTrendFragment extends BaseMvpFragment<IDynamicView, DynamicRe
                             }
                         }
                 ));
+
+        if (dynamicType == 0) {
+            //个性化推荐
+            mCompositeDisposable.add(RxBus.getDefault().toObservable(RecommendChangeEvent.class)
+                    .compose(this.bindToLifecycle())
+                    .subscribe(event -> {
+                        if (llEmptyRecommend != null) {
+                            llEmptyRecommend.setVisibility(event.isOpen() ? View.GONE : View.VISIBLE);
+                        }
+                    }));
+        }
     }
 
     private void performDatas(int type, int blogId) {

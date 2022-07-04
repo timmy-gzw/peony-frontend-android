@@ -23,7 +23,7 @@
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
-        android:paddingStart="@dimen/dp_20"
+        android:paddingStart="@dimen/dp_16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/base_tool_bar">
 
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/bg_switch"
             android:checked="false"
             android:clickable="false"
@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@color/driver"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -100,7 +100,7 @@
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
-        android:paddingStart="@dimen/dp_20"
+        android:paddingStart="@dimen/dp_16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_rich">
 
@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/bg_switch"
             android:checked="false"
             android:clickable="false"
@@ -159,7 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@color/driver"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -176,7 +176,7 @@
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
-        android:paddingStart="@dimen/dp_20"
+        android:paddingStart="@dimen/dp_16"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_gift">
@@ -221,7 +221,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/bg_switch"
             android:checked="false"
             android:clickable="false"
@@ -236,7 +236,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@color/driver"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -251,7 +251,7 @@
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
-        android:paddingStart="@dimen/dp_20"
+        android:paddingStart="@dimen/dp_16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_rank">
 
@@ -295,7 +295,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/bg_switch"
             android:checked="false"
             android:clickable="false"
@@ -310,7 +310,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@color/driver"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -325,7 +325,7 @@
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
-        android:paddingStart="@dimen/dp_20"
+        android:paddingStart="@dimen/dp_16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_stories">
 
@@ -369,7 +369,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/bg_switch"
             android:checked="false"
             android:clickable="false"
@@ -384,7 +384,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@color/driver"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -399,7 +399,7 @@
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
-        android:paddingStart="@dimen/dp_20"
+        android:paddingStart="@dimen/dp_16"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_location">
@@ -444,7 +444,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/bg_switch"
             android:checked="false"
             android:clickable="false"
@@ -456,5 +456,45 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_personalized_recommendation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:descendantFocusability="blocksDescendants"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_location">
+
+        <TextView
+            android:id="@+id/tv_personalized_recommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="个性化推荐"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_personalized_recommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_switch"
+            android:checked="true"
+            android:clickable="false"
+            android:focusable="false"
+            android:thumb="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
