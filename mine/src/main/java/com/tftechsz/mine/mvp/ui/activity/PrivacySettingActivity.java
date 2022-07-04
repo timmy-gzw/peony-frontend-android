@@ -93,6 +93,18 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        if (id == R.id.cl_personalized_recommendation) {
+            boolean checked = mSwRecommend.isChecked();
+            if (checked) {
+                showRecommendClosePop();
+            } else {
+                mSwRecommend.setChecked(true);
+                MMKVUtils.getInstance().encode(Constants.PARAMS_PERSONALIZED_RECOMMENDATION, true);
+                RxBus.getDefault().post(new RecommendChangeEvent(true));
+                toastTip("更改成功");
+            }
+            return;
+        }
         if (!service.getUserInfo().isVip() && service.getUserInfo().getSex() == 1) {
             new OpenVipWindow(this).addOnClickListener(() -> {
                 startActivity(VipActivity.class);
@@ -123,16 +135,6 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
             }
         } else if (id == R.id.cl_ycgrzydjzzs) {
             getP().setPrivilege(6, mswycgrzy.isChecked() ? 0 : 1);
-        } else if (id == R.id.cl_personalized_recommendation) {
-            boolean checked = mSwRecommend.isChecked();
-            if (checked) {
-                showRecommendClosePop();
-            } else {
-                mSwRecommend.setChecked(true);
-                MMKVUtils.getInstance().encode(Constants.PARAMS_PERSONALIZED_RECOMMENDATION, true);
-                RxBus.getDefault().post(new RecommendChangeEvent(true));
-                toastTip("更改成功");
-            }
         }
     }
 
