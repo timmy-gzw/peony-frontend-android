@@ -139,6 +139,9 @@ android {
         VIVO {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "VIVO", app_label: appName2, app_icon: "@mipmap/ic_launcher"]
         }
+        DOUYIN {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "DOUYIN", app_label: appName2, app_icon: "@mipmap/ic_launcher"]
+        }
     }
 }
 
