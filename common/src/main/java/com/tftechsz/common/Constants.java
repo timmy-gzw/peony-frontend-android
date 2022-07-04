@@ -77,6 +77,7 @@ public class Constants {
     public static final String AGREED_TO_TOS = "protocol_status";   //协议勾选状态
     public static final String KEY_HAS_GET_INSTALL_PARAMS = "key_Has_Get_InstallParams";   //是否有h5过来的参数
     public static final String KEY_H5_PARAM = "key_h5_param";   //h5传
+    public static final String H5_INVITE_CODE_PARAM = "h5_invite_code_param";   //h5分享，邀请码
     public static final String TEAM_IS_FIRST = "team_is_first";   //是否第一次进入群聊
     public static final String VOICE_IS_OPEN = "voice_is_open";   //是否开启语音房
     public static final String SIGN_CHAT_CARD = "chat_card";   //签到-聊天卡

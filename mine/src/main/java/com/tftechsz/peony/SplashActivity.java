@@ -348,12 +348,12 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
      */
     private void enter() {
         /* XXX: check this */
-        if (service.getConfigInfo() == null) {
-            p.getConfig(0);
-        } else {
-            p.getConfig(1);
-
-        }
+//        if (service.getConfigInfo() == null) {
+//            p.getConfig(0);
+//        } else {
+//            p.getConfig(1);
+//
+//        }
         if (!NetworkUtil.isNetworkAvailable(BaseApplication.getInstance()) && service.getConfigInfo() != null) {
             enterMain();
         } else {
@@ -382,6 +382,10 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
     UMLinkListener umlinkAdapter = new UMLinkListener() {
         @Override
         public void onLink(String path, HashMap<String, String> query_params) {
+            if(!query_params.isEmpty() && query_params.containsKey("invite_code")&& MMKVUtils.getInstance().decodeString(Constants.H5_INVITE_CODE_PARAM).isEmpty()){
+                String invite_code = query_params.get("invite_code");
+                MMKVUtils.getInstance().encode(Constants.H5_INVITE_CODE_PARAM, invite_code);
+            }
         }
 
         @Override
@@ -401,6 +405,11 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
                         MMKVUtils.getInstance().encode(Constants.KEY_HAS_GET_INSTALL_PARAMS, true);
                     }
 
+                }
+                //友盟新装带参获取
+                if(!install_params.isEmpty() && install_params.containsKey("invite_code")){
+                    String invite_code = install_params.get("invite_code");
+                    MMKVUtils.getInstance().encode(Constants.H5_INVITE_CODE_PARAM, invite_code);
                 }
             }
         }

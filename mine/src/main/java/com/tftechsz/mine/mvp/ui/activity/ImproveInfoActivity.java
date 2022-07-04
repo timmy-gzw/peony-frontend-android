@@ -36,6 +36,7 @@ import com.tftechsz.common.utils.AnimationUtil;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.NetworkUtil;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.SoftHideKeyBoardUtil;
@@ -152,7 +153,14 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
 //            }
 //        }
 //        GlideUtils.loadRoundImage(this, mIvSex, mGirlUrl);
-        mEtCode.postDelayed(() -> mEtCode.setText(getP().getReferralCode(mActivity)), 100);
+        String inviteCode = MMKVUtils.getInstance().decodeString(Constants.H5_INVITE_CODE_PARAM);
+        String tempCode;
+        if(inviteCode.isEmpty()) {
+            tempCode = getP().getReferralCode(mActivity);
+        }else{
+            tempCode = inviteCode;
+        }
+        mEtCode.postDelayed(() -> mEtCode.setText(tempCode), 100);
         p.getCompleteInfo();
     }
 

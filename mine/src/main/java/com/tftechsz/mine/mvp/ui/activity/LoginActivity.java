@@ -355,6 +355,10 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
     UMLinkListener umlinkAdapter = new UMLinkListener() {
         @Override
         public void onLink(String path, HashMap<String, String> query_params) {
+            if(!query_params.isEmpty() && query_params.containsKey("invite_code")&& MMKVUtils.getInstance().decodeString(Constants.H5_INVITE_CODE_PARAM).isEmpty()){
+                String invite_code = query_params.get("invite_code");
+                MMKVUtils.getInstance().encode(Constants.H5_INVITE_CODE_PARAM, invite_code);
+            }
         }
 
         @Override
@@ -373,6 +377,11 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
                         umLinkCount++;
                         MMKVUtils.getInstance().encode(Constants.KEY_HAS_GET_INSTALL_PARAMS, true);
                     }
+                }
+                //友盟新装带参获取
+                if(!install_params.isEmpty() && install_params.containsKey("invite_code")){
+                    String invite_code = install_params.get("invite_code");
+                    MMKVUtils.getInstance().encode(Constants.H5_INVITE_CODE_PARAM, invite_code);
                 }
             }
 
