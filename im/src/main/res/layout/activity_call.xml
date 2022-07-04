@@ -8,7 +8,7 @@
     <com.netease.lava.nertc.sdk.video.NERtcVideoView
         android:id="@+id/remote_video_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
 
     </com.netease.lava.nertc.sdk.video.NERtcVideoView>
@@ -30,8 +30,8 @@
         android:id="@+id/fl_voice_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:visibility="visible"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/iv_voice_avatar"
@@ -163,134 +163,137 @@
         <LinearLayout
             android:id="@+id/ll_voice_user"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_call_user"
-            android:layout_marginTop="@dimen/dp_11"
             android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:layout_marginTop="@dimen/dp_11"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_call_user_gender_age"
-                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="22"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:background="@drawable/shape_blue_alpha30"
                 android:drawableLeft="@drawable/ic_boy"
                 android:drawablePadding="@dimen/dp_5"
-                android:background="@drawable/shape_blue_alpha30"
-                android:textColor="@color/color_99_ff"
-                android:paddingVertical="@dimen/dp_1"
                 android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_1"
+                android:text="22"
+                android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_10"
-                tools:visibility="visible"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_call_user_city"
-                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="深圳市"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:background="@drawable/shape_black_alpha60"
-                android:textColor="@color/white"
-                android:paddingVertical="@dimen/dp_1"
                 android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_1"
+                android:text="深圳市"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_10"
-                tools:visibility="visible"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_call_user_constellation"
-                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="射手座"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:background="@drawable/shape_black_alpha60"
-                android:textColor="@color/white"
-                android:paddingVertical="@dimen/dp_1"
                 android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_1"
+                android:text="射手座"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_10"
-                tools:visibility="visible"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_call_user_job"
-                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="市场营销"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:background="@drawable/shape_black_alpha60"
-                android:textColor="@color/white"
-                android:paddingVertical="@dimen/dp_1"
                 android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_1"
+                android:text="市场营销"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_10"
-                tools:visibility="visible"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
         </LinearLayout>
 
     </RelativeLayout>
 
-    <com.netease.lava.nertc.sdk.video.NERtcVideoView
-        android:id="@+id/local_video_view"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/dp_110"
-        android:layout_marginEnd="@dimen/dp_15"
-        android:visibility="gone" />
-
-    <View
-        android:id="@+id/view_video_view"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/dp_110"
-        android:layout_marginEnd="@dimen/dp_15"
-        android:background="@color/black"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/dp_110"
-        android:layout_marginEnd="@dimen/dp_15"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="weigui.zip"
-        app:lottie_imageAssetsFolder="gift/"
-        app:lottie_loop="true" />
-
-    <TextView
-        android:id="@+id/tv_violation_tip"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/dp_134"
-        android:layout_marginEnd="@dimen/dp_25"
-        android:drawablePadding="@dimen/dp_9"
-        android:gravity="center"
-        android:text="涉嫌违规\n已做黑屏处理"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_10"
-        android:visibility="gone"
-        app:drawableTopCompat="@mipmap/chat_icon_violation"
-        tools:visibility="visible" />
+        android:layout_below="@id/tv_call_tip"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_15">
 
-    <ImageView
-        android:id="@+id/iv_small_close_face"
-        android:layout_width="@dimen/dp_30"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/dp_125"
-        android:layout_marginEnd="@dimen/dp_40"
-        android:src="@mipmap/chat_ic_close_face"
-        tools:visibility="visible"
-        android:visibility="gone" />
+        <com.netease.lava.nertc.sdk.video.NERtcVideoView
+            android:id="@+id/local_video_view"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/view_video_view"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/black"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="weigui.zip"
+            app:lottie_imageAssetsFolder="gift/"
+            app:lottie_loop="true"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_violation_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_9"
+            android:gravity="center"
+            android:text="涉嫌违规\n已做黑屏处理"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            android:visibility="gone"
+            app:drawableTopCompat="@mipmap/chat_icon_violation"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_small_close_face"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_25"
+            android:src="@mipmap/chat_ic_close_face"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/lly_dialog_operation"
@@ -311,55 +314,54 @@
                 android:id="@+id/iv_mute_control"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_34"
                 android:drawablePadding="@dimen/dp_17"
+                android:gravity="center"
                 android:text="静音"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_15"
-                android:gravity="center"
                 app:drawableTopCompat="@mipmap/chat_ic_mute_off"
-                android:layout_marginStart="@dimen/dp_34"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintLeft_toLeftOf="parent" />
 
 
             <TextView
                 android:id="@+id/iv_speaker_control"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_34"
                 android:drawablePadding="@dimen/dp_17"
                 android:gravity="center"
                 android:text="免提"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_15"
                 app:drawableTopCompat="@mipmap/chat_ic_speaker_off"
-                android:layout_marginEnd="@dimen/dp_34"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_gift"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/dp_260"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/dp_10"
-        android:visibility="gone"
-        android:src="@mipmap/chat_ic_call_gift" />
+        android:layout_marginBottom="@dimen/dp_260"
+        android:src="@mipmap/chat_ic_call_gift"
+        android:visibility="gone" />
 
 
     <LinearLayout
         android:id="@+id/ll_income"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/dp_180"
         android:background="@drawable/shape_black_border12_alpha60"
         android:gravity="center"
@@ -401,8 +403,8 @@
         android:layout_marginBottom="@dimen/dp_55"
         android:gravity="center"
         android:orientation="horizontal"
-        tools:visibility="visible"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/tv_reject"
@@ -468,36 +470,36 @@
         android:visibility="invisible">
 
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/tv_face_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/dp_34"
                 android:drawablePadding="@dimen/dp_17"
                 android:text="不露脸视频"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_15"
                 app:drawableTopCompat="@mipmap/chat_ic_face_off"
-                android:layout_marginStart="@dimen/dp_34"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
                 android:id="@+id/tv_call_face_unity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:gravity="center"
+                android:layout_marginStart="@dimen/dp_34"
                 android:drawablePadding="@dimen/dp_17"
+                android:gravity="center"
                 android:text="美颜"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_15"
                 app:drawableTopCompat="@mipmap/chat_ic_call_face_unity"
-                android:layout_marginStart="@dimen/dp_34"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -506,14 +508,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:layout_marginEnd="@dimen/dp_34"
                 android:drawablePadding="@dimen/dp_17"
                 android:text="切换摄像头"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_15"
                 app:drawableTopCompat="@mipmap/chat_ic_capture_switch"
-                android:layout_marginEnd="@dimen/dp_34"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -603,15 +605,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cl_video"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/shape_black_border12_alpha60"
         android:padding="@dimen/dp_10"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
-        tools:visibility="visible"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tv_call_tip"
@@ -623,11 +625,11 @@
         android:layout_marginRight="@dimen/dp_10"
         android:background="@drawable/bg_red_radius6"
         android:gravity="center"
-        tools:text="严禁出现色情、诈骗和涉政等相关问题，一经发现将封号处理"
         android:padding="@dimen/dp_10"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_11"
         android:visibility="gone"
+        tools:text="严禁出现色情、诈骗和涉政等相关问题，一经发现将封号处理"
         tools:visibility="visible" />
 
 
@@ -647,17 +649,16 @@
         android:visibility="gone" />
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_video"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_10"
-        android:padding="@dimen/dp_3">
+        android:padding="@dimen/dp_3"
+        android:visibility="invisible">
 
 
         <ImageView
@@ -676,10 +677,10 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/call_report_user"
             android:gravity="center"
-            android:visibility="invisible"
             android:text="举报"
             android:textColor="#ffffffff"
             android:textSize="@dimen/sp_12"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -687,71 +688,71 @@
         <LinearLayout
             android:id="@+id/ll_video_user"
             android:layout_width="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/tv_report_user2"
             app:layout_constraintRight_toLeftOf="@id/tv_report_user"
-            android:layout_height="wrap_content">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tv_video_user_gender_age"
-                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="22"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:background="@drawable/shape_blue_alpha30"
                 android:drawableLeft="@drawable/ic_boy"
                 android:drawablePadding="@dimen/dp_5"
-                android:background="@drawable/shape_blue_alpha30"
-                android:textColor="@color/color_99_ff"
-                android:paddingVertical="@dimen/dp_1"
                 android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_1"
+                android:text="22"
+                android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_10"
-                tools:visibility="visible"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_video_user_city"
-                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="深圳市"
-                android:paddingVertical="@dimen/dp_1"
-                android:paddingHorizontal="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:background="@drawable/shape_black_alpha60"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_1"
+                android:text="深圳市"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_10"
-                tools:visibility="visible"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_video_user_constellation"
-                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="射手座"
-                android:paddingVertical="@dimen/dp_1"
-                android:paddingHorizontal="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:background="@drawable/shape_black_alpha60"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_1"
+                android:text="射手座"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_10"
-                tools:visibility="visible"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_video_user_job"
-                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="市场营销"
-                android:paddingVertical="@dimen/dp_1"
-                android:paddingHorizontal="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:background="@drawable/shape_black_alpha60"
+                android:paddingHorizontal="@dimen/dp_6"
+                android:paddingVertical="@dimen/dp_1"
+                android:text="市场营销"
                 android:textColor="@color/color_99_ff"
                 android:textSize="@dimen/sp_10"
-                tools:visibility="visible"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
         </LinearLayout>
 
@@ -772,9 +773,9 @@
 
     <com.opensource.svgaplayer.SVGAImageView
         android:id="@+id/svg_image"
-        android:background="@mipmap/chat_ic_message_mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@mipmap/chat_ic_message_mask"
         android:scaleType="fitCenter"
         android:visibility="gone"
         app:autoPlay="true"
