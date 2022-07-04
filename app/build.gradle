@@ -4,7 +4,6 @@ apply plugin: 'com.alibaba.arouter'
 
 def name = 'yisugar'
 def appName = "伊糖"
-def appName2 = "伊糖交友"
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -134,13 +133,13 @@ android {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "XIAOMI", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         OPPO {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OPPO", app_label: appName2, app_icon: "@mipmap/ic_launcher"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OPPO", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         VIVO {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "VIVO", app_label: appName2, app_icon: "@mipmap/ic_launcher"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "VIVO", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         DOUYIN {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "DOUYIN", app_label: appName2, app_icon: "@mipmap/ic_launcher"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "DOUYIN", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
     }
 }
