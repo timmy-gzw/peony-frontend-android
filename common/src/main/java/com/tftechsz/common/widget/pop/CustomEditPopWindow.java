@@ -25,6 +25,7 @@ public class CustomEditPopWindow extends BaseCenterPop implements View.OnClickLi
     private View mView;
     private TextView mTvSingle;
     private LinearLayout mLlBot0, mLlBot1;
+    private boolean sureDismiss = true;
 
     public CustomEditPopWindow(Context context) {
         this(context, 0);
@@ -130,6 +131,10 @@ public class CustomEditPopWindow extends BaseCenterPop implements View.OnClickLi
         }
         return this;
     }
+    public CustomEditPopWindow setSureDismiss(boolean dismiss){
+        sureDismiss = dismiss;
+        return this;
+    }
 
     public void setRightGone() {
         mTvCancel.setVisibility(View.GONE);
@@ -144,7 +149,8 @@ public class CustomEditPopWindow extends BaseCenterPop implements View.OnClickLi
         if (id == R.id.tv_sure || id == R.id.tv_sure1) {
             if (listener != null)
                 listener.onSure();
-            dismiss();
+            if(sureDismiss)
+                dismiss();
         } else if (id == R.id.tv_cancel || id == R.id.tv_cancel1) {
             if (listener != null)
                 listener.onCancel();

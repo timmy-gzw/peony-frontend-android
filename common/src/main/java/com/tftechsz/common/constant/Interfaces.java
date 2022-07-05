@@ -83,6 +83,8 @@ interface Interfaces {
     String LINK_PEONY_WITHDRAW_POP = "withdraw_pop"; //提现弹窗
     String LINK_PEONY_ABOUT_US = "about_us"; //关于我们
 
+    String LINK_PEONY_INVITE = "invite_bind"; //邀请码填写
+
     String SHOW_IS_REAL = "show_is_real"; //真人
     String SHOW_IS_SELF = "show_is_self"; //实名
     String SHOW_IS_PARTY_SELF = "show_is_party_self"; //派对实名

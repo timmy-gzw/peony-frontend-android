@@ -55,4 +55,20 @@ public class MinePresenter extends BasePresenter<IMineView> {
 
     }
 
+    public void setInviteCode(String inviteCode){
+        addNet(service.setInviteCode(inviteCode).compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse>() {
+                    @Override
+                    public void onSuccess(BaseResponse response) {
+                        if(response.getCode() == 0){
+                            if(getView() == null) return;
+                            getView().setInviteCodeSuccess();
+                        }else{
+                            getView().setInviteCodeFail(response.getMessage());
+                        }
+                    }
+                }));
+
+    }
+
 }

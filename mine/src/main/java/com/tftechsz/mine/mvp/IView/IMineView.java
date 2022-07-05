@@ -6,4 +6,8 @@ import com.netease.nim.uikit.common.UserInfo;
 public interface IMineView extends  MvpView {
 
     void getUserInfoSuccess(UserInfo userInfo);
+
+    void setInviteCodeSuccess();
+
+    void setInviteCodeFail(String msg);
 }

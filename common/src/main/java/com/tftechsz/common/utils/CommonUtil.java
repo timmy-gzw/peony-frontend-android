@@ -61,6 +61,7 @@ import com.tftechsz.common.entity.WxPayResultInfo;
 import com.tftechsz.common.iservice.AttentionService;
 import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.widget.pop.CustomEditPopWindow;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.RealAuthPopWindow;
 import com.tftechsz.common.widget.pop.WithdrawPop;
@@ -530,7 +531,8 @@ public class CommonUtil {
             Interfaces.LINK_PEONY_MY_OUTFIT,
             Interfaces.LINK_PEONY_MY_NOBLE,
             Interfaces.LINK_PEONY_NOTE_VALUE,
-            Interfaces.LINK_PEONY_TREND
+            Interfaces.LINK_PEONY_TREND,
+            Interfaces.LINK_PEONY_INVITE
     );
 
 

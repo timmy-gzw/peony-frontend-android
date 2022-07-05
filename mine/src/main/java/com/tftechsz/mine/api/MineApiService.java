@@ -835,4 +835,13 @@ public interface MineApiService {
      */
     @GET("dress/category/list")
     Flowable<BaseResponse<List<DressListDto>>> getCategoryList();
+
+    /**
+     * 我的->填写邀请码
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("h5/invite/bind")
+    Flowable<BaseResponse> setInviteCode(@Field("invite_code")String inviteCode);
 }
