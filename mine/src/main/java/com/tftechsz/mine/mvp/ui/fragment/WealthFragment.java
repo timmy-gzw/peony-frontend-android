@@ -77,8 +77,9 @@ public class WealthFragment extends BaseMvpFragment {
                             ConfigInfo.LevelLadder temp = levelDatas.get(levelDatas.size()-1);
                             for (int i = 0; i < levelDatas.size(); i++) {
                                 ConfigInfo.LevelLadder levelLadder = levelDatas.get(i);
-                                if(dto.level>=levelLadder.min_level&&dto.level<levelLadder.max_level){
+                                if(dto.level>=levelLadder.min_level&&dto.level<=levelLadder.max_level){
                                     temp = levelLadder;
+                                    break;
                                 }
                             }
                             ConfigInfo config = getConfig(mContext);
