@@ -144,6 +144,7 @@
                     android:textColor="@color/color_normal"
                     android:textSize="@dimen/sp_21"
                     android:textStyle="bold"
+                    android:includeFontPadding="false"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="你吃" />
@@ -153,34 +154,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_4"
-                    android:paddingBottom="@dimen/dp_4"
+                    android:gravity="bottom"
+                    android:layout_marginBottom="@dimen/dp_4"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_name"
                     app:layout_constraintLeft_toRightOf="@id/tv_name">
 
                     <ImageView
                         android:id="@+id/iv_vip"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_14"
                         android:layout_marginStart="@dimen/dp_3"
-                        android:layout_marginTop="@dimen/dp_1"
-                        android:background="@mipmap/vip_icon_bg"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_sign"
-                        app:layout_constraintLeft_toRightOf="@+id/iv_sex"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:src="@mipmap/vip_icon_bg"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/iv_sex"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_14"
                         android:layout_marginStart="@dimen/dp_3"
-                        android:layout_marginTop="@dimen/dp_1"
                         android:textColor="@color/white"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_sign"
-                        app:layout_constraintTop_toTopOf="@+id/tv_name"
+                        android:visibility="visible"
                         tools:background="@drawable/bg_girl"
-                        tools:drawablePadding="@dimen/dp_2"
                         tools:drawableStart="@drawable/ic_girl"
                         tools:text="18"
                         tools:textSize="@dimen/sp_10" />
@@ -188,27 +182,18 @@
                     <ImageView
                         android:id="@+id/iv_real_people"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_14"
                         android:layout_marginStart="@dimen/dp_3"
-                        android:layout_marginTop="@dimen/dp_1"
-                        android:background="@mipmap/peony_home_xczr_icon"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_sign"
-                        app:layout_constraintLeft_toRightOf="@+id/iv_sex"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:src="@mipmap/peony_home_xczr_icon"
+                        android:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/iv_auth"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_14"
                         android:layout_marginStart="@dimen/dp_3"
-                        android:layout_marginTop="@dimen/dp_1"
-                        android:background="@mipmap/ic_authentication"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_sign"
-                        app:layout_constraintLeft_toRightOf="@+id/iv_real_people"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:src="@mipmap/ic_authentication"
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
