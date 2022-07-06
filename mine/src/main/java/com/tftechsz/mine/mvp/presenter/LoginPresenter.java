@@ -258,11 +258,13 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 .subscribeWith(new ResourceSubscriber<ReviewBean>() {
                     @Override
                     public void onNext(ReviewBean reviewBean) {
+                        MMKVUtils.getInstance().encode(Constants.KEY_SRL, reviewBean.isSrl());
                         getView().onGetReviewConfig(reviewBean.isR());
                     }
 
                     @Override
                     public void onError(Throwable t) {
+                        MMKVUtils.getInstance().encode(Constants.KEY_SRL, false);
                         getView().onGetReviewConfig(true);
                     }
 

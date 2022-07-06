@@ -36,7 +36,6 @@ import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -149,21 +148,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
         getP().initShanyanSDK(this);
         getP().initUmeng();
 
-        long time = MMKVUtils.getInstance().decodeLong(Constants.CURRENT_TIME);
-        //判断是否为今天
-        if (time != 0 && TimeUtils.isToday(new Date(time))) {
-            loadData();
-        } else {
-            if (BuildConfig.DEBUG) {
-                mCompositeDisposable.add(new RxPermissions(this)
-                        .request(Manifest.permission.READ_PHONE_STATE)
-                        .subscribe(aBoolean -> {
-                            loadMoreData();
-                        }));
-            } else {
-                getP().getReviewConfig();
-            }
-        }
+        getP().getReviewConfig();
     }
 
     private void initRxBus() {
@@ -382,7 +367,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
     UMLinkListener umlinkAdapter = new UMLinkListener() {
         @Override
         public void onLink(String path, HashMap<String, String> query_params) {
-            if(!query_params.isEmpty() && query_params.containsKey("invite_code")&& MMKVUtils.getInstance().decodeString(Constants.H5_INVITE_CODE_PARAM).isEmpty()){
+            if (!query_params.isEmpty() && query_params.containsKey("invite_code") && MMKVUtils.getInstance().decodeString(Constants.H5_INVITE_CODE_PARAM).isEmpty()) {
                 String invite_code = query_params.get("invite_code");
                 MMKVUtils.getInstance().encode(Constants.H5_INVITE_CODE_PARAM, invite_code);
             }
@@ -407,7 +392,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
 
                 }
                 //友盟新装带参获取
-                if(!install_params.isEmpty() && install_params.containsKey("invite_code")){
+                if (!install_params.isEmpty() && install_params.containsKey("invite_code")) {
                     String invite_code = install_params.get("invite_code");
                     MMKVUtils.getInstance().encode(Constants.H5_INVITE_CODE_PARAM, invite_code);
                 }
@@ -504,7 +489,8 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
 
     @Override
     public void onGetReviewConfig(boolean r) {
-        if (r) {
+        long time = MMKVUtils.getInstance().decodeLong(Constants.CURRENT_TIME);
+        if (r || (time != 0 && TimeUtils.isToday(new Date(time)))) {
             loadMoreData();
         } else {
             mCompositeDisposable.add(new RxPermissions(SplashActivity.this)

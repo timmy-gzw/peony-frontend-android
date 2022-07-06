@@ -9,12 +9,16 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.*;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -22,6 +26,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieCompositionFactory;
@@ -52,11 +57,6 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tftechsz.im.mvp.ui.fragment.ChatTabFragment;
-import com.tftechsz.home.entity.SignInBean;
-import com.tftechsz.home.mvp.ui.fragment.HomeFragment;
-import com.tftechsz.home.widget.SignInPopWindow;
-import com.tftechsz.home.widget.SignSucessPopWindow;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.adapter.FragmentVpAdapter2;
@@ -81,24 +81,34 @@ import com.tftechsz.common.music.service.PlayService;
 import com.tftechsz.common.nim.service.CallService;
 import com.tftechsz.common.nim.service.DownGiftWork;
 import com.tftechsz.common.service.PartyAudioService;
-import com.tftechsz.common.utils.*;
+import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.utils.ClickUtil;
+import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.SPUtils;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.UpdateDialog;
 import com.tftechsz.common.widget.pop.MessageNotificationPopWindow;
 import com.tftechsz.common.widget.pop.OneKeyAccostPopWindow;
 import com.tftechsz.common.widget.pop.UserLevelUpPop;
+import com.tftechsz.home.entity.SignInBean;
+import com.tftechsz.home.mvp.ui.fragment.HomeFragment;
+import com.tftechsz.home.widget.SignInPopWindow;
+import com.tftechsz.home.widget.SignSucessPopWindow;
+import com.tftechsz.im.mvp.ui.fragment.ChatTabFragment;
 import com.tftechsz.main.R;
 import com.tftechsz.main.entity.UpdateLocationReq;
 import com.tftechsz.main.mvp.IView.IMainView;
 import com.tftechsz.main.mvp.presenter.MainPresenter;
 import com.tftechsz.mine.mvp.ui.fragment.MineFragment;
-import com.tftechsz.party.mvp.ui.fragment.PartyFragment;
 import com.tftechsz.moment.mvp.ui.activity.SendTrendActivity;
 import com.tftechsz.moment.mvp.ui.fragment.TrendFragment;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import razerdp.basepopup.BasePopupWindow;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,6 +116,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipInputStream;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import razerdp.basepopup.BasePopupWindow;
 
 @Route(path = ARouterApi.MAIN_MAIN)
 public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> implements IMainView, View.OnClickListener, LocationListener, SignInPopWindow.SignInPopClickListener {
@@ -370,14 +384,14 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         if (FileUtils.isFileExists(file)) {
             try {
                 LottieCompositionFactory.fromZipStream(new ZipInputStream(new FileInputStream(file.getAbsolutePath())), null)
-                    .addListener(new LottieListener<LottieComposition>() {
-                        @Override
-                        public void onResult(final LottieComposition lottieComposition) {
-                            if (lottieComposition != null) {
-                                mLottieAnimationView.setComposition(lottieComposition);
+                        .addListener(new LottieListener<LottieComposition>() {
+                            @Override
+                            public void onResult(final LottieComposition lottieComposition) {
+                                if (lottieComposition != null) {
+                                    mLottieAnimationView.setComposition(lottieComposition);
+                                }
                             }
-                        }
-                    });
+                        });
             } catch (Exception ignored) {
             }
         }
@@ -399,7 +413,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private void parseIntent() {
         Intent intent = getIntent();
         IMMessage message = (IMMessage) intent.getSerializableExtra(
-            NimIntent.EXTRA_NOTIFY_CONTENT);
+                NimIntent.EXTRA_NOTIFY_CONTENT);
         if (null != message) {
             intent.removeExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
             switch (message.getSessionType()) {
@@ -507,17 +521,17 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                 if (service.getConfigInfo().sys.noble_zip != null && !TextUtils.isEmpty(service.getConfigInfo().sys.noble_zip.zip_source)) {
                     Data data = new Data.Builder().putString(Interfaces.WORKER_NOBLE_SVGA, service.getConfigInfo().sys.noble_zip.zip_source).build();//创建需要传入的数据,注意不支持序列化数据传入
                     OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(DownGiftWork.class)//一次性Work请求
-                        .setInitialDelay(2, TimeUnit.SECONDS)
-                        .setInputData(data)
-                        .build();
+                            .setInitialDelay(2, TimeUnit.SECONDS)
+                            .setInputData(data)
+                            .build();
                     WorkManager.getInstance(MainActivity.this).enqueue(request);//添加到WorkManager队列中
                 }
                 if (service.getConfigInfo().sys.bubble_zip != null && !TextUtils.isEmpty(service.getConfigInfo().sys.bubble_zip.zip_source)) {
                     Data data = new Data.Builder().putString(Interfaces.WORKER_BUBBLE_PNG, service.getConfigInfo().sys.bubble_zip.zip_source).build();//创建需要传入的数据,注意不支持序列化数据传入
                     OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(DownGiftWork.class)//一次性Work请求
-                        .setInitialDelay(2, TimeUnit.SECONDS)
-                        .setInputData(data)
-                        .build();
+                            .setInitialDelay(2, TimeUnit.SECONDS)
+                            .setInputData(data)
+                            .build();
                     WorkManager.getInstance(MainActivity.this).enqueue(request);//添加到WorkManager队列中
                 }
             }
@@ -572,120 +586,120 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private void initBus() {
         mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
 //                .compose(MainActivity.this.<CommonEvent>bindToLifecycle())
-            .subscribe(
-                new Consumer<CommonEvent>() {
-                    @Override
-                    public void accept(CommonEvent event) {
-                        if (event.type == Constants.NOTIFY_APP_STOPPED) {
-                            getP().updateLocationReq("close");
-                            switchLogo();
-                        } else if (event.type == Constants.NOTIFY_APP_STARTED) {
-                            getP().updateLocationReq("open");
-                            InvitedEvent invitedEvent = (InvitedEvent) SPUtils.readObject(BaseApplication.getInstance(), Constants.INVITED_EVENT);
-                            if (invitedEvent != null) {
-                                ARouterUtils.toCallActivity(invitedEvent, service.getCallType(), service.getMatchType(), service.getCallId(), service.getCallIsMatch());
-                            }
-                        } else if (event.type == Constants.NOTIFY_ALIPAY) {
-                            getP().showRechargePop();
-                        } else if (event.type == Constants.NOTIFY_DELETE_MESSAGE) {   //删除聊天
-                            mBotChatView.setVisibility(View.VISIBLE);
-                        } else if (event.type == Constants.NOTIFY_DELETE_MESSAGE_CANCEL) {  //取消删除
-                            mBotChatView.setVisibility(View.GONE);
-                        } else if (event.type == Constants.NOTIFY_TOP_CONFIG) {   //数显config
-                            ConfigInfo configInfo = service.getConfigInfo();
-                            if (configInfo != null && configInfo.share_config != null && configInfo.share_config.is_show_pop_notice == 1) {
-                                NIMClient.getService(MsgService.class).setChattingAccount(MsgService.MSG_CHATTING_ACCOUNT_NONE, SessionTypeEnum.None);
-                            }
-                        } else if (event.type == Constants.NOTIFY_ACCOST_POPUP) {  //搭讪pop
-                            mAccostPopList = JSON.parseArray(event.code, ChatMsg.AccostPopup.class);
-                            performAccost();
-                        } else if (event.type == Constants.NOTIFY_USER_LEVEL_UP) {  //个人等级提升
-                            ChatMsg.UserLevelUp levelUp = JSON.parseObject(event.code, ChatMsg.UserLevelUp.class);
-                            if (levelUp != null) {
-                                if (levelUp.user_type.equals("rich")) {//土豪值升级
-                                    if (mRichLevelUpPop == null) {
-                                        mRichLevelUpPop = new UserLevelUpPop(mContext);
+                .subscribe(
+                        new Consumer<CommonEvent>() {
+                            @Override
+                            public void accept(CommonEvent event) {
+                                if (event.type == Constants.NOTIFY_APP_STOPPED) {
+                                    getP().updateLocationReq("close");
+                                    switchLogo();
+                                } else if (event.type == Constants.NOTIFY_APP_STARTED) {
+                                    getP().updateLocationReq("open");
+                                    InvitedEvent invitedEvent = (InvitedEvent) SPUtils.readObject(BaseApplication.getInstance(), Constants.INVITED_EVENT);
+                                    if (invitedEvent != null) {
+                                        ARouterUtils.toCallActivity(invitedEvent, service.getCallType(), service.getMatchType(), service.getCallId(), service.getCallIsMatch());
                                     }
-                                    if (mCharmLevelUpPop == null || !mCharmLevelUpPop.isShowing()) {
-                                        mRichLevelUpPop.setRotate();
+                                } else if (event.type == Constants.NOTIFY_ALIPAY) {
+                                    getP().showRechargePop();
+                                } else if (event.type == Constants.NOTIFY_DELETE_MESSAGE) {   //删除聊天
+                                    mBotChatView.setVisibility(View.VISIBLE);
+                                } else if (event.type == Constants.NOTIFY_DELETE_MESSAGE_CANCEL) {  //取消删除
+                                    mBotChatView.setVisibility(View.GONE);
+                                } else if (event.type == Constants.NOTIFY_TOP_CONFIG) {   //数显config
+                                    ConfigInfo configInfo = service.getConfigInfo();
+                                    if (configInfo != null && configInfo.share_config != null && configInfo.share_config.is_show_pop_notice == 1) {
+                                        NIMClient.getService(MsgService.class).setChattingAccount(MsgService.MSG_CHATTING_ACCOUNT_NONE, SessionTypeEnum.None);
                                     }
-                                    mRichLevelUpPop.setData(levelUp);
-                                    mRichLevelUpPop.showPopupWindow();
+                                } else if (event.type == Constants.NOTIFY_ACCOST_POPUP) {  //搭讪pop
+                                    mAccostPopList = JSON.parseArray(event.code, ChatMsg.AccostPopup.class);
+                                    performAccost();
+                                } else if (event.type == Constants.NOTIFY_USER_LEVEL_UP) {  //个人等级提升
+                                    ChatMsg.UserLevelUp levelUp = JSON.parseObject(event.code, ChatMsg.UserLevelUp.class);
+                                    if (levelUp != null) {
+                                        if (levelUp.user_type.equals("rich")) {//土豪值升级
+                                            if (mRichLevelUpPop == null) {
+                                                mRichLevelUpPop = new UserLevelUpPop(mContext);
+                                            }
+                                            if (mCharmLevelUpPop == null || !mCharmLevelUpPop.isShowing()) {
+                                                mRichLevelUpPop.setRotate();
+                                            }
+                                            mRichLevelUpPop.setData(levelUp);
+                                            mRichLevelUpPop.showPopupWindow();
 
-                                } else if (levelUp.user_type.equals("charm")) {//魅力值升级
-                                    if (mCharmLevelUpPop == null) {
-                                        mCharmLevelUpPop = new UserLevelUpPop(mContext);
+                                        } else if (levelUp.user_type.equals("charm")) {//魅力值升级
+                                            if (mCharmLevelUpPop == null) {
+                                                mCharmLevelUpPop = new UserLevelUpPop(mContext);
+                                            }
+                                            if (mRichLevelUpPop == null || !mRichLevelUpPop.isShowing()) {
+                                                mCharmLevelUpPop.setRotate();
+                                            }
+                                            mCharmLevelUpPop.setData(levelUp);
+                                            mCharmLevelUpPop.showPopupWindow();
+                                        }
                                     }
-                                    if (mRichLevelUpPop == null || !mRichLevelUpPop.isShowing()) {
-                                        mCharmLevelUpPop.setRotate();
-                                    }
-                                    mCharmLevelUpPop.setData(levelUp);
-                                    mCharmLevelUpPop.showPopupWindow();
+                                } else if (event.type == Constants.NOTIFY_ENTER_PARTY_ROOM) {
+                                    startCheckService();
+                                    startCheckPartyService();
+                                } else if (event.type == Constants.NOTIFY_START_LOC) {  //通知了开启定位
+                                    bdLocationManager.removeListener();
+                                    bdLocationManager = new BDLocationManager();
+                                    bdLocationManager.addListener(MainActivity.this);
+                                    bdLocationManager.initGPS();
+                                    bdLocationManager.startLoc();
+                                } else if (event.type == Constants.NOTIFY_REQUEST_LOC) {  //询问授权
+                                    requestPermissions();
                                 }
                             }
-                        } else if (event.type == Constants.NOTIFY_ENTER_PARTY_ROOM) {
-                            startCheckService();
-                            startCheckPartyService();
-                        } else if (event.type == Constants.NOTIFY_START_LOC) {  //通知了开启定位
-                            bdLocationManager.removeListener();
-                            bdLocationManager = new BDLocationManager();
-                            bdLocationManager.addListener(MainActivity.this);
-                            bdLocationManager.initGPS();
-                            bdLocationManager.startLoc();
-                        } else if (event.type == Constants.NOTIFY_REQUEST_LOC) {  //询问授权
-                            requestPermissions();
                         }
-                    }
-                }
-            ));
+                ));
 
         mCompositeDisposable.add(RxBus.getDefault().toObservable(UnReadMessageEvent.class)
 //                .compose(MainActivity.this.<UnReadMessageEvent>bindToLifecycle())
-            .subscribe(
-                new Consumer<UnReadMessageEvent>() {
-                    @Override
-                    public void accept(final UnReadMessageEvent event) {
-                        Utils.runOnUiThread(new Runnable() {
+                .subscribe(
+                        new Consumer<UnReadMessageEvent>() {
                             @Override
-                            public void run() {
-                                if (tvBadge == null) return;
-                                tvBadge.setVisibility(event.num > 0 ? View.VISIBLE : View.GONE);
-                                tvBadge.setText(event.num > 99 ? "99+" : String.valueOf(event.num));
-                            }
-                        });
+                            public void accept(final UnReadMessageEvent event) {
+                                Utils.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (tvBadge == null) return;
+                                        tvBadge.setVisibility(event.num > 0 ? View.VISIBLE : View.GONE);
+                                        tvBadge.setText(event.num > 99 ? "99+" : String.valueOf(event.num));
+                                    }
+                                });
 
-                    }
-                }
-            ));
+                            }
+                        }
+                ));
         mCompositeDisposable.add(RxBus.getDefault().toObservable(UpdateEvent.class)
 //                .compose(MainActivity.this.<UpdateEvent>bindToLifecycle())
-            .subscribe(
-                new Consumer<UpdateEvent>() {
-                    @Override
-                    public void accept(UpdateEvent event) {
-                        if (event.alert_accost != null) {
-                            mEvent = event;
-                        }
-                        if (event.updateInfo != null) {
-                            showUpdateDialog(event.updateInfo);
-                        } else {
-                            if (dialog != null && dialog.isShowing())
-                                return;
-                            if (isFirstSign) {
-                                isFirstSign = false;
-                                p.signList();
+                .subscribe(
+                        new Consumer<UpdateEvent>() {
+                            @Override
+                            public void accept(UpdateEvent event) {
+                                if (event.alert_accost != null) {
+                                    mEvent = event;
+                                }
+                                if (event.updateInfo != null) {
+                                    showUpdateDialog(event.updateInfo);
+                                } else {
+                                    if (dialog != null && dialog.isShowing())
+                                        return;
+                                    if (isFirstSign) {
+                                        isFirstSign = false;
+                                        p.signList();
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-            ));
+                ));
         mCompositeDisposable.add(RxBus.getDefault().toObservable(MessageEvent.class)
-            .subscribe(new Consumer<MessageEvent>() {
-                @Override
-                public void accept(MessageEvent messageEvent) throws Exception {
-                    mMessageEvent = messageEvent;
-                }
-            }));
+                .subscribe(new Consumer<MessageEvent>() {
+                    @Override
+                    public void accept(MessageEvent messageEvent) throws Exception {
+                        mMessageEvent = messageEvent;
+                    }
+                }));
         getP().register(true);
 
     }
@@ -697,26 +711,29 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private void requestPermissions() {
         if (mCompositeDisposable == null)
             mCompositeDisposable = new CompositeDisposable();
-        mCompositeDisposable.add(new RxPermissions(MainActivity.this)
-            .requestEach(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_NETWORK_STATE)
-            .subscribe(new Consumer<Permission>() {
-                @Override
-                public void accept(Permission permission) {
-                    if (permission.granted) {
-                        if (permission.name.equals(Manifest.permission.ACCESS_FINE_LOCATION) || permission.name.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                            bdLocationManager.initGPS();
-                            bdLocationManager.startLoc();
+        boolean srl = MMKVUtils.getInstance().decodeBoolean(Constants.KEY_SRL, false);
+        if (srl) {
+            mCompositeDisposable.add(new RxPermissions(MainActivity.this)
+                    .requestEach(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_NETWORK_STATE)
+                    .subscribe(new Consumer<Permission>() {
+                        @Override
+                        public void accept(Permission permission) {
+                            if (permission.granted) {
+                                if (permission.name.equals(Manifest.permission.ACCESS_FINE_LOCATION) || permission.name.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                                    bdLocationManager.initGPS();
+                                    bdLocationManager.startLoc();
+                                }
+                            } else {
+                                MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_LATITUDE);
+                                MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_LONGITUDE);
+                                MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_CITY);
+                                MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_PROVINCE);
+                                getP().updateLocationReq("open");
+                            }
                         }
-                    } else {
-                        MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_LATITUDE);
-                        MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_LONGITUDE);
-                        MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_CITY);
-                        MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_PROVINCE);
-                        getP().updateLocationReq("open");
-                    }
-                }
-            }));
+                    }));
+        }
     }
 
 
@@ -746,8 +763,8 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
      */
     private void trackNavbarClick(int type) {
         ARouter.getInstance()
-            .navigation(MineService.class)
-            .trackEvent("底部导航栏点击", "navigation_bar_click", "", JSON.toJSONString(new NavigationLogEntity(service.getUserId(), type, System.currentTimeMillis(), CommonUtil.getOSName(), Constants.APP_NAME)), null);
+                .navigation(MineService.class)
+                .trackEvent("底部导航栏点击", "navigation_bar_click", "", JSON.toJSONString(new NavigationLogEntity(service.getUserId(), type, System.currentTimeMillis(), CommonUtil.getOSName(), Constants.APP_NAME)), null);
 //语音房间列表页曝光
     }
 
@@ -951,9 +968,9 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
 
     private void showAccostDialog() {
         if (mEvent != null && null != mEvent.alert_accost
-            && null != mEvent.alert_accost.alert_accost_list
-            && mEvent.alert_accost.alert_accost_list.size() > 0
-            && null != mEvent.alert_accost.gift_info) {
+                && null != mEvent.alert_accost.alert_accost_list
+                && mEvent.alert_accost.alert_accost_list.size() > 0
+                && null != mEvent.alert_accost.gift_info) {
             p.showAccostDialog(MainActivity.this, mEvent.alert_accost);
         }
     }

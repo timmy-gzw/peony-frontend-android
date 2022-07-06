@@ -93,6 +93,7 @@ public class Constants {
     public static final String LAST_SHOW_MOMENT_GUIDE_TIME = "last_show_moment_guide_time";   //上次显示发布动态引导的时间戳ms（一天弹一次）
     public static final String LAST_SHOW_MATCH_POP_TIME = "last_show_match_pop_time";   //上次显示速配弹框的时间戳ms（一天弹一次）
     public static final String PARAMS_PERSONALIZED_RECOMMENDATION = "personalized_recommendation";//个性化推荐 默认开启
+    public static final String KEY_SRL = "srl";//是否获取定位权限 true:申请权限 false：不申请
 
     public static final String FAMILY_APPLY = "family_apply";  //通知申请
     public static final String FAMILY_AIT = "family_ait";  //ait消息
