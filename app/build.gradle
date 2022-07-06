@@ -141,6 +141,9 @@ android {
         DOUYIN {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "DOUYIN", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
+        KUAISHOU {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
     }
 }
 
