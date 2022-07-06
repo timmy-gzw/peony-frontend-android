@@ -162,6 +162,9 @@ ext {
             "marquee"                : "com.gongwen:marqueelibrary:1.1.3",
             "vap"                    : 'io.github.tencent:vap:2.0.22',
 
+            "alipay"                 : "com.alipay.sdk:alipaysdk-android:+@aar",
+            "baidu-map-location"     : "com.baidu.lbsyun:BaiduMapSDK_Location:9.1.8",
+
     ]
 
 }

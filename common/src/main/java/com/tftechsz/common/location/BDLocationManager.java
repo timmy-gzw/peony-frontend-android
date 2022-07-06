@@ -3,8 +3,8 @@
  */
 package com.tftechsz.common.location;
 
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.tftechsz.common.base.BaseApplication;
@@ -13,7 +13,7 @@ import com.tftechsz.common.base.BaseApplication;
  * @author by liuhongjian01 on 16/8/17.
  */
 public class BDLocationManager {
-    private final BDLocationListener mSysLocListener = new MLocationListener();
+    private final BDAbstractLocationListener mSysLocListener = new MLocationListener();
     private LocationListener listener;
     private LocationClient mLocClient;
 
@@ -54,7 +54,7 @@ public class BDLocationManager {
 
     public void startLoc() {
         if (mLocClient != null)
-            mLocClient.registerNotifyLocationListener(mSysLocListener);
+            mLocClient.registerLocationListener(mSysLocListener);
     }
 
     public void stopLoc() {
@@ -63,7 +63,7 @@ public class BDLocationManager {
     }
 
 
-    public class MLocationListener implements BDLocationListener {
+    public class MLocationListener extends BDAbstractLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
             if (location == null) {

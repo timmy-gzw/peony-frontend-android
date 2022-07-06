@@ -37,21 +37,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.tftechsz.mine.mvp.ui.activity.AlipayAuthActivity"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="main"
-                    android:scheme="alpverify" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name="com.tftechsz.mine.mvp.ui.activity.MinePhotoActivity"
             android:screenOrientation="portrait" />
         <activity
