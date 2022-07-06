@@ -282,7 +282,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private TextView mTvName;   //个人姓名
     private RelativeLayout mRlToolBar;
     private RelativeLayout mRlIntimacy;  //亲密度布局
-    private TextView mTvIntimacy, mTvLove;  //请密度
+    private TextView mTvIntimacy;  //请密度
     public String mIntimacy; //亲密度
     private AvatarImageView mIvLeft, mIvRight;  //头像
     private CustomPopWindow customPopWindow;
@@ -530,7 +530,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mTvIntimacy = findView(R.id.tv_love);
         mLavLove = findView(R.id.iv_love);
         mIvIntimacyDetail = findView(R.id.iv_intimacy_detail);
-        mTvLove = findView(R.id.tv_love_normal);
         mIvLeft = findView(R.id.iv_left);
         mIvLeft.setRoundIcon(true);
         mIvLeft.setOnClickListener(this);
@@ -1722,11 +1721,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         mTvName.setVisibility(View.GONE);
                         mTvIntimacy.setText("亲密度"+intimacy.intimacy);
                         setIntimacLottie(intimacy);
-                        mTvLove.setVisibility(View.GONE);
                         params.height = ConvertUtils.dp2px(110);
                     } else {
-                        mTvLove.setText(intimacy.intimacy);    //爱心值
-                        mTvLove.setVisibility(View.VISIBLE);   // 爱心显示
                         mRlIntimacy.setVisibility(View.GONE);
                         mTvName.setVisibility(View.VISIBLE);
                         params.height = ConvertUtils.dp2px(90);
@@ -1807,11 +1803,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     mTvName.setVisibility(View.GONE);
                     mTvIntimacy.setText("亲密度"+chatMsg.msg_intimacy.intimacy);
                     setIntimacLottie(chatMsg.msg_intimacy);
-                    mTvLove.setVisibility(View.GONE);
                     params.height = ConvertUtils.dp2px(110);
                 } else {
-                    mTvLove.setText(chatMsg.msg_intimacy.intimacy);    //爱心值
-                    mTvLove.setVisibility(View.VISIBLE);   // 爱心显示
                     mRlIntimacy.setVisibility(View.GONE);
                     mTvName.setVisibility(View.VISIBLE);
                     params.height = ConvertUtils.dp2px(90);

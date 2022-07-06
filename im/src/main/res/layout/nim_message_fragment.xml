@@ -136,17 +136,6 @@
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_love_normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/toolbar_title"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="false"
-                android:textColor="#BDB6B2"
-                android:textSize="@dimen/sp_14"
-                android:visibility="gone" />
-
             <RelativeLayout
                 android:id="@+id/rl_intimacy"
                 android:layout_width="wrap_content"
