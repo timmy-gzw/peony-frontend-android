@@ -933,6 +933,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         if (null != service.getConfigInfo() && null != service.getConfigInfo().sys && null != service.getConfigInfo().sys.content) {
             tvCallTip.setText(service.getConfigInfo().sys.content.audio_warn);
         }
+        rlyTopUserInfo.setVisibility(View.VISIBLE);
         if (mCallDir == 0) {
             callOUt();
             if (mChannelType == 2) {   // 拨打视频电话
@@ -940,7 +941,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 llCallVideo.setVisibility(View.VISIBLE);
             } else {   // 拨打语音电话
                 llyDialogOperation.setVisibility(View.VISIBLE);
-                rlyTopUserInfo.setVisibility(View.VISIBLE);
                 clVoiceCall.setVisibility(View.VISIBLE);
             }
             tvCallComment.setText("等待对方接听...");
@@ -1980,6 +1980,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 //        setupLocalVideo();
         rvCallChat.setVisibility(View.VISIBLE);
         llyBingCall.setVisibility(View.INVISIBLE);
+        rlyTopUserInfo.setVisibility(View.GONE);
         mLlIncome.setVisibility(View.GONE);
         if (mChannelType == 1) {   //语音
             Utils.runOnUiThreadDelayed(() -> {
@@ -2402,30 +2403,28 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     @Override
     public void getUserInfoSuccess(UserInfo userInfo) {
+        if (userInfo.getAge() > 0) {
+            mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
+            mtvGenderAge.setText(userInfo.getAge() + "");
+            mtvGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
+            mtvGenderAge.setVisibility(View.VISIBLE);
+        }
 
-        if(mChannelType == 1) {
-            if (userInfo.getAge() > 0) {
-                mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
-                mtvGenderAge.setText(userInfo.getAge() + "");
-                mtvGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
-                mtvGenderAge.setVisibility(View.VISIBLE);
-            }
+        if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
+            mtvCity.setText(getFiled(userInfo.info,"hometown"));
+            mtvCity.setVisibility(View.VISIBLE);
+        }
 
-            if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
-                mtvCity.setText(getFiled(userInfo.info,"hometown"));
-                mtvCity.setVisibility(View.VISIBLE);
-            }
+        if (!TextUtils.isEmpty(getFiled(userInfo.info,"star_sign"))) {
+            mtvConstellation.setText(getFiled(userInfo.info,"star_sign"));
+            mtvConstellation.setVisibility(View.VISIBLE);
+        }
 
-            if (!TextUtils.isEmpty(getFiled(userInfo.info,"star_sign"))) {
-                mtvConstellation.setText(getFiled(userInfo.info,"star_sign"));
-                mtvConstellation.setVisibility(View.VISIBLE);
-            }
-
-            if (!TextUtils.isEmpty(getFiled(userInfo.info,"job"))) {
-                mtvJob.setText(getFiled(userInfo.info,"job"));
-                mtvJob.setVisibility(View.VISIBLE);
-            }
-        }else{
+        if (!TextUtils.isEmpty(getFiled(userInfo.info,"job"))) {
+            mtvJob.setText(getFiled(userInfo.info,"job"));
+            mtvJob.setVisibility(View.VISIBLE);
+        }
+        if(mChannelType == 2) {
             if (userInfo.getAge() > 0) {
                 mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
                 mtvVideoGenderAge.setText(userInfo.getAge() + "");
