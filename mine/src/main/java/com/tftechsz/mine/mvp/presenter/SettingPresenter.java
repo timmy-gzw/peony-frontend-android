@@ -17,6 +17,7 @@ import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.mine.api.MineApiService;
@@ -73,6 +74,8 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
                             }
                             AppManager.getAppManager().finishAllActivity();
                             ARouterUtils.toLoginActivity(ARouterApi.MINE_LOGIN);
+                            //重置用户协议勾选状态
+                            MMKVUtils.getInstance().encode(Constants.AGREED_TO_TOS, false);
                         }
                     }
                 }));
