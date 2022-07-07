@@ -7,6 +7,9 @@ import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.mine.R;
 
+/**
+ * 账号管理
+ */
 public class AccountManagerActivity extends BaseMvpActivity implements View.OnClickListener {
 
     @Override

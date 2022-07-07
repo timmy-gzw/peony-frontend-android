@@ -98,7 +98,7 @@ ext {
             "aliyun-oss"             : "com.aliyun.dpa:oss-android-sdk:+",  //  阿里上传
             "luban"                  : "top.zibin:Luban:1.1.8",
             "utilcodex"              : "com.blankj:utilcodex:1.30.6",
-            "PictureSelector"        : "io.github.lucksiege:pictureselector:v2.7.3-rc08",
+            "PictureSelector"        : "io.github.lucksiege:pictureselector:v3.10.5",
             "recyclerviewheader"     : "com.bartoszlipinski.recyclerviewheader:library:1.2.0",
             "loadingdialog"          : "com.github.ydstar:loadingdialog:1.0.0",
             "WaveLineView"           : "com.github.Jay-Goo:WaveLineView:v1.0.4",
