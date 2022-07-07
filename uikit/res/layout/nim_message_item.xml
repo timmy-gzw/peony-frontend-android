@@ -36,16 +36,16 @@
 
     <com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView
         android:id="@+id/message_item_portrait_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_size_59"
+        android:layout_height="@dimen/dp_size_59"
         android:layout_below="@+id/message_item_time"
         android:layout_marginStart="@dimen/dp_size_5"
         android:layout_toEndOf="@id/message_item_multi_check_box"
         android:visibility="gone"
         app:is_round="true"
-        app:vip_height="@dimen/chat_icon_size"
+        app:vip_height="@dimen/dp_size_59"
         app:vip_margin="@dimen/dp_size_12"
-        app:vip_width="@dimen/chat_icon_size" />
+        app:vip_width="@dimen/dp_size_59" />
 
 
     <!--    <com.netease.nim.uikit.common.ui.imageview.AvatarImageView-->
@@ -61,15 +61,15 @@
 
     <com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView
         android:id="@+id/message_item_portrait_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_size_59"
+        android:layout_height="@dimen/dp_size_59"
         android:layout_below="@+id/message_item_time"
         android:layout_alignParentRight="true"
         android:visibility="gone"
         app:is_round="true"
-        app:vip_height="@dimen/chat_icon_size"
+        app:vip_height="@dimen/dp_size_59"
         app:vip_margin="@dimen/dp_size_12"
-        app:vip_width="@dimen/chat_icon_size" />
+        app:vip_width="@dimen/dp_size_59" />
 
     <!--    <com.netease.nim.uikit.common.ui.imageview.AvatarImageView-->
     <!--        android:id="@+id/message_item_portrait_right"-->
