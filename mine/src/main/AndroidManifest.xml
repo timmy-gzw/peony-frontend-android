@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="com.tftechsz.mine.mvp.ui.activity.AccountManagerActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />

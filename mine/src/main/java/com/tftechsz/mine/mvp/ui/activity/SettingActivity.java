@@ -33,6 +33,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
     private CommonItemView mItemDebug;
     private CommonItemView mItemRechargeSetting;
     private CommonItemView mItemPrivacySetting;
+    private CommonItemView mItemCallSetting;
 
 
     private int checkedItem, selectedItem;
@@ -62,13 +63,15 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
         mItemPrivacySetting = findViewById(R.id.item_privacy_setting);
         mItemPrivacySetting.setOnClickListener(this);
         mMItemChatsignnum = findViewById(R.id.item_chatsignnum);
+        mItemCallSetting = findViewById(R.id.item_call_setting);
+        mItemCallSetting.setOnClickListener(this);  //招呼设置
         mMItemChatsignnum.setOnClickListener(this);    //聊天卡
         findViewById(R.id.item_account_binding).setOnClickListener(this);  //找号绑定
         findViewById(R.id.item_face_setting).setOnClickListener(this);  //美颜设置
         findViewById(R.id.item_black_list).setOnClickListener(this);    //黑名单设置
+
         CommonItemView itemAbout = findViewById(R.id.item_about);
         itemAbout.setOnClickListener(this);   //关于我们
-        findViewById(R.id.item_cancellation).setOnClickListener(this);  //注销账号
         findViewById(R.id.tv_exit).setOnClickListener(this);   //退出登录
         mItemDebug = findViewById(R.id.item_debug);
         mItemNotice.setOnClickListener(this);  //通知
@@ -104,6 +107,10 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
                 }
             }
 
+            if(service.getUserInfo().isGirl()){
+                mItemCallSetting.setVisibility(View.VISIBLE);
+            }
+
             if (service.getConfigInfo().share_config.is_open_chat_card == 1) {
                 mMItemChatsignnum.setVisibility(View.VISIBLE);
             } else {
@@ -128,22 +135,22 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id != R.id.item_about && id != R.id.tv_exit && id != R.id.item_debug && id != R.id.item_cancellation && CommonUtil.hasPerformAccost(service.getUserInfo()))
+        if (id != R.id.item_about && id != R.id.tv_exit && id != R.id.item_debug && CommonUtil.hasPerformAccost(service.getUserInfo()))
             return;
         if (id == R.id.tv_exit) {  //退出登录
             p.loginOutPop(this);
         } else if (id == R.id.item_charge_setting) {   //收费设置
             startActivity(ChargeSettingActivity.class);
         } else if (id == R.id.item_account_binding) {   //账号绑定
-            startActivity(AccountBindingActivity.class);
+            startActivity(AccountManagerActivity.class);
+        }else if (id == R.id.item_call_setting) {   //招呼设置
+            startActivity(AccostSettingActivity.class);
         } else if (id == R.id.item_privacy_setting) {  //隐私设置
             startActivity(PrivacySettingActivity.class);
         } else if (id == R.id.item_black_list) {   // 黑名单
             startActivity(BlackListActivity.class);
         } else if (id == R.id.item_chatsignnum) {   // 聊天卡
             startActivity(SignChatNumActivity.class);
-        } else if (id == R.id.item_cancellation) {  //注销账号
-            startActivity(CancellationActivity.class);
         } else if (id == R.id.item_about) {   //关于我们
             startActivity(AboutUsActivity.class);
         } else if (id == R.id.item_notification) {  //通知

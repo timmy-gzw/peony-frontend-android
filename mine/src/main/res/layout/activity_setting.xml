@@ -24,6 +24,15 @@
             android:background="@color/white"
             android:orientation="vertical">
 
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_account_binding"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="账号管理"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false" />
 
             <com.tftechsz.common.widget.CommonItemView
                 android:id="@+id/item_charge_setting"
@@ -37,16 +46,6 @@
                 tools:visibility="visible" />
 
             <com.tftechsz.common.widget.CommonItemView
-                android:id="@+id/item_account_binding"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
-                android:background="@color/white"
-                app:left_text_content="账号绑定"
-                app:right_arrow_visible="true"
-                app:right_switch_visible="false"
-                app:right_text_visible="false" />
-
-            <com.tftechsz.common.widget.CommonItemView
                 android:id="@+id/item_privacy_setting"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
@@ -57,12 +56,23 @@
                 app:right_text_visible="false" />
 
             <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_call_setting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="招呼设置"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false" />
+
+            <com.tftechsz.common.widget.CommonItemView
                 android:id="@+id/item_face_setting"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
                 android:background="@color/white"
                 app:left_text_content="美颜设置"
-                android:visibility="gone"
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
                 app:right_text_visible="false" />
@@ -95,16 +105,6 @@
                 android:layout_height="@dimen/dp_60"
                 android:background="@color/white"
                 app:left_text_content="黑名单"
-                app:right_arrow_visible="true"
-                app:right_switch_visible="false"
-                app:right_text_visible="false" />
-
-            <com.tftechsz.common.widget.CommonItemView
-                android:id="@+id/item_cancellation"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
-                android:background="@color/white"
-                app:left_text_content="注销账号"
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
                 app:right_text_visible="false" />
