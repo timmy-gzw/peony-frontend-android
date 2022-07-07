@@ -78,6 +78,7 @@ public class ARouterApi {
     public static final String ACTIVITY_SIGN_CHAT_NUM = "/mine/SignChatNumActivity";   //聊天卡
     public static final String ACTIVITY_NOTIFY_SETTING = "/mine/NotifySettingActivity";   //新消息通知
     public static final String ACTIVITY_INCOME_DETAIL = "/mine/IncomeDetailActivity";   //收益明细
+    public static final String ACTIVITY_GIFT_WALL = "/mine/giftWall";   //礼物墙
 
 
     //family

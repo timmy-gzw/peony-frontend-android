@@ -6,13 +6,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.tftechsz.common.ARouterApi;
@@ -90,10 +94,17 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         mTvGiftVip = getView(R.id.tv_gift_vip);
         mRvGift = getView(R.id.rv_gift);
         mRvGift.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        mRvGift.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(8),ConvertUtils.dp2px(12),false));
+        mRvGift.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(8), ConvertUtils.dp2px(12), false));
         giftAdapter = new GiftAdapter();
         mRvGift.setAdapter(giftAdapter);
-
+        giftAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                //FIXME temp click listener
+                ARouter.getInstance().build(ARouterApi.ACTIVITY_GIFT_WALL)
+                        .navigation();
+            }
+        });
         if (TextUtils.isEmpty(mUserId)) {   //自己
             tvUserInfo.setText(getString(R.string.personal_info));
             tvLevelTitle.setText(getString(R.string.level_mine));
