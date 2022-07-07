@@ -160,9 +160,9 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
                         .trackEvent("充值界面点击vip", Interfaces.POINT_EVENT_CLICK, "recharge_to_vip", JSON.toJSONString(new BuriedPointExtendDto()), null);
             }
 
-            Intent intent = new Intent(mContext, VipActivity.class);
-            intent.putExtra(Interfaces.EXTRA_ID, payId);
-            startActivity(intent);
+            ARouter.getInstance().build(ARouterApi.ACTIVITY_VIP)
+                    .withInt(Interfaces.EXTRA_ID, payId)
+                    .navigation();
         });
         mEmptyView.setVisibility(View.VISIBLE);
         mRecy.setVisibility(View.GONE);

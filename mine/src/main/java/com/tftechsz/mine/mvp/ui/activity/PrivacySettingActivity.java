@@ -16,6 +16,7 @@ import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.event.RecommendChangeEvent;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.OpenVipWindow;
@@ -106,9 +107,7 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
             return;
         }
         if (!service.getUserInfo().isVip() && service.getUserInfo().getSex() == 1) {
-            new OpenVipWindow(this).addOnClickListener(() -> {
-                startActivity(VipActivity.class);
-            }).showPopupWindow();
+            new OpenVipWindow(this).addOnClickListener(() -> ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_VIP)).showPopupWindow();
             return;
         }
         if (id == R.id.cl_rich) {   //土豪魅力

@@ -11,37 +11,30 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
         android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginHorizontal="@dimen/dp_18"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{item.icon}"
+            tools:ignore="ContentDescription"
+            tools:src="@mipmap/ic_default_avatar" />
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
             android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_record"
-                app:imageUrl="@{item.icon}" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                android:text="@{item.title}"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                tools:text="文字聊天5折" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="@{item.title}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="文字聊天5折" />
+    </LinearLayout>
 </layout>

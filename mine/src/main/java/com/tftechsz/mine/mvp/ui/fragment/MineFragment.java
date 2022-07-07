@@ -45,14 +45,11 @@ import com.tftechsz.common.widget.pop.CustomEditPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseItemAdapter;
 import com.tftechsz.mine.adapter.MineMidAdapter;
-import com.tftechsz.mine.entity.AccostType;
 import com.tftechsz.mine.entity.BaseItemBean;
 import com.tftechsz.mine.mvp.IView.IMineView;
 import com.tftechsz.mine.mvp.presenter.MinePresenter;
-import com.tftechsz.mine.mvp.ui.activity.AccostRecordToMyActivity;
 import com.tftechsz.mine.mvp.ui.activity.MineFriendActivity;
 import com.tftechsz.mine.mvp.ui.activity.SettingActivity;
-import com.tftechsz.mine.mvp.ui.activity.VipActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.config.IndicatorConfig;
@@ -194,7 +191,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
             if (mBotConfigList != null && mBotConfigList.size() > 0) {
                 if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_CREATE_LIVE)) {
                     p.getLiveToken("测试");
-                }else if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_INVITE)) { //填写邀请码
+                } else if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_INVITE)) { //填写邀请码
                     CustomEditPopWindow popWindow = new CustomEditPopWindow(getActivity());
                     popWindow.setHintContent("输入邀请码");
                     popWindow.setEtLength(60);
@@ -207,7 +204,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
 
                         @Override
                         public void onSure() {
-                            if(popWindow.getContent().length()<=0){
+                            if (popWindow.getContent().length() <= 0) {
                                 toastTip("请输入邀请码");
                                 return;
                             }
@@ -474,7 +471,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         int size = configInfo.share_config.my.size();
         for (int i = 0; i < size; i++) {
             ConfigInfo.MineInfo mineInfo = configInfo.share_config.my.get(i);
-            if(mineInfo.link.startsWith(Interfaces.LINK_PEONY+Interfaces.LINK_PEONY_INVITE)){
+            if (mineInfo.link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_INVITE)) {
                 configInfo.share_config.my.remove(mineInfo);
                 mBotAdapter.removeAt(i);
                 service.setConfigInfo(new Gson().toJson(configInfo));
@@ -518,7 +515,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
             if (service.getUserInfo().isVip() && !TextUtils.isEmpty(show_vip_desc)) {
                 toastTip(show_vip_desc);
             } else {
-                startActivity(VipActivity.class);
+                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_VIP);
             }
         } else if (id == R.id.edit_info) {
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_INFO);

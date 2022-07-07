@@ -100,7 +100,7 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
         mBind.tvUnlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(VipActivity.class);
+                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_VIP);
             }
         });
         mAdapter.setOnItemClickListener((adapter, view, position) -> {

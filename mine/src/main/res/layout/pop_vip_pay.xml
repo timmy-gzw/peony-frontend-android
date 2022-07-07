@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -19,12 +19,12 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingTop="@dimen/dp_50"
             android:id="@+id/price_recy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
             android:paddingStart="@dimen/dp_15"
+            android:paddingTop="@dimen/dp_50"
             android:paddingEnd="@dimen/dp_15"
             android:visibility="@{showPrice ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,15 +71,15 @@
             android:id="@+id/tv_pay"
             style="@style/CustomButton"
             android:layout_height="@dimen/dp_50"
-            android:background="@drawable/bg_pay_btn"
-            android:text="立即充值"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_pay_btn"
+            android:text="立即充值"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/pay_recy"
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pay_recy" />
 
         <ImageView
             android:id="@+id/del"
