@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/bg_black_tran30_radius6"
         android:paddingVertical="@dimen/dp_10"
-        android:paddingEnd="@dimen/dp_size_10"
+        android:paddingEnd="@dimen/dp_size_42"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
