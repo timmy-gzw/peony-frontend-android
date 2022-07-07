@@ -780,7 +780,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             initFace();
             drawable = ContextCompat.getDrawable(this, R.mipmap.call_accept);
             tvFaceUnity.setVisibility(View.VISIBLE);
-            rlyTopUserInfo.setVisibility(View.GONE);
             //判断男生和女生不同逻辑
             int grader = service.getUserInfo().getSex();
             if (grader == 1) {
@@ -1646,14 +1645,14 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 llCallVideo.setVisibility(View.VISIBLE);
                 tvSpeaker.setVisibility(View.GONE);
                 tvMute.setVisibility(View.GONE);
-
+                rlyTopUserInfo.setVisibility(View.GONE);
                 llVideoTime.setVisibility(View.VISIBLE);
                 videoTime.setBase(SystemClock.elapsedRealtime());
                 videoTime.start();
             } else {   //语音
                 llAudioTime.setVisibility(View.VISIBLE);
                 clVoiceCall.setVisibility(View.VISIBLE);
-                rlyTopUserInfo.setVisibility(View.VISIBLE);
+
                 audioTime.setBase(SystemClock.elapsedRealtime());
                 audioTime.start();
             }
@@ -1980,9 +1979,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 //        setupLocalVideo();
         rvCallChat.setVisibility(View.VISIBLE);
         llyBingCall.setVisibility(View.INVISIBLE);
-        rlyTopUserInfo.setVisibility(View.GONE);
         mLlIncome.setVisibility(View.GONE);
         if (mChannelType == 1) {   //语音
+            rlyTopUserInfo.setVisibility(View.VISIBLE);
             Utils.runOnUiThreadDelayed(() -> {
                 llyDialogOperation.setVisibility(View.VISIBLE);
                 mTvCancel.setVisibility(View.VISIBLE);
