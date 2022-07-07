@@ -44,6 +44,7 @@ public class WealthFragment extends BaseMvpFragment {
     private RecyclerView mRvUpgrade, mRvLevelTitle;
     private ImageView mIvTitle;
     private UserProviderService service;
+    private TextView mTitleWealth,mWealthDesc;
 
     //type 0 财富 1 魅力
     //userId 空为自己，有值则是他人
@@ -108,6 +109,8 @@ public class WealthFragment extends BaseMvpFragment {
         mProgressbar = getView(R.id.progress_bar);
         mRvUpgrade = getView(R.id.rv_upgrade);
         mRvLevelTitle = getView(R.id.rv_level_title);
+        mTitleWealth = getView(R.id.tv_title_wealth);
+        mWealthDesc = getView(R.id.tv_wealth_decs);
         type = getArguments().getString("type");
         userId = getArguments().getString("userId");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -133,6 +136,8 @@ public class WealthFragment extends BaseMvpFragment {
                 mTvNextLevelNum.setTextColor(Color.parseColor("#EDD398"));
                 mTvNextLevel.setTextColor(Color.parseColor("#EDD398"));
                 mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
+                mTitleWealth.setText("什么是财富等级");
+                mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注");
             } else {//魅力
                 mClBg.setBackgroundResource(R.mipmap.bg_charm_level);
                 mTvName.setTextColor(Color.parseColor("#4337FF"));
@@ -140,6 +145,8 @@ public class WealthFragment extends BaseMvpFragment {
                 mTvNextLevelNum.setTextColor(Color.parseColor("#4337FF"));
                 mTvNextLevel.setTextColor(Color.parseColor("#4337FF"));
                 mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_charm_bg));
+                mTitleWealth.setText("什么是魅力等级");
+                mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");
             }
             if (null != service) {
                 mTvName.setText(service.getUserInfo().getNickname());

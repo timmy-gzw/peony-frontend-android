@@ -131,6 +131,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/tv_title_wealth"
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="什么是财富等级"
                 android:textStyle="bold"
@@ -140,6 +141,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/tv_wealth_decs"
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注"
                 android:layout_width="wrap_content"
