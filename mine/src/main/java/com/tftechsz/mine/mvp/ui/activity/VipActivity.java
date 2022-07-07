@@ -12,11 +12,14 @@ import android.text.style.UnderlineSpan;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.constant.TimeConstants;
+import com.blankj.utilcode.util.TimeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.ARouterApi;
@@ -140,6 +143,18 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
                             }
                         }
                 ));
+
+
+        if (service.getUserInfo().isVip()) {
+            long timeSpanByNow = TimeUtils.getTimeSpanByNow(service.getUserInfo().getVip_expiration_time(), TimeConstants.DAY);
+            if (timeSpanByNow <= 7) {
+                mBind.hint.setTextColor(ContextCompat.getColor(this, R.color.c_d72537));
+            } else {
+                mBind.hint.setTextColor(ContextCompat.getColor(this, R.color.c_c89c5d));
+            }
+        } else {
+            mBind.hint.setTextColor(ContextCompat.getColor(this, R.color.c_c89c5d));
+        }
     }
 
     @Override
