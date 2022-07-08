@@ -124,6 +124,15 @@ public class ARouterUtils {
     }
 
     /**
+     * 跳转清单列表
+     */
+    public static void toIncomeDetailActivity(int type) { //0 收益 2 积分兑换
+        ARouter.getInstance().build(ARouterApi.ACTIVITY_INCOME_DETAIL)
+                .withInt(Interfaces.EXTRA_TYPE, type)
+                .navigation();
+    }
+
+    /**
      * 跳转主页吗
      */
     public static void toMainActivity() {

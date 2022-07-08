@@ -75,8 +75,10 @@ public class ARouterApi {
     public static final String ACTIVITY_CANCELLATION = "/mine/cancellationActivity";   //注销账户
     public static final String ACTIVITY_CHARGE_SETTING = "/mine/chargeSettingActivity";   //收费设置
     public static final String ACTIVITY_BLACK_LIST = "/mine/BlackListActivity";   //黑名单
-    public static final String ACTIVITY_SIGN_CHAT_NUM = "/mine/SignChatNumActivity";   //黑名单
-    public static final String ACTIVITY_NOTIFY_SETTING = "/mine/NotifySettingActivity";   //黑名单
+    public static final String ACTIVITY_SIGN_CHAT_NUM = "/mine/SignChatNumActivity";   //聊天卡
+    public static final String ACTIVITY_NOTIFY_SETTING = "/mine/NotifySettingActivity";   //新消息通知
+    public static final String ACTIVITY_INCOME_DETAIL = "/mine/IncomeDetailActivity";   //收益明细
+
 
     //family
     public final static String ACTIVITY_FAMILY_DETAIL = "/family/familyDetailActivity";   //家族详情

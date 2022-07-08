@@ -99,11 +99,11 @@ public class MineIntegralNewActivity extends BaseMvpActivity<IMineIntegralView, 
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.toolbar_tv_menu) {//顶部右边文本
-            ARouterUtils.toIntegralDetailedActivity(0);
+            ARouterUtils.toIncomeDetailActivity(0);
         } else if (id == R.id.tv_intefral_shop) { // btn
             startActivity(IntegralShopActivity.class, "integral", integral);
         } else if (id == R.id.tv_exchange_record) {
-            ARouterUtils.toIntegralDetailedActivity(2);
+            ARouterUtils.toIncomeDetailActivity(2);
         }
     }
 

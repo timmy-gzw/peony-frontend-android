@@ -91,7 +91,6 @@ public class IntegralGroupAdapter extends GroupedRecyclerViewAdapter {
         View view = helper.get(R.id.view);
 
         if (mType == 2 || mType == 5) {   // 兑换记录
-            GlideUtils.loadRouteImage(mContext, helper.get(R.id.iv_shop), item.image_small);
             TextView tvStatus = helper.get(R.id.tv_status);
             helper.setText(R.id.tv_time, item.created_at).setText(R.id.tv_integral, item.integral);
             //0.申请中，1.已兑换，2.不允许兑换
