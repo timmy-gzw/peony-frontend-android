@@ -737,21 +737,27 @@
         app:layout_constraintBottom_toTopOf="@+id/rv_topic"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/tv_content"
+        <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_below="@+id/iv_call"
-            android:layout_marginTop="-25dp"
-            android:background="@drawable/bg_white_radius12"
-            android:gravity="center"
-            android:paddingStart="@dimen/dp_14"
-            android:paddingTop="@dimen/dp_24"
-            android:paddingEnd="@dimen/dp_14"
-            android:paddingBottom="@dimen/dp_12"
-            android:text="看看她迷人的\n脸庞吧～"
-            android:textColor="@color/color_normal"
-            android:textSize="@dimen/sp_12" />
+            android:layout_marginTop="-70dp"
+            android:paddingTop="40dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/bg_white_radius12"
+                android:paddingStart="@dimen/dp_14"
+                android:paddingTop="@dimen/dp_24"
+                android:paddingEnd="@dimen/dp_14"
+                android:paddingBottom="@dimen/dp_12"
+                android:text="看看她迷人的\n脸庞吧～"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/iv_call"
@@ -764,11 +770,32 @@
             app:lottie_loop="true"
             android:layout_marginTop="@dimen/dp_15"/>
 
+        <LinearLayout
+            android:id="@+id/ll_content_over"
+            android:layout_width="@dimen/dp_100"
+            android:layout_below="@+id/iv_call"
+            android:layout_marginTop="-70dp"
+            android:background="@color/transparent"
+            android:paddingTop="40dp"
+            android:layout_above="@id/iv_close_call"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingStart="@dimen/dp_14"
+                android:paddingTop="@dimen/dp_24"
+                android:paddingEnd="@dimen/dp_14"
+                android:paddingBottom="@dimen/dp_12"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/iv_close_call"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_content"
+            android:layout_below="@+id/ll_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_6"
             android:layout_marginBottom="@dimen/dp_10"

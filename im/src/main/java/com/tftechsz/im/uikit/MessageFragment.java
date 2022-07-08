@@ -325,6 +325,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     //亲密度可以拨打音视频的时候弹出
     private RelativeLayout mRlIntimacyCall;
     private TextView mTvIntimacyCall;
+    private LinearLayout mLlContent;
     private boolean isFamilyRecruit;
     protected UserProviderService service;
     private MineApiService mineApiService;
@@ -508,6 +509,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mRlIntimacyCall = findView(R.id.rl_intimacy_call);
         mRlIntimacyCall.setOnClickListener(this);
         mTvIntimacyCall = findView(R.id.tv_content);
+        findView(R.id.ll_content_over).setOnClickListener(this);
         mTvIntimacyCall.setOnClickListener(this);
         findView(R.id.iv_close_call).setOnClickListener(this);
         //家族相关
@@ -3341,7 +3343,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             }
         } else if (id == R.id.ll_notice) {   //审核申请
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FAMILY_APPLY);
-        } else if (id == R.id.tv_content) {   //拨打视频
+        } else if (id == R.id.ll_content_over) {   //拨打视频
             initPermissions();
         } else if (id == R.id.iv_close_call) {  //关闭
             mRlIntimacyCall.setVisibility(View.GONE);
