@@ -270,7 +270,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     protected String sessionId;
     protected CompositeDisposable mCompositeDisposable;
 
-    protected ImageView ivChatPhoto, ivChatRed,mIvVoiceCall;
+    protected ImageView ivChatPhoto, ivChatRed, mIvVoiceCall;
     protected RelativeLayout ivChatCall;
 
     // modules
@@ -433,7 +433,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private GroupCoupleDto groupCoupleDto;
 
     private LottieAnimationView mLavLove;
-    private ImageView mIvChatBg,mIvtoolbarmenu,mIvIntimacyDetail;
+    private ImageView mIvChatBg, mIvtoolbarmenu, mIvIntimacyDetail;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -550,7 +550,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mRvTopic.setLayoutManager(linearLayoutManager);
         TopicAdapter topicAdapter = new TopicAdapter(0);
         ConfigInfo configInfo = service.getConfigInfo();
-        List<String> topics = service.getUserInfo().getSex() == 1?configInfo.share_config.boy_quick_topic:configInfo.share_config.girl_quick_topic;
+        List<String> topics = service.getUserInfo().getSex() == 1 ? configInfo.share_config.boy_quick_topic : configInfo.share_config.girl_quick_topic;
         //打乱顺序，取前五个
         Collections.shuffle(topics);
         topicAdapter.setList(topics.subList(0, Math.min(topics.size(), 5)));
@@ -985,7 +985,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 mIvLeft.loadBuddyAvatar(sessionId);
             }
 
-            if(mIvChatBg != null){
+            if (mIvChatBg != null) {
                 final com.netease.nimlib.sdk.uinfo.model.UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(sessionId);
                 String url = "";   //头像地址
                 if (userInfo != null && null != service.getConfigInfo() && null != service.getConfigInfo().api && null != service.getConfigInfo().api.oss && null != service.getConfigInfo().api.oss.cdn)
@@ -1719,7 +1719,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     if (intimacy.is_show_heart) {
                         mRlIntimacy.setVisibility(View.VISIBLE);
                         mTvName.setVisibility(View.GONE);
-                        mTvIntimacy.setText("亲密度"+intimacy.intimacy);
+                        mTvIntimacy.setText("亲密度" + intimacy.intimacy);
                         setIntimacLottie(intimacy);
                         params.height = ConvertUtils.dp2px(110);
                     } else {
@@ -1752,36 +1752,37 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     /**
      * 显示爱心lottie动画
+     *
      * @param intimacy
      */
     private void setIntimacLottie(ChatMsg.Intimacy intimacy) {
         String s = intimacy.intimacy.replace("℃", "");
         double intimacyInt = Double.parseDouble(s);
         String lottieZipFileNameLast;
-        if (intimacyInt>100){
+        if (intimacyInt > 100) {
             lottieZipFileNameLast = "11";
-        }else if (intimacyInt>90){
+        } else if (intimacyInt > 90) {
             lottieZipFileNameLast = "10";
-        }else if (intimacyInt>80){
+        } else if (intimacyInt > 80) {
             lottieZipFileNameLast = "9";
-        } else if (intimacyInt>70){
+        } else if (intimacyInt > 70) {
             lottieZipFileNameLast = "8";
-        } else if (intimacyInt>60){
+        } else if (intimacyInt > 60) {
             lottieZipFileNameLast = "7";
-        } else if (intimacyInt>50){
+        } else if (intimacyInt > 50) {
             lottieZipFileNameLast = "6";
-        }else if (intimacyInt>40){
+        } else if (intimacyInt > 40) {
             lottieZipFileNameLast = "5";
-        }else if (intimacyInt>30){
+        } else if (intimacyInt > 30) {
             lottieZipFileNameLast = "4";
-        }else if (intimacyInt>20){
+        } else if (intimacyInt > 20) {
             lottieZipFileNameLast = "3";
-        }else if (intimacyInt>10){
+        } else if (intimacyInt > 10) {
             lottieZipFileNameLast = "2";
-        }else {
+        } else {
             lottieZipFileNameLast = "1";
         }
-        mLavLove.setAnimation("love"+lottieZipFileNameLast+".zip");
+        mLavLove.setAnimation("love" + lottieZipFileNameLast + ".zip");
         mLavLove.playAnimation();
     }
 
@@ -1801,7 +1802,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 if (chatMsg.msg_intimacy.is_show_heart) {
                     mRlIntimacy.setVisibility(View.VISIBLE);
                     mTvName.setVisibility(View.GONE);
-                    mTvIntimacy.setText("亲密度"+chatMsg.msg_intimacy.intimacy);
+                    mTvIntimacy.setText("亲密度" + chatMsg.msg_intimacy.intimacy);
                     setIntimacLottie(chatMsg.msg_intimacy);
                     params.height = ConvertUtils.dp2px(110);
                 } else {
@@ -1896,10 +1897,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         } else {
             inputPanel.reload(container, customization);
         }
-        inputPanel.getmIvTopicBtn().setOnClickListener(v->{
+        inputPanel.getmIvTopicBtn().setOnClickListener(v -> {
             //话题icon
             ConfigInfo configInfo = service.getConfigInfo();
-            TopicPop topicPop = new TopicPop(getActivity(),service.getUserInfo().getSex() == 1?configInfo.share_config.boy_quick_topic:configInfo.share_config.girl_quick_topic);
+            TopicPop topicPop = new TopicPop(getActivity(), service.getUserInfo().getSex() == 1 ? configInfo.share_config.boy_quick_topic : configInfo.share_config.girl_quick_topic);
             topicPop.setTopicItemClickListener(new TopicPop.TopicItemOnClickListener() {
                 @Override
                 public void onTopicItemClick(String text) {
@@ -1915,7 +1916,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         ivChatCall = inputPanel.getChatCall();
         mIvVoiceCall = inputPanel.getmIvVoiceCallBtn();
         ivChatRed = inputPanel.getChatRed();
-        ivChatGift =  inputPanel.getChatGift();
+        ivChatGift = inputPanel.getChatGift();
 
 
         initAitManager();
@@ -1934,7 +1935,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             checkCallMsg(1);
         });
         //语音通话
-        mIvVoiceCall.setOnClickListener(v->{
+        mIvVoiceCall.setOnClickListener(v -> {
             checkCallMsg(2);
         });
 
@@ -1958,57 +1959,66 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
         //图片点击
         ivChatPhoto.setOnClickListener(v -> {
-            if (!TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy() && sessionType == SessionTypeEnum.P2P) {
-                float level = Float.parseFloat(mIntimacy.replace("℃", ""));
-                if (level < service.getConfigInfo().sys.boy2girl_pic_intimacy) {
-                    ToastUtil.showToast(requireActivity(), "亲密度>=" + service.getConfigInfo().sys.boy2girl_pic_intimacy + "度才能发送图片");
-                    return;
-                }
-            } else if ((TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy()) && sessionType == SessionTypeEnum.P2P) {
-                ToastUtil.showToast(requireActivity(), "亲密度>=" + service.getConfigInfo().sys.boy2girl_pic_intimacy + "度才能发送图片");
-                return;
-            }
-            if (null == customPopWindow) {
-                customPopWindow = new CustomPopWindow(getActivity());
-            }
-            String content;   //提示文字
-            if (null != service.getConfigInfo() && null != service.getConfigInfo().sys && null != service.getConfigInfo().sys.content)
-                content = service.getConfigInfo().sys.content.picture_warm;
-            else
-                content = "注意:照片请勿作假，涉黄，如被举报并核实，系统会自动禁用图片功能，严重者冻结账号";
-            customPopWindow.setContent(content);
-            customPopWindow.addOnClickListener(new CustomPopWindow.OnSelectListener() {
-                @Override
-                public void onCancel() {
-                }
-
-                @Override
-                public void onSure() {
-                    ChoosePicUtils.picSingle(getActivity(), new OnResultCallbackListener<LocalMedia>() {
-                        @Override
-                        public void onResult(List<LocalMedia> result) {
-                            if (result != null && result.size() > 0) {
-                                String imgPath;
-                                if (result.get(0).isCompressed()) {
-                                    imgPath = result.get(0).getCompressPath();
-                                } else {
-                                    imgPath = result.get(0).getRealPath();
+            mCompositeDisposable.add(new RxPermissions(this)
+                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
+                    .subscribe(aBoolean -> {
+                        if (aBoolean) {
+                            if (!TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy() && sessionType == SessionTypeEnum.P2P) {
+                                float level = Float.parseFloat(mIntimacy.replace("℃", ""));
+                                if (level < service.getConfigInfo().sys.boy2girl_pic_intimacy) {
+                                    ToastUtil.showToast(requireActivity(), "亲密度>=" + service.getConfigInfo().sys.boy2girl_pic_intimacy + "度才能发送图片");
+                                    return;
                                 }
-                                if (!TextUtils.isEmpty(imgPath)) {
-                                    File file = new File(imgPath);
-                                    onPicked(file);
-                                }
+                            } else if ((TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy()) && sessionType == SessionTypeEnum.P2P) {
+                                ToastUtil.showToast(requireActivity(), "亲密度>=" + service.getConfigInfo().sys.boy2girl_pic_intimacy + "度才能发送图片");
+                                return;
                             }
-                        }
+                            if (null == customPopWindow) {
+                                customPopWindow = new CustomPopWindow(getActivity());
+                            }
+                            String content;   //提示文字
+                            if (null != service.getConfigInfo() && null != service.getConfigInfo().sys && null != service.getConfigInfo().sys.content)
+                                content = service.getConfigInfo().sys.content.picture_warm;
+                            else
+                                content = "注意:照片请勿作假，涉黄，如被举报并核实，系统会自动禁用图片功能，严重者冻结账号";
+                            customPopWindow.setContent(content);
+                            customPopWindow.addOnClickListener(new CustomPopWindow.OnSelectListener() {
+                                @Override
+                                public void onCancel() {
+                                }
 
-                        @Override
-                        public void onCancel() {
+                                @Override
+                                public void onSure() {
+                                    ChoosePicUtils.picSingle(getActivity(), new OnResultCallbackListener<LocalMedia>() {
+                                        @Override
+                                        public void onResult(List<LocalMedia> result) {
+                                            if (result != null && result.size() > 0) {
+                                                String imgPath;
+                                                if (result.get(0).isCompressed()) {
+                                                    imgPath = result.get(0).getCompressPath();
+                                                } else {
+                                                    imgPath = result.get(0).getRealPath();
+                                                }
+                                                if (!TextUtils.isEmpty(imgPath)) {
+                                                    File file = new File(imgPath);
+                                                    onPicked(file);
+                                                }
+                                            }
+                                        }
 
+                                        @Override
+                                        public void onCancel() {
+
+                                        }
+                                    });
+                                }
+                            });
+                            customPopWindow.showPopupWindow();
+                        } else {
+                            PermissionUtil.showPermissionPop(getActivity(),"未获取存储和拍照权限,相册功能无法正常使用。打开应用设置页以修改应用权限");
                         }
-                    });
-                }
-            });
-            customPopWindow.showPopupWindow();
+                    }));
+
         });
     }
 
@@ -3237,6 +3247,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     /**
      * 移出黑名单
+     *
      * @param userId
      */
     public void cancelBlack(int userId) {
@@ -4131,7 +4142,17 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             }
         }))
             return;
-        call(type);
+        String[] audioPermission = {Manifest.permission.RECORD_AUDIO};
+        String[] videoPermission = {Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA};
+        mCompositeDisposable.add(new RxPermissions(this)
+                .request(type == 1 ?audioPermission:videoPermission)
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        call(type);
+                    } else {
+                        PermissionUtil.showPermissionPop(getActivity());
+                    }
+                }));
 
     }
 
