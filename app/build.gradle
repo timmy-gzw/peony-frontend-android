@@ -147,6 +147,9 @@ android {
         KUAISHOU0 {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU0", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
+        BAIDU {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "BAIDU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
     }
 }
 
