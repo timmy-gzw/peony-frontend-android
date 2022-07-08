@@ -565,6 +565,38 @@ public class ChatMsgUtil implements Serializable {
         return span;
     }
 
+    /**
+     * tip2消息
+     */
+    public static String getTipContent(String content) {
+        SpannableStringBuilder span = new SpannableStringBuilder();
+        if (!TextUtils.isEmpty(content)) {
+            //tag截取
+            String[] text = content.split("</tag>");
+            for (String s : text) {
+
+                SpannableStringBuilder spanString = new SpannableStringBuilder();
+                StringBuilder stringBuffer = new StringBuilder();
+                stringBuffer.append(s.replace("<tag", "")).append("</tag>");
+                String tag = "url=";
+                int start = stringBuffer.toString().indexOf(tag);
+                int start2 = stringBuffer.toString().indexOf(">");
+                int start3 = stringBuffer.toString().indexOf("</tag>");
+                String text2 = "";
+
+                if (start != -1 && start2 != -1 && start3 != -1) {
+                    if (start + tag.length() <= start2) {
+                        text2 = stringBuffer.substring(start + tag.length(), start2);
+                        return text2;
+                    }
+
+                }
+            }
+
+        }
+        return null;
+    }
+
 
     /**
      * 发送家族邀请
