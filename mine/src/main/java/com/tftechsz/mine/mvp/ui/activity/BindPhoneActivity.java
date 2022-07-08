@@ -3,14 +3,16 @@ package com.tftechsz.mine.mvp.ui.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 
-import com.umeng.analytics.MobclickAgent;
+import androidx.databinding.DataBindingUtil;
+
 import com.tftechsz.common.Constants;
-import com.tftechsz.common.adapter.FragmentVpAdapter;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CountBackUtils;
@@ -21,17 +23,11 @@ import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ActBindPhoneBinding;
 import com.tftechsz.mine.entity.req.BindData;
 import com.tftechsz.mine.entity.req.CompleteReq;
-import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.mine.mvp.IView.IBindPhoneView;
 import com.tftechsz.mine.mvp.presenter.BindPhonePresenter;
 import com.tftechsz.mine.mvp.ui.fragment.BindPhoneFragment_1;
 import com.tftechsz.mine.mvp.ui.fragment.BindPhoneFragment_2;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 包 名 : com.tftechsz.mine.mvp.ui.activity
@@ -39,7 +35,7 @@ import androidx.fragment.app.Fragment;
  */
 public class BindPhoneActivity extends BaseMvpActivity<IBindPhoneView, BindPhonePresenter> implements BindPhoneFragment_1.EdtCallBack, IBindPhoneView, BindPhoneFragment_2.CodeCallBack {
     private ActBindPhoneBinding mBind;
-    private String tell,code;
+    private String tell, code;
     private int mType; // 0:注册绑定  1:换绑  2:未绑定
     private String mPhone;
     private CountBackUtils countBackUtils;
@@ -94,12 +90,11 @@ public class BindPhoneActivity extends BaseMvpActivity<IBindPhoneView, BindPhone
                 tell = s.toString();
             }
         });
-        mBind.sure.setOnClickListener(v->{
+        mBind.sure.setOnClickListener(v -> {
             if (Utils.checkNoTell(tell)) {
                 return;
             }
-            if (code.length()<4) {
-                Utils.toast("请输入正确的验证码");
+            if (Utils.checkSMSCode(code)) {
                 return;
             }
             if (!ClickUtil.canOperate()) {
@@ -120,7 +115,7 @@ public class BindPhoneActivity extends BaseMvpActivity<IBindPhoneView, BindPhone
 
             @Override
             public void afterTextChanged(Editable s) {
-                    code = s.toString();
+                code = s.toString();
             }
         });
     }

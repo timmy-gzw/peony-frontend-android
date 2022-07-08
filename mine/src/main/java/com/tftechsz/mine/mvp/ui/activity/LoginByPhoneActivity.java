@@ -172,10 +172,11 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
             return;
         }
         String code = mEtCode.getText().toString();
-        if (!TextUtils.isEmpty(code) && code.length() == 4) {
-            KeyboardUtils.hideSoftInput(this);
-            login(code);
+        if (Utils.checkSMSCode(code)) {
+            return;
         }
+        KeyboardUtils.hideSoftInput(this);
+        login(code);
     }
 
     private void login(String code) {

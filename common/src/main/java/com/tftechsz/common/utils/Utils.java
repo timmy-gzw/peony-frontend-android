@@ -817,6 +817,18 @@ public final class Utils {
         return false;
     }
 
+    public static boolean checkSMSCode(String code) {
+        if (TextUtils.isEmpty(code)) {
+            toast("请输入验证码");
+            return true;
+        }
+        if (code.length() != 4) {
+            toast("请输入正确的验证码");
+            return true;
+        }
+        return false;
+    }
+
     public static String performUrl(String url) { // http://m.dev.peony.taifangsz.com.com/policy.html?v=2021011310002&__app_name={app_name}
         if (TextUtils.isEmpty(url)) {
             return "";
