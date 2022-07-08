@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.base.BaseWebViewActivity;
 import com.tftechsz.common.widget.CommonItemView;
@@ -17,7 +19,10 @@ import com.tftechsz.mine.mvp.presenter.ChargeSettingPresenter;
 
 import java.util.List;
 
-
+/**
+ * 收费设置
+ */
+@Route(path = ARouterApi.ACTIVITY_CHARGE_SETTING)
 public class ChargeSettingActivity extends BaseMvpActivity<IChargeSettingView, ChargeSettingPresenter> implements View.OnClickListener, IChargeSettingView {
 
 

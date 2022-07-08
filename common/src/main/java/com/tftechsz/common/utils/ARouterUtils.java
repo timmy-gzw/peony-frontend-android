@@ -83,6 +83,38 @@ public class ARouterUtils {
     }
 
     /**
+     * 跳转收费设置
+     */
+    public static void toChargeSettingActivity() {
+        ARouter.getInstance().build(ARouterApi.ACTIVITY_CHARGE_SETTING)
+                .navigation();
+    }
+
+    /**
+     * 跳转账号注销
+     */
+    public static void toCancellationActivity() {
+        ARouter.getInstance().build(ARouterApi.ACTIVITY_CANCELLATION)
+                .navigation();
+    }
+
+    /**
+     * 跳转账号绑定
+     */
+    public static void toAccountBindingActivity() {
+        ARouter.getInstance().build(ARouterApi.ACTIVITY_ACCOUNT_BINDING)
+                .navigation();
+    }
+
+    /**
+     * 跳转账号管理
+     */
+    public static void toAccountManagerActivity() {
+        ARouter.getInstance().build(ARouterApi.ACTIVITY_ACCOUNT_MANAGER)
+                .navigation();
+    }
+
+    /**
      * 跳转清单列表
      */
     public static void toIntegralDetailedActivity(int type) { //0积分清单/收益记录  1:金币清单/收支记录  2.积分兑换记录   3金币消耗记录   4音符消耗记录   5音符兑换记录

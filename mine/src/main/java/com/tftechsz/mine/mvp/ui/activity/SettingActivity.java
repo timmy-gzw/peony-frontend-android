@@ -14,6 +14,7 @@ import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.SPUtils;
@@ -140,21 +141,21 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
         if (id == R.id.tv_exit) {  //退出登录
             p.loginOutPop(this);
         } else if (id == R.id.item_charge_setting) {   //收费设置
-            startActivity(ChargeSettingActivity.class);
+            ARouterUtils.toChargeSettingActivity();
         } else if (id == R.id.item_account_binding) {   //账号绑定
-            startActivity(AccountManagerActivity.class);
+            ARouterUtils.toAccountManagerActivity();
         }else if (id == R.id.item_call_setting) {   //招呼设置
-            startActivity(AccostSettingActivity.class);
+            ARouterUtils.toAccostSettingActivity(null);
         } else if (id == R.id.item_privacy_setting) {  //隐私设置
-            startActivity(PrivacySettingActivity.class);
+            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_PRIVACY_SETTING);
         } else if (id == R.id.item_black_list) {   // 黑名单
-            startActivity(BlackListActivity.class);
+            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_BLACK_LIST);
         } else if (id == R.id.item_chatsignnum) {   // 聊天卡
-            startActivity(SignChatNumActivity.class);
+            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_SIGN_CHAT_NUM);
         } else if (id == R.id.item_about) {   //关于我们
-            startActivity(AboutUsActivity.class);
+            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_ABOUT_US);
         } else if (id == R.id.item_notification) {  //通知
-            startActivity(NotifySettingActivity.class);
+            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_NOTIFY_SETTING);
         } else if (id == R.id.item_face_setting) {   //美颜设置
             mCompositeDisposable.add(new RxPermissions(this)
                     .request(Manifest.permission.READ_EXTERNAL_STORAGE

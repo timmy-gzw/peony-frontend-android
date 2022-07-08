@@ -3,7 +3,9 @@ package com.tftechsz.mine.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
@@ -23,6 +25,7 @@ import androidx.databinding.DataBindingUtil;
  * 包 名 : com.tftechsz.mine.mvp.ui.activity
  * 描 述 : 账号绑定
  */
+@Route(path = ARouterApi.ACTIVITY_ACCOUNT_BINDING)
 public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView, AccountBindingPresenter> implements IAccountBindingView {
 
     private ActAccountBindBinding mBind;

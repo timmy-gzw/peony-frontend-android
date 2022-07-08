@@ -3,13 +3,17 @@ package com.tftechsz.mine.mvp.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.base.BasePresenter;
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.mine.R;
 
 /**
  * 账号管理
  */
+@Route(path = ARouterApi.ACTIVITY_ACCOUNT_MANAGER)
 public class AccountManagerActivity extends BaseMvpActivity implements View.OnClickListener {
 
     @Override
@@ -33,9 +37,9 @@ public class AccountManagerActivity extends BaseMvpActivity implements View.OnCl
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.item_account_binding) {
-            startActivity(AccountBindingActivity.class);
+            ARouterUtils.toAccountBindingActivity();
         } else if (id == R.id.item_logout_setting) {
-            startActivity(CancellationActivity.class);
+            ARouterUtils.toCancellationActivity();
         }
     }
 }

@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.entity.UpdateInfo;
 import com.tftechsz.common.iservice.UserProviderService;
@@ -28,7 +30,7 @@ import com.tftechsz.mine.mvp.presenter.AboutUsPresenter;
 
 import java.util.List;
 
-
+@Route(path = ARouterApi.ACTIVITY_ABOUT_US)
 public class AboutUsActivity extends BaseMvpActivity<IAboutUsView, AboutUsPresenter> implements View.OnClickListener, IAboutUsView {
 
     @Autowired

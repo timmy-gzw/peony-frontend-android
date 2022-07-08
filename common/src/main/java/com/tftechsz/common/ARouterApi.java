@@ -70,7 +70,13 @@ public class ARouterApi {
     public static final String ACTIVITY_ABOUT_US = "/mine/AboutUsActivity";
     public static final String ACTIVITY_FACIAL_SETTING = "/mine/facial";//美颜设置
     public static final String FRAGMENT_USER_INFO = "/mine/userInfo";   //我的基本信息
-
+    public static final String ACTIVITY_ACCOUNT_MANAGER = "/mine/accountManagerActivity";   //账号管理
+    public static final String ACTIVITY_ACCOUNT_BINDING = "/mine/accountBindingActivity";   //账号绑定
+    public static final String ACTIVITY_CANCELLATION = "/mine/cancellationActivity";   //注销账户
+    public static final String ACTIVITY_CHARGE_SETTING = "/mine/chargeSettingActivity";   //收费设置
+    public static final String ACTIVITY_BLACK_LIST = "/mine/BlackListActivity";   //黑名单
+    public static final String ACTIVITY_SIGN_CHAT_NUM = "/mine/SignChatNumActivity";   //黑名单
+    public static final String ACTIVITY_NOTIFY_SETTING = "/mine/NotifySettingActivity";   //黑名单
 
     //family
     public final static String ACTIVITY_FAMILY_DETAIL = "/family/familyDetailActivity";   //家族详情

@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
@@ -13,6 +15,10 @@ import com.tftechsz.mine.entity.SignNumBean;
 import com.tftechsz.mine.mvp.IView.ISettingView;
 import com.tftechsz.mine.mvp.presenter.SettingPresenter;
 
+/**
+ * 聊天卡
+ */
+@Route(path = ARouterApi.ACTIVITY_SIGN_CHAT_NUM)
 public class SignChatNumActivity extends BaseMvpActivity<ISettingView, SettingPresenter> implements View.OnClickListener, ISettingView {
 
     @Autowired

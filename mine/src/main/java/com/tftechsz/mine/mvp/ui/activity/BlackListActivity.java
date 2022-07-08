@@ -3,8 +3,10 @@ package com.tftechsz.mine.mvp.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseListActivity;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
@@ -22,7 +24,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Flowable;
 
-
+/**
+ * 黑名单
+ */
+@Route(path = ARouterApi.ACTIVITY_BLACK_LIST)
 public class BlackListActivity extends BaseListActivity<FriendDto> implements View.OnClickListener {
 
 

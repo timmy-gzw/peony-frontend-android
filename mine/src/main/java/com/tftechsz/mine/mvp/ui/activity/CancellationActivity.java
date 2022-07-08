@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.Utils;
@@ -22,6 +24,7 @@ import java.util.TimerTask;
 /**
  * 注销账号
  */
+@Route(path = ARouterApi.ACTIVITY_CANCELLATION)
 public class CancellationActivity extends BaseMvpActivity<ILogoutView, ILogoutPresenter> implements View.OnClickListener, ILogoutView {
 
     @Autowired

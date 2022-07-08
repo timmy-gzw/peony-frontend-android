@@ -7,10 +7,12 @@ import android.widget.TextView;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.ResponseCode;
 import com.netease.nimlib.sdk.mixpush.MixPushService;
+import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
@@ -23,6 +25,10 @@ import com.tftechsz.mine.entity.dto.PrivacyDto;
 import com.tftechsz.mine.mvp.IView.IPrivacySettingView;
 import com.tftechsz.mine.mvp.presenter.PrivacySettingPresenter;
 
+/**
+ * 通知
+ */
+@Route(path = ARouterApi.ACTIVITY_NOTIFY_SETTING)
 public class NotifySettingActivity extends BaseMvpActivity<IPrivacySettingView,PrivacySettingPresenter> implements View.OnClickListener,IPrivacySettingView {
 
     private CommonItemView mItemNotice;
