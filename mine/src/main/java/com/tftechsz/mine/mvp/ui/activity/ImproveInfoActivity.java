@@ -155,9 +155,9 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
 //        GlideUtils.loadRoundImage(this, mIvSex, mGirlUrl);
         String inviteCode = MMKVUtils.getInstance().decodeString(Constants.H5_INVITE_CODE_PARAM);
         String tempCode;
-        if(inviteCode.isEmpty()) {
+        if (inviteCode.isEmpty()) {
             tempCode = getP().getReferralCode(mActivity);
-        }else{
+        } else {
             tempCode = inviteCode;
         }
         mEtCode.postDelayed(() -> mEtCode.setText(tempCode), 100);
@@ -234,8 +234,11 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
         } else if (id == R.id.tv_complete) {   //完成
             if (!ClickUtil.canOperate()) return;
             if (mCompleteReq.sex == 2 && !isChangedIcon) {
-                toastTip("请上传您的头像");
-                return;
+                boolean isUnderReview = MMKVUtils.getInstance().decodeBoolean(Constants.KEY_IS_REVIEW, true);
+                if (!isUnderReview) {
+                    toastTip("请上传您的头像");
+                    return;
+                }
             }
             if (TextUtils.isEmpty(Utils.getText(mEtName))) {
                 toastTip("请输入您的昵称");
