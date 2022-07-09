@@ -56,14 +56,17 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
             intent.putExtra(Interfaces.EXTRA_DATA, mBindData);
             startActivity(intent);
         });
-
         mBind.itemWechat.setEnabled(false);
         mBind.itemWechat.setOnClickListener(v -> {
             if (!NetworkUtils.isConnected()) {
                 Utils.toast("很抱歉，好像网络出问题了");
                 return;
             }
-            p.loginWx(mActivity);
+            if(mBindData.wecaht.is_bind == 1){
+                //微信解绑
+            }else{
+                p.loginWx(mActivity);
+            }
         });
 
     }
@@ -89,11 +92,9 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
         if (data.wecaht != null && data.wecaht.is_bind == 1) {
             mBind.itemWechat.setRightText("已绑定");
             mBind.itemWechat.setRightTextColor(mContext, R.color.color_999999);
-            mBind.itemWechat.setEnabled(false);
         } else {
             mBind.itemWechat.setRightText("去绑定");
             mBind.itemWechat.setRightTextColor(mContext, R.color.color_mid_font);
-            mBind.itemWechat.setEnabled(true);
         }
 
         if (data.wecaht != null && data.wecaht.is_repair == 1) {

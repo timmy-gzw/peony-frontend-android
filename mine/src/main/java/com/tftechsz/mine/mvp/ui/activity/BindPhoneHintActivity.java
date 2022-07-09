@@ -18,7 +18,7 @@ import androidx.databinding.DataBindingUtil;
 
 /**
  * 包 名 : com.tftechsz.mine.mvp.ui.activity
- * 描 述 : TODO
+ * 描 述 : 手机号绑定，注册，替换
  */
 public class BindPhoneHintActivity extends BaseMvpActivity<IAccountBindingView, AccountBindingPresenter> implements IAccountBindingView {
 
