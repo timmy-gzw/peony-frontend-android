@@ -800,7 +800,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 tvFaceSwitch.setVisibility(View.GONE);
             }
         } else {
-            drawable = ContextCompat.getDrawable(this, R.mipmap.chat_ic_voice_accept);
+            drawable = ContextCompat.getDrawable(this, R.mipmap.call_accept);
             tvFaceUnity.setVisibility(View.GONE);
             tvVideoFace.setVisibility(View.GONE);
         }
@@ -840,13 +840,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 nertcVideoCall.setSpeakerphoneOn(isOpen);
             }
 
-            if (isOpen) {
-                tvVideoSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
-                        ContextCompat.getDrawable(this, R.mipmap.chat_ic_speaker_on), null, null);
-            } else {
-                tvVideoSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
-                        ContextCompat.getDrawable(this, R.mipmap.chat_ic_speaker_off), null, null);
-            }
+            setSpeakerOnDrawble();
         });
         tvVideoMute.setOnClickListener(v -> {
             isMute = !isMute;
@@ -856,10 +850,12 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
             if (isMute) {
                 tvVideoMute.setCompoundDrawablesWithIntrinsicBounds(null,
-                        ContextCompat.getDrawable(this, R.mipmap.chat_ic_mute_on), null, null);
+                        ContextCompat.getDrawable(this, R.mipmap.ic_micorphone_on), null, null);
+                tvVideoMute.setText("静音已开");
             } else {
                 tvVideoMute.setCompoundDrawablesWithIntrinsicBounds(null,
-                        ContextCompat.getDrawable(this, R.mipmap.chat_ic_mute_off), null, null);
+                        ContextCompat.getDrawable(this, R.mipmap.ic_micorphone_off), null, null);
+                tvVideoMute.setText("静音");
             }
         });
         //切换视频头像
@@ -1087,6 +1083,21 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         initBus();
     }
 
+    /**
+     * 设置免提图片
+     */
+    private void setSpeakerOnDrawble() {
+        if (isOpen) {
+            tvVideoSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
+                    ContextCompat.getDrawable(this, R.mipmap.ic_speaker_on), null, null);
+            tvVideoSpeaker.setText("免提已开");
+        } else {
+            tvVideoSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
+                    ContextCompat.getDrawable(this, R.mipmap.ic_speaker_off), null, null);
+            tvVideoSpeaker.setText("免提");
+        }
+    }
+
 
     /**
      * 通知更新
@@ -1191,8 +1202,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             isFaceOn = !isFaceOn;
             if (isFaceOn) {  //开启
                 NERtc.getInstance().enableLocalVideo(false);
-                drawable = ContextCompat.getDrawable(this, R.mipmap.chat_ic_face_on);
+                drawable = ContextCompat.getDrawable(this, R.mipmap.ic_face_on);
                 drawable1 = ContextCompat.getDrawable(this, R.mipmap.chat_ic_face_on);
+                tvFaceSwitch.setText("不露脸已开");
                 if (!mIsAccept) {
                     viewRemote.setVisibility(View.VISIBLE);
                     ivCloseFace.setVisibility(View.VISIBLE);
@@ -1217,8 +1229,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
                 viewVideoView.setVisibility(View.GONE);
                 viewRemote.setVisibility(View.GONE);
-                drawable = ContextCompat.getDrawable(this, R.mipmap.chat_ic_face_off);
+                drawable = ContextCompat.getDrawable(this, R.mipmap.ic_face_off);
                 drawable1 = ContextCompat.getDrawable(this, R.mipmap.chat_ic_face_off);
+                tvFaceSwitch.setText("不露脸视频");
                 ivSmallCloseFace.setVisibility(View.GONE);
                 ivCloseFace.setVisibility(View.GONE);
                 if (mIsWarm) {
@@ -1672,6 +1685,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     private void userEnter() {
         nertcVideoCall.setStatsObserver();
+        //默认不开启免提
+        isOpen = false;
+        nertcVideoCall.setSpeakerphoneOn(isOpen);
         if (mCallDir == 0 && !mIsAccept) {
             rvCallChat.setVisibility(View.VISIBLE);
             mLlIncome.setVisibility(View.GONE);

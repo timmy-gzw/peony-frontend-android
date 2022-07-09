@@ -54,23 +54,33 @@
 
         <LinearLayout
             android:id="@+id/ll_video_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/dp_30"
             android:orientation="horizontal"
             android:visibility="gone"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toTopOf="@id/ll_call_video"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
+            <TextView
+                android:text="通话时长"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_height="wrap_content"/>
+
             <Chronometer
                 android:id="@+id/video_time"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/dp_3"
-                android:gravity="center"
+                android:gravity="start"
                 android:shadowColor="@color/white"
                 android:shadowDy="1"
                 android:shadowRadius="1"
@@ -84,23 +94,33 @@
 
         <LinearLayout
             android:id="@+id/ll_audio_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/dp_30"
             android:orientation="horizontal"
             android:visibility="gone"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toTopOf="@id/ll_call_video"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
+            <TextView
+                android:text="通话时长"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14"
+                android:gravity="end"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
             <Chronometer
                 android:id="@+id/audio_time"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/dp_3"
-                android:gravity="center"
+                android:gravity="start"
                 android:shadowColor="@color/color_99_ff"
                 android:shadowDy="1"
                 android:shadowRadius="1"
@@ -170,11 +190,11 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="bottom|center_horizontal"
-                    android:drawablePadding="@dimen/dp_17"
+                    android:drawablePadding="@dimen/dp_6"
                     android:text="静音"
                     android:textColor="@color/color_99_ff"
-                    android:textSize="@dimen/sp_15"
-                    app:drawableTopCompat="@mipmap/chat_ic_mute_off" />
+                    android:textSize="@dimen/sp_12"
+                    app:drawableTopCompat="@mipmap/ic_micorphone_off" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -186,11 +206,11 @@
                         android:layout_height="wrap_content"
                         android:gravity="bottom|center_horizontal"
                         android:layout_centerHorizontal="true"
-                        android:drawablePadding="@dimen/dp_17"
+                        android:drawablePadding="@dimen/dp_6"
                         android:text="不露脸视频"
                         android:textColor="@color/color_99_ff"
-                        android:textSize="@dimen/sp_15"
-                        app:drawableTopCompat="@mipmap/chat_ic_face_off" />
+                        android:textSize="@dimen/sp_12"
+                        app:drawableTopCompat="@mipmap/ic_face_off" />
 
                     <TextView
                         android:id="@+id/tv_call_face_unity"
@@ -198,12 +218,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_centerHorizontal="true"
-                        android:drawablePadding="@dimen/dp_17"
+                        android:drawablePadding="@dimen/dp_6"
                         android:gravity="center"
                         android:text="美颜"
                         android:textColor="@color/color_99_ff"
-                        android:textSize="@dimen/sp_15"
-                        app:drawableTopCompat="@mipmap/chat_ic_call_face_unity" />
+                        android:textSize="@dimen/sp_12"
+                        app:drawableTopCompat="@mipmap/ic_face_unity_off" />
                 </RelativeLayout>
 
                 <TextView
@@ -212,11 +232,11 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="bottom|center_horizontal"
-                    android:drawablePadding="@dimen/dp_17"
+                    android:drawablePadding="@dimen/dp_6"
                     android:text="切换摄像头"
                     android:textColor="@color/color_99_ff"
-                    android:textSize="@dimen/sp_15"
-                    app:drawableTopCompat="@mipmap/chat_ic_capture_switch"/>
+                    android:textSize="@dimen/sp_12"
+                    app:drawableTopCompat="@mipmap/ic_camera_switch"/>
 
                 <TextView
                     android:id="@+id/tv_video_speak"
@@ -224,11 +244,11 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="bottom|center_horizontal"
-                    android:drawablePadding="@dimen/dp_17"
+                    android:drawablePadding="@dimen/dp_6"
                     android:text="免提"
                     android:textColor="@color/color_99_ff"
-                    android:textSize="@dimen/sp_15"
-                    app:drawableTopCompat="@mipmap/chat_ic_speaker_off" />
+                    android:textSize="@dimen/sp_12"
+                    app:drawableTopCompat="@mipmap/ic_speaker_off" />
             </LinearLayout>
 
 
