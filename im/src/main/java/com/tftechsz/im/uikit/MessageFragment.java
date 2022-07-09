@@ -58,6 +58,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
@@ -446,7 +447,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         partyService = ARouter.getInstance().navigation(PartyService.class);
         attentionService = ARouter.getInstance().navigation(AttentionService.class);
         publicService = RetrofitManager.getInstance().createUploadCheatApi(PublicService.class);
-        ImmersionBar.setTitleBar(this, findView(R.id.base_tool_bar));
+        ImmersionBar.with(this).titleBar(findView(R.id.base_tool_bar)).init();
         mIsFirstEnter = true;
         initReceiverObserver();
         initView();
@@ -532,6 +533,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mTvIntimacy = findView(R.id.tv_love);
         mLavLove = findView(R.id.iv_love);
         mIvIntimacyDetail = findView(R.id.iv_intimacy_detail);
+        mIvIntimacyDetail.setOnClickListener(this);
         mIvLeft = findView(R.id.iv_left);
         mIvLeft.setRoundIcon(true);
         mIvLeft.setOnClickListener(this);
@@ -1718,6 +1720,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     ////{"intimacy":"2822.3℃","change":"0℃","is_show_heart":true}
                     ChatMsg.Intimacy intimacy = JSON.parseObject(chatMsg.content, ChatMsg.Intimacy.class);
                     ViewGroup.LayoutParams params = mRlToolBar.getLayoutParams();
+                    if(message != null && mRlIntimacy.getVisibility() == View.GONE){
+                        mIvIntimacyDetail.setVisibility(View.VISIBLE);
+                    }
                     if (intimacy.is_show_heart) {
                         mRlIntimacy.setVisibility(View.VISIBLE);
                         mTvName.setVisibility(View.GONE);
@@ -1745,6 +1750,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             sendGiftSuccess(gift, message, user);
                         }
                     }
+
                 }
             }
         } catch (Exception e) {
@@ -3326,7 +3332,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             if (getActivity() != null)
                 getActivity().finish();
             KeyboardUtils.close(getActivity());
-        } else if (id == R.id.rl_intimacy) {   //亲密度
+        } else if (id == R.id.rl_intimacy || id == R.id.iv_intimacy_detail) {   //亲密度
+            if(mIvIntimacyDetail.getVisibility() == View.VISIBLE){
+                mIvIntimacyDetail.setVisibility(View.GONE);
+            }
             chatMessagePopWindow = new ChatMessagePopWindow(getActivity(), sessionId);
             chatMessagePopWindow.setHeightWindow(mHeight);
             chatMessagePopWindow.showPopupWindow();
