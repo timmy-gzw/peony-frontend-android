@@ -1,16 +1,35 @@
 package com.tftechsz.mine.mvp.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.common.ChatMsg;
+import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView;
 import com.netease.nim.uikit.common.ui.imageview.CircleImageView;
+import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.RequestCallbackWrapper;
+import com.netease.nimlib.sdk.ResponseCode;
+import com.netease.nimlib.sdk.lifecycle.SdkLifecycleObserver;
+import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
+import com.netease.nimlib.sdk.msg.model.RecentContact;
+import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
+import com.netease.nimlib.sdk.uinfo.model.UserInfo;
+import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseListFragment;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.pagestate.PageStateConfig;
@@ -23,7 +42,11 @@ import com.tftechsz.mine.R;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.FriendDto;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,6 +88,44 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
         view.setVisibility(datas.size() > 0 ? View.VISIBLE : View.GONE);
         adapter.setOnItemClickListener((adapter1, view, position) ->
                 ARouterUtils.toMineDetailActivity(String.valueOf(adapter.getItem(position).user_id)));
+        requestMessages(true,datas);
+    }
+
+    private void requestMessages(boolean delay,List<FriendDto> datas) {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            NIMClient.getService(SdkLifecycleObserver.class).observeMainProcessInitCompleteResult(new Observer<Boolean>() {
+                @Override
+                public void onEvent(Boolean aBoolean) {
+                    NIMClient.getService(SdkLifecycleObserver.class).observeMainProcessInitCompleteResult(this, false);
+                    // 查询最近联系人列表数据
+                    NIMClient.getService(MsgService.class).queryRecentContacts().setCallback(
+                            new RequestCallbackWrapper<List<RecentContact>>() {
+
+                                @Override
+                                public void onResult(int code, List<RecentContact> recents, Throwable exception) {
+                                    if (code != ResponseCode.RES_SUCCESS || recents == null) {
+                                        return;
+                                    }
+                                    for (RecentContact contact : recents) {
+                                        if (contact != null) {
+                                            if (contact.getExtension() != null) {
+                                                String intimacy = (String) contact.getExtension().get("self_attach");
+                                                if (intimacy != null && !TextUtils.isEmpty(intimacy) && intimacy.length() < 10) {
+                                                    for (int i = 0; i < datas.size(); i++) {
+                                                        if(String.valueOf(datas.get(i).user_id).equals(contact.getContactId())){
+                                                            datas.get(i).intimacy_val = Float.parseFloat(intimacy);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    adapter.setList(datas);
+                                }
+                            });
+                }
+            }, true);
+        }, delay ? 250 : 0);
     }
 
 
@@ -81,6 +142,10 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
         CommonUtil.setSexAndAge(getContext(), item.sex, item.age, helper.getView(R.id.iv_sex));
         helper.setGone(R.id.iv_real_people, item.is_real != 1);  //是否真人
         helper.setGone(R.id.tv_vip, item.is_vip != 1);  //是否vip
+        if(item.intimacy_val != 0) {
+            helper.setText(R.id.intimacy, item.intimacy_val+"");
+            helper.setVisible(R.id.intimacy,true);
+        }
 //        helper.setVisible(R.id.view, helper.getLayoutPosition() != getData().size() - 1);
 
     }

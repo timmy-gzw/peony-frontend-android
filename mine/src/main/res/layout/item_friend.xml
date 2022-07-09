@@ -12,8 +12,8 @@
         android:id="@+id/iv_avatar"
         android:layout_width="@dimen/dp_40"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginVertical="@dimen/dp_10"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_marginVertical="@dimen/dp_10" />
 
 
     <LinearLayout
@@ -75,19 +75,19 @@
 
     <TextView
         android:id="@+id/intimacy"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:text="6℃"
-        android:textColor="#FE4D6B"
-        android:layout_marginEnd="@dimen/dp_16"
-        android:textSize="@dimen/sp_14"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:drawablePadding="@dimen/dp_5"
-        android:layout_width="wrap_content"
-        android:drawableRight="@mipmap/mine_ic_attention_selector"
-        android:layout_height="wrap_content"/>
+        android:layout_marginEnd="@dimen/dp_16"
+        android:drawableLeft="@mipmap/chat_ic_intimacy_red_heart"
+        android:drawablePadding="@dimen/dp_3"
+        android:gravity="center"
+        android:text="6℃"
+        android:textColor="#FF5C97"
+        android:textSize="@dimen/sp_10"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <View
         android:id="@+id/view"

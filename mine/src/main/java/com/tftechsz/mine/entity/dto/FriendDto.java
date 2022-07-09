@@ -21,4 +21,6 @@ public class FriendDto {
     public int is_vip;
     public int picture_frame;
 
+    public float intimacy_val; //亲密度
+
 }
