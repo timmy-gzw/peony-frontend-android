@@ -388,7 +388,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
      * 用户信息变更观察者
      */
     private UserInfoObserver userInfoObserver;
-    private LottieAnimationView mAnimationVip, mAnimationWarn;
+    private LottieAnimationView mAnimationVip;
     private SessionEventListener listener;
     private WelcomeToFamilyPopWindow mPopWindow;
 
@@ -563,7 +563,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             formrtAndSendMessage(topicAdapter.getItem(position));
         });
         mAnimationVip = findView(R.id.animation_vip);
-        mAnimationWarn = findView(R.id.animation_warn);
         lottieAnimationView = findView(R.id.animation_view);
         //家族公告
         TextView mTvAnnouncement = findView(R.id.tv_announcement);
@@ -1640,10 +1639,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             mAnimationVip.clearAnimation();
             mAnimationVip = null;
         }
-        if (mAnimationWarn != null) {
-            mAnimationWarn.clearAnimation();
-            mAnimationWarn = null;
-        }
         if (sessionType == SessionTypeEnum.Team && mTeamType == 1)
             leaveRoom();
         if (mActivityView != null) {
@@ -2637,7 +2632,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         mRlOpenVip.setVisibility(View.VISIBLE);
                         mRlOpenVip.setBackgroundResource(R.drawable.bg_open_vip);
                         mAnimationVip.setVisibility(View.VISIBLE);
-                        mAnimationWarn.setVisibility(View.GONE);
                         ChatMsg.Alert alert = JSON.parseObject(chatMsg.content, ChatMsg.Alert.class);
                         SpannableStringBuilder span = ChatMsgUtil.getTipContent(alert.des, "#4A4E4E", content -> {
                             String peony = "peony://";
@@ -2656,7 +2650,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         mRlOpenVip.setVisibility(View.VISIBLE);
                         mRlOpenVip.setBackgroundResource(R.drawable.bg_chat_bot);
                         mAnimationVip.setVisibility(View.GONE);
-                        mAnimationWarn.setVisibility(View.VISIBLE);
                         ChatTipsContent alert = JSON.parseObject(chatMsg.content, ChatTipsContent.class);
 
                         NIMClient.getService(MsgService.class).queryMessageListByUuid(Collections.singletonList(alert.msg_id))

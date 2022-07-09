@@ -702,41 +702,33 @@
         android:id="@+id/rl_open_vip"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
-        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
         android:background="@drawable/bg_chat_bot"
         android:orientation="horizontal"
-        android:paddingEnd="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_16"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/messageActivityBottomLayout"
         tools:visibility="visible">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_vip"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_50"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_9"
             android:src="@mipmap/ic_violation"
             android:layout_gravity="center_vertical"/>
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_warn"
-            android:layout_width="@dimen/dp_66"
-            android:layout_height="@dimen/dp_40"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="open_warn_animation.zip"
-            app:lottie_imageAssetsFolder="gift/"
-            app:lottie_loop="true" />
 
         <TextView
             android:id="@+id/tv_open_vip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/dp_10"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:lineSpacingMultiplier="1.1"
-            android:textColor="@color/color_4A4E4E"
-            android:textSize="@dimen/sp_14"
-            tools:text="开通会员，畅聊5折聊天、购买金币额外赠送、会员个性化展示等专属特权。" />
+            android:textColor="#F12332"
+            android:textSize="@dimen/sp_12"
+            tools:text="请勿输入违反平台规范和法律法规的内容，一旦发现会被禁言或者永久封号，如情况严重还有可能被提交至公安机关立案" />
 
     </LinearLayout>
 
