@@ -1,7 +1,5 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
-import static com.tftechsz.mine.R.mipmap.ic_back_bg_black;
-
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -28,7 +26,9 @@ import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.bumptech.glide.Glide;
-import com.flyco.tablayout.SlidingTabLayout;
+import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.listener.CustomTabEntity;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.bean.AccostDto;
@@ -52,6 +52,7 @@ import com.tftechsz.common.entity.CallCheckDto;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.entity.NavigationLogEntity;
 import com.tftechsz.common.entity.RealStatusInfoDto;
+import com.tftechsz.common.entity.TabEntity;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.VoiceChatEvent;
 import com.tftechsz.common.iservice.MineService;
@@ -141,7 +142,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private int mediaTime, mediaTimeTemp;
     private PageStateManager mPageManager;
     private LottieAnimationView mLottieVoice;
-    private SlidingTabLayout mTabLayout;
+    private CommonTabLayout mTabLayout;
     private ViewPager mViewPager;
 
     @Override
@@ -215,17 +216,20 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
     private void setupTabAndViewPager() {
         if (mUserInfo == null) return;
-        List<String> titles = new ArrayList<>();
+        String firstTabName = "";
         if (TextUtils.isEmpty(mUserId)) {
-            titles.add(getString(R.string.about_me));
+            firstTabName = getString(R.string.about_me);
         } else {
             if (mUserInfo.isGirl()) {
-                titles.add(getString(R.string.about_her));
+                firstTabName = getString(R.string.about_her);
             } else {
-                titles.add(getString(R.string.about_he));
+                firstTabName = getString(R.string.about_he);
             }
         }
-        titles.add(getString(R.string.moment));
+        ArrayList<CustomTabEntity> entities = new ArrayList<>();
+        entities.add(new TabEntity(firstTabName, R.drawable.bg_triangle_up_333, 0));
+        entities.add(new TabEntity(getString(R.string.moment), R.drawable.bg_triangle_up_333, 0));
+        mTabLayout.setTabData(entities);
         List<Fragment> fragments = new ArrayList<>();
         fragments.add((Fragment) ARouter.getInstance()
                 .build(ARouterApi.FRAGMENT_USER_INFO)
@@ -237,8 +241,26 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 .withInt("type", 0)
                 .withInt("uid", TextUtils.isEmpty(mUserId) ? -1 : Integer.parseInt(mUserId))
                 .navigation());
-        mViewPager.setAdapter(new FragmentVpAdapter(getSupportFragmentManager(), fragments, titles));
-        mTabLayout.setViewPager(mViewPager);
+        mViewPager.setAdapter(new FragmentVpAdapter(getSupportFragmentManager(), fragments, null));
+        mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                mViewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                mTabLayout.setCurrentTab(position);
+            }
+        });
+        mViewPager.setCurrentItem(1);
     }
 
     private void initListener() {
@@ -274,7 +296,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                     @Override
                     public void onPageSelected(int position) {
                         mRvPic.post(() -> {
-                            TopSmoothScroller smoothScroller = new TopSmoothScroller(mContext,3f);
+                            TopSmoothScroller smoothScroller = new TopSmoothScroller(mContext, 3f);
                             smoothScroller.setTargetPosition(position);
 
                             mRvPic.getLayoutManager().startSmoothScroll(smoothScroller);
@@ -363,7 +385,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mRvPic.setAdapter(profilePhotoAdapter);
         profilePhotoAdapter.setOnItemClickListener((adapter, view, position) -> {
             mBanner.post(() -> {
-                mBanner.setCurrentItem(position+1, true);
+                mBanner.setCurrentItem(position + 1, true);
             });
         });
 
