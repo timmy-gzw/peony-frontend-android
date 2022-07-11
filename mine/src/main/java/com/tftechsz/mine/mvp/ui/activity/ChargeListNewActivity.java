@@ -28,6 +28,7 @@ import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.EmptyView;
+import com.tftechsz.common.widget.pop.BasePayPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.RechargeAdapter;
 import com.tftechsz.mine.mvp.IView.IChargePayView;
@@ -42,10 +43,10 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
     private TickerView mTvCoin;
     private RechargeAdapter mAdapter;
     private SmartRefreshLayout smartRefreshLayout;
-    private int payId;
     private int form_type;
     private IntegralDto mCoinBean;
     private RechargeDto mRechargeBean;
+    private BasePayPopWindow payPopWindow;
 
     @Override
     public ChargePayPresenter initPresenter() {
@@ -59,7 +60,7 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        ImmersionBar.with(mActivity).transparentStatusBar().navigationBarDarkIcon(false).statusBarDarkFont(false, 0.2f).init();
+        ImmersionBar.with(mActivity).transparentBar().navigationBarDarkIcon(false).statusBarDarkFont(false, 0.2f).init();
         new ToolBarBuilder().showBack(true)
                 .setTitle(getString(R.string.coin_recharge))
                 .setTitleColor(R.color.white)
@@ -89,7 +90,13 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
                                 JSON.toJSONString(new BuriedPointExtendDto(new BuriedPointExtendDto.RechargeExtendDto("", mAdapter.getItem(position).coin))), null);
             }
             mRechargeBean = mAdapter.getItem(position);
-            form_type = 2;
+            if (payPopWindow == null) {
+                payPopWindow = new BasePayPopWindow(this);
+            }
+            if (mRechargeBean == null) return;
+            payPopWindow.setTypeId(mRechargeBean.id);
+            payPopWindow.setPayInfo(mRechargeBean.rmb, mRechargeBean.coin);
+            payPopWindow.showPopupWindow();
         });
     }
 

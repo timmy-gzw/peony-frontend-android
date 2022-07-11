@@ -2,19 +2,28 @@ package com.tftechsz.common.widget.pop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.UnderlineSpan;
 import android.view.View;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.PayTask;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.umeng.analytics.MobclickAgent;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
-import com.tftechsz.common.adapter.ChargePayAdapter;
+import com.tftechsz.common.adapter.ChargePayTypeAdapter;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.databinding.PopBasePayBinding;
@@ -30,9 +39,9 @@ import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.common.widget.PayTextClick;
+import com.umeng.analytics.MobclickAgent;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -52,9 +61,10 @@ public class BasePayPopWindow extends BaseBottomPop {
     private final PayService service;
     private int typeId;
     private IWXAPI mApi;
-    private int oldSel = -1;
     private final Activity mActivity;
-    private ChargePayAdapter adapter;
+    private ChargePayTypeAdapter adapter;
+    private String rmb;
+    private String coin;
 
     public BasePayPopWindow(Activity context) {
         super(context);
@@ -67,6 +77,19 @@ public class BasePayPopWindow extends BaseBottomPop {
 
     public void setTypeId(int typeId) {
         this.typeId = typeId;
+    }
+
+    public void setPayInfo(String rmb, String coin) {
+        this.rmb = rmb;
+        this.coin = coin;
+        if (mBind == null) return;
+        if (!TextUtils.isEmpty(rmb) && !TextUtils.isEmpty(coin)) {
+            mBind.tvPayInfo.setVisibility(View.VISIBLE);
+            mBind.tvPayInfo.setText(Html.fromHtml(getContext().getString(R.string.recharge_coin_rmb_format, coin, rmb)));
+            mBind.tvPay.setText(getContext().getString(R.string.recharge_now_format, rmb));
+        } else {
+            mBind.tvPayInfo.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -113,11 +136,13 @@ public class BasePayPopWindow extends BaseBottomPop {
 
         });
 
-        mBind.payRecy.setLayoutManager(new LinearLayoutManager(mContext));
+        mBind.rvPayWay.setLayoutManager(new GridLayoutManager(mContext, 2));
+        mBind.rvPayWay.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(20f), ConvertUtils.dp2px(10f), false));
         ConfigInfo configInfo = userService.getConfigInfo();
         if (configInfo != null && configInfo.share_config != null && configInfo.share_config.payment_type != null) {
-            adapter = new ChargePayAdapter(configInfo.share_config.payment_type);
-            mBind.payRecy.setAdapter(adapter);
+            adapter = new ChargePayTypeAdapter();
+            mBind.rvPayWay.setAdapter(adapter);
+            adapter.setList(configInfo.share_config.payment_type);
             adapter.setOnItemClickListener((adapter1, view, position) -> {
                 if (typeId != 0) {
                     adapter.notifyDataPosition(position);
@@ -126,6 +151,21 @@ public class BasePayPopWindow extends BaseBottomPop {
                 }
             });
         }
+        if (configInfo != null && configInfo.api != null && configInfo.api.recharge_bottom != null && configInfo.api.recharge_bottom.size() > 0) {
+            SpannableStringBuilder builder = new SpannableStringBuilder();
+            for (ConfigInfo.MineInfo mineInfo : configInfo.api.recharge_bottom) {
+                builder.append(mineInfo.title);
+                if (!TextUtils.isEmpty(mineInfo.link)) {
+                    int start = builder.toString().indexOf(mineInfo.title);
+                    builder.setSpan(new PayTextClick(mContext, mineInfo), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    builder.setSpan(new UnderlineSpan(), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            mBind.tvTerms.setText(builder);
+            mBind.tvTerms.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
+        setPayInfo(rmb, coin);
     }
 
     public void getWxOrderNum(int typeId) {
@@ -171,10 +211,10 @@ public class BasePayPopWindow extends BaseBottomPop {
      */
     public void wakeUpAliPay(final String orderInfo) {
         Disposable disposable = Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            PayTask alipay = new PayTask((Activity) mContext);
-            String result = alipay.pay(orderInfo, true);
-            emitter.onNext(result);
-        }).subscribeOn(Schedulers.newThread())
+                    PayTask alipay = new PayTask((Activity) mContext);
+                    String result = alipay.pay(orderInfo, true);
+                    emitter.onNext(result);
+                }).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
                     AlipayResultInfo payResult = new AlipayResultInfo(s);
                     String resultStatus = payResult.getResultStatus();
