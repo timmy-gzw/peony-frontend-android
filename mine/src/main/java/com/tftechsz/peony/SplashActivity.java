@@ -3,6 +3,7 @@ package com.tftechsz.peony;
 import static java.lang.Boolean.TRUE;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.gyf.immersionbar.BarHide;
@@ -323,7 +325,17 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
             }
         } catch (Throwable ignore) {
         }
-        ARouterUtils.toMainActivity(msg);
+        try {
+            //todo 混淆可能不起作用
+            Class aClass = Class.forName("com.tftechsz.im.mvp.ui.activity.VideoCallActivity");
+            boolean activityExistsInStack = ActivityUtils.isActivityExistsInStack(aClass);
+            if(!activityExistsInStack){
+                ARouterUtils.toMainActivity(msg);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            ARouterUtils.toMainActivity(msg);
+        }
         finish();
     }
 
