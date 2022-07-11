@@ -82,6 +82,7 @@ interface Interfaces {
     String LINK_PEONY_PARTY_SELF_CHECK = "party_self_check"; //派对实名认证
     String LINK_PEONY_WITHDRAW_POP = "withdraw_pop"; //提现弹窗
     String LINK_PEONY_ABOUT_US = "about_us"; //关于我们
+    String LINK_PEONY_MESSAGE_LIST = "message_list"; //首页-消息列表tab
 
     String LINK_PEONY_INVITE = "invite_bind"; //邀请码填写
 
@@ -173,7 +174,7 @@ interface Interfaces {
     int USER_ILLEGAL = 20014;  // 非派对女用户不可收礼
     String MAIN_TAB_LOTTIE_FOLDER = "main_tab_lottie";
     String[] SEGMENT_DATA_LUCKY = {"1", "9", "66", "188", "520"};
-    String[] SEGMENT_DATA = {"1", "10", "52", "188", "520","1314"};
+    String[] SEGMENT_DATA = {"1", "10", "52", "188", "520", "1314"};
     String RECHARGE_NUMBER = "recharge_number";
     String FIY_NUMBER = "fiy_number";
     String SCENE_NUMBER = "scene_number";

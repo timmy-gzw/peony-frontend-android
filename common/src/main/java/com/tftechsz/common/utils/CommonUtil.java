@@ -61,7 +61,6 @@ import com.tftechsz.common.entity.WxPayResultInfo;
 import com.tftechsz.common.iservice.AttentionService;
 import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.widget.pop.CustomEditPopWindow;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.RealAuthPopWindow;
 import com.tftechsz.common.widget.pop.WithdrawPop;
@@ -742,6 +741,11 @@ public class CommonUtil {
             }
             if (substring.equals(Interfaces.LINK_PEONY_PARTY_SELF_CHECK)) { //派对实名认证
                 ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_SELF_CHECK);
+                return;
+            }
+            if (substring.equals(Interfaces.LINK_PEONY_MESSAGE_LIST)) { //首页-消息tab页
+                int chatIndex = MMKVUtils.getInstance().decodeInt(Constants.KEY_CHAT_TAB_INDEX);
+                ARouterUtils.toMainActivity(chatIndex);
                 return;
             }
             if (substring.contains(Interfaces.LINK_PEONY_WITHDRAW_POP)) { //提现弹窗 peony://withdraw_pop&type_id=10

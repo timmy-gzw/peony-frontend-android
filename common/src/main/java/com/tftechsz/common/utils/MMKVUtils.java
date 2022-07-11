@@ -44,7 +44,11 @@ public class MMKVUtils {
     }
 
     public int decodeInt(String key) {
-        return mmkv.decodeInt(key, 0);
+        return decodeInt(key, 0);
+    }
+
+    public int decodeInt(String key, int defaultValue) {
+        return mmkv.decodeInt(key, defaultValue);
     }
 
     public long decodeLong(String key) {

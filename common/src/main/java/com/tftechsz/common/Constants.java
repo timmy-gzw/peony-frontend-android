@@ -95,6 +95,7 @@ public class Constants {
     public static final String PARAMS_PERSONALIZED_RECOMMENDATION = "personalized_recommendation";//个性化推荐 默认开启
     public static final String KEY_SRL = "srl";//是否获取定位权限 true:申请权限 false：不申请
     public static final String KEY_IS_REVIEW = "key_is_review";//是否审核中 true：审核中
+    public static final String KEY_CHAT_TAB_INDEX = "chat_tab_index";//主页-消息tab的index
 
     public static final String FAMILY_APPLY = "family_apply";  //通知申请
     public static final String FAMILY_AIT = "family_ait";  //ait消息

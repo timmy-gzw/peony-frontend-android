@@ -299,6 +299,8 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                 initBus();
             }
         }, 1600);
+        //保存消息页位置
+        MMKVUtils.getInstance().encode(Constants.KEY_CHAT_TAB_INDEX, 2);
 
         if (service.getConfigInfo() != null && service.getConfigInfo().sys != null) {
             mIcon = service.getConfigInfo().sys.icon;
