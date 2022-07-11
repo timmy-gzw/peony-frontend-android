@@ -102,6 +102,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 //FIXME temp click listener
                 ARouter.getInstance().build(ARouterApi.ACTIVITY_GIFT_WALL)
+                        .withString("user_id",mUserId)
                         .navigation();
             }
         });

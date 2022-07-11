@@ -76,4 +76,6 @@
     <string name="about_her">关于她</string>
     <string name="about_he">关于他</string>
     <string name="moment">动态</string>
+    <string name="gift_wall">礼物墙</string>
+    <string name="my_gift_wall">查看我的礼物墙</string>
 </resources>

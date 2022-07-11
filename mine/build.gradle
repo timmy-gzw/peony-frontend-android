@@ -39,6 +39,7 @@ android {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
+        resConfigs "zh"
 
     }
     compileOptions {
