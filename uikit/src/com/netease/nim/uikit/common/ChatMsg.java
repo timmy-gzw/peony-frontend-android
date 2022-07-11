@@ -825,6 +825,8 @@ public class ChatMsg implements Serializable {
         public String nickname;
         public boolean is_selected = true;
         public AccostDto data;
+        public String sex;
+        public String age;
     }
 
     /**

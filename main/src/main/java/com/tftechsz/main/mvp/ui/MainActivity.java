@@ -741,13 +741,13 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
 
     private void performAccost() {
         //FIXME 暂无一键搭讪
-//        if (vp.getCurrentItem() != 3 && mAccostPopList != null && mAccostPopList.size() > 0) {
-//            if (mOneKeyAccostPopWindow == null)
-//                mOneKeyAccostPopWindow = new OneKeyAccostPopWindow(mContext);
-//            mOneKeyAccostPopWindow.setUserList(mAccostPopList);
-//            mOneKeyAccostPopWindow.showPopupWindow();
-//            mAccostPopList = null;
-//        }
+        if (vp.getCurrentItem() != 3 && mAccostPopList != null && mAccostPopList.size() > 0) {
+            if (mOneKeyAccostPopWindow == null)
+                mOneKeyAccostPopWindow = new OneKeyAccostPopWindow(mContext);
+            mOneKeyAccostPopWindow.setUserList(mAccostPopList);
+            mOneKeyAccostPopWindow.showPopupWindow();
+            mAccostPopList = null;
+        }
     }
 
     @Override
