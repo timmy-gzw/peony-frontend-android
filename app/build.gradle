@@ -150,6 +150,9 @@ android {
         BAIDU {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "BAIDU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
+        SAMSUNG {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "SAMSUNG", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
     }
 }
 
