@@ -153,6 +153,9 @@ android {
         SAMSUNG {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "SAMSUNG", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
+        CPS {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "CPS", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
     }
 }
 
