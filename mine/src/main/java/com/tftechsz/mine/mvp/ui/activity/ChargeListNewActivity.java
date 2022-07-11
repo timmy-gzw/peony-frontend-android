@@ -1,7 +1,5 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,8 +23,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.gyf.immersionbar.ImmersionBar;
-import com.luck.picture.lib.decoration.GridSpacingItemDecoration;
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.robinhood.ticker.TickerView;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.tftechsz.common.ARouterApi;
@@ -85,13 +82,6 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
     private RechargeDto mData;
     private TextView tvToPay;
 
-    public static void startActivity(Context context, String coin) {
-        Intent intent = new Intent(context, ChargeListNewActivity.class);
-        intent.putExtra(Interfaces.EXTRA_COIN_VALUE, coin);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-    }
-
     @Override
     public ChargePayPresenter initPresenter() {
         return new ChargePayPresenter();
@@ -116,10 +106,9 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
         mTvCoin = findViewById(R.id.tv_coin_num);
         mVpBg = findViewById(R.id.vp_bg);
         mRecy = findViewById(R.id.recycleview);
-        mRecy.setLayoutManager(new GridLayoutManager(this, 3));
-        mRecy.addItemDecoration(new GridSpacingItemDecoration(3, ConvertUtils.dp2px(10f), false));
-        mRecy.setPadding(ConvertUtils.dp2px(17f), 0, ConvertUtils.dp2px(17f), 0);
-        mRecy.setVerticalScrollBarEnabled(false);
+        mRecy.setLayoutManager(new LinearLayoutManager(this));
+        mRecy.addItemDecoration(new SpacingDecoration(0, ConvertUtils.dp2px(10f), true));
+        mRecy.setPadding(ConvertUtils.dp2px(16f), 0, ConvertUtils.dp2px(16f), 0);
         mRefresh = findViewById(R.id.smartrefreshlayout);
         mRefresh.setBackgroundResource(R.color.white);
         mEmptyView = findViewById(R.id.empty_view);
