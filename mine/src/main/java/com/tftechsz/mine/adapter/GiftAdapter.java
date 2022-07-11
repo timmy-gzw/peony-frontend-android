@@ -20,6 +20,5 @@ public class GiftAdapter extends BaseQuickAdapter<GiftDto, BaseViewHolder> {
     @Override
     protected void convert(@NonNull BaseViewHolder helper, GiftDto item) {
         GlideUtils.loadRouteImage(getContext(), helper.getView(R.id.iv_gift), item.image);
-        helper.setText(R.id.tv_gift_name, item.title);
     }
 }

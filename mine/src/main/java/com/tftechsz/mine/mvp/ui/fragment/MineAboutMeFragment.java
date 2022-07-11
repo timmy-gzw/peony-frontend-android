@@ -6,17 +6,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ConvertUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.tftechsz.common.ARouterApi;
@@ -31,6 +29,7 @@ import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 import com.tftechsz.mine.mvp.presenter.MineAboutMePresenter;
 import com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -55,7 +54,8 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
 
     //礼物相关
     private RecyclerView mRvGift;  //礼物
-    private TextView mTvGift, mTvGiftVip;
+    private TextView mTvGift, mTvGiftVip, tvGiftTitle, tvGiftCount;
+    private ConstraintLayout clGift;
 
     private BaseUserInfoAdapter userInfoAdapter;
     private GiftAdapter giftAdapter;
@@ -92,23 +92,22 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         //礼物
         mTvGift = getView(R.id.tv_gift);
         mTvGiftVip = getView(R.id.tv_gift_vip);
+        tvGiftTitle = getView(R.id.tv_gift_title);
+        tvGiftCount = getView(R.id.tv_gift_count);
+        clGift = getView(R.id.cl_mine_gift);
         mRvGift = getView(R.id.rv_gift);
-        mRvGift.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        mRvGift.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(8), ConvertUtils.dp2px(12), false));
+        mRvGift.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
         giftAdapter = new GiftAdapter();
         mRvGift.setAdapter(giftAdapter);
-        giftAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                //FIXME temp click listener
-                ARouter.getInstance().build(ARouterApi.ACTIVITY_GIFT_WALL)
-                        .withString("user_id",mUserId)
-                        .navigation();
-            }
+        giftAdapter.setOnItemClickListener((adapter, view, position) -> {
+            ARouter.getInstance().build(ARouterApi.ACTIVITY_GIFT_WALL)
+                    .withString("user_id", mUserId)
+                    .navigation();
         });
         if (TextUtils.isEmpty(mUserId)) {   //自己
             tvUserInfo.setText(getString(R.string.personal_info));
             tvLevelTitle.setText(getString(R.string.level_mine));
+            tvGiftTitle.setText(getString(R.string.receive_gift_my));
         } else {
             tvUserInfo.setText(getString(R.string.basic_info));
             tvLevelVip.setVisibility(View.GONE);
@@ -161,6 +160,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             }
         } else {
             tvLevelTitle.setText(mUserInfo.isGirl() ? getString(R.string.level_her) : getString(R.string.level_his));
+            tvGiftTitle.setText(mUserInfo.isGirl() ? getString(R.string.receive_gift_her) : getString(R.string.receive_gift_his));
         }
     }
 
@@ -180,18 +180,22 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     @Override
     public void getGiftSuccess(List<GiftDto> data) {
         if (null == data || data.size() <= 0) {
-            mRvGift.setVisibility(View.GONE);
+            clGift.setVisibility(View.GONE);
             mTvGift.setVisibility(View.GONE);
             mTvGiftVip.setVisibility(View.GONE);
         } else {
             if (mUserInfo != null && mUserInfo.open_hidden_gift == 1 && !TextUtils.isEmpty(mUserId)) {
-                mRvGift.setVisibility(View.GONE);
+                clGift.setVisibility(View.GONE);
                 mTvGift.setVisibility(View.GONE);
                 mTvGiftVip.setVisibility(View.GONE);
             } else {
-                giftAdapter.setList(data);
-                mRvGift.setVisibility(View.VISIBLE);
+                List<GiftDto> giftList = data.subList(0, 3);
+                Collections.reverse(giftList);
+                giftAdapter.setList(giftList);
+                clGift.setVisibility(View.VISIBLE);
                 mTvGift.setVisibility(View.VISIBLE);
+                // TODO: 2022/7/11 礼物墙-收到的数量 
+                tvGiftCount.setText("125/300");
             }
         }
     }

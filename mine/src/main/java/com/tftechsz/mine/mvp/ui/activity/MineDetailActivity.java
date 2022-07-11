@@ -260,7 +260,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 mTabLayout.setCurrentTab(position);
             }
         });
-        mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(0);
     }
 
     private void initListener() {
