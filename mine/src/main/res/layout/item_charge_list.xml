@@ -30,14 +30,14 @@
         app:autoSizeMinTextSize="@dimen/sp_10"
         app:autoSizeTextType="uniform"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@+id/tv_coin_desc"
+        app:layout_constraintBottom_toTopOf="@+id/tv_coin_title"
         app:layout_constraintStart_toEndOf="@id/iv_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="12345566" />
 
     <TextView
-        android:id="@+id/tv_coin_desc"
+        android:id="@+id/tv_coin_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_2"
@@ -50,7 +50,7 @@
         tools:text="首充多送40金币" />
 
     <TextView
-        android:id="@+id/tv_desc"
+        android:id="@+id/tv_coin_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_4"
@@ -61,9 +61,9 @@
         android:paddingBottom="@dimen/dp_2"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_10"
-        app:layout_constraintBaseline_toBaselineOf="@id/tv_coin"
         app:layout_constraintBottom_toBottomOf="@id/tv_coin"
         app:layout_constraintStart_toEndOf="@id/tv_coin"
+        app:layout_constraintTop_toTopOf="@id/tv_coin"
         tools:text="多送40金币" />
 
     <TextView
@@ -71,8 +71,8 @@
         android:layout_width="@dimen/dp_70"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_20"
+        android:background="@drawable/sp_recharge_coin_rmb"
         android:gravity="center"
-        android:background="@drawable/sp_recharge_coin_desc"
         android:paddingVertical="@dimen/dp_6"
         android:textColor="#D06D0C"
         android:textSize="@dimen/sp_16"

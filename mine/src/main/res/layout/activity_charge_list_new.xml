@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,234 +8,67 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_recharge_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.core.widget.NestedScrollView
+        <View
+            android:id="@+id/view_bg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:scrollbars="none"
-            app:layout_constraintBottom_toTopOf="@id/tv_pay"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@mipmap/bg_recharge"
+            app:layout_constraintDimensionRatio="375:218"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <View
-                    android:id="@+id/view_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@mipmap/bg_recharge"
-                    app:layout_constraintDimensionRatio="375:218"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_10"
-                    android:background="@drawable/shape_lt_rt_10_ffffff"
-                    app:layout_constraintBottom_toBottomOf="@+id/view_bg" />
-
-                <TextView
-                    android:id="@+id/tv_coin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:drawablePadding="@dimen/dp_6"
-                    android:gravity="center"
-                    android:text="@string/coin_balance"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_14"
-                    app:layout_constraintBottom_toTopOf="@id/tv_coin_num"
-                    app:layout_constraintStart_toStartOf="@id/tv_coin_num" />
-
-                <com.robinhood.ticker.TickerView
-                    android:id="@+id/tv_coin_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:layout_marginBottom="@dimen/dp_30"
-                    android:drawablePadding="@dimen/dp_6"
-                    android:textColor="@color/white"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/view_bg"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:ticker_animationDuration="0"
-                    app:ticker_defaultCharacterList="number"
-                    tools:text="0" />
-
-                <ImageView
-                    android:id="@+id/vp_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:scaleType="centerCrop"
-                    android:visibility="gone"
-                    app:layout_constraintDimensionRatio="343:70"
-                    app:layout_constraintTop_toBottomOf="@id/view"
-                    tools:ignore="ContentDescription"
-                    tools:src="@mipmap/default_mine_vip_bg_nor"
-                    tools:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/tv_first_recharge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_16"
-                    android:layout_marginEnd="@dimen/dp_16"
-                    android:background="@drawable/bg_first_recharge"
-                    android:gravity="center"
-                    android:padding="@dimen/dp_15"
-                    android:text="首充送2小时至尊VIP会员"
-                    android:textColor="@color/color_normal"
-                    android:textSize="@dimen/sp_15"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/vp_bg" />
-
-                <TextView
-                    android:id="@+id/tv_rechare_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/dp_16"
-                    android:paddingTop="@dimen/dp_12"
-                    android:paddingEnd="@dimen/dp_16"
-                    android:paddingBottom="@dimen/dp_12"
-                    android:text="@string/recharge_amount"
-                    android:textColor="@color/color_333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_first_recharge" />
-
-                <include
-                    layout="@layout/base_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_0"
-                    app:layout_constraintStart_toStartOf="@+id/parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_rechare_title" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_pay_way"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/smartrefreshlayout" />
-
-                <RelativeLayout
-                    android:id="@+id/rl_zfb"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:layout_marginTop="@dimen/dp_10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_pay_way">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:drawablePadding="@dimen/dp_10"
-                        android:gravity="center"
-                        android:text="@string/pay_ali"
-                        android:textColor="@color/color_normal"
-                        android:textSize="@dimen/sp_15"
-                        app:drawableStartCompat="@mipmap/ic_zxb" />
-
-                    <CheckBox
-                        android:id="@+id/checkbox"
-                        android:layout_width="@dimen/dp_30"
-                        android:layout_height="@dimen/dp_40"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="@color/transparent"
-                        android:button="@drawable/check_protocol_pay"
-                        android:checked="true"
-                        android:clickable="false"
-                        android:focusable="false" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rl_wx"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:layout_marginTop="@dimen/dp_10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rl_zfb">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:drawablePadding="@dimen/dp_10"
-                        android:gravity="center"
-                        android:text="@string/pay_wechat"
-                        android:textColor="@color/color_normal"
-                        android:textSize="@dimen/sp_15"
-                        app:drawableStartCompat="@mipmap/ic_wx" />
-
-                    <CheckBox
-                        android:id="@+id/checkbox2"
-                        android:layout_width="@dimen/dp_30"
-                        android:layout_height="@dimen/dp_40"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="@color/transparent"
-                        android:button="@drawable/check_protocol_pay"
-                        android:checked="false"
-                        android:clickable="false"
-                        android:focusable="false" />
-
-                </RelativeLayout>
-
-                <androidx.legacy.widget.Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_24"
-                    app:layout_constraintTop_toBottomOf="@id/rl_wx" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"
+            android:background="@drawable/shape_lt_rt_10_ffffff"
+            app:layout_constraintBottom_toBottomOf="@+id/view_bg" />
 
         <TextView
-            android:id="@+id/tv_pay"
-            style="@style/CustomButton"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginBottom="@dimen/dp_20"
-            android:background="@drawable/bg_pay_btn"
-            android:paddingTop="@dimen/dp_12"
-            android:paddingBottom="@dimen/dp_12"
-            android:text="@string/pay_now"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"
-            app:layout_constraintBottom_toTopOf="@+id/tv_contact"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_contact"
+            android:id="@+id/tv_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_6"
             android:gravity="center"
-            android:text="@string/recharge_agreement"
-            android:textColor="@color/color_light_font"
-            android:textSize="@dimen/sp_10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="@string/coin_balance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toTopOf="@id/tv_coin_num"
+            app:layout_constraintStart_toStartOf="@id/tv_coin_num" />
+
+        <com.robinhood.ticker.TickerView
+            android:id="@+id/tv_coin_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:drawablePadding="@dimen/dp_6"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:ticker_animationDuration="0"
+            app:ticker_defaultCharacterList="number"
+            tools:text="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        layout="@layout/base_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_recharge_header" />
 
     <include
         layout="@layout/tool_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
