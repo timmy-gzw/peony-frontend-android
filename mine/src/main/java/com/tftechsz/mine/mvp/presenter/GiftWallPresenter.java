@@ -11,6 +11,7 @@ import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IGiftWallView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GiftWallPresenter extends BasePresenter<IGiftWallView> {
@@ -35,7 +36,7 @@ public class GiftWallPresenter extends BasePresenter<IGiftWallView> {
                     @Override
                     public void onSuccess(BaseResponse<UserInfo> response) {
                         if (getView() == null) return;
-                        getView().getUserInfoSuccess(response.getData());
+                        getView().onGetUserInfoSuccess(response.getData());
                     }
                 }));
     }
@@ -50,7 +51,7 @@ public class GiftWallPresenter extends BasePresenter<IGiftWallView> {
                     @Override
                     public void onSuccess(BaseResponse<UserInfo> response) {
                         if (getView() == null) return;
-                        getView().getUserInfoSuccess(response.getData());
+                        getView().onGetUserInfoSuccess(response.getData());
                     }
                 }));
     }
@@ -64,7 +65,7 @@ public class GiftWallPresenter extends BasePresenter<IGiftWallView> {
                     @Override
                     public void onSuccess(BaseResponse<List<GiftDto>> response) {
                         if (getView() == null) return;
-                        getView().getGiftSuccess(response.getData());
+                        getView().onGetGiftSuccess(response.getData());
                     }
                 }));
     }
@@ -78,7 +79,21 @@ public class GiftWallPresenter extends BasePresenter<IGiftWallView> {
                     @Override
                     public void onSuccess(BaseResponse<List<GiftDto>> response) {
                         if (getView() == null) return;
-                        getView().getGiftSuccess(response.getData());
+                        getView().onGetGiftSuccess(response.getData());
+                    }
+                }));
+    }
+
+    /**
+     * 获取所有礼物
+     */
+    public void getGiftList(String userId) {
+        addNet(exchService.getGiftList(userId).compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<ArrayList<GiftDto>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<ArrayList<GiftDto>> response) {
+                        if (getView() == null) return;
+                        getView().onGetGiftSuccess(response.getData());
                     }
                 }));
     }

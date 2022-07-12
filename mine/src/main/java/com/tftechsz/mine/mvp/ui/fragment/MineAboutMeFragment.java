@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -30,7 +31,9 @@ import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 import com.tftechsz.mine.mvp.presenter.MineAboutMePresenter;
 import com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity;
+import com.tftechsz.mine.utils.UserManager;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,6 +64,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
 
     private BaseUserInfoAdapter userInfoAdapter;
     private GiftAdapter giftAdapter;
+    private ArrayList<GiftDto> gifts = null;
 
     @Override
     protected int getLayout() {
@@ -111,9 +115,12 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         giftAdapter = new GiftAdapter();
         mRvGift.setAdapter(giftAdapter);
         giftAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ARouter.getInstance().build(ARouterApi.ACTIVITY_GIFT_WALL)
-                    .withString("user_id", mUserId)
-                    .navigation();
+            Postcard postcard = ARouter.getInstance().build(ARouterApi.ACTIVITY_GIFT_WALL)
+                    .withString("user_id", mUserId);
+            if (gifts != null && gifts.size() > 0) {
+                postcard.withParcelableArrayList("gifts", gifts);
+            }
+            postcard.navigation();
         });
         if (TextUtils.isEmpty(mUserId)) {   //自己
             tvUserInfo.setText(getString(R.string.personal_info));
@@ -178,11 +185,13 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     }
 
     private void initNet() {
+        String uid;
         if (TextUtils.isEmpty(mUserId)) {   //自己
-            p.getSelfGift(20);
+            uid = UserManager.getInstance().getUserId() + "";
         } else {
-            p.getUserGift(20, mUserId);
+            uid = mUserId;
         }
+        p.getGiftList(uid);
     }
 
     @Override
@@ -191,7 +200,8 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     }
 
     @Override
-    public void getGiftSuccess(List<GiftDto> data) {
+    public void getGiftSuccess(ArrayList<GiftDto> data) {
+        gifts = data;
         if (null == data || data.size() <= 0) {
             clGift.setVisibility(View.GONE);
             mTvGift.setVisibility(View.GONE);
@@ -207,8 +217,14 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
                 giftAdapter.setList(giftList);
                 clGift.setVisibility(View.VISIBLE);
                 mTvGift.setVisibility(View.VISIBLE);
-                // TODO: 2022/7/11 礼物墙-收到的数量 
-                tvGiftCount.setText("125/300");
+                //fixme 礼物计数
+                int count = 0;
+                for (GiftDto dto : data) {
+                    if (dto.number > 0) {
+                        count++;
+                    }
+                }
+                tvGiftCount.setText(count + "/" + data.size());
             }
         }
     }

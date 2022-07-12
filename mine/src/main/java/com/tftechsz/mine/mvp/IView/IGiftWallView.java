@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface IGiftWallView extends MvpView {
 
-    void getUserInfoSuccess(UserInfo userInfo);
+    void onGetUserInfoSuccess(UserInfo userInfo);
 
-    void getGiftSuccess(List<GiftDto> data);
+    void onGetGiftSuccess(List<GiftDto> data);
 
 }

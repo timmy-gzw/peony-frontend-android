@@ -20,6 +20,7 @@ import com.tftechsz.mine.databinding.ActivityGiftWallBinding
 import com.tftechsz.mine.entity.dto.GiftDto
 import com.tftechsz.mine.mvp.IView.IGiftWallView
 import com.tftechsz.mine.mvp.presenter.GiftWallPresenter
+import com.tftechsz.mine.utils.UserManager
 
 /**
  * 礼物墙
@@ -30,6 +31,10 @@ class GiftWallActivity : BaseMvpActivity<IGiftWallView, GiftWallPresenter>(), IG
     @JvmField
     @Autowired(name = "user_id")
     var userId: String? = null
+
+    @JvmField
+    @Autowired(name = "gifts")
+    var gifts: ArrayList<GiftDto>? = null
 
     private val giftWallAdapter by lazy {
         val wallAdapter = GiftWallAdapter()
@@ -84,21 +89,28 @@ class GiftWallActivity : BaseMvpActivity<IGiftWallView, GiftWallPresenter>(), IG
     private fun getData() {
         if (userId.isNullOrBlank()) {
             p.getUserInfoDetail()
-            p.getSelfGift(mPageSize)
         } else {
             p.getUserInfoById(userId)
-            p.getUserGift(mPageSize, userId)
+        }
+        val uid = if (userId.isNullOrBlank()) {
+            val id = UserManager.getInstance().userId
+            id.toString()
+        } else userId
+        if (gifts.isNullOrEmpty()) {
+            p.getGiftList(uid)
+        } else {
+            onGetGiftSuccess(gifts)
         }
     }
 
-    override fun getUserInfoSuccess(userInfo: UserInfo?) {
+    override fun onGetUserInfoSuccess(userInfo: UserInfo?) {
         binding.tvUsername.text = userInfo?.nickname
-        //fixme 礼物墙 礼物数量
-//        binding.tvGiftCount.text = userInfo?.nickname
         GlideUtils.loadImage(this, binding.civAvatar, userInfo?.icon)
     }
 
-    override fun getGiftSuccess(data: MutableList<GiftDto>?) {
+    override fun onGetGiftSuccess(data: MutableList<GiftDto>?) {
         giftWallAdapter.setList(data)
+        val count = data?.count { it.number > 0 }
+        binding.tvGiftCount.text = "$count/${data?.size ?: 0}"
     }
 }
