@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -36,7 +37,6 @@ import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.netease.nim.uikit.common.UserInfo;
-import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.netease.nimlib.sdk.media.player.AudioPlayer;
 import com.netease.nimlib.sdk.media.player.OnPlayListener;
 import com.tftechsz.common.ARouterApi;
@@ -57,6 +57,7 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.VoiceChatEvent;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.other.SpaceItemDecoration;
 import com.tftechsz.common.pagestate.PageStateConfig;
 import com.tftechsz.common.pagestate.PageStateManager;
 import com.tftechsz.common.utils.ARouterUtils;
@@ -96,6 +97,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private Banner mBanner;
     private RecyclerView mRvPic;//相册
     private ImageView ivPicAdd;
+    private View viewPicMask;
     private TextView mTvEditInfo;
     private ImageView mTobBack, mTobMore;
     private AppBarLayout mAppBarLayout;
@@ -166,11 +168,12 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mBanner.addBannerLifecycleObserver(this);
         //个人相册
         ivPicAdd = findViewById(R.id.iv_profile_add);
+        viewPicMask = findViewById(R.id.view_mask);
         ivPicAdd.setOnClickListener(this);
         ivPicAdd.setVisibility(TextUtils.isEmpty(mUserId) ? View.VISIBLE : View.GONE);
         mRvPic = findViewById(R.id.rv_profile_pic);
         mRvPic.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        mRvPic.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(6), 0, false));
+        mRvPic.addItemDecoration(new SpaceItemDecoration(ConvertUtils.dp2px(6), 0, false));
 
         mTvTobTitle = findViewById(R.id.tob_title);  //名称
         mTobMore = findViewById(R.id.tob_more);
@@ -277,6 +280,20 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         mLlVoice.setOnClickListener(this);  //去录音
         mIvVoice.setOnClickListener(this);
+        mRvPic.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (!mRvPic.canScrollHorizontally(-1)) {
+                        viewPicMask.setVisibility(View.VISIBLE);
+                    } else {
+                        viewPicMask.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
 
         MyBannerImageAdapter<String> bannerImageAdapter = new MyBannerImageAdapter<String>(null) {
 

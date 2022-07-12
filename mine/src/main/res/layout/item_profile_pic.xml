@@ -27,7 +27,7 @@
             android:layout_width="37dp"
             android:layout_height="37dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_avatar_male"
+            android:src="@mipmap/ic_default_avatar"
             tools:ignore="ContentDescription" />
 
     </androidx.cardview.widget.CardView>
