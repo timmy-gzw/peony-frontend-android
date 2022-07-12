@@ -147,6 +147,18 @@ android {
         KUAISHOU0 {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU0", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
+        KUAISHOU1 {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU1", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        KUAISHOU2 {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU2", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        KUAISHOU3 {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU3", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        KUAISHOU4 {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU4", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
         BAIDU {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "BAIDU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
