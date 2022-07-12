@@ -143,6 +143,15 @@ public interface MineApiService {
     Flowable<BaseResponse<GetBindData>> getBindData();
 
     /**
+     * 第三方解绑
+     *  有效值：wechat、qq
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("unbind/third")
+    Flowable<BaseResponse> unBindThird(@Field("type")String type);
+
+    /**
      * 用户信息完善
      */
     @POST("info/complete")

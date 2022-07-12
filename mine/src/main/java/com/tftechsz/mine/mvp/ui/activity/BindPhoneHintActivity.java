@@ -8,6 +8,7 @@ import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.event.CommonEvent;
+import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ActBindPhoneHintBinding;
 import com.tftechsz.mine.entity.req.GetBindData;
@@ -93,6 +94,11 @@ public class BindPhoneHintActivity extends BaseMvpActivity<IAccountBindingView, 
 
     @Override
     public void bindPhoneSuccess(String data) {
+
+    }
+
+    @Override
+    public void unBindThirdSuccess(BaseResponse data) {
 
     }
 }

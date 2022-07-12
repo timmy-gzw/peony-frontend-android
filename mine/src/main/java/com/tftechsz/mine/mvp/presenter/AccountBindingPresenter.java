@@ -60,6 +60,17 @@ public class AccountBindingPresenter extends BasePresenter<IAccountBindingView> 
                 }));
     }
 
+    public void unBindThird(String type) {
+        addNet(service.unBindThird(type).compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse>(getView()) {
+                    @Override
+                    public void onSuccess(BaseResponse response) {
+                        if (null == getView()) return;
+                        getView().unBindThirdSuccess(response);
+                    }
+                }));
+    }
+
     public void bindData(boolean enabled, BindData pram) {
         if (enabled) {
             addNet(service.bindData(pram).compose(BasePresenter.applySchedulers())
