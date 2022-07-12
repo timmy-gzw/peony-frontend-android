@@ -1,11 +1,15 @@
 package com.tftechsz.common.utils;
 
+import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT;
+
 import android.app.Activity;
 import android.content.Intent;
 
+import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.netease.nim.uikit.api.model.session.SessionCustomization;
+import com.netease.nim.uikit.business.session.constant.Extras;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nimlib.sdk.NimIntent;
@@ -27,8 +31,6 @@ import com.tftechsz.common.widget.pop.CustomPopWindow;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT;
 
 public class ARouterUtils {
 
@@ -201,14 +203,24 @@ public class ARouterUtils {
 
     /**
      * 跳转聊天
+     *
+     * @param isAutoShowGiftPanel 进到P2P聊天页面是否自动弹起礼物弹窗
      */
-    public static void toChatP2PActivity(String account, SessionCustomization customization, IMMessage anchor) {
-        ARouter.getInstance().build(ARouterApi.ACTIVITY_P2P_MESSAGE)
+    public static void toChatP2PActivity(String account, SessionCustomization customization, IMMessage anchor, boolean isAutoShowGiftPanel) {
+        Postcard postcard = ARouter.getInstance().build(ARouterApi.ACTIVITY_P2P_MESSAGE)
                 .withString("account", account)
                 .withSerializable("customization", customization)
                 .withSerializable("anchor", anchor)
-                .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .navigation();
+                .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (isAutoShowGiftPanel) postcard.withBoolean(Extras.EXTRA_AUTO_SHOW_GIFT_PANEL, true);
+        postcard.navigation();
+    }
+
+    /**
+     * 跳转聊天
+     */
+    public static void toChatP2PActivity(String account, SessionCustomization customization, IMMessage anchor) {
+        toChatP2PActivity(account, customization, anchor, false);
     }
 
     /**

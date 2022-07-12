@@ -263,6 +263,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private int mHeight;//派对window显示高度
     // p2p对方Account或者群id
     protected String sessionId;
+    private boolean isAutoShowPanel;
     protected CompositeDisposable mCompositeDisposable;
 
     protected ImageView ivChatPhoto, ivChatRed, mIvVoiceCall;
@@ -1007,6 +1008,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 if (inputPanel.mEmojiButtonNew != null) {
                     inputPanel.mEmojiButtonNew.setVisibility(View.VISIBLE);
                 }
+            }
+            if (isAutoShowPanel) {
+                showGiftPop(sessionId, mTeamType == 1 ? 5 : 2);
             }
         }
     }
@@ -1856,6 +1860,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         sessionType = (SessionTypeEnum) arguments.getSerializable(Extras.EXTRA_TYPE);
         tagIsDialog = arguments.getInt(EXTRA_TYPE_DIALOG_ACTIVITY);
         mHeight = arguments.getInt(EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT);
+        isAutoShowPanel = arguments.getBoolean(Extras.EXTRA_AUTO_SHOW_GIFT_PANEL);
         if (tagIsDialog == 1) {//dialog样式
 //            mRlToolBar.setBackground(getResources().getDrawable(R.drawable.bg_mine_white_top));
 //            mRlTeam.setBackground(getResources().getDrawable(R.drawable.bg_mine_white_top));

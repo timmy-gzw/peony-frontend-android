@@ -29,6 +29,7 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.gyf.immersionbar.ImmersionBar;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.bean.AccostDto;
 import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.ConfigInfo;
@@ -276,6 +277,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         findViewById(R.id.tv_call_video).setOnClickListener(this);   //语音视频
         findViewById(R.id.rl_guard).setOnClickListener(this);   //守护
         findViewById(R.id.ll_auth).setOnClickListener(this);
+        findViewById(R.id.tv_mine_gift).setOnClickListener(this);
 
         mLlVoice.setOnClickListener(this);  //去录音
         mIvVoice.setOnClickListener(this);
@@ -707,9 +709,13 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     }
 
     @Override
-    public void getCheckMsgSuccess(String userId, MsgCheckDto data) {
+    public void getCheckMsgSuccess(String userId, MsgCheckDto data, boolean isAutoShowGiftPanel) {
         if (null == data || !CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
-            CommonUtil.checkMsg(service.getConfigInfo(), userId, data);
+            if (isAutoShowGiftPanel) {
+                ARouterUtils.toChatP2PActivity(userId + "", NimUIKit.getCommonP2PSessionCustomization(), null, true);
+            } else {
+                CommonUtil.checkMsg(service.getConfigInfo(), userId, data);
+            }
         }
     }
 
@@ -898,7 +904,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                             p.accostUser(String.valueOf(mUserInfo.getUser_id()), CommonUtil.isBtnTextDetail(service, mUserInfo.isBoy()) ? 1 : 2);
                             setAccostClickLog(CommonUtil.isBtnTextDetail(service, mUserInfo.isBoy()) ? 2 : 1, 2);
                         } else {
-                            p.getMsgCheck(mUserId);
+                            p.getMsgCheck(mUserId, false);
                         }
                     } else if (CommonUtil.infoBtnTextUpdate3(service)) {   //搭讪
                         p.accostUser(String.valueOf(mUserInfo.getUser_id()), CommonUtil.isBtnTextDetail(service, mUserInfo.isBoy()) ? 1 : 2);
@@ -908,7 +914,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                             p.accostUser(String.valueOf(mUserInfo.getUser_id()), CommonUtil.isBtnTextDetail(service, mUserInfo.isBoy()) ? 1 : 2);
                             setAccostClickLog(CommonUtil.isBtnTextDetail(service, mUserInfo.isBoy()) ? 2 : 1, 2);
                         } else {
-                            p.getMsgCheck(mUserId);
+                            p.getMsgCheck(mUserId, false);
                         }
                     }
                 }
@@ -922,7 +928,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 //                CommonUtil.showFirstAccostPop();
 //                return;
 //            }
-            p.getMsgCheck(mUserId);
+            p.getMsgCheck(mUserId, false);
 //            ARouterUtils.toChatP2PActivity(mUserInfo.getUser_id() + "", NimUIKit.getCommonP2PSessionCustomization(), null);
         } else if (id == R.id.ll_voice) {  //去录音
             if (!TextUtils.isEmpty(mUserId)) {
@@ -989,6 +995,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         } else if (id == R.id.iv_profile_add) { //查看/添加更多照片
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_PHOTO);
+        } else if (id == R.id.tv_mine_gift) {//礼物
+            p.getMsgCheck(mUserId, true);
         }
     }
 

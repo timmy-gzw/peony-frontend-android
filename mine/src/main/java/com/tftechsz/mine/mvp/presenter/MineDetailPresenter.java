@@ -297,12 +297,12 @@ public class MineDetailPresenter extends BasePresenter<IMineDetailView> {
     /**
      * 检查私信次数
      */
-    public void getMsgCheck(String userId) {
+    public void getMsgCheck(String userId, boolean isAutoShowGiftPanel) {
         mineService.getMsgCheck(userId, new ResponseObserver<BaseResponse<MsgCheckDto>>() {
             @Override
             public void onSuccess(BaseResponse<MsgCheckDto> response) {
                 if (null == getView()) return;
-                getView().getCheckMsgSuccess(userId, response.getData());
+                getView().getCheckMsgSuccess(userId, response.getData(), isAutoShowGiftPanel);
             }
 
             @Override

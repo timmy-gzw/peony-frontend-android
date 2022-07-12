@@ -1,11 +1,11 @@
 package com.tftechsz.mine.mvp.IView;
 
-import com.tftechsz.common.base.MvpView;
 import com.netease.nim.uikit.bean.AccostDto;
+import com.netease.nim.uikit.common.UserInfo;
+import com.tftechsz.common.base.MvpView;
 import com.tftechsz.common.entity.CallCheckDto;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.entity.RealStatusInfoDto;
-import com.netease.nim.uikit.common.UserInfo;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.entity.dto.TrendDto;
 
@@ -36,7 +36,7 @@ public interface IMineDetailView extends MvpView {
 
     void getCallCheckSuccess(CallCheckDto data);
 
-    void getCheckMsgSuccess(String userId, MsgCheckDto data);
+    void getCheckMsgSuccess(String userId, MsgCheckDto data, boolean isAutoShowGiftPanel);
 
     void getCheckCallSuccess(String userId, CallCheckDto data);
 }
