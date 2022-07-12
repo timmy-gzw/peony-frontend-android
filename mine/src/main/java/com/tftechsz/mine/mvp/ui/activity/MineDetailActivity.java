@@ -280,20 +280,18 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
         mLlVoice.setOnClickListener(this);  //去录音
         mIvVoice.setOnClickListener(this);
-        mRvPic.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (!mRvPic.canScrollHorizontally(-1)) {
-                        viewPicMask.setVisibility(View.VISIBLE);
-                    } else {
-                        viewPicMask.setVisibility(View.GONE);
-                    }
-                }
-            }
-        });
+//        mRvPic.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                if (!mRvPic.canScrollHorizontally(-1)) {
+//                    viewPicMask.setVisibility(View.VISIBLE);
+//                } else {
+//                    viewPicMask.setVisibility(View.GONE);
+//                }
+//            }
+//        });
 
         MyBannerImageAdapter<String> bannerImageAdapter = new MyBannerImageAdapter<String>(null) {
 

@@ -118,9 +118,11 @@
 
             <View
                 android:id="@+id/view_mask"
-                android:layout_width="@dimen/dp_38"
+                android:layout_width="@dimen/dp_20"
                 android:layout_height="0dp"
+                android:layout_margin="@dimen/dp_1"
                 android:background="@drawable/sp_g_tran_white"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/rv_profile_pic"
                 app:layout_constraintEnd_toEndOf="@id/rv_profile_pic"
                 app:layout_constraintTop_toTopOf="@id/rv_profile_pic" />
