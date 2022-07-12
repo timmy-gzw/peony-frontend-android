@@ -363,7 +363,7 @@
 		app:tl_indicator_anim_enable="false"
 		app:tl_indicator_color="@color/color_normal"
 		app:tl_indicator_gravity="BOTTOM"
-		app:tl_indicator_height="@dimen/dp_1"
+		app:tl_indicator_height="@dimen/dp_2"
 		app:tl_indicator_margin_bottom="@dimen/dp_10"
 		app:tl_indicator_margin_top="0dp"
 		app:tl_indicator_style="NORMAL"

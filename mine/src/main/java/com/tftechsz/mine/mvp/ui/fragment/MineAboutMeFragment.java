@@ -1,6 +1,7 @@
 package com.tftechsz.mine.mvp.ui.fragment;
 
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.ClipboardUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
@@ -73,6 +75,15 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         rvUserInfo.setLayoutManager(new GridLayoutManager(getContext(), 2));
         rvUserInfo.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(15f), ConvertUtils.dp2px(6), false));
         userInfoAdapter = new BaseUserInfoAdapter();
+        userInfoAdapter.addChildClickViewIds(R.id.iv_copy);
+        userInfoAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            if (view.getId() == R.id.iv_copy) {
+                UserInfo.BaseInfo item = userInfoAdapter.getItem(position);
+                if (item == null) return;
+                ClipboardUtils.copyText(item.value);
+                toastTip("复制成功");
+            }
+        });
         rvUserInfo.setAdapter(userInfoAdapter);
         //等级
         mClLevel = getView(R.id.cl_level);
@@ -125,12 +136,14 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         if (mUserInfo == null) return;
         if (userInfoAdapter != null) {
             List<UserInfo.BaseInfo> infoList = mUserInfo.info;
+            TextPaint textPaint = new TextPaint();
+            textPaint.setTextSize(ConvertUtils.dp2px(12f));
             int max = 0;
             for (UserInfo.BaseInfo baseInfo : infoList) {
-                int length = baseInfo.title.length();
-                max = Math.max(max, length);
+                float measuredWidth = textPaint.measureText(baseInfo.title);
+                max = Math.max(max, Math.round(measuredWidth));
             }
-            userInfoAdapter.setMinEms(max);
+            userInfoAdapter.setTextViewMaxWidth(max);
             userInfoAdapter.setList(infoList);
         }
         if (mUserInfo.levels != null && mUserInfo.levels.rich != null && mUserInfo.levels.charm != null) {
