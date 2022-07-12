@@ -207,7 +207,8 @@
                 android:layout_centerVertical="true"
                 android:paddingStart="@dimen/dp_17"
                 android:paddingTop="@dimen/dp_5"
-                android:paddingEnd="@dimen/dp_17"
+                android:paddingEnd="0dp"
+                android:layout_marginEnd="@dimen/dp_16"
                 android:paddingBottom="@dimen/dp_5"
                 android:src="@mipmap/ic_more_white_no_bg"
                 tools:ignore="UseAppTint" />

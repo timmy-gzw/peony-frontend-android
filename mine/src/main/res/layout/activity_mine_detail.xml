@@ -125,16 +125,16 @@
                     app:drawableTopCompat="@mipmap/mine_ic_chat_call" />
 
                 <TextView
-                    android:id="@+id/tv_attention"
+                    android:id="@+id/tv_mine_gift"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawablePadding="@dimen/dp_3"
                     android:gravity="center"
-                    android:text="关注"
+                    android:text="礼物"
                     android:textColor="#424242"
                     android:textSize="@dimen/sp_10"
-                    app:drawableTopCompat="@mipmap/mine_ic_attention_normal" />
+                    app:drawableTopCompat="@mipmap/ic_mine_gift" />
 
             </LinearLayout>
         </LinearLayout>

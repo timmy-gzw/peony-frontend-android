@@ -82,4 +82,5 @@
     <string name="no_data">暂无数据</string>
     <string name="recharge_coin_rmb_format"><![CDATA[%s 需支付<font color=#FF0000>%s元</font>]]></string>
     <string name="recharge_now_format">立即充值 %s元</string>
+    <string name="attention_ta">关注Ta</string>
 </resources>

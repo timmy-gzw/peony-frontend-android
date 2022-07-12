@@ -1,5 +1,10 @@
 package com.tftechsz.im.uikit;
 
+import static android.app.Activity.RESULT_OK;
+import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY;
+import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT;
+import static com.tftechsz.common.Constants.NOTIFY_UPDATE_VOICE_INFO;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.app.Activity;
@@ -15,7 +20,6 @@ import android.os.Message;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -58,7 +62,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
@@ -123,45 +126,9 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.qgame.animplayer.AnimConfig;
 import com.tencent.qgame.animplayer.AnimView;
 import com.tencent.qgame.animplayer.inter.IAnimListener;
-import com.tftechsz.common.widget.pop.TopicPop;
-import com.tftechsz.im.R;
-import com.tftechsz.im.adapter.MoreFunAdapter;
-import com.tftechsz.common.adapter.TopicAdapter;
-import com.tftechsz.im.adapter.ViewPagerScrollAdapter;
-import com.tftechsz.im.api.ChatApiService;
-import com.tftechsz.im.api.MultipleItem;
-import com.tftechsz.im.model.dto.AirdropBagDto;
-import com.tftechsz.im.model.dto.ButtonConfigDto;
-import com.tftechsz.im.model.dto.CoupleBagDetailDto;
-import com.tftechsz.im.model.dto.CoupleBagDto;
-import com.tftechsz.im.model.dto.CoupleLetterDto;
-import com.tftechsz.im.model.dto.GroupCoupleDto;
-import com.tftechsz.im.model.dto.JoinLeaveRoom;
-import com.tftechsz.im.model.dto.MoreFunDto;
-import com.tftechsz.im.model.dto.VoiceChatDto;
-import com.tftechsz.im.model.event.BgSetEvent;
-import com.tftechsz.im.mvp.ui.activity.AirdropDetailActivity;
-import com.tftechsz.im.mvp.ui.activity.ChatSettingActivity;
-import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
-import com.tftechsz.im.widget.VoiceChatView;
-import com.tftechsz.im.widget.activity.MessageActivityView;
-import com.tftechsz.im.widget.activity.OnActItemClickListener;
-import com.tftechsz.im.widget.pop.AirdropPopWindow;
-import com.tftechsz.im.widget.pop.ChatMessagePopWindow;
-import com.tftechsz.im.widget.pop.ConfessionLetterPopWindow;
-import com.tftechsz.im.widget.pop.ContinueSendGiftPopWindow;
-import com.tftechsz.im.widget.pop.CoupleGiftBagDetailPop;
-import com.tftechsz.im.widget.pop.CoupleGiftBagPop;
-import com.tftechsz.im.widget.pop.CouplesTaskPop;
-import com.tftechsz.im.widget.pop.FamilyBoxPop;
-import com.tftechsz.im.widget.pop.GroupCouplePopWindow;
-import com.tftechsz.im.widget.pop.IntimacyGiftPop;
-import com.tftechsz.im.widget.pop.OpenAirdropWindow;
-import com.tftechsz.im.widget.pop.OpenRainRedPackagePopWindow;
-import com.tftechsz.im.widget.pop.RainRedPackagePopWindow;
-import com.tftechsz.im.widget.pop.SendRedEnvelopePopWindow;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
+import com.tftechsz.common.adapter.TopicAdapter;
 import com.tftechsz.common.base.AppManager;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BasePresenter;
@@ -195,7 +162,6 @@ import com.tftechsz.common.nim.ChatSoundPlayer;
 import com.tftechsz.common.other.GlideRoundTransform2;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.ARouterUtils;
-import com.tftechsz.common.utils.AnimationUtil;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CountBackUtils;
@@ -222,9 +188,42 @@ import com.tftechsz.common.widget.pop.RechargePopWindow;
 import com.tftechsz.common.widget.pop.RedEnvelopeDetailsPopWindow;
 import com.tftechsz.common.widget.pop.RedEnvelopeReceivePopWindow;
 import com.tftechsz.common.widget.pop.RemoveCouplesPop;
+import com.tftechsz.common.widget.pop.TopicPop;
 import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.common.widget.pop.WelcomeToFamilyPopWindow;
 import com.tftechsz.common.widget.rain.RedPacketViewHelper;
+import com.tftechsz.im.R;
+import com.tftechsz.im.adapter.MoreFunAdapter;
+import com.tftechsz.im.adapter.ViewPagerScrollAdapter;
+import com.tftechsz.im.api.ChatApiService;
+import com.tftechsz.im.api.MultipleItem;
+import com.tftechsz.im.model.dto.AirdropBagDto;
+import com.tftechsz.im.model.dto.ButtonConfigDto;
+import com.tftechsz.im.model.dto.CoupleBagDetailDto;
+import com.tftechsz.im.model.dto.CoupleBagDto;
+import com.tftechsz.im.model.dto.CoupleLetterDto;
+import com.tftechsz.im.model.dto.GroupCoupleDto;
+import com.tftechsz.im.model.dto.JoinLeaveRoom;
+import com.tftechsz.im.model.dto.MoreFunDto;
+import com.tftechsz.im.model.dto.VoiceChatDto;
+import com.tftechsz.im.model.event.BgSetEvent;
+import com.tftechsz.im.mvp.ui.activity.AirdropDetailActivity;
+import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
+import com.tftechsz.im.widget.VoiceChatView;
+import com.tftechsz.im.widget.activity.MessageActivityView;
+import com.tftechsz.im.widget.activity.OnActItemClickListener;
+import com.tftechsz.im.widget.pop.AirdropPopWindow;
+import com.tftechsz.im.widget.pop.ChatMessagePopWindow;
+import com.tftechsz.im.widget.pop.ConfessionLetterPopWindow;
+import com.tftechsz.im.widget.pop.ContinueSendGiftPopWindow;
+import com.tftechsz.im.widget.pop.CoupleGiftBagDetailPop;
+import com.tftechsz.im.widget.pop.CoupleGiftBagPop;
+import com.tftechsz.im.widget.pop.CouplesTaskPop;
+import com.tftechsz.im.widget.pop.FamilyBoxPop;
+import com.tftechsz.im.widget.pop.GroupCouplePopWindow;
+import com.tftechsz.im.widget.pop.IntimacyGiftPop;
+import com.tftechsz.im.widget.pop.OpenAirdropWindow;
+import com.tftechsz.im.widget.pop.SendRedEnvelopePopWindow;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.widget.pop.MineDetailMorePopWindow;
 
@@ -250,11 +249,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import razerdp.basepopup.BasePopupWindow;
 import razerdp.util.KeyboardUtils;
-
-import static android.app.Activity.RESULT_OK;
-import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY;
-import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT;
-import static com.tftechsz.common.Constants.NOTIFY_UPDATE_VOICE_INFO;
 
 /**
  * 聊天界面基类
@@ -1715,7 +1709,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     ////{"intimacy":"2822.3℃","change":"0℃","is_show_heart":true}
                     ChatMsg.Intimacy intimacy = JSON.parseObject(chatMsg.content, ChatMsg.Intimacy.class);
                     ViewGroup.LayoutParams params = mRlToolBar.getLayoutParams();
-                    if(message != null && mRlIntimacy.getVisibility() == View.GONE){
+                    if (message != null && mRlIntimacy.getVisibility() == View.GONE) {
                         mIvIntimacyDetail.setVisibility(View.VISIBLE);
                     }
                     if (intimacy.is_show_heart) {
@@ -2018,7 +2012,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             });
                             customPopWindow.showPopupWindow();
                         } else {
-                            PermissionUtil.showPermissionPop(getActivity(),"未获取存储和拍照权限,相册功能无法正常使用。打开应用设置页以修改应用权限");
+                            PermissionUtil.showPermissionPop(getActivity(), "未获取存储和拍照权限,相册功能无法正常使用。打开应用设置页以修改应用权限");
                         }
                     }));
 
@@ -3319,14 +3313,20 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     } else
                         showBlackPop(getActivity(), Integer.parseInt(sessionId));
                 }
+
+                @Override
+                public void unfollow() {
+
+                }
             });
+            popWindow.setPopupGravityMode(BasePopupWindow.GravityMode.ALIGN_TO_ANCHOR_SIDE);
             popWindow.showPopupWindow(mIvtoolbarmenu);
         } else if (id == R.id.toolbar_back_all) {  //返回
             if (getActivity() != null)
                 getActivity().finish();
             KeyboardUtils.close(getActivity());
         } else if (id == R.id.rl_intimacy || id == R.id.iv_intimacy_detail) {   //亲密度
-            if(mIvIntimacyDetail.getVisibility() == View.VISIBLE){
+            if (mIvIntimacyDetail.getVisibility() == View.VISIBLE) {
                 mIvIntimacyDetail.setVisibility(View.GONE);
             }
             chatMessagePopWindow = new ChatMessagePopWindow(getActivity(), sessionId);
@@ -4147,9 +4147,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         }))
             return;
         String[] audioPermission = {Manifest.permission.RECORD_AUDIO};
-        String[] videoPermission = {Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA};
+        String[] videoPermission = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
         mCompositeDisposable.add(new RxPermissions(this)
-                .request(type == 1 ?audioPermission:videoPermission)
+                .request(type == 1 ? audioPermission : videoPermission)
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         call(type);

@@ -1,7 +1,6 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,10 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -86,6 +83,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import razerdp.basepopup.BasePopupWindow;
 
 /**
  * 个人资料
@@ -647,21 +646,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
     @Override
     public void attentionSuccess(boolean isAttention) {
-        Drawable drawable;
-        int color;
-        String text;
-        if (isAttention) {
-            drawable = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_selector);
-            color = Utils.getColor(R.color.colorPrimary);
-            text = "已关注";
-        } else {
-            drawable = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_normal);
-            color = Utils.getColor(R.color.black);
-            text = "关注";
-        }
-        mTvAttention.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
-        mTvAttention.setTextColor(color);
-        mTvAttention.setText(text);
+        mTvAttention.setVisibility(isAttention ? View.GONE : View.VISIBLE);
+        toastTip(isAttention ? "关注成功，互相关注可互为好友" : "取消关注成功");
         RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_FOLLOW));
     }
 
@@ -782,11 +768,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         //1.男，2.女
         CommonUtil.setSexAndAge(mContext, mUserInfo.getSex(), String.valueOf(mUserInfo.getAge()), mIvSex);
         //关注
-        Drawable attention = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_selector);
-        Drawable notAttention = ContextCompat.getDrawable(this, R.mipmap.mine_ic_attention_normal);
-        mTvAttention.setCompoundDrawablesWithIntrinsicBounds(null,
-                mUserInfo.is_follow == 1 ? attention : notAttention, null, null);
-        mTvAttention.setTextColor(Utils.getColor(mUserInfo.is_follow == 1 ? R.color.colorPrimary : R.color.black));
+        mTvAttention.setVisibility(TextUtils.isEmpty(mUserId) || mUserInfo.is_follow == 1 ? View.GONE : View.VISIBLE);
 
         if (mUserInfo.getIs_real() == 1) {   //已经真人认证
             mllAuth.setVisibility(View.GONE);
@@ -901,7 +883,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         } else if (id == R.id.tv_edit || id == R.id.edit_info) {   //编辑资料
             MineInfoActivity.startActivity(this, mUserInfo);
         } else if (id == R.id.tv_attention) {
-            p.attentionUser(mUserInfo.getUser_id());
+            followOrUnfollow();
         } else if (id == R.id.ll_accost) {   //搭讪
             if (!isPerformClick()) {
                 return;
@@ -978,6 +960,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             p.getCallCheck(mUserId);
         } else if (id == R.id.tob_more) {  //举报拉黑
             MineDetailMorePopWindow popWindow = new MineDetailMorePopWindow(this, mUserId);
+            popWindow.setAttentionVisible(mTvAttention.getVisibility() == View.GONE);
             popWindow.addOnClickListener(new MineDetailMorePopWindow.OnSelectListener() {
                 @Override
                 public void reportUser() {
@@ -991,7 +974,13 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                     } else
                         getP().showBlackPop(mContext, Integer.parseInt(mUserId));
                 }
+
+                @Override
+                public void unfollow() {
+                    followOrUnfollow();
+                }
             });
+            popWindow.setPopupGravityMode(BasePopupWindow.GravityMode.ALIGN_TO_ANCHOR_SIDE);
             popWindow.showPopupWindow(mTobMore);
         } else if (id == R.id.rl_guard) {   //守护
 
@@ -1001,6 +990,11 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         } else if (id == R.id.iv_profile_add) { //查看/添加更多照片
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_PHOTO);
         }
+    }
+
+    private void followOrUnfollow() {
+        if (mUserInfo == null) return;
+        p.attentionUser(mUserInfo.getUser_id());
     }
 
     private boolean isPerformClick() {
