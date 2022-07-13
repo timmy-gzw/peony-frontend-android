@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -322,7 +323,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
 
         //搭讪是否显示
         mLlAccost.setVisibility(service.getUserId() == dataBean.getUser_id() ? View.INVISIBLE : View.VISIBLE);    //自己的动态不可发消息
-        tvAccost.setText(dataBean.isAccost() ? getString(R.string.private_chat) : getString(R.string.accost));
+        setBtnAccostOrP2P();
         mTvTime.setText(dataBean.getCreated_at());
         mTvTrendTimeAddressInfo.setText(dataBean.getCity());
         SlidingScaleTabLayout mTabLayout = findViewById(R.id.tabLayout);
@@ -528,10 +529,16 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
                 Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
             }
             dataBean.setIs_accost(1);
-            tvAccost.setText(dataBean.isAccost() ? getString(R.string.private_chat) : getString(R.string.accost));
+            setBtnAccostOrP2P();
             CommonUtil.sendAccostGirlBoy(service, dataBean.getUser_id(), data, 4);
             RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PIC_ACCOST_SUCCESS, dataBean.getUser_id()));
         }
+    }
+
+    private void setBtnAccostOrP2P() {
+        tvAccost.setText(dataBean.isAccost() ? getString(R.string.private_chat) : getString(R.string.accost));//私聊/搭讪
+        tvAccost.setTextColor(dataBean.isAccost() ? ContextCompat.getColor(this, R.color.c_f76576) : ContextCompat.getColor(this, R.color.color_normal));//私聊/搭讪
+        mLlAccost.setBackgroundResource(dataBean.isAccost() ? R.drawable.bg_p2p_btn : R.drawable.bg_accost_btn);//私聊/搭讪
     }
 
     @Override
