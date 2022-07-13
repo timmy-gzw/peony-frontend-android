@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseListFragment;
+import com.tftechsz.common.bus.RxBus;
+import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
@@ -24,11 +27,11 @@ import com.tftechsz.mine.entity.dto.CheckExchangeDto;
 import com.tftechsz.mine.entity.dto.ShopInfoDto;
 import com.tftechsz.mine.mvp.ui.activity.ExchangeDetailsActivity;
 import com.tftechsz.mine.mvp.ui.activity.IntegralShopActivity;
+import com.tftechsz.mine.mvp.ui.activity.MineIntegralActivity;
+import com.tftechsz.mine.mvp.ui.activity.MineIntegralNewActivity;
 
 import java.util.List;
 
-import com.tftechsz.mine.mvp.ui.activity.MineIntegralActivity;
-import com.tftechsz.mine.mvp.ui.activity.MineIntegralNewActivity;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -67,19 +70,19 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
     public void setData(List<ShopInfoDto> datas, int page) {
         mPageManager.showContent();
         Disposable disposable = Observable.fromIterable(datas)
-            .filter(shopInfoDto -> {
-                if (TYPE_INTEGRAL_TO_RMB.equals(mType)) {
-                    return "rmb".equals(shopInfoDto.type);
-                } else if (TYPE_INTEGRAL_TO_COIN.equals(mType)) {
-                    return "coin".equals(shopInfoDto.type);
-                }
-                return false;
-            }).toList()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(lists -> {
-                super.setData(lists, page);
-            });
+                .filter(shopInfoDto -> {
+                    if (TYPE_INTEGRAL_TO_RMB.equals(mType)) {
+                        return "rmb".equals(shopInfoDto.type);
+                    } else if (TYPE_INTEGRAL_TO_COIN.equals(mType)) {
+                        return "coin".equals(shopInfoDto.type);
+                    }
+                    return false;
+                }).toList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(lists -> {
+                    super.setData(lists, page);
+                });
         mCompositeDisposable.add(disposable);
     }
 
@@ -93,7 +96,7 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
     public void bingViewHolder(BaseViewHolder helper, ShopInfoDto item, int position) {
         GlideUtils.loadRouteImage(getContext(), helper.getView(R.id.iv_shop), item.image_small);
         helper.setText(R.id.tv_coin, item.cost)
-            .setText(R.id.tv_integral, item.integral);
+                .setText(R.id.tv_integral, item.integral);
     }
 
     @Override
@@ -130,7 +133,7 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
         }
         smartRefreshLayout.setBackgroundResource(R.color.white);
         adapter.setOnItemClickListener((adapter1, view, position) ->
-            checkExChange(position));
+                checkExChange(position));
     }
 
     private void checkExChange(int position) {
@@ -138,8 +141,8 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
         int type = item.id;
         FragmentActivity activity = getActivity();
         String integral = activity instanceof IntegralShopActivity ? ((IntegralShopActivity) activity).integral :
-            activity instanceof MineIntegralNewActivity ? ((MineIntegralNewActivity) activity).integral :
-            activity instanceof MineIntegralActivity ? ((MineIntegralActivity) activity).integral : "";
+                activity instanceof MineIntegralNewActivity ? ((MineIntegralNewActivity) activity).integral :
+                        activity instanceof MineIntegralActivity ? ((MineIntegralActivity) activity).integral : "";
         if (service == null)
             service = RetrofitManager.getInstance().createExchApi(MineApiService.class);
         mCompositeDisposable.add(service.checkExchange(type).compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<CheckExchangeDto>>() {
@@ -171,6 +174,17 @@ public class IntegralListFragment extends BaseListFragment<ShopInfoDto> {
 
     @Override
     protected void initData() {
+        initRxBus();
+    }
 
+    private void initRxBus() {
+        mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
+                .compose(this.bindToLifecycle())
+                .subscribe(event -> {
+                            if (event.type == Constants.NOTIFY_UPDATE_USER_INFO_SUCCESS) {
+                                onRefresh();
+                            }
+                        }
+                ));
     }
 }
