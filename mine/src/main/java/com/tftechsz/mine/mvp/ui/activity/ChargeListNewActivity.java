@@ -98,6 +98,7 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
             payPopWindow.setPayInfo(mRechargeBean.rmb, mRechargeBean.coin);
             payPopWindow.showPopupWindow();
         });
+        initRxBus();
     }
 
     @Override
@@ -107,6 +108,10 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
         if (!TextUtils.isEmpty(coin)) {
             mTvCoin.setText(coin);
         }
+        getCoin();
+    }
+
+    private void getCoin() {
         p.getCoin();
     }
 
@@ -136,6 +141,19 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
         } else {
             mAdapter.setList(null);
         }
+    }
+
+    private void initRxBus() {
+        mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
+                .compose(this.bindToLifecycle())
+                .subscribe(
+                        event -> {
+                            if (event.type == Constants.NOTIFY_UPDATE_USER_INFO_SUCCESS) {
+                                getCoin();
+                                if (payPopWindow != null && payPopWindow.isShowing()) payPopWindow.dismiss();
+                            }
+                        }
+                ));
     }
 
     @Override
