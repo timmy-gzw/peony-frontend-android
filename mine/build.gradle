@@ -39,8 +39,6 @@ android {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
-        resConfigs "zh"
-
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
