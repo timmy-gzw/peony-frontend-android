@@ -164,47 +164,50 @@
                     android:id="@+id/ll_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_4"
-                    android:layout_marginBottom="@dimen/dp_4"
+                    android:layout_marginTop="@dimen/dp_7"
                     android:gravity="bottom"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-                    app:layout_constraintLeft_toRightOf="@id/tv_name">
+                    app:layout_constraintStart_toStartOf="@id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name">
 
                     <ImageView
                         android:id="@+id/iv_vip"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_14"
-                        android:layout_marginStart="@dimen/dp_3"
+                        android:layout_marginEnd="@dimen/dp_4"
                         android:src="@mipmap/vip_icon_bg"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/iv_sex"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_14"
-                        android:layout_marginStart="@dimen/dp_3"
+                        android:layout_marginEnd="@dimen/dp_4"
                         android:textColor="@color/white"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         tools:background="@drawable/bg_girl"
                         tools:drawableStart="@drawable/ic_girl"
                         tools:text="18"
-                        tools:textSize="@dimen/sp_10" />
+                        tools:textSize="@dimen/sp_10"
+                        tools:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/iv_real_people"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_14"
-                        android:layout_marginStart="@dimen/dp_3"
+                        android:layout_marginEnd="@dimen/dp_4"
                         android:src="@mipmap/peony_home_xczr_icon"
-                        android:visibility="visible" />
+                        android:visibility="gone"
+                        tools:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/iv_auth"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_14"
-                        android:layout_marginStart="@dimen/dp_3"
+                        android:layout_marginEnd="@dimen/dp_4"
                         android:src="@mipmap/ic_authentication"
-                        android:visibility="visible" />
+                        android:visibility="gone"
+                        tools:visibility="visible" />
 
                 </LinearLayout>
 
@@ -228,13 +231,13 @@
                     android:id="@+id/tv_sign"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginTop="@dimen/dp_11"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:textColor="@color/color_normal"
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_info"
                     tools:text="可甜可咸，想交个真心朋友，是你吗" />
 
                 <LinearLayout
@@ -402,6 +405,7 @@
         app:tl_textBold="SELECT"
         app:tl_textSelectColor="@color/color_normal"
         app:tl_textSelectSize="@dimen/sp_16"
+        app:tl_textSize="@dimen/sp_16"
         app:tl_textUnSelectColor="@color/color_light_font"
         app:tl_textUnSelectSize="@dimen/sp_16" />
 
