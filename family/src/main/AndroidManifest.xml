@@ -12,14 +12,6 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.tftechsz.family.mvp.ui.activity.FamilyDetailActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.tftechsz.family.mvp.ui.activity.FamilyMemberActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.tftechsz.family.mvp.ui.activity.FamilyRecruitActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

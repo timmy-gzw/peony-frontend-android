@@ -78,9 +78,6 @@ public class FamilyRecruitActivity extends BaseMvpActivity<IFamilyRecruitView, F
     @Override
     public void onItemChildClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
         FamilyRecruitDto item = mAdapter.getItem(position);
-        if (view.getId() == R.id.root) { //点击打开家族详情
-            ARouterUtils.toFamilyDetail(item.family_id,1);
-        }
         if (view.getId() == R.id.red_btn) { //点击领红包加入
             if (!ClickUtil.canOperate()) {
                 return;

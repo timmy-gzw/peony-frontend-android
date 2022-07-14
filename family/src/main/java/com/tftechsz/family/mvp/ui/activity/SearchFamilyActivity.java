@@ -77,10 +77,5 @@ public class SearchFamilyActivity extends BaseMvpActivity<ISearchFamilyView, Sea
 
     @Override
     public void getSearchSuccess(FamilyIdDto data) {
-        if (data != null) {
-            Intent intent = new Intent(SearchFamilyActivity.this, FamilyDetailActivity.class);
-            intent.putExtra("familyId", data.family_id);
-            startActivity(intent);
-        }
     }
 }

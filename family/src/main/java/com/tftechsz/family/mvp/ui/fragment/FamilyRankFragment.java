@@ -23,7 +23,6 @@ import com.tftechsz.family.entity.dto.FamilyInfoDto;
 import com.tftechsz.family.entity.dto.FamilyRankDto;
 import com.tftechsz.family.mvp.IView.IFamilyRankView;
 import com.tftechsz.family.mvp.presenter.FamilyRankPresenter;
-import com.tftechsz.family.mvp.ui.activity.FamilyDetailActivity;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpFragment;
 import com.tftechsz.common.bus.RxBus;
@@ -86,9 +85,6 @@ public class FamilyRankFragment extends BaseMvpFragment<IFamilyRankView, FamilyR
             }
         });
         mAdapter.setOnItemClickListener((adapter1, view, position) -> {
-            Intent intent = new Intent(getActivity(), FamilyDetailActivity.class);
-            intent.putExtra("familyId", mAdapter.getData().get(position).family_id);
-            startActivity(intent);
         });
         initBus();
         p.rankList(mPage, mType);

@@ -3654,7 +3654,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
                 @Override
                 public void toFamilyDetail(int familyId, String invite_id) {
-                    ARouterUtils.toFamilyDetail(familyId, invite_id, 1);
                 }
 
                 @Override
@@ -3736,7 +3735,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                 return;
                             }
                             if (isGoActivity) {
-                                ARouterUtils.toFamilyDetail(response.getData().family_id, 1);
                             } else {
                                 ARouter.getInstance()
                                         .navigation(MineService.class)

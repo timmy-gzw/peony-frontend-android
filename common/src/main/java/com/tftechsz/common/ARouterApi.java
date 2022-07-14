@@ -82,7 +82,6 @@ public class ARouterApi {
 
 
     //family
-    public final static String ACTIVITY_FAMILY_DETAIL = "/family/familyDetailActivity";   //家族详情
     public final static String ACTIVITY_EDIT_FAMILY = "/family/EditFamilyInfoActivity";   //编辑
     public final static String ACTIVITY_FAMILY_MEMBER = "/family/FamilyMemberActivity";   //我的家族成员
     public final static String ACTIVITY_FAMILY_APPLY = "/family/ApplyVerifyActivity";   //申请列表

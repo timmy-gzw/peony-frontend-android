@@ -433,24 +433,6 @@ public class ARouterUtils {
     /**
      * 跳转到家族详情
      */
-    public static void toFamilyDetail(int familyId, String invite_id, int fromType) {
-        ARouter.getInstance().build(ARouterApi.ACTIVITY_FAMILY_DETAIL)
-                .withInt("familyId", familyId)
-                .withInt("fromType", fromType)
-                .withString(Interfaces.EXTRA_INVITE_ID, invite_id)
-                .navigation();
-    }
-
-    /**
-     * 跳转到家族详情
-     */
-    public static void toFamilyDetail(int familyId, int fromType) {
-        toFamilyDetail(familyId, "", fromType);
-    }
-
-    /**
-     * 跳转到家族详情
-     */
     public static void toFamilyMember(int familyId) {
         ARouter.getInstance().build(ARouterApi.ACTIVITY_FAMILY_MEMBER)
                 .withInt("familyId", familyId)
