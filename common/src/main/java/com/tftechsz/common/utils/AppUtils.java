@@ -313,11 +313,7 @@ public class AppUtils {
                 Class<?> clazz = Class.forName("android.content.Context");
                 Method method = clazz.getMethod("checkSelfPermission", String.class);
                 int rest = (Integer) method.invoke(context, permission);
-                if (rest == PackageManager.PERMISSION_GRANTED) {
-                    result = true;
-                } else {
-                    result = false;
-                }
+                result = rest == PackageManager.PERMISSION_GRANTED;
             } catch (Throwable e) {
                 result = false;
             }
@@ -468,9 +464,7 @@ public class AppUtils {
         List<ActivityManager.RunningTaskInfo> recentTaskInfos = manager.getRunningTasks(1);
         if (recentTaskInfos != null && recentTaskInfos.size() > 0) {
             ActivityManager.RunningTaskInfo taskInfo = recentTaskInfos.get(0);
-            if (taskInfo.baseActivity.getPackageName().equals(packageName) && taskInfo.numActivities > 1) {
-                return true;
-            }
+            return taskInfo.baseActivity.getPackageName().equals(packageName) && taskInfo.numActivities > 1;
         }
 
         return false;
@@ -478,7 +472,7 @@ public class AppUtils {
 
     private static final String SHARED_PREFERENCES_NAME = "deviceid_cache";
     //.开头隐藏文件和隐藏文件夹
-    private static final String FILE_PATH = "data/.cache/.1270f37f6c8";
+    private static final String FILE_PATH = "data/.cache/.mp06bfSdnER";
 
     private static final String LOACL_UUID = "my_device_localuuid";
     private static final String LOACL_MAC = "my_device_local_mac";
@@ -562,7 +556,7 @@ public class AppUtils {
     }
 
     private static String getFileName() {
-        return ".abcdefg60232414f87c77dcc737f2f0c";
+        return ".fd990eff10b3157097bfaa0fac56caa9";
     }
 
     private static String readSDFile() {
@@ -580,7 +574,7 @@ public class AppUtils {
 
             byte[] buffer = new byte[length];
             fis.read(buffer);
-            String res = new String(buffer, "utf-8");
+            String res = new String(buffer, StandardCharsets.UTF_8);
 
             fis.close();
             Log.d("DeviceIDUtils", "readSDFile filePath:" + filePath);
@@ -838,10 +832,10 @@ public class AppUtils {
     private enum AESType {
 
         ECB("ECB", "0"), CBC("CBC", "1"), CFB("CFB", "2"), OFB("OFB", "3");
-        private String k;
-        private String v;
+        private final String k;
+        private final String v;
 
-        private AESType(String k, String v) {
+        AESType(String k, String v) {
             this.k = k;
             this.v = v;
         }
@@ -909,7 +903,7 @@ public class AppUtils {
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         }
 
-        byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
+        byte[] encrypted = cipher.doFinal(sSrc.getBytes(StandardCharsets.UTF_8));
         return Base64.encode(encrypted, Base64.DEFAULT);// 此处使用BASE64做转码。
     }
 
@@ -918,7 +912,7 @@ public class AppUtils {
             throws Exception {
         sKey = toMakekey(sKey, pwdLenght, val);
         try {
-            byte[] raw = sKey.getBytes("ASCII");
+            byte[] raw = sKey.getBytes(StandardCharsets.US_ASCII);
             SecretKeySpec skeySpec = new SecretKeySpec(raw, WAYS);
             Cipher cipher = Cipher.getInstance(selectMod(type));
             IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());
@@ -929,7 +923,7 @@ public class AppUtils {
             }
             byte[] encrypted1 = Base64.decode(sSrc.getBytes(), Base64.DEFAULT);// 先用base64解密
             byte[] original = cipher.doFinal(encrypted1);
-            String originalString = new String(original, "utf-8");
+            String originalString = new String(original, StandardCharsets.UTF_8);
             return originalString;
         } catch (Exception ex) {
             return null;
