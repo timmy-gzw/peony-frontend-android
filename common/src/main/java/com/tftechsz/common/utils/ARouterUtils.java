@@ -556,16 +556,6 @@ public class ARouterUtils {
     }
 
     /**
-     * 跳转到我的家族
-     */
-    public static void toMineFamily(int familyId) {
-        ARouter.getInstance().build(ARouterApi.ACTIVITY_MINE_FAMILY)
-                .withInt("familyId", familyId)
-                .navigation();
-    }
-
-
-    /**
      * 跳转真人认证状态
      */
     public static void toRealAuthentication(int status, String path, RealStatusInfoDto data) {

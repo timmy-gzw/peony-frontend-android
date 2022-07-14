@@ -1350,18 +1350,7 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
     public void onClick(View v) {
         int id = v.getId();
         if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
-        if (id == R.id.rl_team) {   //家族
-            if (TextUtils.isEmpty(teamId)) {
-                ARouterUtils.toMineFamily(0);
-            } else {
-                com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_TEAM_ID, teamId);
-                CommonUtil.startTeamChatActivity(getActivity(), teamId);
-            }
-            ARouter.getInstance()
-                    .navigation(MineService.class)
-                    .trackEvent("家族聊天点击", "click", "family_chat_click", JSON.toJSONString(new BuriedPointExtendDto(new BuriedPointExtendDto.FamilyExtendDto(teamId))), null);
-
-        } else if (id == R.id.cl_pull_wires) {
+        if (id == R.id.cl_pull_wires) {
             startActivity(PullWiresRecordActivity.class);
         } else if (id == R.id.tv_apply) {   // 申请审核和招募红包
             if (TextUtils.isEmpty(teamId)) {

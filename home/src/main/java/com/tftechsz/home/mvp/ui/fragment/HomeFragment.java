@@ -592,22 +592,6 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                         break;
 
                     default:
-                        if (link.equals(Interfaces.LINK_PEONY_FAMILY_HOME)) { //家族点击埋点
-                            String cusFamilyId = "0";
-                            String substring = nav.link.substring(Interfaces.LINK_PEONY.length());
-                            if (substring.contains(Interfaces.LINK_PEONY_FAMILY_HOME)) {//家族
-                                String familyId = substring.substring((Interfaces.LINK_PEONY_FAMILY_HOME).length());
-                                if (!TextUtils.isEmpty(familyId)) {
-                                    cusFamilyId = familyId.replace("/", "");
-                                    ARouterUtils.toMineFamily(Integer.parseInt(cusFamilyId));
-                                }
-                            }
-                            ARouter.getInstance()
-                                    .navigation(MineService.class)
-                                    .trackEvent("家族首页点击", "click", "family_home_click",
-                                            JSON.toJSONString(new BuriedPointExtendDto(new BuriedPointExtendDto.FamilyExtendDto(cusFamilyId))), null);
-
-                        }
                         CommonUtil.performLink(mActivity, new ConfigInfo.MineInfo(nav.link), 0, 0);
                         break;
                 }

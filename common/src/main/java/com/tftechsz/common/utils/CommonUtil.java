@@ -616,16 +616,6 @@ public class CommonUtil {
 
         if (info.link.startsWith(Interfaces.LINK_PEONY)) { // peony://
             String substring = info.link.substring(Interfaces.LINK_PEONY.length());
-            if (substring.contains(Interfaces.LINK_PEONY_FAMILY_HOME)) {//家族
-                String familyId = substring.substring((Interfaces.LINK_PEONY_FAMILY_HOME).length());
-                if (!TextUtils.isEmpty(familyId)) {
-                    String cusFamilyId = familyId.replace("/", "");
-                    ARouterUtils.toMineFamily(Integer.parseInt(cusFamilyId));
-                } else {
-                    ARouterUtils.toMineFamily(0);
-                }
-                return;
-            }
             if (substring.contains(Interfaces.LINK_PEONY_CHAT_SQUARE)) {//聊天广场
                 String rid = substring.substring(Interfaces.LINK_PEONY_CHAT_SQUARE.length());
                 String cusRid = rid.replace("/", "");
