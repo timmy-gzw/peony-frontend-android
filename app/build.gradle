@@ -177,7 +177,6 @@ dependencies {
         implementation project(':party')
         implementation project(':im')
         implementation project(':mine')
-        implementation project(':family')
         implementation project(':videotrimmer')
     }
 
