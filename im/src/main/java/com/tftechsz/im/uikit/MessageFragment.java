@@ -2648,7 +2648,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         Utils.logE(chatMsg.content);
                         mRlOpenVip.setVisibility(View.VISIBLE);
                         mRlOpenVip.setBackgroundResource(R.drawable.bg_chat_bot);
-                        mAnimationVip.setVisibility(View.GONE);
+//                        mAnimationVip.setVisibility(View.GONE);
                         ChatTipsContent alert = JSON.parseObject(chatMsg.content, ChatTipsContent.class);
 
                         NIMClient.getService(MsgService.class).queryMessageListByUuid(Collections.singletonList(alert.msg_id))
