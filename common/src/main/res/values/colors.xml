@@ -18,8 +18,6 @@
     <color name="color_5F6392">#5F6392</color>
 
 
-    <color name="trans_white_40">#66FFFFFF</color>
-
     <color name="color_cc">#CCCCCC</color>
     <color name="color_d6">#D6D6D6</color>
     <color name="color_de">#DEDEDE</color>
@@ -39,7 +37,6 @@
 
     <color name="praise_item_selector_default">#cccccc</color>
 
-    <color name="c2f2f2f">#2f2f2f</color>
     <color name="c2c2c2">#c2c2c2</color>
     <color name="cfcfcf">#cfcfcf</color>
     <color name="cd8d8d8">#d8d8d8</color>
@@ -48,7 +45,6 @@
 
     <color name="shadow_color">#7F000000</color>
     <color name="dkplayer_theme_color">@color/colorPrimary</color>
-    <color name="color_444444">#444444</color>
     <color name="color_8C4BE1">#8C4BE1</color>
     <color name="color_89A5FF">#89A5FF</color>
 
@@ -57,13 +53,6 @@
     <color name="color_928C81">#928C81</color>
     <color name="gift_wheat_text_color">#644B0D</color>
 
-    <color name="shadow_3c3fce_lan">#3C3FCE</color>
-    <color name="shadow_3c3fce_zi">#6D0ECA</color>
-    <color name="shadow_3c3fce_def">#EB4C16</color>
-
-    <color name="shadow_3c3fce_lv">#006066</color>
-    <color name="shadow_3c3fce_huang">#BE4715</color>
-    <color name="shadow_3c3fce_red">#FFD0A2</color>
     <color name="color_f8d423">#FE4D6B</color>
 
     <color name="c_f7f7f7">#F7F7F7</color>
