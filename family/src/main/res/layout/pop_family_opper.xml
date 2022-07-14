@@ -16,7 +16,6 @@
         app:text_content="温馨提示" />
 
     <TextView
-        android:id="@+id/tv_title_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_15"

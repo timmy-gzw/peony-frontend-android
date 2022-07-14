@@ -378,7 +378,6 @@
             android:textSize="@dimen/sp_26" />
 
         <LinearLayout
-            android:id="@+id/ll_voice_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_call_user"
@@ -736,7 +735,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/ll_video_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

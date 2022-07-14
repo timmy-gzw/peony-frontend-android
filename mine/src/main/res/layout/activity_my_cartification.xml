@@ -58,8 +58,7 @@
 			app:layout_constraintTop_toTopOf="parent" />
 		
 		<TextView
-			android:id="@+id/tv_real_tip"
-			android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/dp_3"
 			android:gravity="center"
@@ -100,8 +99,7 @@
 		app:layout_constraintTop_toBottomOf="@+id/cl_is_self" />
 	
 	<androidx.constraintlayout.widget.ConstraintLayout
-		android:id="@+id/cl_is_real"
-		android:layout_width="match_parent"
+        android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:padding="@dimen/dp_16"
 		app:layout_constraintStart_toStartOf="parent"
@@ -131,8 +129,7 @@
 			app:layout_constraintTop_toTopOf="parent" />
 		
 		<TextView
-			android:id="@+id/tv_self_tip"
-			android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/dp_3"
 			android:gravity="center"

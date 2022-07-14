@@ -35,7 +35,6 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_quick_recharge_banner" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_recharge_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_white_top"

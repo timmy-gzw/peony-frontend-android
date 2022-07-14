@@ -1,21 +1,14 @@
 <resources>
 
-    <string name="mine_phone_number">手机号</string>
     <string name="mobile_input">请输入手机号</string>
     <string name="code_input">请输入验证码</string>
     <string name="main_get_phone_code">获取验证码</string>
     <string name="mine_share_money">邀请赚钱</string>
-    <string name="mine_red_pack">红包福利</string>
-    <string name="mine_help_feed">帮助反馈</string>
-    <string name="mine_setting">设置</string>
     <string name="mine_record_voice">为了更好的展示自己，\n请录制5秒以上的语音介绍</string>
     <string name="mine_accost_record">录一些诱惑的声音，会让异性更喜欢你哦！</string>
     <string name="friend">好友</string>
     <string name="attention">关注</string>
     <string name="fans">粉丝</string>
-    <string name="vip_charge">立即开通</string>
-    <string name="super_vip">至尊VIP</string>
-    <string name="vip_special_power">开通即享视频8折，免费搭讪等8项特权</string>
     <string name="edit_userInfo">编辑资料</string>
     <string name="login_out">退出登录</string>
     <string name="vip_can_set">（VIP用户可设置）</string>
@@ -27,13 +20,8 @@
     <string name="income_and_expenditude_records">收支记录</string>
 
     <string name="recharge_agreement">充值即代表同意伊糖用户充值协议</string>
-    <string name="pay_now_format">立即支付%s元</string>
     <string name="pay_now">立即充值</string>
-    <string name="recharge_amount">充值金额</string>
-    <string name="pay_ali">支付宝支付</string>
-    <string name="pay_wechat">微信支付</string>
     <string name="integral_balance">积分余额</string>
-    <string name="available_to_exchange">可兑换（元）</string>
     <string name="exchange_record">兑换记录</string>
     <string name="my_benifit">我的收益</string>
     <string name="benifit_record">收益记录</string>
@@ -51,10 +39,6 @@
     <string name="renewal_now_format">¥%s 立即续费</string>
     <string name="edit_account">修改账号</string>
     <string name="_86">+86</string>
-    <string name="title_activity_user_level">UserLevelActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="cert_requirements">认证要求</string>
     <string name="cert_complete_will_grant">认证完成后，你将获得以下权限</string>
     <string name="cert_now">马上认证</string>

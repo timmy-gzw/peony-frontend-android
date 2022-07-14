@@ -1,19 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="chat_message_all_read">全部已读</string>
     <string name="chat_message_all_del">批量删除</string>
-    <string name="chat_switch_camera">切换摄像头</string>
-    <string name="chat_join_room">加入房间</string>
-    <string name="chat_leave_room">离开房间</string>
-    <string name="chat_meeting_wait_hint">等待加入…</string>
     <string name="chat_ta">@Ta</string>
-    <string name="chat_call_tip">本平台倡导绿色交友，谨防诈骗。聊天交友严禁包含政治、招嫖卖淫、低俗色情或诱导第三方交易行为等内容。若有违反，将按平台规则给予限制功能、封禁账号，并上报上级有关部门。</string>
     <string name="chat_boy_no_message">暂无消息，去搭讪小姐姐吧</string>
     <string name="chat_girl_no_message"><![CDATA[暂无消息 >_<]]></string>
-    <string name="chat_intimacy_text">等级权限&#038;奖励</string>
     <string name="chat_voice_chat">语音闲聊</string>
     <string name="chat_voice_chat_text">文字模式</string>
-    <string name="chat_video_self_warm_tip1">系统检测您存在违规行为，对方将暂时看不到您的视频画面，若不停止违规，将断开视频通话。</string>
-    <string name="chat_video_self_warm_tip">您涉嫌违规，已经做黑屏处理，对方无法看到你的画面</string>
     <string name="chat_video_other_warm_tip">因对方涉嫌违规，已做黑屏处理，无法看到对方的画面</string>
-    <string name="chat_video_other_warm_tip1">系统检测对方存在违规行为，您将暂时看不到TA的视频画面，请提醒对方及时停止违规行为。</string>
 </resources>

@@ -8,7 +8,6 @@
     android:paddingTop="@dimen/dp_5">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_5">

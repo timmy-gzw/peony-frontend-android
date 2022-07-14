@@ -46,7 +46,6 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvVoiceMsg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -149,7 +148,6 @@
 
 
             <LinearLayout
-                android:id="@+id/id_record"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center"

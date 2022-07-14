@@ -140,7 +140,6 @@
                 android:background="@color/driver" />
 
             <LinearLayout
-                android:id="@+id/rl_announcement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

@@ -8,7 +8,6 @@
     android:gravity="top">
 
     <View
-        android:id="@+id/bottom_bg"
         android:layout_width="match_parent"
         android:background="@mipmap/bg_intmacy_pop_bottom"
         android:layout_height="200dp"
@@ -64,7 +63,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/rel_header_pcm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_35"

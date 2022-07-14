@@ -45,7 +45,6 @@
                     android:textSize="@dimen/sp_16" />
 
                 <ImageView
-                    android:id="@+id/iv_agl_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -141,7 +140,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_left2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -151,7 +149,6 @@
                     android:textSize="@dimen/sp_16" />
 
                 <ImageView
-                    android:id="@+id/iv_right3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -231,7 +228,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_left5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -260,7 +256,6 @@
                     tl:tl_tab_padding="7dp" />
 
                 <View
-                    android:id="@+id/view5"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_alignParentBottom="true"
@@ -321,7 +316,6 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/view4"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_alignParentBottom="true"
@@ -331,7 +325,6 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_left6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"

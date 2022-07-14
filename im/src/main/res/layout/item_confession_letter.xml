@@ -17,7 +17,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/img_alg_top_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_16"
@@ -27,7 +26,6 @@
         app:layout_constraintTop_toTopOf="@id/iv_title" />
 
     <ImageView
-        android:id="@+id/img_alg_top_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_16"

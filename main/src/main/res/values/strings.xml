@@ -1,7 +1,5 @@
 <resources>
     <string name="tab_home">首页</string>
     <string name="tab_trend">动态</string>
-    <string name="tab_party">派对</string>
-    <string name="tab_message">消息</string>
     <string name="tab_mine">我的</string>
 </resources>

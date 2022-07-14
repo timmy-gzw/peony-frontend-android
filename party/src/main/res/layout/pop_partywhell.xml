@@ -805,7 +805,6 @@
             android:textSize="10sp" />
 
         <ImageView
-            android:id="@+id/img_add_coin_lucky_stone"
             android:layout_width="@dimen/dp_26"
             android:layout_height="@dimen/dp_26"
             android:layout_marginStart="@dimen/dp_8"
