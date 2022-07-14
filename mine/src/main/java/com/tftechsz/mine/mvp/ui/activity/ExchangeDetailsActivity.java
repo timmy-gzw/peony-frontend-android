@@ -95,7 +95,13 @@ public class ExchangeDetailsActivity extends BaseMvpActivity<IExchangeDetailView
         integral = getIntent().getStringExtra(EXTRA_INTEGRAL);
         if (mShopInfo != null) {
             GlideUtils.loadRouteImage(this, mIvShop, mShopInfo.image_big);
-            mTvExchangeNum.setText(mShopInfo.number);
+            String number = mShopInfo.number;
+            if (TextUtils.isEmpty(number)) {
+                mTvExchangeNum.setVisibility(View.GONE);
+            } else {
+                mTvExchangeNum.setVisibility(View.VISIBLE);
+                mTvExchangeNum.setText(number);
+            }
             mTvCoin.setText(mShopInfo.cost);
             mTvIntegral.setText(mShopInfo.integral);
             if (!TextUtils.equals("coin", mShopInfo.type)) {
