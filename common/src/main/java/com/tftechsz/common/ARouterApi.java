@@ -88,7 +88,6 @@ public class ARouterApi {
     public final static String FAMILY_SERVICE = "/family/familyService";
     public final static String ACTIVITY_ROOM_MEMBER = "/family/RoomMemberActivity";   //聊天室成员
     public final static String ACTIVITY_CREATE_FAMILY = "/family/CreateFamilyInfoActivity";   //创建家族
-    public final static String ACTIVITY_FAMILY_RECRUIT = "/family/FamilyRecruitActivity";  //招募红包
     public final static String ACTIVITY_FAMILY_AIT_MEMBER = "/family/FamilyAitMemberActivity";   //ait我的家族成员
     public final static String ACTIVITY_FAMILY_AIT = "/family/FamilyAitActivity";   //ait我的家族成员
     public final static String ACTIVITY_GROUP_COUPLE = "/family/GroupCoupleActivity";   //组情侣

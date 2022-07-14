@@ -1354,7 +1354,6 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
             startActivity(PullWiresRecordActivity.class);
         } else if (id == R.id.tv_apply) {   // 申请审核和招募红包
             if (TextUtils.isEmpty(teamId)) {
-                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FAMILY_RECRUIT);
             } else {
                 ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FAMILY_APPLY);
             }
