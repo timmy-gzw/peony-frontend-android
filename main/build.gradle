@@ -41,7 +41,6 @@ dependencies {
     if (isModule.toBoolean()) {
         implementation project(':home')
         implementation project(':moment')
-        implementation project(':party')
         implementation project(':im')
         implementation project(':mine')
     }
