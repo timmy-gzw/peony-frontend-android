@@ -732,6 +732,17 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             });
         }
 
+        /**
+         * 跳转资料页面
+         */
+        @JavascriptInterface
+        public void toPersonInfo(int user_id) {
+            if (service != null && service.getUserId() == user_id) {
+                ARouterUtils.toMineDetailActivity("");
+            } else {
+                ARouterUtils.toMineDetailActivity(String.valueOf(user_id));
+            }
+        }
     }
 
     @Override
