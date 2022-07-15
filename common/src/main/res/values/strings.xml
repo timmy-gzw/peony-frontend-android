@@ -68,4 +68,8 @@
     <string name="recharge_coin_rmb_format"><![CDATA[%s 需支付<font color=#FF0000>%s元</font>]]></string>
     <string name="recharge_now_format">立即充值 %s元</string>
     <string name="attention_ta">关注Ta</string>
+    <string name="sign_in">签到</string>
+    <string name="daily_sign_in">每日签到</string>
+    <string name="get_more_coin">领取更多金币</string>
+    <string name="sign_in_success_format">恭喜你获得%s金币</string>
 </resources>

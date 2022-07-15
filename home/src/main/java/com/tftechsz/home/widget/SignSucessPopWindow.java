@@ -1,12 +1,12 @@
 package com.tftechsz.home.widget;
 
 import android.content.Context;
-import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
-import com.tftechsz.home.R;
+import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.widget.pop.BaseCenterPop;
+import com.tftechsz.home.R;
 
 /**
  * 包 名 : com.tftechsz.home.widget
@@ -15,7 +15,6 @@ import com.tftechsz.common.widget.pop.BaseCenterPop;
 public class SignSucessPopWindow extends BaseCenterPop {
 
     private TextView mTvGold;
-    private Handler mHandler = new Handler();
 
     public SignSucessPopWindow(Context context) {
         super(context);
@@ -23,14 +22,22 @@ public class SignSucessPopWindow extends BaseCenterPop {
     }
 
     private void initUI() {
-        mTvGold = findViewById(R.id.tv_gold);
+        mTvGold = findViewById(R.id.tv_title);
+        findViewById(R.id.ic_close).setOnClickListener(v -> dismiss());
+        findViewById(R.id.tv_sign_in_more).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2022/7/15 领取更多积分
+                ToastUtil.showToast(getContext(), "敬请期待");
+                dismiss();
+            }
+        });
         setOutSideDismiss(false);
     }
 
     public SignSucessPopWindow showPop(String gold) {
-        mTvGold.setText(gold);
+        mTvGold.setText(getContext().getString(R.string.sign_in_success_format, gold));
         showPopupWindow();
-        mHandler.postDelayed(() -> dismiss(), 1500);
         return this;
     }
 
