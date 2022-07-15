@@ -18,10 +18,8 @@ import com.tftechsz.im.model.dto.CallLogDto;
 import com.tftechsz.im.mvp.iview.ICallLogView;
 import com.tftechsz.im.mvp.presenter.CallLogPresenter;
 import com.tftechsz.common.base.BaseMvpFragment;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.PermissionUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +38,6 @@ public class CallLogFragment extends BaseMvpFragment<ICallLogView, CallLogPresen
     private CallLogAdapter mAdapter;
     private final ArrayList<CallLogDto> mList = new ArrayList<>();
     private boolean mFlagVisibleFragment;
-    private PartyService partyService;
 
     @Override
     protected CallLogPresenter initPresenter() {
@@ -59,7 +56,6 @@ public class CallLogFragment extends BaseMvpFragment<ICallLogView, CallLogPresen
 
     @Override
     public void initUI(Bundle savedInstanceState) {
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         mBind = (FragmentCallLogBinding) getBind();
         mBind.recy.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter = new CallLogAdapter();
@@ -94,11 +90,6 @@ public class CallLogFragment extends BaseMvpFragment<ICallLogView, CallLogPresen
                 ARouterUtils.toMineDetailActivity(String.valueOf(ids));
             } else if (id == R.id.end_call) { //拨打电话/视频
                 if (!ClickUtil.canOperate()) return;
-                if (CommonUtil.showCallTip(partyService)) {
-                    return;
-                }
-                if (CommonUtil.showCallTip2(partyService, () -> call(data)))
-                    return;
                 call(data);
             }
         });

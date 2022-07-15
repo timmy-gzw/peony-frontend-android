@@ -1,6 +1,7 @@
 package com.tftechsz.common.adapter;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,6 +28,15 @@ public class OneKeyAccostAdapter extends BaseQuickAdapter<ChatMsg.AccostPopup, B
     protected void convert(@NotNull BaseViewHolder helper, ChatMsg.AccostPopup item) {
         TextView name = helper.getView(R.id.name);
         TextView age = helper.getView(R.id.tv_age);
+        ImageView sex =  helper.getView(R.id.iv_sex);
+        LinearLayout llage = helper.getView(R.id.ll_age);
+        if(item.sex.equals("2")){
+            llage.setBackgroundResource(R.drawable.bg_girl);
+            sex.setImageResource(R.drawable.ic_girl);
+        }else{
+            llage.setBackgroundResource(R.drawable.bg_boy);
+            sex.setImageResource(R.drawable.ic_boy);
+        }
         age.setText(item.age);
         ImageView icon = helper.getView(R.id.icon);
         ImageView iv_check = helper.getView(R.id.iv_check);
@@ -36,7 +46,7 @@ public class OneKeyAccostAdapter extends BaseQuickAdapter<ChatMsg.AccostPopup, B
         if (item.is_selected) {
             iv_check.setImageResource(R.mipmap.ic_check_selector);
         } else {
-            iv_check.setImageResource(R.mipmap.ic_check_normal);
+            iv_check.setImageResource(R.mipmap.ic_check_normal2);
         }
     }
 }

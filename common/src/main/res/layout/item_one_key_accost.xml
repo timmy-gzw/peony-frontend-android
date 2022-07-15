@@ -28,25 +28,36 @@
         tools:text="难过的乐曲"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_12"
-        app:layout_constraintStart_toStartOf="@id/tv_age"
-        app:layout_constraintBottom_toTopOf="@id/tv_age"/>
+        app:layout_constraintStart_toStartOf="@id/ll_age"
+        app:layout_constraintBottom_toTopOf="@id/ll_age"/>
 
-    <TextView
-        android:id="@+id/tv_age"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_4"
-        android:layout_marginBottom="@dimen/dp_4"
-        android:background="@drawable/bg_girl"
-        android:gravity="center"
-        android:paddingVertical="@dimen/dp_2"
-        android:drawableLeft="@drawable/ic_girl"
-        android:singleLine="true"
-        tools:text="22"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_10"
-        app:layout_constraintBottom_toBottomOf="@id/icon"
-        app:layout_constraintStart_toStartOf="@id/icon" />
+   <LinearLayout
+       android:id="@+id/ll_age"
+       android:layout_width="wrap_content"
+       app:layout_constraintBottom_toBottomOf="@id/icon"
+       app:layout_constraintStart_toStartOf="@id/icon"
+       android:background="@drawable/bg_girl"
+       android:layout_marginLeft="@dimen/dp_4"
+       android:layout_marginBottom="@dimen/dp_4"
+       android:gravity="center"
+       android:layout_height="wrap_content">
+
+       <ImageView
+           android:id="@+id/iv_sex"
+           android:layout_width="@dimen/dp_10"
+           android:src="@drawable/ic_girl"
+           android:layout_marginRight="@dimen/dp_3"
+           android:layout_height="@dimen/dp_10"/>
+
+       <TextView
+           android:id="@+id/tv_age"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="@dimen/dp_2"
+           tools:text="22"
+           android:textColor="@color/white"
+           android:textSize="@dimen/sp_10" />
+   </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_check"

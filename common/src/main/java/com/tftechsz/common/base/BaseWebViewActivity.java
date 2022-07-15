@@ -48,7 +48,6 @@ import com.tftechsz.common.R;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.entity.RechargeDto;
 import com.tftechsz.common.event.CommonEvent;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.music.base.BaseMusicHelper;
 import com.tftechsz.common.pagestate.PageStateConfig;
@@ -497,13 +496,8 @@ public class BaseWebViewActivity extends BaseMvpActivity {
             if (!ClickUtil.canOperate()) {
                 return;
             }
-            boolean isOnSeat = MMKVUtils.getInstance().decodeBoolean(Constants.PARTY_IS_ON_SEAT);
             int id = MMKVUtils.getInstance().decodeInt(Constants.PARTY_ID);
             String yunId = MMKVUtils.getInstance().decodeString(Constants.PARAM_YUN_ROOM_ID);
-            if (isOnSeat && partyId != id) {
-                showTipPop(BaseWebViewActivity.this);
-                return;
-            }
             if (!TextUtils.isEmpty(yunId) && partyId != id) {
                 if (BaseMusicHelper.get() != null && BaseMusicHelper.get().getPartyService() != null) {
                     BaseMusicHelper.get().getPartyService().releaseAudience();
@@ -511,15 +505,6 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                 NIMClient.getService(ChatRoomService.class).exitChatRoom(yunId);
             }
             if (partyId == id) {
-                PartyService partyService = ARouter.getInstance().navigation(PartyService.class);
-                if (!isOnSeat && !partyService.isRunActivity()) {
-                    ARouterUtils.joinRoom(roomId, partyId);
-                    return;
-                }
-                if (isOnSeat && !partyService.isRunActivity()) {
-                    ARouterUtils.joinRoom(roomId, partyId, id);
-                    return;
-                }
                 finish();
                 return;
             }

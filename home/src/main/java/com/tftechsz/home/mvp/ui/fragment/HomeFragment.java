@@ -49,14 +49,11 @@ import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.base.BaseWebViewActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
-import com.tftechsz.common.event.BuriedPointExtendDto;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.MessageEvent;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
-import com.tftechsz.common.iservice.MineService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
@@ -93,7 +90,6 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
     @Autowired
     UserProviderService service;
 
-    private PartyService partyService;
     private ConfigInfo.HomeTopNav mHome_top_nav;
     private ImageView mIvSearch;
     private LinearLayout mLl_home_top_item;
@@ -181,7 +177,6 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             getActivity().getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.System.LOCATION_PROVIDERS_ALLOWED), false, mGpsMonitor);
         }
         ImmersionBar.with(this).titleBarMarginTop(R.id.appbarlayout).init();
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         coordinatorLayout = getView(R.id.appbarlayout);
         coordinatorLayout.addOnOffsetChangedListener((AppBarLayout.BaseOnOffsetChangedListener) (appBarLayout, verticalOffset) -> {
             if (verticalOffset < -150) {
@@ -547,21 +542,6 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                 String link = nav.link.substring(Interfaces.LINK_PEONY.length());
                 switch (link) {
                     case Interfaces.LINK_PEONY_JOIN_VIDEO_MATCH: //视频速配
-                        if (CommonUtil.showCallTip(partyService)) {
-                            return;
-                        }
-                        if (CommonUtil.showCallTip2(partyService, new CommonUtil.OnSelectListener() {
-                            @Override
-                            public void onSure() {
-                                if (null != service.getUserInfo() && service.getUserInfo().getSex() == 2) {   //女生
-                                    initPermissions(2);
-                                } else {
-                                    checkIsVer(50, 2);
-                                }
-                            }
-                        })) {
-                            return;
-                        }
                         if (null != service.getUserInfo() && service.getUserInfo().getSex() == 2) {   //女生
                             initPermissions(2);
                         } else {
@@ -570,20 +550,6 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                         break;
 
                     case Interfaces.LINK_PEONY_JOIN_VOICE_MATCH: //语音速配
-                        if (CommonUtil.showCallTip(partyService)) {
-                            return;
-                        }
-                        if (CommonUtil.showCallTip2(partyService, new CommonUtil.OnSelectListener() {
-                            @Override
-                            public void onSure() {
-                                if (null != service.getUserInfo() && service.getUserInfo().getSex() == 2) {  //女生
-                                    initPermissions(1);
-                                } else {
-                                    checkIsVer(30, 1);
-                                }
-                            }
-                        }))
-                            return;
                         if (null != service.getUserInfo() && service.getUserInfo().getSex() == 2) {  //女生
                             initPermissions(1);
                         } else {

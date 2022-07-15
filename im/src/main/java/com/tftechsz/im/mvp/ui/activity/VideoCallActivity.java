@@ -111,7 +111,6 @@ import com.tftechsz.common.custom.CameraUtils;
 import com.tftechsz.common.entity.GiftDto;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.MessageCallEvent;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.nim.ChatSoundPlayer;
 import com.tftechsz.common.nim.model.JoinChannelCallBack;
@@ -119,15 +118,12 @@ import com.tftechsz.common.nim.model.NERTCCallingDelegate;
 import com.tftechsz.common.nim.model.NERTCVideoCall;
 import com.tftechsz.common.nim.model.impl.NERTCVideoCallImpl;
 import com.tftechsz.common.utils.ClickUtil;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.CountBackUtils;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.SPUtils;
-import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.utils.face.LifeCycleSensorManager;
-import com.tftechsz.common.widget.CircleImageView;
 import com.tftechsz.common.widget.gift.GiftRootLayout;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 
@@ -186,7 +182,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private long videoUid;
     private boolean isChangeVideo;  //切换视频头像
     private UserProviderService service;
-    private PartyService partyService;
     private boolean isSelfEnd = false; //是否自己挂断
     private String fromId;  //哪个用户打入
     private String callId;
@@ -779,7 +774,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         NIMClient.getService(MsgServiceObserve.class).observeCustomNotification(commandObserver, true);
         NimUIKit.getUserInfoObservable().registerObserver(userInfoObserver, true);
         service = ARouter.getInstance().navigation(UserProviderService.class);
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         Drawable drawable;
         if (mChannelType == 2) {  //视频
             initFace();
@@ -1858,13 +1852,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 if (!ClickUtil.canOperate()) {
                     return;
                 }
-                if (CommonUtil.showCallTip3(partyService, new CommonUtil.OnSelectListener() {
-                    @Override
-                    public void onSure() {
-                        getP().checkAcceptCheck(finalInvitedParam, accountId);
-                    }
-                }))
-                    return;
                 getP().checkAcceptCheck(finalInvitedParam, accountId);
             });
             tvReject.setOnClickListener(view -> reject());

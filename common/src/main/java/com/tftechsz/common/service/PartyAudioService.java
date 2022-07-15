@@ -23,7 +23,6 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.entity.VoicePlayRegionsBean;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.nertcvoiceroom.model.Audience;
 import com.tftechsz.common.nertcvoiceroom.model.AudiencePlay;
 import com.tftechsz.common.nertcvoiceroom.model.NERtcVoiceRoom;
@@ -53,7 +52,6 @@ public class PartyAudioService extends Service implements NERtcVoiceRoomDef.Room
     protected NERTCVideoCall voiceRoom;
     private boolean isInit = false;
     private boolean isListener = false;
-    private PartyService partyService;
     //view
     protected CompositeDisposable mCompositeDisposable;
     private VoiceRoomSeat mVoiceRoomSeat;
@@ -77,7 +75,6 @@ public class PartyAudioService extends Service implements NERtcVoiceRoomDef.Room
         super.onCreate();
         NIMClient.getService(ChatRoomServiceObserver.class).observeReceiveMessage(incomingChatRoomMsg, true);
         mCompositeDisposable = new CompositeDisposable();
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         isListener = false;
     }
 
@@ -142,9 +139,6 @@ public class PartyAudioService extends Service implements NERtcVoiceRoomDef.Room
             }
             if (listener != null)
                 listener.onIncomingMessage(messages);
-            partyService = ARouter.getInstance().navigation(PartyService.class);
-            if (!partyService.isRunFloatService())
-                return;
             for (ChatRoomMessage message : messages) {
                 if (message.getSessionType() != SessionTypeEnum.ChatRoom ||
                         !message.getSessionId().equals(mRoomId)) {
@@ -173,10 +167,6 @@ public class PartyAudioService extends Service implements NERtcVoiceRoomDef.Room
 
 
     public void leaveRoomService() {
-        PartyService partyService = ARouter.getInstance().navigation(PartyService.class);
-        if (partyService.isRunFloatService()) {
-            partyService.stopFloatService();
-        }
         stopSelf();
         releaseAudience();
         removeCallBack();

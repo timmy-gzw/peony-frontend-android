@@ -14,7 +14,6 @@ import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.MMKVUtils;
@@ -55,15 +54,11 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
      * 退出登录
      */
     public void loginOut() {
-        PartyService partyService = ARouter.getInstance().navigation(PartyService.class);
         addNet(service.loginOut().compose(BasePresenter.applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
                     @Override
                     public void onSuccess(BaseResponse<Boolean> response) {
                         if (response.getData()) {
-                            if (partyService.isRunFloatService()) {
-                                partyService.stopFloatService();
-                            }
                             SPUtils.put(Constants.IS_COMPLETE_INFO, 0);
                             NIMClient.getService(AuthService.class).logout();
                             UserProviderService service = ARouter.getInstance().navigation(UserProviderService.class);

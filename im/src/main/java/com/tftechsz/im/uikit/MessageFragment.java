@@ -152,9 +152,7 @@ import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.AttentionService;
-import com.tftechsz.common.iservice.FamilyService;
 import com.tftechsz.common.iservice.MineService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.manager.DbManager;
 import com.tftechsz.common.nertcvoiceroom.model.VoiceRoomSeat;
@@ -274,7 +272,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     protected MessageListPanelEx messageListPanel;
 
     protected AitManager aitManager;
-    private PartyService partyService;
     private TextView mTvName;   //个人姓名
     private RelativeLayout mRlToolBar;
     private RelativeLayout mRlIntimacy;  //亲密度布局
@@ -439,7 +436,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         service = ARouter.getInstance().navigation(UserProviderService.class);
         mineApiService = RetrofitManager.getInstance().createUserApi(MineApiService.class);
         mineService = ARouter.getInstance().navigation(MineService.class);
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         attentionService = ARouter.getInstance().navigation(AttentionService.class);
         publicService = RetrofitManager.getInstance().createUploadCheatApi(PublicService.class);
         ImmersionBar.with(this).titleBar(findView(R.id.base_tool_bar)).init();
@@ -3363,9 +3359,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             String desc = MMKVUtils.getInstance().decodeString(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT);
             ARouterUtils.toEditFamily(desc, 0);
             MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT);
-        } else if (id == R.id.iv_sign_in) {  //签到
-            signIn();
-        } else if (id == R.id.fl_ait) {  //ait消息get
+        }  else if (id == R.id.fl_ait) {  //ait消息get
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FAMILY_AIT);
         } else if (id == R.id.ll_family_box) {
             if (mFamilyBoxPop == null) {
@@ -3436,28 +3430,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     private CustomPopWindow popWindow;
 
-
-    public boolean showRecordTip(PartyService partyService) {
-        boolean isShow = false;
-        boolean isOnSeat = MMKVUtils.getInstance().decodeBoolean(Constants.PARTY_IS_ON_SEAT);
-        if ((partyService.isRunFloatService() || partyService.isRunActivity()) && isOnSeat) {
-            if (popWindow == null)
-                popWindow = new CustomPopWindow(BaseApplication.getInstance());
-            popWindow.setContent("在麦位上，需要下麦后，才能进行语音");
-            popWindow.setRightButton("我知道了");
-            popWindow.setRightGone();
-            popWindow.showPopupWindow();
-            isShow = true;
-        }
-        return isShow;
-    }
-
-
     @Override
     public void onAudioRecord(View v, MotionEvent event) {
-        if (showRecordTip(partyService)) {
-            return;
-        }
         if (getActivity() != null && isAdded() && !isDestroyed())
             mCompositeDisposable.add(new RxPermissions(this)
                     .request(Manifest.permission.RECORD_AUDIO
@@ -3860,20 +3834,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 }).submit();
     }
 
-    private void signIn() {
-        FamilyService familyService = ARouter.getInstance().navigation(FamilyService.class);
-        familyService.familySign("family-im", new ResponseObserver<BaseResponse<Boolean>>() {
-            @Override
-            public void onSuccess(BaseResponse<Boolean> response) {
-                if (response.getData()) {
-                    mIvSign.setVisibility(View.GONE);
-                    RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_SIGN_IN_SUCCESS));
-                }
-            }
-        });
-
-    }
-
 
     /**
      * 获取当前用户是否组了情侣
@@ -4139,16 +4099,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
 
     private void checkCallMsg(int type) {
-        if (com.tftechsz.common.utils.CommonUtil.showCallTip(partyService)) {
-            return;
-        }
-        if (com.tftechsz.common.utils.CommonUtil.showCallTip2(partyService, new com.tftechsz.common.utils.CommonUtil.OnSelectListener() {
-            @Override
-            public void onSure() {
-                call(type);
-            }
-        }))
-            return;
         String[] audioPermission = {Manifest.permission.RECORD_AUDIO};
         String[] videoPermission = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
         mCompositeDisposable.add(new RxPermissions(this)

@@ -64,7 +64,6 @@ import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.iservice.AccostService;
 import com.tftechsz.common.iservice.AttentionService;
-import com.tftechsz.common.iservice.FamilyService;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
@@ -168,10 +167,7 @@ public class SessionHelper {
                 } else if (content.contains(Constants.CHAT_ACTIVITY)) {   //聊天页面
                     String userId = content.substring(Constants.CHAT_ACTIVITY.length() + 1);
                     ARouterUtils.toChatP2PActivity(userId, NimUIKit.getCommonP2PSessionCustomization(), null);
-                } else if (content.contains(Constants.CHAT_TEAM_ACTIVITY)) {  //群聊页面
-                    String teamId = content.substring(Constants.CHAT_TEAM_ACTIVITY.length() + 1);
-                    getFamilyId(teamId);
-                } else if (content.contains(Constants.USER_DETAIL_ACTIVITY)) {   //个人详情页面
+                }  else if (content.contains(Constants.USER_DETAIL_ACTIVITY)) {   //个人详情页面
                     String userId = content.substring(Constants.USER_DETAIL_ACTIVITY.length() + 1);
                     if (TextUtils.equals(String.valueOf(service.getUserId()), userId)) {
                         userId = "";
@@ -355,26 +351,6 @@ public class SessionHelper {
         customPopWindow.showPopupWindow();
     }
 
-    /**
-     * 获取群id
-     */
-    private static void getFamilyId(String teamId) {
-        FamilyService familyService = ARouter.getInstance().navigation(FamilyService.class);
-        UserProviderService service = ARouter.getInstance().navigation(UserProviderService.class);
-        familyService.searchFamily(teamId, new ResponseObserver<BaseResponse<FamilyIdDto>>() {
-            @Override
-            public void onSuccess(BaseResponse<FamilyIdDto> response) {
-                if (null != response.getData() && service != null) {
-                    if (response.getData().family_id == service.getUserInfo().family_id) {
-                        ARouterUtils.toChatTeamActivity(teamId, NimUIKit.getCommonTeamSessionCustomization(), null);
-                    } else {
-                        ToastUtil.showToast(BaseApplication.getInstance(), "您已不在该家族");
-                    }
-                }
-            }
-        });
-
-    }
 
 
     private static void registerIMMessageFilter() {

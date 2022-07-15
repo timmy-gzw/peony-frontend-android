@@ -18,15 +18,11 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
-import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.AudioBean;
 import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.common.entity.RechargeDto;
-import com.tftechsz.common.iservice.AttentionService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.nim.model.CallParams;
-import com.tftechsz.common.widget.pop.CustomPopWindow;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -254,34 +250,6 @@ public class ARouterUtils {
      */
     public static void toChatTeamActivity(String account, SessionCustomization customization, IMMessage anchor) {
         if (!ClickUtil.canOperate()) return;
-        AttentionService attentionService = ARouter.getInstance().navigation(AttentionService.class);
-        PartyService partyService = ARouter.getInstance().navigation(PartyService.class);
-        if (partyService.isRunFloatService() || partyService.isRunActivity()) {
-            CustomPopWindow customPopWindow = new CustomPopWindow(BaseApplication.getInstance());
-            customPopWindow.setContent("进入家族后会退出当前派对哦");
-            customPopWindow.addOnClickListener(new CustomPopWindow.OnSelectListener() {
-                @Override
-                public void onCancel() {
-                    customPopWindow.dismiss();
-                }
-
-                @Override
-                public void onSure() {
-                    partyService.stopFloatService();
-                    if (partyService.isRunActivity())
-                        partyService.finishPartyActivity();
-                    attentionService.finishPartyActivity();
-                    ARouter.getInstance().build(ARouterApi.ACTIVITY_TEAM_MESSAGE)
-                            .withString("account", account)
-                            .withSerializable("customization", customization)
-                            .withSerializable("anchor", anchor)
-                            .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            .navigation();
-                }
-            });
-            customPopWindow.showPopupWindow();
-            return;
-        }
         ARouter.getInstance().build(ARouterApi.ACTIVITY_TEAM_MESSAGE)
                 .withString("account", account)
                 .withSerializable("customization", customization)

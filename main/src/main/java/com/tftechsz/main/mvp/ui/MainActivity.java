@@ -71,7 +71,6 @@ import com.tftechsz.common.event.MessageEvent;
 import com.tftechsz.common.event.UnReadMessageEvent;
 import com.tftechsz.common.event.UpdateEvent;
 import com.tftechsz.common.iservice.MineService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.location.BDLocationManager;
 import com.tftechsz.common.location.LocationListener;
@@ -137,7 +136,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private OneKeyAccostPopWindow mOneKeyAccostPopWindow;
     private PlayServiceConnection mPlayServiceConnection;
     private PartyServiceConnection mPartyServiceConnection;
-    private PartyService partyService;
     @Autowired
     UserProviderService service;
     private SignInPopWindow mSignInPopWindow;
@@ -188,7 +186,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         };
         NELivePlayer.init(getApplicationContext(), config);
         service = ARouter.getInstance().navigation(UserProviderService.class);
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         final ConfigInfo configInfo = service.getConfigInfo();
         vp = findViewById(R.id.vp);
         final LottieAnimationView viewHome = findViewById(R.id.view_home);
@@ -453,7 +450,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     @Override
     protected void initData() {
         super.initData();
-        MMKVUtils.getInstance().encode(Constants.PARTY_IS_ON_SEAT, false);
         initService();
         startWork();
     }
@@ -845,9 +841,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         if (mServiceConnection != null) {
             unbindService(mServiceConnection);
             mServiceConnection = null;
-        }
-        if (partyService.isRunFloatService()) {
-            partyService.stopFloatService();
         }
         if (BaseMusicHelper.get() != null && BaseMusicHelper.get().getPlayService() != null && BaseMusicHelper.get().getPlayService().isPlaying()) {
             BaseMusicHelper.get().getPlayService().onDestroy();
