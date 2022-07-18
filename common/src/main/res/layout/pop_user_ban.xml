@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:layout_marginStart="@dimen/dp_28"
+    android:layout_marginEnd="@dimen/dp_28"
+    android:paddingBottom="@dimen/dp_20">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="@id/iv_ban"
+            android:id="@+id/ll_content"
+            android:paddingTop="@dimen/dp_85"
+            android:background="@drawable/bg_white"
+            android:layout_marginTop="@dimen/dp_32"
+            android:paddingHorizontal="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:text="用户封禁"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dp_17"
+                android:textSize="@dimen/sp_18"
+                android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:text="由于该用户“存在严重违规行为”严重影响社区氛围，经官方判定封号，一起维护健康文明的社区环境，人人有责。"
+                android:layout_marginTop="@dimen/dp_20"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_15"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_btn"
+                android:text="我知道了"
+                android:textSize="@dimen/sp_15"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_red"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_14"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_ban"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@mipmap/ic_ban"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
