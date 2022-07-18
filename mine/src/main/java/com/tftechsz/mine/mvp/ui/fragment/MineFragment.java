@@ -406,7 +406,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                 }
             }
 
-            if (configInfo != null && configInfo.share_config != null) {
+            if (configInfo != null && configInfo.share_config != null && null != mUserInfo) {
                 if (mUserInfo.isGirl()) {
                     List<ConfigInfo.NoticeBannerBean> girlBanners = configInfo.share_config.girl_banners;
                     if (girlBanners == null || girlBanners.isEmpty()) {
