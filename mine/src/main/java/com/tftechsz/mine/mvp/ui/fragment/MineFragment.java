@@ -42,6 +42,7 @@ import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomEditPopWindow;
+import com.tftechsz.common.widget.pop.CustomEditPopWindow2;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseItemAdapter;
 import com.tftechsz.mine.adapter.MineMidAdapter;
@@ -192,12 +193,13 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                 if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_CREATE_LIVE)) {
                     p.getLiveToken("测试");
                 } else if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_INVITE)) { //填写邀请码
-                    CustomEditPopWindow popWindow = new CustomEditPopWindow(getActivity());
+                    CustomEditPopWindow2 popWindow = new CustomEditPopWindow2(getActivity());
+                    popWindow.showNow(getParentFragmentManager(),"custom");
                     popWindow.setHintContent("输入邀请码");
                     popWindow.setEtLength(60);
                     popWindow.setTitle("填写邀请码");
                     popWindow.setSureDismiss(false);
-                    popWindow.addOnClickListener(new CustomEditPopWindow.OnSelectListener() {
+                    popWindow.addOnClickListener(new CustomEditPopWindow2.OnSelectListener() {
                         @Override
                         public void onCancel() {
                         }
@@ -212,7 +214,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                             popWindow.dismiss();
                         }
                     });
-                    popWindow.showPopupWindow();
+
                 } else {
                     CommonUtil.performLink(mActivity, mBotConfigList.get(position), position, 0);
                 }
