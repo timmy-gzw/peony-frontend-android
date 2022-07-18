@@ -66,11 +66,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_marginBottom="@dimen/dp_20"
-            android:background="@drawable/sp_primary_r_25"
+            android:background="@drawable/sel_primary_eee_r_25_enable"
             android:gravity="center"
             android:padding="@dimen/dp_14"
             android:text="@string/sign_in"
-            android:textColor="@color/white"
+            android:textColor="@color/sel_text_fff_999_enable"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold" />
 

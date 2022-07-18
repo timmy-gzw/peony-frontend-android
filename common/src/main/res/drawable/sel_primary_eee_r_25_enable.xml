@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/sp_primary_r_25" android:state_enabled="true" />
+    <item android:state_enabled="false">
+        <shape>
+            <corners android:radius="@dimen/dp_25" />
+            <solid android:color="@color/color_eeeeee" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/sp_primary_r_25" />
+</selector>

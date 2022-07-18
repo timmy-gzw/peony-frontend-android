@@ -1,5 +1,9 @@
 package com.tftechsz.main.mvp.presenter;
 
+import static com.tftechsz.common.constant.Interfaces.FIY_NUMBER;
+import static com.tftechsz.common.constant.Interfaces.RECHARGE_NUMBER;
+import static com.tftechsz.common.constant.Interfaces.SCENE_NUMBER;
+
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
@@ -24,11 +28,6 @@ import com.netease.nimlib.sdk.msg.constant.MsgStatusEnum;
 import com.netease.nimlib.sdk.msg.model.CustomMessageConfig;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
-import com.umeng.analytics.MobclickAgent;
-import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
-import com.tftechsz.im.uikit.P2PMessageActivity;
-import com.tftechsz.im.uikit.TeamMessageActivity;
-import com.tftechsz.home.entity.SignInBean;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.AppManager;
@@ -64,6 +63,11 @@ import com.tftechsz.common.widget.pop.RechargeBeforePop;
 import com.tftechsz.common.widget.pop.RechargePopWindow;
 import com.tftechsz.common.widget.pop.RecommendValuePop;
 import com.tftechsz.common.widget.pop.RedPackagePopWindow;
+import com.tftechsz.home.entity.SignInBean;
+import com.tftechsz.home.entity.SignInSuccessBean;
+import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
+import com.tftechsz.im.uikit.P2PMessageActivity;
+import com.tftechsz.im.uikit.TeamMessageActivity;
 import com.tftechsz.main.R;
 import com.tftechsz.main.api.MainApiService;
 import com.tftechsz.main.entity.UpdateLocationReq;
@@ -73,6 +77,7 @@ import com.tftechsz.main.widget.RetainNoMessagePopWindow;
 import com.tftechsz.main.widget.RetainPopWindow;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.utils.UserManager;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.Objects;
 
@@ -84,10 +89,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
-import static com.tftechsz.common.constant.Interfaces.FIY_NUMBER;
-import static com.tftechsz.common.constant.Interfaces.RECHARGE_NUMBER;
-import static com.tftechsz.common.constant.Interfaces.SCENE_NUMBER;
 
 public class MainPresenter extends BasePresenter<IMainView> {
     private long currentTime;
@@ -168,9 +169,8 @@ public class MainPresenter extends BasePresenter<IMainView> {
                 } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.CALL_TYPE)) {   //语音视频速配
                     if (NERTCVideoCallImpl.sharedInstance().isReceive()) return;
                     ChatMsg.CallMsg callMsg = JSON.parseObject(chatMsg.content, ChatMsg.CallMsg.class);
-                    boolean isMatch = false;
-                    if (TextUtils.equals(callMsg.type, ChatMsg.CALL_MATCH_FORCE))   //type.force = 强制匹配，type.inquiry = 询问匹配
-                        isMatch = true;
+                    boolean isMatch = TextUtils.equals(callMsg.type, ChatMsg.CALL_MATCH_FORCE);
+                    //type.force = 强制匹配，type.inquiry = 询问匹配
                     userService.setMatchType(callMsg.type);
                     if (TextUtils.equals(chatMsg.cmd, "video_call_matched")) {
                         ChatMsgUtil.callMessage(2, chatMsg.to, chatMsg.from, callMsg.type, isMatch);
@@ -566,10 +566,10 @@ public class MainPresenter extends BasePresenter<IMainView> {
 
 
     //签到列表
-    public void signList() {
+    public void signList(String scene) {
         MainApiService service = RetrofitManager.getInstance().createUserApi(MainApiService.class);
-        addNet(service.signList().compose(BasePresenter
-                .<BaseResponse<SignInBean>>applySchedulers())
+        addNet(service.signListNew(scene).compose(BasePresenter
+                        .<BaseResponse<SignInBean>>applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<SignInBean>>() {
                     @Override
                     public void onSuccess(BaseResponse<SignInBean> response) {
@@ -586,24 +586,28 @@ public class MainPresenter extends BasePresenter<IMainView> {
                         //super.onFail(code, msg);
                         if (getView() == null) return;
                         getView().signListFail();
-
                     }
                 }));
     }
 
     public void sign() {
         MainApiService service = RetrofitManager.getInstance().createUserApi(MainApiService.class);
-        addNet(service.sign().compose(BasePresenter
-                .<BaseResponse<Boolean>>applySchedulers())
-                .subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
+        addNet(service.sign().compose(BasePresenter.<BaseResponse<SignInSuccessBean>>applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<SignInSuccessBean>>() {
                     @Override
-                    public void onSuccess(BaseResponse<Boolean> response) {
-                        getView().signInSucceeded();
+                    public void onSuccess(BaseResponse<SignInSuccessBean> response) {
+                        SignInSuccessBean data = response.getData();
+                        if (data != null) {
+                            getView().signInSuccess(data);
+                        } else {
+                            getView().signInFail();
+                        }
                     }
 
                     @Override
                     public void onFail(int code, String msg) {
                         super.onFail(code, msg);
+                        getView().signInFail();
                     }
                 }));
     }
@@ -613,7 +617,7 @@ public class MainPresenter extends BasePresenter<IMainView> {
      */
     public void getUserInfo() {
         addNet(mineApiService.getUserInfo().compose(BasePresenter
-                .<BaseResponse<UserInfo>>applySchedulers())
+                        .<BaseResponse<UserInfo>>applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<UserInfo>>() {
                     @Override
                     public void onSuccess(BaseResponse<UserInfo> response) {
@@ -687,13 +691,13 @@ public class MainPresenter extends BasePresenter<IMainView> {
      */
     public void wakeUpAliPay(final String orderInfo) {
         Disposable disposable = Observable.create(new ObservableOnSubscribe<String>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<String> emitter) {
-                PayTask alipay = new PayTask((Activity) MainPresenter.this.getView());
-                String result = alipay.pay(orderInfo, true);
-                emitter.onNext(result);
-            }
-        }).subscribeOn(Schedulers.newThread())
+                    @Override
+                    public void subscribe(@NonNull ObservableEmitter<String> emitter) {
+                        PayTask alipay = new PayTask((Activity) MainPresenter.this.getView());
+                        String result = alipay.pay(orderInfo, true);
+                        emitter.onNext(result);
+                    }
+                }).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) {

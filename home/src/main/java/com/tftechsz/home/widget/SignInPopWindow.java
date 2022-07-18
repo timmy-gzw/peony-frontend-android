@@ -33,8 +33,12 @@ public class SignInPopWindow extends BaseCenterPop {
         setOutSideDismiss(false);
 
         TextView tvSignIn = findViewById(R.id.tv_sign_in);
+        TextView tvDesc = findViewById(R.id.tv_sign_in_c);
+        tvDesc.setText(data.desc);
         findViewById(R.id.ic_close).setOnClickListener(v -> dismiss());
         tvSignIn.setOnClickListener(v -> listener.signInPopClick());
+        tvSignIn.setEnabled(!data.is_complete_today);
+        tvSignIn.setText(data.is_complete_today ? getContext().getString(R.string.sign_in_already) : getContext().getString(R.string.sign_in));
         RecyclerView recy = findViewById(R.id.sign_recy);
         SignInAdapter adapter = new SignInAdapter(data.start_day);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 4);
