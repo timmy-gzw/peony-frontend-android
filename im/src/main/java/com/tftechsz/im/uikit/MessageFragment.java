@@ -4122,12 +4122,12 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 CallCheckDto data = response.getData();
                 if (null == data || !com.tftechsz.common.utils.CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
                     if (type == 2) {
-                        if (null != data && data.list != null && null != data.list.video) {
-                            if (data.list.video.is_lock) {
+                        if (null != data && data.list != null && null != data.list.voice) {
+                            if (data.list.voice.is_lock) {
                                 if (null != data.error && null != data.error.intimacy) {
                                     showCustomPop(data.error.intimacy.msg);
-                                } else if (null != data.error && null != data.error.video) {
-                                    if (TextUtils.equals(data.error.video.cmd_type, Constants.DIRECT_RECHARGE)) {
+                                } else if (null != data.error && null != data.error.voice) {
+                                    if (TextUtils.equals(data.error.voice.cmd_type, Constants.DIRECT_RECHARGE)) {
                                         if (service.getConfigInfo() != null && service.getConfigInfo().share_config != null && service.getConfigInfo().share_config.is_limit_from_channel == 1) {
                                             if (beforePop == null)
                                                 beforePop = new RechargeBeforePop(getActivity());
@@ -4137,7 +4137,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                             showRechargePop(sessionId);
                                         }
                                     } else {
-                                        showCustomPop(data.error.video.msg);
+                                        showCustomPop(data.error.voice.msg);
                                     }
                                 }
                             } else {
