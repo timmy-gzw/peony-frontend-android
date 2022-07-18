@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_4"
         android:textColor="@color/white"
+        android:layout_marginVertical="@dimen/dp_4"
         android:textSize="@dimen/sp_12"
         android:text="张三"
         app:layout_constraintBottom_toTopOf="@id/ll_age"
