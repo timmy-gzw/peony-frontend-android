@@ -44,7 +44,9 @@
                     android:id="@+id/rv_visitor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:overScrollMode="never" />
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingBottom="@dimen/dp_150" />
             </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
             <ImageView

@@ -41,7 +41,6 @@ import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
-import com.tftechsz.common.widget.pop.CustomEditPopWindow;
 import com.tftechsz.common.widget.pop.CustomEditPopWindow2;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseItemAdapter;
@@ -91,6 +90,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private View llCoin;
     private Banner<ConfigInfo.NoticeBannerBean, BannerImageAdapter<ConfigInfo.NoticeBannerBean>> mBanner;
     private CardView mCvBanner;
+    private MineMidAdapter mineMidAdapter;
 
     @Override
     protected MinePresenter initPresenter() {
@@ -184,7 +184,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mRvMineBot.setAdapter(mBotAdapter);
         mRvMineBot.setNestedScrollingEnabled(false);
         mBotAdapter.setList(null);
-        if (((SimpleItemAnimator) mRvMineBot.getItemAnimator()) != null)
+        if (mRvMineBot.getItemAnimator() != null)
             ((SimpleItemAnimator) mRvMineBot.getItemAnimator()).setSupportsChangeAnimations(false);
         mRvMineBot.setItemAnimator(null);
         mBotAdapter.onAttachedToRecyclerView(mRvMineBot);
@@ -194,7 +194,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                     p.getLiveToken("测试");
                 } else if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_INVITE)) { //填写邀请码
                     CustomEditPopWindow2 popWindow = new CustomEditPopWindow2(getActivity());
-                    popWindow.showNow(getParentFragmentManager(),"custom");
+                    popWindow.showNow(getParentFragmentManager(), "custom");
                     popWindow.setHintContent("输入邀请码");
                     popWindow.setEtLength(60);
                     popWindow.setTitle("填写邀请码");
@@ -230,6 +230,12 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
 
                 }
             }
+        });
+        mRcMineMid.setLayoutManager(new GridLayoutManager(mContext, 4));
+        mineMidAdapter = new MineMidAdapter();
+        mRcMineMid.setAdapter(mineMidAdapter);
+        mineMidAdapter.setOnItemClickListener((a, view, position) -> {
+            CommonUtil.performLink(mActivity, mineMidAdapter.getItem(position), position, 0);
         });
 
         if (mUserInfo != null) {
@@ -359,14 +365,18 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
 
 
                 //渲染中部RecyclerView
-                List<ConfigInfo.MineInfo> myMainNavlist = CommonUtil.addMineInfo(configInfo.share_config.my_main_nav);
-                if (myMainNavlist.size() > 0) {
-                    mRcMineMid.setLayoutManager(new GridLayoutManager(mContext, myMainNavlist.size()));
-                    MineMidAdapter adapter = new MineMidAdapter(myMainNavlist);
-                    mRcMineMid.setAdapter(adapter);
-                    adapter.setOnItemClickListener((a, view, position) -> {
-                        CommonUtil.performLink(mActivity, adapter.getItem(position), position, 0);
-                    });
+                List<ConfigInfo.MineInfo> mineMidList = CommonUtil.addMineInfo(configInfo.share_config.my_main_nav);
+                if (mineMidList.size() > 0) {
+                    for (ConfigInfo.MineInfo mineInfo : mineMidList) {
+                        if ("谁看过我".equals(mineInfo.title) || "访客记录".equals(mineInfo.title)) {
+                            mineInfo.visitor_count = mUserInfo == null ? 0 : mUserInfo.visitor_count;
+                            break;
+                        }
+                    }
+                    if (mineMidAdapter.getItemCount() != mineMidList.size()) {
+                        mRcMineMid.setLayoutManager(new GridLayoutManager(mContext, mineMidList.size()));
+                    }
+                    mineMidAdapter.setList(mineMidList);
                     mRcMineMid.setVisibility(View.VISIBLE);
                     llIntegral.setVisibility(View.GONE);
                     llCoin.setVisibility(View.GONE);
