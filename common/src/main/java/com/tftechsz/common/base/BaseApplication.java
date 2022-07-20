@@ -25,7 +25,6 @@ import com.faceunity.nama.ui.BeautyParameterModel;
 import com.faceunity.nama.utils.PreferenceUtil;
 import com.heytap.msp.push.HeytapPushManager;
 import com.hjq.toast.ToastUtils;
-import com.hua.permissionmonitor.PermissionMonitor;
 import com.netease.lava.api.Trace;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.common.util.DownloadHelper;
@@ -100,10 +99,6 @@ public class BaseApplication extends Application implements Application.Activity
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
-
-        if(BuildConfig.DEBUG) {
-            PermissionMonitor.start(false);
-        }
     }
 
     private static BaseApplication mApplication;

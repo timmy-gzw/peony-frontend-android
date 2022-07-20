@@ -163,9 +163,7 @@ ext {
             "vap"                    : 'io.github.tencent:vap:2.0.22',
 
             "alipay"                 : "com.alipay.sdk:alipaysdk-android:+@aar",
-            "baidu-map-location"     : "com.baidu.lbsyun:BaiduMapSDK_Location:9.1.8",
-
-            "PermissionMonitor"      : "com.github.huage2580:PermissionMonitor:1.0.1"
+            "baidu-map-location"     : "com.baidu.lbsyun:BaiduMapSDK_Location:9.1.8"
 
     ]
 
