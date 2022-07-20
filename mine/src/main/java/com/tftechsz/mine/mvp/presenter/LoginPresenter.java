@@ -62,6 +62,7 @@ import com.tftechsz.mine.utils.UserManager;
 import com.tftechsz.mine.widget.pop.PrivacyPopWindow;
 import com.tftechsz.peony.SplashActivity;
 import com.umeng.commonsdk.UMConfigure;
+import com.yl.lib.sentry.hook.PrivacySentry;
 
 import org.apache.commons.codec.binary.Base64;
 import org.jetbrains.annotations.NotNull;
@@ -408,6 +409,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      * 跳转主页面
      */
     public void intentMain(Activity context, String account, String token, LoginDto data, int type) {
+        PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
         // 初始化消息提醒配置
         initNotificationConfig();
         NimCache.setAccount(account);
