@@ -1,5 +1,9 @@
 package com.tftechsz.common.base;
 
+import static com.tftechsz.common.utils.CommonUtil.getUmengAppKey;
+import static com.tftechsz.common.utils.CommonUtil.getUmengChannel;
+import static com.tftechsz.common.utils.CommonUtil.getUmengPushSecret;
+
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
@@ -8,20 +12,15 @@ import android.os.Process;
 import android.webkit.WebView;
 
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
+import com.netease.nim.uikit.common.util.DownloadHelper;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.previewlibrary.ZoomMediaLoader;
+import com.tftechsz.common.utils.ImageLoaderUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
-import com.umeng.message.IUmengRegisterCallback;
-import com.umeng.message.PushAgent;
 import com.umeng.socialize.UMShareAPI;
-import com.netease.nim.uikit.common.util.DownloadHelper;
-import com.tftechsz.common.utils.ImageLoaderUtil;
-import com.tftechsz.common.utils.Utils;
 
 import java.io.File;
-
-import static com.tftechsz.common.utils.CommonUtil.*;
 
 public class StartIntentService extends IntentService {
     private static final String ACTION_INIT = "StartIntentService";
@@ -52,21 +51,6 @@ public class StartIntentService extends IntentService {
     private void initApplication() {
         LogUtil.e("==============","=================");
         UMConfigure.init(this, getUmengAppKey(), getUmengChannel(), UMConfigure.DEVICE_TYPE_PHONE, getUmengPushSecret());
-        //获取消息推送代理示例
-        PushAgent mPushAgent = PushAgent.getInstance(this);
-        //注册推送服务，每次调用register方法都会回调该接口
-        mPushAgent.register(new IUmengRegisterCallback() {
-            @Override
-            public void onSuccess(String deviceToken) {
-                //注册成功会返回deviceToken deviceToken是推送消息的唯一标志
-                Utils.logE("注册成功：deviceToken：-------->  " + deviceToken);
-            }
-
-            @Override
-            public void onFailure(String s, String s1) {
-                Utils.logE("注册失败：-------->  " + "s:" + s + ",s1:" + s1);
-            }
-        });
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.LEGACY_MANUAL);
         UMConfigure.setProcessEvent(true);
         UMShareAPI.get(this);

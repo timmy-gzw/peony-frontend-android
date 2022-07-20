@@ -106,27 +106,19 @@ ext {
             "umeng-common"           : "com.umeng.umsdk:common:9.4.0",
             "umeng-asms"             : "com.umeng.umsdk:asms:1.2.3",
             "umeng-crash"            : "com.umeng.umsdk:crash:0.0.5",
-            "umeng-share-core"       : "com.umeng.umsdk:share-core:7.1.5",//分享核心库，必选
-            "umeng-share-board"      : "com.umeng.umsdk:share-board:7.1.5",//分享面板功能，可选
-            "umeng-share-qq"         : "com.umeng.umsdk:share-qq:7.1.5",//QQ完整版
+            "umeng-share-core"       : "com.umeng.umsdk:share-core:7.1.7",//分享核心库，必选
+            "umeng-share-board"      : "com.umeng.umsdk:share-board:7.1.7",//分享面板功能，可选
+            "umeng-share-qq"         : "com.umeng.umsdk:share-qq:7.1.7",//QQ完整版
             "umeng-share-qqopensdk"  : 'com.tencent.tauth:qqopensdk:3.53.0',//QQ官方SDK依赖库,
-            "umeng-share-wx"         : "com.umeng.umsdk:share-wx:7.1.5",//微信完整版
-            "umeng-share-wxopensdk"  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.7.0", //微信官方SDK依赖库
-            "umeng-share-sina"       : "com.umeng.umsdk:share-sina:7.1.5",//新浪微博完整版
-            "umeng-share-sinaopensdk": "com.sina.weibo.sdk:core:10.10.0:openDefaultRelease@aar", //新浪微博官方SDK依赖库
+            "umeng-share-wx"         : "com.umeng.umsdk:share-wx:7.1.7",//微信完整版
+            "umeng-share-wxopensdk"  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0", //微信官方SDK依赖库
+            "umeng-share-sina"       : "com.umeng.umsdk:share-sina:7.1.7",//新浪微博完整版
+            "umeng-share-sinaopensdk": "io.github.sinaweibosdk:core:11.11.1@aar", //新浪微博官方SDK依赖库
             "umeng-link"             : "com.umeng.umsdk:link:1.1.0",
             "imagePreview"           : "com.ycjiang:ImagePreview:2.3.5",  //图片
             "huawei-push"            : "com.huawei.hms:push:4.0.4.301",  //华为推送
             "roundedimageview"       : "com.makeramen:roundedimageview:2.3.0",
             "umeng-utdid"            : "com.umeng.umsdk:utdid:1.5.2.1",
-            "umeng-push"             : "com.umeng.umsdk:push:6.3.3",
-            "umeng-alicloud-httpdns" : "com.umeng.umsdk:alicloud-httpdns:1.3.2.3",
-            "umeng-alicloud-utils"   : "com.umeng.umsdk:alicloud-utils:2.0.0",
-            "umeng-alicloud_beacon"  : "com.umeng.umsdk:alicloud_beacon:1.0.5",
-            "umeng-accs"             : "com.umeng.umsdk:agoo-accs:3.4.2.7",
-            "umeng-agoo_networksdk"  : "com.umeng.umsdk:agoo_networksdk:3.5.8",
-            "umeng-agoo_tlog"        : "com.umeng.umsdk:agoo_tlog:3.0.0.17", // ----
-            "umeng-agoo_tnet4android": "com.umeng.umsdk:agoo_tnet4android:3.1.14.10",
             "photoview"              : "com.bm.photoview:library:1.4.1",
             "LikeButton"             : "com.github.jd-alexander:LikeButton:0.2.3",
             //视频播放
