@@ -159,6 +159,21 @@ android {
         "20005" {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20005", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
+        "20006" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20006", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20007" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20007", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20008" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20008", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20009" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20009", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20010" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20010", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
         BAIDU {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "BAIDU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
