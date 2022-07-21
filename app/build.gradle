@@ -30,7 +30,11 @@ android {
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: name,
                                 APPLOG_SCHEME      : "rangersapplog.__TBD__".toLowerCase(),
                                 app_label          : appName,
-                                app_icon           : "@mipmap/ic_launcher"]
+                                app_icon           : "@mipmap/ic_launcher",
+                                hotfixKey          : "333738527",
+                                hotfixSecret       : "0f7d0099aaaa44cbb1e1e9dc6b07943f",
+                                hotfixRsa          : "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCbjTwRJHSKBbZQdeFldPQ+yLfiWvrHA16OeJ0QJdFDq/m8AR47g4PRisPe8ifuPEpUw+URC7r9+V7mjj4vLnyKWMKHnnjA53gOCUnFo7y0JGmfAiQpsZuirkjV8waxvs5YpMrQwvByX4OO8aHbgLW1udoCXmQqL4080PUmp4kFT6VrLTa5Qv0Lo4pRCiBC8FRMFxJ+a+9rr5HhOkC+KAEtWRZuY4XADOTkAUikomK/pCIX0wpefsHkRid9QADJQ7HzkAujUciXtNufyjZ9mMrGV491QT9P+lbF11rMba4+on4VeejuScmMtJblEr4A1hBNkmP/PAp+TK8VuF4Srh9xAgMBAAECggEBAJlwdSsXwdmQjunJjkAtYO05w6IGSs/bc/+n3I7cLxPI5bzdgXwFXBdsAZC/YEIxuMTqw9/PqXHz9fgJoi+adIFn0uRCnyzyZ0u5P8s0m+U68fFHBHMYXsTXlMNvSlA1PojUbbgGQ3ce3sA3fIjw6s3K+dFSWQ4AABtYqCqsIo5YG8W+btvFTiDE367EaE92Msoc/S5sZ8O+cZRVXwyC8aJDYPYedHwC0oWjVLX2OSwg7SKrcFEc1GdUQ+OcjdY5/CvPcP1Lpfm6jggUHKdl1E16z1SFKpiWKHD1Ga048U7ets+NXF1l7xwDjuQFdUaVqN1rB/TlidDm0Ak7GYyFG8ECgYEAyedRvkyrk++zlcL4UgwQ/+WboCsUJM8ZT0/gIWakFXIBQuy8Zl2BdGQJnCfxSGVEvKMvR3awkHkvYnCEN4sat5tR08CLRpRiHQH967vGTcCD9ypuP57tQXTPaT4zoMFqM+UKdKjdDAbx2dKaQtgwBqmZiFUbqvpMHCLj3qPkhTkCgYEAxTqc6ZRWRP92ENKXrAI3+Pmu2IXThBN99+M8hzBBmEJDWCfMrTGH7MMGsUsW6sjU4i8u/WltLP6RPiNa5ldt6FDW5UgvBrK3SwbCpYeIlrGqN8tj+AGcFN9ftbQOzsinOLyP5QIp3cjZCp4uTD+0KkAjRZQACoZrVsTNhnB/4/kCgYB73jXRSVpubT3BIJeWRp7bT/OVZTh7iK8fcIKyGzWJjqLlezXum2lDjegzbHHkF3T/QiJMdq3GRQLkIuGK7gWbJWgjQFpyF7DF2SX+TPpRU03jAp4W3Br08IQbLjUgZ+kPI3KxtbO/oDcaitFnNxjnzX9LG+PYlqzBCkrAmc4mSQKBgDEhxtERWORbV0gdjhcVfmgRmxLpU6XFTU4hV4S96rlJWIlvcLd8bUX314T3FcBrQ00NQAF07/OTfw8hs5VKFmEXMlFvx/c9MhgImRivSMFxhNvdWQwBKqawdqFHN6EfrzidEKOWBGPxks/oU9Q+0lzsGV1N3yzAC6FT6XciM1nRAoGAKN+INHfS5YLcYZ0EKR6Xu33PCnLBX4CsndQEU7BdRgRN8wBoBjJI3i+8L9B/aqfFTgBB5Gk18sCZiMRId8ySdgmmA4tCOCcPwF06/RCYOKlrQK0FJE5HhXM4zpcUg/iicWExtBxQYZbzW1AGfDv7y6uQRFrTNl+/WNWSwGtNk3A="
+        ]
 
         ndk {
 //            abiFilters "armeabi-v7a"

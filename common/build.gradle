@@ -49,6 +49,9 @@ repositories {
     flatDir {
         dirs 'libs', '../lib_common/libs'
     }
+    maven {
+        url "http://maven.aliyun.com/nexus/content/repositories/releases"
+    }
 }
 
 dependencies {
@@ -218,5 +221,9 @@ dependencies {
     api rootProject.ext.dependencies["hook-sentry"]
     api rootProject.ext.dependencies["privacy-annotation"]
     api rootProject.ext.dependencies["privacy-proxy"]
+
+    api(rootProject.ext.dependencies.hotfix) {
+        exclude group: 'com.aliyun.ams',module:"alicloud-android-utdid"
+    }
 
 }

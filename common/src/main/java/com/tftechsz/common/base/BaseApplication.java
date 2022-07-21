@@ -104,27 +104,29 @@ public class BaseApplication extends Application implements Application.Activity
         super.attachBaseContext(base);
         MultiDex.install(this);
 
-        //完成功能的初始化
-        PrivacySentryBuilder builder = new PrivacySentryBuilder()
-                // 自定义文件结果的输出名
-                .configResultFileName("buyer_privacy")
-                // 配置游客模式，true打开游客模式，false关闭游客模式
-                .configVisitorModel(true)
-                // 配置写入文件日志 , 线上包这个开关不要打开！！！！，true打开文件输入，false关闭文件输入
-                .enableFileResult(true)
-                // 持续写入文件30分钟
-                .configWatchTime(30 * 60 * 1000)
-                // 文件输出后的回调
-                .configResultCallBack(new PrivacyResultCallBack() {
+        if(BuildConfig.IS_DEBUG) {
+            //完成功能的初始化
+            PrivacySentryBuilder builder = new PrivacySentryBuilder()
+                    // 自定义文件结果的输出名
+                    .configResultFileName("buyer_privacy")
+                    // 配置游客模式，true打开游客模式，false关闭游客模式
+                    .configVisitorModel(true)
+                    // 配置写入文件日志 , 线上包这个开关不要打开！！！！，true打开文件输入，false关闭文件输入
+                    .enableFileResult(true)
+                    // 持续写入文件30分钟
+                    .configWatchTime(30 * 60 * 1000)
+                    // 文件输出后的回调
+                    .configResultCallBack(new PrivacyResultCallBack() {
 
-                    @Override
-                    public void onResultCallBack(@NonNull String s) {
+                        @Override
+                        public void onResultCallBack(@NonNull String s) {
 
-                    }
-                });
+                        }
+                    });
 
-        // 添加默认结果输出，包含log输出和文件输出
-        PrivacySentry.Privacy.INSTANCE.init(this, builder);
+            // 添加默认结果输出，包含log输出和文件输出
+            PrivacySentry.Privacy.INSTANCE.init(this, builder);
+        }
     }
 
     private static BaseApplication mApplication;
