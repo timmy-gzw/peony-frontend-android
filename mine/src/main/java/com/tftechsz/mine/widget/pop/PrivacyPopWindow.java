@@ -14,6 +14,7 @@ import com.tftechsz.common.R;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.widget.pop.BaseCenterPop;
 import com.tftechsz.mine.widget.TextClick;
+import com.yl.lib.sentry.hook.PrivacySentry;
 
 /**
  * 隐私协议
@@ -61,6 +62,7 @@ public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_agree) {
+            PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
             MMKVUtils.getInstance().encode(Constants.IS_AGREE_AGREEMENT, 1);
             if (privacyListener != null) {
                 privacyListener.agree();

@@ -6,7 +6,7 @@ ext {
             applicationId    : "com.tftechsz.peony",
             minSdkVersion    : 21,
             targetSdkVersion : 30,
-            versionCode      : 24,
+            versionCode      : 25,
             versionName      : "1.0.0",
     ]
     //version配置
@@ -35,127 +35,124 @@ ext {
     //依赖第三方配置
     dependencies = [
             //rxjava
-            "rxjava"                 : "io.reactivex.rxjava2:rxjava:2.2.3",
-            "rxandroid"              : "io.reactivex.rxjava2:rxandroid:2.1.0",
+            "rxjava"                : "io.reactivex.rxjava2:rxjava:2.2.3",
+            "rxandroid"             : "io.reactivex.rxjava2:rxandroid:2.1.0",
             //rx系列与View生命周期同步
-            "rxlifecycle"            : "com.trello.rxlifecycle2:rxlifecycle:2.2.2",
-            "rxlifecycle-components" : "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
+            "rxlifecycle"           : "com.trello.rxlifecycle2:rxlifecycle:2.2.2",
+            "rxlifecycle-components": "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
             //rxbinding
-            "rxbinding"              : "com.jakewharton.rxbinding2:rxbinding:2.1.1",
+            "rxbinding"             : "com.jakewharton.rxbinding2:rxbinding:2.1.1",
             //network
-            "okhttp"                 : "com.squareup.okhttp3:okhttp:3.10.0",
-            "retrofit"               : "com.squareup.retrofit2:retrofit:2.4.0",
-            "converter-gson"         : "com.squareup.retrofit2:converter-gson:2.4.0",
-            "adapter-rxjava"         : "com.squareup.retrofit2:adapter-rxjava2:2.4.0",
-            "logging-interceptor"    : "com.squareup.okhttp3:logging-interceptor:3.9.1",
-            "autosize"               : "me.jessyan:autosize:1.1.2",
+            "okhttp"                : "com.squareup.okhttp3:okhttp:3.10.0",
+            "retrofit"              : "com.squareup.retrofit2:retrofit:2.4.0",
+            "converter-gson"        : "com.squareup.retrofit2:converter-gson:2.4.0",
+            "adapter-rxjava"        : "com.squareup.retrofit2:adapter-rxjava2:2.4.0",
+            "logging-interceptor"   : "com.squareup.okhttp3:logging-interceptor:3.9.1",
+            "autosize"              : "me.jessyan:autosize:1.1.2",
             //glide图片加载
-            "glide"                  : "com.github.bumptech.glide:glide:4.11.0",
-            "glide-compiler"         : "com.github.bumptech.glide:compiler:4.9.0",
-            "glide-transformations"  : "jp.wasabeef:glide-transformations:4.0.0",
+            "glide"                 : "com.github.bumptech.glide:glide:4.11.0",
+            "glide-compiler"        : "com.github.bumptech.glide:compiler:4.9.0",
+            "glide-transformations" : "jp.wasabeef:glide-transformations:4.0.0",
             //json解析
-            "gson"                   : "com.google.code.gson:gson:2.8.5",
-            "adapterHelper"          : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
+            "gson"                  : "com.google.code.gson:gson:2.8.5",
+            "adapterHelper"         : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
             //Google AAC
-            "lifecycle-extensions"   : "android.arch.lifecycle:extensions:1.1.1",
-            "lifecycle-compiler"     : "android.arch.lifecycle:compiler:1.1.1",
+            "lifecycle-extensions"  : "android.arch.lifecycle:extensions:1.1.1",
+            "lifecycle-compiler"    : "android.arch.lifecycle:compiler:1.1.1",
             //阿里路由框架
-            "arouter-api"            : "com.alibaba:arouter-api:1.4.1",
-            "arouter-compiler"       : "com.alibaba:arouter-compiler:1.5.2",
-            "eventbus"               : "org.greenrobot:eventbus:3.1.1",
-            "dagger"                 : "com.google.dagger:dagger:2.13",
-            "dagger-compiler"        : "com.google.dagger:dagger-compiler:2.13",
+            "arouter-api"           : "com.alibaba:arouter-api:1.4.1",
+            "arouter-compiler"      : "com.alibaba:arouter-compiler:1.5.2",
+            "eventbus"              : "org.greenrobot:eventbus:3.1.1",
+            "dagger"                : "com.google.dagger:dagger:2.13",
+            "dagger-compiler"       : "com.google.dagger:dagger-compiler:2.13",
 
-            "smartRefreshLayout"     : "com.scwang.smart:refresh-layout-kernel:2.0.3",//下拉刷新上拉加载
-            "smartRefreshHeader"     : "com.scwang.smart:refresh-header-classics:2.0.3",//下拉刷新上拉加载
-            "smartFooiter"           : "com.scwang.smart:refresh-footer-classics:2.0.3",//下拉刷新上拉加载
-            "material"               : "com.scwang.smart:refresh-header-material:2.0.3",//下拉刷新头部 ui
+            "smartRefreshLayout"    : "com.scwang.smart:refresh-layout-kernel:2.0.3",//下拉刷新上拉加载
+            "smartRefreshHeader"    : "com.scwang.smart:refresh-header-classics:2.0.3",//下拉刷新上拉加载
+            "smartFooiter"          : "com.scwang.smart:refresh-footer-classics:2.0.3",//下拉刷新上拉加载
+            "material"              : "com.scwang.smart:refresh-header-material:2.0.3",//下拉刷新头部 ui
 
-            "immersionbar"           : "com.gyf.immersionbar:immersionbar:3.0.0",
-            "immersionbar_component" : "com.gyf.immersionbar:immersionbar-components:3.0.0",
+            "immersionbar"          : "com.gyf.immersionbar:immersionbar:3.0.0",
+            "immersionbar_component": "com.gyf.immersionbar:immersionbar-components:3.0.0",
             //rx 6.0权限请求
-            "rxpermission"           : "com.github.tbruyelle:rxpermissions:0.10.2",
-            "flycoTabLayout"         : "com.lzp:FlycoTabLayoutZ:1.3.3",
-            "basePopup"              : "com.github.razerdp:BasePopup:2.2.10",
+            "rxpermission"          : "com.github.tbruyelle:rxpermissions:0.10.2",
+            "flycoTabLayout"        : "com.lzp:FlycoTabLayoutZ:1.3.3",
+            "basePopup"             : "com.github.razerdp:BasePopup:2.2.10",
             //网易云信
             // 聊天室需要
-            "avsignalling"           : "com.netease.nimlib:avsignalling:8.7.2",
+            "avsignalling"          : "com.netease.nimlib:avsignalling:8.7.2",
             // 通过云信来集成小米等厂商推送需要
-            "push"                   : "com.netease.nimlib:push:8.7.2",
-            "yunxin-nertc"           : "com.netease.yunxin:nertc:4.2.117",
-            "neliveplayer"           : "com.netease.nimlib:neliveplayer:2.9.0",
-            "playerGslbVersion"      : "com.netease:gslb:1.1.0",
-            "SVGAPlayer"             : "com.github.yyued:SVGAPlayer-Android:2.6.1", //svga播放器
-            "filedownloader"         : "com.liulishuo.filedownloader:library:1.7.7",
-            "lottie"                 : "com.airbnb.android:lottie:4.1.0",
-            "fastjson"               : "com.alibaba:fastjson:1.2.73",
-            "pickerView"             : "com.contrarywind:Android-PickerView:4.1.8",  //时间选择
-            "room-runtime"           : "android.arch.persistence.room:runtime:2.2.5",
-            "room-compiler"          : "android.arch.persistence.room:compiler:2.2.5",
-            "room-ktx"               : "androidx.room:room-ktx:2.2.5",
-            "room-rxjava2"           : "android.arch.persistence.room:rxjava2:2.2.5",
-            "room-guava"             : "acom.google.guava:guava:30.1.1-jre",
-            "aliyun-oss"             : "com.aliyun.dpa:oss-android-sdk:+",  //  阿里上传
-            "luban"                  : "top.zibin:Luban:1.1.8",
-            "utilcodex"              : "com.blankj:utilcodex:1.30.6",
-            "PictureSelector"        : "io.github.lucksiege:pictureselector:v3.10.5",
-            "recyclerviewheader"     : "com.bartoszlipinski.recyclerviewheader:library:1.2.0",
-            "loadingdialog"          : "com.github.ydstar:loadingdialog:1.0.0",
-            "WaveLineView"           : "com.github.Jay-Goo:WaveLineView:v1.0.4",
-            "banner"                 : "io.github.youth5201314:banner:2.2.2",
-            "umeng-common"           : "com.umeng.umsdk:common:9.4.0",
-            "umeng-asms"             : "com.umeng.umsdk:asms:1.2.3",
-            "umeng-crash"            : "com.umeng.umsdk:crash:0.0.5",
-            "umeng-share-core"       : "com.umeng.umsdk:share-core:7.1.7",//分享核心库，必选
-            "umeng-share-board"      : "com.umeng.umsdk:share-board:7.1.7",//分享面板功能，可选
-            "umeng-share-qq"         : "com.umeng.umsdk:share-qq:7.1.7",//QQ完整版
-            "umeng-share-qqopensdk"  : 'com.tencent.tauth:qqopensdk:3.53.0',//QQ官方SDK依赖库,
-            "umeng-share-wx"         : "com.umeng.umsdk:share-wx:7.1.7",//微信完整版
-            "umeng-share-wxopensdk"  : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0", //微信官方SDK依赖库
-            "umeng-share-sina"       : "com.umeng.umsdk:share-sina:7.1.7",//新浪微博完整版
-            "umeng-share-sinaopensdk": "io.github.sinaweibosdk:core:11.11.1@aar", //新浪微博官方SDK依赖库
-            "umeng-link"             : "com.umeng.umsdk:link:1.1.0",
-            "imagePreview"           : "com.ycjiang:ImagePreview:2.3.5",  //图片
-            "huawei-push"            : "com.huawei.hms:push:4.0.4.301",  //华为推送
-            "roundedimageview"       : "com.makeramen:roundedimageview:2.3.0",
-            "umeng-utdid"            : "com.umeng.umsdk:utdid:1.5.2.1",
-            "photoview"              : "com.bm.photoview:library:1.4.1",
-            "LikeButton"             : "com.github.jd-alexander:LikeButton:0.2.3",
+            "push"                  : "com.netease.nimlib:push:8.7.2",
+            "yunxin-nertc"          : "com.netease.yunxin:nertc:4.2.117",
+            "neliveplayer"          : "com.netease.nimlib:neliveplayer:2.9.0",
+            "playerGslbVersion"     : "com.netease:gslb:1.1.0",
+            "SVGAPlayer"            : "com.github.yyued:SVGAPlayer-Android:2.6.1", //svga播放器
+            "filedownloader"        : "com.liulishuo.filedownloader:library:1.7.7",
+            "lottie"                : "com.airbnb.android:lottie:4.1.0",
+            "fastjson"              : "com.alibaba:fastjson:1.2.73",
+            "pickerView"            : "com.contrarywind:Android-PickerView:4.1.8",  //时间选择
+            "room-runtime"          : "android.arch.persistence.room:runtime:2.2.5",
+            "room-compiler"         : "android.arch.persistence.room:compiler:2.2.5",
+            "room-ktx"              : "androidx.room:room-ktx:2.2.5",
+            "room-rxjava2"          : "android.arch.persistence.room:rxjava2:2.2.5",
+            "room-guava"            : "acom.google.guava:guava:30.1.1-jre",
+            "aliyun-oss"            : "com.aliyun.dpa:oss-android-sdk:+",  //  阿里上传
+            "luban"                 : "top.zibin:Luban:1.1.8",
+            "utilcodex"             : "com.blankj:utilcodex:1.30.6",
+            "PictureSelector"       : "io.github.lucksiege:pictureselector:v3.10.5",
+            "recyclerviewheader"    : "com.bartoszlipinski.recyclerviewheader:library:1.2.0",
+            "loadingdialog"         : "com.github.ydstar:loadingdialog:1.0.0",
+            "WaveLineView"          : "com.github.Jay-Goo:WaveLineView:v1.0.4",
+            "banner"                : "io.github.youth5201314:banner:2.2.2",
+            "umeng-common"          : "com.umeng.umsdk:common:9.5.0",
+            "umeng-asms"            : "com.umeng.umsdk:asms:1.5.0",
+            "umeng-apm"             : "com.umeng.umsdk:apm:1.7.0",//U-APM产品包依赖(必选)
+            "umeng-link"            : "com.umeng.umsdk:link:1.2.0",
+            "umeng-share-core"      : "com.umeng.umsdk:share-core:7.1.7",//分享核心库，必选
+            "umeng-share-board"     : "com.umeng.umsdk:share-board:7.1.7",//分享面板功能，可选
+            "umeng-share-qq"        : "com.umeng.umsdk:share-qq:7.1.7",//QQ完整版
+            "umeng-share-qqopensdk" : 'com.tencent.tauth:qqopensdk:3.53.0',//QQ官方SDK依赖库,
+            "umeng-share-wx"        : "com.umeng.umsdk:share-wx:7.1.7",//微信完整版
+            "umeng-share-wxopensdk" : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0", //微信官方SDK依赖库
+            "imagePreview"          : "com.ycjiang:ImagePreview:2.3.5",  //图片
+            "huawei-push"           : "com.huawei.hms:push:4.0.4.301",  //华为推送
+            "roundedimageview"      : "com.makeramen:roundedimageview:2.3.0",
+            "photoview"             : "com.bm.photoview:library:1.4.1",
+            "LikeButton"            : "com.github.jd-alexander:LikeButton:0.2.3",
             //视频播放
-            "dkplayer-java"          : "xyz.doikki.android.dkplayer:dkplayer-java:3.3.3",
-            "dkplayer-ui"            : "xyz.doikki.android.dkplayer:dkplayer-ui:3.3.3",
-            "dkplayer-exo"           : "xyz.doikki.android.dkplayer:player-exo:3.3.3",
-            "dkplayer-ijk"           : "xyz.doikki.android.dkplayer:player-ijk:3.3.3",
-            "videocache"             : "xyz.doikki.android.dkplayer:videocache:3.3.3",
-            "ffmpeg"                 : "nl.bravobit:android-ffmpeg:1.1.7",
-            "baseutils"              : "com.github.iknow4:android-utils-sdk:1.1.2",
-            "rclayout"               : "com.gcssloop.widget:rclayout:1.8.1",
-            "EpMedia"                : "com.github.yangjie10930:EpMedia:v1.0.1",
+            "dkplayer-java"         : "xyz.doikki.android.dkplayer:dkplayer-java:3.3.3",
+            "dkplayer-ui"           : "xyz.doikki.android.dkplayer:dkplayer-ui:3.3.3",
+            "dkplayer-exo"          : "xyz.doikki.android.dkplayer:player-exo:3.3.3",
+            "dkplayer-ijk"          : "xyz.doikki.android.dkplayer:player-ijk:3.3.3",
+            "videocache"            : "xyz.doikki.android.dkplayer:videocache:3.3.3",
+            "ffmpeg"                : "nl.bravobit:android-ffmpeg:1.1.7",
+            "baseutils"             : "com.github.iknow4:android-utils-sdk:1.1.2",
+            "rclayout"              : "com.gcssloop.widget:rclayout:1.8.1",
+            "EpMedia"               : "com.github.yangjie10930:EpMedia:v1.0.1",
             //"toast"                  : "com.hjq:toast:8.6",
-            "multidex"               : "com.android.support:multidex:1.0.3",
-            "mojito"                 : "com.github.mikaelzero.mojito:mojito:1.7.1",
-            "GlideImageLoader"       : "com.github.mikaelzero.mojito:GlideImageLoader:1.7.1",
-            "SketchImageFactory"     : "com.github.mikaelzero.mojito:SketchImageViewLoader:1.7.1",
-            "ticker"                 : "com.robinhood.ticker:ticker:2.0.2",
-            "appcompat"              : "androidx.appcompat:appcompat:1.1.0",
-            "recyclerview"           : "androidx.recyclerview:recyclerview:1.0.0",
-            "faceunity"              : "com.faceunity:nama:7.3.2",
-            "integration"            : "com.github.bumptech.glide:okhttp3-integration:4.11.0",
-            "glide-extension"        : "com.gitee.arcns:glide-extension:0.3",
-            "mmkv"                   : "com.tencent:mmkv:1.2.11",
-            "livedetect"             : "io.github.yidun:livedetect:3.0.8",
-            "realtimeblurview"       : "com.github.mmin18:realtimeblurview:1.2.1",
-            "gif"                    : "pl.droidsonroids.gif:android-gif-drawable:1.2.22",
-            "ctpv"                   : "com.sfyc.ctpv:library:1.1.3",
-            "rxdownload"             : "com.github.ssseasonnn:RxDownload:1.1.3",
-            "MagicIndicator"         : "com.github.hackware1993:MagicIndicator:1.7.0",
-            "tkrefreshlayout"        : "com.lcodecorex:tkrefreshlayout:1.0.7",
+            "multidex"              : "com.android.support:multidex:1.0.3",
+            "mojito"                : "com.github.mikaelzero.mojito:mojito:1.7.1",
+            "GlideImageLoader"      : "com.github.mikaelzero.mojito:GlideImageLoader:1.7.1",
+            "SketchImageFactory"    : "com.github.mikaelzero.mojito:SketchImageViewLoader:1.7.1",
+            "ticker"                : "com.robinhood.ticker:ticker:2.0.2",
+            "appcompat"             : "androidx.appcompat:appcompat:1.1.0",
+            "recyclerview"          : "androidx.recyclerview:recyclerview:1.0.0",
+            "faceunity"             : "com.faceunity:nama:7.3.2",
+            "integration"           : "com.github.bumptech.glide:okhttp3-integration:4.11.0",
+            "glide-extension"       : "com.gitee.arcns:glide-extension:0.3",
+            "mmkv"                  : "com.tencent:mmkv:1.2.11",
+            "livedetect"            : "io.github.yidun:livedetect:3.0.8",
+            "realtimeblurview"      : "com.github.mmin18:realtimeblurview:1.2.1",
+            "gif"                   : "pl.droidsonroids.gif:android-gif-drawable:1.2.22",
+            "ctpv"                  : "com.sfyc.ctpv:library:1.1.3",
+            "rxdownload"            : "com.github.ssseasonnn:RxDownload:1.1.3",
+            "MagicIndicator"        : "com.github.hackware1993:MagicIndicator:1.7.0",
+            "tkrefreshlayout"       : "com.lcodecorex:tkrefreshlayout:1.0.7",
             //跑马灯
-            "marquee"                : "com.gongwen:marqueelibrary:1.1.3",
-            "vap"                    : 'io.github.tencent:vap:2.0.22',
+            "marquee"               : "com.gongwen:marqueelibrary:1.1.3",
+            "vap"                   : 'io.github.tencent:vap:2.0.22',
 
-            "alipay"                 : "com.alipay.sdk:alipaysdk-android:+@aar",
-            "baidu-map-location"     : "com.baidu.lbsyun:BaiduMapSDK_Location:9.1.8",
+            "alipay"                : "com.alipay.sdk:alipaysdk-android:+@aar",
+            "baidu-map-location"    : "com.baidu.lbsyun:BaiduMapSDK_Location:9.1.8",
 
     ]
 
