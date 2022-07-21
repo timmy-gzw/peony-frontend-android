@@ -165,11 +165,6 @@ ext {
             "alipay"                 : "com.alipay.sdk:alipaysdk-android:+@aar",
             "baidu-map-location"     : "com.baidu.lbsyun:BaiduMapSDK_Location:9.1.8",
 
-            //PrivacySentry
-            "hook-sentry"            : "com.github.allenymt.PrivacySentry:hook-sentry:1.0.7",
-            "privacy-annotation"     : "com.github.allenymt.PrivacySentry:privacy-annotation:1.0.7",
-            "privacy-proxy"          : "com.github.allenymt.PrivacySentry:privacy-proxy:1.0.7",
-
             //阿里热修复
             "hotfix"                 : "com.aliyun.ams:alicloud-android-hotfix:3.3.5"
 

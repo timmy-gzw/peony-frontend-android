@@ -54,9 +54,6 @@ import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.widget.MyToastStyle;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
-import com.yl.lib.sentry.hook.PrivacyResultCallBack;
-import com.yl.lib.sentry.hook.PrivacySentry;
-import com.yl.lib.sentry.hook.PrivacySentryBuilder;
 
 import net.mikaelzero.mojito.Mojito;
 import net.mikaelzero.mojito.loader.glide.GlideImageLoader;
@@ -103,30 +100,6 @@ public class BaseApplication extends Application implements Application.Activity
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
-
-        if(BuildConfig.IS_DEBUG) {
-            //完成功能的初始化
-            PrivacySentryBuilder builder = new PrivacySentryBuilder()
-                    // 自定义文件结果的输出名
-                    .configResultFileName("buyer_privacy")
-                    // 配置游客模式，true打开游客模式，false关闭游客模式
-                    .configVisitorModel(true)
-                    // 配置写入文件日志 , 线上包这个开关不要打开！！！！，true打开文件输入，false关闭文件输入
-                    .enableFileResult(true)
-                    // 持续写入文件30分钟
-                    .configWatchTime(30 * 60 * 1000)
-                    // 文件输出后的回调
-                    .configResultCallBack(new PrivacyResultCallBack() {
-
-                        @Override
-                        public void onResultCallBack(@NonNull String s) {
-
-                        }
-                    });
-
-            // 添加默认结果输出，包含log输出和文件输出
-            PrivacySentry.Privacy.INSTANCE.init(this, builder);
-        }
     }
 
     private static BaseApplication mApplication;
@@ -173,8 +146,7 @@ public class BaseApplication extends Application implements Application.Activity
         registerActivityLifecycleCallbacks(this);
         mApplication = this;
         setRxJavaErrorHandler();
-        PrivacySentryBuilder builder = PrivacySentry.Privacy.INSTANCE.getBuilder();
-        if (processName == null && !Objects.requireNonNull(builder).isVisitorModel()) {
+        if (processName == null) {
             return;
         }
         if (AppUtils.isAppDebug()) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效

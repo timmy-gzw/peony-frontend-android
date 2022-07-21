@@ -340,7 +340,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             return;
         }
         txt_color_enable = Utils.getColor(R.color.color_black_ff666666);
-        txt_color_unenable = Utils.getColor(R.color.green);
+        txt_color_unenable = Utils.getColor(R.color.colorPrimary);
         if (configInfo == null || configInfo.sys == null || configInfo.sys.is_main_tab_lottie_config == 0) {
             return;
         }
