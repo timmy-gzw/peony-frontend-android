@@ -2,9 +2,9 @@ package com.tftechsz.common.base;
 
 import static com.tftechsz.common.utils.CommonUtil.getUmengAppKey;
 import static com.tftechsz.common.utils.CommonUtil.getUmengChannel;
+import static com.tftechsz.common.utils.CommonUtil.getUmengPushSecret;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
@@ -20,6 +20,7 @@ import androidx.multidex.MultiDex;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.AppUtils;
 import com.bun.miitmdid.interfaces.IIdentifierListener;
+import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.faceunity.nama.ui.BeautyParameterModel;
 import com.faceunity.nama.utils.PreferenceUtil;
@@ -32,7 +33,6 @@ import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.mixpush.NIMPushClient;
-import com.netease.nimlib.sdk.util.NIMUtil;
 import com.previewlibrary.ZoomMediaLoader;
 import com.tencent.mmkv.MMKV;
 import com.tencent.tauth.Tencent;
@@ -49,11 +49,15 @@ import com.tftechsz.common.nim.UserPreferences;
 import com.tftechsz.common.player.controller.VideoViewManager;
 import com.tftechsz.common.push.MyMixPushMessageHandler;
 import com.tftechsz.common.push.MyPushContentProvider;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ImageLoaderUtil;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.widget.MyToastStyle;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
+import com.yl.lib.sentry.hook.PrivacySentry;
+import com.yl.lib.sentry.hook.PrivacySentryBuilder;
+import com.yl.lib.sentry.hook.util.MainProcessUtil;
 
 import net.mikaelzero.mojito.Mojito;
 import net.mikaelzero.mojito.loader.glide.GlideImageLoader;
@@ -64,7 +68,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
 
 import iknow.android.utils.BaseUtils;
 import io.reactivex.plugins.RxJavaPlugins;
@@ -99,6 +102,21 @@ public class BaseApplication extends Application implements Application.Activity
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+
+        initPrivacy();
+    }
+
+    private void initPrivacy() {
+        PrivacySentryBuilder builder = new PrivacySentryBuilder()
+                // 自定义文件结果的输出名
+                .configResultFileName("peony_privacy")
+                // 配置游客模式，true打开游客模式，false关闭游客模式
+                .configVisitorModel(false)
+                // 配置写入文件日志 , 线上包这个开关不要打开！！！！，true打开文件输入，false关闭文件输入
+                .enableFileResult(BuildConfig.DEBUG)
+                // 持续写入文件30分钟
+                .configWatchTime(30 * 60 * 1000);
+        PrivacySentry.Privacy.INSTANCE.init(this, builder);
     }
 
     private static BaseApplication mApplication;
@@ -122,88 +140,68 @@ public class BaseApplication extends Application implements Application.Activity
         });
     }
 
-    private String getProcessName(Context context) {
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
-        if (runningApps == null) {
-            return null;
-        }
-        for (ActivityManager.RunningAppProcessInfo proInfo : runningApps) {
-            if (proInfo.pid == Process.myPid()) {
-                if (proInfo.processName != null) {
-                    return proInfo.processName;
-                }
-            }
-        }
-        return null;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
-        String processName = getProcessName(this);
         registerActivityLifecycleCallbacks(this);
         mApplication = this;
         setRxJavaErrorHandler();
-        if (processName == null) {
-            return;
-        }
         if (AppUtils.isAppDebug()) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog();     // 打印日志
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this);
         NimCache.setContext(this);
-        NIMClient.init(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
+        MMKV.initialize(this);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Field field = ClassLoader.getSystemClassLoader()
-                            .loadClass("de.robv.android.xposed.XposedBridge")
-                            .getDeclaredField("disableHooks");
-                    field.setAccessible(true);
-                    field.set(null, Boolean.TRUE);
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
-                enableHttpResponseCache();
+        int isAgree = MMKVUtils.getInstance().decodeInt(Constants.IS_AGREE_AGREEMENT);
+        if (isAgree == 0) {
+            NIMClient.config(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
+        } else {
+            NIMClient.init(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
+        }
+        boolean mainProcess = MainProcessUtil.MainProcessChecker.INSTANCE.isMainProcess(this);
+        if (!mainProcess) return;
+
+        new Thread(() -> {
+            try {
+                Field field = ClassLoader.getSystemClassLoader()
+                        .loadClass("de.robv.android.xposed.XposedBridge")
+                        .getDeclaredField("disableHooks");
+                field.setAccessible(true);
+                field.set(null, Boolean.TRUE);
+            } catch (Throwable e) {
+                e.printStackTrace();
             }
+            enableHttpResponseCache();
         }).start();
 
-        if (NIMUtil.isMainProcess(this)) {
-            UMConfigure.setLogEnabled(BuildConfig.DEBUG);
+        UMConfigure.setLogEnabled(BuildConfig.DEBUG);
+        if (isAgree == 0) {//未同意隐私政策
             UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
-            // 监听的注册，必须在主进程中。
-            HeytapPushManager.init(this, true);
-            com.huawei.hms.support.common.ActivityMgr.INST.init(this);
+        } else {
+            getOaid();
+            initUmeng();
             initUiKit();
-            // 初始化消息提醒
-            NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
-            NIMPushClient.registerMixPushMessageHandler(new MyMixPushMessageHandler());
-            ToastUtils.init(mApplication, new MyToastStyle());
-            MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.LEGACY_MANUAL);
-            VideoViewManager.setConfig(VideoViewConfig.newBuilder().setPlayerFactory(IjkPlayerFactory.create()).build());
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                WebView.setDataDirectorySuffix(Process.myPid() + "");
-            }
-            ZoomMediaLoader.getInstance().init(new ImageLoaderUtil());
-            DownloadHelper.init(this);
-            PreferenceUtil.init(this);
-            BeautyParameterModel.init();
-            BaseUtils.init(this);
-            MMKV.initialize(this);
-            Mojito.initialize(GlideImageLoader.Companion.with(this), new SketchImageLoadFactory());
-            if (TextUtils.isEmpty(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID))) {
-                com.netease.nis.sdkwrapper.Utils.rL(new Object[]{null, BaseApplication.getInstance(),
-                        true, (IIdentifierListener) (b, idSupplier) -> {
-                    String oaid = idSupplier.getOAID();
-                    MMKVUtils.getInstance().encode(Interfaces.SP_OAID, oaid);
-                }, 28, 1606976968500L});
-            }
-//            notifyChannel(this);
+            initShanyanSDK();
         }
+        // 监听的注册，必须在主进程中。
+        HeytapPushManager.init(this, true);
+        com.huawei.hms.support.common.ActivityMgr.INST.init(this);
+        ToastUtils.init(mApplication, new MyToastStyle());
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.LEGACY_MANUAL);
+        VideoViewManager.setConfig(VideoViewConfig.newBuilder().setPlayerFactory(IjkPlayerFactory.create()).build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WebView.setDataDirectorySuffix(Process.myPid() + "");
+        }
+        ZoomMediaLoader.getInstance().init(new ImageLoaderUtil());
+        DownloadHelper.init(this);
+        PreferenceUtil.init(this);
+        BeautyParameterModel.init();
+        BaseUtils.init(this);
+        Mojito.initialize(GlideImageLoader.Companion.with(this), new SketchImageLoadFactory());
+//            notifyChannel(this);
+
 //        initBytedance();
 
         // 尽可能早，推荐在Application中初始化
@@ -252,7 +250,10 @@ public class BaseApplication extends Application implements Application.Activity
     }
 
 
-    private void initUiKit() {
+    public void initUiKit() {
+        // 初始化消息提醒
+        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
+        NIMPushClient.registerMixPushMessageHandler(new MyMixPushMessageHandler());
         // 初始化
         NimUIKit.init(this);
         // 会话窗口的定制: 示例代码可详见demo源码中的SessionHelper类。
@@ -261,9 +262,33 @@ public class BaseApplication extends Application implements Application.Activity
         // 3.设置会话中点击事件响应处理（一般需要）
         SessionHelper.init();
         NimUIKit.setCustomPushContentProvider(new MyPushContentProvider());
-
     }
 
+    /**
+     * 闪验
+     */
+    public void initShanyanSDK() {
+        OneKeyLoginManager.getInstance().init(this, Constants.SANYAN_APP_ID, (code, result) -> {
+        });
+    }
+
+    /**
+     * 友盟初始化
+     */
+    public void initUmeng() {
+        UMConfigure.init(this, CommonUtil.getUmengAppKey(), CommonUtil.getUmengChannel(), UMConfigure.DEVICE_TYPE_PHONE, getUmengPushSecret());
+        UMConfigure.setProcessEvent(true);
+    }
+
+    public void getOaid() {
+        if (TextUtils.isEmpty(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID))) {
+            com.netease.nis.sdkwrapper.Utils.rL(new Object[]{null, BaseApplication.getInstance(),
+                    true, (IIdentifierListener) (b, idSupplier) -> {
+                String oaid = idSupplier.getOAID();
+                MMKVUtils.getInstance().encode(Interfaces.SP_OAID, oaid);
+            }, 28, 1606976968500L});
+        }
+    }
 
     private LoginInfo getLoginInfo() {
         UserProviderService service = ARouter.getInstance().navigation(UserProviderService.class);
