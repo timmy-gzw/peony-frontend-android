@@ -59,7 +59,6 @@ import com.tftechsz.mine.utils.UserManager;
 import com.tftechsz.mine.widget.pop.PrivacyPopWindow;
 import com.umeng.umlink.MobclickLink;
 import com.umeng.umlink.UMLinkListener;
-import com.yl.lib.sentry.hook.PrivacySentry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -130,7 +129,6 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
             popWindow.setPrivacyListener(new PrivacyPopWindow.PrivacyListener() {
                 @Override
                 public void agree() {
-                    PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
                     getP().lazyInit();
                     initPermission();
                 }
