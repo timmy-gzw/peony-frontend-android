@@ -54,8 +54,8 @@ dependencies {
 
     api(name: 'netmobsecLib_4.4.6.8', ext: 'aar')
     api(name: 'oaid_sdk_1.0.25', ext: 'aar')
-    api(name: 'com.heytap.msp-push-2.1.0', ext: 'aar')
-    api(name: 'vivo_pushsdk_v3.0.0.0_480', ext: 'aar')
+    api(name: 'com.heytap.msp-push-3.0.0', ext: 'aar')
+    api(name: 'vivo_pushsdk_v3.0.0.4_484', ext: 'aar')
 
     api rootProject.ext.support["kotlin"]
     api rootProject.ext.support["design"]
@@ -113,19 +113,8 @@ dependencies {
     api rootProject.ext.dependencies["rxpermission"]
     api rootProject.ext.dependencies["basePopup"]
 
-    //网易云信
-
-
-    api rootProject.ext.dependencies["yunxin-nertc"]
-    api rootProject.ext.dependencies["neliveplayer"]
-    api rootProject.ext.dependencies["playerGslbVersion"]
     api project(path: ':uikit')
     api project(path: ':faceunity')
-
-    api rootProject.ext.dependencies["avsignalling"]
-//    api rootProject.ext.dependencies["fastjson"]
-    api rootProject.ext.dependencies["push"]
-
 
     api rootProject.ext.dependencies["SVGAPlayer"]
     api rootProject.ext.dependencies["filedownloader"]
@@ -155,6 +144,7 @@ dependencies {
     api rootProject.ext.dependencies["umeng-share-wx"]
     api rootProject.ext.dependencies["umeng-share-wxopensdk"]
     api rootProject.ext.dependencies["huawei-push"]
+    api rootProject.ext.dependencies["meizu-push"]
     api rootProject.ext.dependencies["roundedimageview"]
     api rootProject.ext.dependencies["umeng-link"]
 

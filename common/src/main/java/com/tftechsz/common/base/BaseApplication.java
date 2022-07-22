@@ -157,6 +157,7 @@ public class BaseApplication extends Application implements Application.Activity
         if (isAgree == 0) {
             NIMClient.config(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
         } else {
+            PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
             NIMClient.init(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
         }
         boolean mainProcess = NIMUtil.isMainProcess(this);
@@ -179,7 +180,6 @@ public class BaseApplication extends Application implements Application.Activity
         if (isAgree == 0) {//未同意隐私政策
             UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
         } else {
-            PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
             getOaid();
             initUmeng();
             initUiKit();

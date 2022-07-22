@@ -26,9 +26,11 @@
     <!-- 外置存储存取权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
 
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
@@ -55,6 +57,7 @@
     <permission
         android:name="com.tftechsz.peony.permission.RECEIVE_MSG"
         android:protectionLevel="signature" />
+    <uses-permission android:name="com.tftechsz.peony.permission.RECEIVE_MSG" />
 
     <!--  oppo推送配置权限-->
     <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
@@ -82,6 +85,21 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <!-- 魅族推送 -->
+    <!-- 兼容 Flyme5 以下版本，魅族内部接入 PushSDK 必填，不然无法收到消息-->
+    <uses-permission android:name="com.meizu.flyme.push.permission.RECEIVE" />
+    <permission
+        android:name="{你的包名}.permission.MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.tftechsz.peony.push.permission.MESSAGE" />
+    <!-- 兼容 Flyme3 配置权限-->
+    <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" />
+    <permission
+        android:name="com.tftechsz.peony.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.tftechsz.peony.permission.C2D_MESSAGE" />
+
+
     <application android:requestLegacyExternalStorage="true">
         <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
             如果 SDKOptions 中提供了，则取 SDKOptions 中的值。 -->
@@ -102,6 +120,7 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="hPHNLUSasPjeRQjpQYeFBj13lTESGRee" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -109,9 +128,8 @@
         <service
             android:name="com.tftechsz.common.nim.service.CallService"
             android:enabled="true"
-            android:exported="true"
-            >
-            <intent-filter android:priority="1000" >
+            android:exported="true">
+            <intent-filter android:priority="1000">
                 <action android:name="com.tftechsz.peony.callService" />
             </intent-filter>
         </service>
@@ -231,6 +249,24 @@
             </intent-filter>
         </receiver>
 
+        <!--魅族推送配置项-->
+        <receiver android:name="com.netease.nimlib.mixpush.mz.MZPushReceiver">
+            <intent-filter android:priority="0x7fffffff">
+                <!-- 接收 push 消息 -->
+                <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
+                <!-- 接收 register 消息 -->
+                <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
+                <!-- 接收 unregister 消息-->
+                <action android:name="com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK" />
+                <!-- 兼容低版本 Flyme3 推送服务配置 -->
+                <action android:name="com.meizu.c2dm.intent.REGISTRATION" />
+                <action android:name="com.meizu.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.netease.nim.demo" />
+            </intent-filter>
+        </receiver>
+
+
         <service
             android:name="com.netease.nimlib.mixpush.hw.HWPushService"
             android:exported="false">
@@ -247,12 +283,15 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.tftechsz.common.push.MixPushActivity"
+        <activity
+            android:name="com.tftechsz.common.push.MixPushActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="com.tftechsz.huawei.push"
                     android:path="/link"
@@ -266,7 +305,8 @@
         <!--Vivo推送配置项-->
         <service
             android:name="com.vivo.push.sdk.service.CommandClientService"
-            android:exported="true" />
+            android:exported="true"
+            android:permission="com.push.permission.UPSTAGESERVICE" />
         <activity
             android:name="com.vivo.push.sdk.LinkProxyClientActivity"
             android:exported="false"
@@ -283,7 +323,7 @@
         <receiver android:name="com.netease.nimlib.mixpush.vivo.VivoPushReceiver">
             <intent-filter>
                 <!-- 接收 push 消息 -->
-                <action android:name="com.vivo.pushclient.action.RECEIVE"/>
+                <action android:name="com.vivo.pushclient.action.RECEIVE" />
             </intent-filter>
         </receiver>
 
@@ -311,12 +351,14 @@
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"
-            android:noHistory="true"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent1111187726" />
             </intent-filter>
         </activity>
