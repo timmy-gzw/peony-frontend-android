@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tftechsz.common">
+
+    <uses-permission
+        android:name="android.permission.READ_CONTACTS"
+        tools:node="remove" />
+
     <!-- 权限声明 -->
     <!-- 访问网络状态-->
     <uses-permission android:name="android.permission.INTERNET" />
