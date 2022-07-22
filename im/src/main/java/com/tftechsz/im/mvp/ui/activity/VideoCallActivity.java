@@ -727,6 +727,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private void initIntent() {
         invitedEvent = (InvitedEvent) getIntent().getSerializableExtra(INVENT_EVENT);
         fromId = getIntent().getStringExtra(CALL_FROM_ID);
+        if(fromId == null && invitedEvent != null){
+            fromId = invitedEvent.getFromAccountId();
+        }
         callId = getIntent().getStringExtra(CALL_ID);
         callOutUser = (UserInfo) getIntent().getSerializableExtra(CALL_OUT_USER);
         mCallDir = getIntent().getIntExtra(CALL_DIR, 0);
