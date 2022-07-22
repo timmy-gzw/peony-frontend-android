@@ -325,18 +325,25 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
             }
         } catch (Throwable ignore) {
         }
-        try {
-            //todo 混淆可能不起作用
-            Class aClass = Class.forName("com.tftechsz.im.mvp.ui.activity.VideoCallActivity");
-            boolean activityExistsInStack = ActivityUtils.isActivityExistsInStack(aClass);
-            if(!activityExistsInStack){
-                ARouterUtils.toMainActivity(msg);
+        IMMessage finalMsg = msg;
+        Utils.runOnUiThreadDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //todo 混淆可能不起作用
+                    Class aClass = Class.forName("com.tftechsz.im.mvp.ui.activity.VideoCallActivity");
+                    boolean activityExistsInStack = ActivityUtils.isActivityExistsInStack(aClass);
+                    if(!activityExistsInStack){
+                        ARouterUtils.toMainActivity(finalMsg);
+                    }
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    ARouterUtils.toMainActivity(finalMsg);
+                }
+                finish();
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            ARouterUtils.toMainActivity(msg);
-        }
-        finish();
+        },100);
+
     }
 
 
