@@ -153,15 +153,15 @@ public class BaseApplication extends Application implements Application.Activity
         NimCache.setContext(this);
         MMKV.initialize(this);
 
-        int isAgree = MMKVUtils.getInstance().decodeInt(Constants.IS_AGREE_AGREEMENT);
-        if (isAgree == 0) {
-            NIMClient.config(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
-        } else {
+        boolean isAgree = MMKVUtils.getInstance().decodeInt(Constants.IS_AGREE_AGREEMENT) == 1;
+        if (isAgree) {
             PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
             NIMClient.init(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
+        } else {
+            NIMClient.config(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
         }
-        boolean mainProcess = NIMUtil.isMainProcess(this);
-        if (!mainProcess) return;
+        boolean isMainProcess = isAgree ? NIMUtil.isMainProcess(this) : NIMUtil.isMainProcessPure(this) > 0;
+        if (!isMainProcess) return;
 
         new Thread(() -> {
             try {
@@ -177,13 +177,13 @@ public class BaseApplication extends Application implements Application.Activity
         }).start();
 
         UMConfigure.setLogEnabled(BuildConfig.DEBUG);
-        if (isAgree == 0) {//未同意隐私政策
-            UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
-        } else {
+        if (isAgree) {
             getOaid();
             initUmeng();
             initUiKit();
             initShanyanSDK();
+        } else {//未同意隐私政策
+            UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
         }
         // 监听的注册，必须在主进程中。
         HeytapPushManager.init(this, true);
