@@ -218,6 +218,8 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        int isAgree = MMKVUtils.getInstance().decodeInt(Constants.IS_AGREE_AGREEMENT);
+        if (isAgree != 1) return;
         Uri data = intent.getData();
         if (data != null) {
             MobclickLink.handleUMLinkURI(this, data, umlinkAdapter);
