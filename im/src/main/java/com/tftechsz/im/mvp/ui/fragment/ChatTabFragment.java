@@ -246,7 +246,7 @@ public class ChatTabFragment extends BaseMvpFragment implements View.OnClickList
                 mTvOnlineStatus.setText("空闲");
                 mIvOnLineStatus.setImageResource(R.mipmap.chat_ic_status_free);
             }
-//            mLlOnlineStatus.setVisibility(View.VISIBLE);
+            mLlOnlineStatus.setVisibility(View.VISIBLE);
         });
     }
 
@@ -269,7 +269,7 @@ public class ChatTabFragment extends BaseMvpFragment implements View.OnClickList
                 if (code == StatusCode.NET_BROKEN || code == StatusCode.CONNECTING) {
                     mTvOnlineStatus.setText("离开");
                     mIvOnLineStatus.setImageResource(R.mipmap.chat_ic_status_offline);
-//                    mLlOnlineStatus.setVisibility(View.VISIBLE);
+                    mLlOnlineStatus.setVisibility(View.VISIBLE);
                 } else {
                     setStatus();
                 }
