@@ -1048,6 +1048,10 @@ public class CommonUtil {
         return getMetaData("UMENG_APPKEY");
     }
 
+    public static String getBuglyAppKey() {
+        return getMetaData("BUGLY_APPKEY");
+    }
+
     public static String getUmengPushSecret() {
         return getMetaData("UMENG_PUSH_SECRET");
     }

@@ -21,6 +21,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -161,6 +162,14 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         UMConfigure.init(BaseApplication.getInstance(), CommonUtil.getUmengAppKey(), CommonUtil.getUmengChannel(), UMConfigure.DEVICE_TYPE_PHONE, getUmengPushSecret());
         UMConfigure.setProcessEvent(true);
     }
+
+    /**
+     * bugly初始化
+     */
+    public void initBugly(Context context) {
+        CrashReport.initCrashReport(context, CommonUtil.getBuglyAppKey(), com.tftechsz.common.BuildConfig.IS_DEBUG);
+    }
+
 
     /**
      * 统计云手机

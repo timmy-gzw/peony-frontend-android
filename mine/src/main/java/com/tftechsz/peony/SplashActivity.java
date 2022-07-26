@@ -149,8 +149,11 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
     private void initPermission() {
         getP().initShanyanSDK(this);
         getP().initUmeng();
+        getP().initBugly(this);
 
         getP().getReviewConfig();
+
+
     }
 
     private void initRxBus() {

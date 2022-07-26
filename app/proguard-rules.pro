@@ -556,3 +556,7 @@
         public <init>();
     }
     -keep class com.tftechsz.peony.SophixStubApplication$RealApplicationStub
+
+    #bugly
+    -dontwarn com.tencent.bugly.**
+    -keep public class com.tencent.bugly.**{*;}

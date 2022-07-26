@@ -28,6 +28,10 @@
             android:name="com.taobao.android.hotfix.RSASECRET"
             android:value="${hotfixRsa}" />
 
+        <meta-data
+            android:name="BUGLY_APPKEY"
+            android:value="${buglyKey}" />
+
         <activity
             android:name="com.tftechsz.peony.SplashActivity"
             android:configChanges="keyboardHidden|orientation"
