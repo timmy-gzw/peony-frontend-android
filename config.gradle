@@ -6,8 +6,8 @@ ext {
             applicationId    : "com.tftechsz.peony",
             minSdkVersion    : 21,
             targetSdkVersion : 30,
-            versionCode      : 31,
-            versionName      : "1.0.02",
+            versionCode      : 33,
+            versionName      : "1.0.0",
     ]
     //version配置
     versions = [
