@@ -101,6 +101,12 @@
 
 
     <application android:requestLegacyExternalStorage="true">
+        <!--   workManager lazy init     -->
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            tools:node="remove" />
+
         <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
             如果 SDKOptions 中提供了，则取 SDKOptions 中的值。 -->
         <provider

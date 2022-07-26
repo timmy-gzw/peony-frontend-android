@@ -22,7 +22,6 @@ import com.yl.lib.sentry.hook.PrivacySentry;
 public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListener {
 
 
-
     public PrivacyPopWindow(Context context) {
         super(context);
         mContext = context;
@@ -57,11 +56,13 @@ public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListe
     }
 
 
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_agree) {
+            //关闭游客模式
+            PrivacySentry.Privacy.INSTANCE.closeVisitorModel();
+            //隐私协议点击确定
             PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
             MMKVUtils.getInstance().encode(Constants.IS_AGREE_AGREEMENT, 1);
             if (privacyListener != null) {
@@ -85,6 +86,7 @@ public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListe
 
     public interface PrivacyListener {
         void agree();
+
         void cancel();
     }
 

@@ -16,6 +16,7 @@ import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 import androidx.multidex.MultiDex;
+import androidx.work.Configuration;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.AppUtils;
@@ -78,7 +79,7 @@ import xyz.doikki.videoplayer.player.VideoViewConfig;
 /**
  * Description: <初始化应用程序><br>
  */
-public class BaseApplication extends Application implements Application.ActivityLifecycleCallbacks {
+public class BaseApplication extends Application implements Application.ActivityLifecycleCallbacks, Configuration.Provider {
     public final static int APP_STATUS_KILLED = 0; // 表示应用是被杀死后在启动的
     public final static int APP_STATUS_NORMAL = 1; // 表示应用时正常的启动流程
     public static int APP_STATUS = APP_STATUS_KILLED; // 记录App的启动状态
@@ -110,7 +111,7 @@ public class BaseApplication extends Application implements Application.Activity
                 // 自定义文件结果的输出名
                 .configResultFileName("peony_privacy")
                 // 配置游客模式，true打开游客模式，false关闭游客模式
-                .configVisitorModel(false)
+                .configVisitorModel(true)
                 // 配置写入文件日志 , 线上包这个开关不要打开！！！！，true打开文件输入，false关闭文件输入
                 .enableFileResult(BuildConfig.DEBUG)
                 // 持续写入文件30分钟
@@ -155,6 +156,9 @@ public class BaseApplication extends Application implements Application.Activity
 
         boolean isAgree = MMKVUtils.getInstance().decodeInt(Constants.IS_AGREE_AGREEMENT) == 1;
         if (isAgree) {
+            //关闭游客模式 敏感信息可取到值
+            PrivacySentry.Privacy.INSTANCE.closeVisitorModel();
+            //隐私协议点击确定
             PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
             NIMClient.init(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
         } else {
@@ -372,6 +376,13 @@ public class BaseApplication extends Application implements Application.Activity
         return new HttpProxyCacheServer.Builder(this)
                 .maxCacheSize(1024 * 1024 * 1024)       // 1 Gb for cache
                 .build();
+    }
+
+    //workManager configuration
+    @NonNull
+    @Override
+    public Configuration getWorkManagerConfiguration() {
+        return new Configuration.Builder().build();
     }
 
 
