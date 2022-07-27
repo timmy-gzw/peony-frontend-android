@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -134,7 +135,7 @@ public class ConfigUtils {
                 .setCheckedImgPath(check)
                 .setPrivacyOffsetBottomY(20) //设置隐私条款相对于屏幕下边缘y偏
                 .setcheckBoxOffsetXY(0, 1)
-                .setPrivacyState(MMKVUtils.getInstance().decodeBoolean(Constants.AGREED_TO_TOS))
+                .setPrivacyState(false)
                 .setPrivacyTextSize(12)
                 .setPrivacyOffsetX(5)
                 .setSloganHidden(true)
@@ -173,7 +174,8 @@ public class ConfigUtils {
     private static void showLogin(LoginWay loginWay, Activity context, int type) {
         if (showPop(context))
             return;
-        if (!MMKVUtils.getInstance().decodeBoolean(Constants.AGREED_TO_TOS)) {
+        CheckBox checkBox = OneKeyLoginManager.getInstance().getPrivacyCheckBox();
+        if (checkBox != null && !checkBox.isChecked()) {
             Utils.toast("请阅读并勾选协议");
             return;
         }

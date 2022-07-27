@@ -31,8 +31,6 @@ import com.blankj.utilcode.util.ConvertUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.ConfigInfo;
-import com.umeng.umlink.MobclickLink;
-import com.umeng.umlink.UMLinkListener;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.AppManager;
@@ -40,6 +38,7 @@ import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.CommonUtil;
@@ -52,11 +51,12 @@ import com.tftechsz.mine.BuildConfig;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.LoginImageAdapter;
 import com.tftechsz.mine.entity.dto.LoginDto;
-import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.mine.mvp.IView.ILoginView;
 import com.tftechsz.mine.mvp.presenter.LoginPresenter;
 import com.tftechsz.mine.widget.TextClick;
 import com.tftechsz.mine.widget.pop.PrivacyPopWindow;
+import com.umeng.umlink.MobclickLink;
+import com.umeng.umlink.UMLinkListener;
 
 import java.util.HashMap;
 
@@ -75,7 +75,6 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
     @Autowired
     UserProviderService service;
     private int type = 0;
-    private boolean agreedToTos;
     private LinearLayout mLlBottom;
     private boolean isFirst;
     private int umLinkCount = 0;
@@ -146,10 +145,8 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
             e.printStackTrace();
         }
         Utils.runOnUiThreadDelayed(this::setShowPop, 1000);
-        agreedToTos = MMKVUtils.getInstance().decodeBoolean(Constants.AGREED_TO_TOS);
-        mCheckBox.setChecked(agreedToTos);
+        mCheckBox.setChecked(false);
         mCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            agreedToTos = isChecked;
             MMKVUtils.getInstance().encode(Constants.AGREED_TO_TOS, isChecked);
         });
         ConfigInfo configInfo = service.getConfigInfo();
@@ -332,7 +329,7 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
                 });
                 popWindow.showPopupWindow();
             } else {
-                if (agreedToTos) {
+                if (mCheckBox.isChecked()) {
                     goLogin();
                 } else {
                     if (isFirst) {
@@ -355,7 +352,7 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
     UMLinkListener umlinkAdapter = new UMLinkListener() {
         @Override
         public void onLink(String path, HashMap<String, String> query_params) {
-            if(!query_params.isEmpty() && query_params.containsKey("invite_code")&& MMKVUtils.getInstance().decodeString(Constants.H5_INVITE_CODE_PARAM).isEmpty()){
+            if (!query_params.isEmpty() && query_params.containsKey("invite_code") && MMKVUtils.getInstance().decodeString(Constants.H5_INVITE_CODE_PARAM).isEmpty()) {
                 String invite_code = query_params.get("invite_code");
                 MMKVUtils.getInstance().encode(Constants.H5_INVITE_CODE_PARAM, invite_code);
             }
@@ -379,7 +376,7 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
                     }
                 }
                 //友盟新装带参获取
-                if(!install_params.isEmpty() && install_params.containsKey("invite_code")){
+                if (!install_params.isEmpty() && install_params.containsKey("invite_code")) {
                     String invite_code = install_params.get("invite_code");
                     MMKVUtils.getInstance().encode(Constants.H5_INVITE_CODE_PARAM, invite_code);
                 }
