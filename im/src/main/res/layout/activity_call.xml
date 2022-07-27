@@ -351,9 +351,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="@dimen/dp_50"
+        android:layout_marginStart="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_150"
-        android:layout_marginEnd="@dimen/dp_50"
+        android:layout_marginEnd="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_100">
 
         <com.netease.nim.uikit.common.ui.imageview.HeadImageView
