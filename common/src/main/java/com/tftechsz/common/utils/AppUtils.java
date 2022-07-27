@@ -111,7 +111,6 @@ public class AppUtils {
     }
 
 
-
     /**
      * 判断手机是否root
      */
@@ -260,7 +259,14 @@ public class AppUtils {
      * @return 系统版本号
      */
     public static String getSystemVersion() {
-        return android.os.Build.VERSION.RELEASE;
+        String version = (String) SPUtils.get(Constants.KEY_SYSTEM_VERSION, "");
+        if (TextUtils.isEmpty(version)) {
+            String sv = Build.VERSION.RELEASE;
+            SPUtils.put(Constants.KEY_SYSTEM_VERSION, sv);
+            return sv;
+        } else {
+            return version;
+        }
     }
 
     /**
@@ -269,7 +275,14 @@ public class AppUtils {
      * @return 手机型号
      */
     public static String getSystemModel() {
-        return android.os.Build.MODEL;
+        String model = (String) SPUtils.get(Constants.KEY_SYSTEM_MODEL, "");
+        if (TextUtils.isEmpty(model)) {
+            String m = android.os.Build.MODEL;
+            SPUtils.put(Constants.KEY_SYSTEM_MODEL, m);
+            return m;
+        } else {
+            return model;
+        }
     }
 
     /**
@@ -278,7 +291,14 @@ public class AppUtils {
      * @return 手机厂商
      */
     public static String getDeviceBrand() {
-        return android.os.Build.BRAND;
+        String brand = (String) SPUtils.get(Constants.KEY_SYSTEM_BRAND, "");
+        if (TextUtils.isEmpty(brand)) {
+            String b = android.os.Build.BRAND;
+            SPUtils.put(Constants.KEY_SYSTEM_BRAND, b);
+            return b;
+        } else {
+            return brand;
+        }
     }
 
     /**
@@ -313,11 +333,7 @@ public class AppUtils {
                 Class<?> clazz = Class.forName("android.content.Context");
                 Method method = clazz.getMethod("checkSelfPermission", String.class);
                 int rest = (Integer) method.invoke(context, permission);
-                if (rest == PackageManager.PERMISSION_GRANTED) {
-                    result = true;
-                } else {
-                    result = false;
-                }
+                result = rest == PackageManager.PERMISSION_GRANTED;
             } catch (Throwable e) {
                 result = false;
             }
@@ -468,9 +484,7 @@ public class AppUtils {
         List<ActivityManager.RunningTaskInfo> recentTaskInfos = manager.getRunningTasks(1);
         if (recentTaskInfos != null && recentTaskInfos.size() > 0) {
             ActivityManager.RunningTaskInfo taskInfo = recentTaskInfos.get(0);
-            if (taskInfo.baseActivity.getPackageName().equals(packageName) && taskInfo.numActivities > 1) {
-                return true;
-            }
+            return taskInfo.baseActivity.getPackageName().equals(packageName) && taskInfo.numActivities > 1;
         }
 
         return false;
@@ -580,7 +594,7 @@ public class AppUtils {
 
             byte[] buffer = new byte[length];
             fis.read(buffer);
-            String res = new String(buffer, "utf-8");
+            String res = new String(buffer, StandardCharsets.UTF_8);
 
             fis.close();
             Log.d("DeviceIDUtils", "readSDFile filePath:" + filePath);
@@ -838,10 +852,10 @@ public class AppUtils {
     private enum AESType {
 
         ECB("ECB", "0"), CBC("CBC", "1"), CFB("CFB", "2"), OFB("OFB", "3");
-        private String k;
-        private String v;
+        private final String k;
+        private final String v;
 
-        private AESType(String k, String v) {
+        AESType(String k, String v) {
             this.k = k;
             this.v = v;
         }
@@ -909,7 +923,7 @@ public class AppUtils {
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         }
 
-        byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
+        byte[] encrypted = cipher.doFinal(sSrc.getBytes(StandardCharsets.UTF_8));
         return Base64.encode(encrypted, Base64.DEFAULT);// 此处使用BASE64做转码。
     }
 
@@ -918,7 +932,7 @@ public class AppUtils {
             throws Exception {
         sKey = toMakekey(sKey, pwdLenght, val);
         try {
-            byte[] raw = sKey.getBytes("ASCII");
+            byte[] raw = sKey.getBytes(StandardCharsets.US_ASCII);
             SecretKeySpec skeySpec = new SecretKeySpec(raw, WAYS);
             Cipher cipher = Cipher.getInstance(selectMod(type));
             IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());
@@ -929,7 +943,7 @@ public class AppUtils {
             }
             byte[] encrypted1 = Base64.decode(sSrc.getBytes(), Base64.DEFAULT);// 先用base64解密
             byte[] original = cipher.doFinal(encrypted1);
-            String originalString = new String(original, "utf-8");
+            String originalString = new String(original, StandardCharsets.UTF_8);
             return originalString;
         } catch (Exception ex) {
             return null;
