@@ -515,10 +515,6 @@ public class AppUtils {
         if (TextUtils.isEmpty(diviceid)) {
             diviceid = getMacid();
         }
-        //如果还为空择取设备信息拼接出来的id
-        if (TextUtils.isEmpty(diviceid)) {
-            diviceid = getDiviceInfoIMEI();
-        }
         //如果还为空则生成并保存一个唯一的UUID
         if (TextUtils.isEmpty(diviceid)) {
             diviceid = getLocalUUID();
