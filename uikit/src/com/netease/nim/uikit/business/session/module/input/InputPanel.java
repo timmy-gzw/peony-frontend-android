@@ -554,6 +554,8 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
     // 发送文本消息
     private void onTextMessageSendButtonPressed() {
         String text = messageEditText.getText().toString();
+        //Android 特殊字符，显示为空格
+        text = text.replace("  ", "");
         if (TextUtils.isEmpty(text) || TextUtils.isEmpty(text.trim())) {
             ToastHelper.showToast(container.activity, "发送消息不能为空");
             return;
