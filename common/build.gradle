@@ -197,14 +197,12 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.3"
 
     // 隐私合规整改检测工具
-    def privacyVersion = "1.0.7"
-    api "com.github.allenymt.PrivacySentry:hook-sentry:$privacyVersion"
-    api "com.github.allenymt.PrivacySentry:privacy-annotation:$privacyVersion"
-    //如果不想使用库中本身的代理方法，可以不引入这个aar，自己实现
-    api "com.github.allenymt.PrivacySentry:privacy-proxy:$privacyVersion"
+    api rootProject.ext.dependencies["hook-sentry"]
+    api rootProject.ext.dependencies["privacy-annotation"]
+    api rootProject.ext.dependencies["privacy-proxy"]
 
     api(rootProject.ext.dependencies.hotfix) {
-        exclude group: 'com.aliyun.ams',module:"alicloud-android-utdid"
+        exclude group: 'com.aliyun.ams', module: "alicloud-android-utdid"
     }
     api rootProject.ext.dependencies["bugly-crash"]
 
