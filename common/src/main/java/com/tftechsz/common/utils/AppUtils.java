@@ -111,7 +111,6 @@ public class AppUtils {
     }
 
 
-
     /**
      * 判断手机是否root
      */
@@ -260,7 +259,14 @@ public class AppUtils {
      * @return 系统版本号
      */
     public static String getSystemVersion() {
-        return android.os.Build.VERSION.RELEASE;
+        String version = (String) SPUtils.get(Constants.KEY_SYSTEM_VERSION, "");
+        if (TextUtils.isEmpty(version)) {
+            String sv = Build.VERSION.RELEASE;
+            SPUtils.put(Constants.KEY_SYSTEM_VERSION, sv);
+            return sv;
+        } else {
+            return version;
+        }
     }
 
     /**
@@ -269,7 +275,14 @@ public class AppUtils {
      * @return 手机型号
      */
     public static String getSystemModel() {
-        return android.os.Build.MODEL;
+        String model = (String) SPUtils.get(Constants.KEY_SYSTEM_MODEL, "");
+        if (TextUtils.isEmpty(model)) {
+            String m = android.os.Build.MODEL;
+            SPUtils.put(Constants.KEY_SYSTEM_MODEL, m);
+            return m;
+        } else {
+            return model;
+        }
     }
 
     /**
@@ -278,7 +291,14 @@ public class AppUtils {
      * @return 手机厂商
      */
     public static String getDeviceBrand() {
-        return android.os.Build.BRAND;
+        String brand = (String) SPUtils.get(Constants.KEY_SYSTEM_BRAND, "");
+        if (TextUtils.isEmpty(brand)) {
+            String b = android.os.Build.BRAND;
+            SPUtils.put(Constants.KEY_SYSTEM_BRAND, b);
+            return b;
+        } else {
+            return brand;
+        }
     }
 
     /**
@@ -494,10 +514,6 @@ public class AppUtils {
         //如果为空获取MAC地址
         if (TextUtils.isEmpty(diviceid)) {
             diviceid = getMacid();
-        }
-        //如果还为空择取设备信息拼接出来的id
-        if (TextUtils.isEmpty(diviceid)) {
-            diviceid = getDiviceInfoIMEI();
         }
         //如果还为空则生成并保存一个唯一的UUID
         if (TextUtils.isEmpty(diviceid)) {

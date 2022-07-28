@@ -95,6 +95,9 @@ public class Constants {
     public static final String KEY_SRL = "srl";//是否获取定位权限 true:申请权限 false：不申请
     public static final String KEY_IS_REVIEW = "key_is_review";//是否审核中 true：审核中
     public static final String KEY_CHAT_TAB_INDEX = "chat_tab_index";//主页-消息tab的index
+    public static final String KEY_SYSTEM_VERSION = "SystemVersion";//获取当前手机系统版本号
+    public static final String KEY_SYSTEM_MODEL = "SystemModel";//获取手机型号
+    public static final String KEY_SYSTEM_BRAND = "SystemBrand";//获取手机厂商
 
     public static final String FAMILY_APPLY = "family_apply";  //通知申请
     public static final String FAMILY_AIT = "family_ait";  //ait消息

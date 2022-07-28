@@ -3,6 +3,8 @@ package com.tftechsz.mine.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.databinding.DataBindingUtil;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.tftechsz.common.ARouterApi;
@@ -19,8 +21,6 @@ import com.tftechsz.mine.entity.req.BindData;
 import com.tftechsz.mine.entity.req.GetBindData;
 import com.tftechsz.mine.mvp.IView.IAccountBindingView;
 import com.tftechsz.mine.mvp.presenter.AccountBindingPresenter;
-
-import androidx.databinding.DataBindingUtil;
 
 /**
  * 包 名 : com.tftechsz.mine.mvp.ui.activity
@@ -69,12 +69,12 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
                 Utils.toast("很抱歉，好像网络出问题了");
                 return;
             }
-            if(mBindData.wecaht.is_bind == 1){
+            if (mBindData.wecaht.is_bind == 1) {
                 //微信解绑
                 Intent intent = new Intent(mContext, UnbindWechatActivity.class);
                 intent.putExtra(Interfaces.EXTRA_DATA, mBindData);
                 startActivity(intent);
-            }else{
+            } else {
                 p.loginWx(mActivity);
             }
         });

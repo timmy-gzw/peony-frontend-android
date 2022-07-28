@@ -82,8 +82,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             fitsLayoutOverlap();
         }
         ARouter.getInstance().inject(this);
-        // 该方法是【友盟+】Push后台进行日活统计及多维度推送的必调用方法，请务必调用！
-//        PushAgent.getInstance(this).onAppStart();
         mCompositeDisposable = new CompositeDisposable();
     }
 
@@ -165,7 +163,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
         private boolean isRightImgShow, isRightTxtShow = true;
         private int backgroundColor = -1, backViewColor = -1, titleTextColor, rightTextColor, rightTextBg;
         private int backRes = -1;
-        private LinearLayout toolbarMenu;
+        private final LinearLayout toolbarMenu;
         private int toolbarMenubgColor;
 
         public ToolBarBuilder() {

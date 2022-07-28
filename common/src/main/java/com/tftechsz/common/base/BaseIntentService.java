@@ -7,6 +7,9 @@ import android.os.Process;
 import android.text.TextUtils;
 import android.webkit.WebView;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.InitListener;
@@ -29,12 +32,6 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.commonsdk.UMConfigure;
-import com.umeng.message.IUmengRegisterCallback;
-import com.umeng.message.PushAgent;
-import com.umeng.socialize.PlatformConfig;
-import com.umeng.socialize.UMShareAPI;
 import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
@@ -46,11 +43,13 @@ import com.tftechsz.common.nim.UserPreferences;
 import com.tftechsz.common.player.controller.VideoViewManager;
 import com.tftechsz.common.utils.ImageLoaderUtil;
 import com.tftechsz.common.utils.Utils;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import java.io.File;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.JobIntentService;
 import iknow.android.utils.BaseUtils;
 import xyz.doikki.videoplayer.exo.ExoMediaPlayerFactory;
 import xyz.doikki.videoplayer.player.VideoViewConfig;
@@ -88,21 +87,6 @@ public class BaseIntentService extends JobIntentService {
         ToastUtils.init(BaseApplication.getInstance());
         com.blankj.utilcode.util.Utils.init(BaseApplication.getInstance());
         ARouter.init(BaseApplication.getInstance()); // 尽可能早，推荐在Application中初始化
-        //获取消息推送代理示例
-        PushAgent mPushAgent = PushAgent.getInstance(BaseApplication.getInstance());
-        //注册推送服务，每次调用register方法都会回调该接口
-        mPushAgent.register(new IUmengRegisterCallback() {
-            @Override
-            public void onSuccess(String deviceToken) {
-                //注册成功会返回deviceToken deviceToken是推送消息的唯一标志z
-                Utils.logE("注册成功：deviceToken：-------->  " + deviceToken);
-            }
-
-            @Override
-            public void onFailure(String s, String s1) {
-                Utils.logE("注册失败：-------->  " + "s:" + s + ",s1:" + s1);
-            }
-        });
         VideoViewManager.setConfig(VideoViewConfig.newBuilder()
                 //使用使用IjkPlayer解码
 //                .setPlayerFactory(IjkPlayerFactory.create())

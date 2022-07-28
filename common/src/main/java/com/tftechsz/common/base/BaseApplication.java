@@ -2,9 +2,9 @@ package com.tftechsz.common.base;
 
 import static com.tftechsz.common.utils.CommonUtil.getUmengAppKey;
 import static com.tftechsz.common.utils.CommonUtil.getUmengChannel;
+import static com.tftechsz.common.utils.CommonUtil.getUmengPushSecret;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
@@ -16,10 +16,12 @@ import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 import androidx.multidex.MultiDex;
+import androidx.work.Configuration;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.AppUtils;
 import com.bun.miitmdid.interfaces.IIdentifierListener;
+import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.faceunity.nama.ui.BeautyParameterModel;
 import com.faceunity.nama.utils.PreferenceUtil;
@@ -49,11 +51,14 @@ import com.tftechsz.common.nim.UserPreferences;
 import com.tftechsz.common.player.controller.VideoViewManager;
 import com.tftechsz.common.push.MyMixPushMessageHandler;
 import com.tftechsz.common.push.MyPushContentProvider;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ImageLoaderUtil;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.widget.MyToastStyle;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
+import com.yl.lib.sentry.hook.PrivacySentry;
+import com.yl.lib.sentry.hook.PrivacySentryBuilder;
 
 import net.mikaelzero.mojito.Mojito;
 import net.mikaelzero.mojito.loader.glide.GlideImageLoader;
@@ -64,8 +69,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Objects;
 
 import iknow.android.utils.BaseUtils;
 import io.reactivex.plugins.RxJavaPlugins;
@@ -76,7 +79,7 @@ import xyz.doikki.videoplayer.player.VideoViewConfig;
 /**
  * Description: <初始化应用程序><br>
  */
-public class BaseApplication extends Application implements Application.ActivityLifecycleCallbacks {
+public class BaseApplication extends Application implements Application.ActivityLifecycleCallbacks, Configuration.Provider {
     public final static int APP_STATUS_KILLED = 0; // 表示应用是被杀死后在启动的
     public final static int APP_STATUS_NORMAL = 1; // 表示应用时正常的启动流程
     public static int APP_STATUS = APP_STATUS_KILLED; // 记录App的启动状态
@@ -100,6 +103,20 @@ public class BaseApplication extends Application implements Application.Activity
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+        initPrivacy();
+    }
+
+    private void initPrivacy() {
+        PrivacySentryBuilder builder = new PrivacySentryBuilder()
+                // 自定义文件结果的输出名
+                .configResultFileName("peony_privacy")
+                // 配置游客模式，true打开游客模式，false关闭游客模式
+                .configVisitorModel(true)
+                // 配置写入文件日志 , 线上包这个开关不要打开！！！！，true打开文件输入，false关闭文件输入
+                .enableFileResult(BuildConfig.DEBUG)
+                // 持续写入文件30分钟
+                .configWatchTime(30 * 60 * 1000);
+        PrivacySentry.Privacy.INSTANCE.init(this, builder);
     }
 
     private static BaseApplication mApplication;
@@ -123,106 +140,75 @@ public class BaseApplication extends Application implements Application.Activity
         });
     }
 
-    private String getProcessName(Context context) {
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
-        if (runningApps == null) {
-            return null;
-        }
-        for (ActivityManager.RunningAppProcessInfo proInfo : runningApps) {
-            if (proInfo.pid == Process.myPid()) {
-                if (proInfo.processName != null) {
-                    return proInfo.processName;
-                }
-            }
-        }
-        return null;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
-        String processName = getProcessName(this);
         registerActivityLifecycleCallbacks(this);
         mApplication = this;
         setRxJavaErrorHandler();
-        if (processName == null) {
-            return;
-        }
         if (AppUtils.isAppDebug()) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog();     // 打印日志
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this);
         NimCache.setContext(this);
-        NIMClient.init(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
+        MMKV.initialize(this);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Field field = ClassLoader.getSystemClassLoader()
-                            .loadClass("de.robv.android.xposed.XposedBridge")
-                            .getDeclaredField("disableHooks");
-                    field.setAccessible(true);
-                    field.set(null, Boolean.TRUE);
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
-                enableHttpResponseCache();
+        boolean isAgree = MMKVUtils.getInstance().decodeInt(Constants.IS_AGREE_AGREEMENT) == 1;
+        if (isAgree) {
+            //关闭游客模式 敏感信息可取到值
+            PrivacySentry.Privacy.INSTANCE.closeVisitorModel();
+            //隐私协议点击确定
+            PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
+            NIMClient.init(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
+        } else {
+            NIMClient.config(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
+        }
+        boolean isMainProcess = isAgree ? NIMUtil.isMainProcess(this) : NIMUtil.isMainProcessPure(this) > 0;
+        if (!isMainProcess) return;
+
+        new Thread(() -> {
+            try {
+                Field field = ClassLoader.getSystemClassLoader()
+                        .loadClass("de.robv.android.xposed.XposedBridge")
+                        .getDeclaredField("disableHooks");
+                field.setAccessible(true);
+                field.set(null, Boolean.TRUE);
+            } catch (Throwable e) {
+                e.printStackTrace();
             }
+            enableHttpResponseCache();
         }).start();
 
-        if (NIMUtil.isMainProcess(this)) {
-            UMConfigure.setLogEnabled(BuildConfig.DEBUG);
-            UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
-            // 监听的注册，必须在主进程中。
-            HeytapPushManager.init(this, true);
-            com.huawei.hms.support.common.ActivityMgr.INST.init(this);
+        UMConfigure.setLogEnabled(BuildConfig.DEBUG);
+        if (isAgree) {
+            getOaid();
+            initUmeng();
             initUiKit();
-            // 初始化消息提醒
-            NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
-            NIMPushClient.registerMixPushMessageHandler(new MyMixPushMessageHandler());
-            ToastUtils.init(mApplication, new MyToastStyle());
-            MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.LEGACY_MANUAL);
-            VideoViewManager.setConfig(VideoViewConfig.newBuilder().setPlayerFactory(IjkPlayerFactory.create()).build());
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                WebView.setDataDirectorySuffix(Process.myPid() + "");
-            }
-            ZoomMediaLoader.getInstance().init(new ImageLoaderUtil());
-            DownloadHelper.init(this);
-            PreferenceUtil.init(this);
-            BeautyParameterModel.init();
-            BaseUtils.init(this);
-            MMKV.initialize(this);
-            Mojito.initialize(GlideImageLoader.Companion.with(this), new SketchImageLoadFactory());
-            if (TextUtils.isEmpty(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID))) {
-                com.netease.nis.sdkwrapper.Utils.rL(new Object[]{null, BaseApplication.getInstance(),
-                        true, (IIdentifierListener) (b, idSupplier) -> {
-                    String oaid = idSupplier.getOAID();
-                    MMKVUtils.getInstance().encode(Interfaces.SP_OAID, oaid);
-                }, 28, 1606976968500L});
-            }
-//            notifyChannel(this);
+            initShanyanSDK();
+        } else {//未同意隐私政策
+            UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
         }
+        // 监听的注册，必须在主进程中。
+        HeytapPushManager.init(this, true);
+        com.huawei.hms.support.common.ActivityMgr.INST.init(this);
+        ToastUtils.init(mApplication, new MyToastStyle());
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.LEGACY_MANUAL);
+        VideoViewManager.setConfig(VideoViewConfig.newBuilder().setPlayerFactory(IjkPlayerFactory.create()).build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WebView.setDataDirectorySuffix(Process.myPid() + "");
+        }
+        ZoomMediaLoader.getInstance().init(new ImageLoaderUtil());
+        DownloadHelper.init(this);
+        PreferenceUtil.init(this);
+        BeautyParameterModel.init();
+        BaseUtils.init(this);
+        Mojito.initialize(GlideImageLoader.Companion.with(this), new SketchImageLoadFactory());
+//            notifyChannel(this);
+
 //        initBytedance();
 
         // 尽可能早，推荐在Application中初始化
-        //获取消息推送代理示例
-        /*PushAgent mPushAgent = PushAgent.getInstance(this);
-        //注册推送服务，每次调用register方法都会回调该接口
-        mPushAgent.register(new IUmengRegisterCallback() {
-            @Override
-            public void onSuccess(String deviceToken) {
-                //注册成功会返回deviceToken deviceToken是推送消息的唯一标志z
-                Utils.logE("注册成功：deviceToken：-------->  " + deviceToken);
-            }
-
-            @Override
-            public void onFailure(String s, String s1) {
-                Utils.logE("注册失败：-------->  " + "s:" + s + ",s1:" + s1);
-            }
-        });*/
        /* if (!FFmpeg.getInstance(this).isSupported()) {
             Log.e("ZApplication","Android cup arch not supported!");
         }*/
@@ -268,7 +254,10 @@ public class BaseApplication extends Application implements Application.Activity
     }
 
 
-    private void initUiKit() {
+    public void initUiKit() {
+        // 初始化消息提醒
+        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
+        NIMPushClient.registerMixPushMessageHandler(new MyMixPushMessageHandler());
         // 初始化
         NimUIKit.init(this);
         // 会话窗口的定制: 示例代码可详见demo源码中的SessionHelper类。
@@ -277,9 +266,33 @@ public class BaseApplication extends Application implements Application.Activity
         // 3.设置会话中点击事件响应处理（一般需要）
         SessionHelper.init();
         NimUIKit.setCustomPushContentProvider(new MyPushContentProvider());
-
     }
 
+    /**
+     * 闪验
+     */
+    public void initShanyanSDK() {
+        OneKeyLoginManager.getInstance().init(this, Constants.SANYAN_APP_ID, (code, result) -> {
+        });
+    }
+
+    /**
+     * 友盟初始化
+     */
+    public void initUmeng() {
+        UMConfigure.init(this, CommonUtil.getUmengAppKey(), CommonUtil.getUmengChannel(), UMConfigure.DEVICE_TYPE_PHONE, getUmengPushSecret());
+        UMConfigure.setProcessEvent(true);
+    }
+
+    public void getOaid() {
+        if (TextUtils.isEmpty(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID))) {
+            com.netease.nis.sdkwrapper.Utils.rL(new Object[]{null, BaseApplication.getInstance(),
+                    true, (IIdentifierListener) (b, idSupplier) -> {
+                String oaid = idSupplier.getOAID();
+                MMKVUtils.getInstance().encode(Interfaces.SP_OAID, oaid);
+            }, 28, 1606976968500L});
+        }
+    }
 
     private LoginInfo getLoginInfo() {
         UserProviderService service = ARouter.getInstance().navigation(UserProviderService.class);
@@ -363,6 +376,13 @@ public class BaseApplication extends Application implements Application.Activity
         return new HttpProxyCacheServer.Builder(this)
                 .maxCacheSize(1024 * 1024 * 1024)       // 1 Gb for cache
                 .build();
+    }
+
+    //workManager configuration
+    @NonNull
+    @Override
+    public Configuration getWorkManagerConfiguration() {
+        return new Configuration.Builder().build();
     }
 
 

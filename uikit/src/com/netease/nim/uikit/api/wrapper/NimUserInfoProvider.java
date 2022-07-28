@@ -115,6 +115,11 @@ public class NimUserInfoProvider implements UserInfoProvider {
     }
 
     @Override
+    public String getDisplayTitleForMessageNotifier(IMMessage message) {
+        return null;
+    }
+
+    @Override
     public String getDisplayNameForMessageNotifier(String account, String sessionId,
                                                    SessionTypeEnum sessionType) {
         String nick = null;

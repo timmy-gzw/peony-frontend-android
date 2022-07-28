@@ -1,9 +1,6 @@
 package com.tftechsz.mine.mvp.presenter;
 
-import static com.tftechsz.common.utils.CommonUtil.getUmengPushSecret;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
@@ -62,7 +59,6 @@ import com.tftechsz.mine.utils.ConfigUtils;
 import com.tftechsz.mine.utils.UserManager;
 import com.tftechsz.mine.widget.pop.PrivacyPopWindow;
 import com.tftechsz.peony.SplashActivity;
-import com.umeng.commonsdk.UMConfigure;
 
 import org.apache.commons.codec.binary.Base64;
 import org.jetbrains.annotations.NotNull;
@@ -82,8 +78,8 @@ import okhttp3.Response;
 public class LoginPresenter extends BasePresenter<ILoginView> {
 
     private MineApiService configService;
-    private PublicService publicService;
-    private UserProviderService userService;
+    private final PublicService publicService;
+    private final UserProviderService userService;
     private IWXAPI api;
 
     public LoginPresenter() {
@@ -146,21 +142,14 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     }
 
     /**
-     * 闪验
-     *
-     * @param context
+     * 合规延迟初始化
      */
-    public void initShanyanSDK(Context context) {
-        OneKeyLoginManager.getInstance().init(context, Constants.SANYAN_APP_ID, (code, result) -> {
-        });
-    }
-
-    /**
-     * 友盟初始化
-     */
-    public void initUmeng() {
-        UMConfigure.init(BaseApplication.getInstance(), CommonUtil.getUmengAppKey(), CommonUtil.getUmengChannel(), UMConfigure.DEVICE_TYPE_PHONE, getUmengPushSecret());
-        UMConfigure.setProcessEvent(true);
+    public void lazyInit() {
+        BaseApplication.getInstance().initUmeng();
+        NIMClient.initSDK();
+        BaseApplication.getInstance().initUiKit();
+        BaseApplication.getInstance().initShanyanSDK();
+        BaseApplication.getInstance().getOaid();
     }
 
     /**

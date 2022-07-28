@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.alibaba.fastjson.JSON;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.api.NimUIKit;
@@ -39,7 +41,6 @@ import com.netease.nim.uikit.common.util.string.StringUtil;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
 import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.NIMSDK;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.attachment.FileAttachment;
@@ -48,13 +49,12 @@ import com.netease.nimlib.sdk.msg.constant.MsgStatusEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.MsgThreadOption;
+import com.netease.nimlib.sdk.team.TeamService;
 import com.netease.nimlib.sdk.uinfo.UserService;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.core.content.ContextCompat;
 
 /**
  * 会话窗口消息列表项的ViewHolder基类，负责每个消息项的外层框架，包括头像，昵称，发送/接收进度条，重发按钮等。<br>
@@ -162,7 +162,7 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
             replyTipTextView.setVisibility(View.GONE);
             return;
         }
-        replyTipTextView.setText(String.format(context.getResources().getString(R.string.reply_with_amount), String.valueOf(count)));
+        replyTipTextView.setText(String.format(context.getResources().getString(R.string.reply_with_amount), count + ""));
         replyTipTextView.setVisibility(View.VISIBLE);
     }
 
@@ -279,7 +279,7 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
 
     // 根据layout id查找对应的控件
     protected <T extends View> T findViewById(int id) {
-        return (T) view.findViewById(id);
+        return view.findViewById(id);
     }
 
     // 判断消息方向，是否是接收到的消息
@@ -712,7 +712,7 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
             return;
         }
 
-        LinearLayout bodyContainer = (LinearLayout) view.findViewById(R.id.message_item_body);
+        LinearLayout bodyContainer = view.findViewById(R.id.message_item_body);
 
         // 调整container的位置
         int index = isReceivedMessage() ? 0 : 4;
@@ -795,7 +795,7 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
             if (isReceivedMessage()) {
                 // 收到的需要已读回执的消息，需要给个反馈
                 ackMsgTextView.setVisibility(View.GONE);
-                NIMSDK.getTeamService().sendTeamMessageReceipt(message);
+                NIMClient.getService(TeamService.class).sendTeamMessageReceipt(message);
             } else {
                 // 自己发的需要已读回执的消息，显示未读人数
                 ackMsgTextView.setVisibility(View.VISIBLE);

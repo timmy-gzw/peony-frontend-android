@@ -131,6 +131,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
             popWindow.setPrivacyListener(new PrivacyPopWindow.PrivacyListener() {
                 @Override
                 public void agree() {
+                    getP().lazyInit();
                     initPermission();
                 }
 
@@ -147,13 +148,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
 
 
     private void initPermission() {
-        getP().initShanyanSDK(this);
-        getP().initUmeng();
-        getP().initBugly(this);
-
         getP().getReviewConfig();
-
-
     }
 
     private void initRxBus() {
@@ -225,6 +220,8 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        int isAgree = MMKVUtils.getInstance().decodeInt(Constants.IS_AGREE_AGREEMENT);
+        if (isAgree != 1) return;
         Uri data = intent.getData();
         if (data != null) {
             MobclickLink.handleUMLinkURI(this, data, umlinkAdapter);

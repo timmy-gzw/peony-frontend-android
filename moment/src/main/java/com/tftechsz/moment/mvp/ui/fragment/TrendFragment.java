@@ -35,6 +35,7 @@ import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.AccostChatPop;
 import com.tftechsz.moment.R;
@@ -233,7 +234,7 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
                     if (aBoolean) {
                         ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
                     } else {
-                        Utils.toast("请允许摄像头权限");
+                        PermissionUtil.showPermissionPop(getActivity(), "未获取存储和拍照权限,相册功能无法正常使用。打开应用设置页以修改应用权限");
                     }
                 })
         );

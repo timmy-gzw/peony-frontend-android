@@ -14,12 +14,12 @@ import com.tftechsz.common.R;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.widget.pop.BaseCenterPop;
 import com.tftechsz.mine.widget.TextClick;
+import com.yl.lib.sentry.hook.PrivacySentry;
 
 /**
  * 隐私协议
  */
 public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListener {
-
 
 
     public PrivacyPopWindow(Context context) {
@@ -56,11 +56,14 @@ public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListe
     }
 
 
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_agree) {
+            //关闭游客模式
+            PrivacySentry.Privacy.INSTANCE.closeVisitorModel();
+            //隐私协议点击确定
+            PrivacySentry.Privacy.INSTANCE.updatePrivacyShow();
             MMKVUtils.getInstance().encode(Constants.IS_AGREE_AGREEMENT, 1);
             if (privacyListener != null) {
                 privacyListener.agree();
@@ -83,6 +86,7 @@ public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListe
 
     public interface PrivacyListener {
         void agree();
+
         void cancel();
     }
 

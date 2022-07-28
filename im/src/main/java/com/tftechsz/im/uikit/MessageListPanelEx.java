@@ -56,7 +56,6 @@ import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
 import com.netease.nimlib.sdk.InvocationFuture;
 import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.NIMSDK;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
@@ -81,12 +80,12 @@ import com.netease.nimlib.sdk.robot.model.RobotMsgType;
 import com.netease.nimlib.sdk.team.TeamService;
 import com.netease.nimlib.sdk.team.constant.TeamMemberType;
 import com.netease.nimlib.sdk.team.model.TeamMember;
-import com.tftechsz.im.R;
-import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.im.R;
+import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -125,7 +124,7 @@ public class MessageListPanelEx {
      * container
      */
     private Container container;
-    private View rootView;
+    private final View rootView;
 
     /**
      * message list view
@@ -144,11 +143,11 @@ public class MessageListPanelEx {
     /**
      * 仅显示消息记录，不接收和发送消息
      */
-    private boolean recordOnly;
+    private final boolean recordOnly;
     /**
      * 从服务器拉取消息记录
      */
-    private boolean remote;
+    private final boolean remote;
 
     /**
      * 语音转文字
@@ -168,7 +167,7 @@ public class MessageListPanelEx {
     /**
      * 是否忽略缓存记录，拉取消息时存储被清除的消息
      */
-    private boolean persistClear;
+    private final boolean persistClear;
 
     /**
      * 如果在发需要拍照 的消息时，拍照回来时页面可能会销毁重建，重建时会在MessageLoader 的构造方法中调一次 loadFromLocal
@@ -245,7 +244,7 @@ public class MessageListPanelEx {
         // RecyclerView
         messageListView = rootView.findViewById(R.id.messageListView);
         linearLayoutManager = new LinearLayoutManager(container.activity);
-        if (((SimpleItemAnimator) messageListView.getItemAnimator()) != null)
+        if (messageListView.getItemAnimator() != null)
             ((SimpleItemAnimator) messageListView.getItemAnimator()).setSupportsChangeAnimations(false);
         messageListView.setItemAnimator(null);
         messageListView.setLayoutManager(linearLayoutManager);
@@ -283,7 +282,7 @@ public class MessageListPanelEx {
     LinearLayoutManager linearLayoutManager;
 
 
-    private OnItemClickListener listener = new OnItemClickListener() {
+    private final OnItemClickListener listener = new OnItemClickListener() {
         @Override
         public void onItemClick(IRecyclerView adapter, View view, int position) {
 
@@ -537,7 +536,7 @@ public class MessageListPanelEx {
         Collections.sort(list, comp);
     }
 
-    private static Comparator<IMMessage> comp = new Comparator<IMMessage>() {
+    private static final Comparator<IMMessage> comp = new Comparator<IMMessage>() {
 
         @Override
         public int compare(IMMessage o1, IMMessage o2) {
@@ -549,7 +548,7 @@ public class MessageListPanelEx {
     /**
      * 消息状态变化观察者
      */
-    private Observer<IMMessage> messageStatusObserver = new Observer<IMMessage>() {
+    private final Observer<IMMessage> messageStatusObserver = new Observer<IMMessage>() {
         @Override
         public void onEvent(IMMessage message) {
             ChatMsg chatMsg = ChatMsgUtil.parseMessage(message.getCallbackExtension());
@@ -607,7 +606,7 @@ public class MessageListPanelEx {
     /**
      * 消息附件上传/下载进度观察者
      */
-    private Observer<AttachmentProgress> attachmentProgressObserver = new Observer<AttachmentProgress>() {
+    private final Observer<AttachmentProgress> attachmentProgressObserver = new Observer<AttachmentProgress>() {
         @Override
         public void onEvent(AttachmentProgress progress) {
             onAttachmentProgressChange(progress);
@@ -617,7 +616,7 @@ public class MessageListPanelEx {
     /**
      * 消息撤回观察者
      */
-    private Observer<RevokeMsgNotification> revokeMessageObserver = new Observer<RevokeMsgNotification>() {
+    private final Observer<RevokeMsgNotification> revokeMessageObserver = new Observer<RevokeMsgNotification>() {
         @Override
         public void onEvent(RevokeMsgNotification notification) {
             if (notification == null || notification.getMessage() == null) {
@@ -636,7 +635,7 @@ public class MessageListPanelEx {
     /**
      * 群消息已读回执观察者
      */
-    private Observer<List<TeamMessageReceipt>> teamMessageReceiptObserver = new Observer<List<TeamMessageReceipt>>() {
+    private final Observer<List<TeamMessageReceipt>> teamMessageReceiptObserver = new Observer<List<TeamMessageReceipt>>() {
         @Override
         public void onEvent(List<TeamMessageReceipt> teamMessageReceipts) {
             for (TeamMessageReceipt teamMessageReceipt : teamMessageReceipts) {
@@ -648,13 +647,13 @@ public class MessageListPanelEx {
         }
     };
 
-    private Observer<IMMessage> deleteMsgSelfObserver =
-            (Observer<IMMessage>) message -> deleteItem(message, true, false);
+    private final Observer<IMMessage> deleteMsgSelfObserver =
+            message -> deleteItem(message, true, false);
 
-    private Observer<List<IMMessage>> deleteMsgSelfBatchObserver =
-            (Observer<List<IMMessage>>) msgList -> deleteItems(msgList, true, false);
+    private final Observer<List<IMMessage>> deleteMsgSelfBatchObserver =
+            msgList -> deleteItems(msgList, true, false);
 
-    private Observer<List<SessionMsgDeleteOption>> deleteSessionHistoryMsgsObserver = (optionList) -> {
+    private final Observer<List<SessionMsgDeleteOption>> deleteSessionHistoryMsgsObserver = (optionList) -> {
         for (SessionMsgDeleteOption option : optionList) {
             deleteItemsRange(option.getSessionId(), option.getSessionType(), 0, option.getTime());
         }
@@ -663,7 +662,7 @@ public class MessageListPanelEx {
     /**
      * 用户信息观察者
      */
-    private UserInfoObserver userInfoObserver = new UserInfoObserver() {
+    private final UserInfoObserver userInfoObserver = new UserInfoObserver() {
         @Override
         public void onUserInfoChanged(List<String> accounts) {
             if (container.sessionType == SessionTypeEnum.P2P) {
@@ -679,7 +678,7 @@ public class MessageListPanelEx {
     /**
      * 本地消息接收观察者
      */
-    private MessageListPanelHelper.LocalMessageObserver incomingLocalMessageObserver = new MessageListPanelHelper.LocalMessageObserver() {
+    private final MessageListPanelHelper.LocalMessageObserver incomingLocalMessageObserver = new MessageListPanelHelper.LocalMessageObserver() {
         @Override
         public void onAddMessage(IMMessage message) {
             if (message == null || !container.account.equals(message.getSessionId())) {
@@ -803,12 +802,12 @@ public class MessageListPanelEx {
      */
     private class MessageLoader implements BaseFetchLoadAdapter.RequestLoadMoreListener, BaseFetchLoadAdapter.RequestFetchMoreListener {
 
-        private int loadMsgCount = NimUIKitImpl.getOptions().messageCountLoadOnce;
+        private final int loadMsgCount = NimUIKitImpl.getOptions().messageCountLoadOnce;
 
         private QueryDirectionEnum direction = null;
 
-        private IMMessage anchor;
-        private boolean remote;
+        private final IMMessage anchor;
+        private final boolean remote;
 
         private boolean firstLoad = true;
 
@@ -827,7 +826,7 @@ public class MessageListPanelEx {
             }
         }
 
-        private RequestCallback<List<IMMessage>> callback = new RequestCallbackWrapper<List<IMMessage>>() {
+        private final RequestCallback<List<IMMessage>> callback = new RequestCallbackWrapper<List<IMMessage>>() {
             @Override
             public void onResult(int code, List<IMMessage> messages, Throwable exception) {
                 mIsInitFetchingLocal = false;
@@ -959,7 +958,7 @@ public class MessageListPanelEx {
 
             // 通过历史记录加载的群聊消息，需要刷新一下已读未读最新数据
             if (container.sessionType == SessionTypeEnum.Team) {
-                NIMSDK.getTeamService().refreshTeamMessageReceipt(messages);
+                NIMClient.getService(TeamService.class).refreshTeamMessageReceipt(messages);
             }
             firstLoad = false;
         }

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.huawei.agconnect'
 apply plugin: 'com.alibaba.arouter'
+apply plugin: 'privacy-sentry-plugin'
 
 def name = 'yisugar'
 def appName = "伊糖"
@@ -149,14 +150,44 @@ android {
         KUAISHOU {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
-        KUAISHOU0 {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU0", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        "20001" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20001", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20002" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20002", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20003" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20003", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20004" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20004", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20005" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20005", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20006" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20006", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20007" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20007", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20008" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20008", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20009" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20009", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        "20010" {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20010", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         BAIDU {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "BAIDU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
         SAMSUNG {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "SAMSUNG", app_label: appName, app_icon: "@mipmap/ic_launcher"]
+        }
+        CPS {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "CPS", app_label: appName, app_icon: "@mipmap/ic_launcher"]
         }
     }
 }

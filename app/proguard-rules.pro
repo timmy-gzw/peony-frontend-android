@@ -390,6 +390,9 @@
     -keep class com.netease.lava.** {*;}
     -keep class com.netease.yunxin.** {*;}
     -keep class com.netease.mobsec.**{*;}
+    #云信点播
+    -keep class com.netease.neliveplayer.**{*;}
+    -keep class com.netease.gslb.** {*;}
 
     -dontwarn com.alibaba.**
     -keep class com.alibaba.fastjson.** {*;}

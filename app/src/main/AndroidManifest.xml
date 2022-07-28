@@ -17,6 +17,11 @@
         android:usesCleartextTraffic="true"
         android:largeHeap="true"
         tools:replace="android:label">
+        <!--   workManager lazy init     -->
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            tools:node="remove" />
 
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
