@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -579,6 +580,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 //        }
 //        LogUtil.e("========================",ret+"=====");
         stopPlayer();
+        initSpeakerDrwables();
         handler.postDelayed(runnable1, 1000);
 
     }
@@ -593,8 +595,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     Runnable runnable1 = () -> {
 //        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_PLAY_SOUND);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        boolean isHeadSetOn = mAudioManager.isWiredHeadsetOn();
-        isOpen = !isHeadSetOn;
+        boolean isHeadSetOn = initSpeakerDrwables();
         mAudioManager.setSpeakerphoneOn(!isHeadSetOn);
         mediaPlayer = MediaPlayer.create(VideoCallActivity.this, R.raw.avchat_ring);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -602,6 +603,20 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         mediaPlayer.start();
         mediaPlayer.setLooping(true);
     };
+
+    private boolean initSpeakerDrwables() {
+        boolean isHeadSetOn = mAudioManager.isWiredHeadsetOn();
+        isOpen = !isHeadSetOn;
+        if (isOpen) {
+            tvSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
+                    ContextCompat.getDrawable(this, R.mipmap.chat_ic_speaker_on), null, null);
+        } else {
+            tvSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
+                    ContextCompat.getDrawable(this, R.mipmap.chat_ic_speaker_off), null, null);
+        }
+        setSpeakerOnDrawble();
+        return isHeadSetOn;
+    }
 
 
     private void stopPlayer() {

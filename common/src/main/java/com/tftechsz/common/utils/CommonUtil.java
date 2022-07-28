@@ -208,7 +208,6 @@ public class CommonUtil {
      * 设置通知消息
      */
     public static String getMessage(IMMessage message) {
-        //你刚刚漏接了哈哈啊图的来电，快点给Ta回电哦，<tag url="peony://chatActivity/655">点击前往>></tag>
         String content = null;
         try {
             if (null != message && !TextUtils.isEmpty(message.getContent())) {
@@ -234,6 +233,7 @@ public class CommonUtil {
             e.printStackTrace();
         }
         if(message != null && !TextUtils.isEmpty(message.getContent()) && message.getContent().contains("，<tag")){
+            //你刚刚漏接了哈哈啊图的来电，快点给Ta回电哦，<tag url="peony://chatActivity/655">点击前往>></tag>
             String msg = message.getContent();
             content = msg.substring(0,msg.indexOf("<tag"));
             content += msg.substring(msg.indexOf(">")+1,msg.indexOf("</tag>"));
