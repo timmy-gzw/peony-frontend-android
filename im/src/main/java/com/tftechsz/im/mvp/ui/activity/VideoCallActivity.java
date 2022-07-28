@@ -163,7 +163,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private TextView tvFaceUnity;   //美颜设置
     private RelativeLayout rlyTopUserInfo;
     private LinearLayout llUserInfo;
-        public static boolean ISBOUND = false;
+    public static boolean ISBOUND = false;
     public static long startTime = 0;
     public static long endTime = 0;
     public static long seconds = 0;
@@ -594,9 +594,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     Runnable runnable1 = () -> {
 //        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_PLAY_SOUND);
+        initSpeakerDrwables();
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        boolean isHeadSetOn = initSpeakerDrwables();
-        mAudioManager.setSpeakerphoneOn(!isHeadSetOn);
+//        mAudioManager.setSpeakerphoneOn(speakerphoneOn);
         mediaPlayer = MediaPlayer.create(VideoCallActivity.this, R.raw.avchat_ring);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setVolume(1f, 1f);
@@ -604,9 +604,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         mediaPlayer.setLooping(true);
     };
 
-    private boolean initSpeakerDrwables() {
-        boolean isHeadSetOn = mAudioManager.isWiredHeadsetOn();
-        isOpen = !isHeadSetOn;
+    private void initSpeakerDrwables() {
+        boolean speakerphoneOn = mAudioManager.isSpeakerphoneOn();
+        isOpen = speakerphoneOn;
         if (isOpen) {
             tvSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
                     ContextCompat.getDrawable(this, R.mipmap.chat_ic_speaker_on), null, null);
@@ -615,7 +615,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                     ContextCompat.getDrawable(this, R.mipmap.chat_ic_speaker_off), null, null);
         }
         setSpeakerOnDrawble();
-        return isHeadSetOn;
     }
 
 
@@ -1707,8 +1706,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private void userEnter() {
         nertcVideoCall.setStatsObserver();
         //默认不开启免提
-        isOpen = false;
-        nertcVideoCall.setSpeakerphoneOn(isOpen);
         if (mCallDir == 0 && !mIsAccept) {
             rvCallChat.setVisibility(View.VISIBLE);
             mLlIncome.setVisibility(View.GONE);
