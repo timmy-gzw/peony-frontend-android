@@ -5,11 +5,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -20,15 +18,12 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Chronometer;
 import android.widget.FrameLayout;
@@ -47,7 +42,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bumptech.glide.Glide;
 import com.faceunity.nama.FURenderer;
 import com.faceunity.nama.IFURenderer;
 import com.faceunity.nama.ui.FaceUnityView;
@@ -66,7 +60,6 @@ import com.netease.nim.uikit.api.model.user.UserInfoObserver;
 import com.netease.nim.uikit.business.uinfo.UserInfoHelper;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.ChatMsgUtil;
-import com.netease.nim.uikit.common.DensityUtils;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.ui.imageview.HeadImageView;
 import com.netease.nim.uikit.common.util.log.LogUtil;
@@ -91,17 +84,6 @@ import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 import com.opensource.svgaplayer.SVGAImageView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.qgame.animplayer.AnimView;
-import com.tftechsz.common.utils.ARouterUtils;
-import com.tftechsz.common.widget.MarqueeTextView;
-import com.tftechsz.common.widget.MarqueeTextView2;
-import com.tftechsz.im.R;
-import com.tftechsz.im.adapter.CallMessageAdapter;
-import com.tftechsz.im.model.CallStatusInfo;
-import com.tftechsz.im.model.dto.CallMessageDto;
-import com.tftechsz.im.mvp.iview.ICallView;
-import com.tftechsz.im.mvp.presenter.CallPresenter;
-import com.tftechsz.im.service.FloatVideoWindowService;
-import com.tftechsz.im.widget.pop.CallHangUpPopWindow;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
@@ -118,18 +100,25 @@ import com.tftechsz.common.nim.model.JoinChannelCallBack;
 import com.tftechsz.common.nim.model.NERTCCallingDelegate;
 import com.tftechsz.common.nim.model.NERTCVideoCall;
 import com.tftechsz.common.nim.model.impl.NERTCVideoCallImpl;
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.CountBackUtils;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.SPUtils;
-import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.utils.face.LifeCycleSensorManager;
-import com.tftechsz.common.widget.CircleImageView;
 import com.tftechsz.common.widget.gift.GiftRootLayout;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.im.R;
+import com.tftechsz.im.adapter.CallMessageAdapter;
+import com.tftechsz.im.model.CallStatusInfo;
+import com.tftechsz.im.model.dto.CallMessageDto;
+import com.tftechsz.im.mvp.iview.ICallView;
+import com.tftechsz.im.mvp.presenter.CallPresenter;
+import com.tftechsz.im.service.FloatVideoWindowService;
+import com.tftechsz.im.widget.pop.CallHangUpPopWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -1317,7 +1306,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     /**
      * 消息状态变化观察者
      */
-    private Observer<IMMessage> messageStatusObserver = new Observer<IMMessage>() {
+    private final Observer<IMMessage> messageStatusObserver = new Observer<IMMessage>() {
         @Override
         public void onEvent(IMMessage message) {
             if (isMyMessage(message)) {
@@ -2153,7 +2142,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         stopPlayer();
         if (countBackUtils != null)
             countBackUtils.destroy();
-//        NERtc.getInstance().leaveChannel();
+        NERtc.getInstance().leaveChannel();
         if (mChannelType == 2) {
             if (remoteVideoView != null) {
                 remoteVideoView.release();
@@ -2191,7 +2180,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         SPUtils.remove(Constants.INVITED_EVENT);
         if (nertcCallingDelegate != null && nertcVideoCall != null) {
             nertcVideoCall.removeDelegate(nertcCallingDelegate);
-//            nertcVideoCall.releaseNERtc();
+            nertcVideoCall.releaseNERtc();
             nertcCallingDelegate = null;
             nertcVideoCall = null;
         }
