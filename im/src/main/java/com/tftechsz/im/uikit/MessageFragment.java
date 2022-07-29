@@ -1566,7 +1566,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 mIntimacyEntity = intimacyEntity;
                 intimacyEndTime = intimacyEntity.getEndTime();
                 if (intimacyEntity.getIsShow() == 1) {
-                    mRlIntimacyCall.setVisibility(View.VISIBLE);
+//                    mRlIntimacyCall.setVisibility(View.VISIBLE);
                 }
                 if (intimacyEndTime > 0) {
                     setContactTip(intimacyEndTime);
@@ -1701,7 +1701,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             @Override
                             public void accept(Long aLong) {
                                 mIntimacyEntity = entity;
-                                mRlIntimacyCall.setVisibility(View.VISIBLE);
+//                                mRlIntimacyCall.setVisibility(View.VISIBLE);
                             }
                         }));
                     }
