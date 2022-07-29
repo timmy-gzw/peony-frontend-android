@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -104,6 +105,10 @@ public class IntegralGroupAdapter extends GroupedRecyclerViewAdapter {
             TextView tvContent = helper.get(R.id.tv_title);
             setContent(tvContent, item.title);
             view.setVisibility(childPosition == mGroups.get(groupPosition).getChildren().size() - 1 ? View.INVISIBLE : View.VISIBLE);
+            ImageView ivIcon = helper.get(R.id.ic_icon);
+            if (ivIcon != null) {
+                GlideUtils.loadImage(mContext, ivIcon, item.image_small);
+            }
         } else {
             TextView tvContent = helper.get(R.id.tv_content);
             helper.setText(R.id.tv_time, item.created_at)
