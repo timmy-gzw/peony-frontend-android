@@ -3,8 +3,10 @@ package com.tftechsz.mine.serviceImpl;
 import android.content.Context;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.google.gson.Gson;
 import com.netease.nim.uikit.common.UserInfo;
 import com.tftechsz.common.ARouterApi;
+import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.entity.CallCheckDto;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.entity.PaymentDto;
@@ -13,8 +15,13 @@ import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.MineService;
+import com.tftechsz.common.utils.NetworkUtil;
 import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.mine.api.MineApiService;
+import com.tftechsz.mine.utils.TrackUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Route(path = ARouterApi.MINE_SERVICE, name = "个人服务")
 public class MineServiceImpl implements MineService {
@@ -72,20 +79,50 @@ public class MineServiceImpl implements MineService {
     @Override
     public void trackEvent(String scene, String event, String index, String extend, ResponseObserver<BaseResponse<Boolean>> observer) {
 
-        if (observer != null) {
-            service.trackEvent(scene, event, index, extend)
-                    .compose(RxUtil.applySchedulers())
-                    .subscribe(observer);
-        } else {
-            service.trackEvent(scene, event, index, extend)
-                    .compose(RxUtil.applySchedulers())
-                    .subscribe(new ResponseObserver<BaseResponse<Boolean>>() {
-                        @Override
-                        public void onSuccess(BaseResponse<Boolean> booleanBaseResponse) {
-
+        service.trackEvent(scene, event, index, extend)
+                .compose(RxUtil.applySchedulers())
+                .subscribe(new ResponseObserver<BaseResponse<Boolean>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<Boolean> booleanBaseResponse) {
+                        if(observer != null){
+                            observer.onSuccess(booleanBaseResponse);
                         }
-                    });
+                        cacheUpload();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if(scene.equals("缓存重传") && index.equals("444")){
+                            return;
+                        }
+                        cache(e, scene, event, index, extend);
+                    }
+                });
+    }
+
+    private void cacheUpload() {
+        String trackCache = TrackUtils.getInstance().getTrackCache();
+        if(trackCache != null) {
+            trackEvent("缓存重传", "", "444", trackCache,null);
+            TrackUtils.getInstance().cleanCache();
         }
+    }
+
+    private void cache(Throwable e, String scene, String event, String index, String extend) {
+        Map<String,Object> content = new HashMap<>();
+        Map<String,String> map = new HashMap<>();
+        map.put("scene", scene);
+        map.put("event", event);
+        map.put("index", index);
+        map.put("extend", extend);
+        Gson gson = new Gson();
+        content.put("content",gson.toJson(map));
+        content.put("error", e.getMessage());
+        content.put("timestamp",System.currentTimeMillis());
+        content.put("netType",NetworkUtil.getActiveNetworkInfo(BaseApplication.getInstance()));
+        //使用#&#分割每个事件
+        TrackUtils.getInstance().cacheTrackEvent(gson.toJson(content)+"#&#");
     }
 
     @Override
@@ -95,6 +132,7 @@ public class MineServiceImpl implements MineService {
                 .subscribe(observer);
 
     }
+
 
 
 }
