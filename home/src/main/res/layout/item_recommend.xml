@@ -17,28 +17,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/transparent"
-            app:cardCornerRadius="@dimen/dp_10"
-            app:cardElevation="0px"
-            app:cardUseCompatPadding="false"
-            app:elevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_avatar"
-                android:layout_width="@dimen/dp_size_74"
-                android:layout_height="@dimen/dp_size_74"
-                android:scaleType="centerCrop" />
-
-        </androidx.cardview.widget.CardView>
-
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/dp_size_74"
+            android:layout_height="@dimen/dp_size_74"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/bg_frame"
