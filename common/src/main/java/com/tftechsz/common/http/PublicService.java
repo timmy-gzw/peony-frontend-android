@@ -480,5 +480,6 @@ public interface PublicService {
      */
     @GET(Constants.HOST_REVIEW_CONFIG)
     Flowable<ReviewBean> getReviewConfig(@Path("packageName") String packageName,
-                                         @Path("channel") String channel);
+                                         @Path("channel") String channel,
+                                         @Path("versionName") String versionName);
 }

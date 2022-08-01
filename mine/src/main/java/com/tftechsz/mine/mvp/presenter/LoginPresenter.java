@@ -242,7 +242,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      * 获取是否审核配置信息
      */
     public void getReviewConfig() {
-        addNet(publicService.getReviewConfig(Utils.getApp().getPackageName(), Utils.getChannel())
+        addNet(publicService.getReviewConfig(Utils.getApp().getPackageName(), Utils.getChannel(), AppUtils.getVersionName(BaseApplication.getInstance()))
                 .compose(BasePresenter.applySchedulers())
                 .subscribeWith(new ResourceSubscriber<ReviewBean>() {
                     @Override
