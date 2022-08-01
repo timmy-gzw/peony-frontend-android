@@ -2480,7 +2480,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         }
 
         if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
-            mtvCity.setText(getFiled(userInfo.info,"hometown"));
+            mtvCity.setText(getFiled(userInfo.info,"hometown").split(" ")[0]);
             mtvCity.setVisibility(View.VISIBLE);
         }
 
@@ -2501,7 +2501,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 mtvVideoGenderAge.setVisibility(View.VISIBLE);
             }
             if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
-                mtvVideoCity.setText(getFiled(userInfo.info,"hometown"));
+                mtvVideoCity.setText(getFiled(userInfo.info,"hometown").split(" ")[0]);
                 mtvVideoCity.setVisibility(View.VISIBLE);
             }
 
