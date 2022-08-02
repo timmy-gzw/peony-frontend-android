@@ -1,81 +1,76 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-	<string name="app_name">伊糖</string>
-	<string name="string_search_you_want">搜索你想要的内容</string>
-	<string name="hold_talk">按住 说话</string>
-	<string name="finger_loosening_cancel_send">松开手指，取消发送</string>
-	<string name="finger_slide_cancel_send">松开发送，上滑取消</string>
-	<string name="release_end">松开 结束</string>
-	<string name="Recording_time_is_too_short">录音时间太短</string>
-	<string name="total_ban">全体禁言</string>
-	<string name="forbidden_words">禁言</string>
-	<string name="chat_playvoice_play_faild">语音留言播放失败！</string>
-	<string name="chat_playvoice_play_faild3">语音留言播放失败（网络下载完成后）！</string>
-	<string name="chat_playvoice_play_faild4">语音留言文件下载失败！</string>
-	<string name="copyToClipboard">已复制到粘贴板</string>
-	
-	<string name="copied">已复制</string>
-	<string name="the_content_of_the_comment_cannot_exceed_500_words">评论内容不能超过500字…</string>
-	
-	
-	<string name="yaoqinghaoyou">邀请好友赚金币</string>
-	<string name="fenxiangyaoqinghaoyou">分享邀请好友一起赚钱，月入过万不是梦！～</string>
-	<string name="qqzone">QQ空间</string>
-	<string name="wxpengyoucircle">朋友圈</string>
-	<string name="wxhaoyou">微信好友</string>
-	<string name="qqhaoyou">QQ好友</string>
-	<string name="sinaweibo">新浪微博</string>
-	<string name="net_error">很抱歉，好像网络出问题了</string>
-	<string name="upload_fail">上传失败,请重新上传</string>
-	<string name="under_development">该功能正在完善中,敬请期待</string>
-	
-	<string name="trimmed_done">视频裁剪完成！</string>
-	<string name="trimming">正在裁剪视频…</string>
-	<string name="compressing">正在压缩视频…</string>
-	<string name="compressed_done">视频压缩完成！</string>
-	<string name="video_shoot_tip">拖动选择你要发表的%d秒以内视频！</string>
-	<string name="open_permission">开启权限</string>
-	<string name="video_record_des">要录制视频，需要授予相机和麦克风使用权.</string>
-	<string name="recording">录制</string>
-	<string name="back">返回</string>
-	<string name="finish">完成</string>
-	<string name="dkplayer_error_message">视频源出了点问题，请稍后重试</string>
-	<string name="chat_open_camera_permission">未获取此设备摄像头或麦克风权限,音视频功能无法正常使用。打开应用设置页以修改应用权限</string>
-	<string name="chat_open_voice_permission">未获取此设备麦克风权限,录音功能无法正常使用。打开应用设置页以修改应用权限</string>
-	<string name="video_transitions">video_transitions</string>
-	<string name="transition_aac_add">transition_aac_add</string>
-	<string name="transition_aac_recy">transition_aac_recy</string>
-	<string name="auditing">真人认证审核中…</string>
-	
-	<string name="pagestate_no_network_title">无网络</string>
-	<string name="pagestate_no_network_msg">打开网络或者wifi才能获取数据</string>
-	<string name="pagestate_go_setting">去设置页</string>
-	<string name="pagestate_cancel">取消</string>
-	<string name="page_loading">加载中…</string>
-	<string name="pagestate_click_to_retry">重试</string>
-	<string name="pagestate_error_occurs">网络异常 请刷新</string>
-	<string name="pagestate_empty_msg">咦…没有任何内容，先去逛逛别的吧</string>
-	<string name="user_no_exist">该用户已不存在</string>
-	<string name="user_is_disable">该用户已被封禁</string>
-	<string name="picture_choose_fail">图片选择失败，请重新选择</string>
-	<string name="isinteam">该用户已不在家族内</string>
-	<string name="more100">最多输入100个字符</string>
-	<string name="i_know">知道了</string>
-	<string name="no_external_premiss">存储权限获取失败</string>
-	<string name="unknown">未知</string>
-	<string name="chat_ta">@Ta</string>
-	<string name="not_enough_backpacks">背包礼物数量不足</string>
-	<string name="alipay_type">支付宝支付</string>
-	
-	<string name="privacy_short_desc">请您充分阅读并理解《用户服务协议》及《用户隐私政策》。 \n1、在您浏览使用时，我们会收集您的设备信息、操作日志等用于平台安全风控，并申请存储权限用于下载及缓存。 \n2、在您使用上传、分享等服务时，我们需要获取您设备的摄像头、麦克风、相册、地理位置、存储空间等权限，但该等权限均需经您明示授权才会为实现功能或服务时使用。 \n您可以在相关页面访问、修改、删除您的个人信息或管理您的授权。</string>
-	
-	<string name="accosted">已搭讪</string>
-	<string name="accost">搭讪</string>
-	<string name="to_private_chat">去私聊</string>
-	<string name="private_chat">私聊</string>
-	<string name="auth_for_obtain_permission">完成认证，可获得以下权限</string>
-	
-	<string name="coin">金币</string>
-	
-	<string name="rich_lv_format">财富LV.%s</string>
-	<string name="charm_lv_format">魅力LV.%s</string>
+    <string name="app_name">伊糖</string>
+    <string name="hold_talk">按住 说话</string>
+    <string name="finger_loosening_cancel_send">松开手指，取消发送</string>
+    <string name="finger_slide_cancel_send">松开发送，上滑取消</string>
+    <string name="release_end">松开 结束</string>
+    <string name="Recording_time_is_too_short">录音时间太短</string>
+    <string name="chat_playvoice_play_faild">语音留言播放失败！</string>
+    <string name="chat_playvoice_play_faild3">语音留言播放失败（网络下载完成后）！</string>
+    <string name="chat_playvoice_play_faild4">语音留言文件下载失败！</string>
+
+
+    <string name="yaoqinghaoyou">邀请好友赚金币</string>
+    <string name="fenxiangyaoqinghaoyou">分享邀请好友一起赚钱，月入过万不是梦！～</string>
+    <string name="qqzone">QQ空间</string>
+    <string name="wxpengyoucircle">朋友圈</string>
+    <string name="wxhaoyou">微信好友</string>
+    <string name="qqhaoyou">QQ好友</string>
+    <string name="sinaweibo">新浪微博</string>
+    <string name="net_error">很抱歉，好像网络出问题了</string>
+
+    <string name="trimmed_done">视频裁剪完成！</string>
+    <string name="trimming">正在裁剪视频…</string>
+    <string name="video_shoot_tip">拖动选择你要发表的%d秒以内视频！</string>
+    <string name="back">返回</string>
+    <string name="finish">完成</string>
+    <string name="dkplayer_error_message">视频源出了点问题，请稍后重试</string>
+    <string name="chat_open_camera_permission">未获取此设备摄像头或麦克风权限,音视频功能无法正常使用。打开应用设置页以修改应用权限</string>
+    <string name="chat_open_voice_permission">未获取此设备麦克风权限,录音功能无法正常使用。打开应用设置页以修改应用权限</string>
+    <string name="video_transitions">video_transitions</string>
+    <string name="transition_aac_add">transition_aac_add</string>
+    <string name="transition_aac_recy">transition_aac_recy</string>
+    <string name="auditing">真人认证审核中…</string>
+
+    <string name="pagestate_no_network_msg">打开网络或者wifi才能获取数据</string>
+    <string name="pagestate_go_setting">去设置页</string>
+    <string name="pagestate_cancel">取消</string>
+    <string name="page_loading">加载中…</string>
+    <string name="pagestate_click_to_retry">重试</string>
+    <string name="pagestate_error_occurs">网络异常 请刷新</string>
+    <string name="pagestate_empty_msg">咦…没有任何内容，先去逛逛别的吧</string>
+    <string name="user_no_exist">该用户已不存在</string>
+    <string name="user_is_disable">该用户已被封禁</string>
+    <string name="picture_choose_fail">图片选择失败，请重新选择</string>
+    <string name="isinteam">该用户已不在家族内</string>
+    <string name="more100">最多输入100个字符</string>
+    <string name="i_know">知道了</string>
+    <string name="no_external_premiss">存储权限获取失败</string>
+    <string name="unknown">未知</string>
+    <string name="chat_ta">@Ta</string>
+    <string name="not_enough_backpacks">背包礼物数量不足</string>
+    <string name="alipay_type">支付宝支付</string>
+
+    <string name="privacy_short_desc">请您充分阅读并理解《用户服务协议》及《用户隐私政策》。 \n1、在您浏览使用时，我们会收集您的设备信息、操作日志等用于平台安全风控，并申请存储权限用于下载及缓存。 \n2、在您使用上传、分享等服务时，我们需要获取您设备的摄像头、麦克风、相册、地理位置、存储空间等权限，但该等权限均需经您明示授权才会为实现功能或服务时使用。 \n您可以在相关页面访问、修改、删除您的个人信息或管理您的授权。</string>
+
+    <string name="accosted">已搭讪</string>
+    <string name="accost">搭讪</string>
+    <string name="to_private_chat">去私聊</string>
+    <string name="private_chat">私聊</string>
+    <string name="auth_for_obtain_permission">完成认证，可获得以下权限</string>
+
+    <string name="coin">金币</string>
+
+    <string name="rich_lv_format">财富LV.%s</string>
+    <string name="charm_lv_format">魅力LV.%s</string>
+
+    <string name="no_data">暂无数据</string>
+    <string name="recharge_coin_rmb_format"><![CDATA[%s 需支付<font color=#FF0000>%s元</font>]]></string>
+    <string name="recharge_now_format">立即充值 %s元</string>
+    <string name="attention_ta">关注Ta</string>
+    <string name="sign_in">签到</string>
+    <string name="sign_in_already">已签到</string>
+    <string name="daily_sign_in">每日签到</string>
+    <string name="get_more_coin">领取更多金币</string>
+    <string name="sign_in_success_format">恭喜你获得%s</string>
 </resources>

@@ -23,6 +23,8 @@ import com.netease.nim.uikit.common.DensityUtils;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
 
+import java.util.List;
+
 /**
  * Created by zhoujianghua on 2015/8/4.
  */
@@ -91,12 +93,12 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
            mLlTitle.setPadding(padding,padding,padding,padding);
            mClCall.setVisibility(View.VISIBLE);
            mIvRTop.setVisibility(View.VISIBLE);
-           String tipContent = ChatMsgUtil.getTipContent(tips.des);
+           List<String> tipContent = ChatMsgUtil.getTipContent(tips.des);
            mLlVideo.setOnClickListener( v -> {
-               open(tipContent);
+               open(tipContent.get(1));
            });
            mLlAudio.setOnClickListener( v -> {
-               open(tipContent);
+               open(tipContent.get(0));
            });
            String[] split = tips.des.split("\\n<tag");
            content = split[0];

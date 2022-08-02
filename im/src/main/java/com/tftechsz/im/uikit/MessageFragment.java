@@ -1,5 +1,10 @@
 package com.tftechsz.im.uikit;
 
+import static android.app.Activity.RESULT_OK;
+import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY;
+import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT;
+import static com.tftechsz.common.Constants.NOTIFY_UPDATE_VOICE_INFO;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.app.Activity;
@@ -15,7 +20,6 @@ import android.os.Message;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -58,7 +62,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
@@ -123,45 +126,9 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.qgame.animplayer.AnimConfig;
 import com.tencent.qgame.animplayer.AnimView;
 import com.tencent.qgame.animplayer.inter.IAnimListener;
-import com.tftechsz.common.widget.pop.TopicPop;
-import com.tftechsz.im.R;
-import com.tftechsz.im.adapter.MoreFunAdapter;
-import com.tftechsz.common.adapter.TopicAdapter;
-import com.tftechsz.im.adapter.ViewPagerScrollAdapter;
-import com.tftechsz.im.api.ChatApiService;
-import com.tftechsz.im.api.MultipleItem;
-import com.tftechsz.im.model.dto.AirdropBagDto;
-import com.tftechsz.im.model.dto.ButtonConfigDto;
-import com.tftechsz.im.model.dto.CoupleBagDetailDto;
-import com.tftechsz.im.model.dto.CoupleBagDto;
-import com.tftechsz.im.model.dto.CoupleLetterDto;
-import com.tftechsz.im.model.dto.GroupCoupleDto;
-import com.tftechsz.im.model.dto.JoinLeaveRoom;
-import com.tftechsz.im.model.dto.MoreFunDto;
-import com.tftechsz.im.model.dto.VoiceChatDto;
-import com.tftechsz.im.model.event.BgSetEvent;
-import com.tftechsz.im.mvp.ui.activity.AirdropDetailActivity;
-import com.tftechsz.im.mvp.ui.activity.ChatSettingActivity;
-import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
-import com.tftechsz.im.widget.VoiceChatView;
-import com.tftechsz.im.widget.activity.MessageActivityView;
-import com.tftechsz.im.widget.activity.OnActItemClickListener;
-import com.tftechsz.im.widget.pop.AirdropPopWindow;
-import com.tftechsz.im.widget.pop.ChatMessagePopWindow;
-import com.tftechsz.im.widget.pop.ConfessionLetterPopWindow;
-import com.tftechsz.im.widget.pop.ContinueSendGiftPopWindow;
-import com.tftechsz.im.widget.pop.CoupleGiftBagDetailPop;
-import com.tftechsz.im.widget.pop.CoupleGiftBagPop;
-import com.tftechsz.im.widget.pop.CouplesTaskPop;
-import com.tftechsz.im.widget.pop.FamilyBoxPop;
-import com.tftechsz.im.widget.pop.GroupCouplePopWindow;
-import com.tftechsz.im.widget.pop.IntimacyGiftPop;
-import com.tftechsz.im.widget.pop.OpenAirdropWindow;
-import com.tftechsz.im.widget.pop.OpenRainRedPackagePopWindow;
-import com.tftechsz.im.widget.pop.RainRedPackagePopWindow;
-import com.tftechsz.im.widget.pop.SendRedEnvelopePopWindow;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
+import com.tftechsz.common.adapter.TopicAdapter;
 import com.tftechsz.common.base.AppManager;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BasePresenter;
@@ -185,9 +152,7 @@ import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.AttentionService;
-import com.tftechsz.common.iservice.FamilyService;
 import com.tftechsz.common.iservice.MineService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.manager.DbManager;
 import com.tftechsz.common.nertcvoiceroom.model.VoiceRoomSeat;
@@ -195,7 +160,6 @@ import com.tftechsz.common.nim.ChatSoundPlayer;
 import com.tftechsz.common.other.GlideRoundTransform2;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.ARouterUtils;
-import com.tftechsz.common.utils.AnimationUtil;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CountBackUtils;
@@ -222,9 +186,42 @@ import com.tftechsz.common.widget.pop.RechargePopWindow;
 import com.tftechsz.common.widget.pop.RedEnvelopeDetailsPopWindow;
 import com.tftechsz.common.widget.pop.RedEnvelopeReceivePopWindow;
 import com.tftechsz.common.widget.pop.RemoveCouplesPop;
+import com.tftechsz.common.widget.pop.TopicPop;
 import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.common.widget.pop.WelcomeToFamilyPopWindow;
 import com.tftechsz.common.widget.rain.RedPacketViewHelper;
+import com.tftechsz.im.R;
+import com.tftechsz.im.adapter.MoreFunAdapter;
+import com.tftechsz.im.adapter.ViewPagerScrollAdapter;
+import com.tftechsz.im.api.ChatApiService;
+import com.tftechsz.im.api.MultipleItem;
+import com.tftechsz.im.model.dto.AirdropBagDto;
+import com.tftechsz.im.model.dto.ButtonConfigDto;
+import com.tftechsz.im.model.dto.CoupleBagDetailDto;
+import com.tftechsz.im.model.dto.CoupleBagDto;
+import com.tftechsz.im.model.dto.CoupleLetterDto;
+import com.tftechsz.im.model.dto.GroupCoupleDto;
+import com.tftechsz.im.model.dto.JoinLeaveRoom;
+import com.tftechsz.im.model.dto.MoreFunDto;
+import com.tftechsz.im.model.dto.VoiceChatDto;
+import com.tftechsz.im.model.event.BgSetEvent;
+import com.tftechsz.im.mvp.ui.activity.AirdropDetailActivity;
+import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
+import com.tftechsz.im.widget.VoiceChatView;
+import com.tftechsz.im.widget.activity.MessageActivityView;
+import com.tftechsz.im.widget.activity.OnActItemClickListener;
+import com.tftechsz.im.widget.pop.AirdropPopWindow;
+import com.tftechsz.im.widget.pop.ChatMessagePopWindow;
+import com.tftechsz.im.widget.pop.ConfessionLetterPopWindow;
+import com.tftechsz.im.widget.pop.ContinueSendGiftPopWindow;
+import com.tftechsz.im.widget.pop.CoupleGiftBagDetailPop;
+import com.tftechsz.im.widget.pop.CoupleGiftBagPop;
+import com.tftechsz.im.widget.pop.CouplesTaskPop;
+import com.tftechsz.im.widget.pop.FamilyBoxPop;
+import com.tftechsz.im.widget.pop.GroupCouplePopWindow;
+import com.tftechsz.im.widget.pop.IntimacyGiftPop;
+import com.tftechsz.im.widget.pop.OpenAirdropWindow;
+import com.tftechsz.im.widget.pop.SendRedEnvelopePopWindow;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.widget.pop.MineDetailMorePopWindow;
 
@@ -251,11 +248,6 @@ import io.reactivex.functions.Consumer;
 import razerdp.basepopup.BasePopupWindow;
 import razerdp.util.KeyboardUtils;
 
-import static android.app.Activity.RESULT_OK;
-import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY;
-import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT;
-import static com.tftechsz.common.Constants.NOTIFY_UPDATE_VOICE_INFO;
-
 /**
  * 聊天界面基类
  */
@@ -269,6 +261,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private int mHeight;//派对window显示高度
     // p2p对方Account或者群id
     protected String sessionId;
+    private boolean isAutoShowPanel;
     protected CompositeDisposable mCompositeDisposable;
 
     protected ImageView ivChatPhoto, ivChatRed, mIvVoiceCall;
@@ -279,7 +272,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     protected MessageListPanelEx messageListPanel;
 
     protected AitManager aitManager;
-    private PartyService partyService;
     private TextView mTvName;   //个人姓名
     private RelativeLayout mRlToolBar;
     private RelativeLayout mRlIntimacy;  //亲密度布局
@@ -444,7 +436,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         service = ARouter.getInstance().navigation(UserProviderService.class);
         mineApiService = RetrofitManager.getInstance().createUserApi(MineApiService.class);
         mineService = ARouter.getInstance().navigation(MineService.class);
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         attentionService = ARouter.getInstance().navigation(AttentionService.class);
         publicService = RetrofitManager.getInstance().createUploadCheatApi(PublicService.class);
         ImmersionBar.with(this).titleBar(findView(R.id.base_tool_bar)).init();
@@ -1014,6 +1005,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     inputPanel.mEmojiButtonNew.setVisibility(View.VISIBLE);
                 }
             }
+            if (isAutoShowPanel) {
+                showGiftPop(sessionId, mTeamType == 1 ? 5 : 2);
+            }
         }
     }
 
@@ -1572,7 +1566,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 mIntimacyEntity = intimacyEntity;
                 intimacyEndTime = intimacyEntity.getEndTime();
                 if (intimacyEntity.getIsShow() == 1) {
-                    mRlIntimacyCall.setVisibility(View.VISIBLE);
+//                    mRlIntimacyCall.setVisibility(View.VISIBLE);
                 }
                 if (intimacyEndTime > 0) {
                     setContactTip(intimacyEndTime);
@@ -1707,7 +1701,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             @Override
                             public void accept(Long aLong) {
                                 mIntimacyEntity = entity;
-                                mRlIntimacyCall.setVisibility(View.VISIBLE);
+//                                mRlIntimacyCall.setVisibility(View.VISIBLE);
                             }
                         }));
                     }
@@ -1715,7 +1709,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     ////{"intimacy":"2822.3℃","change":"0℃","is_show_heart":true}
                     ChatMsg.Intimacy intimacy = JSON.parseObject(chatMsg.content, ChatMsg.Intimacy.class);
                     ViewGroup.LayoutParams params = mRlToolBar.getLayoutParams();
-                    if(message != null && mRlIntimacy.getVisibility() == View.GONE){
+                    if (message != null && mRlIntimacy.getVisibility() == View.GONE) {
                         mIvIntimacyDetail.setVisibility(View.VISIBLE);
                     }
                     if (intimacy.is_show_heart) {
@@ -1862,6 +1856,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         sessionType = (SessionTypeEnum) arguments.getSerializable(Extras.EXTRA_TYPE);
         tagIsDialog = arguments.getInt(EXTRA_TYPE_DIALOG_ACTIVITY);
         mHeight = arguments.getInt(EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT);
+        isAutoShowPanel = arguments.getBoolean(Extras.EXTRA_AUTO_SHOW_GIFT_PANEL);
         if (tagIsDialog == 1) {//dialog样式
 //            mRlToolBar.setBackground(getResources().getDrawable(R.drawable.bg_mine_white_top));
 //            mRlTeam.setBackground(getResources().getDrawable(R.drawable.bg_mine_white_top));
@@ -2018,7 +2013,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             });
                             customPopWindow.showPopupWindow();
                         } else {
-                            PermissionUtil.showPermissionPop(getActivity(),"未获取存储和拍照权限,相册功能无法正常使用。打开应用设置页以修改应用权限");
+                            PermissionUtil.showPermissionPop(getActivity(), "未获取存储和拍照权限,相册功能无法正常使用。打开应用设置页以修改应用权限");
                         }
                     }));
 
@@ -2649,7 +2644,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         Utils.logE(chatMsg.content);
                         mRlOpenVip.setVisibility(View.VISIBLE);
                         mRlOpenVip.setBackgroundResource(R.drawable.bg_chat_bot);
-                        mAnimationVip.setVisibility(View.GONE);
+//                        mAnimationVip.setVisibility(View.GONE);
                         ChatTipsContent alert = JSON.parseObject(chatMsg.content, ChatTipsContent.class);
 
                         NIMClient.getService(MsgService.class).queryMessageListByUuid(Collections.singletonList(alert.msg_id))
@@ -3319,14 +3314,20 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     } else
                         showBlackPop(getActivity(), Integer.parseInt(sessionId));
                 }
+
+                @Override
+                public void unfollow() {
+
+                }
             });
+            popWindow.setPopupGravityMode(BasePopupWindow.GravityMode.ALIGN_TO_ANCHOR_SIDE);
             popWindow.showPopupWindow(mIvtoolbarmenu);
         } else if (id == R.id.toolbar_back_all) {  //返回
             if (getActivity() != null)
                 getActivity().finish();
             KeyboardUtils.close(getActivity());
         } else if (id == R.id.rl_intimacy || id == R.id.iv_intimacy_detail) {   //亲密度
-            if(mIvIntimacyDetail.getVisibility() == View.VISIBLE){
+            if (mIvIntimacyDetail.getVisibility() == View.VISIBLE) {
                 mIvIntimacyDetail.setVisibility(View.GONE);
             }
             chatMessagePopWindow = new ChatMessagePopWindow(getActivity(), sessionId);
@@ -3358,9 +3359,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             String desc = MMKVUtils.getInstance().decodeString(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT);
             ARouterUtils.toEditFamily(desc, 0);
             MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT);
-        } else if (id == R.id.iv_sign_in) {  //签到
-            signIn();
-        } else if (id == R.id.fl_ait) {  //ait消息get
+        }  else if (id == R.id.fl_ait) {  //ait消息get
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FAMILY_AIT);
         } else if (id == R.id.ll_family_box) {
             if (mFamilyBoxPop == null) {
@@ -3431,28 +3430,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     private CustomPopWindow popWindow;
 
-
-    public boolean showRecordTip(PartyService partyService) {
-        boolean isShow = false;
-        boolean isOnSeat = MMKVUtils.getInstance().decodeBoolean(Constants.PARTY_IS_ON_SEAT);
-        if ((partyService.isRunFloatService() || partyService.isRunActivity()) && isOnSeat) {
-            if (popWindow == null)
-                popWindow = new CustomPopWindow(BaseApplication.getInstance());
-            popWindow.setContent("在麦位上，需要下麦后，才能进行语音");
-            popWindow.setRightButton("我知道了");
-            popWindow.setRightGone();
-            popWindow.showPopupWindow();
-            isShow = true;
-        }
-        return isShow;
-    }
-
-
     @Override
     public void onAudioRecord(View v, MotionEvent event) {
-        if (showRecordTip(partyService)) {
-            return;
-        }
         if (getActivity() != null && isAdded() && !isDestroyed())
             mCompositeDisposable.add(new RxPermissions(this)
                     .request(Manifest.permission.RECORD_AUDIO
@@ -3649,7 +3628,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
                 @Override
                 public void toFamilyDetail(int familyId, String invite_id) {
-                    ARouterUtils.toFamilyDetail(familyId, invite_id, 1);
                 }
 
                 @Override
@@ -3731,7 +3709,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                 return;
                             }
                             if (isGoActivity) {
-                                ARouterUtils.toFamilyDetail(response.getData().family_id, 1);
                             } else {
                                 ARouter.getInstance()
                                         .navigation(MineService.class)
@@ -3855,20 +3832,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         return false;
                     }
                 }).submit();
-    }
-
-    private void signIn() {
-        FamilyService familyService = ARouter.getInstance().navigation(FamilyService.class);
-        familyService.familySign("family-im", new ResponseObserver<BaseResponse<Boolean>>() {
-            @Override
-            public void onSuccess(BaseResponse<Boolean> response) {
-                if (response.getData()) {
-                    mIvSign.setVisibility(View.GONE);
-                    RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_SIGN_IN_SUCCESS));
-                }
-            }
-        });
-
     }
 
 
@@ -4136,20 +4099,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
 
     private void checkCallMsg(int type) {
-        if (com.tftechsz.common.utils.CommonUtil.showCallTip(partyService)) {
-            return;
-        }
-        if (com.tftechsz.common.utils.CommonUtil.showCallTip2(partyService, new com.tftechsz.common.utils.CommonUtil.OnSelectListener() {
-            @Override
-            public void onSure() {
-                call(type);
-            }
-        }))
-            return;
         String[] audioPermission = {Manifest.permission.RECORD_AUDIO};
-        String[] videoPermission = {Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA};
+        String[] videoPermission = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
         mCompositeDisposable.add(new RxPermissions(this)
-                .request(type == 1 ?audioPermission:videoPermission)
+                .request(type == 1 ? audioPermission : videoPermission)
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         call(type);
@@ -4169,12 +4122,12 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 CallCheckDto data = response.getData();
                 if (null == data || !com.tftechsz.common.utils.CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
                     if (type == 2) {
-                        if (null != data && data.list != null && null != data.list.video) {
-                            if (data.list.video.is_lock) {
+                        if (null != data && data.list != null && null != data.list.voice) {
+                            if (data.list.voice.is_lock) {
                                 if (null != data.error && null != data.error.intimacy) {
                                     showCustomPop(data.error.intimacy.msg);
-                                } else if (null != data.error && null != data.error.video) {
-                                    if (TextUtils.equals(data.error.video.cmd_type, Constants.DIRECT_RECHARGE)) {
+                                } else if (null != data.error && null != data.error.voice) {
+                                    if (TextUtils.equals(data.error.voice.cmd_type, Constants.DIRECT_RECHARGE)) {
                                         if (service.getConfigInfo() != null && service.getConfigInfo().share_config != null && service.getConfigInfo().share_config.is_limit_from_channel == 1) {
                                             if (beforePop == null)
                                                 beforePop = new RechargeBeforePop(getActivity());
@@ -4184,7 +4137,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                             showRechargePop(sessionId);
                                         }
                                     } else {
-                                        showCustomPop(data.error.video.msg);
+                                        showCustomPop(data.error.voice.msg);
                                     }
                                 }
                             } else {

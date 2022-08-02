@@ -58,8 +58,6 @@ import com.tftechsz.common.entity.PackageDto;
 import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.common.entity.UserViewInfo;
 import com.tftechsz.common.entity.WxPayResultInfo;
-import com.tftechsz.common.iservice.AttentionService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.RealAuthPopWindow;
@@ -184,102 +182,6 @@ public class CommonUtil {
 
     }
 
-
-    /**
-     * 当前在麦上
-     *
-     * @return
-     */
-    public static boolean showCallTip(PartyService partyService) {
-        boolean isShow = false;
-//        boolean isOnSeat = MMKVUtils.getInstance().decodeBoolean(Constants.PARTY_IS_ON_SEAT);
-//        if ((partyService.isRunFloatService() || partyService.isRunActivity()) && isOnSeat) {
-//            CustomPopWindow popWindow = new CustomPopWindow(BaseApplication.getInstance());
-//            popWindow.setContent("您当前在麦上、不能呼叫对方！");
-//            popWindow.setRightButton("我知道了");
-//            popWindow.setRightGone();
-//            popWindow.showPopupWindow();
-//            isShow = true;
-//        }
-        return isShow;
-    }
-
-
-    /**
-     * 当前在派对内
-     *
-     * @return
-     */
-    public static boolean showCallTip2(PartyService partyService, OnSelectListener listener) {
-        boolean isShow = false;
-//        boolean isOnSeat = MMKVUtils.getInstance().decodeBoolean(Constants.PARTY_IS_ON_SEAT);
-//        if ((partyService.isRunFloatService() || partyService.isRunActivity()) && !isOnSeat) {
-//            CustomPopWindow popWindow = new CustomPopWindow(BaseApplication.getInstance());
-//            popWindow.setContent("您当前在派对内，拨打语音（视频）会退出派对哦，确认拨打吗？");
-//            popWindow.setLeftButton("取消");
-//            popWindow.setRightButton("确认");
-//            popWindow.addOnClickListener(new CustomPopWindow.OnSelectListener() {
-//                @Override
-//                public void onCancel() {
-//
-//                }
-//
-//                @Override
-//                public void onSure() {
-//                    if (partyService.isRunActivity())
-//                        partyService.finishPartyActivity();
-//                    partyService.stopFloatService();
-//                    AttentionService attentionService = ARouter.getInstance().navigation(AttentionService.class);
-//                    attentionService.finishPartyActivity();
-//                    if (listener != null)
-//                        listener.onSure();
-//                }
-//            });
-//            popWindow.showPopupWindow();
-//            isShow = true;
-//        }
-        return isShow;
-    }
-
-
-    /**
-     * 当前在派对内
-     *
-     * @return
-     */
-    public static boolean showCallTip3(PartyService partyService, OnSelectListener listener) {
-        boolean isShow = false;
-        boolean isOnSeat = MMKVUtils.getInstance().decodeBoolean(Constants.PARTY_IS_ON_SEAT);
-        if ((partyService.isRunFloatService() || partyService.isRunActivity()) && !isOnSeat) {
-            CustomPopWindow popWindow = new CustomPopWindow(BaseApplication.getInstance());
-            popWindow.setContent("您当前在派对内，接听语音（视频）会退出派对哦，确认接听吗？");
-            popWindow.setLeftButton("取消");
-            popWindow.setRightButton("接听");
-            popWindow.addOnClickListener(new CustomPopWindow.OnSelectListener() {
-                @Override
-                public void onCancel() {
-
-                }
-
-                @Override
-                public void onSure() {
-                    MMKVUtils.getInstance().encode(Constants.PARAM_IS_CALL_CLOSE, 1);
-                    if (partyService.isRunActivity())
-                        partyService.finishPartyActivity();
-                    partyService.stopFloatService();
-                    AttentionService attentionService = ARouter.getInstance().navigation(AttentionService.class);
-                    attentionService.finishPartyActivity();
-                    if (listener != null)
-                        listener.onSure();
-                }
-            });
-            popWindow.showPopupWindow();
-            isShow = true;
-        }
-        return isShow;
-    }
-
-
     public interface OnSelectListener {
 
         void onSure();
@@ -287,23 +189,6 @@ public class CommonUtil {
     }
 
     public OnSelectListener listener;
-
-
-    public static boolean showRecordTip(CustomPopWindow customPopWindow, PartyService partyService) {
-        boolean isShow = false;
-        boolean isOnSeat = MMKVUtils.getInstance().decodeBoolean(Constants.PARTY_IS_ON_SEAT);
-        if (partyService.isRunFloatService() && isOnSeat) {
-            if (customPopWindow == null)
-                customPopWindow = new CustomPopWindow(BaseApplication.getInstance());
-            customPopWindow.setContent("在麦位上，需要下麦后，才能进行录音");
-            customPopWindow.setRightButton("我知道了");
-            customPopWindow.setRightGone();
-            customPopWindow.showPopupWindow();
-            isShow = true;
-        }
-        return isShow;
-    }
-
 
     /**
      * 获取微信APP_ID
@@ -347,7 +232,12 @@ public class CommonUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        if(message != null && !TextUtils.isEmpty(message.getContent()) && message.getContent().contains("，<tag")){
+            //你刚刚漏接了哈哈啊图的来电，快点给Ta回电哦，<tag url="peony://chatActivity/655">点击前往>></tag>
+            String msg = message.getContent();
+            content = msg.substring(0,msg.indexOf("<tag"));
+            content += msg.substring(msg.indexOf(">")+1,msg.indexOf("</tag>"));
+        }
         return content;
     }
 
@@ -616,16 +506,6 @@ public class CommonUtil {
 
         if (info.link.startsWith(Interfaces.LINK_PEONY)) { // peony://
             String substring = info.link.substring(Interfaces.LINK_PEONY.length());
-            if (substring.contains(Interfaces.LINK_PEONY_FAMILY_HOME)) {//家族
-                String familyId = substring.substring((Interfaces.LINK_PEONY_FAMILY_HOME).length());
-                if (!TextUtils.isEmpty(familyId)) {
-                    String cusFamilyId = familyId.replace("/", "");
-                    ARouterUtils.toMineFamily(Integer.parseInt(cusFamilyId));
-                } else {
-                    ARouterUtils.toMineFamily(0);
-                }
-                return;
-            }
             if (substring.contains(Interfaces.LINK_PEONY_CHAT_SQUARE)) {//聊天广场
                 String rid = substring.substring(Interfaces.LINK_PEONY_CHAT_SQUARE.length());
                 String cusRid = rid.replace("/", "");
@@ -1171,6 +1051,10 @@ public class CommonUtil {
 
     public static String getUmengAppKey() {
         return getMetaData("UMENG_APPKEY");
+    }
+
+    public static String getBuglyAppKey() {
+        return getMetaData("BUGLY_APPKEY");
     }
 
     public static String getUmengPushSecret() {

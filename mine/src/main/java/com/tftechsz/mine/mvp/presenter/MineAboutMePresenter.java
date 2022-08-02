@@ -8,7 +8,7 @@ import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MineAboutMePresenter extends BasePresenter<IMineAboutMeView> {
 
@@ -21,27 +21,13 @@ public class MineAboutMePresenter extends BasePresenter<IMineAboutMeView> {
     }
 
     /**
-     * 获取他人用户收到礼物
+     * 获取所有礼物
      */
-    public void getUserGift(int pageSize, String userId) {
-        addNet(exchService.getUserGift(pageSize, userId).compose(BasePresenter.applySchedulers())
-                .subscribeWith(new ResponseObserver<BaseResponse<List<GiftDto>>>() {
+    public void getGiftList(String userId) {
+        addNet(exchService.getGiftList(userId).compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<ArrayList<GiftDto>>>() {
                     @Override
-                    public void onSuccess(BaseResponse<List<GiftDto>> response) {
-                        if (getView() == null) return;
-                        getView().getGiftSuccess(response.getData());
-                    }
-                }));
-    }
-
-    /**
-     * 获取自己收到礼物
-     */
-    public void getSelfGift(int pageSize) {
-        addNet(exchService.getSelfGift(pageSize).compose(BasePresenter.applySchedulers())
-                .subscribeWith(new ResponseObserver<BaseResponse<List<GiftDto>>>() {
-                    @Override
-                    public void onSuccess(BaseResponse<List<GiftDto>> response) {
+                    public void onSuccess(BaseResponse<ArrayList<GiftDto>> response) {
                         if (getView() == null) return;
                         getView().getGiftSuccess(response.getData());
                     }

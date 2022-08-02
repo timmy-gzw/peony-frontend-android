@@ -9,33 +9,18 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="gray">#808080</color>
-    <color name="yellow_FEFCE5">#FEFCE5</color>
-    <color name="yellow_F89D23">#F89D23</color>
-    <color name="yellow">#FFFF00</color>
     <color name="green">#00BC5A</color>
     <color name="red">#FC5858</color>
     <color name="half_red">#FF6A9D</color>
     <color name="red_dot">#F6508D</color>
-    <color name="blue">#0000FF</color>
-    <color name="line_color_blue">#3C8EAE</color>
-    <color name="bg_color_pink">#FF90A2</color>
-    <color name="bg_color_blue">#43D5FF</color>
-    <color name="bg_color_blue_light">#84B5CA</color>
     <color name="blue_7F89F3">#7F89F3</color>
     <color name="color_FEDCB4">#FEDCB4</color>
     <color name="color_5F6392">#5F6392</color>
-    <color name="color_9FABC2">#9FABC2</color>
-    <color name="color_CEC9BF">#CEC9BF</color>
 
 
-    <color name="trans_black_80">#33000000</color>
-    <color name="trans_white_40">#66FFFFFF</color>
-
-    <color name="color_bb">#BBBBBB</color>
     <color name="color_cc">#CCCCCC</color>
     <color name="color_d6">#D6D6D6</color>
     <color name="color_de">#DEDEDE</color>
-    <color name="color_ae">#AEAEAE</color>
     <color name="driver">#EEEEEE</color>
     <color name="color_normal">#333333</color>
     <color name="color_mid_font">#666666</color>
@@ -48,55 +33,26 @@
     <color name="color_8290AF">#8290AF</color>
     <color name="c697A9F">#697A9F</color>
 
-    <color name="c555555">#555555</color>
-
     <color name="default_clickable_color">#cccccc</color>
 
     <color name="praise_item_selector_default">#cccccc</color>
 
-    <color name="praise_item">#8290AF</color>
-
-    <color name="cdcdcdc">#DCDCDC</color>
-    <color name="cf2f2f2">#f2f2f2</color>
-    <color name="c2f2f2f">#2f2f2f</color>
     <color name="c2c2c2">#c2c2c2</color>
     <color name="cfcfcf">#cfcfcf</color>
-    <color name="color_grey_cccccc">#f7f7f7</color>
     <color name="cd8d8d8">#d8d8d8</color>
 
     <color name="dkplayer_theme_color_translucent">#99000000</color>
 
-    <color name="background_video_color">#2f3031</color>
-    <color name="background_progress_color">#6C6D6D</color>
-    <color name="progress_color">#aacc0000</color>
-    <color name="line_color">#FF15FF00</color>
     <color name="shadow_color">#7F000000</color>
-    <color name="line_button">#565758</color>
-    <color name="black_translucent">#50000000</color>
-    <color name="top_bottom">#42BAF8</color>
     <color name="dkplayer_theme_color">@color/colorPrimary</color>
-    <color name="color_4A4E4E">#4A4E4E</color>
-    <color name="color_444444">#444444</color>
     <color name="color_8C4BE1">#8C4BE1</color>
     <color name="color_89A5FF">#89A5FF</color>
 
-    <color name="member_top_name_nor">#C5C7CC</color>
-    <color name="member_top_name_open">#4A4E4E</color>
-    <color name="member_top_hint_nor">#99c5c7cc</color>
-    <color name="member_top_hint_open">#994A4E4E</color>
     <color name="family_box_color">#CC5513</color>
     <color name="noble_color">#ffd993</color>
     <color name="color_928C81">#928C81</color>
     <color name="gift_wheat_text_color">#644B0D</color>
 
-    <color name="shadow_3c3fce_lan">#3C3FCE</color>
-    <color name="shadow_3c3fce_zi">#6D0ECA</color>
-    <color name="shadow_3c3fce_def">#EB4C16</color>
-
-    <color name="shadow_3c3fce_lv">#006066</color>
-    <color name="shadow_3c3fce_huang">#BE4715</color>
-    <color name="shadow_3c3fce_red">#FFD0A2</color>
-    <color name="color_002074">#002074</color>
     <color name="color_f8d423">#FE4D6B</color>
 
     <color name="c_f7f7f7">#F7F7F7</color>
@@ -122,4 +78,5 @@
     <color name="c_cc3d3d">#CC3D3D</color>
     <color name="c_30000000">#4D000000</color>
     <color name="c_d72537">#D72537</color>
+    <color name="c_ff9e00">#FF9E00</color>
 </resources>

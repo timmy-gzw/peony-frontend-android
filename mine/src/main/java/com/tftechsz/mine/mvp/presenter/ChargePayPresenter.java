@@ -10,11 +10,12 @@ import com.netease.nim.uikit.common.ConfigInfo;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.umeng.analytics.MobclickAgent;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.entity.AlipayResultInfo;
+import com.tftechsz.common.entity.IntegralDto;
+import com.tftechsz.common.entity.PaymentDto;
 import com.tftechsz.common.entity.SXYWxPayResultInfo;
 import com.tftechsz.common.entity.WxPayResultInfo;
 import com.tftechsz.common.http.BaseResponse;
@@ -23,9 +24,11 @@ import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.mvp.IView.IChargePayView;
+import com.umeng.analytics.MobclickAgent;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
@@ -36,12 +39,45 @@ import io.reactivex.schedulers.Schedulers;
 public class ChargePayPresenter extends BasePresenter<IChargePayView> {
 
     public MineApiService service;
+    public MineApiService userService;
+    public MineApiService configService;
     private IWXAPI mApi;
 
     public ChargePayPresenter() {
         service = RetrofitManager.getInstance().createPaymentApi(MineApiService.class);
+        userService = RetrofitManager.getInstance().createUserApi(MineApiService.class);
+        configService = RetrofitManager.getInstance().createConfigApi(MineApiService.class);
     }
 
+    public void getCoin() {
+        addNet(userService.getField("property", "coin")
+                .compose(RxUtil.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<IntegralDto>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<IntegralDto> response) {
+                        if (response == null) return;
+                        getView().onGetCoin(response.getData());
+                    }
+                }));
+    }
+
+    public void getRechargeInfo() {
+        addNet(configService.getRechargeNewList()
+                .compose(RxUtil.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<PaymentDto>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<PaymentDto> response) {
+                        if (response == null) return;
+                        getView().onGetRechargeInfo(response.getData());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        getView().onGetRechargeInfo(null);
+                    }
+                }));
+    }
 
     /**
      * 支付宝
@@ -67,10 +103,10 @@ public class ChargePayPresenter extends BasePresenter<IChargePayView> {
      */
     public void wakeUpAliPay(Activity context, final String orderInfo) {
         Disposable disposable = Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            PayTask alipay = new PayTask(context);
-            String result = alipay.pay(orderInfo, true);
-            emitter.onNext(result);
-        }).subscribeOn(Schedulers.newThread())
+                    PayTask alipay = new PayTask(context);
+                    String result = alipay.pay(orderInfo, true);
+                    emitter.onNext(result);
+                }).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
                     AlipayResultInfo payResult = new AlipayResultInfo(s);
                     String resultStatus = payResult.getResultStatus();

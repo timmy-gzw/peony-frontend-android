@@ -36,6 +36,7 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.mixpush.NIMPushClient;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.previewlibrary.ZoomMediaLoader;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 import com.tencent.tauth.Tencent;
 import com.tftechsz.common.BuildConfig;
@@ -183,6 +184,7 @@ public class BaseApplication extends Application implements Application.Activity
         UMConfigure.setLogEnabled(BuildConfig.DEBUG);
         if (isAgree) {
             getOaid();
+            initBugly();
             initUmeng();
             initUiKit();
             initShanyanSDK();
@@ -304,6 +306,13 @@ public class BaseApplication extends Application implements Application.Activity
         } else {
             return null;
         }
+    }
+
+    /**
+     * bugly初始化
+     */
+    public void initBugly() {
+        CrashReport.initCrashReport(this, CommonUtil.getBuglyAppKey(), BuildConfig.IS_DEBUG);
     }
 
 

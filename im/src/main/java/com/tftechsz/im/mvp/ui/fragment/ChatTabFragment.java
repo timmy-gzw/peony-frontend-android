@@ -51,12 +51,10 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.NetStatusEvent;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.UserStatusEvent;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.nim.model.NERTCVideoCall;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
-import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.NetworkCallbackImpl;
 import com.tftechsz.common.utils.NetworkUtil;
 import com.tftechsz.common.utils.SPUtils;
@@ -248,7 +246,7 @@ public class ChatTabFragment extends BaseMvpFragment implements View.OnClickList
                 mTvOnlineStatus.setText("空闲");
                 mIvOnLineStatus.setImageResource(R.mipmap.chat_ic_status_free);
             }
-//            mLlOnlineStatus.setVisibility(View.VISIBLE);
+            mLlOnlineStatus.setVisibility(View.VISIBLE);
         });
     }
 
@@ -271,7 +269,7 @@ public class ChatTabFragment extends BaseMvpFragment implements View.OnClickList
                 if (code == StatusCode.NET_BROKEN || code == StatusCode.CONNECTING) {
                     mTvOnlineStatus.setText("离开");
                     mIvOnLineStatus.setImageResource(R.mipmap.chat_ic_status_offline);
-//                    mLlOnlineStatus.setVisibility(View.VISIBLE);
+                    mLlOnlineStatus.setVisibility(View.VISIBLE);
                 } else {
                     setStatus();
                 }
@@ -283,15 +281,6 @@ public class ChatTabFragment extends BaseMvpFragment implements View.OnClickList
                         NERTCVideoCall.sharedInstance().releaseNERtc();
                     }
                     (activity).finish();
-                } else { //派对或语音房修改
-                    PartyService partyService = ARouter.getInstance().navigation(PartyService.class);
-                    if (partyService.isRunFloatService()) {
-                        partyService.stopFloatService();
-                    }
-                    if (partyService.isRunActivity()) {
-                        MMKVUtils.getInstance().encode(Constants.PARAM_IS_CALL_CLOSE, 1);
-                        partyService.finishPartyActivity();
-                    }
                 }
                 AppManager.getAppManager().finishAllActivity();
                 SPUtils.put(Constants.IS_COMPLETE_INFO, 0);

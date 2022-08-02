@@ -86,7 +86,7 @@ public class NetworkUtil {
      * @param context
      * @return
      */
-    private static NetworkInfo getActiveNetworkInfo(Context context) {
+    public static NetworkInfo getActiveNetworkInfo(Context context) {
         try {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             return cm.getActiveNetworkInfo();

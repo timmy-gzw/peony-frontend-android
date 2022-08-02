@@ -37,6 +37,7 @@ public interface Extras {
     String EXTRA_TAG_SHOW_PARTY_MENU = "extra_tag_show_party_menu";
     String EXTRA_TYPE_DIALOG_ACTIVITY = "activity_dialog";
     String EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT = "dialog_activity_height";
+    String EXTRA_AUTO_SHOW_GIFT_PANEL = "is_auto_show_gift_panel";//进到P2P页面是否自动弹起礼物弹窗
 
     String EXTRA_CUSTOMIZATION = "customization";
     String EXTRA_BACK_TO_CLASS = "backToClass";

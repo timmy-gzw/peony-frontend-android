@@ -917,9 +917,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         } else if (id == R.id.tv_user_message) {  //私信
             ARouterUtils.toChatP2PActivity(sessionId, NimUIKit.getCommonP2PSessionCustomization(), null);
             dismiss();
-        } else if (id == R.id.ll_team) {  //跳转家族详情
-            ARouterUtils.toFamilyDetail(mFamilyId, 1);
-        } else if (id == R.id.more) { //更多
+        }  else if (id == R.id.more) { //更多
             RetrofitManager.getInstance().createFamilyApi(PublicService.class)
                     .getFamilyRole(sessionId)
                     .compose(BasePresenter.applySchedulers())

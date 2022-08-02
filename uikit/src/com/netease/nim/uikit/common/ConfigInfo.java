@@ -147,6 +147,7 @@ public class ConfigInfo {
         public String complete_msg;
         public String complete_msg_color;
         public String desc;
+        public int visitor_count;//看过我数量
 
         public MineInfo() {
         }

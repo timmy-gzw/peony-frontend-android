@@ -141,8 +141,8 @@ public class NimSDKOptionConfig {
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
         // 点击通知需要跳转到的界面
 //        try {
-////            Class clazz = Class.forName("com.tftechsz.main.mvp.ui.MainActivity");
-////            config.notificationEntrance = clazz;
+//            Class clazz = Class.forName("com.tftechsz.main.mvp.ui.MainActivity");
+//            config.notificationEntrance = clazz;
 //        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
 //        }

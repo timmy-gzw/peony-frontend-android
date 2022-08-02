@@ -71,7 +71,6 @@ import com.tftechsz.common.event.MessageEvent;
 import com.tftechsz.common.event.UnReadMessageEvent;
 import com.tftechsz.common.event.UpdateEvent;
 import com.tftechsz.common.iservice.MineService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.location.BDLocationManager;
 import com.tftechsz.common.location.LocationListener;
@@ -92,6 +91,7 @@ import com.tftechsz.common.widget.pop.MessageNotificationPopWindow;
 import com.tftechsz.common.widget.pop.OneKeyAccostPopWindow;
 import com.tftechsz.common.widget.pop.UserLevelUpPop;
 import com.tftechsz.home.entity.SignInBean;
+import com.tftechsz.home.entity.SignInSuccessBean;
 import com.tftechsz.home.mvp.ui.fragment.HomeFragment;
 import com.tftechsz.home.widget.SignInPopWindow;
 import com.tftechsz.home.widget.SignSucessPopWindow;
@@ -133,11 +133,10 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private UpdateDialog dialog;
     private UpdateEvent mEvent;  //更新信息
     private boolean isFirstSign = true;
-    private String signCost;
+    private SignInBean signInBean;
     private OneKeyAccostPopWindow mOneKeyAccostPopWindow;
     private PlayServiceConnection mPlayServiceConnection;
     private PartyServiceConnection mPartyServiceConnection;
-    private PartyService partyService;
     @Autowired
     UserProviderService service;
     private SignInPopWindow mSignInPopWindow;
@@ -188,7 +187,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         };
         NELivePlayer.init(getApplicationContext(), config);
         service = ARouter.getInstance().navigation(UserProviderService.class);
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         final ConfigInfo configInfo = service.getConfigInfo();
         vp = findViewById(R.id.vp);
         final LottieAnimationView viewHome = findViewById(R.id.view_home);
@@ -453,9 +451,10 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     @Override
     protected void initData() {
         super.initData();
-        MMKVUtils.getInstance().encode(Constants.PARTY_IS_ON_SEAT, false);
         initService();
         startWork();
+
+        getSignList();
     }
 
     BDLocationManager bdLocationManager;
@@ -552,10 +551,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         dialog.setOnSureClick(new UpdateDialog.OnSureClick() {
             @Override
             public void onCancel() {
-                if (isFirstSign) {
-                    isFirstSign = false;
-                    getP().signList();
-                }
+                showSignInPop();
             }
         });
     }
@@ -687,10 +683,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                 } else {
                                     if (dialog != null && dialog.isShowing())
                                         return;
-                                    if (isFirstSign) {
-                                        isFirstSign = false;
-                                        p.signList();
-                                    }
+                                    showSignInPop();
                                 }
                             }
                         }
@@ -703,9 +696,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                     }
                 }));
         getP().register(true);
-
     }
-
 
     /**
      * 请求权限
@@ -741,13 +732,13 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
 
     private void performAccost() {
         //FIXME 暂无一键搭讪
-//        if (vp.getCurrentItem() != 3 && mAccostPopList != null && mAccostPopList.size() > 0) {
-//            if (mOneKeyAccostPopWindow == null)
-//                mOneKeyAccostPopWindow = new OneKeyAccostPopWindow(mContext);
-//            mOneKeyAccostPopWindow.setUserList(mAccostPopList);
-//            mOneKeyAccostPopWindow.showPopupWindow();
-//            mAccostPopList = null;
-//        }
+        if (vp.getCurrentItem() != 3 && mAccostPopList != null && mAccostPopList.size() > 0) {
+            if (mOneKeyAccostPopWindow == null)
+                mOneKeyAccostPopWindow = new OneKeyAccostPopWindow(mContext);
+            mOneKeyAccostPopWindow.setUserList(mAccostPopList);
+            mOneKeyAccostPopWindow.showPopupWindow();
+            mAccostPopList = null;
+        }
     }
 
     @Override
@@ -846,9 +837,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             unbindService(mServiceConnection);
             mServiceConnection = null;
         }
-        if (partyService.isRunFloatService()) {
-            partyService.stopFloatService();
-        }
         if (BaseMusicHelper.get() != null && BaseMusicHelper.get().getPlayService() != null && BaseMusicHelper.get().getPlayService().isPlaying()) {
             BaseMusicHelper.get().getPlayService().onDestroy();
         }
@@ -922,31 +910,42 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * 获取签到列表
+     */
+    private void getSignList() {
+        if (isFirstSign) {
+            isFirstSign = false;
+            p.signList("home");
+        }
+    }
+
+    private void showSignInPop() {
+        if (signInBean != null && !signInBean.is_complete_today) {
+            if (mSignInPopWindow == null) {
+                mSignInPopWindow = new SignInPopWindow(mContext, signInBean, this);
+                mSignInPopWindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        signInBean = null;
+                        //if (!signTag) {
+                        showAccostDialog();
+                        // }
+                    }
+                });
+            }
+            if (!mSignInPopWindow.isShowing()) {
+                mSignInPopWindow.showPopupWindow();
+            }
+        }
+    }
 
     @Override
     public void signListSucceeded(SignInBean data) {
-        List<SignInBean.SignInListBean> list = data.list;
-        for (SignInBean.SignInListBean bean : list) {
-            if (data.start_day == bean.day_number) {
-                signCost = "+" + bean.cost;
-                break;
-            }
-        }
-
-        if (mSignInPopWindow == null) {
-            mSignInPopWindow = new SignInPopWindow(mContext, data, this);
-            mSignInPopWindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    //if (!signTag) {
-                    showAccostDialog();
-                    // }
-                }
-            });
-        }
-        if (!mSignInPopWindow.isShowing()) {
-            mSignInPopWindow.showPopupWindow();
-        }
+        signInBean = data;
+        if (dialog != null && dialog.isShowing())
+            return;
+        showSignInPop();
     }
 
     //获取签到列表失败
@@ -956,16 +955,25 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     }
 
     @Override
-    public void signInSucceeded() {
+    public void signInSuccess(SignInSuccessBean data) {
         if (mSignInPopWindow != null) {
             mSignInPopWindow.dismiss();
         }
-        new SignSucessPopWindow(mContext).showPop(signCost).setOnDismissListener(new BasePopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                showAccostDialog();
-            }
-        });
+        if (data != null) {
+            new SignSucessPopWindow(mContext).showPop(data).setOnDismissListener(new BasePopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    showAccostDialog();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void signInFail() {
+        if (mSignInPopWindow != null) {
+            mSignInPopWindow.dismiss();
+        }
     }
 
     private void showAccostDialog() {

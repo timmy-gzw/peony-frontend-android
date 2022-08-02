@@ -14,14 +14,14 @@ import com.tftechsz.mine.R;
  */
 public class BaseUserInfoAdapter extends BaseQuickAdapter<UserInfo.BaseInfo, BaseViewHolder> {
 
-    private int minEms = 0;
+    private int textWidth = 0;
 
     public BaseUserInfoAdapter() {
         super(R.layout.item_base_info);
     }
 
-    public void setMinEms(int minEms) {
-        this.minEms = minEms;
+    public void setTextViewMaxWidth(int textWidth) {
+        this.textWidth = textWidth;
     }
 
     @Override
@@ -30,8 +30,9 @@ public class BaseUserInfoAdapter extends BaseQuickAdapter<UserInfo.BaseInfo, Bas
 
         TextView textView = helper.getView(R.id.tv_name);
         textView.setText(item.title);
-        if (minEms > 0) {
-            textView.setMinEms(minEms);
+        if (textWidth > 0) {
+            textView.setWidth(textWidth);
         }
+        helper.setGone(R.id.iv_copy, helper.getLayoutPosition() != 0);
     }
 }

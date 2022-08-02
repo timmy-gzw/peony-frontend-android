@@ -1,5 +1,6 @@
 package com.tftechsz.common.other;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.tftechsz.common.widget.pop.AndroidLoadingDialogNew;
@@ -42,6 +43,9 @@ public class GlobalDialogManager {
     public synchronized void show(FragmentManager manager, String hintMessage) {
         this.manager = manager;
         if (manager == null || mIsShow) {
+            return;
+        }
+        if(null != manager.findFragmentByTag("loadingDialog")){
             return;
         }
         init();

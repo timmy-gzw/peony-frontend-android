@@ -207,7 +207,8 @@
                 android:layout_centerVertical="true"
                 android:paddingStart="@dimen/dp_17"
                 android:paddingTop="@dimen/dp_5"
-                android:paddingEnd="@dimen/dp_17"
+                android:paddingEnd="0dp"
+                android:layout_marginEnd="@dimen/dp_16"
                 android:paddingBottom="@dimen/dp_5"
                 android:src="@mipmap/ic_more_white_no_bg"
                 tools:ignore="UseAppTint" />
@@ -701,7 +702,7 @@
     <LinearLayout
         android:id="@+id/rl_open_vip"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_70"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:background="@drawable/bg_chat_bot"
         android:orientation="horizontal"
@@ -878,7 +879,6 @@
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/frame_gift_award"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_12"
@@ -891,7 +891,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_award_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

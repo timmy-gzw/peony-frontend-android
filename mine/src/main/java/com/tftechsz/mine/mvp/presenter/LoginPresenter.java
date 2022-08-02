@@ -144,11 +144,12 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      * 合规延迟初始化
      */
     public void lazyInit() {
+        BaseApplication.getInstance().getOaid();
+        BaseApplication.getInstance().initBugly();
         BaseApplication.getInstance().initUmeng();
         NIMClient.initSDK();
         BaseApplication.getInstance().initUiKit();
         BaseApplication.getInstance().initShanyanSDK();
-        BaseApplication.getInstance().getOaid();
     }
 
     /**

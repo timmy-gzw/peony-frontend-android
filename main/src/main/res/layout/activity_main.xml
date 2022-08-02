@@ -81,7 +81,6 @@
             style="@style/MainBotRootStyle">
 
             <LinearLayout
-                android:id="@+id/rl_message"
                 android:layout_width="@dimen/dp_40"
                 android:layout_height="wrap_content"
                 android:gravity="center"

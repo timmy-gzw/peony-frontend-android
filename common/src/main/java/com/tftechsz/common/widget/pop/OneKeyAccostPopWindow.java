@@ -73,7 +73,7 @@ public class OneKeyAccostPopWindow extends BaseCenterPop implements OnItemClickL
         mAdapter.setOnItemClickListener(this);
 
         mAcbtn = findViewById(R.id.accost_btn);
-        findViewById(R.id.accost_btn).setOnClickListener(this);
+        findViewById(R.id.ll_btn).setOnClickListener(this);
         findViewById(R.id.del).setOnClickListener(this);
         mAcbtn.setText(CommonUtil.isBtnTextPop(userService) ? "一键喜欢" : "一键搭讪");
     }
@@ -115,7 +115,7 @@ public class OneKeyAccostPopWindow extends BaseCenterPop implements OnItemClickL
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.accost_btn) { //一键搭讪
+        if (id == R.id.ll_btn) { //一键搭讪
             if (!ClickUtil.canOperate()) {
                 return;
             }

@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/icon"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dp_90"
         android:layout_margin="@dimen/dp_8"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,23 +16,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/umeng_socialize_share_video" />
+        tools:src="@drawable/nim_avatar_default" />
+
+    <View
+        app:layout_constraintLeft_toLeftOf="@id/icon"
+        app:layout_constraintRight_toRightOf="@id/icon"
+        app:layout_constraintBottom_toBottomOf="@id/icon"
+        android:background="@drawable/bg_grey_alpha"
+        android:layout_marginHorizontal="@dimen/dp_8"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"/>
 
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_one_key_item_bg"
         android:gravity="center"
-        android:paddingTop="@dimen/dp_8"
-        android:paddingBottom="@dimen/dp_5"
+        android:layout_marginVertical="@dimen/dp_4"
         android:singleLine="true"
         tools:text="难过的乐曲"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_11"
-        app:layout_constraintBottom_toBottomOf="@id/icon"
-        app:layout_constraintEnd_toEndOf="@id/icon"
-        app:layout_constraintStart_toStartOf="@id/icon" />
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@id/ll_age"
+        app:layout_constraintBottom_toTopOf="@id/ll_age"/>
+
+   <LinearLayout
+       android:id="@+id/ll_age"
+       android:layout_width="wrap_content"
+       app:layout_constraintBottom_toBottomOf="@id/icon"
+       app:layout_constraintStart_toStartOf="@id/icon"
+       android:background="@drawable/bg_boy"
+       android:layout_marginLeft="@dimen/dp_4"
+       android:layout_marginBottom="@dimen/dp_4"
+       android:gravity="center"
+       android:layout_height="wrap_content">
+
+       <ImageView
+           android:id="@+id/iv_sex"
+           android:layout_width="@dimen/dp_10"
+           android:src="@drawable/ic_boy"
+           android:layout_marginRight="@dimen/dp_3"
+           android:layout_height="@dimen/dp_10"/>
+
+       <TextView
+           android:id="@+id/tv_age"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="@dimen/dp_2"
+           tools:text="22"
+           android:textColor="@color/white"
+           android:textSize="@dimen/sp_10" />
+   </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_check"

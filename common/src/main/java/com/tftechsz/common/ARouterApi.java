@@ -78,18 +78,16 @@ public class ARouterApi {
     public static final String ACTIVITY_SIGN_CHAT_NUM = "/mine/SignChatNumActivity";   //聊天卡
     public static final String ACTIVITY_NOTIFY_SETTING = "/mine/NotifySettingActivity";   //新消息通知
     public static final String ACTIVITY_INCOME_DETAIL = "/mine/IncomeDetailActivity";   //收益明细
+    public static final String ACTIVITY_GIFT_WALL = "/mine/giftWall";   //礼物墙
 
 
     //family
-    public final static String ACTIVITY_FAMILY_DETAIL = "/family/familyDetailActivity";   //家族详情
     public final static String ACTIVITY_EDIT_FAMILY = "/family/EditFamilyInfoActivity";   //编辑
-    public final static String ACTIVITY_MINE_FAMILY = "/family/mineFamilyActivity";   //我的家族
     public final static String ACTIVITY_FAMILY_MEMBER = "/family/FamilyMemberActivity";   //我的家族成员
     public final static String ACTIVITY_FAMILY_APPLY = "/family/ApplyVerifyActivity";   //申请列表
     public final static String FAMILY_SERVICE = "/family/familyService";
     public final static String ACTIVITY_ROOM_MEMBER = "/family/RoomMemberActivity";   //聊天室成员
     public final static String ACTIVITY_CREATE_FAMILY = "/family/CreateFamilyInfoActivity";   //创建家族
-    public final static String ACTIVITY_FAMILY_RECRUIT = "/family/FamilyRecruitActivity";  //招募红包
     public final static String ACTIVITY_FAMILY_AIT_MEMBER = "/family/FamilyAitMemberActivity";   //ait我的家族成员
     public final static String ACTIVITY_FAMILY_AIT = "/family/FamilyAitActivity";   //ait我的家族成员
     public final static String ACTIVITY_GROUP_COUPLE = "/family/GroupCoupleActivity";   //组情侣

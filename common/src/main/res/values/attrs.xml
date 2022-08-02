@@ -285,4 +285,8 @@
         <attr name="countdownTime2" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="EmptyView">
+        <attr name="empty_str" format="string" />
+        <attr name="empty_resId" format="reference" />
+    </declare-styleable>
 </resources>

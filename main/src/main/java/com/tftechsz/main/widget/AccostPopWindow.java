@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ public class AccostPopWindow extends BasePopupWindow implements View.OnClickList
     private AccostUserAdapter mAdapter;
     private final Context mContext;
     private final UserProviderService service;
+    private LinearLayout llBtn;
     private TextView mTvAccost;
     private TextView tvTitle, tvContent;
     private RecyclerView mRvAccost;
@@ -60,8 +62,9 @@ public class AccostPopWindow extends BasePopupWindow implements View.OnClickList
         ((SimpleItemAnimator) mRvAccost.getItemAnimator()).setSupportsChangeAnimations(false);
         mRvAccost.setLayoutManager(gridLayoutManager);
         findViewById(R.id.iv_close).setOnClickListener(this);   //关闭
-        mTvAccost = findViewById(R.id.tv_accost);
-        mTvAccost.setOnClickListener(this);  //一键搭讪
+        llBtn = findViewById(R.id.ll_btn);
+        mTvAccost = findViewById(R.id.accost_btn);
+        llBtn.setOnClickListener(this);  //一键搭讪
         tvTitle = findViewById(R.id.tv_title);
         tvContent = findViewById(R.id.tv_content);
 
@@ -85,7 +88,7 @@ public class AccostPopWindow extends BasePopupWindow implements View.OnClickList
                     }
                 }
                 if (canClick) {
-                    mTvAccost.setBackgroundResource(R.drawable.bg_family_leader);
+                    mTvAccost.setBackgroundResource(R.drawable.bg_red);
                     mTvAccost.setTextColor(ContextCompat.getColor(mContext, R.color.color_normal));
                     mTvAccost.setEnabled(true);
                 } else {
@@ -100,7 +103,7 @@ public class AccostPopWindow extends BasePopupWindow implements View.OnClickList
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.tv_accost) {   //一键搭讪
+        if (id == R.id.ll_btn) {   //一键搭讪
             for (int i = 0; i < mAdapter.getData().size(); i++) {
                 if (mAdapter.getData().get(i).isSelected()) {
                     ChatMsgUtil.sendAccostMessage(String.valueOf(service.getUserId()), String.valueOf(mAdapter.getData().get(i).getUser_id()), mData.gift_info.gift.id, mData.gift_info.gift.name, mData.gift_info.gift.image, mData.gift_info.gift.animation, mData.gift_info.msg, 8,mData.accost_from);

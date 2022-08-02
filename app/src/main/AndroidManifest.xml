@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
-        android:name="com.tftechsz.peony.App"
+        android:name="com.tftechsz.peony.SophixStubApplication"
         android:icon="${app_icon}"
         android:label="${app_label}"
         android:requestLegacyExternalStorage="true"
@@ -22,6 +22,20 @@
             android:name="androidx.work.impl.WorkManagerInitializer"
             android:authorities="${applicationId}.workmanager-init"
             tools:node="remove" />
+
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="${hotfixKey}" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="${hotfixSecret}" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="${hotfixRsa}" />
+
+        <meta-data
+            android:name="BUGLY_APPKEY"
+            android:value="${buglyKey}" />
 
         <activity
             android:name="com.tftechsz.peony.SplashActivity"

@@ -41,10 +41,8 @@ dependencies {
     if (isModule.toBoolean()) {
         implementation project(':home')
         implementation project(':moment')
-        implementation project(':party')
         implementation project(':im')
         implementation project(':mine')
-        implementation project(':family')
     }
     implementation 'com.jakewharton.timber:timber:5.0.1'
     testImplementation "junit:junit:4.12"

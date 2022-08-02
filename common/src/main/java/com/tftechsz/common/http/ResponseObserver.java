@@ -19,7 +19,6 @@ import com.tftechsz.common.base.AppManager;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.MvpView;
 import com.tftechsz.common.iservice.MineService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
@@ -88,7 +87,6 @@ public abstract class ResponseObserver<T> extends ResourceSubscriber<T> {
                     if (!ClickUtil.canOperate()) {
                         return;
                     }
-                    PartyService partyService = ARouter.getInstance().navigation(PartyService.class);
                     long curClickTime = System.currentTimeMillis();
                     if ((curClickTime - currentTime) > 3000) {
                         currentTime = curClickTime;
@@ -97,9 +95,6 @@ public abstract class ResponseObserver<T> extends ResourceSubscriber<T> {
                         ARouterUtils.toLoginActivity(ARouterApi.MINE_LOGIN);
                         ToastUtil.showToast(BaseApplication.getInstance(), "登录过期，请重新登录！");
                         NIMClient.getService(AuthService.class).logout();
-                        if (partyService.isRunFloatService()) {
-                            partyService.stopFloatService();
-                        }
                     }
                     break;
                 case 404:

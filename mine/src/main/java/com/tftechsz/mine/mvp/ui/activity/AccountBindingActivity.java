@@ -13,6 +13,7 @@ import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.event.CommonEvent;
+import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ActAccountBindBinding;
@@ -36,6 +37,13 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
         return new AccountBindingPresenter();
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        p.getBindData();
+    }
+
     @Override
     protected int getLayout() {
         mBind = DataBindingUtil.setContentView(this, R.layout.act_account_bind);
@@ -56,15 +64,17 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
             intent.putExtra(Interfaces.EXTRA_DATA, mBindData);
             startActivity(intent);
         });
-//        mBind.itemWechat.setEnabled(false);
         mBind.itemWechat.setOnClickListener(v -> {
             if (!NetworkUtils.isConnected()) {
                 Utils.toast("很抱歉，好像网络出问题了");
                 return;
             }
-            if(mBindData.wecaht.is_bind == 1){
+            if (mBindData.wecaht.is_bind == 1) {
                 //微信解绑
-            }else{
+                Intent intent = new Intent(mContext, UnbindWechatActivity.class);
+                intent.putExtra(Interfaces.EXTRA_DATA, mBindData);
+                startActivity(intent);
+            } else {
                 p.loginWx(mActivity);
             }
         });
@@ -115,5 +125,10 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
     public void bindPhoneSuccess(String data) {
         toastTip("绑定成功!");
         p.getBindData();
+    }
+
+    @Override
+    public void unBindThirdSuccess(BaseResponse data) {
+
     }
 }

@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.netease.nimlib.sdk.media.player.AudioPlayer;
@@ -26,8 +25,6 @@ import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.event.CommonEvent;
-import com.tftechsz.common.iservice.PartyService;
-import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.UploadHelper;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.mine.R;
@@ -68,8 +65,6 @@ public abstract class BaseVoiceRecordActivity extends BaseMvpActivity<IVoiceSign
     public boolean touched = false; // 是否按着
     public CountDownTimer mCountDownTimer;
     private CustomPopWindow popWindow;
-    public PartyService partyService;
-
 
     @Override
     public VoiceSignPresenter initPresenter() {
@@ -83,7 +78,6 @@ public abstract class BaseVoiceRecordActivity extends BaseMvpActivity<IVoiceSign
          * 修改成每次进入唯一，后面覆盖上一次
          */
         fileName = DateFormat.format("yyyyMMdd_HHmmss", Calendar.getInstance(Locale.CHINA)) + ".aac";
-        partyService = ARouter.getInstance().navigation(PartyService.class);
     }
 
     @Override
@@ -323,25 +317,7 @@ public abstract class BaseVoiceRecordActivity extends BaseMvpActivity<IVoiceSign
         }
     }
 
-    public boolean showRecordTip(PartyService partyService) {
-        boolean isShow = false;
-        boolean isOnSeat = MMKVUtils.getInstance().decodeBoolean(Constants.PARTY_IS_ON_SEAT);
-        if (partyService.isRunFloatService() && isOnSeat) {
-            if (popWindow == null)
-                popWindow = new CustomPopWindow(BaseApplication.getInstance());
-            popWindow.setContent("在麦位上，需要下麦后，才能进行录音");
-            popWindow.setRightButton("我知道了");
-            popWindow.setRightGone();
-            popWindow.showPopupWindow();
-            isShow = true;
-        }
-        return isShow;
-    }
-
     public void initStartRecord() {
-        if (showRecordTip(partyService)) {
-            return;
-        }
         recording.setVisibility(View.VISIBLE);//录制中可见
         recordIcon.setVisibility(View.GONE);//录制图标不可见
         recordPaly.setVisibility(View.GONE);//录制播放图标不可见

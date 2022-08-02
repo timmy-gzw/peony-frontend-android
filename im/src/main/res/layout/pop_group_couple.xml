@@ -145,7 +145,6 @@
             />
 
         <RelativeLayout
-            android:id="@+id/rl_right"
             android:layout_width="@dimen/dp_size_63"
             android:layout_height="@dimen/dp_size_78"
             app:layout_constraintEnd_toEndOf="parent"

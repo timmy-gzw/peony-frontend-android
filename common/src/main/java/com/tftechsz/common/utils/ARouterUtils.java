@@ -1,11 +1,15 @@
 package com.tftechsz.common.utils;
 
+import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT;
+
 import android.app.Activity;
 import android.content.Intent;
 
+import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.netease.nim.uikit.api.model.session.SessionCustomization;
+import com.netease.nim.uikit.business.session.constant.Extras;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nimlib.sdk.NimIntent;
@@ -14,21 +18,15 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
-import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.AudioBean;
 import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.common.entity.RechargeDto;
-import com.tftechsz.common.iservice.AttentionService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.nim.model.CallParams;
-import com.tftechsz.common.widget.pop.CustomPopWindow;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_DIALOG_ACTIVITY_HEIGHT;
 
 public class ARouterUtils {
 
@@ -201,14 +199,24 @@ public class ARouterUtils {
 
     /**
      * 跳转聊天
+     *
+     * @param isAutoShowGiftPanel 进到P2P聊天页面是否自动弹起礼物弹窗
      */
-    public static void toChatP2PActivity(String account, SessionCustomization customization, IMMessage anchor) {
-        ARouter.getInstance().build(ARouterApi.ACTIVITY_P2P_MESSAGE)
+    public static void toChatP2PActivity(String account, SessionCustomization customization, IMMessage anchor, boolean isAutoShowGiftPanel) {
+        Postcard postcard = ARouter.getInstance().build(ARouterApi.ACTIVITY_P2P_MESSAGE)
                 .withString("account", account)
                 .withSerializable("customization", customization)
                 .withSerializable("anchor", anchor)
-                .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .navigation();
+                .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (isAutoShowGiftPanel) postcard.withBoolean(Extras.EXTRA_AUTO_SHOW_GIFT_PANEL, true);
+        postcard.navigation();
+    }
+
+    /**
+     * 跳转聊天
+     */
+    public static void toChatP2PActivity(String account, SessionCustomization customization, IMMessage anchor) {
+        toChatP2PActivity(account, customization, anchor, false);
     }
 
     /**
@@ -242,34 +250,6 @@ public class ARouterUtils {
      */
     public static void toChatTeamActivity(String account, SessionCustomization customization, IMMessage anchor) {
         if (!ClickUtil.canOperate()) return;
-        AttentionService attentionService = ARouter.getInstance().navigation(AttentionService.class);
-        PartyService partyService = ARouter.getInstance().navigation(PartyService.class);
-        if (partyService.isRunFloatService() || partyService.isRunActivity()) {
-            CustomPopWindow customPopWindow = new CustomPopWindow(BaseApplication.getInstance());
-            customPopWindow.setContent("进入家族后会退出当前派对哦");
-            customPopWindow.addOnClickListener(new CustomPopWindow.OnSelectListener() {
-                @Override
-                public void onCancel() {
-                    customPopWindow.dismiss();
-                }
-
-                @Override
-                public void onSure() {
-                    partyService.stopFloatService();
-                    if (partyService.isRunActivity())
-                        partyService.finishPartyActivity();
-                    attentionService.finishPartyActivity();
-                    ARouter.getInstance().build(ARouterApi.ACTIVITY_TEAM_MESSAGE)
-                            .withString("account", account)
-                            .withSerializable("customization", customization)
-                            .withSerializable("anchor", anchor)
-                            .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            .navigation();
-                }
-            });
-            customPopWindow.showPopupWindow();
-            return;
-        }
         ARouter.getInstance().build(ARouterApi.ACTIVITY_TEAM_MESSAGE)
                 .withString("account", account)
                 .withSerializable("customization", customization)
@@ -421,24 +401,6 @@ public class ARouterUtils {
     /**
      * 跳转到家族详情
      */
-    public static void toFamilyDetail(int familyId, String invite_id, int fromType) {
-        ARouter.getInstance().build(ARouterApi.ACTIVITY_FAMILY_DETAIL)
-                .withInt("familyId", familyId)
-                .withInt("fromType", fromType)
-                .withString(Interfaces.EXTRA_INVITE_ID, invite_id)
-                .navigation();
-    }
-
-    /**
-     * 跳转到家族详情
-     */
-    public static void toFamilyDetail(int familyId, int fromType) {
-        toFamilyDetail(familyId, "", fromType);
-    }
-
-    /**
-     * 跳转到家族详情
-     */
     public static void toFamilyMember(int familyId) {
         ARouter.getInstance().build(ARouterApi.ACTIVITY_FAMILY_MEMBER)
                 .withInt("familyId", familyId)
@@ -542,16 +504,6 @@ public class ARouterUtils {
                 .navigation();
 
     }
-
-    /**
-     * 跳转到我的家族
-     */
-    public static void toMineFamily(int familyId) {
-        ARouter.getInstance().build(ARouterApi.ACTIVITY_MINE_FAMILY)
-                .withInt("familyId", familyId)
-                .navigation();
-    }
-
 
     /**
      * 跳转真人认证状态

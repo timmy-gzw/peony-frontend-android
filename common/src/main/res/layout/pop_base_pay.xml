@@ -3,63 +3,101 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
+    <data />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_top_radius20"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/pay_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_20"
-            android:text="选择支付方式"
-            android:textColor="@color/color_normal"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+        <androidx.legacy.widget.Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pay_recy"
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:overScrollMode="never"
-            android:paddingBottom="@dimen/dp_15"
-            app:layout_constraintTop_toBottomOf="@id/pay_type" />
-
-        <TextView
-            android:id="@+id/tv_pay"
-            style="@style/CustomButton"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/bg_pay_btn"
-            android:text="立即支付"
-            android:textColor="@color/white"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_white_top_radius20"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pay_recy" />
+            app:layout_constraintTop_toBottomOf="@id/space" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_recharge_coin_pop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/space"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/del"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_marginEnd="@dimen/dp_6"
             android:padding="@dimen/dp_10"
             android:src="@drawable/iv_del"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/view"
+            tools:ignore="ContentDescription" />
 
+        <TextView
+            android:id="@+id/tv_pay_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="center"
+            android:textColor="@color/color_normal"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_icon"
+            tools:text="@string/recharge_coin_rmb_format" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pay_way"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/dp_16"
+            app:layout_constraintTop_toBottomOf="@id/tv_pay_info" />
+
+        <TextView
+            android:id="@+id/tv_pay"
+            style="@style/CustomButton"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_pay_btn"
+            android:text="@string/recharge_now_format"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_pay_way" />
+
+        <TextView
+            android:id="@+id/tv_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dp_20"
+            android:text="充值即表示同意用户充值协议"
+            android:textColor="@color/color_light_font"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pay" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

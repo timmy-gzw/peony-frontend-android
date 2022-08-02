@@ -6,7 +6,6 @@
     android:layout_marginStart="75dp"
     android:layout_marginTop="@dimen/dp_50"
     android:layout_marginEnd="@dimen/dp_50"
-    android:id="@+id/lin_layouts"
     android:background="@mipmap/chat_bg_vly_yyf_gg_imgnew"
     android:gravity="center">
 

@@ -41,6 +41,7 @@ import com.netease.nimlib.sdk.msg.model.NIMAntiSpamOption;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -568,11 +569,12 @@ public class ChatMsgUtil implements Serializable {
     /**
      * tip2消息
      */
-    public static String getTipContent(String content) {
+    public static List<String> getTipContent(String content) {
         SpannableStringBuilder span = new SpannableStringBuilder();
         if (!TextUtils.isEmpty(content)) {
             //tag截取
             String[] text = content.split("</tag>");
+            List<String> result = new ArrayList<>();
             for (String s : text) {
 
                 SpannableStringBuilder spanString = new SpannableStringBuilder();
@@ -587,12 +589,12 @@ public class ChatMsgUtil implements Serializable {
                 if (start != -1 && start2 != -1 && start3 != -1) {
                     if (start + tag.length() <= start2) {
                         text2 = stringBuffer.substring(start + tag.length(), start2);
-                        return text2;
+                        result.add(text2);
                     }
 
                 }
             }
-
+            return result;
         }
         return null;
     }

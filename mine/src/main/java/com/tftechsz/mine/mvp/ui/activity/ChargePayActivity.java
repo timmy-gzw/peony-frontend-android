@@ -23,6 +23,8 @@ import com.tftechsz.common.adapter.ChargePayAdapter;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.entity.IntegralDto;
+import com.tftechsz.common.entity.PaymentDto;
 import com.tftechsz.common.entity.RechargeDto;
 import com.tftechsz.common.event.BuriedPointExtendDto;
 import com.tftechsz.common.event.CommonEvent;
@@ -211,6 +213,16 @@ public class ChargePayActivity extends BaseMvpActivity<IChargePayView, ChargePay
 
 
         }
+    }
+
+    @Override
+    public void onGetCoin(IntegralDto bean) {
+
+    }
+
+    @Override
+    public void onGetRechargeInfo(PaymentDto bean) {
+
     }
 
     @Override

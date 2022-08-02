@@ -84,7 +84,6 @@ public class Constants {
     public static final String SHOW_NEAR_USER = "show_near_user";   //是否显示附近列表
     public static final String PARAM_ROOM_ID = "partyRoomId";   //获得参数id
     public static final String SHOW_PARTY_ICON = "show_party_icon";   //是否显示附近列表
-    public static final String PARTY_IS_ON_SEAT = "party_is_on_seat";   //是否在麦上
     public static final String PARTY_ID = "param_id";   //房间id
     public static final String PARAM_YUN_ROOM_ID = "param_room_id";   //房间id
     public static final String PARAM_IS_CALL_CLOSE = "param_is_call_close";   //是否是打电话关闭

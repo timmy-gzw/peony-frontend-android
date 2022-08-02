@@ -16,9 +16,7 @@ import com.tftechsz.common.iservice.AccostService;
 import com.tftechsz.common.iservice.AttentionService;
 import com.tftechsz.common.iservice.CallService;
 import com.tftechsz.common.iservice.MineService;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.mine.api.MineApiService;
@@ -38,7 +36,6 @@ public class MineDetailPresenter extends BasePresenter<IMineDetailView> {
     CallService callService;
     MineService mineService;
     private final UserProviderService userService;
-    private PartyService partyService;
 
 
     public MineDetailPresenter() {
@@ -49,7 +46,6 @@ public class MineDetailPresenter extends BasePresenter<IMineDetailView> {
         attentionService = ARouter.getInstance().navigation(AttentionService.class);
         callService = ARouter.getInstance().navigation(CallService.class);
         mineService = ARouter.getInstance().navigation(MineService.class);
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         userService = ARouter.getInstance().navigation(UserProviderService.class);
 
     }
@@ -297,12 +293,12 @@ public class MineDetailPresenter extends BasePresenter<IMineDetailView> {
     /**
      * 检查私信次数
      */
-    public void getMsgCheck(String userId) {
+    public void getMsgCheck(String userId, boolean isAutoShowGiftPanel) {
         mineService.getMsgCheck(userId, new ResponseObserver<BaseResponse<MsgCheckDto>>() {
             @Override
             public void onSuccess(BaseResponse<MsgCheckDto> response) {
                 if (null == getView()) return;
-                getView().getCheckMsgSuccess(userId, response.getData());
+                getView().getCheckMsgSuccess(userId, response.getData(), isAutoShowGiftPanel);
             }
 
             @Override
@@ -319,16 +315,6 @@ public class MineDetailPresenter extends BasePresenter<IMineDetailView> {
      * 检查是否可以拨打电话
      */
     public void getCallCheck(String userId) {
-        if (CommonUtil.showCallTip(partyService)) {
-            return;
-        }
-        if (CommonUtil.showCallTip2(partyService, new CommonUtil.OnSelectListener() {
-            @Override
-            public void onSure() {
-                call(userId);
-            }
-        }))
-            return;
         call(userId);
 
     }

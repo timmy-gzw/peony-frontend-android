@@ -351,9 +351,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="@dimen/dp_50"
+        android:layout_marginStart="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_150"
-        android:layout_marginEnd="@dimen/dp_50"
+        android:layout_marginEnd="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_100">
 
         <com.netease.nim.uikit.common.ui.imageview.HeadImageView
@@ -378,7 +378,6 @@
             android:textSize="@dimen/sp_26" />
 
         <LinearLayout
-            android:id="@+id/ll_voice_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_call_user"
@@ -447,6 +446,36 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_userinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_call_tip"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/shape_black_alpha60"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_18">
+
+        <com.netease.nim.uikit.common.ui.imageview.HeadImageView
+            android:id="@+id/iv_avatar"
+            android:layout_margin="@dimen/dp_3"
+            tools:src="@drawable/ic_default_avatar"
+            android:layout_width="@dimen/dp_27"
+            android:layout_height="@dimen/dp_27"/>
+
+        <TextView
+            android:layout_marginLeft="@dimen/dp_2"
+            android:id="@+id/tv_name"
+            tools:text="萌萌就是我"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/dp_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -736,7 +765,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/ll_video_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

@@ -7,12 +7,14 @@ import com.netease.nim.uikit.common.UserInfo;
 import com.tftechsz.common.entity.CallCheckDto;
 import com.tftechsz.common.entity.IntegralDto;
 import com.tftechsz.common.entity.LiveTokenDto;
+import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.entity.PaymentDto;
 import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.common.entity.RechargeDto;
 import com.tftechsz.common.entity.SXYWxPayResultInfo;
+import com.tftechsz.common.entity.WithdrawReq;
 import com.tftechsz.common.entity.WxPayResultInfo;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.mine.entity.AccostSettingBean;
@@ -47,9 +49,8 @@ import com.tftechsz.mine.entity.req.BindData;
 import com.tftechsz.mine.entity.req.CompleteReq;
 import com.tftechsz.mine.entity.req.DelAccostSettingBean;
 import com.tftechsz.mine.entity.req.GetBindData;
-import com.tftechsz.common.entity.LoginReq;
-import com.tftechsz.common.entity.WithdrawReq;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Flowable;
@@ -140,6 +141,15 @@ public interface MineApiService {
      */
     @GET("info/bind")
     Flowable<BaseResponse<GetBindData>> getBindData();
+
+    /**
+     * 第三方解绑
+     *  有效值：wechat、qq
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("unbind/third")
+    Flowable<BaseResponse> unBindThird(@Field("type")String type);
 
     /**
      * 用户信息完善
@@ -344,6 +354,14 @@ public interface MineApiService {
      */
     @GET("gift/list/they")
     Flowable<BaseResponse<List<GiftDto>>> getUserGift(@Query("limit") int pageSize, @Query("user_id") String user_id);
+
+    /**
+     * 获取所有礼物 自己或他人
+     *
+     * @param userId userId必传
+     */
+    @GET("gift/list/v2")
+    Flowable<BaseResponse<ArrayList<GiftDto>>> getGiftList(@Query("user_id") String userId);
 
     /**
      * 搭讪用户
@@ -843,5 +861,5 @@ public interface MineApiService {
      */
     @FormUrlEncoded
     @POST("h5/invite/bind")
-    Flowable<BaseResponse> setInviteCode(@Field("invite_code")String inviteCode);
+    Flowable<BaseResponse> setInviteCode(@Field("invite_code") String inviteCode);
 }

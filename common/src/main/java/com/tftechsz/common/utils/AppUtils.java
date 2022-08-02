@@ -492,7 +492,7 @@ public class AppUtils {
 
     private static final String SHARED_PREFERENCES_NAME = "deviceid_cache";
     //.开头隐藏文件和隐藏文件夹
-    private static final String FILE_PATH = "data/.cache/.1270f37f6c8";
+    private static final String FILE_PATH = "data/.cache/.mp06bfSdnER";
 
     private static final String LOACL_UUID = "my_device_localuuid";
     private static final String LOACL_MAC = "my_device_local_mac";
@@ -572,7 +572,7 @@ public class AppUtils {
     }
 
     private static String getFileName() {
-        return ".abcdefg60232414f87c77dcc737f2f0c";
+        return ".fd990eff10b3157097bfaa0fac56caa9";
     }
 
     private static String readSDFile() {

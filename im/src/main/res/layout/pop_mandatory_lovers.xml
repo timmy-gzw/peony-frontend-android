@@ -15,7 +15,6 @@
         android:src="@mipmap/chat_ic_confession_letter_consider" />
 
     <ImageView
-        android:id="@+id/img_alg_top_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/iv_title"
@@ -25,7 +24,6 @@
         android:src="@mipmap/img_title_gift_left" />
 
     <ImageView
-        android:id="@+id/img_alg_top_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/iv_title"
@@ -135,7 +133,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_apply_mandatory_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_apply_mandatory"
@@ -171,7 +168,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_apply_mandatory_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_apply_mandatory_hint_time"
@@ -239,7 +235,6 @@
             android:src="@mipmap/chat_confession_remove_couples_jiechu" />
 
         <RelativeLayout
-            android:id="@+id/rl_right"
             android:layout_width="@dimen/dp_size_63"
             android:layout_height="@dimen/dp_size_78"
             app:layout_constraintEnd_toEndOf="parent"

@@ -41,7 +41,7 @@ import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
-import com.tftechsz.common.widget.pop.CustomEditPopWindow;
+import com.tftechsz.common.widget.pop.CustomEditPopWindow2;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseItemAdapter;
 import com.tftechsz.mine.adapter.MineMidAdapter;
@@ -90,6 +90,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
     private View llCoin;
     private Banner<ConfigInfo.NoticeBannerBean, BannerImageAdapter<ConfigInfo.NoticeBannerBean>> mBanner;
     private CardView mCvBanner;
+    private MineMidAdapter mineMidAdapter;
 
     @Override
     protected MinePresenter initPresenter() {
@@ -183,7 +184,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mRvMineBot.setAdapter(mBotAdapter);
         mRvMineBot.setNestedScrollingEnabled(false);
         mBotAdapter.setList(null);
-        if (((SimpleItemAnimator) mRvMineBot.getItemAnimator()) != null)
+        if (mRvMineBot.getItemAnimator() != null)
             ((SimpleItemAnimator) mRvMineBot.getItemAnimator()).setSupportsChangeAnimations(false);
         mRvMineBot.setItemAnimator(null);
         mBotAdapter.onAttachedToRecyclerView(mRvMineBot);
@@ -192,12 +193,13 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                 if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_CREATE_LIVE)) {
                     p.getLiveToken("测试");
                 } else if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_INVITE)) { //填写邀请码
-                    CustomEditPopWindow popWindow = new CustomEditPopWindow(getActivity());
+                    CustomEditPopWindow2 popWindow = new CustomEditPopWindow2(getActivity());
+                    popWindow.showNow(getParentFragmentManager(), "custom");
                     popWindow.setHintContent("输入邀请码");
                     popWindow.setEtLength(60);
                     popWindow.setTitle("填写邀请码");
                     popWindow.setSureDismiss(false);
-                    popWindow.addOnClickListener(new CustomEditPopWindow.OnSelectListener() {
+                    popWindow.addOnClickListener(new CustomEditPopWindow2.OnSelectListener() {
                         @Override
                         public void onCancel() {
                         }
@@ -212,7 +214,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                             popWindow.dismiss();
                         }
                     });
-                    popWindow.showPopupWindow();
+
                 } else {
                     CommonUtil.performLink(mActivity, mBotConfigList.get(position), position, 0);
                 }
@@ -228,6 +230,12 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
 
                 }
             }
+        });
+        mRcMineMid.setLayoutManager(new GridLayoutManager(mContext, 4));
+        mineMidAdapter = new MineMidAdapter();
+        mRcMineMid.setAdapter(mineMidAdapter);
+        mineMidAdapter.setOnItemClickListener((a, view, position) -> {
+            CommonUtil.performLink(mActivity, mineMidAdapter.getItem(position), position, 0);
         });
 
         if (mUserInfo != null) {
@@ -357,14 +365,18 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
 
 
                 //渲染中部RecyclerView
-                List<ConfigInfo.MineInfo> myMainNavlist = CommonUtil.addMineInfo(configInfo.share_config.my_main_nav);
-                if (myMainNavlist.size() > 0) {
-                    mRcMineMid.setLayoutManager(new GridLayoutManager(mContext, myMainNavlist.size()));
-                    MineMidAdapter adapter = new MineMidAdapter(myMainNavlist);
-                    mRcMineMid.setAdapter(adapter);
-                    adapter.setOnItemClickListener((a, view, position) -> {
-                        CommonUtil.performLink(mActivity, adapter.getItem(position), position, 0);
-                    });
+                List<ConfigInfo.MineInfo> mineMidList = CommonUtil.addMineInfo(configInfo.share_config.my_main_nav);
+                if (mineMidList.size() > 0) {
+                    for (ConfigInfo.MineInfo mineInfo : mineMidList) {
+                        if ("谁看过我".equals(mineInfo.title) || "访客记录".equals(mineInfo.title)) {
+                            mineInfo.visitor_count = mUserInfo == null ? 0 : mUserInfo.visitor_count;
+                            break;
+                        }
+                    }
+                    if (mineMidAdapter.getItemCount() != mineMidList.size()) {
+                        mRcMineMid.setLayoutManager(new GridLayoutManager(mContext, mineMidList.size()));
+                    }
+                    mineMidAdapter.setList(mineMidList);
                     mRcMineMid.setVisibility(View.VISIBLE);
                     llIntegral.setVisibility(View.GONE);
                     llCoin.setVisibility(View.GONE);
@@ -406,7 +418,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                 }
             }
 
-            if (configInfo != null && configInfo.share_config != null) {
+            if (configInfo != null && configInfo.share_config != null && null != mUserInfo) {
                 if (mUserInfo.isGirl()) {
                     List<ConfigInfo.NoticeBannerBean> girlBanners = configInfo.share_config.girl_banners;
                     if (girlBanners == null || girlBanners.isEmpty()) {

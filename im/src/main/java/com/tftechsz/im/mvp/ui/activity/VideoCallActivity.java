@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.drawable.Drawable;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -93,7 +94,6 @@ import com.tftechsz.common.custom.CameraUtils;
 import com.tftechsz.common.entity.GiftDto;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.MessageCallEvent;
-import com.tftechsz.common.iservice.PartyService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.nim.ChatSoundPlayer;
 import com.tftechsz.common.nim.model.JoinChannelCallBack;
@@ -102,7 +102,6 @@ import com.tftechsz.common.nim.model.NERTCVideoCall;
 import com.tftechsz.common.nim.model.impl.NERTCVideoCallImpl;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.CountBackUtils;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.SPUtils;
@@ -142,8 +141,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private NERTCVideoCall nertcVideoCall;
     private NERtcVideoView localVideoView, videoView, remoteVideoView;
     private TextView tvSwitch;  //切换摄像头
-    private HeadImageView ivUserIcon;
-    private TextView tvCallUser, tvCallComment;
+    private HeadImageView ivUserIcon,ivAvater;
+    private TextView tvCallUser, tvCallComment,tvName;
     private LinearLayout mLlIncome;
     private TextView tvSpeaker, tvMute;
     private TextView tvVideoSpeaker, tvVideoMute;
@@ -154,7 +153,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private TextView tvReject;
     private TextView tvFaceUnity;   //美颜设置
     private RelativeLayout rlyTopUserInfo;
-        public static boolean ISBOUND = false;
+    private LinearLayout llUserInfo;
+    public static boolean ISBOUND = false;
     public static long startTime = 0;
     public static long endTime = 0;
     public static long seconds = 0;
@@ -175,7 +175,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private long videoUid;
     private boolean isChangeVideo;  //切换视频头像
     private UserProviderService service;
-    private PartyService partyService;
     private boolean isSelfEnd = false; //是否自己挂断
     private String fromId;  //哪个用户打入
     private String callId;
@@ -458,6 +457,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                     if (mChannelType == 2) {
                         if (isVideoAvailable) {
                             rlyTopUserInfo.setVisibility(View.GONE);
+                            llUserInfo.setVisibility(View.VISIBLE);
                             if (remoteVideoView != null) {
                                 remoteVideoView.setBackgroundColor(ContextCompat.getColor(VideoCallActivity.this, R.color.transparent));
                             }
@@ -571,6 +571,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 //        }
 //        LogUtil.e("========================",ret+"=====");
         stopPlayer();
+        initSpeakerDrwables();
         handler.postDelayed(runnable1, 1000);
 
     }
@@ -584,16 +585,28 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     Runnable runnable1 = () -> {
 //        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_PLAY_SOUND);
+        initSpeakerDrwables();
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        boolean isHeadSetOn = mAudioManager.isWiredHeadsetOn();
-        isOpen = !isHeadSetOn;
-        mAudioManager.setSpeakerphoneOn(!isHeadSetOn);
+//        mAudioManager.setSpeakerphoneOn(speakerphoneOn);
         mediaPlayer = MediaPlayer.create(VideoCallActivity.this, R.raw.avchat_ring);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setVolume(1f, 1f);
         mediaPlayer.start();
         mediaPlayer.setLooping(true);
     };
+
+    private void initSpeakerDrwables() {
+        boolean speakerphoneOn = mAudioManager.isSpeakerphoneOn();
+        isOpen = speakerphoneOn;
+        if (isOpen) {
+            tvSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
+                    ContextCompat.getDrawable(this, R.mipmap.chat_ic_speaker_on), null, null);
+        } else {
+            tvSpeaker.setCompoundDrawablesWithIntrinsicBounds(null,
+                    ContextCompat.getDrawable(this, R.mipmap.chat_ic_speaker_off), null, null);
+        }
+        setSpeakerOnDrawble();
+    }
 
 
     private void stopPlayer() {
@@ -628,7 +641,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         viewRemote = findViewById(R.id.view_remote);
         tvSwitch = findViewById(R.id.tv_camera_switch);
         ivUserIcon = findViewById(R.id.iv_call_user);
+        ivAvater = findViewById(R.id.iv_avatar);
         tvCallUser = findViewById(R.id.tv_call_user);
+        tvName = findViewById(R.id.tv_name);
         tvCallComment = findViewById(R.id.tv_call_comment);
         mLlIncome = findViewById(R.id.ll_income);
         tvSpeaker = findViewById(R.id.iv_speaker_control);  //扬声器
@@ -642,6 +657,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         llyBingCall = findViewById(R.id.lly_invited_operation);
         llyDialogOperation = findViewById(R.id.lly_dialog_operation);
         rlyTopUserInfo = findViewById(R.id.rly_top_user_info);
+        llUserInfo = findViewById(R.id.ll_userinfo);
         mFlVoiceBg = findViewById(R.id.fl_voice_bg);   //语音头像蒙城
         mIvVoiceAvatar = findViewById(R.id.iv_voice_avatar);
         ivGift = findViewById(R.id.iv_gift);  //礼物
@@ -716,6 +732,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private void initIntent() {
         invitedEvent = (InvitedEvent) getIntent().getSerializableExtra(INVENT_EVENT);
         fromId = getIntent().getStringExtra(CALL_FROM_ID);
+        if(fromId == null && invitedEvent != null){
+            fromId = invitedEvent.getFromAccountId();
+        }
         callId = getIntent().getStringExtra(CALL_ID);
         callOutUser = (UserInfo) getIntent().getSerializableExtra(CALL_OUT_USER);
         mCallDir = getIntent().getIntExtra(CALL_DIR, 0);
@@ -768,7 +787,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         NIMClient.getService(MsgServiceObserve.class).observeCustomNotification(commandObserver, true);
         NimUIKit.getUserInfoObservable().registerObserver(userInfoObserver, true);
         service = ARouter.getInstance().navigation(UserProviderService.class);
-        partyService = ARouter.getInstance().navigation(PartyService.class);
         Drawable drawable;
         if (mChannelType == 2) {  //视频
             initFace();
@@ -1151,11 +1169,15 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             if (null != callOutUser) {   //打出
                 ivUserIcon.loadBuddyAvatar(String.valueOf(callOutUser.getUser_id()));
                 tvCallUser.setText(UserInfoHelper.getUserTitleName(String.valueOf(callOutUser.getUser_id()), SessionTypeEnum.P2P));
+                ivAvater.loadBuddyAvatar(String.valueOf(callOutUser.getUser_id()));
+                tvName.setText(UserInfoHelper.getUserTitleName(String.valueOf(callOutUser.getUser_id()), SessionTypeEnum.P2P));
             }
         }
         if (mCallDir == 1 && null != invitedEvent) {
             ivUserIcon.loadBuddyAvatar(String.valueOf(invitedEvent.getFromAccountId()));
             tvCallUser.setText(UserInfoHelper.getUserTitleName(String.valueOf(invitedEvent.getFromAccountId()), SessionTypeEnum.P2P));
+            ivAvater.loadBuddyAvatar(String.valueOf(invitedEvent.getFromAccountId()));
+            tvName.setText(UserInfoHelper.getUserTitleName(String.valueOf(invitedEvent.getFromAccountId()), SessionTypeEnum.P2P));
         }
         if (mChannelType == 1) {  //语音
             GlideUtils.loadImageGaussian(mActivity, mIvVoiceAvatar, url, R.mipmap.ic_default_avatar);
@@ -1675,8 +1697,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private void userEnter() {
         nertcVideoCall.setStatsObserver();
         //默认不开启免提
-        isOpen = false;
-        nertcVideoCall.setSpeakerphoneOn(isOpen);
         if (mCallDir == 0 && !mIsAccept) {
             rvCallChat.setVisibility(View.VISIBLE);
             mLlIncome.setVisibility(View.GONE);
@@ -1686,6 +1706,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 tvSpeaker.setVisibility(View.GONE);
                 tvMute.setVisibility(View.GONE);
                 rlyTopUserInfo.setVisibility(View.GONE);
+                llUserInfo.setVisibility(View.VISIBLE);
                 llVideoTime.setVisibility(View.VISIBLE);
                 videoTime.setBase(SystemClock.elapsedRealtime());
                 videoTime.start();
@@ -1724,6 +1745,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 tvSpeaker.setVisibility(View.GONE);
                 tvMute.setVisibility(View.GONE);
                 rlyTopUserInfo.setVisibility(View.GONE);
+                llUserInfo.setVisibility(View.VISIBLE);
                 mTvCancel.setVisibility(View.VISIBLE);
                 llVideoTime.setVisibility(View.VISIBLE);
                 videoTime.setBase(SystemClock.elapsedRealtime());
@@ -1814,6 +1836,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         if (null != callOutUser) {   //打出
             ivUserIcon.loadBuddyAvatar(String.valueOf(callOutUser.getUser_id()));
             tvCallUser.setText(UserInfoHelper.getUserTitleName(String.valueOf(callOutUser.getUser_id()), SessionTypeEnum.P2P));
+            ivAvater.loadBuddyAvatar(String.valueOf(callOutUser.getUser_id()));
+            tvName.setText(UserInfoHelper.getUserTitleName(String.valueOf(callOutUser.getUser_id()), SessionTypeEnum.P2P));
         }
     }
 
@@ -1826,6 +1850,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             String accountId = invitedEvent != null ? invitedEvent.getFromAccountId() : fromId;
             ivUserIcon.loadBuddyAvatar(accountId);
             tvCallUser.setText(UserInfoHelper.getUserTitleName(String.valueOf(accountId), SessionTypeEnum.P2P));
+            ivAvater.loadBuddyAvatar(accountId);
+            tvName.setText(UserInfoHelper.getUserTitleName(String.valueOf(accountId), SessionTypeEnum.P2P));
             InviteParamBuilder invitedParam = null;
             List<String> userAccount = new ArrayList<>();
             if (invitedEvent != null) {
@@ -1847,13 +1873,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 if (!ClickUtil.canOperate()) {
                     return;
                 }
-                if (CommonUtil.showCallTip3(partyService, new CommonUtil.OnSelectListener() {
-                    @Override
-                    public void onSure() {
-                        getP().checkAcceptCheck(finalInvitedParam, accountId);
-                    }
-                }))
-                    return;
                 getP().checkAcceptCheck(finalInvitedParam, accountId);
             });
             tvReject.setOnClickListener(view -> reject());
@@ -2034,6 +2053,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 tvSpeaker.setVisibility(View.GONE);
                 tvMute.setVisibility(View.GONE);
                 rlyTopUserInfo.setVisibility(View.GONE);
+                llUserInfo.setVisibility(View.VISIBLE);
 //                    llVideoTime.setVisibility(View.VISIBLE);
 
             }, 1500);
@@ -2451,7 +2471,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         }
 
         if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
-            mtvCity.setText(getFiled(userInfo.info,"hometown"));
+            mtvCity.setText(getFiled(userInfo.info,"hometown").split(" ")[0]);
             mtvCity.setVisibility(View.VISIBLE);
         }
 
@@ -2472,7 +2492,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 mtvVideoGenderAge.setVisibility(View.VISIBLE);
             }
             if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
-                mtvVideoCity.setText(getFiled(userInfo.info,"hometown"));
+                mtvVideoCity.setText(getFiled(userInfo.info,"hometown").split(" ")[0]);
                 mtvVideoCity.setVisibility(View.VISIBLE);
             }
 

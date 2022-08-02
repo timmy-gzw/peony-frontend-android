@@ -65,9 +65,6 @@ public class VoiceSignActivity extends BaseVoiceRecordActivity {
                             } else if (event.getAction() == MotionEvent.ACTION_CANCEL
                                     || event.getAction() == MotionEvent.ACTION_UP) {
                                 if (touched) {
-                                    if (showRecordTip(partyService)) {
-                                        return;
-                                    }
                                     endRecord(5);
                                 }
                             }

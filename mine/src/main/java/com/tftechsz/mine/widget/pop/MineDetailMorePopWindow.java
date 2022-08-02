@@ -16,11 +16,12 @@ import razerdp.basepopup.BasePopupWindow;
  */
 public class MineDetailMorePopWindow extends BasePopupWindow implements View.OnClickListener {
 
-    private TextView mTvBlack;
+    private TextView mTvBlack, mTvUnfollow;
+    private View dividerUnfollow;
     private String userId;
     private boolean isBlack;
 
-    public MineDetailMorePopWindow(Context context,String userId) {
+    public MineDetailMorePopWindow(Context context, String userId) {
         super(context);
         this.userId = userId;
         initUI();
@@ -28,18 +29,26 @@ public class MineDetailMorePopWindow extends BasePopupWindow implements View.OnC
     }
 
     private void initUI() {
+        mTvUnfollow = findViewById(R.id.tv_unfollow);
+        dividerUnfollow = findViewById(R.id.divider_unfollow);
+        mTvUnfollow.setOnClickListener(this);
         mTvBlack = findViewById(R.id.tv_black);
         mTvBlack.setOnClickListener(this);
         findViewById(R.id.tv_report).setOnClickListener(this);
         mTvBlack.setText(UserInfoHelper.isInBlackList(userId) ? "取消拉黑" : "拉黑");
         isBlack = UserInfoHelper.isInBlackList(userId);
+    }
 
+    public void setAttentionVisible(boolean isShow) {
+        if (mTvUnfollow != null && dividerUnfollow != null) {
+            mTvUnfollow.setVisibility(isShow ? View.VISIBLE : View.GONE);
+            dividerUnfollow.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
     public View onCreateContentView() {
-        View v = createPopupById(R.layout.pop_mine_detail_more);
-        return v;
+        return createPopupById(R.layout.pop_mine_detail_more);
     }
 
     @Override
@@ -66,6 +75,9 @@ public class MineDetailMorePopWindow extends BasePopupWindow implements View.OnC
             if (listener != null)
                 listener.reportUser();
             dismiss();
+        } else if (id == R.id.tv_unfollow) {
+            if (listener != null) listener.unfollow();
+            dismiss();
         }
     }
 
@@ -73,6 +85,8 @@ public class MineDetailMorePopWindow extends BasePopupWindow implements View.OnC
         void reportUser();
 
         void blackUser(boolean isBlack);
+
+        void unfollow();
     }
 
     public OnSelectListener listener;

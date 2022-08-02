@@ -1,6 +1,7 @@
 package com.tftechsz.mine.mvp.IView;
 
 import com.tftechsz.common.base.MvpView;
+import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.mine.entity.req.GetBindData;
 
 /**
@@ -11,4 +12,6 @@ public interface IAccountBindingView extends MvpView {
     void getBindDataSuccess(GetBindData data);
 
     void bindPhoneSuccess(String data);
+
+    void unBindThirdSuccess(BaseResponse data);
 }

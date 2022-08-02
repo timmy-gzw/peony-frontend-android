@@ -45,7 +45,6 @@ public class ScrollerForbidView extends LinearLayout {
     private int position = 0;
     private int targetItemPosition = 0;
     private int size;
-    DecelerateInterpolator decelerateInterpolator;
     Handler myHandler = new Handler(getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -80,7 +79,6 @@ public class ScrollerForbidView extends LinearLayout {
         recyclerView.setAdapter(mAdapter);
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
-        decelerateInterpolator = new DecelerateInterpolator();
         recyclerView.requestDisallowInterceptTouchEvent(true);
     }
 

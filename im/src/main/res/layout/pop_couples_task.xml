@@ -91,7 +91,6 @@
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/img_task_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
@@ -178,7 +177,6 @@
             />
 
         <RelativeLayout
-            android:id="@+id/rl_right"
             android:layout_width="@dimen/dp_size_63"
             android:layout_height="@dimen/dp_size_78"
             app:layout_constraintEnd_toEndOf="parent"
