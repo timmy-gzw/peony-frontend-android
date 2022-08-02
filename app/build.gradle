@@ -14,8 +14,8 @@ android {
         applicationId "com.tftechsz.peony"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
+        versionCode version_code as int
+        versionName version_name
         flavorDimensions "versionCode"
         vectorDrawables.useSupportLibrary = true
         renderscriptTargetApi 25
@@ -33,8 +33,6 @@ android {
                                 app_icon           : "@mipmap/ic_launcher"]
 
         ndk {
-//            abiFilters "armeabi-v7a"
-//            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
             abiFilters "armeabi-v7a", "arm64-v8a"
         }
 
@@ -76,10 +74,7 @@ android {
             debuggable false
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    def apkFileName = "Peony_" + "${variant.productFlavors[0].name}" + "_V${defaultConfig.versionName}_"
-                    apkFileName += "${defaultConfig.versionCode}"
-//                    apkFileName += new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08:00"))
-                    outputFileName = apkFileName + ".apk"
+                    outputFileName = "Peony_V${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
                 }
                 variant.mergeAssetsProvider.configure {
                     doLast {
@@ -118,72 +113,6 @@ android {
 
     lintOptions {
         disable 'MissingTranslation'
-    }
-
-    productFlavors {
-        OFFICIAL {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OFFICIAL", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        YINGYONGBAO {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "YINGYONGBAO", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        HUAWEI {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "HUAWEI", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        XIAOMI {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "XIAOMI", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        OPPO {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OPPO", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        VIVO {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "VIVO", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        DOUYIN {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "DOUYIN", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        KUAISHOU {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "KUAISHOU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20001" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20001", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20002" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20002", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20003" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20003", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20004" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20004", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20005" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20005", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20006" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20006", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20007" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20007", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20008" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20008", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20009" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20009", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        "20010" {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "20010", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        BAIDU {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "BAIDU", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        SAMSUNG {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "SAMSUNG", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
-        CPS {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "CPS", app_label: appName, app_icon: "@mipmap/ic_launcher"]
-        }
     }
 }
 

@@ -5,9 +5,7 @@ ext {
             buildToolsVersion: "30.0.0",
             applicationId    : "com.tftechsz.peony",
             minSdkVersion    : 21,
-            targetSdkVersion : 30,
-            versionCode      : 42,
-            versionName      : "1.0.2",
+            targetSdkVersion : 30
     ]
     //version配置
     versions = [

@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
+        versionCode version_code as int
+        versionName version_name
 
         renderscriptTargetApi rootProject.ext.android.compileSdkVersion
         renderscriptSupportModeEnabled true
