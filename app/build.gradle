@@ -119,6 +119,13 @@ android {
     lintOptions {
         disable 'MissingTranslation'
     }
+
+    flavorDimensions "official"
+    productFlavors{
+        official{
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "OFFICIAL"]
+        }
+    }
 }
 
 
