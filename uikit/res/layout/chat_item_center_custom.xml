@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_10"
-                android:text="解锁新功能"
+                android:text="友情提示"
                 android:textColor="@color/red"
                 android:textSize="@dimen/sp_14"
                 android:visibility="gone" />

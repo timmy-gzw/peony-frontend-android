@@ -87,7 +87,7 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
            Shader shader = new LinearGradient(0, 0, 0, mtvTitle.getLineHeight(),
                    Color.parseColor("#FE4D6B"), Color.parseColor("#F78765"), Shader.TileMode.REPEAT);
            mtvTitle.getPaint().setShader(shader);
-           mtvTitle.setText("解锁新功能");
+           mtvTitle.setText("友情提示");
            mRlBox.setBackground(context.getResources().getDrawable(R.drawable.ic_tip_unlock_bg));
            int padding = (int) context.getResources().getDimension(R.dimen.dp_10);
            mLlTitle.setPadding(padding,padding,padding,padding);
