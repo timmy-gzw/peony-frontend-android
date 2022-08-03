@@ -71,17 +71,10 @@ public class TeamMessageFragment extends MessageFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //语音闲聊
-        mVoiceChat = findView(R.id.voice_chat);
         mIvVoiceWarm = findView(R.id.iv_voice_close);
         mIvVoiceWarm.setOnClickListener(this);
         mLlVoiceWarm = findView(R.id.ll_voice_warm);
         mTvVoiceWarm = findView(R.id.tv_voice_warm);
-        mVoiceChat.addOnClickListener((userId, isAdmin, status) -> {
-            showGiftPop(userId, mTeamType == 0 ? 3 : 4);   //聊天室点击的时候传4  群主点击传3
-            if (giftPopWindow != null && isAdmin == 1)
-                giftPopWindow.setVoiceChat(status);
-        });
         initRxBus();
     }
 
@@ -89,9 +82,6 @@ public class TeamMessageFragment extends MessageFragment {
     public void onResume() {
         super.onResume();
         setSessionListener();
-        if (mVoiceChat != null) {
-            mVoiceChat.setVoiceMode(2);
-        }
         if (team == null) {
             team = NimUIKit.getTeamProvider().getTeamById(sessionId);
         }
@@ -118,151 +108,8 @@ public class TeamMessageFragment extends MessageFragment {
     @Override
     protected void commandObserverMessage(ChatMsg chatMsg) {
         super.commandObserverMessage(chatMsg);
-        if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.VOICE_ROOM_ATTACH)) {  //切换了语音聊天模式
-            if (sessionType == SessionTypeEnum.Team && mTeamType == 0 && mVoiceChat != null) {
-                switch (chatMsg.cmd) {
-                    case "apply_num":  //用户申请上麦
-                        postRunnable(() -> {
-                            ChatMsg.ApplyMessage applyMessage = JSON.parseObject(chatMsg.content, ChatMsg.ApplyMessage.class);
-                            if (applyMessage != null) {
-                                mVoiceChat.setApplyNum(applyMessage.num);
-                            }
-                        });
-                        break;
-                    case "open":  //开启
-                        mIsOpenRoom = 1;
-                        postRunnable(() -> {
-                            mVoiceChat.setVisibility(View.VISIBLE);
-                            VoiceChatDto voiceChatDto = JSON.parseObject(chatMsg.content, VoiceChatDto.class);
-                            mVoiceChat.setVoiceUser(voiceChatDto, false);
-                            int size = moreAdapter.getData().size();
-                            for (int i = 0; i < size; i++) {
-                                if (TextUtils.equals(moreAdapter.getData().get(i).content, getString(R.string.chat_voice_chat))) {
-                                    moreAdapter.getData().get(i).content = getString(R.string.chat_voice_chat_text);
-                                    moreAdapter.getData().get(i).bg = R.mipmap.chat_ic_voice_chat_text;
-                                    moreAdapter.setData(i, moreAdapter.getData().get(i));
-                                    moreAdapter.notifyItemChanged(i);
-                                }
-                            }
-                        });
-                        if (getActivity() != null)
-                            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                        MMKVUtils.getInstance().encode(Constants.VOICE_IS_OPEN, 1);
-                        break;
-                    case "close":  //关闭
-                        mIsOpenRoom = 0;
-                        postRunnable(() -> {
-                            mVoiceChat.setVisibility(View.GONE);
-                            mVoiceChat.setApplyNum(0);
-                            int size1 = moreAdapter.getData().size();
-                            for (int i = 0; i < size1; i++) {
-                                if (TextUtils.equals(moreAdapter.getData().get(i).content, getString(com.tftechsz.im.R.string.chat_voice_chat_text))) {
-                                    moreAdapter.getData().get(i).content = getString(com.tftechsz.im.R.string.chat_voice_chat);
-                                    moreAdapter.getData().get(i).bg = R.drawable.chat_ic_voice_chat;
-                                    moreAdapter.setData(i, moreAdapter.getData().get(i));
-                                    moreAdapter.notifyItemChanged(i);
-                                }
-                            }
-                            mVoiceChat.openVoice();
-                            mVoiceChat.resetAudioVoice();
-                            mVoiceChat.releaseAudience();
-                            mVoiceChat.leaveChannel(false);
-                        });
-                        if (getActivity() != null)
-                            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                        MMKVUtils.getInstance().encode(Constants.VOICE_IS_OPEN, 0);
-                        break;
-                    case "up":  //用户申请上麦
-                        postRunnable(() -> {
-                            VoiceRoomInfo voiceRoomInfo = JSON.parseObject(chatMsg.content, VoiceRoomInfo.class);
-                            if (voiceRoomInfo.isIs_first()) {   // 第一个用户创建房间，其他用户加入房间
-                                mVoiceChat.setVisibility(View.VISIBLE);
-                                mVoiceChat.initData(voiceRoomInfo);
-                            } else {
-                                mVoiceChat.onSeat(voiceRoomInfo);
-                            }
-                            mVoiceChat.resetAudioVoice();
-                            isLeave = false;
-//                            if (null != service.getConfigInfo() && null != service.getConfigInfo().sys) { //其中有一个显示了
-//                                if (service.getConfigInfo().sys.is_open_family_room_music == 1) {   //0-全关 1-主播开启 2-全员开启
-//                                    if (voiceRoomInfo.index == 0) {
-//                                        bindScreenService();
-//                                        if (getActivity() != null) {
-//                                            changeAudioLoopBack(true);
-//                                        }
-//                                    }
-//                                } else if (service.getConfigInfo().sys.is_open_family_room_music == 2) {
-//                                    bindScreenService();
-//                                    if (getActivity() != null) {
-//                                        changeAudioLoopBack(true);
-//                                    }
-//                                }
-//                            }
-//
-                        });
-                        break;
-                    case "down":  //下麦
-                        if (isLeave) return;
-                        mVoiceChat.noticeDown();
-                        mVoiceChat.resetAudioVoice();
-                        break;
-                    case "info":  //信息
-                        postRunnable(() -> {
-                            VoiceChatDto voiceChatDto1 = JSON.parseObject(chatMsg.content, VoiceChatDto.class);
-                            mVoiceChat.setVoiceUser(voiceChatDto1, false);
-                            if (NimUIKit.getTeamProvider().getTeamById(sessionId) != null)
-                                mVoiceChat.setTid(NimUIKit.getTeamProvider().getTeamById(sessionId).getId());
-                        });
-                        break;
-                    case "name":  //语音房名称
-                        ChatMsg.RoomInfo voiceChatDto2 = JSON.parseObject(chatMsg.content, ChatMsg.RoomInfo.class);
-                        mVoiceChat.setName(voiceChatDto2.name);
-                        break;
-                    case "microphone":  //声音控制
-                        ChatMsg.RoomSeat status2 = JSON.parseObject(chatMsg.content, ChatMsg.RoomSeat.class);
-                        if (status2 != null)
-                            mVoiceChat.changeVoiceStatus(status2.user_id, status2.status);
-                        break;
-                    case "announcement":  //公告
-                        Utils.runOnUiThreadDelayed(() -> {
-                            ChatMsg.RoomInfo voiceChatDto3 = JSON.parseObject(chatMsg.content, ChatMsg.RoomInfo.class);
-                            mVoiceChat.setAnnouncement(voiceChatDto3.announcement, voiceChatDto3);
-                        }, 1000);
-                        break;
-                    case "cost":  //心动值更新
-                        postRunnable(() -> {
-                            List<ChatMsg.RoomSeat> status = JSON.parseArray(chatMsg.content, ChatMsg.RoomSeat.class);
-                            if (status != null && status.size() > 0)
-                                mVoiceChat.changeCost(status);
-                        });
-                        break;
-                    case "warm":  //违规提示
-                        ChatMsg.VideoStyle status1 = JSON.parseObject(chatMsg.content, ChatMsg.VideoStyle.class);
-                        if (status1 != null) {
-                            mTvVoiceWarm.setText(status1.msg);
-                            mLlVoiceWarm.setVisibility(View.VISIBLE);
-                            if (mCountWarm == null)
-                                mCountWarm = new CountBackUtils();
-                            mCountWarm.countBack(status1.second, new CountBackUtils.Callback() {
-                                @Override
-                                public void countBacking(long time) {
-                                }
+        if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.VOICE_ROOM_ATTACH)) {
 
-                                @Override
-                                public void finish() {
-                                    mLlVoiceWarm.setVisibility(View.GONE);
-                                }
-                            });
-                        }
-                        break;
-                    case "warm_close":  //违规提示关闭
-                        mLlVoiceWarm.setVisibility(View.GONE);
-                        break;
-                    case "role_change":  //角色改变
-                        mVoiceChat.roleCheck(0, 0);
-                        break;
-                }
-            }
         } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_INTO_NOTICE)) {  //通知贵族进入有svga动画
             ChatMsg.JoinFamily dressUp = JSON.parseObject(chatMsg.content, ChatMsg.JoinFamily.class);
             if (dressUp != null && !TextUtils.isEmpty(dressUp.svg)) {
@@ -272,7 +119,6 @@ public class TeamMessageFragment extends MessageFragment {
                 myGiftList.offer(bean);
             }
         } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_JOIN_ROOM)) {  //开启了语音房
-            getRoomInfo();
         }
     }
 
@@ -283,32 +129,15 @@ public class TeamMessageFragment extends MessageFragment {
         if (id == R.id.iv_voice_close) {
             mLlVoiceWarm.setVisibility(View.GONE);
         } else if (id == R.id.toolbar_team_back_all) {
-            if (mVoiceChat != null && mIsOpenRoom == 1 && mVoiceChat.isOnSeat()) {
-                showBackPop();
-                return;
-            }
             if (getActivity() != null)
                 getActivity().finish();
             KeyboardUtils.close(getActivity());
-            if (mVoiceChat != null)
-                mVoiceChat.releaseAudience();
         }
 
     }
 
     private void initRxBus() {
-        mCompositeDisposable.add(RxBus.getDefault().toObservable(VoiceChatEvent.class)
-                .subscribe(
-                        type -> {
-                            if (null != type && type.type == Constants.NOTIFY_EXIT_VOICE_ROOM && mVoiceChat != null) {
-                                isLeave = true;
-                                mVoiceChat.leaveChannel(mVoiceChat.isOnSeat());
-                                mVoiceChat.releaseAudience();
-                                mVoiceChat.setVoiceMode(1);
-                                mVoiceChat.down(false);
-                            }
-                        }
-                ));
+
     }
 
 
@@ -324,8 +153,6 @@ public class TeamMessageFragment extends MessageFragment {
 
             @Override
             public void onSure() {
-                mVoiceChat.leaveChannel(true);
-                mVoiceChat.down(false);
                 if (getActivity() != null)
                     getActivity().finish();
                 KeyboardUtils.close(getActivity());
@@ -435,33 +262,17 @@ public class TeamMessageFragment extends MessageFragment {
     @Override
     public void onKeyBack() {
         super.onKeyBack();
-        if (mVoiceChat != null && mIsOpenRoom == 1 && mVoiceChat.isOnSeat()) {
-            showBackPop();
-            return;
-        }
         if (getActivity() != null)
             getActivity().finish();
         KeyboardUtils.close(getActivity());
-        if (mVoiceChat != null)
-            mVoiceChat.releaseAudience();
     }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mVoiceChat != null) {
-            mVoiceChat.releaseAudience();
-            mVoiceChat.removeCallBack();
-            mVoiceChat.onDestroy();
-        }
         unbindScreenService();
         if (mCountWarm != null)
             mCountWarm.destroy();
-        if (mVoiceChat != null) {
-//            mVoiceChat.listen(false);
-            mVoiceChat.removeAllViews();
-            mVoiceChat = null;
-        }
     }
 }

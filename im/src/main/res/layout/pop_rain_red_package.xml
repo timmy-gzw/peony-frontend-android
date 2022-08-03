@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         app:lottie_imageAssetsFolder="gift/"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="rain_red_package.zip"
         app:lottie_loop="false" />
 
 

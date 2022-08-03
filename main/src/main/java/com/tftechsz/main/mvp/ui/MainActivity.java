@@ -135,8 +135,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private boolean isFirstSign = true;
     private SignInBean signInBean;
     private OneKeyAccostPopWindow mOneKeyAccostPopWindow;
-    private PlayServiceConnection mPlayServiceConnection;
-    private PartyServiceConnection mPartyServiceConnection;
     @Autowired
     UserProviderService service;
     private SignInPopWindow mSignInPopWindow;
@@ -635,9 +633,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                             mCharmLevelUpPop.showPopupWindow();
                                         }
                                     }
-                                } else if (event.type == Constants.NOTIFY_ENTER_PARTY_ROOM) {
-                                    startCheckService();
-                                    startCheckPartyService();
                                 } else if (event.type == Constants.NOTIFY_START_LOC) {  //通知了开启定位
                                     bdLocationManager.removeListener();
                                     bdLocationManager = new BDLocationManager();
@@ -837,14 +832,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             unbindService(mServiceConnection);
             mServiceConnection = null;
         }
-        if (BaseMusicHelper.get() != null && BaseMusicHelper.get().getPlayService() != null && BaseMusicHelper.get().getPlayService().isPlaying()) {
-            BaseMusicHelper.get().getPlayService().onDestroy();
-        }
-        if (mPlayServiceConnection != null) {
-            unbindService(mPlayServiceConnection);
-        }
-        if (mPartyServiceConnection != null)
-            unbindService(mPartyServiceConnection);
     }
 
 
@@ -991,78 +978,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         p.sign();
     }
 
-    /**
-     * 检测服务
-     */
-    private void startCheckService() {
-        if (BaseMusicHelper.get().getPlayService() == null) {
-            bindService();
-        }
-    }
-
-    /**
-     * 开启服务
-     */
-    private void startService() {
-        Intent intent = new Intent(this, PlayService.class);
-        startService(intent);
-    }
-
-    private void bindService() {
-        Intent intent = new Intent();
-        intent.setClass(this, PlayService.class);
-        mPlayServiceConnection = new PlayServiceConnection();
-        bindService(intent, mPlayServiceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    private static class PlayServiceConnection implements ServiceConnection {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            AppLogUtils.e("onServiceConnected" + name);
-            final PlayService playService = ((PlayService.PlayBinder) service).getService();
-            BaseMusicHelper.get().setPlayService(playService);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            AppLogUtils.e("onServiceDisconnected" + name);
-        }
-    }
-
-
-    /**
-     * 检测服务
-     */
-    private void startCheckPartyService() {
-        if (BaseMusicHelper.get().getPartyService() == null) {
-            startPartyService();
-        }
-    }
-
-    /**
-     * 开启服务
-     */
-    private void startPartyService() {
-        Intent intent = new Intent();
-        intent.setClass(this, PartyAudioService.class);
-        mPartyServiceConnection = new PartyServiceConnection();
-        bindService(intent, mPartyServiceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-
-    private static class PartyServiceConnection implements ServiceConnection {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            AppLogUtils.e("onServiceConnected11111" + name);
-            final PartyAudioService playService = ((PartyAudioService.MyBinder) service).getService();
-            BaseMusicHelper.get().setPartyService(playService);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            AppLogUtils.e("onServiceDisconnected" + name);
-        }
-    }
 
     /**
      * 动态切换logo

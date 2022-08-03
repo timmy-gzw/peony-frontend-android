@@ -308,11 +308,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private ImageView mIvGiftMask;
     private boolean mIsDown, mIsPlay;
     protected int mTeamType;  //1:聊天广场  0家族
-    private ImageView mIvSign;   //签到
-
-    private ConstraintLayout mClGroupCouple;  //情侣表白布局
-    private TextView mTvFrom, mTvTo, mTvGroupCoupleContent;
-    private ImageView mIvFrom, mIvFromHead, mIvTo, mIvToHead;
 
 
     //亲密度可以拨打音视频的时候弹出
@@ -340,11 +335,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private IMMessage redImMessage;
     private LinearLayout mLlAnnouncement;
 
-    //贵族消息飘萍  幸运礼物中奖
-    private RelativeLayout mLlFloat;
-    private ImageView mIvCriticalLeft;  //幸运礼物左边图片
-    private CustomMarqueeTextView mTvFloatContent;
-    private final Queue<ChatMsg> mFloatGift = new ConcurrentLinkedQueue<>();   //漂屏队列
     private boolean mIsPlayEnd = false;
     //ait消息
     private FrameLayout mFlAit;
@@ -387,20 +377,13 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private FamilyLevelUpPop mFamilyLevelUpPop;
 
     protected MoreFunAdapter moreAdapter; //更布局适配器
-    private ConstraintLayout mLlFamilyBox;
-    private TextView mTvBoxTime, mTvBoxStatus;
-    private CountBackUtils mCountBack2Box;
-    private FamilyBoxPop mFamilyBoxPop;
     private ChatMsg.FamilyBox mFamilyBox;
-    private ProgressBar mPbBox;
-    private LottieAnimationView mBoxLottie;
     private ViewPagerScrollAdapter mTopScrollAdapter;
     private ViewPager2 mTopVp2;
 
     private IntimacyGiftPop mIntimacyGiftPop;
 
     private boolean mIsLoadRoom = false;  //是否加载语音房
-    protected VoiceChatView mVoiceChat;  //语音闲聊
     public int mIsOpenRoom;  //0 未开启  1 开始语音闲聊
     protected RelativeLayout mLlVoiceWarm;
     protected TextView mTvVoiceWarm;
@@ -516,8 +499,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mLlNotice.setOnClickListener(this);
         mTvContactWay = findView(R.id.tv_contact_way);
         mTvContactWay.setPauseScroll(true);
-        mIvSign = findView(R.id.iv_sign_in);
-        mIvSign.setOnClickListener(this);
         //亲密度相关
         mRlIntimacy = findView(R.id.rl_intimacy);
         mRlIntimacy.setOnClickListener(this);
@@ -566,21 +547,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         mTvAitNum = findView(R.id.tv_ait_num);
         mActivityIcon = findView(R.id.activity_icon);
         mActivityView = findView(R.id.message_activity);
-        mLlFamilyBox = findView(R.id.ll_family_box);
-        mLlFamilyBox.setOnClickListener(this);
-        mBoxLottie = findView(R.id.box_lottie);
-        mTvBoxTime = findView(R.id.tv_box_time);
-        mTvBoxStatus = findView(R.id.family_box_status);
-        mPbBox = findView(R.id.pb_box);
-        //情侣表白布局
-        mClGroupCouple = findView(R.id.cl_group_couple);
-        mTvFrom = findView(R.id.tv_from);
-        mTvGroupCoupleContent = findView(R.id.tv_group_couple_content);
-        mTvTo = findView(R.id.tv_to);
-        mIvFrom = findView(R.id.iv_from);
-        mIvFromHead = findView(R.id.iv_from_head);
-        mIvTo = findView(R.id.iv_to);
-        mIvToHead = findView(R.id.iv_to_head);
         mTopVp2 = findView(R.id.top_vp2);
         mDoubleGift = findView(R.id.cl_double_gift);
         mPlayerView = findView(R.id.player_view);
@@ -606,10 +572,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         layoutParams2.topMargin = ConvertUtils.dp2px(90);
         mLinRootAward.setLayoutParams(layoutParams2);
 
-        //飘萍
-        mLlFloat = findView(R.id.ll_float);
-        mIvCriticalLeft = findView(R.id.iv_critical_left);
-        mTvFloatContent = findView(R.id.tv_float_content);
         mIvChatBg = findView(R.id.iv_chat_bg);
 
         mActivityView.setOnActItemClickListener(new OnActItemClickListener() {
@@ -919,26 +881,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         } else if (data.id == 4) {  //招募红包
                             showFamilyRecruitPop();
                         } else if (data.id == 5) {  //语音闲聊
-                            if (TextUtils.equals(getString(R.string.chat_voice_chat_text), data.content)) {  //语音闲聊
-                                new CustomPopWindow(getContext(), 1)
-                                        .setLeftButton("取消")
-                                        .setRightButton("确认")
-                                        .setContent("模式切换后，所有用户将下麦，\n确认切换吗？")
-                                        .addOnClickListener(new CustomPopWindow.OnSelectListener() {
-                                            @Override
-                                            public void onCancel() {
 
-                                            }
-
-                                            @Override
-                                            public void onSure() {
-                                                deleteRoom(data, position);
-                                            }
-                                        })
-                                        .showPopupWindow();
-                            } else {
-                                createRoom(data, position);
-                            }
                         } else if (data.id == 6) {  //情侣礼包
                             openCoupleBag();
                         }
@@ -1158,9 +1101,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                     mPopWindow.dismiss();
                                 });
                                 mPopWindow.showPopupWindow();
-                            } else if (event.type == Constants.NOTIFY_SIGN_IN_SUCCESS) {  //签到成功
-                                mIvSign.setVisibility(View.GONE);
-                            } else if (event.type == Constants.NOTIFY_AIT_SELF) {  //ait消息
+                            }else if (event.type == Constants.NOTIFY_AIT_SELF) {  //ait消息
                                 showAit();
                             } else if (event.type == Constants.NOTIFY_FAMILY_RANK) {   //家族排行
                                 ChatMsg.JoinFamily dto = JSON.parseObject(event.code, ChatMsg.JoinFamily.class);
@@ -1245,67 +1186,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                     mFamilyLevelUpPop.setData(levelUp);
                                     mFamilyLevelUpPop.showPopupWindow();
                                 }
-                            } else if (event.type == Constants.NOTIFY_FAMILY_BOX) { //家族宝箱
-                                if (sessionType == SessionTypeEnum.P2P) {
-                                    return;
-                                }
-                                mFamilyBox = JSON.parseObject(event.code, ChatMsg.FamilyBox.class);
-                                if (mFamilyBox != null) {
-                                    mLlFamilyBox.setVisibility(View.VISIBLE);
-                                    if (mFamilyBox.activity_desc != null && mFamilyBox.activity_desc.size() > 0) {
-                                        SPUtils.getInstance().put(Interfaces.SP_FAMILY_BOX_ACTIVITY_DESC, JSON.toJSONString(mFamilyBox.activity_desc));
-                                    }
-                                    if (mFamilyBox.status == 1) {//如果是抢宝箱状态, 就播放动画
-                                        mBoxLottie.playAnimation();
-                                        mTvBoxTime.setVisibility(View.INVISIBLE);
-                                    } else {
-                                        mTvBoxTime.setVisibility(View.INVISIBLE);
-                                        mBoxLottie.cancelAnimation();
-                                        if (mFamilyBox.status == 0) {
-                                            mTvBoxTime.setVisibility(View.VISIBLE);
-                                            mTvBoxTime.setText(Utils.getLastTime(mFamilyBox.count_down));
-                                            if (mCountBack2Box == null)
-                                                mCountBack2Box = new CountBackUtils();
-                                            mCountBack2Box.countBack(mFamilyBox.count_down, new CountBackUtils.Callback() {
-                                                @Override
-                                                public void countBacking(long time) {
-                                                    mFamilyBox.count_down = time;
-                                                    mTvBoxTime.setText(Utils.getLastTime(time));
-                                                }
-
-                                                @Override
-                                                public void finish() {
-                                                    mFamilyBox.count_down = 0;
-                                                    mTvBoxTime.setText(Utils.getLastTime(0));
-                                                }
-                                            });
-                                        }
-                                    }
-                                    if (mFamilyBox.defaultUsersCount != 0 && mFamilyBox.defaultCoins != 0) { //进度条计算
-                                        int v = (int) (1d * Math.min(mFamilyBox.realUsersCount, mFamilyBox.defaultUsersCount) / mFamilyBox.defaultUsersCount * 50
-                                                + 1d * Math.min(mFamilyBox.realCoins, mFamilyBox.defaultCoins) / mFamilyBox.defaultCoins * 50);
-                                        mPbBox.setProgress(v);
-                                        if (v == 100) {
-                                            mTvBoxStatus.setText("已完成");
-                                        } else {
-                                            mTvBoxStatus.setText(v + "%");
-                                        }
-                                    }
-
-                                    if (mFamilyBoxPop != null && mFamilyBoxPop.isShowing()) {
-                                        mFamilyBoxPop.setData(mFamilyBox);
-                                    }
-
-                                    if (mFamilyBox.status == 1) {
-                                        if (mFamilyBoxPop == null) {
-                                            mFamilyBoxPop = new FamilyBoxPop(getContext());
-                                        }
-                                        if (!mFamilyBoxPop.isShowing()) {
-                                            mFamilyBoxPop.setData(mFamilyBox);
-                                            mFamilyBoxPop.showPopupWindow();
-                                        }
-                                    }
-                                }
                             } else if (event.type == Constants.NOTIFY_CHAT_ALERT_REAL) {    //聊天真人弹窗
                                 ChatMsg.Alert alertDto = JSON.parseObject(event.code, ChatMsg.Alert.class);
                                 if (alertDto != null) {
@@ -1357,9 +1237,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 .subscribe(
                         event -> {
                             if (event.type == NOTIFY_UPDATE_VOICE_INFO) {
-                                if (mVoiceChat != null) {
-                                    mVoiceChat.setAnnouncement(event.code, null);
-                                }
                             }
                         }
                 ));
@@ -1601,7 +1478,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         if (mPlayerView != null) {
             mPlayerView.stopPlay();
         }
-        mFloatGift.clear();
         if (mMapAward != null)
             mMapAward.clear();
         if (countBackUtils != null)
@@ -1612,17 +1488,11 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             contactBack.destroy();
         if (mSvgBack != null)
             mSvgBack.destroy();
-        if (mCountBack2Box != null)
-            mCountBack2Box.destroy();
         if (animationBack != null)
             animationBack.destroy();
         if (aitManager != null) {
             aitManager.reset();
             aitManager = null;
-        }
-        if (mBoxLottie != null) {
-            mBoxLottie.clearAnimation();
-            mBoxLottie = null;
         }
         if (svgaImageView != null) {
             svgaImageView.clearAnimation();
@@ -2141,12 +2011,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
             @Override
             public void upOrDownSeat(int userId, boolean isOnSeat) {
-                mVoiceChat.kickOut(userId);
             }
 
             @Override
             public void muteVoice(int userId, int voiceStatus) {
-                mVoiceChat.microphone(2, userId, voiceStatus != 2 ? VoiceRoomSeat.Status.ON : VoiceRoomSeat.Status.AUDIO_MUTED);
             }
         });
 
@@ -2317,7 +2185,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     if (msg.what == EVENT_MESSAGE) {
                         try {
                             playGift();
-                            showFloatGift();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -2328,97 +2195,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         }
         if (safeHandle.hasMessages(EVENT_MESSAGE)) return;
         safeHandle.sendEmptyMessage(EVENT_MESSAGE);
-    }
-
-    /**
-     * 显示礼物飘屏
-     */
-    protected void showFloatGift() {
-        if (mIsPlayEnd) return;
-        if (mFloatGift.isEmpty()) return;
-        ChatMsg data = mFloatGift.peek();
-        if (data == null) {
-            return;
-        }
-        mIsPlayEnd = true;
-        mFloatGift.poll();
-        ChatMsg.PartyMsg partyMsg = JSON.parseObject(data.content, ChatMsg.PartyMsg.class);
-        if (partyMsg == null) return;
-
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mTvFloatContent.getLayoutParams();
-        //贵族升级飘萍
-        if (getActivity() == null) return;
-        if (TextUtils.equals(ChatMsg.FAMILY_USER_NOBILITY_LEVEL_UP_NOTICE, data.cmd_type)) {
-            mIvCriticalLeft.setVisibility(View.GONE);
-            mTvFloatContent.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
-            mLlFloat.setBackgroundResource(R.drawable.bg_nobility_level);
-            params.leftMargin = DensityUtils.dp2px(getActivity(), 34);
-            mTvFloatContent.setLayoutParams(params);
-            mTvFloatContent.setBackgroundResource(0);
-            mTvFloatContent.setPadding(0, 0, 0, 0);
-            SpannableStringBuilder spannableString = new SpannableStringBuilder();
-            String url = partyMsg.badge;
-            spannableString.append("[icon]   ");
-            spannableString.append(partyMsg.msg);
-            int headerStart = spannableString.toString().indexOf("[icon]");
-            CircleUrlImageSpan headerSpan = new CircleUrlImageSpan(getActivity(), url, mTvFloatContent, ConvertUtils.dp2px(18), ConvertUtils.dp2px(18));
-            spannableString.setSpan(headerSpan, headerStart, headerStart + 6, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-            int start = spannableString.toString().indexOf(partyMsg.nickname);
-            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FEE903")), start, start + partyMsg.nickname.length(),
-                    Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-            int start1 = spannableString.toString().indexOf(partyMsg.gradename);
-            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FEE903")), start1, start1 + partyMsg.gradename.length(),
-                    Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-            mTvFloatContent.setText(spannableString);
-
-        } else {  //幸运礼物中奖礼物飘萍
-            mIvCriticalLeft.setVisibility(View.VISIBLE);
-            mLlFloat.setBackgroundResource(0);
-            params.leftMargin = DensityUtils.dp2px(getActivity(), 5);
-            mTvFloatContent.setPadding(DensityUtils.dp2px(getActivity(), 50), 0, 0, 0);
-            mTvFloatContent.setLayoutParams(params);
-            mTvFloatContent.setBackgroundResource(R.drawable.bg_critical_hit_content);
-            SpannableStringBuilder spannableString = new SpannableStringBuilder();
-            spannableString.append(partyMsg.msg);
-            int start1 = spannableString.toString().indexOf(partyMsg.nums);
-            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#F8D029")), start1, start1 + partyMsg.nums.length(),
-                    Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-            mTvFloatContent.setText(spannableString);
-        }
-        mLlFloat.setVisibility(View.VISIBLE);
-        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.float_screen_in_right);
-        Animation animationOut = AnimationUtils.loadAnimation(getActivity(), R.anim.float_screen_out_left);
-        animationOut.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mLlFloat.setVisibility(View.GONE);
-                mIsPlayEnd = false;
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-        mLlFloat.startAnimation(animation);
-        if (null == mFloatBack)
-            mFloatBack = new CountBackUtils();
-        mFloatBack.countBack(5, new CountBackUtils.Callback() {
-            @Override
-            public void countBacking(long time) {
-                if (time == 1) {
-                    mLlFloat.startAnimation(animationOut);
-                }
-            }
-
-            @Override
-            public void finish() {
-
-            }
-        });
     }
 
 
@@ -2492,10 +2268,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         svgaImageView.setVideoItem(videoItem);
                         svgaImageView.stepToFrame(0, true);
                     }
-                    Utils.runOnUiThreadDelayed(() -> {
-                        if (mClGroupCouple != null)
-                            mClGroupCouple.setVisibility(View.VISIBLE);
-                    }, 1500);
                 }
             }
         }, null);
@@ -2510,8 +2282,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             public void onFinished() {
                 mIsPlay = false;
                 mIvGiftMask.setVisibility(View.GONE);
-                if (mClGroupCouple != null)
-                    mClGroupCouple.setVisibility(View.GONE);
             }
 
             @Override
@@ -3361,12 +3131,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT);
         }  else if (id == R.id.fl_ait) {  //ait消息get
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FAMILY_AIT);
-        } else if (id == R.id.ll_family_box) {
-            if (mFamilyBoxPop == null) {
-                mFamilyBoxPop = new FamilyBoxPop(getContext());
-            }
-            mFamilyBoxPop.setData(mFamilyBox);
-            mFamilyBoxPop.showPopupWindow();
         } else if (R.id.tv_gone_close == id) {
             setAttention(true);
         } else if (R.id.tv_btn_attention == id) {
@@ -3946,13 +3710,11 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             mIsFirstEnter = false;
                         }
                         if (TextUtils.equals("open", type)) {
-                            mIvSign.setVisibility(response.getData().is_sign == 0 ? View.VISIBLE : View.GONE);
                             if (response.getData().room_status == 1) {  //语音房开启
                                 mIsOpenRoom = response.getData().room_status;
                                 if (getActivity() != null)
                                     getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                                 if (!mIsLoadRoom) {
-                                    getRoomInfo();
                                 }
                             }
                             //甜蜜值减少
@@ -3973,28 +3735,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 }));
     }
 
-
-    /**
-     * 获取语音房信息
-     */
-    protected void getRoomInfo() {
-        mCompositeDisposable.add(new RetrofitManager().createFamilyApi(ChatApiService.class).getRoomInfo()
-                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<VoiceChatDto>>() {
-                    @Override
-                    public void onSuccess(BaseResponse<VoiceChatDto> response) {
-                        if (response != null && response.getData() != null) {
-                            mVoiceChat.setVisibility(View.VISIBLE);
-                            mVoiceChat.setTid(NimUIKit.getTeamProvider().getTeamById(sessionId).getId());
-                            mVoiceChat.setVoiceUser(response.getData(), true);
-                            MMKVUtils.getInstance().encode(Constants.VOICE_IS_OPEN, 1);
-                        } else {
-                            mVoiceChat.setVisibility(View.GONE);
-                            MMKVUtils.getInstance().encode(Constants.VOICE_IS_OPEN, 0);
-                        }
-                        mIsLoadRoom = true;
-                    }
-                }));
-    }
 
 
     /**
@@ -4049,52 +3789,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                         }
                     }
                 }));
-    }
-
-
-    /**
-     * 退出语音聊天房间
-     */
-    private void deleteRoom(MoreFunDto data, int position) {
-        mCompositeDisposable.add(new RetrofitManager().createFamilyApi(ChatApiService.class).deleteRoom()
-                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
-                    @Override
-                    public void onSuccess(BaseResponse<Boolean> response) {
-                        if (response.getData() != null) {
-                            if (response.getData()) {
-                                mVoiceChat.setVisibility(View.GONE);
-                                MMKVUtils.getInstance().encode(Constants.VOICE_IS_OPEN, 0);
-                                if (TextUtils.equals(getString(R.string.chat_voice_chat_text), moreAdapter.getData().get(position).content)) {
-                                    moreAdapter.getData().get(position).content = getString(R.string.chat_voice_chat);
-                                    moreAdapter.getData().get(position).bg = R.drawable.chat_ic_voice_chat;
-                                    moreAdapter.setData(position, moreAdapter.getData().get(position));
-                                }
-                            }
-                        }
-                    }
-                }));
-
-    }
-
-
-    /**
-     * 创建语音房模式
-     */
-    private void createRoom(MoreFunDto data, int position) {
-        mCompositeDisposable.add(new RetrofitManager().createFamilyApi(ChatApiService.class).createRoom()
-                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
-                    @Override
-                    public void onSuccess(BaseResponse<Boolean> response) {
-                        if (response.getData() != null) {
-                            if (TextUtils.equals(getString(R.string.chat_voice_chat), moreAdapter.getData().get(position).content)) {
-                                moreAdapter.getData().get(position).content = getString(R.string.chat_voice_chat_text);
-                                moreAdapter.getData().get(position).bg = R.mipmap.chat_ic_voice_chat_text;
-                                moreAdapter.setData(position, moreAdapter.getData().get(position));
-                            }
-                        }
-                    }
-                }));
-
     }
 
 
@@ -4486,10 +4180,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             mCompositeDisposable.clear();
         }
         mRlIntimacy = null;
-        if (mClGroupCouple != null) {
-            mClGroupCouple.removeAllViews();
-            mClGroupCouple = null;
-        }
         if (mLlNotice != null) {
             mLlNotice.removeAllViews();
             mLlNotice = null;
@@ -4497,10 +4187,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         if (mRlIntimacyCall != null) {
             mRlIntimacyCall.removeAllViews();
             mRlIntimacyCall = null;
-        }
-        if (mLlFamilyBox != null) {
-            mLlFamilyBox.removeAllViews();
-            mLlFamilyBox = null;
         }
         if (mRlToolBar != null) {
             mRlToolBar.removeAllViews();
@@ -4513,12 +4199,5 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         ivChatRed = null;
         ivChatPhoto = null;
         redImMessage = null;
-        mTvGroupCoupleContent = null;
-        if (sessionType == SessionTypeEnum.P2P && mVoiceChat != null) {
-//            mVoiceChat.listen(false);
-            mVoiceChat.removeAllViews();
-            mVoiceChat = null;
-        }
-
     }
 }

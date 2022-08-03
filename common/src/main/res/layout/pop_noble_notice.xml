@@ -53,7 +53,7 @@
                 app:layout_constraintEnd_toEndOf="@id/icon"
                 app:layout_constraintStart_toStartOf="@id/icon"
                 app:layout_constraintTop_toTopOf="@id/icon"
-                tools:background="@drawable/vip_style_picture_frame_s18_start" />
+                 />
 
             <TextView
                 android:id="@+id/title"
