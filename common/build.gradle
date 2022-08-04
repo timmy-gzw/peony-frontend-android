@@ -43,6 +43,16 @@ android {
     buildFeatures {
         dataBinding = true
     }
+
+    productFlavors {
+        OFFICE {
+            buildConfigField "String", "WX_APPID", "\"wx4d4897cbee9c06d9\""
+            buildConfigField "String", "WX_APP_SC", "\"20c726d79aa9b7d809300b1f58aca89c\""
+            buildConfigField "String", "SANYAN_APP_ID", "\"qYz3RbpO\""
+        }
+    }
+
+
 }
 
 repositories {

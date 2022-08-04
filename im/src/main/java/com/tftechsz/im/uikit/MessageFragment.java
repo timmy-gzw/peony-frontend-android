@@ -333,13 +333,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private TextView mTvOpenVip;
     private MineService mineService;
     private IMMessage redImMessage;
-    private LinearLayout mLlAnnouncement;
 
-    private boolean mIsPlayEnd = false;
-    //ait消息
-    private FrameLayout mFlAit;
-    private TextView mTvAit;
-    private TextView mTvAitNum;
     protected SessionTypeEnum sessionType;
     /**
      * 0 聊天 1 派对私聊
@@ -536,15 +530,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         });
         mAnimationVip = findView(R.id.animation_vip);
         lottieAnimationView = findView(R.id.animation_view);
-        //家族公告
-        TextView mTvAnnouncement = findView(R.id.tv_announcement);
-        mLlAnnouncement = findView(R.id.ll_announcement);
-        mLlAnnouncement.setOnClickListener(this);
-        //ait消息
-        mFlAit = findView(R.id.fl_ait);
-        mFlAit.setOnClickListener(this);
-        mTvAit = findView(R.id.tv_ait);
-        mTvAitNum = findView(R.id.tv_ait_num);
         mActivityIcon = findView(R.id.activity_icon);
         mActivityView = findView(R.id.message_activity);
         mTopVp2 = findView(R.id.top_vp2);
@@ -1027,33 +1012,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         }
     }
 
-
-    /**
-     * 显示ait
-     */
-    private void showAit() {
-        if (sessionType == SessionTypeEnum.Team && mTeamType == 0 && mFlAit != null) {   //群聊
-            com.tftechsz.common.utils.CommonUtil.isShowAitNum(service.getUserId(), mFlAit, mTvAit, mTvAitNum);
-        }
-    }
-
-
-    /**
-     * 显示公告
-     */
-    private void showAnnouncement() {
-        if (sessionType == SessionTypeEnum.Team && mTeamType == 0) {
-            String announcement = MMKVUtils.getInstance().decodeString(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT);
-            if (!TextUtils.isEmpty(announcement)) {
-                mLlAnnouncement.setVisibility(View.VISIBLE);
-//                mTvAnnouncement.setText(announcement);
-            } else {
-                mLlAnnouncement.setVisibility(View.GONE);
-            }
-        }
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
@@ -1101,8 +1059,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                     mPopWindow.dismiss();
                                 });
                                 mPopWindow.showPopupWindow();
-                            }else if (event.type == Constants.NOTIFY_AIT_SELF) {  //ait消息
-                                showAit();
                             } else if (event.type == Constants.NOTIFY_FAMILY_RANK) {   //家族排行
                                 ChatMsg.JoinFamily dto = JSON.parseObject(event.code, ChatMsg.JoinFamily.class);
                                 if (dto != null) {
@@ -1416,8 +1372,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         if (getActivity() != null)
             getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC); // 扬声器播放
         showApply();
-        showAit();
-        showAnnouncement();
         mTvContactWay.setBackgroundColor(Utils.getColor(R.color.transparent));
         mTvContactWay.setPauseScroll(true);
         mTvContactWay.setText("");
@@ -2659,12 +2613,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                 showGift(message, chatMsg, 1);
                             }
                         }
-                    } else if (chatMsg != null && TextUtils.equals(ChatMsg.FAMILY_NOTICE, chatMsg.cmd_type)) {  //公告
-                        ChatMsg.ApplyMessage applyMessage = JSON.parseObject(chatMsg.content, ChatMsg.ApplyMessage.class);
-                        if (applyMessage != null) {
-                            MMKVUtils.getInstance().encode(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT, applyMessage.message);
-                        }
-                        showAnnouncement();
                     }
                 }
                 if (chatMsg != null && TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_GIFT_BAG_IM)) {  //空投
@@ -3129,8 +3077,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             String desc = MMKVUtils.getInstance().decodeString(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT);
             ARouterUtils.toEditFamily(desc, 0);
             MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.FAMILY_ANNOUNCEMENT);
-        }  else if (id == R.id.fl_ait) {  //ait消息get
-            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FAMILY_AIT);
         } else if (R.id.tv_gone_close == id) {
             setAttention(true);
         } else if (R.id.tv_btn_attention == id) {

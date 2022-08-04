@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -65,6 +66,63 @@ public class AppUtils {
     private AppUtils() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
+    }
+    public static String getWXAppId() {
+        return getMetaDataString("WX_APPID");
+    }
+
+
+    public static String getWXAppSecret() {
+        return getMetaDataString("WX_SECRET");
+    }
+
+
+
+    public static String getYXAppId() {
+        return getMetaDataString("YUNXIN_APP_ID");
+    }
+
+    public static String getYMAppId() {
+        return getMetaDataString("UMENG_APPKEY");
+    }
+
+    public static String getAPPName() {
+        return getMetaDataString("app_name");
+    }
+
+    public static String getAPPLabel() {
+        return getMetaDataString("app_label");
+    }
+
+    public static String getCustomerService() {
+        return getMetaDataString("CUSTOMER_SERVICE_VALUE").substring(1);
+    }
+
+    public static String getActivityNotice() {
+        return getMetaDataString("ACTIVITY_NOTICE").substring(1);
+    }
+
+    public static String getMetaDataString(String key) {
+        String res = "";
+        try {
+            ApplicationInfo appInfo = BaseApplication.getInstance().getPackageManager().getApplicationInfo(BaseApplication.getInstance().getPackageName(), PackageManager.GET_META_DATA);
+            res = appInfo.metaData.getString(key);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+
+    public static String getMetaDataString(Context context, String key) {
+        String res = "";
+        try {
+            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            res = appInfo.metaData.getString(key);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
 

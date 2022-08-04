@@ -1,5 +1,7 @@
 package com.tftechsz.common;
 
+import com.tftechsz.common.utils.AppUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * 公共常量
  */
 public class Constants {
-    public static final String APP_NAME = "peony";
+    public static final String APP_NAME = AppUtils.getAPPLabel();
     public static final String HOST_USER = "://user.";   // 用户
     public static final String HOST_EXCH = "://exch.";
     public static final String HOST_PARTY = "://party.";  //派对
@@ -37,9 +39,9 @@ public class Constants {
     public static final String YUNXIN_APP_ID = "9c3106de8f4c4b69e7ff47b6b6c7aad3";   //云信
     public static final String YUNXIN_ROOM_APP_ID = "9c3106de8f4c4b69e7ff47b6b6c7aad3";   //语音房云信
     public static final String YUNXIN_PRODUCT_NUMBER = "YD00357078827886";   //云信反作弊产品编号
-    public static final String SANYAN_APP_ID = "qYz3RbpO";   //闪验
-    public static final String WX_APP_ID = "wx4d4897cbee9c06d9";  //微信
-    public static final String WX_APP_SC = "20c726d79aa9b7d809300b1f58aca89c";  //微信
+    public static final String SANYAN_APP_ID = BuildConfig.SANYAN_APP_ID;   //闪验
+    public static final String WX_APP_ID = BuildConfig.WX_APPID;  //微信
+    public static final String WX_APP_SC = BuildConfig.WX_APP_SC;  //微信
     public static final String PUSH_XM_APP_ID = "2882303761520165940";//小米推送
     public static final String PUSH_XM_APP_KEY = "5562016512940";//小米推送
     public static final String PUSH_XM_CERT_NAME = "peony-push-cert-xm";//小米推送

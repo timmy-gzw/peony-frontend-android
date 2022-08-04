@@ -466,50 +466,6 @@
         />
 
     <FrameLayout
-        android:id="@+id/fl_ait"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_44"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/messageActivityBottomLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <TextView
-            android:id="@+id/tv_ait"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_white_start_radius"
-            android:gravity="center"
-            android:paddingVertical="@dimen/dp_5"
-            android:paddingStart="@dimen/dp_18"
-            android:paddingEnd="@dimen/dp_10"
-            android:text="[有人@我]"
-            android:textColor="@color/red"
-
-            />
-
-        <TextView
-            android:id="@+id/tv_ait_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_dot_red1"
-            android:gravity="center"
-            android:minWidth="@dimen/dp_18"
-            android:minHeight="@dimen/dp_18"
-            android:paddingStart="@dimen/dp_3"
-            android:paddingEnd="@dimen/dp_3"
-            android:text="1"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_10"
-            android:visibility="visible"
-            tools:visibility="visible" />
-
-
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/layoutPlayAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

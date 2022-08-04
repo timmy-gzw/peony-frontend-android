@@ -274,7 +274,7 @@ public class BaseApplication extends Application implements Application.Activity
      * 闪验
      */
     public void initShanyanSDK() {
-        OneKeyLoginManager.getInstance().init(this, Constants.SANYAN_APP_ID, (code, result) -> {
+        OneKeyLoginManager.getInstance().init(this,Constants.SANYAN_APP_ID, (code, result) -> {
         });
     }
 

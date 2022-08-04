@@ -94,12 +94,7 @@
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="62947b8a05844627b598c5ef" />
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}" />
+
         <meta-data
           android:name="UMENG_PUSH_SECRET"
           android:value="624dfb919be15a65eeafafcf17bbc546" />
@@ -108,6 +103,52 @@
             android:name="APPLOG_URL_SCHEME"
             android:value="${APPLOG_SCHEME}" />
 
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="${UMENG_APPKEY}" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+        <meta-data
+            android:name="SANYAN_APP_ID"
+            android:value="${SANYAN_APP_ID}" />
+        <meta-data
+            android:name="APPLOG_URL_SCHEME"
+            android:value="${APPLOG_SCHEME}" />
+        <meta-data
+            android:name="YUNXIN_APP_ID"
+            android:value="${YUNXIN_APP_ID}" />
+        <meta-data
+            android:name="app_label"
+            android:value="${app_label}" />
+        <meta-data
+            android:name="app_name"
+            android:value="${app_name}" />
+        <meta-data
+            android:name="CUSTOMER_SERVICE_VALUE"
+            android:value="${CUSTOMER_SERVICE_VALUE}" />
+        <meta-data
+            android:name="ACTIVITY_NOTICE"
+            android:value="${ACTIVITY_NOTICE}" />
+        <!--百度地图-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="${BAIDU_APPKEY}" />
+        <meta-data
+            android:name="com.netease.nim.appKey"
+            android:value="${YUNXIN_APP_ID}" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="${VIVO_APP_KEY}" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="${VIVO_APP_ID}" />
 
         <!--适配华为（huawei）刘海屏-->
         <meta-data
