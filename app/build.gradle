@@ -121,6 +121,10 @@ android {
             applicationId "com.tftechsz.peony"
             manifestPlaceholders = rootProject.ext.manifestPlaceholders
         }
+        heart {
+            applicationId "com.tftechsz.ivy"
+            manifestPlaceholders = rootProject.ext.heartPlaceholders
+        }
     }
 }
 

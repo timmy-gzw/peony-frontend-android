@@ -9,7 +9,7 @@ import java.util.List;
  * 公共常量
  */
 public class Constants {
-    public static final String APP_NAME = AppUtils.getAPPLabel();
+    public static final String APP_NAME = BuildConfig.APP_NAME;
     public static final String HOST_USER = "://user.";   // 用户
     public static final String HOST_EXCH = "://exch.";
     public static final String HOST_PARTY = "://party.";  //派对

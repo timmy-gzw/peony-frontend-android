@@ -85,6 +85,18 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <activity
+            android:name="com.tftechsz.ivy.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.tftechsz.ivy"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tftechsz.ivy.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <meta-data
             android:name="design_width_in_dp"
             android:value="376" />
@@ -118,19 +130,7 @@
         <meta-data
             android:name="app_label"
             android:value="${app_label}" />
-        <meta-data
-            android:name="app_name"
-            android:value="${app_name}" />
-        <meta-data
-            android:name="CUSTOMER_SERVICE_VALUE"
-            android:value="${CUSTOMER_SERVICE_VALUE}" />
-        <meta-data
-            android:name="ACTIVITY_NOTICE"
-            android:value="${ACTIVITY_NOTICE}" />
-        <!--百度地图-->
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="${BAIDU_APPKEY}" />
+
         <meta-data
             android:name="com.netease.nim.appKey"
             android:value="${YUNXIN_APP_ID}" />

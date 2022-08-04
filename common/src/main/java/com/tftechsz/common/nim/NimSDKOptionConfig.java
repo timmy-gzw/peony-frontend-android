@@ -18,6 +18,7 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
+import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.CommonUtil;
 
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class NimSDKOptionConfig {
         //        options.mNosTokenSceneConfig = createNosTokenScene();
         options.loginCustomTag = "登录自定义字段";
         options.useXLog = false;
-        options.appKey = Constants.YUNXIN_APP_ID;
+        options.appKey = AppUtils.getYXAppId();
         // 会话置顶是否漫游
         options.notifyStickTopSession = true;
         // 设置数据库加密秘钥（替换为自己的秘钥），开启加密；如不需要加密，则去掉

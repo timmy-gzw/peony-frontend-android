@@ -55,7 +55,7 @@
 
     <!-- 下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
     <permission
-        android:name="com.tftechsz.peony.permission.RECEIVE_MSG"
+        android:name="${applicationId}.permission.RECEIVE_MSG"
         android:protectionLevel="signature" />
     <uses-permission android:name="com.tftechsz.peony.permission.RECEIVE_MSG" />
 
@@ -74,9 +74,9 @@
     <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
     <!-- 小米推送 -->
     <permission
-        android:name="com.tftechsz.peony.permission.MIPUSH_RECEIVE"
+        android:name="${applicationId}.permission.MIPUSH_RECEIVE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.tftechsz.peony.permission.MIPUSH_RECEIVE" />
+    <uses-permission android:name="${applicationId}.permission.MIPUSH_RECEIVE" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera" />
@@ -89,15 +89,15 @@
     <!-- 兼容 Flyme5 以下版本，魅族内部接入 PushSDK 必填，不然无法收到消息-->
     <uses-permission android:name="com.meizu.flyme.push.permission.RECEIVE" />
     <permission
-        android:name="{你的包名}.permission.MESSAGE"
+        android:name="${applicationId}.permission.MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.tftechsz.peony.push.permission.MESSAGE" />
+    <uses-permission android:name="${applicationId}.push.permission.MESSAGE" />
     <!-- 兼容 Flyme3 配置权限-->
     <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" />
     <permission
-        android:name="com.tftechsz.peony.permission.C2D_MESSAGE"
+        android:name="${applicationId}.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.tftechsz.peony.permission.C2D_MESSAGE" />
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
 
 
     <application android:requestLegacyExternalStorage="true">
@@ -149,11 +149,6 @@
             android:name="com.tftechsz.common.base.StartIntentService"
             android:enabled="true"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.netease.nim.appKey"
-            android:value="9c3106de8f4c4b69e7ff47b6b6c7aad3" />
-
         <!-- 云信后台服务，请使用独立进程。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
@@ -192,7 +187,7 @@
         <!-- 云信进程间通信provider -->
         <provider
             android:name="com.netease.nimlib.ipc.NIMContentProvider"
-            android:authorities="com.tftechsz.peony.ipc.provider"
+            android:authorities="${applicationId}.ipc.provider"
             android:exported="false"
             android:process=":core" />
 
@@ -200,7 +195,7 @@
         <!-- SDK启动时会强制检测该组件的声明是否配置正确，如果检测到该声明不正确，SDK会主动抛出异常引发崩溃 -->
         <provider
             android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider"
-            android:authorities="com.tftechsz.peony.ipc.provider.preference"
+            android:authorities="${applicationId}.ipc.provider.preference"
             android:exported="false"
             tools:replace="android:authorities" />
 

@@ -125,6 +125,7 @@ import com.tftechsz.common.nim.model.ProfileManager;
 import com.tftechsz.common.nim.model.TokenService;
 import com.tftechsz.common.nim.model.UserInfoInitCallBack;
 import com.tftechsz.common.nim.model.VideoCallOptions;
+import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.Utils;
@@ -696,7 +697,7 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
                     appKey = service.getConfigInfo().sys.yunxin_live_app_key;
                 }
             } else {  //1v1
-                appKey = Constants.YUNXIN_APP_ID;
+                appKey = AppUtils.getYXAppId();
             }
             LogUtil.e("==============================",mode+"==================" + appKey);
             options = new VideoCallOptions(null, ProfileManager.getInstance());
