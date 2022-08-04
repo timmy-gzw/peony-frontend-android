@@ -115,13 +115,15 @@ android {
     lintOptions {
         disable 'MissingTranslation'
     }
-
+    flavorDimensions ('OFFICE')
     productFlavors {
         OFFICE {
+            dimension 'OFFICE'
             applicationId "com.tftechsz.peony"
             manifestPlaceholders = rootProject.ext.manifestPlaceholders
         }
         heart {
+            dimension 'OFFICE'
             applicationId "com.tftechsz.ivy"
             manifestPlaceholders = rootProject.ext.heartPlaceholders
         }
