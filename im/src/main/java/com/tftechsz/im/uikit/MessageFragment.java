@@ -3316,16 +3316,20 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     continueSendGiftPopWindow.addOnClickListener(new ContinueSendGiftPopWindow.OnSelectListener() {
                         @Override
                         public void sendGift(GiftDto data, int num, List<String> userId, String name) {
-                            if (message.getSessionType() == SessionTypeEnum.Team) {  //群组
-                                if (userId != null) {
-                                    isInTeamcallback(getActivity(), userId.get(0), 2, data, num, userId, name);
+                            if(Double.parseDouble(service.getUserInfo().getCoin())>data.coin*num){
+                                if (message.getSessionType() == SessionTypeEnum.Team) {  //群组
+                                    if (userId != null) {
+                                        isInTeamcallback(getActivity(), userId.get(0), 2, data, num, userId, name);
+                                    } else {
+                                        sendMessageGift(data, num, userId, name);
+                                    }
                                 } else {
                                     sendMessageGift(data, num, userId, name);
                                 }
-                            } else {
-                                sendMessageGift(data, num, userId, name);
+                                continueSendGiftPopWindow.dismiss();
+                            }else {
+                                showRechargePop(sessionId);
                             }
-
                         }
                     });
                     continueSendGiftPopWindow.showPopupWindow();

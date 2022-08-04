@@ -214,7 +214,6 @@ public class ContinueSendGiftPopWindow extends BaseCenterPop implements View.OnC
                 listener.sendGift(giftDto, mNum, mGift.to, "");
             }
         }
-        dismiss();
     }
 
 
