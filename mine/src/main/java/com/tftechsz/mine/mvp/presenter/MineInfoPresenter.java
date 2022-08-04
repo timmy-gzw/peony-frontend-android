@@ -223,7 +223,7 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
         startDate.set(1900, 0, 1);
 //        endDate.set(TimeUtils.getCurrentYear(), TimeUtils.getCurrentMonth() - 1, TimeUtils.getCurrentDay2());
         String[] split = Utils.getOldYearDate(-18).split("-");
-        endDate.set(Integer.parseInt(split[0]), 11, 31);
+        endDate.set(Integer.parseInt(split[0]), TimeUtils.getCurrentMonth() - 1, TimeUtils.getCurrentDay2());
         if (pvTime == null) {
             pvTime = new TimePickerBuilder(context, new OnTimeSelectListener() {
                 @Override
