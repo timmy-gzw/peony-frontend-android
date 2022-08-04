@@ -42,19 +42,6 @@ public class Constants {
     public static final String SANYAN_APP_ID = BuildConfig.SANYAN_APP_ID;   //闪验
     public static final String WX_APP_ID = BuildConfig.WX_APPID;  //微信
     public static final String WX_APP_SC = BuildConfig.WX_APP_SC;  //微信
-    public static final String PUSH_XM_APP_ID = "2882303761520165940";//小米推送
-    public static final String PUSH_XM_APP_KEY = "5562016512940";//小米推送
-    public static final String PUSH_XM_CERT_NAME = "peony-push-cert-xm";//小米推送
-    public static final String PUSH_HW_APP_ID = "106353275";//华为推送
-    public static final String PUSH_HW_CERT_NAME = "peony-push-cert-hw";//华为推送
-    public static final String PUSH_MZ_APP_ID = "148885";//魅族推送
-    public static final String PUSH_MZ_APP_KEY = "da1af0c8faac4c1f889f7302ebb2224d";//魅族推送
-    public static final String PUSH_MZ_CERT_NAME = "peony-push-cert-meizu";//魅族推送
-    public static final String PUSH_VIVO_CERT_NAME = "peony-push-cert-vivo";//vivo推送
-    public static final String PUSH_OPPO_APP_ID = "30829691";//oppo推送
-    public static final String PUSH_OPPO_APP_KEY = "493f11e3ebdc4f96b8174d0e242a3a72";//oppo推送
-    public static final String PUSH_OPPO_APP_SECRET = "97be08d74bb8458e8fbe79cb2f308d1d";//oppo推送
-    public static final String PUSH_OPPO_CERT_NAME = "peony-push-cert-opp";//oppo推送
 
 
     public static final String IS_COMPLETE_INFO = "is_complete_info";   //是否完善了个人信息

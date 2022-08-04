@@ -15,6 +15,7 @@ import com.netease.nimlib.sdk.mixpush.MixPushConfig;
 import com.netease.nimlib.sdk.msg.MessageNotifierCustomization;
 import com.netease.nimlib.sdk.msg.constant.NotificationExtraTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
+import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
 import com.tftechsz.common.utils.CommonUtil;
@@ -192,28 +193,28 @@ public class NimSDKOptionConfig {
         MixPushConfig config = new MixPushConfig();
         config.autoSelectPushType = true;
         // 小米推送
-        config.xmAppId = Constants.PUSH_XM_APP_ID;
-        config.xmAppKey = Constants.PUSH_XM_APP_KEY;
-        config.xmCertificateName = Constants.PUSH_XM_CERT_NAME;
+        config.xmAppId = BuildConfig.PUSH_XM_APP_ID;
+        config.xmAppKey = BuildConfig.PUSH_XM_APP_KEY;
+        config.xmCertificateName = BuildConfig.PUSH_XM_CERT_NAME;
 
         // 华为推送
-        config.hwAppId = Constants.PUSH_HW_APP_ID;
-        config.hwCertificateName = Constants.PUSH_HW_CERT_NAME;
+        config.hwAppId = BuildConfig.PUSH_HW_APP_ID;
+        config.hwCertificateName = BuildConfig.PUSH_HW_CERT_NAME;
 
 
         // 魅族推送
-        config.mzAppId = Constants.PUSH_MZ_APP_ID;
-        config.mzAppKey = Constants.PUSH_MZ_APP_KEY;
-        config.mzCertificateName = Constants.PUSH_MZ_CERT_NAME;
+        config.mzAppId = BuildConfig.PUSH_MZ_APP_ID;
+        config.mzAppKey = BuildConfig.PUSH_MZ_APP_KEY;
+        config.mzCertificateName = BuildConfig.PUSH_MZ_CERT_NAME;
 
         // vivo推送
-        config.vivoCertificateName = Constants.PUSH_VIVO_CERT_NAME;
+        config.vivoCertificateName = BuildConfig.PUSH_VIVO_CERT_NAME;
 
         // oppo推送
-        config.oppoAppId = Constants.PUSH_OPPO_APP_ID;
-        config.oppoAppKey = Constants.PUSH_OPPO_APP_KEY;
-        config.oppoAppSercet = Constants.PUSH_OPPO_APP_SECRET;
-        config.oppoCertificateName = Constants.PUSH_OPPO_CERT_NAME;
+        config.oppoAppId = BuildConfig.PUSH_OPPO_APP_ID;
+        config.oppoAppKey = BuildConfig.PUSH_OPPO_APP_KEY;
+        config.oppoAppSercet = BuildConfig.PUSH_OPPO_APP_SECRET;
+        config.oppoCertificateName = BuildConfig.PUSH_OPPO_CERT_NAME;
         return config;
     }
 }
