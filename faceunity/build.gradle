@@ -24,13 +24,13 @@ android {
         }
     }
 
-    flavorDimensions ('OFFICE')
+    flavorDimensions ('office')
     productFlavors {
         OFFICE {
-            dimension 'OFFICE'
+            dimension 'office'
         }
         heart {
-            dimension 'OFFICE'
+            dimension 'office'
         }
     }
 }

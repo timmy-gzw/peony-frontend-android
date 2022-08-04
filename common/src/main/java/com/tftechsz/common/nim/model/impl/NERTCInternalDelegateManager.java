@@ -165,6 +165,16 @@ public class NERTCInternalDelegateManager implements NERTCCallingDelegate {
     }
 
     @Override
+    public void onUserVideoStop(long userId) {
+        for (WeakReference<NERTCCallingDelegate> reference : mWeakReferenceList) {
+            NERTCCallingDelegate listener = reference.get();
+            if (listener != null) {
+                listener.onUserVideoStop(userId);
+            }
+        }
+    }
+
+    @Override
     public void onUserNetworkQuality(NERtcNetworkQualityInfo[] stats) {
         for (WeakReference<NERTCCallingDelegate> reference : mWeakReferenceList) {
             NERTCCallingDelegate listener = reference.get();

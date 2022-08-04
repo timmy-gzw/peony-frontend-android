@@ -48,13 +48,13 @@ android {
     buildFeatures {
         dataBinding =  true
     }
-    flavorDimensions ('OFFICE')
+    flavorDimensions ('office')
     productFlavors {
-        OFFICE {
-            dimension 'OFFICE'
+        office {
+            dimension 'office'
         }
         heart {
-            dimension 'OFFICE'
+            dimension 'office'
         }
     }
 

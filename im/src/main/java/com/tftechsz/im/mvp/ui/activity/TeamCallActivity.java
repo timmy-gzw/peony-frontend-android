@@ -492,6 +492,11 @@ public class TeamCallActivity extends BaseMvpActivity<ITeamCallView, TeamCallPre
             }
 
             @Override
+            public void onUserVideoStop(long userId) {
+
+            }
+
+            @Override
             public void onAudioAvailable(long userId, boolean isAudioAvailable) {
 
             }

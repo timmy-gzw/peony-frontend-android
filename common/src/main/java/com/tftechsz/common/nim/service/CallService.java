@@ -105,6 +105,11 @@ public class CallService extends Service {
         }
 
         @Override
+        public void onUserVideoStop(long userId) {
+
+        }
+
+        @Override
         public void onUserNetworkQuality(NERtcNetworkQualityInfo[] stats) {
 
         }

@@ -44,10 +44,10 @@ android {
         dataBinding = true
     }
 
-    flavorDimensions ('OFFICE')
+    flavorDimensions ('office')
     productFlavors {
         OFFICE {
-            dimension 'OFFICE'
+            dimension 'office'
             buildConfigField "String", "APP_NAME", "\"peony\""
             buildConfigField "String", "WX_APPID", "\"wx4d4897cbee9c06d9\""
             buildConfigField "String", "WX_APP_SC", "\"20c726d79aa9b7d809300b1f58aca89c\""
@@ -67,8 +67,8 @@ android {
             buildConfigField "String", "PUSH_OPPO_CERT_NAME", "\"peony-push-cert-opp\""
         }
         heart {
-            dimension 'OFFICE'
-            buildConfigField "String", "APP_NAME", "\"peony\""
+            dimension 'office'
+            buildConfigField "String", "APP_NAME", "\"ivy\""
             buildConfigField "String", "WX_APPID", "\"wx4d4897cbee9c06d9\""
             buildConfigField "String", "WX_APP_SC", "\"20c726d79aa9b7d809300b1f58aca89c\""
             buildConfigField "String", "SANYAN_APP_ID", "\"qYz3RbpO\""

@@ -34,13 +34,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    flavorDimensions ('OFFICE')
+    flavorDimensions ('office')
     productFlavors {
-        OFFICE {
-            dimension 'OFFICE'
+        office {
+            dimension 'office'
         }
         heart {
-            dimension 'OFFICE'
+            dimension 'office'
         }
     }
 }

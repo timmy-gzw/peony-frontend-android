@@ -97,6 +97,10 @@ public interface NERTCCallingDelegate {
     void onCameraAvailable(long userId, boolean isVideoAvailable);
 
 
+    void onUserVideoStop(long userId);
+
+
+
     void onUserNetworkQuality(NERtcNetworkQualityInfo[] stats);
 
     /**

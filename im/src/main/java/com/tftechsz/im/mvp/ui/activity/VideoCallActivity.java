@@ -471,6 +471,17 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 }
             }
 
+            @Override
+            public void onUserVideoStop(long userId) {
+                if (remoteVideoView != null && localVideoView != null) {
+                    if (isChangeVideo) {
+                        localVideoView.clearImage();
+                    } else {
+                        remoteVideoView.clearImage();
+                    }
+                }
+            }
+
             /**
              *  0	网络质量未知
              *  1	网络质量极好
@@ -1213,6 +1224,14 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             isFaceOn = !isFaceOn;
             if (isFaceOn) {  //开启
                 NERtc.getInstance().enableLocalVideo(false);
+                if (isChangeVideo) {
+                    if (remoteVideoView != null)
+                        remoteVideoView.clearImage();
+                } else {
+                    if (localVideoView != null)
+                        localVideoView.clearImage();
+                }
+                mSkipFrame = 5;
                 drawable = ContextCompat.getDrawable(this, R.mipmap.ic_face_on);
                 drawable1 = ContextCompat.getDrawable(this, R.mipmap.chat_ic_face_on);
                 tvFaceSwitch.setText("不露脸已开");
@@ -1230,6 +1249,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 }
             } else {
                 NERtc.getInstance().startVideoPreview();
+                mSkipFrame = 5;
                 NERtc.getInstance().enableLocalVideo(true);
                 if (nertcVideoCall != null) {
                     if (videoView != null) {
@@ -1478,13 +1498,18 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                     if (mIsMeWarm) {   //自己违规了
                         mTvViolationTip.setVisibility(View.VISIBLE);
                         NERtc.getInstance().enableLocalVideo(false);
+                        mSkipFrame = 5;
                         //是否切换了摄像头
                         if (isChangeVideo) {
+                            if (remoteVideoView != null)
+                                remoteVideoView.clearImage();
                             viewRemote.setVisibility(View.VISIBLE);
                             mTvViolationTip.setVisibility(View.GONE);
                         } else {
                             viewVideoView.setVisibility(View.VISIBLE);
                             mTvViolationTip.setVisibility(View.VISIBLE);
+                            if (localVideoView != null)
+                                localVideoView.clearImage();
                         }
                     }
                 });
@@ -1657,6 +1682,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         NERtc.getInstance().startVideoPreview();
         viewVideoView.setVisibility(View.GONE);
         viewRemote.setVisibility(View.GONE);
+        mSkipFrame = 5;
         if (mIsMeWarm)
             NERtc.getInstance().enableLocalVideo(true);
         mIsWarm = false;

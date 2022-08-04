@@ -604,6 +604,10 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
             if (delegateManager != null) {
                 delegateManager.onCameraAvailable(l, false);
             }
+            if (delegateManager != null) {
+                delegateManager.onUserVideoStop(l);
+            }
+
         }
 
         @Override
@@ -684,7 +688,6 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
             NERtc.getInstance().setParameters(parameters);
 
 
-
             //语聊房间
             if (mode == VOICE_ROOM) {
                 int scenario = NERtcConstants.AudioScenario.MUSIC;
@@ -693,13 +696,13 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
                 NERtcEx.getInstance().setAudioProfile(profile, scenario);
                 appKey = Constants.YUNXIN_ROOM_APP_ID;
                 //有数据根据配置来读取
-                if (service != null && service.getConfigInfo() != null && service.getConfigInfo().sys != null && !TextUtils.isEmpty(service.getConfigInfo().sys.yunxin_live_app_key)){
+                if (service != null && service.getConfigInfo() != null && service.getConfigInfo().sys != null && !TextUtils.isEmpty(service.getConfigInfo().sys.yunxin_live_app_key)) {
                     appKey = service.getConfigInfo().sys.yunxin_live_app_key;
                 }
             } else {  //1v1
                 appKey = AppUtils.getYXAppId();
             }
-            LogUtil.e("==============================",mode+"==================" + appKey);
+            LogUtil.e("==============================", mode + "==================" + appKey);
             options = new VideoCallOptions(null, ProfileManager.getInstance());
             userInfoInitCallBack = options.getUserInfoInitCallBack();
             roomCallback = callback;

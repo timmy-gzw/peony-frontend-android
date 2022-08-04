@@ -55,14 +55,10 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        ImmersionBar.with(mActivity).transparentStatusBar().navigationBarDarkIcon(false).navigationBarColor(R.color.black).statusBarDarkFont(false, 0.2f).init();
         countBackUtils = new CountBackUtils();
         new ToolBarBuilder().showBack(true)
                 .setTitle("手机号码登录/注册")
                 .setTitleColor(R.color.white)
-                .setRightTextColor(R.color.white)
-                .setBackgroundColor(0)
-                .setBackTint(R.color.white)
                 .build();
         mEtPhone = findViewById(R.id.et_phone);
         mEtCode = findViewById(R.id.et_code);
