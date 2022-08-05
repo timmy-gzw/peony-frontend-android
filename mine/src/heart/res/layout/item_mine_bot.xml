@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/dp_20"
+    >
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="@dimen/dp_34"
+        android:layout_height="@dimen/dp_34"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_record" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp_4"
+        android:singleLine="true"
+        android:text="@string/mine_share_money"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_12" />
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_arrow"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/right_icon"
+        android:layout_width="@dimen/dp_22"
+        android:layout_height="@dimen/dp_22"
+        android:layout_marginEnd="@dimen/dp_4"
+        android:scaleType="fitCenter"
+        android:visibility="gone"
+        tools:src="@drawable/ic_red_packet" />
+
+    <com.tftechsz.common.widget.AutoFitTextView
+        android:id="@+id/right_txt"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|end"
+        android:paddingEnd="@dimen/dp_4"
+        android:singleLine="true"
+        android:textColor="@color/color_black_ff666666"
+        android:textSize="@dimen/sp_12"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="@string/app_name" />
+
+</LinearLayout>

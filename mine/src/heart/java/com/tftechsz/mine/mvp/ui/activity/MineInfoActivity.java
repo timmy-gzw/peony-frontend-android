@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -104,8 +105,11 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     @Override
     protected void initView(Bundle savedInstanceState) {
         new ToolBarBuilder().showBack(true)
-                .setTitle("我的资料")
+                .setTitle("编辑资料")
+                .setBackgroundColor(0)
                 .build();
+        ImmersionBar.with(this).transparentStatusBar()
+                .navigationBarColor(R.color.bg_color).init();
         mItemSign = findViewById(R.id.tv_right);
         mIvAvatar = findViewById(R.id.iv_avatar);
         mItemSex = findViewById(R.id.item_sex);

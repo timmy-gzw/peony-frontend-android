@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_mine_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/bg_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_below="@+id/base_tool_bar"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rl_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_5">
+
+                <TextView
+                    android:id="@+id/audit_icon_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textColor="@color/color_8282AA"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="(1周只能修改1次)"
+                    tools:visibility="visible" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="@dimen/dp_90"
+                    android:layout_height="@dimen/dp_90"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/audit_icon_msg"
+                    app:riv_border_color="@color/color_normal"
+                    app:riv_border_width="@dimen/dp_1"
+                    app:riv_corner_radius="@dimen/dp_60"
+                    tools:src="@mipmap/mine_ic_girl_default" />
+
+
+                <TextView
+                    android:id="@+id/tv_icon_audit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="审核中,不能操作"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_12"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
+                    tools:visibility="visible" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <View
+                style="@style/Driver"
+                android:layout_height="@dimen/dp_10"
+                android:background="@color/bg_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:background="@drawable/bg_white_radius"
+                android:orientation="vertical"
+
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_audio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:minHeight="@dimen/dp_50"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_4">
+
+                    <TextView
+                        android:id="@+id/tv_voice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="语音介绍"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constraintBottom_toTopOf="@id/audit_audio_msg"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/audit_audio_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/sp_12"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_voice"
+                        tools:text="(1周只能修改1次)"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/iv_audio_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:src="@mipmap/ic_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_audio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_5"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:background="@drawable/shape_black_alpha30"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/tv_audio_audit"
+                        app:layout_constraintEnd_toStartOf="@id/iv_audio_right"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_audio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/peony_me_zt_icon" />
+
+                        <TextView
+                            android:id="@+id/audio_time"
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp_10"
+                            tools:text="17s" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_audio_audit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_24"
+                        android:text="审核中,不能操作"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/sp_10"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ll_audio"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_audio_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:gravity="end"
+                        android:text="未录制"
+                        android:textColor="@color/color_999999"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/iv_audio_right"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="gone" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:descendantFocusability="blocksDescendants"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:minHeight="@dimen/dp_80"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/tv_right"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:includeFontPadding="false"
+                        android:text="交友宣言"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_16" />
+
+                    <ImageView
+                        android:id="@+id/iv_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:src="@mipmap/ic_arrow" />
+
+                    <com.tftechsz.common.widget.CBAlignTextView
+                        android:id="@+id/tv_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginEnd="@dimen/dp_44"
+                        android:layout_toEndOf="@+id/tv_left"
+                        android:gravity="end"
+                        android:includeFontPadding="false"
+                        android:text="默默做好事，从不贪功劳"
+                        android:textColor="@color/color_light_font"
+                        android:textSize="15sp"
+                        cb:align="right" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:background="@color/driver" />
+
+                    <TextView
+                        android:id="@+id/tv_sign_audit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/dp_60"
+                        android:layout_marginEnd="@dimen/dp_44"
+                        android:gravity="bottom"
+                        android:text="审核中,不能操作"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/sp_10" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_white_radius"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    android:minHeight="@dimen/dp_50">
+
+                    <TextView
+                        android:id="@+id/tv_name_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/iv_name_right"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="昵称"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_16" />
+
+                    <ImageView
+                        android:id="@+id/iv_name_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:src="@mipmap/ic_arrow" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginEnd="@dimen/dp_44"
+                        android:layout_toEndOf="@+id/tv_name_left"
+                        android:gravity="end"
+                        android:textColor="@color/color_normal"
+                        android:textSize="16sp"
+                        tools:text="大气的鸡" />
+
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:background="@color/driver"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_name_audit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/dp_35"
+                        android:layout_marginEnd="@dimen/dp_44"
+                        android:gravity="bottom"
+                        android:text="审核中,不能操作"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/sp_10" />
+                </RelativeLayout>
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="性别"
+                    app:right_arrow_visible="false"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="生日"
+                    app:right_arrow_visible="true"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_constellation"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="星座"
+                    app:right_arrow_visible="false"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="所在地"
+                    app:right_arrow_visible="false"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_home_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="家乡"
+                    app:right_arrow_visible="true"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_job"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="职业"
+                    app:right_arrow_visible="true"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="身高"
+                    app:right_arrow_visible="true"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="体重"
+                    app:right_arrow_visible="true"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+
+                <com.tftechsz.common.widget.CommonItemView
+                    android:id="@+id/item_income"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:left_text_content="年收入"
+                    app:right_arrow_visible="true"
+                    android:background="@color/transparent"
+                    app:right_switch_visible="false"
+                    app:right_text_visible="true"
+                    app:view_visible="false" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_save"
+            style="@style/CustomButton"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/bg_orange_radius30"
+            android:text="保存"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</RelativeLayout>
