@@ -3,7 +3,6 @@ package com.tftechsz.peony;
 import static java.lang.Boolean.TRUE;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
