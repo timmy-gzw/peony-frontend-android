@@ -248,9 +248,6 @@ dependencies {
     api rootProject.ext.dependencies["privacy-annotation"]
     api rootProject.ext.dependencies["privacy-proxy"]
 
-    api(rootProject.ext.dependencies.hotfix) {
-        exclude group: 'com.aliyun.ams', module: "alicloud-android-utdid"
-    }
     api rootProject.ext.dependencies["bugly-crash"]
 
 }
