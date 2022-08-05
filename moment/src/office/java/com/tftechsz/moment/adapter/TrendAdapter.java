@@ -87,7 +87,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         }
         holder.mPosition = holder.getLayoutPosition();
         holder.tvLikeCount.setText(item.getPraises() == 0 ? "点赞" : String.valueOf(item.getPraises()));
-        holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0 ? R.color.color_light_font : R.color.color_F8D423));
+        holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0 ? R.color.color_light_font : R.color.colorPrimary));
         holder.tvDiscussCount.setText(item.getComments() == 0 ? "评论" : String.valueOf(item.getComments()));
         holder.setVisible(R.id.iv_real, item.isReal());  //是否真人
         holder.mPlayerContainer.setTransitionName(Utils.getString(R.string.video_transitions));
@@ -138,7 +138,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             holder.setVisible(R.id.tv_del, service.getUserId() == item.getUser_id());   //自己时可见
             holder.setVisible(R.id.ll_accost, service.getUserId() != item.getUser_id());   //自己时不可见
             holder.setText(R.id.tv_accost, item.isAccost() ? getContext().getString(R.string.private_chat) : getContext().getString(R.string.accost));//私聊/搭讪
-            holder.setTextColor(R.id.tv_accost, item.isAccost() ? ContextCompat.getColor(getContext(), R.color.c_f76576) : ContextCompat.getColor(getContext(), R.color.color_normal));//私聊/搭讪
+            holder.setTextColor(R.id.tv_accost, item.isAccost() ? ContextCompat.getColor(getContext(), R.color.colorPrimary) : ContextCompat.getColor(getContext(), R.color.color_normal));//私聊/搭讪
             holder.setBackgroundResource(R.id.ll_accost, item.isAccost() ? R.drawable.bg_p2p_btn : R.drawable.bg_accost_btn);//私聊/搭讪
 //            if (!TextUtils.isEmpty(item.getCity())) {
 //                holder.tvAddress.setText(item.getCity());  //城市
@@ -179,7 +179,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
                 if (likeCount != null) {
                     likeCount.setAnimationDuration(praises == 1 ? 0 : Interfaces.TICKERVIEW_ANIMATION_LIKE);
                     likeCount.setText(String.valueOf(praises));
-                    likeCount.setTextColor(context.getResources().getColor(praises == 0 ? R.color.color_light_font : R.color.color_F8D423));
+                    likeCount.setTextColor(context.getResources().getColor(praises == 0 ? R.color.color_light_font : R.color.colorPrimary));
                 }
                 break;
             }
@@ -255,7 +255,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         TickerView tvLike = (TickerView) getViewByPosition(clickPosition, R.id.tv_like_count);
         if (tvLike != null) {
             tvLike.setText(data.getPraises() == 0 ? "点赞" : String.valueOf(data.getPraises()));
-            tvLike.setTextColor(context.getResources().getColor(data.getIs_praise() == 0 ? R.color.color_light_font : R.color.color_F8D423));
+            tvLike.setTextColor(context.getResources().getColor(data.getIs_praise() == 0 ? R.color.color_light_font : R.color.colorPrimary));
         }
 
         TickerView tvLikeCount = (TickerView) getViewByPosition(clickPosition, R.id.tv_discuss_count);
