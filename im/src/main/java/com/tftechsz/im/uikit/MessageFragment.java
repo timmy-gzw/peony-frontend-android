@@ -2614,6 +2614,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             }
                         }
                     }
+                    if (chatMsg != null && TextUtils.equals(chatMsg.cmd, ChatMsg.REPLY_ACCOST_TYPE)) {//搭讪回复礼物
+                        showGift(message, chatMsg, 1);
+                    }
                 }
                 if (chatMsg != null && TextUtils.equals(chatMsg.cmd_type, ChatMsg.FAMILY_GIFT_BAG_IM)) {  //空投
                     if (sessionType == SessionTypeEnum.Team && mTeamType == 0) {
@@ -2645,7 +2648,13 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
      */
     private void showGift(IMMessage message, ChatMsg chatMsg, int type) {
         //逻辑处理: 如果是自己发出的礼物 && 盲盒礼物 , 使用callbackExt对象添加 animations
-        ChatMsg.Gift gift = JSON.parseObject(chatMsg.content, ChatMsg.Gift.class);
+        ChatMsg.Gift gift;
+        if(TextUtils.equals(chatMsg.cmd,ChatMsg.REPLY_ACCOST_TYPE)){
+            gift = new ChatMsg.Gift();
+            gift.gift_info = JSON.parseArray(chatMsg.content, ChatMsg.AccostGift.class).get(0);
+        }else {
+            gift = JSON.parseObject(chatMsg.content, ChatMsg.Gift.class);
+        }
         ChatMsg cm = ChatMsgUtil.parseMessage(message.getCallbackExtension());
         if (cm != null) {
             ChatMsg.Gift gift1 = JSON.parseObject(cm.content, ChatMsg.Gift.class);
