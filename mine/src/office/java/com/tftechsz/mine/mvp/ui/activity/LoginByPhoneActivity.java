@@ -60,6 +60,9 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
         new ToolBarBuilder().showBack(true)
                 .setTitle("手机号码登录/注册")
                 .setTitleColor(R.color.white)
+                .setRightTextColor(R.color.white)
+                .setBackgroundColor(0)
+                .setBackTint(R.color.white)
                 .build();
         mEtPhone = findViewById(R.id.et_phone);
         mEtCode = findViewById(R.id.et_code);
