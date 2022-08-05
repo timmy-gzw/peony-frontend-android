@@ -2,6 +2,7 @@
 <resources>
 
     <color name="colorPrimary">#7858FC</color>
+    <color name="colorPrimaryLight">#F5F5FF</color>
     <color name="colorPrimaryDark">#7858FC</color>
     <color name="colorAccent">#7858FC</color>
 
@@ -9,6 +10,11 @@
 
     <color name="color_ADADD7">#ADADD7</color>
     <color name="color_8282AA">#8282AA</color>
+
+    <color name="c_f78765">#298AF8</color>
+    <color name="c_fe4f6b">#A257FF</color>
+    <color name="c_ff5c97">#7858FC</color>
+    <color name="red_dot">#F55F4E</color>
 
 
 

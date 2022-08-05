@@ -167,7 +167,7 @@
             android:layout_gravity="center_vertical|end"
             android:drawablePadding="@dimen/dp_3"
             android:text="123"
-            android:textColor="#FF5C97"
+            android:textColor="@color/c_ff5c97"
             android:textSize="@dimen/sp_10"
             app:drawableStartCompat="@mipmap/chat_ic_intimacy_red_heart" />
 

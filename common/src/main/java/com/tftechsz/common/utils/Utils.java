@@ -1507,4 +1507,16 @@ public final class Utils {
         });
 
     }
+
+    /**
+     * 判断是不是office渠道
+     * @return
+     */
+    public static boolean isOffice(){
+        return getChannel().equals("office");
+    }
+
+    public static boolean isHeart(){
+        return getChannel().equals("heart");
+    }
 }

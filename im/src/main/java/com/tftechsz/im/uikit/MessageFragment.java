@@ -522,8 +522,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         ConfigInfo configInfo = service.getConfigInfo();
         List<String> topics = service.getUserInfo().getSex() == 1 ? configInfo.share_config.boy_quick_topic : configInfo.share_config.girl_quick_topic;
         //打乱顺序，取前五个
-        Collections.shuffle(topics);
-        topicAdapter.setList(topics.subList(0, Math.min(topics.size(), 5)));
+        if(topics != null){
+            Collections.shuffle(topics);
+            topicAdapter.setList(topics.subList(0, Math.min(topics.size(), 5)));
+        }
         mRvTopic.setAdapter(topicAdapter);
         topicAdapter.setOnItemClickListener((adapter, view, position) -> {
             formrtAndSendMessage(topicAdapter.getItem(position));
@@ -1722,7 +1724,12 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         inputPanel.getmIvTopicBtn().setOnClickListener(v -> {
             //话题icon
             ConfigInfo configInfo = service.getConfigInfo();
-            TopicPop topicPop = new TopicPop(getActivity(), service.getUserInfo().getSex() == 1 ? configInfo.share_config.boy_quick_topic : configInfo.share_config.girl_quick_topic);
+            List<String> data = service.getUserInfo().getSex() == 1 ? configInfo.share_config.boy_quick_topic : configInfo.share_config.girl_quick_topic;
+            if(data == null){
+                ToastUtil.showToast(getActivity(),"当前热聊话题还没有哦！");
+                return;
+            }
+            TopicPop topicPop = new TopicPop(getActivity(), data);
             topicPop.setTopicItemClickListener(new TopicPop.TopicItemOnClickListener() {
                 @Override
                 public void onTopicItemClick(String text) {

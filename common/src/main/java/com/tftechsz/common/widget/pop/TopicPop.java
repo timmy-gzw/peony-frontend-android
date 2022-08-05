@@ -39,7 +39,9 @@ public class TopicPop extends BaseBottomPop{
         TopicAdapter topicAdapter = new TopicAdapter(1);
         rv.setAdapter(topicAdapter);
         //打乱顺序
-        Collections.shuffle(data);
+        if(data != null) {
+            Collections.shuffle(data);
+        }
         topicAdapter.setList(data);
         topicAdapter.setOnItemClickListener((adapter, view, position) -> {
             dismiss();

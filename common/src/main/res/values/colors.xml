@@ -2,6 +2,7 @@
 <resources>
 
     <color name="colorPrimary">#FE4D6B</color>
+    <color name="colorPrimaryLight">#20FF5A7B</color>
     <color name="colorPrimaryDark">#FE4D6B</color>
     <color name="colorAccent">#FE4D6B</color>
     <color name="transparent">#00000000</color>
@@ -79,4 +80,6 @@
     <color name="c_30000000">#4D000000</color>
     <color name="c_d72537">#D72537</color>
     <color name="c_ff9e00">#FF9E00</color>
+    <color name="c_ff5c97">#FF5C97</color>
+
 </resources>

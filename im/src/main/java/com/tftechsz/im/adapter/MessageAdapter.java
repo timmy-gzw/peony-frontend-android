@@ -140,11 +140,15 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
             ivAvatar.setBgFrame(item.picture_frame);
             ivAvatar.setAvatar(0);
             ivAvatar.setAvatar(R.drawable.bg_trans);
+            tvContent.setTextColor(Utils.getColor(R.color.color_light_font));
             if (TextUtils.equals(Constants.CUSTOMER_SERVICE, item.getContactId())) {  //客服小秘书
                 ivOffice.setVisibility(View.VISIBLE);
                 ivOffice.setImageResource(R.mipmap.ic_official);
                 ivAvatar.setAvatar(R.drawable.chat_ic_customer_service_secretary);
                 CommonUtil.setUserName(tvName, "客服小秘书", false);
+                if(Utils.isHeart()){
+                    tvContent.setTextColor(Utils.getColor(R.color.black));
+                }
             } else {
                 if (mType == 2) {
                     ivAvatar.setPartyAvatar(item.getContactId());
