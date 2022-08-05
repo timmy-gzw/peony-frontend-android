@@ -73,8 +73,8 @@
         android:paddingHorizontal="@dimen/dp_16"
         android:paddingVertical="@dimen/dp_12"
         android:textColor="@color/color_normal"
-        android:textColorHint="@color/color_light_font"
-        android:textSize="@dimen/sp_17"
+        android:textColorHint="@color/color_ADADD7"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
