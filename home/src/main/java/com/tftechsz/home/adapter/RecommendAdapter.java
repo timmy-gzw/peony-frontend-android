@@ -33,7 +33,7 @@ import java.util.List;
  * 推荐适配器
  */
 public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder> {
-    private int mType;
+    private final int mType;
     private final UserProviderService service;
     private int isShow;
 
@@ -106,7 +106,7 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
         helper.setGone(R.id.iv_real_people, item.getIs_real() != 1);  //是否真人
 //        helper.setGone(R.id.iv_auth, item.getIs_self() != 1);  //是否实名
         helper.setText(R.id.tv_accost, item.isAccost() ? getContext().getString(R.string.private_chat) : getContext().getString(R.string.accost));//私聊/搭讪
-        helper.setTextColor(R.id.tv_accost, item.isAccost() ? ContextCompat.getColor(getContext(), R.color.c_f76576) : ContextCompat.getColor(getContext(), R.color.color_normal));//私聊/搭讪
+        helper.setTextColor(R.id.tv_accost, item.isAccost() ? ContextCompat.getColor(getContext(), R.color.c_btn_p2p) : ContextCompat.getColor(getContext(), R.color.c_btn_accost));//私聊/搭讪
         helper.setBackgroundResource(R.id.ll_accost, item.isAccost() ? R.drawable.bg_p2p_btn : R.drawable.bg_accost_btn);//私聊/搭讪
         if (isShow == 1) {   //只显示私信   图片显示认证图片
             helper.setImageResource(R.id.iv_real_people, R.mipmap.ic_attestation);

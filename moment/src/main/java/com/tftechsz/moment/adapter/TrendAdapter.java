@@ -80,11 +80,8 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         } else {
             holder.tvContent.setVisibility(View.GONE);
         }
-        if (!item.isPraise()) {//为点过赞
-            holder.btnLike.setLiked(false);
-        } else {
-            holder.btnLike.setLiked(true);
-        }
+        //为点过赞
+        holder.btnLike.setLiked(item.isPraise());
         holder.mPosition = holder.getLayoutPosition();
         holder.tvLikeCount.setText(item.getPraises() == 0 ? "点赞" : String.valueOf(item.getPraises()));
         holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0 ? R.color.color_light_font : R.color.colorPrimary));
@@ -138,14 +135,8 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             holder.setVisible(R.id.tv_del, service.getUserId() == item.getUser_id());   //自己时可见
             holder.setVisible(R.id.ll_accost, service.getUserId() != item.getUser_id());   //自己时不可见
             holder.setText(R.id.tv_accost, item.isAccost() ? getContext().getString(R.string.private_chat) : getContext().getString(R.string.accost));//私聊/搭讪
-            holder.setTextColor(R.id.tv_accost, item.isAccost() ? ContextCompat.getColor(getContext(), R.color.colorPrimary) : ContextCompat.getColor(getContext(), R.color.color_normal));//私聊/搭讪
+            holder.setTextColor(R.id.tv_accost, item.isAccost() ? ContextCompat.getColor(getContext(), R.color.c_btn_p2p) : ContextCompat.getColor(getContext(), R.color.c_btn_accost));//私聊/搭讪
             holder.setBackgroundResource(R.id.ll_accost, item.isAccost() ? R.drawable.bg_p2p_btn : R.drawable.bg_accost_btn);//私聊/搭讪
-//            if (!TextUtils.isEmpty(item.getCity())) {
-//                holder.tvAddress.setText(item.getCity());  //城市
-//                holder.tvAddress.setVisibility(View.VISIBLE);
-//            } else {
-//                holder.tvAddress.setVisibility(View.GONE);
-//            }
         }
     }
 
@@ -273,7 +264,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         public FrameLayout mPlayerContainer;
         public LikeButton btnLike;//点赞按钮
         public RecyclerView rvTrendImage;
-        private ImageView mImgVip;
+        private final ImageView mImgVip;
 
         public TendHolder(View view) {
             super(view);

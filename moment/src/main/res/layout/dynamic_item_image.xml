@@ -195,7 +195,6 @@
         android:layout_width="@dimen/dp_30"
         android:layout_height="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_3"
-        android:layout_marginEnd="@dimen/dp_3_5"
         app:anim_scale_factor="2"
         app:circle_end_color="@color/colorAccent"
         app:circle_start_color="@color/colorPrimary"
@@ -216,7 +215,7 @@
         android:id="@+id/tv_like_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp_40"
+        android:layout_marginEnd="@dimen/dp_36"
         android:gravity="center"
         android:textColor="@color/color_light_font"
         android:textSize="@dimen/sp_12"
@@ -298,7 +297,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_3"
             android:text="@string/accost"
-            android:textColor="@color/c_f76576"
+            android:textColor="@color/c_btn_accost"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold" />
 

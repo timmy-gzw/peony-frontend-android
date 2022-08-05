@@ -537,7 +537,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
 
     private void setBtnAccostOrP2P() {
         tvAccost.setText(dataBean.isAccost() ? getString(R.string.private_chat) : getString(R.string.accost));//私聊/搭讪
-        tvAccost.setTextColor(dataBean.isAccost() ? ContextCompat.getColor(this, R.color.c_f76576) : ContextCompat.getColor(this, R.color.color_normal));//私聊/搭讪
+        tvAccost.setTextColor(dataBean.isAccost() ? ContextCompat.getColor(this, R.color.c_btn_p2p) : ContextCompat.getColor(this, R.color.c_btn_accost));//私聊/搭讪
         mLlAccost.setBackgroundResource(dataBean.isAccost() ? R.drawable.bg_p2p_btn : R.drawable.bg_accost_btn);//私聊/搭讪
     }
 
