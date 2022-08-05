@@ -2288,12 +2288,10 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     @Override
     public void getChatUserInfo(List<UserInfo> infoList) {
-        System.out.println("userinfo----:" + infoList.toString());
         //显示来电/拨出用户的个人信息
         if (infoList.size() == 0) {
             return;
         }
-        System.out.println("--------");
         UserInfo userInfo = infoList.get(0);
 
     }
