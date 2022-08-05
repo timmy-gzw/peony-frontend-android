@@ -30,12 +30,12 @@ import java.util.List;
  */
 public class MsgViewHolderTip extends MsgViewHolderBase {
     protected TextView bodyTextView;
-    private LinearLayout mLlleft,mLlTitle;
+    private LinearLayout mLlleft, mLlTitle;
     private LinearLayout mClCall;
     private ImageView mIvRTop;
     private RelativeLayout mRlBox;
     private TextView mtvTitle;
-    private LinearLayout mLlAudio,mLlVideo;
+    private LinearLayout mLlAudio, mLlVideo;
 
     public MsgViewHolderTip(BaseMultiItemFetchLoadAdapter adapter) {
         super(adapter);
@@ -70,7 +70,7 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
         });
         setReSendGone();
         ChatMsg chatMsg = ChatMsgUtil.parseMessage(message);
-        mLlTitle.setPadding(0,(int) context.getResources().getDimension(R.dimen.dp_10),(int) context.getResources().getDimension(R.dimen.dp_size_42), (int) context.getResources().getDimension(R.dimen.dp_10));
+        mLlTitle.setPadding(0, (int) context.getResources().getDimension(R.dimen.dp_10), (int) context.getResources().getDimension(R.dimen.dp_size_42), (int) context.getResources().getDimension(R.dimen.dp_10));
         mLlleft.setVisibility(View.VISIBLE);
         mClCall.setVisibility(View.GONE);
         mIvRTop.setVisibility(View.GONE);
@@ -81,37 +81,37 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
         ChatMsg.Tips tips = JSON.parseObject(chatMsg.content, ChatMsg.Tips.class);
         String content = "";
 
-       if(tips.des.contains("跟她语音聊天")&&tips.des.contains("跟她视频聊天")){
-           mLlleft.setVisibility(View.GONE);
-           mtvTitle.setVisibility(View.VISIBLE);
-           Shader shader = new LinearGradient(0, 0, 0, mtvTitle.getLineHeight(),
-                   Color.parseColor("#FE4D6B"), Color.parseColor("#F78765"), Shader.TileMode.REPEAT);
-           mtvTitle.getPaint().setShader(shader);
-           mtvTitle.setText("友情提示");
-           mRlBox.setBackground(context.getResources().getDrawable(R.drawable.ic_tip_unlock_bg));
-           int padding = (int) context.getResources().getDimension(R.dimen.dp_10);
-           mLlTitle.setPadding(padding,padding,padding,padding);
-           mClCall.setVisibility(View.VISIBLE);
-           mIvRTop.setVisibility(View.VISIBLE);
-           List<String> tipContent = ChatMsgUtil.getTipContent(tips.des);
-           mLlVideo.setOnClickListener( v -> {
-               open(tipContent.get(1));
-           });
-           mLlAudio.setOnClickListener( v -> {
-               open(tipContent.get(0));
-           });
-           String[] split = tips.des.split("\\n<tag");
-           content = split[0];
-       }else{
-           SpannableStringBuilder span = ChatMsgUtil.getTipContent(/*"        " + */tips.des,"", new ChatMsgUtil.OnSelectListener() {
-               @Override
-               public void onClick(String content) {
-                   open(content);
-               }
-           });
-           content = String.valueOf(span);
-       }
-        bodyTextView.setText(content);
+        if (tips.des.contains("跟她语音聊天") && tips.des.contains("跟她视频聊天")) {
+            mLlleft.setVisibility(View.GONE);
+            mtvTitle.setVisibility(View.VISIBLE);
+            Shader shader = new LinearGradient(0, 0, 0, mtvTitle.getLineHeight(),
+                    Color.parseColor("#FE4D6B"), Color.parseColor("#F78765"), Shader.TileMode.REPEAT);
+            mtvTitle.getPaint().setShader(shader);
+            mtvTitle.setText("友情提示");
+            mRlBox.setBackground(context.getResources().getDrawable(R.drawable.ic_tip_unlock_bg));
+            int padding = (int) context.getResources().getDimension(R.dimen.dp_10);
+            mLlTitle.setPadding(padding, padding, padding, padding);
+            mClCall.setVisibility(View.VISIBLE);
+            mIvRTop.setVisibility(View.VISIBLE);
+            List<String> tipContent = ChatMsgUtil.getTipContent(tips.des);
+            mLlVideo.setOnClickListener(v -> {
+                open(tipContent.get(1));
+            });
+            mLlAudio.setOnClickListener(v -> {
+                open(tipContent.get(0));
+            });
+            String[] split = tips.des.split("\\n<tag");
+            content = split[0];
+            bodyTextView.setText(content);
+        } else {
+            SpannableStringBuilder span = ChatMsgUtil.getTipContent(/*"        " + */tips.des, "", new ChatMsgUtil.OnSelectListener() {
+                @Override
+                public void onClick(String content) {
+                    open(content);
+                }
+            });
+            bodyTextView.setText(span);
+        }
         bodyTextView.setMovementMethod(LinkMovementMethod.getInstance());
         bodyTextView.setOnLongClickListener(longClickListener);
     }
