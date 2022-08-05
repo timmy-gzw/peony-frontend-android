@@ -26,7 +26,7 @@ android {
 
     flavorDimensions ('office')
     productFlavors {
-        OFFICE {
+        office {
             dimension 'office'
         }
         heart {

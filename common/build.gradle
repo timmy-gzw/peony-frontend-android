@@ -46,7 +46,7 @@ android {
 
     flavorDimensions ('office')
     productFlavors {
-        OFFICE {
+        office {
             dimension 'office'
             buildConfigField "String", "APP_NAME", "\"peony\""
             buildConfigField "String", "WX_APPID", "\"wx4d4897cbee9c06d9\""

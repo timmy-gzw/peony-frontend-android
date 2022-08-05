@@ -117,7 +117,7 @@ android {
     }
     flavorDimensions ('office')
     productFlavors {
-        OFFICE {
+        office {
             dimension 'office'
             applicationId "com.tftechsz.peony"
             manifestPlaceholders = rootProject.ext.manifestPlaceholders
