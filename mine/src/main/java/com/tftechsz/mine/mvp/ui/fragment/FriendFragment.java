@@ -41,11 +41,13 @@ import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.FriendDto;
+import com.tftechsz.mine.mvp.ui.activity.MineFriendActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -197,7 +199,9 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
             return;
         }
         super.onRefresh();
-
+        if (getActivity() != null) {
+            ((MineFriendActivity)getActivity()).onRefresh(mType);
+        }
     }
 
     @Override
