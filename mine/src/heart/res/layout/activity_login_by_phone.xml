@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <androidx.legacy.widget.Space
@@ -25,16 +25,29 @@
 
     <ImageView
         android:id="@+id/iv_default"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_105"
-        android:background="@mipmap/mine_bg_phone_login"
-        android:textSize="@dimen/sp_15"
-        app:layout_constraintBottom_toTopOf="@id/tv_tip"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@mipmap/mine_ic_login_logo"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/base_tool_bar"
         app:layout_constraintVertical_chainStyle="packed"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:text="欢迎来到心心相伴"
+        android:textColor="@color/color_normal"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_default"
+        app:layout_constraintStart_toEndOf="@+id/iv_default"
+        app:layout_constraintTop_toTopOf="@+id/iv_default"
+
+        />
 
     <TextView
         android:id="@+id/tv_tip"
@@ -46,6 +59,7 @@
         android:paddingEnd="@dimen/dp_16"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_15"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/space"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -55,30 +69,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bg_white_radius20"
+        android:layout_marginTop="37dp"
         android:padding="@dimen/dp_30"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/space">
+        app:layout_constraintTop_toBottomOf="@id/iv_default">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_f9f9f9_radius"
+            android:background="@drawable/shape_bg_login_radius"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/dp_16"
-                android:text="@string/_86"
-                android:textColor="@color/color_mid_font"
-                android:textSize="@dimen/sp_14"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/et_phone"
@@ -94,22 +95,26 @@
                 android:paddingEnd="@dimen/dp_4"
                 android:singleLine="true"
                 android:textColor="@color/color_normal"
-                android:textColorHint="@color/color_light_font"
+                android:textColorHint="@color/color_ADADD7"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/tv_phone"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_phone"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="Autofill,TextFields" />
 
-            <View
-                android:layout_width="@dimen/dp_1"
-                android:layout_height="@dimen/dp_16"
-                android:background="@color/cd8d8d8"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/et_phone"
-                app:layout_constraintStart_toEndOf="@id/tv_phone"
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/dp_16"
+                android:text="@string/_86"
+                android:textColor="@color/color_8282AA"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -120,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_30"
-            android:background="@drawable/shape_bg_f9f9f9_radius"
+            android:background="@drawable/shape_bg_login_radius"
             app:layout_constraintTop_toBottomOf="@id/cl_mobile">
 
             <EditText
@@ -137,7 +142,7 @@
                 android:paddingEnd="@dimen/dp_4"
                 android:singleLine="true"
                 android:textColor="@color/color_normal"
-                android:textColorHint="@color/color_light_font"
+                android:textColorHint="@color/color_ADADD7"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +183,7 @@
             android:gravity="center"
             android:padding="@dimen/dp_4"
             android:text="@string/login_by_one_ley"
-            android:textColor="@color/c_fe4f6b"
+            android:textColor="@color/color_8282AA"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/cl_mobile"
             app:layout_constraintStart_toStartOf="@id/cl_mobile"
@@ -188,11 +193,11 @@
         <TextView
             android:id="@+id/tv_login"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_60"
             android:background="@drawable/sel_login_btn"
             android:enabled="false"
             android:gravity="center"
-            android:padding="@dimen/dp_13"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"

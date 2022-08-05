@@ -67,7 +67,6 @@ import java.util.HashMap;
 public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> implements View.OnClickListener, ILoginView {
 
     private TextView mTvOtherLogin;
-    private AutoPollRecyclerView mRvLogin;
     private TextView mTvAgreement;
     private ChatMsg.JumpMessage mJumpMessage;
     private final long[] hits = new long[5];
@@ -93,16 +92,10 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
         mCheckBox = findViewById(R.id.checkbox);
         mTvOtherLogin = findViewById(R.id.tv_other_phone);
         mTvOtherLogin.setVisibility(View.GONE);
-        mRvLogin = findViewById(R.id.rv_login);
         mTvAgreement = findViewById(R.id.tv_agreement);
         mLlBottom = findViewById(R.id.ll_bottom);
         findViewById(R.id.tv_wx_login).setOnClickListener(this);  //微信登录
         findViewById(R.id.tv_qq_login).setOnClickListener(this);   //QQ 登录
-        mRvLogin.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        LoginImageAdapter adapter = new LoginImageAdapter(BaseApplication.getInstance());
-        mRvLogin.setAdapter(adapter);
-        //启动滚动
-        mRvLogin.start();
         ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) mLlBottom.getLayoutParams();
         lp.bottomMargin = ImmersionBar.getNavigationBarHeight(mActivity) + ConvertUtils.dp2px(22);
         mLlBottom.setLayoutParams(lp);
@@ -125,7 +118,7 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
     @Override
     protected void initData() {
         super.initData();
-        ImmersionBar.with(this).statusBarDarkFont(false).transparentBar().init();
+        ImmersionBar.with(this).statusBarDarkFont(true).transparentBar().init();
         getP().uploadDeviceInfo(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID), 0, "", "default", "");
         initRxBus();
         mJumpMessage = (ChatMsg.JumpMessage) getIntent().getSerializableExtra("jumpMessage");
@@ -159,9 +152,9 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
         SpannableStringBuilder builder = new SpannableStringBuilder(res);
         int stat = res.indexOf("《");
         builder.setSpan(new TextClick(this, 0), stat, stat + 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")), stat, stat + 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#528EFF")), stat, stat + 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new TextClick(this, 1), stat + 7, stat + 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")), stat + 7, stat + 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#528EFF")), stat + 7, stat + 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mTvAgreement.setText(builder);
         mTvAgreement.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -253,7 +246,6 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mRvLogin.stop();
         Utils.removeHandler();
     }
 
@@ -262,7 +254,6 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            mRvLogin.stop();
             finish();
             return true;
         }

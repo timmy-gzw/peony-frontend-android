@@ -57,8 +57,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
     protected void initView(Bundle savedInstanceState) {
         countBackUtils = new CountBackUtils();
         new ToolBarBuilder().showBack(true)
-                .setTitle("手机号码登录/注册")
-                .setTitleColor(R.color.white)
+                .setTitle("登录/注册")
                 .build();
         mEtPhone = findViewById(R.id.et_phone);
         mEtCode = findViewById(R.id.et_code);
