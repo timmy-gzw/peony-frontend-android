@@ -83,7 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_red"
+            android:background="@drawable/bg_orange_radius30"
             android:gravity="center"
             android:paddingTop="@dimen/dp_14"
             android:paddingBottom="@dimen/dp_14"

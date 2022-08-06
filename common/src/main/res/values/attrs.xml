@@ -83,17 +83,18 @@
         <item>正式环境</item>
         <item>预发布环境</item>
         <item>提测环境</item>
-        <item>测试稳定版本</item>
+        <item>盘刚环境</item>
         <item>无用端口</item>
     </string-array>
 
     <string-array name="host_url">
         <item>http://config.api.peony.taifangsz.com/</item>
         <item>http://config.api.stg.peony.taifangsz.com/</item>
-        <item>http://config.api.dev.peony.taifangsz.com.com/</item>
-        <item>http://config.api.dev.peony.taifangsz.com.com/</item>
+        <item>http://config.api.dev.peony.taifangsz.com:8080/</item>
+        <item>http://config.api.dev.peony.taifangsz.com:8001/</item>
         <item>http://config.api.dev.peony.taifangsz.com.com/</item>
     </string-array>
+
 
     <declare-styleable name="AutofitTextView">
         <!-- Minimum size of the text. -->

@@ -65,6 +65,16 @@
                     app:riv_corner_radius="@dimen/dp_60"
                     tools:src="@mipmap/mine_ic_girl_default" />
 
+                <ImageView
+                    android:id="@+id/iv_edit_photo"
+                    android:layout_width="@dimen/dp_34"
+                    android:layout_height="@dimen/dp_34"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@mipmap/mine_ic_edit_photo"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_icon_audit"
@@ -159,8 +169,8 @@
 
                         <ImageView
                             android:id="@+id/iv_audio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="@dimen/dp_30"
                             android:src="@drawable/peony_me_zt_icon" />
 
                         <TextView
@@ -446,8 +456,8 @@
                     android:layout_height="@dimen/dp_50"
                     app:left_text_content="年收入"
                     app:right_arrow_visible="true"
-                    android:background="@color/transparent"
                     app:right_switch_visible="false"
+                    android:layout_marginBottom="@dimen/dp_10"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 

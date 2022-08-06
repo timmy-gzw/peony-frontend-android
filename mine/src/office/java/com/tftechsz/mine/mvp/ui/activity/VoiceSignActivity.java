@@ -8,6 +8,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ColorUtils;
 import com.blankj.utilcode.util.FileUtils;
+import com.gyf.immersionbar.ImmersionBar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.other.GlobalDialogManager;

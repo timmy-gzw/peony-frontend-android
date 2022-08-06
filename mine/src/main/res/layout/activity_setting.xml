@@ -139,7 +139,7 @@
                 android:layout_marginBottom="@dimen/dp_20"
                 android:background="@color/white"
                 android:text="@string/login_out"
-                android:textColor="#F76576" />
+                android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

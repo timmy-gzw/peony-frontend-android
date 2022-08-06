@@ -147,6 +147,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         findViewById(R.id.rl_avatar).setOnClickListener(this);
         findViewById(R.id.rl_sign).setOnClickListener(this);
         findViewById(R.id.rl_name).setOnClickListener(this);
+        findViewById(R.id.iv_edit_photo).setOnClickListener(this);
         mItemBirthday.setOnClickListener(this);
         mItemHomeAddress.setOnClickListener(this);
         mItemJob.setOnClickListener(this);
@@ -354,7 +355,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                 return;
             }
             EditInfoActivity.startForSign(this, mItemSign.getText().toString(), REQUEST_SIGN);
-        } else if (id == R.id.rl_avatar) {  //头像
+        } else if (id == R.id.rl_avatar || id == R.id.iv_edit_photo) {  //头像
             if (mUserInfo != null) {
                 if (!TextUtils.isEmpty(mUserInfo.audit_icon)) {
                     toastTip("头像正在审核，无法更改");

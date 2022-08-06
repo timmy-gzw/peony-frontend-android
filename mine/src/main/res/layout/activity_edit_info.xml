@@ -70,11 +70,11 @@
         android:gravity="center"
         android:layout_marginStart="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_16"
-        android:background="@drawable/bg_red"
+        android:background="@drawable/bg_orange_radius30"
         android:layout_marginTop="@dimen/dp_15"
         android:paddingTop="@dimen/dp_5"
         android:paddingBottom="@dimen/dp_5"
         android:text="提交"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_14" />
+        android:textSize="@dimen/sp_16" />
 </LinearLayout>

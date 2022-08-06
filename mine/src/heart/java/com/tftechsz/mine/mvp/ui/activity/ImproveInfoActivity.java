@@ -83,7 +83,6 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
     private CustomPopWindow mNoDataPop;
     private CustomPopWindow mGirlPop;
     private CustomPopWindow mBackPop;
-    private View ivBack;
 
     @Override
     public ImproveInfoPresenter initPresenter() {
@@ -92,13 +91,13 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        SoftHideKeyBoardUtil.assistActivity(this);
-        ivBack = findViewById(R.id.toolbar_back_all);
-        ivBack.setOnClickListener(this);
+        new ToolBarBuilder().showBack(true)
+                .build();
         findViewById(R.id.tv_complete).setOnClickListener(this);
         mIvBoy = findViewById(R.id.iv_boy);
         mIvGirl = findViewById(R.id.iv_girl);
         mTvGirl = findViewById(R.id.tv_girl);
+        mTvBoy = findViewById(R.id.tv_boy);
         mLlGirl = findViewById(R.id.ll_girl);
         mLlBoy = findViewById(R.id.ll_boy);
         mLlBoy.setOnClickListener(this);
@@ -178,9 +177,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.toolbar_back_all) { //返回
-            onBackPressed();
-        } else if (id == R.id.rl_icon) { //头像
+        if (id == R.id.rl_icon) { //头像
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 // 先判断有没有权限
                 if (Environment.isExternalStorageManager()) {
@@ -261,7 +258,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
             if (mCompleteReq.sex == 2) {
                 if (mGirlPop == null)
                     mGirlPop = new CustomPopWindow(mContext, 1)
-                            .setContent(new SpannableStringUtils.Builder()
+                            .setContentText(new SpannableStringUtils.Builder()
                                     .append("您当前选择的性别为:")
                                     .append(" 女")
                                     .setForegroundColor(Utils.getColor(R.color.red))
@@ -470,7 +467,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                     mEtName.setSelection(tempBoyName.length());
                 mTvBirthday.setText(tempBoyBir);
                 mRandomView.setVisibility(View.VISIBLE);
-                mTvGirl.setTextColor(Color.parseColor("#FFFFFF"));
+                mTvBoy.setTextColor(Color.parseColor("#FFFFFF"));
                 mTvGirl.setTextColor(Color.parseColor("#FF5078"));
                 mLlBoy.setBackgroundResource(R.drawable.bg_orange_radius25);
                 mLlGirl.setBackgroundResource(R.drawable.bg_gray_radius25);
@@ -488,7 +485,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                     mEtName.setSelection(tempGirlName.length());
                 mTvBirthday.setText(tempGirlBir);
                 mRandomView.setVisibility(View.GONE);
-                mTvGirl.setTextColor(Color.parseColor("#528EFF"));
+                mTvBoy.setTextColor(Color.parseColor("#528EFF"));
                 mTvGirl.setTextColor(Color.parseColor("#FFFFFF"));
                 mLlBoy.setBackgroundResource(R.drawable.bg_gray_radius25);
                 mLlGirl.setBackgroundResource(R.drawable.bg_orange_radius25);

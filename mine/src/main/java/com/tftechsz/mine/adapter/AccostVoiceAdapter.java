@@ -38,7 +38,7 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
         ViewGroup.LayoutParams layoutParams = llVoice.getLayoutParams();
         layoutParams.width = currentBubbleWidth;
         llVoice.setLayoutParams(layoutParams);
-        helper.setVisible(R.id.bot_line, helper.getLayoutPosition() != getData().size() - 1);
+        helper.setVisible(R.id.bot_line, getItemPosition(item) != getData().size() - 1);
 
     }
 

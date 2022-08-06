@@ -23,7 +23,6 @@
                 android:id="@+id/item_message_price"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
-
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/white"
                 app:left_text_content="消息价格"
