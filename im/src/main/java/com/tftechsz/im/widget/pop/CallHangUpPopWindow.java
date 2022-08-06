@@ -60,7 +60,7 @@ public class CallHangUpPopWindow extends BasePopupWindow implements View.OnClick
 
             @Override
             public void finish() {
-                tvHungUp.setText("残忍挂断");
+                tvHungUp.setText(R.string.hang_up_left_text);
                 tvHungUp.setEnabled(true);
             }
         });

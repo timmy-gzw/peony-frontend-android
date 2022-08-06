@@ -1,0 +1,4 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="hang_up_left_text">狠心挂断</string>
+    <string name="hang_up_right_text">我再想想</string>
+</resources>

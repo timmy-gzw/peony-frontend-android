@@ -77,7 +77,7 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
             return;
         ChatMsg.Tips tips = JSON.parseObject(chatMsg.content, ChatMsg.Tips.class);
         String content = "";
-
+        bodyTextView.setTextColor(context.getResources().getColor(R.color.white));
         if (tips.des.contains("跟她语音聊天") && tips.des.contains("跟她视频聊天")) {
             mLlleft.setVisibility(View.GONE);
             mtvTitle.setVisibility(View.VISIBLE);

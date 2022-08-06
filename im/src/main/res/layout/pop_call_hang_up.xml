@@ -67,7 +67,7 @@
             android:background="@drawable/bg_red"
             android:layout_marginStart="@dimen/dp_10"
             android:gravity="center"
-            android:text="继续通话"
+            android:text="@string/hang_up_right_text"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_15" />
 
