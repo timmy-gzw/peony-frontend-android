@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
-            android:textColor="@color/color_cccccc"
+            android:textColor="@color/color_light_font"
             android:textSize="@dimen/text_size_12"
             app:layout_constraintLeft_toLeftOf="@id/tv_content"
             app:layout_constraintTop_toBottomOf="@id/tv_content"

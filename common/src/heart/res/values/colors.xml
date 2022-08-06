@@ -21,5 +21,6 @@
     <color name="bg_color">#F4F5FB</color>
     <color name="c_btn_p2p">@color/color_normal</color>
     <color name="c_btn_accost">@color/white</color>
+    <color name="c_del_content">@color/color_light_font</color>
 
 </resources>

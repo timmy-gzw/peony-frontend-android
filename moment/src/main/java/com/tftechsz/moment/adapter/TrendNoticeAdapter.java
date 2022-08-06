@@ -7,9 +7,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.tftechsz.common.iservice.UserProviderService;
@@ -67,11 +69,14 @@ public class TrendNoticeAdapter extends BaseQuickAdapter<NoticeBean, BaseViewHol
         }
 
         if (item.getStatus() == 0) { //判断删除状态
-            content.setBackgroundResource(R.drawable.sp_eee_c_2);
+            content.setBackgroundResource(R.drawable.sp_del_content_bg);
             content.setTextSize(12);
+            content.setTextColor(ContextCompat.getColor(getContext(), R.color.c_del_content));
+            content.setPadding(ConvertUtils.dp2px(4), ConvertUtils.dp2px(2), ConvertUtils.dp2px(4), ConvertUtils.dp2px(2));
         } else {
             content.setBackgroundResource(0);
             content.setTextSize(18);
+            content.setTextColor(ContextCompat.getColor(getContext(), R.color.color_normal));
             content.setPadding(0, 0, 0, 0);
         }
 
