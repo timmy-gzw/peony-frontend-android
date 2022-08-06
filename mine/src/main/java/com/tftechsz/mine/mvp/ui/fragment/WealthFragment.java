@@ -24,6 +24,7 @@ import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.LevelTitleAdapter;
 import com.tftechsz.mine.adapter.LevelUpgradeAdapter;
@@ -131,19 +132,19 @@ public class WealthFragment extends BaseMvpFragment {
             mClBg.setVisibility(View.VISIBLE);
             if (type.equals("0")) {//财富
                 mClBg.setBackgroundResource(R.mipmap.bg_wealth_level);
-                mTvName.setTextColor(Color.parseColor("#EDD398"));
-                mTvLevel.setTextColor(Color.parseColor("#EDD398"));
-                mTvNextLevelNum.setTextColor(Color.parseColor("#EDD398"));
-                mTvNextLevel.setTextColor(Color.parseColor("#EDD398"));
+                mTvName.setTextColor(Utils.getColor(R.color.c_edd398));
+                mTvLevel.setTextColor(Utils.getColor(R.color.c_edd398));
+                mTvNextLevelNum.setTextColor(Utils.getColor(R.color.c_edd398));
+                mTvNextLevel.setTextColor(Utils.getColor(R.color.c_edd398));
                 mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
                 mTitleWealth.setText("什么是财富等级");
                 mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注");
             } else {//魅力
                 mClBg.setBackgroundResource(R.mipmap.bg_charm_level);
-                mTvName.setTextColor(Color.parseColor("#4337FF"));
-                mTvLevel.setTextColor(Color.parseColor("#4337FF"));
-                mTvNextLevelNum.setTextColor(Color.parseColor("#4337FF"));
-                mTvNextLevel.setTextColor(Color.parseColor("#4337FF"));
+                mTvName.setTextColor(Utils.getColor(R.color.c_4337FF));
+                mTvLevel.setTextColor(Utils.getColor(R.color.c_4337FF));
+                mTvNextLevelNum.setTextColor(Utils.getColor(R.color.c_4337FF));
+                mTvNextLevel.setTextColor(Utils.getColor(R.color.c_4337FF));
                 mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_charm_bg));
                 mTitleWealth.setText("什么是魅力等级");
                 mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");

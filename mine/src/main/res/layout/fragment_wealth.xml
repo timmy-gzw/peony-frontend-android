@@ -27,7 +27,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="@dimen/dp_80"
-                    app:civ_border_color="#EDD398"
+                    app:civ_border_color="@color/c_edd398"
                     app:civ_border_width="1dp"
                     android:src="@drawable/default_cover"
                     android:layout_height="@dimen/dp_80"/>
@@ -46,7 +46,7 @@
                         android:text="糊涂小美女"
                         android:textSize="@dimen/sp_18"
                         android:textStyle="bold"
-                        android:textColor="#EDD398"
+                        android:textColor="@color/c_edd398"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -89,7 +89,7 @@
                         android:id="@+id/tv_level"
                         android:textSize="@dimen/sp_12"
                         android:text="Lv.1"
-                        android:textColor="#EDD398"
+                        android:textColor="@color/c_edd398"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -97,7 +97,7 @@
                         android:id="@+id/tv_level_to_next"
                         android:textSize="@dimen/sp_12"
                         android:text="距离升级还差：35"
-                        android:textColor="#EDD398"
+                        android:textColor="@color/c_edd398"
                         android:gravity="center"
                         android:layout_weight="1"
                         android:layout_width="0dp"
@@ -107,7 +107,7 @@
                         android:id="@+id/tv_level_next"
                         android:textSize="@dimen/sp_12"
                         android:text="Lv.2"
-                        android:textColor="#EDD398"
+                        android:textColor="@color/c_edd398"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -143,6 +143,7 @@
             <TextView
                 android:id="@+id/tv_wealth_decs"
                 android:layout_marginTop="@dimen/dp_10"
+                android:textColor="@color/c_999999"
                 android:text="财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
