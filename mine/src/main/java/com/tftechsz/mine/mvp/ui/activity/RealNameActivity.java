@@ -317,7 +317,7 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
                 .append("\n\n")
                 .append(data.tips)
                 .setFontSize(12, true)
-                .setForegroundColor(Utils.getColor(R.color.color_cc))
+                .setForegroundColor(Utils.getColor(R.color.color_light_font))
                 .create();
 
         if (mPopWindow == null) {

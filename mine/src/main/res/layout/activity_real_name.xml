@@ -116,7 +116,7 @@
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent" />
 
-			<RelativeLayout
+			<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="@dimen/dp_250"
 				android:layout_height="@dimen/dp_180"
 				android:layout_marginHorizontal="@dimen/dp_48"
@@ -144,7 +144,7 @@
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintTop_toTopOf="parent"
 					app:riv_corner_radius="@dimen/dp_10" />
-			</RelativeLayout>
+			</androidx.constraintlayout.widget.ConstraintLayout>
 
 			<TextView
 				android:layout_width="wrap_content"
