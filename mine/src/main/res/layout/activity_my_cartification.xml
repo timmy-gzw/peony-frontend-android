@@ -80,10 +80,10 @@
             android:enabled="false"
             android:paddingHorizontal="@dimen/dp_12"
             android:paddingVertical="@dimen/dp_6"
-            android:textStyle="bold"
             android:text="@string/to_cert"
             android:textColor="@color/sel_text_fff_999_enable"
             android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -150,13 +150,14 @@
             android:enabled="false"
             android:paddingHorizontal="@dimen/dp_12"
             android:paddingVertical="@dimen/dp_6"
-            android:textStyle="bold"
             android:text="@string/to_cert"
             android:textColor="@color/sel_text_fff_999_enable"
             android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:enabled="true" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
