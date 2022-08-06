@@ -25,10 +25,8 @@ import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.netease.nim.uikit.common.UserInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
@@ -71,7 +69,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     private CommonItemView mItemWeight;  //体重
     private CommonItemView mItemIncome;  //年收入
     private RelativeLayout mRlMineInfo;
-    private RoundedImageView mIvAvatar;
+    private ImageView mIvAvatar;
     private TextView mTvName, mTvNameAudit, mTvSignAudit;
     private UserInfo mUserInfo;
     private String path = "";  //头像路径
@@ -105,11 +103,8 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     @Override
     protected void initView(Bundle savedInstanceState) {
         new ToolBarBuilder().showBack(true)
-                .setTitle("编辑资料")
-                .setBackgroundColor(0)
+                .setTitle("我的资料")
                 .build();
-        ImmersionBar.with(this).transparentStatusBar()
-                .navigationBarColor(R.color.bg_color).init();
         mItemSign = findViewById(R.id.tv_right);
         mIvAvatar = findViewById(R.id.iv_avatar);
         mItemSex = findViewById(R.id.item_sex);
@@ -288,7 +283,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     private void setInfo(CommonItemView textView, String data) {
         if (TextUtils.isEmpty(data) || TextUtils.equals("0", data)) {
             textView.setRightText("待完善");
-            textView.setRightTextColor(this, R.color.colorPrimary);
+            textView.setRightTextColor(this, R.color.red);
         } else {
             textView.setRightText(data);
             textView.setRightTextColor(this, R.color.color_normal);
@@ -301,7 +296,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     private void setFlagHometown(CommonItemView textView, String data) {
         if (TextUtils.isEmpty(data) || TextUtils.equals("0", data)) {
             textView.setRightText("待完善");
-            textView.setRightTextColor(this, R.color.colorPrimary);
+            textView.setRightTextColor(this, R.color.red);
         } else {
             strHometown = data.split(" ");
             textView.setRightText(data);
@@ -326,7 +321,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         if (TextUtils.isEmpty(mUserInfo.getDesc()) || TextUtils.equals("0", mUserInfo.getDesc())) {
             if (TextUtils.isEmpty(mUserInfo.audit_desc)) {
                 mItemSign.setText("待完善");
-                mItemSign.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+                mItemSign.setTextColor(ContextCompat.getColor(this, R.color.red));
                 mTvSignAudit.setVisibility(View.GONE);
             } else {
                 mItemSign.setText(mUserInfo.audit_desc);
@@ -575,7 +570,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                     }
                 }
 //                mItemNickName.setRightText("审核中");
-//                mItemNickName.setRightTextColor(this, R.color.colorPrimary);
+//                mItemNickName.setRightTextColor(this, R.color.red);
             } else if (requestCode == REQUEST_JOB_CODE) {
                 if (data != null && mUserInfo != null) {
                     mUserInfo.setJob(data.getStringExtra("type"));
