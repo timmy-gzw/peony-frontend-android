@@ -6,16 +6,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.ConvertUtils;
-import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
-import com.tftechsz.common.base.BaseWebViewActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.common.event.CommonEvent;
@@ -27,9 +23,6 @@ import com.tftechsz.mine.entity.dto.ShopInfoDto;
 import com.tftechsz.mine.mvp.IView.IExchangeDetailView;
 import com.tftechsz.mine.mvp.presenter.ExchangeDetailPresenter;
 import com.tftechsz.mine.widget.pop.RealNamePopWindow;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 兑换详情
@@ -44,7 +37,6 @@ public class ExchangeDetailsActivity extends BaseMvpActivity<IExchangeDetailView
     @Autowired
     UserProviderService service;
     private TextView mTips;
-    private LinearLayout mBotLink;
 
     public static void startActivity(Context context, ShopInfoDto dto, String integral) {
         Intent intent = new Intent(context, ExchangeDetailsActivity.class);
@@ -71,7 +63,6 @@ public class ExchangeDetailsActivity extends BaseMvpActivity<IExchangeDetailView
         mTvExchange = findViewById(R.id.tv_exchange);
         mTvIntegral = findViewById(R.id.tv_integral);
         mTvExchangeNum = findViewById(R.id.tv_exchange_num);
-        mBotLink = findViewById(R.id.bot_link);
         initListener();
 
     }
@@ -112,37 +103,6 @@ public class ExchangeDetailsActivity extends BaseMvpActivity<IExchangeDetailView
             }
         }
         initRxBus();
-        if (AppUtils.isAppDebug()) {
-            mBotLink.removeAllViews();
-            List<ConfigInfo.MineInfo> list = new ArrayList<>();
-            ConfigInfo.MineInfo mineInfo = new ConfigInfo.MineInfo();
-            // TODO: update this
-            mineInfo.link = "https://h5.dev.peony.taifangsz.com.com/page/haolinggong.html";
-            mineInfo.title = "《好灵工服务协议》";
-            list.add(mineInfo);
-            ConfigInfo.MineInfo mineInfo1 = new ConfigInfo.MineInfo();
-            mineInfo1.link = "https://h5.dev.peony.taifangsz.com.com/page/yunxiang.html";
-            mineInfo1.title = "《云享服务协议》";
-            list.add(mineInfo1);
-            ConfigInfo.MineInfo mineInfo2 = new ConfigInfo.MineInfo();
-            mineInfo2.link = "https://h5.dev.peony.taifangsz.com.com/page/zongxiang.html";
-            mineInfo2.title = "《众享服务协议》";
-            list.add(mineInfo2);
-            for (int i = 0, j = list.size(); i < j; i++) {
-                ConfigInfo.MineInfo mine = list.get(i);
-                TextView textView = new TextView(mContext);
-                textView.setTextSize(12);
-                textView.setPadding(ConvertUtils.dp2px(6), ConvertUtils.dp2px(3), ConvertUtils.dp2px(6), ConvertUtils.dp2px(3));
-                textView.setText(mine.title);
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        BaseWebViewActivity.start(ExchangeDetailsActivity.this, mine.title.replace("《", "").replace("》", ""), mine.link, 0, 7);
-                    }
-                });
-                mBotLink.addView(textView);
-            }
-        }
     }
 
 

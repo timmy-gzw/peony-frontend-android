@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_16"
-        android:textColor="@color/red"
+        android:textColor="@color/colorPrimary"
         android:textSize="@dimen/sp_15"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/tv_exchange_num"
@@ -86,9 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:lineSpacingExtra="@dimen/dp_2"
-        android:textColor="#ff999999"
+        android:textColor="@color/color_light_font"
         android:textSize="@dimen/sp_12"
-        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/tv_integral"
         app:layout_constraintStart_toStartOf="@id/tv_coin"
@@ -108,19 +107,5 @@
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tips" />
-
-
-    <LinearLayout
-        android:id="@+id/bot_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_12"
-        android:orientation="horizontal"
-        android:textColor="@color/color_mid_font"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_exchange" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
