@@ -56,9 +56,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                         TextView tv_level_name = helper.getView(R.id.tv_level_name);
                         //已获得“萍水相逢”标签
                         tv_level_name.setText("LV."+dto.level+" "+dto.tips.substring(dto.tips.indexOf("“")+1,dto.tips.indexOf("”")));
-                        tv_level_name.setTextColor(Color.parseColor("#CD5C33"));
+                        tv_level_name.setTextColor(Utils.getColor(R.color.c_50CD5C33));
                         TextView tv_lock = helper.getView(R.id.tv_lock);
-                        tv_lock.setTextColor(Color.parseColor("#CD5C33"));
+                        tv_lock.setTextColor(Utils.getColor(R.color.c_50CD5C33_2));
                         String[] s = dto.title.split(" ");
                         tv_lock.setText(s[1]+(s[2].substring(s[2].indexOf("/")+1)).replace(".1","")+"解锁");
                         imageView.setVisibility(View.VISIBLE);
@@ -73,9 +73,9 @@ public class IntmacyLevelAdapter extends BaseMultiItemQuickAdapter<MultiIntmacyI
                         TextView tv_level_name = helper.getView(R.id.tv_level_name);
                         //已获得“萍水相逢”标签
                         tv_level_name.setText("LV."+dto.level+" "+dto.tips.substring(dto.tips.indexOf("“")+1,dto.tips.indexOf("”")));
-                        tv_level_name.setTextColor(Color.parseColor("#50CD5C33"));
+                        tv_level_name.setTextColor(Utils.getColor(R.color.c_CD5C33));
                         TextView tv_lock = helper.getView(R.id.tv_lock);
-                        tv_lock.setTextColor(Color.parseColor("#50CD5C33"));
+                        tv_lock.setTextColor(Utils.getColor(R.color.c_CD5C33));
                         tv_lock.setText("已解锁");
                         if(dto.level.equals(mLastItemDto.getDto().level) && dto.tips.equals(mLastItemDto.getDto().tips)) {
                             imageView.setVisibility(View.INVISIBLE);

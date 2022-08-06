@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:gravity="top">
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@mipmap/bg_intmacy_pop_bottom"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom2" />
+
+    <ImageView
+        android:id="@+id/intmacy_pop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/bg_intmacy_pop"
+        app:layout_constraintBottom_toTopOf="@id/bottom"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="86dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_up_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/shape_intimacy_bg"
+            android:paddingHorizontal="@dimen/dp_40"
+            android:paddingVertical="@dimen/dp_3"
+            android:text="亲密度"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- 能滑动的部分 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_up_level"
+            android:layout_marginTop="15dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_push_pull"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/icon_intamcy_push"
+        app:layout_constraintBottom_toTopOf="@id/bottom2" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_35"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_strategy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_marginRight="@dimen/dp_16"
+            android:text="升级攻略"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12" />
+
+        <RelativeLayout
+            android:id="@+id/fl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_9"
+            android:background="@mipmap/intmacy_bg"
+            android:gravity="center">
+
+
+            <com.tftechsz.common.widget.CircleImageView
+                android:id="@+id/iv_to"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="@dimen/dp_60"
+                android:layout_toEndOf="@id/iv_from"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_share_qq"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="@dimen/dp_2" />
+
+            <com.tftechsz.common.widget.CircleImageView
+                android:id="@+id/iv_from"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginEnd="-15dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_share_qq"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="@dimen/dp_2" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/img_algin_pcm_ablow10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fl_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-37dp"
+            android:background="@mipmap/peony_ax_icon"
+            android:gravity="bottom|center_horizontal"
+            android:paddingHorizontal="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_3"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_10"
+            tools:text="LV.100 遇见美好" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:id="@+id/bottom2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

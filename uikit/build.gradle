@@ -27,6 +27,11 @@ android {
         }
         heart{
             res.srcDirs = ['heart/res', 'heart/res-ptr2', 'heart/res-chatroom']
+            java.srcDirs = ['heart/src']
+        }
+        office{
+            res.srcDirs = ['office/res', 'office/res-ptr2', 'office/res-chatroom']
+            java.srcDirs = ['office/src']
         }
     }
 

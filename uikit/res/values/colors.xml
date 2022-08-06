@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
+    <color name="colorPrimary">#FF5A7B</color>
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
@@ -96,4 +97,5 @@
     <color name="blue_7f89f3">#7F89F3</color>
     <color name="color_noble">#FFECCB</color>
     <color name="color_d1d1d1">#d1d1d1</color>
+    <color name="c_1affffff">#1affffff</color>
 </resources>

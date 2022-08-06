@@ -518,18 +518,19 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRvTopic.setLayoutManager(linearLayoutManager);
-        TopicAdapter topicAdapter = new TopicAdapter(0);
         ConfigInfo configInfo = service.getConfigInfo();
         List<String> topics = service.getUserInfo().getSex() == 1 ? configInfo.share_config.boy_quick_topic : configInfo.share_config.girl_quick_topic;
         //打乱顺序，取前五个
         if(topics != null){
+            TopicAdapter topicAdapter = new TopicAdapter(0);
             Collections.shuffle(topics);
             topicAdapter.setList(topics.subList(0, Math.min(topics.size(), 5)));
+            mRvTopic.setAdapter(topicAdapter);
+            topicAdapter.setOnItemClickListener((adapter, view, position) -> {
+                formrtAndSendMessage(topicAdapter.getItem(position));
+            });
+            mRvTopic.setVisibility(View.VISIBLE);
         }
-        mRvTopic.setAdapter(topicAdapter);
-        topicAdapter.setOnItemClickListener((adapter, view, position) -> {
-            formrtAndSendMessage(topicAdapter.getItem(position));
-        });
         mAnimationVip = findView(R.id.animation_vip);
         lottieAnimationView = findView(R.id.animation_view);
         mActivityIcon = findView(R.id.activity_icon);

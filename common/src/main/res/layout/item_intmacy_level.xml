@@ -52,7 +52,7 @@
             android:id="@+id/tv_level_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:textColor="#50CD5C33"
+            android:textColor="@color/c_50CD5C33_2"
             android:textSize="@dimen/sp_16"
             android:fontFamily="sans-serif-medium"
             android:textStyle="normal"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/tv_lock"
-            android:textColor="#50CD5C33"
+            android:textColor="@color/c_50CD5C33_2"
             android:textSize="@dimen/sp_12"
             android:layout_marginLeft="@dimen/dp_15"
             app:layout_constraintTop_toTopOf="parent"
