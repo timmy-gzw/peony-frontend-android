@@ -9,6 +9,7 @@ import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.entity.dto.TrendDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IMineDetailView extends MvpView {
@@ -17,6 +18,8 @@ public interface IMineDetailView extends MvpView {
     void getUserInfoSuccess(UserInfo userInfo);
 
     void getGiftSuccess(List<GiftDto> data);
+
+    void getGiftSuccess(ArrayList<GiftDto> data);
 
     void getTrendSuccess(List<TrendDto> data);
 

@@ -27,6 +27,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.util.VipUtils;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpFragment;
@@ -360,6 +361,8 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
 
                 //渲染中部RecyclerView
                 List<ConfigInfo.MineInfo> mineMidList = CommonUtil.addMineInfo(configInfo.share_config.my_main_nav);
+
+                LogUtil.e("==================",mineMidList.size()+"====");
                 if (mineMidList.size() > 0) {
                     for (ConfigInfo.MineInfo mineInfo : mineMidList) {
                         if ("谁看过我".equals(mineInfo.title) || "访客记录".equals(mineInfo.title)) {

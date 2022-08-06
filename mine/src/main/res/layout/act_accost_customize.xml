@@ -30,7 +30,7 @@
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginEnd="@dimen/dp_28"
         android:layout_marginBottom="@dimen/dp_22"
-        android:background="@drawable/bg_red"
+        android:background="@drawable/bg_orange_radius30"
         android:gravity="center"
         android:orientation="horizontal"
         android:text="添加常用语"

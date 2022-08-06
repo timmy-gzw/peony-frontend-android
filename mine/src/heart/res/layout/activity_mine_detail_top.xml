@@ -1,0 +1,386 @@
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_bar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    app:elevation="0dp">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:contentScrim="@color/white"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+     <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.legacy.widget.Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="@id/banner" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_voice"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="@dimen/dp_44"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/space"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.3"
+                    android:background="@drawable/bg_voice_circle" />
+
+                <ImageView
+                    android:id="@+id/iv_voice"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/mine_ic_voice_record"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie_voice"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="voice_record.json"
+                    app:lottie_imageAssetsFolder="gift/"
+                    app:lottie_loop="true"
+                    tools:visibility="visible" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="iv_voice,lottie_voice" />
+
+                <TextView
+                    android:id="@+id/tv_voice_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/dp_7"
+                    android:paddingEnd="@dimen/dp_12"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_15"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/barrier"
+                    tools:text="录制语音" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_profile_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_38"
+                android:layout_marginStart="@dimen/dp_40"
+                android:layout_marginEnd="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="@dimen/dp_22"
+                android:requiresFadingEdge="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/space"
+                app:layout_constraintEnd_toStartOf="@id/iv_profile_add"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@id/ll_voice"
+                app:layout_constraintWidth_max="@dimen/dp_150"
+                app:layout_goneMarginEnd="@dimen/dp_16"
+                tools:itemCount="8"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_profile_pic"
+                tools:orientation="horizontal"
+                tools:reverseLayout="true" />
+
+            <View
+                android:id="@+id/view_mask"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/dp_1"
+                android:background="@drawable/sp_g_tran_white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/rv_profile_pic"
+                app:layout_constraintEnd_toEndOf="@id/rv_profile_pic"
+                app:layout_constraintTop_toTopOf="@id/rv_profile_pic" />
+
+            <ImageView
+                android:id="@+id/iv_profile_add"
+                android:layout_width="@dimen/dp_38"
+                android:layout_height="@dimen/dp_38"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:src="@mipmap/ic_profile_add"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/rv_profile_pic"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="ContentDescription"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_lt_rt_20_ffffff"
+                android:paddingBottom="@dimen/dp_10"
+                app:layout_constraintTop_toTopOf="@id/space">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_21"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="你吃" />
+
+                <LinearLayout
+                    android:id="@+id/ll_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:gravity="bottom"
+                    app:layout_constraintStart_toStartOf="@id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name">
+
+                    <ImageView
+                        android:id="@+id/iv_vip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_14"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:src="@mipmap/vip_icon_bg"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/iv_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_14"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:textColor="@color/white"
+                        android:visibility="gone"
+                        tools:background="@drawable/bg_girl"
+                        tools:drawableStart="@drawable/ic_girl"
+                        tools:text="18"
+                        tools:textSize="@dimen/sp_10"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/iv_real_people"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_14"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:src="@mipmap/peony_home_xczr_icon"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/iv_auth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_14"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:src="@mipmap/ic_authentication"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_attention"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:background="@drawable/sp_s_primary_f78765_c_16"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_3"
+                    android:text="@string/attention_ta"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_name"
+                    tools:text="关注Ta" />
+
+                <TextView
+                    android:id="@+id/tv_sign"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_11"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_info"
+                    tools:text="可甜可咸，想交个真心朋友，是你吗" />
+
+                <LinearLayout
+                    android:id="@+id/ll_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_49"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:background="@drawable/sp_recharge_coin"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sign">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_auth_left"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginEnd="@dimen/dp_15"
+                        android:layout_weight="1"
+                        android:text="完成真人认证，交友成功率提升10倍"
+                        android:textColor="@color/color_8282AA"
+                        android:textSize="@dimen/sp_12" />
+
+                    <TextView
+                        android:layout_width="@dimen/dp_48"
+                        android:layout_height="@dimen/dp_27"
+                        android:background="@drawable/shape_play_message_radiu6"
+                        android:padding="@dimen/dp_5"
+                        android:text="去认证"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_12" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_guard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/dp_220"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/mine_bg_no_guard" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/mine_ic_no_guard" />
+
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/tob_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:padding="@dimen/dp_6"
+                    android:src="@mipmap/ic_back_bg_white"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tob_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxEms="12"
+                    android:singleLine="true"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_18" />
+
+                <ImageView
+                    android:id="@+id/tob_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:padding="@dimen/dp_6"
+                    android:paddingVertical="@dimen/dp_6"
+                    android:paddingStart="@dimen/dp_6"
+                    android:paddingEnd="0dp"
+                    android:src="@mipmap/ic_more_white"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/edit_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/sp_30black_lt_25_lb_25"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/dp_16"
+                    android:paddingTop="@dimen/dp_8"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_8"
+                    android:text="@string/edit_userInfo"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12"
+                    app:drawableStartCompat="@mipmap/mine_edit" />
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+</com.google.android.material.appbar.AppBarLayout>
