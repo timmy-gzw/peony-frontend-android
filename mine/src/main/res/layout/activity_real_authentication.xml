@@ -34,7 +34,7 @@
                 android:layout_width="182dp"
                 android:layout_height="182dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/right_avater"
+                android:src="@mipmap/ic_avatar_female"
                 app:layout_constraintBottom_toBottomOf="@id/iv_avatar_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
