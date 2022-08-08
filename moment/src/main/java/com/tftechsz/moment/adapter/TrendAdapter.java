@@ -80,11 +80,8 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         } else {
             holder.tvContent.setVisibility(View.GONE);
         }
-        if (!item.isPraise()) {//为点过赞
-            holder.btnLike.setLiked(false);
-        } else {
-            holder.btnLike.setLiked(true);
-        }
+        //为点过赞
+        holder.btnLike.setLiked(item.isPraise());
         holder.mPosition = holder.getLayoutPosition();
         holder.tvLikeCount.setText(item.getPraises() == 0 ? "点赞" : String.valueOf(item.getPraises()));
         holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0 ? R.color.color_light_font : R.color.color_F8D423));
@@ -239,11 +236,6 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
     }
 
     public void updateData(int clickPosition, CircleBean data) {
-        ImageView icon = (ImageView) getViewByPosition(clickPosition, R.id.iv_photo);
-        if (!data.getIcon().equals(getData().get(clickPosition).getIcon())) {
-            GlideUtils.loadRouteImage(getContext(), icon, data.getIcon());
-        }
-
         TextView tvName = (TextView) getViewByPosition(clickPosition, R.id.tv_name);
         if (tvName != null)
             tvName.setText(data.getNickname());
@@ -273,7 +265,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         public FrameLayout mPlayerContainer;
         public LikeButton btnLike;//点赞按钮
         public RecyclerView rvTrendImage;
-        private ImageView mImgVip;
+        private final ImageView mImgVip;
 
         public TendHolder(View view) {
             super(view);
