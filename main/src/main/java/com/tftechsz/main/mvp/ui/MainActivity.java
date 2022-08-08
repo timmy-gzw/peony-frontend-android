@@ -65,6 +65,8 @@ import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.NavigationLogEntity;
+import com.tftechsz.common.entity.SignInBean;
+import com.tftechsz.common.entity.SignInSuccessBean;
 import com.tftechsz.common.entity.UpdateInfo;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.MessageEvent;
@@ -74,12 +76,8 @@ import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.location.BDLocationManager;
 import com.tftechsz.common.location.LocationListener;
-import com.tftechsz.common.music.base.BaseMusicHelper;
-import com.tftechsz.common.music.logger.AppLogUtils;
-import com.tftechsz.common.music.service.PlayService;
 import com.tftechsz.common.nim.service.CallService;
 import com.tftechsz.common.nim.service.DownGiftWork;
-import com.tftechsz.common.service.PartyAudioService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CommonUtil;
@@ -89,12 +87,10 @@ import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.UpdateDialog;
 import com.tftechsz.common.widget.pop.MessageNotificationPopWindow;
 import com.tftechsz.common.widget.pop.OneKeyAccostPopWindow;
+import com.tftechsz.common.widget.pop.SignInPopWindow;
+import com.tftechsz.common.widget.pop.SignSucessPopWindow;
 import com.tftechsz.common.widget.pop.UserLevelUpPop;
-import com.tftechsz.home.entity.SignInBean;
-import com.tftechsz.home.entity.SignInSuccessBean;
 import com.tftechsz.home.mvp.ui.fragment.HomeFragment;
-import com.tftechsz.home.widget.SignInPopWindow;
-import com.tftechsz.home.widget.SignSucessPopWindow;
 import com.tftechsz.im.mvp.ui.fragment.ChatTabFragment;
 import com.tftechsz.main.R;
 import com.tftechsz.main.entity.UpdateLocationReq;
@@ -122,7 +118,7 @@ import io.reactivex.functions.Consumer;
 import razerdp.basepopup.BasePopupWindow;
 
 @Route(path = ARouterApi.MAIN_MAIN)
-public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> implements IMainView, View.OnClickListener, LocationListener, SignInPopWindow.SignInPopClickListener {
+public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> implements IMainView, View.OnClickListener, LocationListener {
     private List<View> views;
     private List<TextView> mTextViews;
     private TextView tvBadge;
@@ -910,7 +906,14 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private void showSignInPop() {
         if (signInBean != null && !signInBean.is_complete_today) {
             if (mSignInPopWindow == null) {
-                mSignInPopWindow = new SignInPopWindow(mContext, signInBean, this);
+                mSignInPopWindow = new SignInPopWindow(mContext);
+                mSignInPopWindow.setSignInListener(new SignInPopWindow.OnSignInListener() {
+                    @Override
+                    public void onSignInResult(SignInPopWindow popup, SignInSuccessBean bean) {
+                        if (popup != null) popup.dismiss();
+                        MainActivity.this.onSignInResult(bean);
+                    }
+                });
                 mSignInPopWindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
@@ -921,6 +924,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                     }
                 });
             }
+            mSignInPopWindow.setData(signInBean);
             if (!mSignInPopWindow.isShowing()) {
                 mSignInPopWindow.showPopupWindow();
             }
@@ -942,7 +946,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     }
 
     @Override
-    public void signInSuccess(SignInSuccessBean data) {
+    public void onSignInResult(SignInSuccessBean data) {
         if (mSignInPopWindow != null) {
             mSignInPopWindow.dismiss();
         }
@@ -956,13 +960,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         }
     }
 
-    @Override
-    public void signInFail() {
-        if (mSignInPopWindow != null) {
-            mSignInPopWindow.dismiss();
-        }
-    }
-
     private void showAccostDialog() {
         if (mEvent != null && null != mEvent.alert_accost
                 && null != mEvent.alert_accost.alert_accost_list
@@ -971,13 +968,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             p.showAccostDialog(MainActivity.this, mEvent.alert_accost);
         }
     }
-
-    //点击签到
-    @Override
-    public void signInPopClick() {
-        p.sign();
-    }
-
 
     /**
      * 动态切换logo

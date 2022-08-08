@@ -1,9 +1,9 @@
 package com.tftechsz.main.api;
 
 
+import com.tftechsz.common.entity.SignInBean;
+import com.tftechsz.common.entity.SignInSuccessBean;
 import com.tftechsz.common.http.BaseResponse;
-import com.tftechsz.home.entity.SignInBean;
-import com.tftechsz.home.entity.SignInSuccessBean;
 import com.tftechsz.main.entity.UpdateLocationReq;
 
 import io.reactivex.Flowable;

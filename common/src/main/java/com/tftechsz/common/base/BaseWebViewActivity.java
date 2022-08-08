@@ -65,6 +65,8 @@ import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.X5WebView;
 import com.tftechsz.common.widget.pop.BasePayPopWindow;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.common.widget.pop.SignInPopWindow;
+import com.tftechsz.common.widget.pop.SignSucessPopWindow;
 
 import java.io.File;
 
@@ -99,6 +101,7 @@ public class BaseWebViewActivity extends BaseMvpActivity {
     private PageStateManager mPageManager;
     private int bannerIndex, from_type;
     private BasePayPopWindow mPayPopWindow;
+    private SignInPopWindow signInPopWindow = null;//签到
 
 
     public static void start(Context context, String title, String url, int bannerIndex, int from_type) {
@@ -604,6 +607,31 @@ public class BaseWebViewActivity extends BaseMvpActivity {
         public void closeWebView() {
             finish();
         }
+
+        @JavascriptInterface
+        public void openSignIn(String signInJson) {
+            showSignInDialog(signInJson);
+        }
+    }
+
+    /**
+     * 签到
+     */
+    public void showSignInDialog(String signInJsonStr) {
+        runOnUiThread(() -> {
+            if (signInPopWindow == null) {
+                signInPopWindow = new SignInPopWindow(this);
+                signInPopWindow.setSignInListener((popup, bean) -> {
+                    if (popup != null) popup.dismiss();
+                    if (bean != null) new SignSucessPopWindow(mContext).showPop(bean);
+                    if (bean != null && mWebView != null) mWebView.loadUrl("javascript:signInSuccess()");
+                });
+            }
+            signInPopWindow.setData(signInJsonStr);
+            if (!signInPopWindow.isShowing()) {
+                signInPopWindow.showPopupWindow();
+            }
+        });
     }
 
     public void showTipPop(Activity activity) {

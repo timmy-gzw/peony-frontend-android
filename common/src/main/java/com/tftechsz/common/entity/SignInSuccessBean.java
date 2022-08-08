@@ -1,4 +1,4 @@
-package com.tftechsz.home.entity;
+package com.tftechsz.common.entity;
 
 import com.netease.nim.uikit.common.ConfigInfo;
 

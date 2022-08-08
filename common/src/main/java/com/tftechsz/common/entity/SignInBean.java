@@ -1,9 +1,9 @@
-package com.tftechsz.home.entity;
+package com.tftechsz.common.entity;
 
 import java.util.List;
 
 /**
- * 包 名 : com.tftechsz.home.entity
+ * 包 名 : com.tftechsz.common.entity.
  * 描 述 : TODO
  */
 public class SignInBean {

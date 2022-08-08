@@ -40,6 +40,8 @@ import com.tftechsz.common.entity.IntimacyEntity;
 import com.tftechsz.common.entity.MessageInfo;
 import com.tftechsz.common.entity.NobilityLevelUpPopDto;
 import com.tftechsz.common.entity.QingLangBean;
+import com.tftechsz.common.entity.SignInBean;
+import com.tftechsz.common.entity.SignInSuccessBean;
 import com.tftechsz.common.entity.SystemAccostDto;
 import com.tftechsz.common.event.AccostNowEvent;
 import com.tftechsz.common.event.CommonEvent;
@@ -63,8 +65,6 @@ import com.tftechsz.common.widget.pop.RechargeBeforePop;
 import com.tftechsz.common.widget.pop.RechargePopWindow;
 import com.tftechsz.common.widget.pop.RecommendValuePop;
 import com.tftechsz.common.widget.pop.RedPackagePopWindow;
-import com.tftechsz.home.entity.SignInBean;
-import com.tftechsz.home.entity.SignInSuccessBean;
 import com.tftechsz.im.mvp.ui.activity.VideoCallActivity;
 import com.tftechsz.im.uikit.P2PMessageActivity;
 import com.tftechsz.im.uikit.TeamMessageActivity;
@@ -597,17 +597,13 @@ public class MainPresenter extends BasePresenter<IMainView> {
                     @Override
                     public void onSuccess(BaseResponse<SignInSuccessBean> response) {
                         SignInSuccessBean data = response.getData();
-                        if (data != null) {
-                            getView().signInSuccess(data);
-                        } else {
-                            getView().signInFail();
-                        }
+                        getView().onSignInResult(data);
                     }
 
                     @Override
                     public void onFail(int code, String msg) {
                         super.onFail(code, msg);
-                        getView().signInFail();
+                        getView().onSignInResult(null);
                     }
                 }));
     }

@@ -1,4 +1,4 @@
-package com.tftechsz.home.widget;
+package com.tftechsz.common.widget.pop;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -6,13 +6,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.tftechsz.common.R;
+import com.tftechsz.common.entity.SignInSuccessBean;
 import com.tftechsz.common.utils.CommonUtil;
-import com.tftechsz.common.widget.pop.BaseCenterPop;
-import com.tftechsz.home.R;
-import com.tftechsz.home.entity.SignInSuccessBean;
 
 /**
- * 包 名 : com.tftechsz.home.widget
+ * 包 名 : com.tftechsz.common.widget.pop
  * 描 述 : TODO
  */
 public class SignSucessPopWindow extends BaseCenterPop {
