@@ -9,11 +9,13 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.AppUtils;
+import com.netease.nim.uikit.common.ConfigInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
+import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
@@ -28,6 +30,9 @@ import com.tftechsz.mine.mvp.presenter.SettingPresenter;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Route(path = ARouterApi.ACTIVITY_SETTING)
 public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresenter> implements View.OnClickListener, ISettingView {
 
@@ -36,6 +41,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
     private CommonItemView mItemRechargeSetting;
     private CommonItemView mItemPrivacySetting;
     private CommonItemView mItemCallSetting;
+    private CommonItemView mItemFaceSetting;
 
 
     private int checkedItem, selectedItem;
@@ -69,7 +75,8 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
         mItemCallSetting.setOnClickListener(this);  //招呼设置
         mMItemChatsignnum.setOnClickListener(this);    //聊天卡
         findViewById(R.id.item_account_binding).setOnClickListener(this);  //找号绑定
-        findViewById(R.id.item_face_setting).setOnClickListener(this);  //美颜设置
+        mItemFaceSetting = findViewById(R.id.item_face_setting);
+        mItemFaceSetting.setOnClickListener(this);  //美颜设置
         findViewById(R.id.item_black_list).setOnClickListener(this);    //黑名单设置
 
         CommonItemView itemAbout = findViewById(R.id.item_about);
@@ -109,8 +116,18 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
                 }
             }
 
-            if(service.getUserInfo().isGirl()){
+            List<ConfigInfo.MineInfo> list = CommonUtil.addMineInfo(service.getConfigInfo().share_config.my);
+            List<String> links = new ArrayList<>();
+            for(ConfigInfo.MineInfo mineInfo:list){
+                links.add(mineInfo.link);
+            }
+
+            if(service.getUserInfo().isGirl() && links.contains(Interfaces.LINK_PEONY_ACCOST_SETTING)){
                 mItemCallSetting.setVisibility(View.VISIBLE);
+            }
+
+            if(links.contains(Interfaces.LINK_PEONY_FACIAL)){
+                mItemFaceSetting.setVisibility(View.VISIBLE);
             }
 
             if (service.getConfigInfo().share_config.is_open_chat_card == 1) {
