@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
@@ -21,8 +22,10 @@ import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.EventBusConstant;
+import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.ChoosePicUtils;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.NumIndicator;
@@ -41,7 +44,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -51,8 +53,9 @@ import razerdp.util.KeyboardUtils;
  * 包 名 : com.tftechsz.moment.widget
  * 描 述 : 发布动态引导弹窗
  */
-public class PublishMomentGuidePop extends BaseBottomPop implements  ITrendView {
+public class PublishMomentGuidePop extends BaseBottomPop implements ITrendView {
 
+    UserProviderService service;
     private final FragmentActivity mActivity;
     private final CompositeDisposable mCompositeDisposable;
     private final List<LocalMedia> selectList = new ArrayList<>();
@@ -68,6 +71,7 @@ public class PublishMomentGuidePop extends BaseBottomPop implements  ITrendView 
         super(mActivity);
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = mActivity;
+        service = ARouter.getInstance().navigation(UserProviderService.class);
         initUI();
     }
 
@@ -97,6 +101,9 @@ public class PublishMomentGuidePop extends BaseBottomPop implements  ITrendView 
         mCompositeDisposable.add(RxView.clicks(flContent)
                 .throttleFirst(2, TimeUnit.SECONDS)
                 .subscribe(o -> {
+                            if (service != null && service.getUserInfo() != null) {
+                                if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
+                            }
                             if (selectList.size() == 0) {
                                 toastTip("请添加图片后发布");
                                 return;
@@ -115,7 +122,12 @@ public class PublishMomentGuidePop extends BaseBottomPop implements  ITrendView 
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
-        adapter = new MomentImageAdapter(mActivity, this::showMediaSelector);
+        adapter = new MomentImageAdapter(mActivity, () -> {
+            if (service != null && service.getUserInfo() != null) {
+                if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
+            }
+            showMediaSelector();
+        });
         adapter.setList(selectList);
         adapter.setSelectMax(Interfaces.PIC_SELCTED_NUM);
         recyclerView.setAdapter(adapter);
