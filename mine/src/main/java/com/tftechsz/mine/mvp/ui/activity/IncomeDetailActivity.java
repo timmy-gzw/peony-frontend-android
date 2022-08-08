@@ -31,7 +31,7 @@ public class IncomeDetailActivity extends BaseMvpActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        new ToolBarBuilder().showBack(true).setTitle("收益明细").build();
+        new ToolBarBuilder().showBack(true).setTitle(getString(R.string.benifit_record)).build();
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager mViewPager = findViewById(R.id.vp_integral);
         List<String> titles = new ArrayList<>();
