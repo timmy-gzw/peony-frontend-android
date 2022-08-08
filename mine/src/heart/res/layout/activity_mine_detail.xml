@@ -89,6 +89,49 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+                <TextView
+                    android:id="@+id/tv_trend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:text="最新动态"
+                    android:textColor="@color/color_normal"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_level" />
+
+                <TextView
+                    android:id="@+id/tv_mine_trend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:gravity="center"
+                    android:text="查看全部"
+                    android:textColor="@color/color_light_font"
+                    android:textSize="@dimen/sp_14"
+                    android:visibility="gone"
+                    app:drawableEndCompat="@mipmap/ic_arrow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_level" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_trend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_11"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_11"
+                    android:overScrollMode="never"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_trend" />
+
+
                 <TextView
                     android:id="@+id/tv_user_info"
                     android:layout_width="wrap_content"
@@ -100,7 +143,7 @@
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl_level" />
+                    app:layout_constraintTop_toBottomOf="@id/rv_trend" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_user_info"

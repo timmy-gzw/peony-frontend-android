@@ -369,6 +369,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                             mineInfo.visitor_count = mUserInfo == null ? 0 : mUserInfo.visitor_count;
                             break;
                         }
+                        LogUtil.e("==================",mineInfo.title + "====");
                     }
                     if (mineMidAdapter.getItemCount() != mineMidList.size()) {
                         mRcMineMid.setLayoutManager(new GridLayoutManager(mContext, mineMidList.size()));

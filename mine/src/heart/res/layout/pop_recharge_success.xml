@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_20">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/mine_ic_recharge_success"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="123dp"
+        android:background="@drawable/bg_orange_radius20"
+        android:gravity="center"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="充值成功"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_8"
+            android:text="充值成功"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@mipmap/mine_ic_recharge_success_coin" />
+
+        <TextView
+            style="@style/CustomButton"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:background="@drawable/bg_white_radius25"
+            android:text="知道了"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dp_20" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

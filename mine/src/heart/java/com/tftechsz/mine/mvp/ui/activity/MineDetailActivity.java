@@ -5,6 +5,8 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,6 +37,7 @@ import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nimlib.sdk.media.player.AudioPlayer;
 import com.netease.nimlib.sdk.media.player.OnPlayListener;
 import com.tftechsz.common.ARouterApi;
@@ -70,6 +73,7 @@ import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
 import com.tftechsz.mine.adapter.GiftAdapter;
 import com.tftechsz.mine.adapter.ProfilePhotoAdapter;
+import com.tftechsz.mine.adapter.TrendAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.entity.dto.TrendDto;
 import com.tftechsz.mine.mvp.IView.IMineDetailView;
@@ -98,6 +102,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
     private Banner mBanner;
     private RecyclerView mRvPic;//相册
+    private RecyclerView mRvTrend;   //动态
     private ImageView ivPicAdd;
     private View viewPicMask;
     private TextView mTvEditInfo;
@@ -113,6 +118,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
     private TextView mIvSex;  //性别，是否真人，是否认证
     private ImageView mIvIsRealPeople, mIvIsAuth, mIvIsVIP;
+    private GestureDetector gestureDetector;
+    private TextView mTvTrend, mTvTrendMore;   //动态
 
     //女性用户逻辑私信
     private LinearLayout mLlAccost, mLlOperate, llBottom;
@@ -158,6 +165,9 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private RecyclerView mRvGift;  //礼物
     private TextView mTvGift, mTvGiftVip, tvGiftTitle, tvGiftCount;
     private ConstraintLayout clGift;
+    private List<TrendDto> mTrendList;
+
+    private TrendAdapter mTrendAdapter;   //动态
 
     private BaseUserInfoAdapter userInfoAdapter;
     private GiftAdapter giftAdapter;
@@ -190,6 +200,13 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mRvPic = findViewById(R.id.rv_profile_pic);
         mRvPic.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         mRvPic.addItemDecoration(new SpaceItemDecoration(ConvertUtils.dp2px(6), 0, false));
+
+        //动态
+        mRvTrend = findViewById(R.id.rv_trend);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this, 4);
+        mRvTrend.setLayoutManager(gridLayoutManager2);
+        mTvTrend = findViewById(R.id.tv_trend);
+        mTvTrendMore = findViewById(R.id.tv_mine_trend);  //动态
 
         mTvTobTitle = findViewById(R.id.tob_title);  //名称
         mTobMore = findViewById(R.id.tob_more);
@@ -284,6 +301,40 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mIvAccost = findViewById(R.id.iv_accost);
         setSupportActionBar(mToolbar);
         initListener();
+        gestureDetector = new GestureDetector(this, new GestureDetector.OnGestureListener() {
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onShowPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                if (null != mUserInfo)
+                    ARouterUtils.toTrendActivity(mUserId, mUserInfo.getNickname());
+                return true;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return false;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                return false;
+            }
+        });
     }
 
 
@@ -294,6 +345,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mTvEditInfo.setOnClickListener(this);
         mLottieVoice.setOnClickListener(this);
         mLlAccost.setOnClickListener(this);   //搭讪
+        mTvTrendMore.setOnClickListener(this);   //更多动态
         findViewById(R.id.tv_chat_message).setOnClickListener(this);  //私信
         findViewById(R.id.tv_call_video).setOnClickListener(this);   //语音视频
         findViewById(R.id.rl_guard).setOnClickListener(this);   //守护
@@ -357,12 +409,17 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private void initNet() {
         String uid;
         if (TextUtils.isEmpty(mUserId)) {   //自己
+            //默认添加第一条数据
+            TrendDto trendDto = new TrendDto();
+            trendDto.image = "ADD";
+            mTrendList.add(trendDto);
+            p.getSelfTrend(3);
             uid = UserManager.getInstance().getUserId() + "";
             p.getUserInfoDetail();
         } else {
             uid = mUserId;
             p.getUserInfoById(mUserId);
-
+            p.getUserTrend(4, mUserId);
             if (service.getUserInfo() != null && service.getUserInfo().getSex() != 1) {   //女性用户看其他人信息
                 if (!CommonUtil.infoBtnTextUpdate3(service)) {
                     LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
@@ -387,21 +444,20 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 AnimationUtil.createAnimation(mIvAccost);
             }
         }
-        if (TextUtils.isEmpty(mUserId)) {   //自己
-
-        } else {
-            uid = mUserId;
-        }
-        p.getGiftList(uid);
+        getP().getGiftList(uid);
     }
 
     @Override
     protected void initData() {
         super.initData();
+        mTrendList = new ArrayList<>();
         MAX_SCROLL = DensityUtils.dp2px(this, 340);
         mConfig = service.getConfigInfo();
         mIjkPlayer = new AudioPlayer(BaseApplication.getInstance());
         initRxBus();
+        mTrendAdapter = new TrendAdapter(mTrendList, mUserId);
+        mRvTrend.setAdapter(mTrendAdapter);
+        mRvTrend.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
 
         mPageManager = PageStateManager.initWhenUse(this, new PageStateConfig() {
             @Override
@@ -658,6 +714,25 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
      */
     @Override
     public void getTrendSuccess(List<TrendDto> data) {
+        final int size = data == null ? 0 : data.size();
+        mTrendList.clear();
+        if (TextUtils.isEmpty(mUserId)) {   //自己
+            TrendDto trendDto = new TrendDto();
+            trendDto.image = "ADD";
+            mTrendList.add(trendDto);
+        }
+        LogUtil.e("========","==" + size + "==" + mUserId);
+        if (size > 0) {
+            mTvTrendMore.setVisibility(View.VISIBLE);
+            mTvTrend.setVisibility(View.VISIBLE);
+            mTrendList.addAll(data);
+        } else {
+            if (TextUtils.isEmpty(mUserId)) {
+                mTvTrendMore.setVisibility(View.VISIBLE);
+                mTvTrend.setVisibility(View.VISIBLE);
+            }
+        }
+        mTrendAdapter.setList(mTrendList);
     }
 
     /**
@@ -974,6 +1049,11 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             mLottie.clearAnimation();
             mLottie = null;
         }
+        if (mTrendList != null) {
+            mTrendList.clear();
+            mTrendList = null;
+        }
+        gestureDetector = null;
     }
 
     @Override
@@ -990,9 +1070,23 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             p.getRealInfo();
         } else if (id == R.id.tv_edit || id == R.id.edit_info) {   //编辑资料
             MineInfoActivity.startActivity(this, mUserInfo);
+        } else if (id == R.id.tv_mine_trend) {   //查看更多动态
+            ARouterUtils.toTrendActivity(mUserId, mUserInfo.getNickname());
         } else if (id == R.id.tv_attention) {
             followOrUnfollow();
-        } else if (id == R.id.ll_accost) {   //搭讪
+        }else if (id == R.id.cl_local_tyrant) {    //土豪值
+            if (!TextUtils.isEmpty(mUserId))
+                return;
+            if (null != mUserInfo.levels && null != mUserInfo.levels.rich) {
+                MyWealthCharmLevelActivity.startActivity(this, "0", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
+            }
+        } else if (id == R.id.cl_charm) {    //魅力值
+            if (!TextUtils.isEmpty(mUserId))
+                return;
+            if (null != mUserInfo.levels && null != mUserInfo.levels.charm) {
+                MyWealthCharmLevelActivity.startActivity(this, "1", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
+            }
+        }else if (id == R.id.ll_accost) {   //搭讪
             if (!isPerformClick()) {
                 return;
             }
