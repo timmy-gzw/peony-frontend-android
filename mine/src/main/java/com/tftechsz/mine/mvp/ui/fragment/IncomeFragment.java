@@ -8,9 +8,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.tftechsz.common.base.BaseListFragment;
 import com.tftechsz.common.base.BaseMvpFragment;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.http.BaseResponse;
@@ -24,8 +22,6 @@ import com.tftechsz.mine.entity.dto.ExchangeRecord;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Flowable;
 
 /**
  * 收益
