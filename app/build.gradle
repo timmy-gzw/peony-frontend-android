@@ -3,7 +3,7 @@ apply plugin: 'com.huawei.agconnect'
 apply plugin: 'com.alibaba.arouter'
 apply plugin: 'privacy-sentry-plugin'
 
-def name = 'yisugar'
+def name = 'OFFICIAL'
 def appName = "伊糖"
 
 android {
@@ -36,7 +36,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a"
         }
-        resConfigs("zh","zh-rCN")
+        resConfigs("zh", "zh-rCN")
     }
     signingConfigs {
         release {
@@ -115,7 +115,7 @@ android {
     lintOptions {
         disable 'MissingTranslation'
     }
-    flavorDimensions ('office')
+    flavorDimensions('office')
     productFlavors {
         office {
             dimension 'office'
