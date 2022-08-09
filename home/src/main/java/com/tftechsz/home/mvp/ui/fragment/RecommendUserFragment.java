@@ -437,8 +437,8 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
             if (item != null) {
                 RxBus.getDefault().post(new AccostSuccessEvent(AccostSuccessEvent.ACCOUST_HOME, item.getUser_id() + "", item.getNickname(), item.getIcon()));
             }
-            if (data != null && data.gift != null) {
-                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
+            if (data != null && data.gift != null && service != null) {
+                Utils.playAccostAnimationAndSound(service.getUserInfo(), data.gift.name, data.gift.animation);
             }
             //首页搭讪 2  个人资料页搭讪 3  动态搭讪 4  相册搭讪 5
             CommonUtil.sendAccostGirlBoy(service, mAdapter.getData().get(position).getUser_id(), data, 2);

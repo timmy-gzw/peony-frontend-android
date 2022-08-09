@@ -169,8 +169,8 @@ public class SearchActivity extends BaseMvpActivity<ISearchView, SearchPresenter
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (data != null && data.gift != null) {
-                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
+            if (data != null && data.gift != null && service != null) {
+                Utils.playAccostAnimationAndSound(service.getUserInfo(), data.gift.name, data.gift.animation);
             }
             //首页搭讪 2  个人资料页搭讪 3  动态搭讪 4  相册搭讪 5
             CommonUtil.sendAccostGirlBoy(service, mAdapter.getItem(position).getUser_id(), data, 2);

@@ -525,8 +525,8 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
     @Override
     public void accostUserSuccess(int position, AccostDto data) {
         if (null == data || !CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
-            if (data != null && data.gift != null) {
-                Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
+            if (data != null && data.gift != null && service != null) {
+                Utils.playAccostAnimationAndSound(service.getUserInfo(), data.gift.name, data.gift.animation);
             }
             dataBean.setIs_accost(1);
             setBtnAccostOrP2P();
