@@ -20,7 +20,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.SlidingScaleTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.config.PictureConfig;
-import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
@@ -143,19 +142,21 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
     }
 
     /**
-     * 显示发布动态引导页，一天只显示一次
+     * 显示发布动态引导页，安装进入APP后只弹1次引导只显示一次(女生需要真人认证)
      */
     private void showMomentGuide() {
         if (needShowGuide) {
             long lastShowMomentTime = MMKVUtils.getInstance().decodeLong(Constants.LAST_SHOW_MOMENT_GUIDE_TIME);//上次显示动态引导页的时间戳ms
-            long l = System.currentTimeMillis();
-            boolean sameDay = TimeUtil.isSameDay(lastShowMomentTime, l);
-            if (l > lastShowMomentTime && !sameDay) {
-                PublishMomentGuidePop pop = new PublishMomentGuidePop(getActivity());
-                pop.showPopupWindow();
-                MMKVUtils.getInstance().encode(Constants.LAST_SHOW_MOMENT_GUIDE_TIME, l);
+            if (lastShowMomentTime <= 0) {
+                if (service != null && service.getUserInfo() != null && (service.getUserInfo().isReal() || service.getUserInfo().isBoy())) {
+                    PublishMomentGuidePop pop = new PublishMomentGuidePop(getActivity());
+                    pop.showPopupWindow();
+                    MMKVUtils.getInstance().encode(Constants.LAST_SHOW_MOMENT_GUIDE_TIME, System.currentTimeMillis());
+                    needShowGuide = false;
+                }
+            } else {
+                needShowGuide = false;
             }
-            needShowGuide = false;
         }
     }
 
