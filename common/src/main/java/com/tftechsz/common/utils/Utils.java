@@ -71,7 +71,6 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.tools.DateUtils;
 import com.luck.picture.lib.tools.ValueOf;
 import com.netease.nim.uikit.common.ConfigInfo;
-import com.netease.nim.uikit.common.UserInfo;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.constant.Interfaces;
@@ -511,8 +510,7 @@ public final class Utils {
     /**
      * 全屏播放搭讪成功动画以及播放音效
      */
-    public static void playAccostAnimationAndSound(UserInfo userInfo, String giftName, String giftAnimationOfSVGA) {
-        if (userInfo == null || userInfo.isGirl()) return;//女生不显示动画
+    public static void playAccostAnimationAndSound(String giftName, String giftAnimationOfSVGA) {
         if (TextUtils.isEmpty(giftAnimationOfSVGA)) return;
         SVGAPlayerPop svgaPop = new SVGAPlayerPop(BaseApplication.getInstance());
         svgaPop.addSvga(giftName, giftAnimationOfSVGA);
