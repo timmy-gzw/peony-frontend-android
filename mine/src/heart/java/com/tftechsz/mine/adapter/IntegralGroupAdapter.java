@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -88,12 +87,12 @@ public class IntegralGroupAdapter extends GroupedRecyclerViewAdapter {
 
     @Override
     public void onBindChildViewHolder(BaseViewHolder helper, int groupPosition, int childPosition) {
-        ExchangeRecordDto item = mGroups.get(groupPosition).getChildren().get(childPosition);
-        View view = helper.get(R.id.view);
-
+        ExchangeRecord exchangeRecord = mGroups.get(groupPosition);
+        if (exchangeRecord == null) return;
+        ExchangeRecordDto item = exchangeRecord.getChildren().get(childPosition);
         if (mType == 2 || mType == 5) {   // 兑换记录
             TextView tvStatus = helper.get(R.id.tv_status);
-            helper.setText(R.id.tv_time, item.created_at).setText(R.id.tv_integral, item.integral_cost);
+            helper.setText(R.id.tv_time, exchangeRecord.getHeader() + " " + item.created_at).setText(R.id.tv_integral, item.integral_cost);
             //0.申请中，1.已兑换，2.不允许兑换
             if (item.status == 0) {
                 tvStatus.setText("审核中");
@@ -107,7 +106,6 @@ public class IntegralGroupAdapter extends GroupedRecyclerViewAdapter {
             }
             TextView tvContent = helper.get(R.id.tv_title);
             setContent(tvContent, item.title_new);
-            view.setVisibility(childPosition == mGroups.get(groupPosition).getChildren().size() - 1 ? View.INVISIBLE : View.VISIBLE);
             ImageView ivIcon = helper.get(R.id.ic_icon);
             if (ivIcon != null) {
                 GlideUtils.loadImage(mContext, ivIcon, item.image_small);
