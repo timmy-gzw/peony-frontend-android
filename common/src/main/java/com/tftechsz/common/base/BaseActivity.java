@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.tftechsz.common.R;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.KeyBoardUtil;
 import com.tftechsz.common.utils.ToastUtil;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.LoadingDialog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -50,6 +53,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
     private long lastClickTime;
     //dialog样式不能设置 SCREEN_ORIENTATION_PORTRAIT
     public boolean mFlagIsPortrait = true;
+    private static final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,9 +110,11 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
     }
 
 
+    Runnable runnable = () -> GlobalDialogManager.getInstance().show(getFragmentManager(), "正在加载中,请稍后...");
+
     @Override
     public void showLoadingDialog() {
-        runOnUiThread(() -> GlobalDialogManager.getInstance().show(getFragmentManager(), "正在加载中,请稍后..."));
+        handler.postDelayed(runnable, 150);
     }
 
     @Override
@@ -119,13 +125,17 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
 
     @Override
     public void hideLoadingDialog() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                GlobalDialogManager.getInstance().dismiss();
-            }
-        });
-
+        if (!isLoadingDialogShow()) {
+            if (runnable != null)
+                handler.removeCallbacks(runnable);
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    GlobalDialogManager.getInstance().dismiss();
+                }
+            });
+        }
     }
 
     @Override
@@ -178,7 +188,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             }
         }
 
-        public ToolBarBuilder setToolbarMenuBackground(@DrawableRes int color){
+        public ToolBarBuilder setToolbarMenuBackground(@DrawableRes int color) {
             toolbarMenubgColor = color;
             return this;
         }
@@ -289,7 +299,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             if (backViewColor != -1) {
                 backBtn.setColorFilter(ContextCompat.getColor(BaseApplication.getInstance(), backViewColor));
             }
-            if(toolbarMenubgColor >0){
+            if (toolbarMenubgColor > 0) {
                 toolbarMenu.setBackgroundResource(toolbarMenubgColor);
             }
         }
@@ -329,6 +339,9 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
         super.onDestroy();
         try {
             AppManager.getAppManager().removeActivity(this);
+            if(runnable != null){
+                runnable = null;
+            }
             if (mLoadingDialog != null) {
                 hideLoadingDialog();
                 mLoadingDialog = null;
