@@ -53,7 +53,7 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
      */
     public void completeInfo(CompleteReq pram) {
         if (getView() != null)
-            getView().showLoadingDialog();
+//            getView().showLoadingDialog();
         CommonUtil.getToken(new com.tftechsz.common.utils.CommonUtil.OnSelectListener() {
             @Override
             public void onSure() {
@@ -68,8 +68,8 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
                             @Override
                             public void onFail(int code, String msg) {
                                 super.onFail(code, msg);
-                                if (getView() != null)
-                                    getView().hideLoadingDialog();
+//                                if (getView() != null)
+//                                    getView().hideLoadingDialog();
                             }
                         }));
             }
