@@ -2,4 +2,7 @@
 
     <string name="main_get_phone_code">发送验证码</string>
 
+    <string name="vip_activated">去续费</string>
+    <string name="nonactivated">立即开通</string>
+
 </resources>

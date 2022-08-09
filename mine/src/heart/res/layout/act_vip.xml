@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="com.tftechsz.mine.R" />
+
+        <variable
+            name="is_vip"
+            type="boolean" />
+
+        <variable
+            name="vip_expiration_time"
+            type="String" />
+
+        <variable
+            name="item_price"
+            type="String" />
+
+        <variable
+            name="vip_privilege_count"
+            type="int" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_vip_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/iv_vip_head_bg"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@mipmap/bg_vip_header"
+                app:layout_constraintDimensionRatio="375:278"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/toolbar"
+                tools:ignore="ContentDescription" />
+
+            <FrameLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="@dimen/dp_20"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingEnd="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:src="@mipmap/ic_back_white"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    tools:text="@string/vip_center" />
+
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/vip_cl1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="142dp"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:background="@mipmap/bg_vip_header_1"
+                app:layout_constraintDimensionRatio="343:90"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="@dimen/dp_100"
+                    tools:src="@mipmap/ic_default_avatar" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:textColor="#623700"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/hint"
+                    app:layout_constraintStart_toEndOf="@id/icon"
+                    app:layout_constraintTop_toTopOf="@id/icon"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="旎旎胆小鬼" />
+
+                <TextView
+                    android:id="@+id/hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:text='@{is_vip ? vip_expiration_time : @string/vip_un_open}'
+                    android:textColor="#623700"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/icon"
+                    app:layout_constraintStart_toStartOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    tools:text="@string/vip_un_open" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_lock_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_marginEnd="@dimen/dp_12"
+                    android:background="@drawable/sp_vip_unlock"
+                    android:paddingStart="@dimen/dp_12"
+                    android:paddingTop="@dimen/dp_4"
+                    android:paddingEnd="@dimen/dp_12"
+                    android:paddingBottom="@dimen/dp_4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_vip_unlock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{is_vip ? @string/vip_activated : @string/nonactivated}'
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/nonactivated" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:visibility="gone"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:text="@{@string/vip_privilege(vip_privilege_count)}"
+                    android:textColor="@color/c_c89c5d"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_vip_header">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/dp_16">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/price_recy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:visibility="gone"
+                    android:overScrollMode="never"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="3"
+                    tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    tools:listitem="@layout/item_vip_price"
+                    tools:spanCount="3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:layout_constraintBottom_toTopOf="@id/space"
+                    app:layout_constraintTop_toBottomOf="@id/price_recy">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_4"
+                        android:src="@mipmap/ic_vip_privilege_r"
+                        app:layout_constraintBottom_toBottomOf="@id/t3"
+                        app:layout_constraintStart_toEndOf="@id/t3"
+                        app:layout_constraintTop_toTopOf="@id/t3"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/t3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_20"
+                        android:includeFontPadding="false"
+                        android:text="@{@string/vip_privilege_8(vip_privilege_count)}"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/privilege_recy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:overScrollMode="never"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/t3"
+                        tools:itemCount="8"
+                        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        tools:listitem="@layout/item_vip_privilege"
+                        tools:spanCount="4" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.legacy.widget.Space
+                    android:id="@+id/space"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_130"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/get_vip"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginHorizontal="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/shape_vip_price_bg_button"
+            android:gravity="center"
+            android:text="@{is_vip?(TextUtils.isEmpty(item_price)?@string/renewal_now:@string/renewal_now_format(item_price)):(TextUtils.isEmpty(item_price)?@string/open_now:@string/open_now_format(item_price))}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toTopOf="@id/vip_agree"
+            tools:text="@string/open_now" />
+
+        <TextView
+            android:id="@+id/vip_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:textColor="#ff999999"
+            android:textSize="@dimen/sp_10"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="成为会员即表示同意会员协议" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

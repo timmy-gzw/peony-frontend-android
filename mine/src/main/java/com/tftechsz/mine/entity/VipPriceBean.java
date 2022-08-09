@@ -11,6 +11,7 @@ public class VipPriceBean {
     public String price;
     public String desc;
     public int is_active;
+    public String tag;
     public String origin_price_title;//原价
     public String reduce_price_title;//立省
     public boolean is_mid_line = true;

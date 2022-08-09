@@ -705,6 +705,12 @@ public interface MineApiService {
     Flowable<BaseResponse<PrivacyDto>> getPrivilege();
 
     /**
+     * 获取vip价格
+     * @return
+     */
+    @GET("vip/new")
+    Flowable<BaseResponse<VipConfigBean>> getVipInfo();
+    /**
      * 设置会员特权
      *
      * @param type  1-土豪值、魅力值 2-礼物墙  3：上电视上头条  ，4 排行榜 7 搭讪开关

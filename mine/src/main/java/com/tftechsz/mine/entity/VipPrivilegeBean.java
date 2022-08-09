@@ -7,4 +7,6 @@ package com.tftechsz.mine.entity;
 public class VipPrivilegeBean {
     public String title;
     public String icon;
+    public String desc;
+    public String img;
 }

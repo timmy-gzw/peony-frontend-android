@@ -71,7 +71,7 @@ android {
             buildConfigField "String", "APP_NAME", "\"ivy\""
             buildConfigField "String", "WX_APPID", "\"wx4d4897cbee9c06d9\""
             buildConfigField "String", "WX_APP_SC", "\"20c726d79aa9b7d809300b1f58aca89c\""
-            buildConfigField "String", "SANYAN_APP_ID", "\"qYz3RbpO\""
+            buildConfigField "String", "SANYAN_APP_ID", "\"jDDCmk66\""
             buildConfigField "String", "PUSH_XM_APP_ID", "\"2882303761520165940\""  //小米推送
             buildConfigField "String", "PUSH_XM_APP_KEY", "\"5562016512940\""
             buildConfigField "String", "PUSH_XM_CERT_NAME", "\"peony-push-cert-xm\""
