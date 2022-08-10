@@ -36,10 +36,12 @@ import com.blankj.utilcode.util.ZipUtils;
 import com.flyco.tablayout.SlidingScaleTabLayout;
 import com.google.android.material.appbar.AppBarLayout;
 import com.gyf.immersionbar.ImmersionBar;
+import com.netease.nim.highavailable.LogUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.util.DownloadHelper;
 import com.netease.nim.uikit.common.util.MD5Util;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
@@ -197,50 +199,17 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         fragments = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         //加载排行榜图片
-        if (service.getConfigInfo() != null && service.getConfigInfo().sys != null && service.getConfigInfo().sys.loading_h5 != null) {
-            showHot();
-            if (service.getConfigInfo().sys.loading_h5.lovelist != null) {
-                mIvRank.setVisibility(View.VISIBLE);
-                GlideUtils.loadImage(mContext, mIvRank, service.getConfigInfo().sys.loading_h5.lovelist.icon);
-                mIvRank.setOnClickListener(v -> {
-                    if (StringUtils.isTrimEmpty(service.getConfigInfo().sys.loading_h5.lovelist.zip_source)) {
-                        return;
-                    }
-                    File file = new File(DownloadHelper.FILE_PATH + File.separator + MD5Util.toMD516(service.getConfigInfo().sys.loading_h5.lovelist.zip_source) + ".zip");
-                    if (file.exists()) {
-                        String url = DownloadHelper.FILE_PATH + File.separator + "lovelist.html";
-                        if (!new File(url).exists()) {
-                            url = DownloadHelper.FILE_PATH + File.separator + "lovelist" + "/lovelist.html";
-                        }
-                        BaseWebViewActivity.start(mContext, "", "file://" + url, false, "black", 0, 5);
-                    } else {
-                        DownloadHelper.downloadZip(service.getConfigInfo().sys.loading_h5.lovelist.zip_source, new DownloadHelper.DownloadListener() {
-                            @Override
-                            public void completed() {
-                                try {
-                                    ZipUtils.unzipFile(file.getPath(), DownloadHelper.FILE_PATH);
-                                    String url = DownloadHelper.FILE_PATH + File.separator + "lovelist.html";
-                                    if (!new File(url).exists()) {
-                                        url = DownloadHelper.FILE_PATH + File.separator + "lovelist" + "/lovelist.html";
-                                    }
-                                    BaseWebViewActivity.start(mContext, "", "file://" + url, false, "black", 0, 5);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+        LogUtils.e("=======124124","32143143124112341234124"+service.getConfigInfo().share_config.home_tab_config_tv+"-----");
+        if (service.getConfigInfo() != null && service.getConfigInfo().share_config != null && service.getConfigInfo().share_config.home_tab_config_tv != null) {
+            mIvRank.setVisibility(View.VISIBLE);
+            GlideUtils.loadImage(mContext, mIvRank, service.getConfigInfo().share_config.home_tab_config_tv.icon);
 
-                            @Override
-                            public void failed() {
-                                toastTip("下载失败,请稍后重试");
-                            }
-
-                            @Override
-                            public void onProgress(int progress) {
-                            }
-                        });
-                    }
-                });
-            }
+            mIvRank.setOnClickListener(v -> {
+                if (StringUtils.isTrimEmpty(service.getConfigInfo().share_config.home_tab_config_tv.link)) {
+                    return;
+                }
+                BaseWebViewActivity.start(mContext, "", service.getConfigInfo().share_config.home_tab_config_tv.link, false, "black", 0, 5);
+            });
         }
         if (service.getConfigInfo() == null || service.getConfigInfo().share_config == null
                 || service.getConfigInfo().share_config.home_tab_config == null) {
@@ -252,10 +221,15 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         boolean showNearUser = MMKVUtils.getInstance().decodeBoolean(Constants.SHOW_NEAR_USER);
 
         for (ConfigInfo.HomeTabNav homeTabNav : homeTabLists) {
-            recommendUserFragment = RecommendUserFragment.newInstance(homeTabNav.type);
-            if (recommendUserFragment != null) {
-                fragments.add(recommendUserFragment);
+            if(TextUtils.equals("recommend",homeTabNav.type)){
+                recommendUserFragment = RecommendUserFragment.newInstance(homeTabNav.type);
+                if (recommendUserFragment != null) {
+                    fragments.add(recommendUserFragment);
+                    titles.add(homeTabNav.title);
+                }
+            }else {
                 titles.add(homeTabNav.title);
+                fragments.add(SpeedMatchFragment.newInstance());
             }
         }
 
@@ -264,8 +238,6 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             return;
         }
 
-        fragments.add(SpeedMatchFragment.newInstance());
-        titles.add("速配");
 
         if (showNearUser) {
             fragments.add(RecommendUserFragment.newInstance(Interfaces.MAIN_TAB_NEAR, mOpenLocationType));

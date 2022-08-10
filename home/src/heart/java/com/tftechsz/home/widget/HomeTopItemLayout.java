@@ -77,9 +77,9 @@ public class HomeTopItemLayout extends LinearLayout {
                         ImageView img1 = topLeft.findViewById(R.id.img_carrousel1);
                         ImageView img2 = topLeft.findViewById(R.id.img_carrousel2);
                         ImageView img3 = topLeft.findViewById(R.id.img_carrousel3);
-                        GlideUtils.loadRouteImage(mContext, img1, data.img_list.get(0));
-                        GlideUtils.loadRouteImage(mContext, img2, data.img_list.get(1));
-                        GlideUtils.loadRouteImage(mContext, img3, data.img_list.get(2));
+                        GlideUtils.loadImageNew(mContext, img1, data.img_list.get(0));
+                        GlideUtils.loadImageNew(mContext, img2, data.img_list.get(1));
+                        GlideUtils.loadImageNew(mContext, img3, data.img_list.get(2));
                         llAvatar2.addView(topLeft);
                     }
                     llAvatar2.setVisibility(View.VISIBLE);
