@@ -22,6 +22,7 @@ public class ARouterApi {
     //home
     public final static String CALL_SERVICE = "/home/callService";
     public static final String ACTIVITY_USER_PIC_BROWSER = "/home/UserPicBrowserActivity";
+    public final static String SERVICE_MAIN = "/main/mainService";
 
 
     //trend

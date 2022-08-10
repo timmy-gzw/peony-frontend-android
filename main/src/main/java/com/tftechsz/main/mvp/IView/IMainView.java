@@ -1,8 +1,8 @@
 package com.tftechsz.main.mvp.IView;
 
 import com.tftechsz.common.base.MvpView;
-import com.tftechsz.home.entity.SignInBean;
-import com.tftechsz.home.entity.SignInSuccessBean;
+import com.tftechsz.common.entity.SignInBean;
+import com.tftechsz.common.entity.SignInSuccessBean;
 
 public interface IMainView extends MvpView {
 
@@ -10,7 +10,5 @@ public interface IMainView extends MvpView {
 
     void signListFail();
 
-    void signInSuccess(SignInSuccessBean data);
-
-    void signInFail();
+    void onSignInResult(SignInSuccessBean data);
 }

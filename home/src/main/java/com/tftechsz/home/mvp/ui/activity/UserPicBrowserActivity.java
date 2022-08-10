@@ -21,10 +21,6 @@ import com.like.LikeButton;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.bean.AccostDto;
 import com.robinhood.ticker.TickerView;
-import com.tftechsz.home.R;
-import com.tftechsz.home.entity.InfoPictureBean;
-import com.tftechsz.home.mvp.iview.IPicBrowserView;
-import com.tftechsz.home.mvp.presenter.PicBrowserPresenter;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.adapter.FragmentVpAdapter;
@@ -39,6 +35,10 @@ import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.home.R;
+import com.tftechsz.home.entity.InfoPictureBean;
+import com.tftechsz.home.mvp.iview.IPicBrowserView;
+import com.tftechsz.home.mvp.presenter.PicBrowserPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -228,7 +228,7 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
     private void performLike(int is_praise_picture, int praise_picture_count) {
         mTv_like.setAnimationDuration(300);
         mTv_like.setText(String.valueOf(praise_picture_count));
-        mTv_like.setTextColor(getResources().getColor(is_praise_picture==1?R.color.colorPrimary:R.color.color_light_font));
+        mTv_like.setTextColor(getResources().getColor(is_praise_picture == 1 ? R.color.colorPrimary : R.color.color_light_font));
         mIv_like.setLiked(is_praise_picture != 0);
     }
 

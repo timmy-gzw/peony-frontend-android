@@ -51,7 +51,7 @@ public class AccountBindingPresenter extends BasePresenter<IAccountBindingView> 
 
     public void getBindData() {
         addNet(service.getBindData().compose(BasePresenter.applySchedulers())
-                .subscribeWith(new ResponseObserver<BaseResponse<GetBindData>>(getView()) {
+                .subscribeWith(new ResponseObserver<BaseResponse<GetBindData>>() {
                     @Override
                     public void onSuccess(BaseResponse<GetBindData> response) {
                         if (null == getView()) return;

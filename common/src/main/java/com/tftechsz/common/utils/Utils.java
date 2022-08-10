@@ -1332,7 +1332,7 @@ public final class Utils {
 
         abstract Result doInBackground();
 
-        private Callback<Result> mCallback;
+        private final Callback<Result> mCallback;
 
         public Task(final Callback<Result> callback) {
             mCallback = callback;

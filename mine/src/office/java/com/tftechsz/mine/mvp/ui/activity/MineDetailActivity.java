@@ -433,11 +433,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                     mTobMore.setImageResource(R.mipmap.mine_ic_more_white);
                     mTvTobTitle.setTextColor(backgroundBlack);
 //                    mTobMore.setColorFilter(backgroundBlack);
-                    if (backgroundAlpha > 150) {
-                        StatusBarUtil.setLightStatusBar(mActivity, true, true);
-                    } else {
-                        StatusBarUtil.setLightStatusBar(mActivity, false, true);
-                    }
+                    StatusBarUtil.setLightStatusBar(mActivity, backgroundAlpha > 150, true);
                 }
             }
         });

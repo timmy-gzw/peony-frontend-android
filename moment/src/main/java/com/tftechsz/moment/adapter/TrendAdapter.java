@@ -230,11 +230,6 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
     }
 
     public void updateData(int clickPosition, CircleBean data) {
-        ImageView icon = (ImageView) getViewByPosition(clickPosition, R.id.iv_photo);
-        if (!data.getIcon().equals(getData().get(clickPosition).getIcon())) {
-            GlideUtils.loadRouteImage(getContext(), icon, data.getIcon());
-        }
-
         TextView tvName = (TextView) getViewByPosition(clickPosition, R.id.tv_name);
         if (tvName != null)
             tvName.setText(data.getNickname());

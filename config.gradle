@@ -10,27 +10,25 @@ ext {
 
 
     manifestPlaceholders = [
-            UMENG_CHANNEL_VALUE   : "office",
-            app_label             : "伊糖",
-            YUNXIN_APP_ID         : "9c3106de8f4c4b69e7ff47b6b6c7aad3",// 云信APP_ID  √
-            UMENG_APPKEY          : "62947b8a05844627b598c5ef",//友盟   √
-            BAIDU_APPKEY          : "hPHNLUSasPjeRQjpQYeFBj13lTESGRee",   //百度key  √
-            VIVO_APP_ID           : "105568848",   //VIVO ID
-            VIVO_APP_KEY          : "e677afe37c0e8667a2972d3076a7f953",
-            buglyKey              : "bbbd02a9aa",
-     ]
-    heartPlaceholders = [
-            UMENG_CHANNEL_VALUE   : "heart",
-            app_label             : "心心相伴",
-            YUNXIN_APP_ID         : "9c3106de8f4c4b69e7ff47b6b6c7aad3",// 云信APP_ID  √
-            UMENG_APPKEY          : "62947b8a05844627b598c5ef",//友盟   √
-            BAIDU_APPKEY          : "hPHNLUSasPjeRQjpQYeFBj13lTESGRee",   //百度key  √
-            VIVO_APP_ID           : "105568848",   //VIVO ID
-            VIVO_APP_KEY          : "e677afe37c0e8667a2972d3076a7f953",
-            buglyKey              : "bbbd02a9aa",
+            UMENG_CHANNEL_VALUE: "OFFICIAL",
+            app_label          : "伊糖",
+            YUNXIN_APP_ID      : "9c3106de8f4c4b69e7ff47b6b6c7aad3",// 云信APP_ID  √
+            UMENG_APPKEY       : "62947b8a05844627b598c5ef",//友盟   √
+            BAIDU_APPKEY       : "hPHNLUSasPjeRQjpQYeFBj13lTESGRee",   //百度key  √
+            VIVO_APP_ID        : "105568848",   //VIVO ID
+            VIVO_APP_KEY       : "e677afe37c0e8667a2972d3076a7f953",
+            buglyKey           : "bbbd02a9aa",
     ]
-
-
+    heartPlaceholders = [
+            UMENG_CHANNEL_VALUE: "OFFICIAL",
+            app_label          : "心心相伴",
+            YUNXIN_APP_ID      : "9c3106de8f4c4b69e7ff47b6b6c7aad3",// 云信APP_ID  √
+            UMENG_APPKEY       : "62947b8a05844627b598c5ef",//友盟   √
+            BAIDU_APPKEY       : "hPHNLUSasPjeRQjpQYeFBj13lTESGRee",   //百度key  √
+            VIVO_APP_ID        : "105568848",   //VIVO ID
+            VIVO_APP_KEY       : "e677afe37c0e8667a2972d3076a7f953",
+            buglyKey           : "bbbd02a9aa",
+    ]
 
 
     //version配置
