@@ -194,13 +194,13 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
 
 
         TextView tvHome = findViewById(R.id.tv_home);
-        setConfigTextColor(tvHome, true, configInfo);
+        setConfigTextColor(tvHome, false, configInfo);
         TextView tvMessage = findViewById(R.id.tv_message);
-        setConfigTextColor(tvMessage, true, configInfo);
+        setConfigTextColor(tvMessage, false, configInfo);
         TextView tvTrend = findViewById(R.id.tv_trend);
-        setConfigTextColor(tvTrend, true, configInfo);
+        setConfigTextColor(tvTrend, false, configInfo);
         TextView tvMine = findViewById(R.id.tv_mine);
-        setConfigTextColor(tvMine, true, configInfo);
+        setConfigTextColor(tvMine, false, configInfo);
         tvBadge = findViewById(R.id.tv_badge);
         mBotChatView = findViewById(R.id.bot_chat_view);
         if (findViewById(R.id.btn_home) != null) {
@@ -263,8 +263,8 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                     }
 
                     mTextViews.get(prevPosition).setEnabled(true);
-                    setConfigTextColor(mTextViews.get(prevPosition), true, configInfo);
-                    setConfigTextColor(mTextViews.get(position), false, configInfo);
+                    setConfigTextColor(mTextViews.get(prevPosition), false, configInfo);
+                    setConfigTextColor(mTextViews.get(position), true, configInfo);
                     mTextViews.get(prevPosition).setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
                     mTextViews.get(position).setEnabled(false);
                     mTextViews.get(position).setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
@@ -333,8 +333,8 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             textView.setTextColor(isEnabled ? txt_color_enable : txt_color_unenable);
             return;
         }
-        txt_color_enable = Utils.getColor(R.color.color_black_ff666666);
-        txt_color_unenable = Utils.getColor(R.color.colorPrimary);
+        txt_color_enable = Utils.getColor(R.color.tab_select_color);
+        txt_color_unenable = Utils.getColor(R.color.tab_normal_color);
         if (configInfo == null || configInfo.sys == null || configInfo.sys.is_main_tab_lottie_config == 0) {
             return;
         }

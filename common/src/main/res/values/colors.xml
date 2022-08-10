@@ -83,6 +83,7 @@
     <color name="c_ff5c97">#FF5C97</color>
 
 
+    <color name="color_update_version">#EE2C40</color>
     <color name="c_btn_p2p">@color/colorPrimary</color>
     <color name="c_btn_accost">@color/color_normal</color>
     <color name="c_del_content">@color/color_mid_font</color>

@@ -506,10 +506,10 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
 
         @Override
         protected void convert(@NonNull BaseViewHolder helper, PaymentTypeDto item) {
+            helper.getView(R.id.cl_root).setSelected(checkPosition == getItemPosition(item));
             GlideUtils.loadRouteImage(getContext(), helper.getView(R.id.iv_icon), item.image);
             helper.setText(R.id.tv_pay_title, item.title);
-            CheckBox checkBox = helper.getView(R.id.checkbox);
-            checkBox.setChecked(checkPosition == getItemPosition(item));
+            helper.setVisible(R.id.iv_checked, checkPosition == getItemPosition(item));
         }
     }
 

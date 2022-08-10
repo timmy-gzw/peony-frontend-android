@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="#aa000000">
+
+    <ImageView
+        android:id="@+id/iv_rotate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@mipmap/peony_qd_bbg_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="375:410"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/level_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@mipmap/peony_bpqtt_img"
+        app:layout_constraintBottom_toTopOf="@id/del"
+        app:layout_constraintDimensionRatio="271:391"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/dp_54"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <FrameLayout
+        android:id="@+id/icon_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/tv_level_cont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/level_bg"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <View
+            android:id="@+id/icon_stroke"
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_110"
+            android:background="@drawable/shape_tuhao_icon_bg_pop" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/dp_108"
+            android:layout_height="@dimen/dp_108"
+            android:layout_gravity="center"
+            android:src="@mipmap/mine_ic_girl_default"
+            app:riv_corner_radius="@dimen/dp_100" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/iv_level_up_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_48"
+        android:src="@mipmap/mine_bg_rich_content"
+        app:layout_constraintBottom_toBottomOf="@id/icon_frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon_frame"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_level_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_level_up_icon"
+        app:layout_constraintEnd_toEndOf="@id/iv_level_up_icon"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="@id/iv_level_up_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_level_up_icon"
+        tools:text="我是称号" />
+
+    <TextView
+        android:id="@+id/tv_level_cont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_9"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:gravity="center"
+        android:text="恭喜您"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/level_tips"
+        app:layout_constraintEnd_toEndOf="@id/level_bg"
+        app:layout_constraintStart_toStartOf="@id/level_bg"
+        app:layout_constraintTop_toBottomOf="@id/iv_level_up_icon" />
+
+    <TextView
+        android:id="@+id/level_tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_45"
+        android:layout_marginBottom="@dimen/dp_size_31"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_13"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/level_bg"
+        app:layout_constraintEnd_toEndOf="@id/level_bg"
+        app:layout_constraintStart_toStartOf="@id/level_bg"
+        app:layout_constraintTop_toBottomOf="@id/tv_level_cont"
+        tools:text="恭喜，您的土豪值已经升级到\nLV3小家碧玉" />
+
+    <ImageView
+        android:id="@+id/del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:src="@mipmap/real_pop_del"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/level_bg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
