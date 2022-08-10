@@ -2,4 +2,5 @@
 <resources>
     <color name="c_7d000000">#7d000000</color>
     <color name="c_7d000000_2">#00000000</color>
+    <color name="c_im_content">@color/color_light_font</color>
 </resources>
