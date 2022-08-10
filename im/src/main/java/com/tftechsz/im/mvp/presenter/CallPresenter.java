@@ -12,7 +12,6 @@ import android.os.Message;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +38,7 @@ import com.opensource.svgaplayer.SVGAVideoEntity;
 import com.tencent.qgame.animplayer.AnimConfig;
 import com.tencent.qgame.animplayer.AnimView;
 import com.tencent.qgame.animplayer.inter.IAnimListener;
+import com.tftechsz.common.widget.pop.RechargePopWindow;
 import com.tftechsz.im.api.ChatApiService;
 import com.tftechsz.im.model.CallStatusInfo;
 import com.tftechsz.im.mvp.iview.ICallView;
@@ -59,7 +59,6 @@ import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.GiftPopWindow;
 import com.tftechsz.common.widget.pop.RechargeBeforePop;
-import com.tftechsz.common.widget.pop.RechargePopWindow;
 import com.tftechsz.mine.api.MineApiService;
 
 import org.jetbrains.annotations.NotNull;

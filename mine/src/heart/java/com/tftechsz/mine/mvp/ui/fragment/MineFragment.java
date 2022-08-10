@@ -308,7 +308,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
             if (null != configInfo && configInfo.share_config != null) {
                 //渲染底部RecyclerView
                 List<ConfigInfo.MineInfo> list = CommonUtil.addMineInfo(configInfo.share_config.my);
-
+                LogUtil.e("=======",list.size()+"====="+configInfo.share_config.my);
                 if (list.size() > 0) {
                     List<BaseItemBean> beanList = new ArrayList<>();
                     for (ConfigInfo.MineInfo mineInfo : list) {

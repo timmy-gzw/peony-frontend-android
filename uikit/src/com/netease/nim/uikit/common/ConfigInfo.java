@@ -17,6 +17,7 @@ public class ConfigInfo {
         public List<MineInfo> my;
         public List<MineInfo> my_main_nav;
         public HomeTopNav home_top_nav;
+        public HomeTopNav home_tab_config_matching;
         public List<PaymentTypeDto> payment_type;
         public int matching_wait_time;
         public List<HomeTabNav> home_tab_config;

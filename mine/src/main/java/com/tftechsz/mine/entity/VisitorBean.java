@@ -18,6 +18,7 @@ public class VisitorBean {
     public int to_user_id;
     public int from_user_id;
     public String desc;
+    public String count;
     public int age;
 
     public boolean isGirl() {

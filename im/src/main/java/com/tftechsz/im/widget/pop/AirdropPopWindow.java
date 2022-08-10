@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.common.UserInfo;
+import com.tftechsz.common.widget.pop.RechargePopWindow;
 import com.tftechsz.im.R;
 import com.tftechsz.im.adapter.AirdropAdapter;
 import com.tftechsz.im.api.ChatApiService;
@@ -25,7 +26,6 @@ import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.widget.pop.BaseBottomPop;
 import com.tftechsz.common.widget.pop.RechargeBeforePop;
-import com.tftechsz.common.widget.pop.RechargePopWindow;
 
 import java.util.List;
 

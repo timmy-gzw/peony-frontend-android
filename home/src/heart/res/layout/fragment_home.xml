@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:fillViewport="true">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="196dp"
+        android:background="@mipmap/bg_home_top" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:orientation="vertical"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+
+                <LinearLayout
+                    android:id="@+id/ll_home_top_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.tftechsz.home.widget.HomeTopItemLayout
+                        android:id="@+id/home_top_item1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone" />
+
+                    <com.tftechsz.home.widget.HomeTopItemLayout
+                        android:id="@+id/home_top_item2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/dp_7"
+                        android:layout_weight="1"
+                        android:visibility="gone" />
+
+                    <com.tftechsz.home.widget.HomeTopItemLayout
+                        android:id="@+id/home_top_item3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/dp_7"
+                        android:layout_weight="1"
+                        android:visibility="gone" />
+
+                    <com.tftechsz.home.widget.HomeTopItemLayout
+                        android:id="@+id/home_top_item4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/dp_7"
+                        android:layout_weight="1"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:cardCornerRadius="@dimen/dp_10"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_home_top_item">
+
+                    <com.tftechsz.common.widget.X5WebView
+                        android:id="@+id/webView"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:scrollbars="none"
+                        android:visibility="gone" />
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <com.flyco.tablayout.SlidingScaleTabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_tab_height"
+            android:paddingStart="@dimen/dp_6"
+            android:paddingEnd="@dimen/dp_6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.6"
+            android:layout_marginStart="@dimen/dp_10"
+            app:tl_divider_padding="@dimen/dp_26"
+            app:tl_indicator_color="@color/colorPrimary"
+            app:tl_indicator_corner_radius="@dimen/dp_2"
+            app:tl_indicator_height="@dimen/dp_4"
+            app:tl_indicator_margin_top="@dimen/dp_10"
+            app:tl_indicator_width="@dimen/dp_10"
+            app:tl_tab_marginBottom="@dimen/dp_12"
+            app:tl_tab_msg_marginRight="@dimen/dp_10"
+            app:tl_tab_space_equal="true"
+            app:tl_tab_vertical_gravity="Bottom"
+            app:tl_tab_width="@dimen/dp_80"
+            app:tl_textBold="SELECT"
+            app:tl_textSelectColor="@color/color_normal"
+            app:tl_textSelectSize="@dimen/sp_18"
+            app:tl_textUnSelectColor="@color/color_light_font"
+            app:tl_textUnSelectSize="@dimen/sp_18"
+            app:tl_underline_gravity="BOTTOM"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@mipmap/ic_search"
+            android:padding="@dimen/dp_5"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tabLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_rank"
+            app:layout_constraintTop_toTopOf="@id/tabLayout"
+            tools:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/iv_rank"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginEnd="@dimen/dp_21"
+            android:src="@mipmap/home_ic_tv_wall"
+            app:layout_constraintBottom_toBottomOf="@id/tabLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tabLayout"
+            tools:visibility="visible" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.tftechsz.home.widget.ScrollerForbidView
+        android:id="@+id/sv_message"
+        android:layout_width="142dp"
+        android:layout_height="@dimen/dp_40"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_22"
+        android:background="@drawable/shape_play_message"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/dp_5"
+        android:visibility="gone" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
