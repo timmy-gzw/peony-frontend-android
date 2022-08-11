@@ -1080,8 +1080,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                             }
                             setVideoCallback();
                         }
-                        NERtcEx.getInstance().adjustRecordingSignalVolume(400);
-                        NERtcEx.getInstance().adjustPlaybackSignalVolume(400);
+                        NERtcEx.getInstance().adjustRecordingSignalVolume(0);
+                        NERtcEx.getInstance().adjustPlaybackSignalVolume(0);
                     }
                 }));
         LogUtil.e(TAG, isOnLine + "");
@@ -2188,7 +2188,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         stopPlayer();
         if (countBackUtils != null)
             countBackUtils.destroy();
-        NERtc.getInstance().leaveChannel();
         if (mChannelType == 2) {
             if (remoteVideoView != null) {
                 remoteVideoView.release();
@@ -2226,7 +2225,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         SPUtils.remove(Constants.INVITED_EVENT);
         if (nertcCallingDelegate != null && nertcVideoCall != null) {
             nertcVideoCall.removeDelegate(nertcCallingDelegate);
-            nertcVideoCall.releaseNERtc();
             nertcCallingDelegate = null;
             nertcVideoCall = null;
         }

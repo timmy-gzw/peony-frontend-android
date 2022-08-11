@@ -576,7 +576,7 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
 
         @Override
         public void onUserAudioStart(long l) {
-            LogUtil.e("NERtcCallback", "--onUserAudioStop--");
+            LogUtil.e("NERtcCallback", "--onUserAudioStart--");
             if (service.getUserId() != l) {
                 NERtcEx.getInstance().subscribeRemoteAudioStream(l, true);
             }
@@ -1310,6 +1310,7 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
         //离开NERtc的channel
         if (haveJoinNertcChannel) {
             NERtc.getInstance().leaveChannel();
+            LogUtil.e("NERtcCallback", "--leaveChannel--");
         }
         //离开信令的channel
         if (!TextUtils.isEmpty(imChannelId)) {
@@ -1632,7 +1633,7 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
         @Override
         public void onUserAudioStart(long l) {
             if (mode == CALL) {
-                LogUtil.e("NERtcCallback", "--onUserAudioStop--");
+                LogUtil.e("NERtcCallback", "--onUserAudioStart--");
                 if (service.getUserId() != l) {
                     NERtcEx.getInstance().subscribeRemoteAudioStream(l, true);
                 }
