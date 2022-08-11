@@ -1,9 +1,10 @@
 <resources>
 
     <style name="MainBotLottieStyle">
-        <item name="android:layout_width">@dimen/dp_36</item>
+        <item name="android:layout_width">@dimen/dp_30</item>
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:layout_height">@dimen/dp_36</item>
+        <item name="android:layout_marginTop">@dimen/dp_7</item>
+        <item name="android:layout_height">@dimen/dp_30</item>
     </style>
 
 </resources>

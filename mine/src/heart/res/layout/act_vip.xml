@@ -142,9 +142,8 @@
                     android:layout_marginEnd="@dimen/dp_12"
                     android:background="@drawable/sp_vip_unlock"
                     android:paddingStart="@dimen/dp_12"
-                    android:paddingTop="@dimen/dp_4"
                     android:paddingEnd="@dimen/dp_12"
-                    android:paddingBottom="@dimen/dp_4"
+                    android:paddingVertical="@dimen/dp_6"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">

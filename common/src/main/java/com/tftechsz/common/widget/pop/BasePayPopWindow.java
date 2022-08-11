@@ -18,6 +18,7 @@ import com.alipay.sdk.app.PayTask;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -224,8 +225,10 @@ public class BasePayPopWindow extends BaseBottomPop {
                         RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_UPDATE_USER_INFO_SUCCESS));
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付成功");
                     } else {
+                        LogUtil.e("==========","==" + payResult.toString());
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付失败");
                     }
+
                 });
         mCompositeDisposable.add(disposable);
     }

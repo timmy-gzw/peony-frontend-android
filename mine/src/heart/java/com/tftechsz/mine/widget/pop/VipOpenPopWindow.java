@@ -170,6 +170,7 @@ public class VipOpenPopWindow extends BaseBottomPop implements View.OnClickListe
                                     break;
                                 }
                             }
+                            setTypeId(mPriceAdapter.getItem(oldSel).id);
                         }
                         if (data.privilege != null && data.privilege.size() > 0) {
                             OpenVipAdapter openVipAdapter = new OpenVipAdapter(mContext, data.privilege);

@@ -3,4 +3,6 @@
 
     <string name="accost">心动</string>
     <string name="recharge_coin_rmb_format"><![CDATA[%s 需支付<font color=#7858FC>%s元</font>]]></string>
+    <string name="to_private_chat">去私信</string>
+    <string name="private_chat">私信</string>
 </resources>
