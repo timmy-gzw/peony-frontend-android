@@ -186,12 +186,6 @@ public class VipOpenPopWindow extends BaseBottomPop implements View.OnClickListe
                             });
                         }
                         if (data.payment_show != null && data.payment_show.size() > 0) {
-                            for (int i = 0; i < data.payment_show.size(); i++) {
-                                PaymentTypeDto paymentTypeDto = data.payment_show.get(i);
-                                if (paymentTypeDto.is_active == 1) {
-                                    setTypeId(paymentTypeDto.id);
-                                }
-                            }
                             adapter = new ChargePayTypeAdapter();
                             mBind.payRecy.setAdapter(adapter);
                             adapter.setList(data.payment_show);
@@ -251,6 +245,7 @@ public class VipOpenPopWindow extends BaseBottomPop implements View.OnClickListe
             if (oldSel >= 0 && oldSel < mPriceAdapter.getItemCount()) {
                 if (adapter == null || adapter.getData().size() <= 0)
                     return;
+                setTypeId(mPriceAdapter.getItem(oldSel).id);
                 if (adapter.isWeChat(adapter.getDataPosition())) {
                     getWxOrderNum(mPayId);
                     return;

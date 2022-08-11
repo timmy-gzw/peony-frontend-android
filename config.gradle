@@ -14,6 +14,7 @@ ext {
             app_label          : "伊糖",
             YUNXIN_APP_ID      : "9c3106de8f4c4b69e7ff47b6b6c7aad3",// 云信APP_ID  √
             UMENG_APPKEY       : "62947b8a05844627b598c5ef",//友盟   √
+            UMENG_PUSH_SECRET  : "624dfb919be15a65eeafafcf17bbc546",//友盟   √
             BAIDU_APPKEY       : "hPHNLUSasPjeRQjpQYeFBj13lTESGRee",   //百度key  √
             VIVO_APP_ID        : "105568848",   //VIVO ID
             VIVO_APP_KEY       : "e677afe37c0e8667a2972d3076a7f953",
@@ -23,8 +24,9 @@ ext {
             UMENG_CHANNEL_VALUE: "OFFICIAL",
             app_label          : "心心相伴",
             YUNXIN_APP_ID      : "9c3106de8f4c4b69e7ff47b6b6c7aad3",// 云信APP_ID  √
-            UMENG_APPKEY       : "62947b8a05844627b598c5ef",//友盟   √
-            BAIDU_APPKEY       : "hPHNLUSasPjeRQjpQYeFBj13lTESGRee",   //百度key  √
+            UMENG_APPKEY       : "62f37e4f05844627b5188e6a",//友盟   √
+            UMENG_PUSH_SECRET  : "88a1d7442b985a794588a762e76e524f",//友盟   √
+            BAIDU_APPKEY       : "GzzOUnxY17OiR0E7ryE9GZysTSTjpC8l",   //百度key  √
             VIVO_APP_ID        : "105568848",   //VIVO ID
             VIVO_APP_KEY       : "e677afe37c0e8667a2972d3076a7f953",
             buglyKey           : "bbbd02a9aa",

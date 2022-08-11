@@ -199,7 +199,6 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         fragments = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         //加载排行榜图片
-        LogUtils.e("=======124124","32143143124112341234124"+service.getConfigInfo().share_config.home_tab_config_tv+"-----");
         if (service.getConfigInfo() != null && service.getConfigInfo().share_config != null && service.getConfigInfo().share_config.home_tab_config_tv != null) {
             mIvRank.setVisibility(View.VISIBLE);
             GlideUtils.loadImage(mContext, mIvRank, service.getConfigInfo().share_config.home_tab_config_tv.icon);
@@ -210,6 +209,9 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                 }
                 BaseWebViewActivity.start(mContext, "", service.getConfigInfo().share_config.home_tab_config_tv.link, false, "black", 0, 5);
             });
+        }
+        if (service.getConfigInfo() != null && service.getConfigInfo().sys != null && service.getConfigInfo().sys.loading_h5 != null) {
+            showHot();
         }
         if (service.getConfigInfo() == null || service.getConfigInfo().share_config == null
                 || service.getConfigInfo().share_config.home_tab_config == null) {

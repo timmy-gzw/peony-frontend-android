@@ -99,7 +99,7 @@
 
         <meta-data
           android:name="UMENG_PUSH_SECRET"
-          android:value="624dfb919be15a65eeafafcf17bbc546" />
+          android:value="${UMENG_PUSH_SECRET}"/>
 
         <meta-data
             android:name="APPLOG_URL_SCHEME"
