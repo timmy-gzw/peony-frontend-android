@@ -2,7 +2,6 @@ package com.tftechsz.home.mvp.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,19 +13,8 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
-import com.netease.nim.uikit.common.adapter.AdvancedAdapter;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
-import com.tftechsz.common.utils.MMKVUtils;
-import com.tftechsz.common.widget.pop.CustomPopWindow;
-import com.tftechsz.common.widget.pop.MatchPopWindow;
-import com.tftechsz.home.R;
-import com.tftechsz.home.mvp.iview.IRadarView;
-import com.tftechsz.home.mvp.presenter.RadarPresenter;
-import com.tftechsz.home.widget.BarrageView.Barrage;
-import com.tftechsz.home.widget.BarrageView.BarrageView;
-import com.tftechsz.home.widget.RadarView;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
@@ -34,8 +22,16 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AnimationUtil;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.common.widget.pop.MatchPopWindow;
+import com.tftechsz.home.R;
+import com.tftechsz.home.mvp.iview.IRadarView;
+import com.tftechsz.home.mvp.presenter.RadarPresenter;
+import com.tftechsz.home.widget.BarrageView.Barrage;
+import com.tftechsz.home.widget.BarrageView.BarrageView;
+import com.tftechsz.home.widget.RadarView;
 
 import java.util.ArrayList;
 import java.util.Collections;

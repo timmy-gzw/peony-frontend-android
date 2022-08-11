@@ -32,16 +32,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.blankj.utilcode.util.ZipUtils;
 import com.flyco.tablayout.SlidingScaleTabLayout;
 import com.google.android.material.appbar.AppBarLayout;
 import com.gyf.immersionbar.ImmersionBar;
-import com.netease.nim.highavailable.LogUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.util.DownloadHelper;
 import com.netease.nim.uikit.common.util.MD5Util;
-import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
@@ -78,7 +75,6 @@ import com.tftechsz.home.widget.ScrollerForbidView;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

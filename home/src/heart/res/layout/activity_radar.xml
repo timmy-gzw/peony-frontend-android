@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_radar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/radar_voice_bg">
+
+
+    <ImageView
+        android:id="@+id/toolbar_back_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/dp_44"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_10"
+        android:src="@mipmap/ic_back_white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="语音速配"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_back_all"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar_back_all" />
+
+    <ImageView
+        android:id="@+id/music_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:src="@mipmap/radar_music_icon"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_back_all"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar_back_all" />
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center"
+        android:text="正在为你寻找有缘人"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radar_view" />
+
+    <TextView
+        android:id="@+id/tv_matching"
+        android:text="."
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintLeft_toRightOf="@id/tv_tip"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/ll_pair"
+        android:layout_width="@dimen/dp_200"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@id/radar_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/bg_pink"
+        android:gravity="center"
+        android:layout_height="@dimen/dp_57">
+
+        <TextView
+            android:id="@+id/tv_match"
+            android:layout_width="wrap_content"
+            android:text="继续速配"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_match_interval"
+            android:layout_width="wrap_content"
+            android:text="（3S后自动参与速配）"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <com.tftechsz.home.widget.BarrageView.BarrageView
+        android:id="@+id/barrage_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        app:allow_repeat="true"
+        app:layout_constraintBottom_toTopOf="@id/radar_view"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_back_all"
+        app:line_height="@dimen/dp_30"
+        app:text_left_padding="30"
+        app:text_right_padding="17" />
+
+    <ImageView
+        android:id="@+id/img_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_voice_center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/radar_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/radar_fan_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/rule_im"
+        android:src="@mipmap/radar_pair_rule"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/radar_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.tftechsz.common.widget.CircleImageView
+        android:id="@+id/sa_im1"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_60"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/dp_1"
+        android:src="@mipmap/mine_ic_boy_default"
+        app:layout_constraintRight_toRightOf="@id/radar_view"
+        app:layout_constraintTop_toTopOf="@id/radar_view" />
+
+    <com.tftechsz.common.widget.CircleImageView
+        android:id="@+id/sa_im2"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_100"
+        android:layout_marginBottom="@dimen/dp_70"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/dp_1"
+        android:src="@mipmap/mine_ic_girl_default"
+        app:layout_constraintBottom_toBottomOf="@id/radar_view"
+        app:layout_constraintRight_toRightOf="@id/radar_view" />
+
+    <com.tftechsz.common.widget.CircleImageView
+        android:id="@+id/sa_im3"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_100"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/dp_1"
+        android:src="@mipmap/pic_front_2x"
+        app:layout_constraintLeft_toLeftOf="@id/radar_view"
+        app:layout_constraintTop_toTopOf="@id/radar_view" />
+
+    <com.tftechsz.common.widget.CircleImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_center_avater"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_round"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_100"
+        android:alpha="0.2"
+        android:background="@drawable/round_video"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        />
+
+    <ImageView
+        android:id="@+id/iv_round_big"
+        android:layout_width="@dimen/dp_160"
+        android:layout_height="@dimen/dp_160"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:alpha="0.1"
+        android:background="@drawable/round_video"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
