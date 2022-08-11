@@ -28,8 +28,8 @@
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/iv_icon"
-                    android:layout_width="182dp"
-                    android:layout_height="182dp"
+                    android:layout_width="@dimen/real_name_avatar_wh"
+                    android:layout_height="@dimen/real_name_avatar_wh"
                     android:layout_margin="@dimen/dp_60"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@id/real_bg"

@@ -31,8 +31,8 @@
                 tools:ignore="ContentDescription" />
 
             <ImageView
-                android:layout_width="182dp"
-                android:layout_height="182dp"
+                android:layout_width="@dimen/real_name_avatar_wh"
+                android:layout_height="@dimen/real_name_avatar_wh"
                 android:layout_gravity="center_horizontal"
                 android:src="@mipmap/ic_avatar_female"
                 app:layout_constraintBottom_toBottomOf="@id/iv_avatar_bg"
