@@ -84,7 +84,7 @@
         android:drawablePadding="@dimen/dp_3"
         android:gravity="center"
         android:text="6℃"
-        android:textColor="#FF5C97"
+        android:textColor="@color/c_ff5c97"
         android:textSize="@dimen/sp_10"
         android:visibility="gone"
         tools:visibility="visible" />
