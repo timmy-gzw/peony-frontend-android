@@ -31,12 +31,12 @@
 
     <ImageView
         android:id="@+id/iv_close"
-        android:src="@mipmap/ic_close_circle"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_15"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:src="@mipmap/ic_close_circle" />
 
     <TextView
         android:id="@+id/tv_content"
