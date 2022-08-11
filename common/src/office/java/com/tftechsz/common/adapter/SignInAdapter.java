@@ -1,4 +1,4 @@
-package com.tftechsz.home.adapter;
+package com.tftechsz.common.adapter;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.tftechsz.common.R;
+import com.tftechsz.common.entity.SignInBean;
 import com.tftechsz.common.utils.Utils;
-import com.tftechsz.home.R;
-import com.tftechsz.home.entity.SignInBean;
 
 /**
  * 包 名 : com.tftechsz.home.adapter
