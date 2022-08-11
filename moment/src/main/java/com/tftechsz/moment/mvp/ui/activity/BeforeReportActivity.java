@@ -23,6 +23,7 @@ public class BeforeReportActivity extends BaseMvpActivity implements View.OnClic
     private TextView item,item1,item2,item3,item4,item5,temp;
     private int blogId;
     private int fromType;  // 1:个人  2：动态 3：帮助反馈
+    private TextView tvSubmit;
 
     @Override
     public BasePresenter initPresenter() {
@@ -59,7 +60,8 @@ public class BeforeReportActivity extends BaseMvpActivity implements View.OnClic
         item4.setOnClickListener(this);
         item5.setOnClickListener(this);
         findViewById(R.id.toolbar_back_all).setOnClickListener(this);
-        findViewById(R.id.submit).setOnClickListener(this);
+        tvSubmit = findViewById(R.id.submit);
+        tvSubmit.setOnClickListener(this);
     }
 
     @Override
@@ -124,6 +126,7 @@ public class BeforeReportActivity extends BaseMvpActivity implements View.OnClic
             if(id == R.id.item5){
                 item5.setCompoundDrawablesWithIntrinsicBounds(d,null,null,null);
             }
+            tvSubmit.setEnabled(true);
         }
 
     }

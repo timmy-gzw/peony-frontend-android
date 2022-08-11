@@ -609,6 +609,8 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                     ChatMsg.UserLevelUp levelUp = JSON.parseObject(event.code, ChatMsg.UserLevelUp.class);
                                     if (levelUp != null) {
                                         if (levelUp.user_type.equals("rich")) {//土豪值升级
+                                            if (mCharmLevelUpPop != null)
+                                                mCharmLevelUpPop.dismiss();
                                             if (mRichLevelUpPop == null) {
                                                 mRichLevelUpPop = new UserLevelUpPop(mContext);
                                             }
@@ -619,6 +621,9 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                             mRichLevelUpPop.showPopupWindow();
 
                                         } else if (levelUp.user_type.equals("charm")) {//魅力值升级
+                                            if (mRichLevelUpPop != null) {
+                                                mRichLevelUpPop.dismiss();
+                                            }
                                             if (mCharmLevelUpPop == null) {
                                                 mCharmLevelUpPop = new UserLevelUpPop(mContext);
                                             }
