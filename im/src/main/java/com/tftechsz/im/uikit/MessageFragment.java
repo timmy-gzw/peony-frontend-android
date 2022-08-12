@@ -244,7 +244,6 @@ import razerdp.util.KeyboardUtils;
  * 聊天界面基类
  */
 public class MessageFragment extends TFragment implements ModuleProxy, View.OnClickListener, MessageListPanelEx.OnMessageListener, InputPanel.InputListener {
-    private final String COUPLE_OFFICIAL_PUBLICITY = "couple_official_publicity.svga";
     private final int EVENT_MESSAGE = 10000;
     private View rootView;
     private final Handler mHandler = new Handler();
@@ -2203,53 +2202,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         }
 
     }
-
-    private void playAirdrop(String name) {
-        svgaParser.decodeFromAssets(name, new SVGAParser.ParseCompletion() {
-
-            @Override
-            public void onError() {
-
-            }
-
-            @Override
-            public void onComplete(@NotNull SVGAVideoEntity videoItem) {
-                if (TextUtils.equals(COUPLE_OFFICIAL_PUBLICITY, name)) {   //情侣表白svga
-                    if (svgaImageView != null && mIvGiftMask != null) {
-                        if (mTvContactWay.isPauseScroll()) {
-                            mIvGiftMask.setVisibility(View.VISIBLE);
-                        }
-                        svgaImageView.setVideoItem(videoItem);
-                        svgaImageView.stepToFrame(0, true);
-                    }
-                }
-            }
-        }, null);
-        if (!TextUtils.equals(COUPLE_OFFICIAL_PUBLICITY, name)) return;
-        svgaImageView.setCallback(new SVGACallback() {
-            @Override
-            public void onPause() {
-
-            }
-
-            @Override
-            public void onFinished() {
-                mIsPlay = false;
-                mIvGiftMask.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onRepeat() {
-
-            }
-
-            @Override
-            public void onStep(int frame, double percentage) {
-
-            }
-        });
-    }
-
 
     /**
      * ************************* 消息收发 **********************************

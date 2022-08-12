@@ -71,7 +71,6 @@
             app:layout_constraintStart_toStartOf="@id/root_bg"
             app:layout_constraintTop_toTopOf="@id/iv_prestige"
             app:lottie_autoPlay="false"
-            app:lottie_fileName="pop_family_box.zip"
             app:lottie_loop="false" />
 
         <TextView
