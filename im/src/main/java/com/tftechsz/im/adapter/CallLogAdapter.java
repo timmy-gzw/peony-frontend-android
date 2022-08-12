@@ -4,12 +4,13 @@ import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.tftechsz.common.adapter.DataBindBaseViewHolder;
+import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.im.BR;
 import com.tftechsz.im.R;
 import com.tftechsz.im.databinding.ItemCallLogBinding;
 import com.tftechsz.im.model.dto.CallLogDto;
-import com.tftechsz.common.adapter.DataBindBaseViewHolder;
-import com.tftechsz.common.utils.GlideUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +30,7 @@ public class CallLogAdapter extends BaseQuickAdapter<CallLogDto, DataBindBaseVie
         binding.setVariable(BR.item, bean);
         binding.executePendingBindings();
 
+        CommonUtil.setUserName(binding.name, bean.user_nickname, bean.isVip());
         binding.setBotLineVisible(getItemCount() - 1 == helper.getLayoutPosition());
 //        binding.setEndIconVisible(bean.is_tag);
         GlideUtils.loadRoundImage(getContext(), binding.icon, bean.user_icon);
