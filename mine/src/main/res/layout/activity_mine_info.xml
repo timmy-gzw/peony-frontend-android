@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingHorizontal="@dimen/dp_16"
                 android:paddingTop="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_5">
 
@@ -86,7 +86,7 @@
                     android:id="@+id/iv_avatar"
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="@dimen/dp_60"
-                    android:layout_marginEnd="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:layout_toStartOf="@+id/iv_arrow"
                     android:scaleType="centerCrop"
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:minHeight="@dimen/dp_50"
-                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingHorizontal="@dimen/dp_16"
                 android:paddingTop="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_4">
 
@@ -168,7 +168,6 @@
                     android:id="@+id/ll_audio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:background="@drawable/shape_black_alpha30"
                     android:gravity="center"
@@ -216,7 +215,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/dp_10"
-                    android:layout_marginEnd="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:gravity="end"
                     android:text="未录制"
@@ -252,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/tv_right"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginStart="@dimen/dp_16"
                     android:includeFontPadding="false"
                     android:text="交友宣言"
                     android:textColor="@color/color_normal"
@@ -264,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/dp_20"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:src="@mipmap/ic_arrow" />
 
                 <com.tftechsz.common.widget.CBAlignTextView
@@ -288,8 +287,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:layout_marginEnd="@dimen/dp_20"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:background="@color/driver" />
 
                 <TextView
@@ -321,7 +320,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/iv_name_right"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginStart="@dimen/dp_16"
                     android:text="昵称"
                     android:textColor="@color/color_normal"
                     android:textSize="@dimen/sp_16" />
@@ -332,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/dp_20"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:src="@mipmap/ic_arrow" />
 
                 <TextView
@@ -354,8 +353,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:layout_marginEnd="@dimen/dp_20"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:background="@color/driver" />
 
                 <TextView
