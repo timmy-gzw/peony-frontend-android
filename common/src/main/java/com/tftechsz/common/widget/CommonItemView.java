@@ -3,6 +3,7 @@ package com.tftechsz.common.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,6 +84,11 @@ public class CommonItemView extends RelativeLayout {
 
             int leftTextColor = typedArray.getColor(R.styleable.CommonItemView_left_text_color, Color.BLACK);
             mTvLeft.setTextColor(leftTextColor);
+
+            boolean isBold = typedArray.getBoolean(R.styleable.CommonItemView_view_visible, false);
+            if (isBold) {
+                mTvLeft.setTypeface(mTvLeft.getTypeface(), Typeface.BOLD);
+            }
 
             String leftContent = typedArray.getString(R.styleable.CommonItemView_left_text_content);
             mTvLeft.setText(leftContent);

@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/tv_text"
         android:text="帅哥，认识一下吧"
-        android:textColor="#FF5A7B"
+        android:textColor="@color/colorPrimary"
         android:textSize="@dimen/sp_14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

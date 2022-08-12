@@ -30,6 +30,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.netease.nim.uikit.common.UserInfo;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
@@ -354,7 +355,8 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                 toastTip("交友宣言正在审核，无法更改");
                 return;
             }
-            EditInfoActivity.startForSign(this, mItemSign.getText().toString(), REQUEST_SIGN);
+            if (mUserInfo != null)
+                EditInfoActivity.startForSign(this, mUserInfo.getDesc(), REQUEST_SIGN);
         } else if (id == R.id.rl_avatar || id == R.id.iv_edit_photo) {  //头像
             if (mUserInfo != null) {
                 if (!TextUtils.isEmpty(mUserInfo.audit_icon)) {
@@ -584,11 +586,13 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                 }
             } else if (requestCode == REQUEST_SIGN) {
                 if (data != null && mUserInfo != null) {
-                    mItemSign.setText(data.getStringExtra("type"));
+                    String desc = data.getStringExtra("type");
+                    mItemSign.setText(desc);
                     mItemSign.setTextColor(ContextCompat.getColor(this, R.color.color_normal));
+                    mUserInfo.setDesc(desc);
                     if (service.getUserInfo() != null && service.getUserInfo().isGirl()) {
                         mTvSignAudit.setVisibility(View.VISIBLE);
-                        mUserInfo.audit_desc = data.getStringExtra("type");
+                        mUserInfo.audit_desc = desc;
                     }
                 }
 
