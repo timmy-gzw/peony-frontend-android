@@ -1,5 +1,8 @@
 package com.netease.nim.uikit.business.session.viewholder;
 
+import static android.util.TypedValue.COMPLEX_UNIT_PX;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -78,13 +81,13 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
         ChatMsg.Tips tips = JSON.parseObject(chatMsg.content, ChatMsg.Tips.class);
         String content = "";
         bodyTextView.setTextColor(context.getResources().getColor(R.color.white));
+        bodyTextView.setTextSize(COMPLEX_UNIT_PX,context.getResources().getDimension(R.dimen.sp_12));
         if (tips.des.contains("跟她语音聊天") && tips.des.contains("跟她视频聊天")) {
             mLlleft.setVisibility(View.GONE);
             mtvTitle.setVisibility(View.VISIBLE);
             mtvTitle.setText("友情提示");
             mRlBox.setBackground(context.getResources().getDrawable(R.drawable.ic_tip_top_right));
-            int padding = (int) context.getResources().getDimension(R.dimen.dp_10);
-            mLlTitle.setPadding(padding, padding, padding, padding);
+            mLlTitle.setPadding((int) context.getResources().getDimension(R.dimen.dp_size_12), (int) context.getResources().getDimension(R.dimen.dp_size_12), (int)context.getResources().getDimension(R.dimen.dp_size_12), (int)context.getResources().getDimension(R.dimen.dp_size_12));
             mClCall.setVisibility(View.VISIBLE);
             List<String> tipContent = ChatMsgUtil.getTipContent(tips.des);
             mLlVideo.setOnClickListener(v -> {
@@ -96,6 +99,7 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
             String[] split = tips.des.split("\\n<tag");
             content = split[0];
             bodyTextView.setText(content);
+            bodyTextView.setTextSize(COMPLEX_UNIT_PX,context.getResources().getDimension(R.dimen.sp_10));
             bodyTextView.setTextColor(context.getResources().getColor(R.color.black));
         } else {
             SpannableStringBuilder span = ChatMsgUtil.getTipContent(/*"        " + */tips.des, "", new ChatMsgUtil.OnSelectListener() {

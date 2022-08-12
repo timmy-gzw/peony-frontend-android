@@ -52,17 +52,21 @@
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_8"
                 android:text="友情提示"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14"
+                tools:visibility="visible"
                 android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="left"
+                tools:textColor="@color/black"
+                tools:textSize="@dimen/sp_10"
                 android:lineSpacingExtra="@dimen/dp_size_2"
                 android:textColor="#EEEEEE"
                 android:textSize="@dimen/sp_12"
@@ -73,9 +77,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp_size_12"
-                android:layout_marginBottom="@dimen/dp_size_6"
+                android:layout_marginTop="@dimen/dp_size_20"
                 android:orientation="horizontal"
+                tools:visibility="visible"
                 android:visibility="gone">
 
                 <LinearLayout
@@ -93,7 +97,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp_size_6"
+                        android:layout_marginEnd="@dimen/dp_size_4"
                         android:src="@drawable/ic_tip_audio" />
 
                     <TextView
@@ -103,7 +107,7 @@
                         android:gravity="center"
                         android:text="听听TA的声音"
                         android:textColor="#EEEEEE"
-                        android:textSize="@dimen/sp_12" />
+                        android:textSize="@dimen/sp_11" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -121,7 +125,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp_size_6"
+                        android:layout_marginEnd="@dimen/dp_size_4"
                         android:src="@drawable/ic_tip_video" />
 
                     <TextView
@@ -131,7 +135,7 @@
                         android:gravity="center"
                         android:text="看看TA的脸庞"
                         android:textColor="#EEEEEE"
-                        android:textSize="@dimen/sp_12" />
+                        android:textSize="@dimen/sp_11" />
                 </LinearLayout>
 
             </LinearLayout>
