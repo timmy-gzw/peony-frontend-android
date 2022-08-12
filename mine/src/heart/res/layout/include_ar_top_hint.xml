@@ -5,9 +5,10 @@
     android:id="@+id/ar_top_hint"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:background="#207858FC"
+    android:background="#F5F5FF"
     android:gravity="center"
-    android:textColor="@color/colorPrimary"
+    android:textStyle="bold"
+    android:textColor="@color/color_mid_font"
     android:textSize="12sp"
     app:layout_constraintTop_toBottomOf="@+id/base_tool_bar"
     tools:text="照片越多，越容易让Ta喜欢你哦~">
