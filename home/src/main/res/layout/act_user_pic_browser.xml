@@ -89,9 +89,9 @@
             app:icon_size="18dp"
             app:icon_type="Star"
             app:is_enabled="true"
-            app:like_drawable="@mipmap/peony_home_xcdz_icon02"
+            app:like_drawable="@mipmap/peony_dt_dz01_icon"
             app:liked="false"
-            app:unlike_drawable="@mipmap/peony_home_xcdz_icon01" />
+            app:unlike_drawable="@mipmap/peony_dt_dz02_icon" />
 
         <com.robinhood.ticker.TickerView
             android:id="@+id/tv_like"
