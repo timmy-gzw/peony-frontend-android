@@ -69,6 +69,10 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
                 Utils.toast("很抱歉，好像网络出问题了");
                 return;
             }
+            if (mBindData.phone.is_bind != 1) {
+                Utils.toast("请先绑定手机号后再解绑");
+                return;
+            }
             if (mBindData.wecaht.is_bind == 1) {
                 //微信解绑
                 Intent intent = new Intent(mContext, UnbindWechatActivity.class);
