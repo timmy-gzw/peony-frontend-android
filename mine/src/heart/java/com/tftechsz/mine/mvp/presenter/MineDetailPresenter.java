@@ -1,14 +1,24 @@
 package com.tftechsz.mine.mvp.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.fastjson.JSON;
 import com.netease.nim.uikit.bean.AccostDto;
+import com.netease.nim.uikit.common.ChatMsg;
+import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.UserInfo;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
+import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BasePresenter;
+import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.entity.CallCheckDto;
+import com.tftechsz.common.entity.IntegralDto;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.entity.RealStatusInfoDto;
+import com.tftechsz.common.event.MessageCallEvent;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
@@ -18,7 +28,10 @@ import com.tftechsz.common.iservice.CallService;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.RxUtil;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.common.widget.pop.GiftPopWindow;
+import com.tftechsz.common.widget.pop.SVGAPlayerPop;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.entity.dto.TrendDto;
@@ -94,6 +107,7 @@ public class MineDetailPresenter extends BasePresenter<IMineDetailView> {
                     }
                 }));
     }
+
     /**
      * 获取他人用户收到礼物
      */
@@ -350,5 +364,106 @@ public class MineDetailPresenter extends BasePresenter<IMineDetailView> {
         });
     }
 
+
+    protected GiftPopWindow giftPopWindow;
+
+    /**
+     * 显示礼物弹窗
+     *
+     * @param sessionId userId
+     */
+    public void showGiftPop(Context context, String sessionId) {
+        getCoin();
+        if (null == giftPopWindow)
+            giftPopWindow = new GiftPopWindow(context, 1, 1, 0);
+        giftPopWindow.setUserIdType(sessionId, 1, "");
+        giftPopWindow.setCoin(userService.getUserInfo().getCoin());
+        giftPopWindow.addOnClickListener(new GiftPopWindow.OnSelectListener() {
+            @Override
+            public void sendGift(com.tftechsz.common.entity.GiftDto data, int num, List<String> toMember, String name) {
+                ChatMsgUtil.sendGiftMessage(SessionTypeEnum.P2P, String.valueOf(userService.getUserId()), sessionId, data.is_choose_num, data.cate, data.tag_value, data.id, data.coin, data.name, data.image, data.animationType, data.animation, data.animations, data.combo, "", num, "p2p", "", null, new ChatMsgUtil.OnMessageListener() {
+                    @Override
+                    public void onGiftListener(int code, IMMessage message) {
+                        if (code == 200) {
+                            RxBus.getDefault().post(new MessageCallEvent(message));
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void getMyCoin() {
+                getCoin();
+            }
+
+            @Override
+            public void atUser(List<String> userId, String name) {
+
+            }
+
+            @Override
+            public void upOrDownSeat(int userId, boolean isOnSeat) {
+
+            }
+
+            @Override
+            public void muteVoice(int userId, int voiceStatus) {
+
+            }
+        });
+    }
+
+    private void getCoin() {
+        userService.getField("property", "coin", new ResponseObserver<BaseResponse<IntegralDto>>() {
+            @Override
+            public void onSuccess(BaseResponse<IntegralDto> response) {
+                if (response.getData() != null) {
+                    UserInfo userInfo = userService.getUserInfo();
+                    userInfo.setCoin(response.getData().coin);
+                    userService.setUserInfo(userInfo);
+                    if (giftPopWindow != null) {
+                        giftPopWindow.setCoin(response.getData().coin);
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * 发送礼物成功
+     */
+    public void sendGiftSuccess(com.tftechsz.common.entity.GiftDto data, IMMessage message) {
+        try {
+            ChatMsg chatMsg = ChatMsgUtil.parseMessage(message);
+            if (chatMsg != null && TextUtils.equals(chatMsg.cmd_type, ChatMsg.GIFT_TYPE)) {
+                showGift(chatMsg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 显示礼物动画
+     */
+    private void showGift(ChatMsg chatMsg) {
+        ChatMsg.Gift gift = JSON.parseObject(chatMsg.content, ChatMsg.Gift.class);
+        if (gift != null && gift.gift_info != null) {
+            addOffer(gift);
+        }
+
+    }
+
+    private void addOffer(ChatMsg.Gift gift) {
+        if (gift == null || gift.gift_info.animation == null || TextUtils.isEmpty(gift.gift_info.animation)) return;
+        SVGAPlayerPop svgaPop = new SVGAPlayerPop(BaseApplication.getInstance());
+        String animation = gift.gift_info.animation;
+        String name = Utils.getFileName(animation).replace(".svga", "");
+        svgaPop.addSvga(name, animation);
+
+        if (giftPopWindow != null) {
+            giftPopWindow.dismiss();
+        }
+    }
 
 }
