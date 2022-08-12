@@ -90,7 +90,7 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
         helper.setVisible(R.id.tv_badge, false);  //消息
         ivOffice.setVisibility(View.GONE);
         if (null != item) {
-            if (mType == 0 || mType == 2) {   //消息
+            if (mType == 2) {   //消息
                 ivRedPackage.setVisibility(View.GONE);
 //                helper.setVisible(R.id.iv_red_packet, false);  // 红包
                 tvIntimacy.setVisibility(View.GONE);
@@ -102,8 +102,12 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
                 }
             } else {  //密友
                 ivRedPackage.setVisibility(View.GONE);
-                tvIntimacy.setVisibility(View.VISIBLE);
-                tvIntimacy.setText(StringUtils.formatNumbers(item.intimacy_val));
+                if(item.intimacy_val>0) {
+                    tvIntimacy.setVisibility(View.VISIBLE);
+                    tvIntimacy.setText(StringUtils.formatNumbers(item.intimacy_val));
+                }else{
+                    tvIntimacy.setVisibility(View.GONE);
+                }
             }
             if (TextUtils.equals(item.cmd_type, ChatMsg.ACCOST_TYPE)) {  //搭讪消息
                 if (!TextUtils.equals(item.cmd, ChatMsg.REPLY_ACCOST_TYPE)) {
