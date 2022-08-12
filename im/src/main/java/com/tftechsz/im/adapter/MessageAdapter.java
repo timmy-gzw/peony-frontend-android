@@ -90,24 +90,24 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
         helper.setVisible(R.id.tv_badge, false);  //消息
         ivOffice.setVisibility(View.GONE);
         if (null != item) {
+            ivRedPackage.setVisibility(View.GONE);
             if (mType == 2) {   //消息
-                ivRedPackage.setVisibility(View.GONE);
 //                helper.setVisible(R.id.iv_red_packet, false);  // 红包
                 tvIntimacy.setVisibility(View.GONE);
-                if (item.intimacy_val >= mIntimacyNum) {
-                    ivOffice.setImageResource(R.mipmap.chat_ic_fast_friend);
-                    ivOffice.setVisibility(View.VISIBLE);
-                } else {
-                    ivOffice.setVisibility(View.GONE);
-                }
+
             } else {  //密友
-                ivRedPackage.setVisibility(View.GONE);
                 if(item.intimacy_val>0) {
                     tvIntimacy.setVisibility(View.VISIBLE);
                     tvIntimacy.setText(StringUtils.formatNumbers(item.intimacy_val));
                 }else{
                     tvIntimacy.setVisibility(View.GONE);
                 }
+            }
+            if (item.intimacy_val >= mIntimacyNum) {
+                ivOffice.setImageResource(R.mipmap.chat_ic_fast_friend);
+                ivOffice.setVisibility(View.VISIBLE);
+            } else {
+                ivOffice.setVisibility(View.GONE);
             }
             if (TextUtils.equals(item.cmd_type, ChatMsg.ACCOST_TYPE)) {  //搭讪消息
                 if (!TextUtils.equals(item.cmd, ChatMsg.REPLY_ACCOST_TYPE)) {
@@ -144,7 +144,6 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
             ivAvatar.setBgFrame(item.picture_frame);
             ivAvatar.setAvatar(0);
             ivAvatar.setAvatar(R.drawable.bg_trans);
-            tvContent.setTextColor(Utils.getColor(R.color.color_light_font));
             if (TextUtils.equals(Constants.CUSTOMER_SERVICE, item.getContactId())) {  //客服小秘书
                 ivOffice.setVisibility(View.VISIBLE);
                 ivOffice.setImageResource(R.mipmap.ic_official);
