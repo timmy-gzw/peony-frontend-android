@@ -397,7 +397,7 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
                 RxBus.getDefault().post(new UpdateEvent(data.update_info));
             if (null != data.alert_accost)
                 RxBus.getDefault().post(new UpdateEvent(data.alert_accost));
-            if (null != data.share_config  && mRefreshCount <= 1) {
+            if (null != data.share_config && mRefreshCount <= 1) {
                 mRefreshCount++;
                 ConfigInfo configInfo = service.getConfigInfo();
                 if (configInfo != null) {
@@ -437,7 +437,7 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
             if (item != null) {
                 RxBus.getDefault().post(new AccostSuccessEvent(AccostSuccessEvent.ACCOUST_HOME, item.getUser_id() + "", item.getNickname(), item.getIcon()));
             }
-            if (data != null && data.gift != null) {
+            if (data.gift != null && service != null && service.getUserInfo() != null && !service.getUserInfo().isGirl()) {
                 Utils.playAccostAnimationAndSound(data.gift.name, data.gift.animation);
             }
             //首页搭讪 2  个人资料页搭讪 3  动态搭讪 4  相册搭讪 5

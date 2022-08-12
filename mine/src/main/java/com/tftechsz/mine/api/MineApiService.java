@@ -713,7 +713,7 @@ public interface MineApiService {
     /**
      * 设置会员特权
      *
-     * @param type  1-土豪值、魅力值 2-礼物墙  3：上电视上头条  ，4 排行榜 7 搭讪开关
+     * @param type  1-土豪值、魅力值 2-礼物墙  3：上电视上头条  ，4 排行榜 7 搭讪开关 6:家族
      * @param value 1-开启 0-关闭
      * @return
      */

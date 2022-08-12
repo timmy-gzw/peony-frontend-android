@@ -13,11 +13,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_rich"
+        android:id="@+id/cl_stories"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_76"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
@@ -28,11 +27,159 @@
         app:layout_constraintTop_toBottomOf="@+id/base_tool_bar">
 
         <TextView
+            android:id="@+id/tv_stories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="不想上电视、头条"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toTopOf="@+id/tv_stories_tip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tv_vip_stories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vip_can_set"
+            android:textColor="#D8B888"
+            app:layout_constraintLeft_toRightOf="@id/tv_stories"
+            app:layout_constraintTop_toTopOf="@id/tv_stories" />
+
+        <TextView
+            android:id="@+id/tv_stories_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开启后，您将不会在电视和头条上出现"
+            android:textColor="@color/color_light_font"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/view3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_stories" />
+
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_stories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@drawable/bg_switch"
+            android:checked="false"
+            android:clickable="false"
+            android:focusable="false"
+            android:thumb="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/driver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_gift"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_76"
+        android:background="@color/white"
+        android:descendantFocusability="blocksDescendants"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dp_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_stories">
+
+        <TextView
+            android:id="@+id/tv_gift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="隐藏礼物"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toTopOf="@+id/tv_gift_tip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tv_vip_gift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vip_can_set"
+            android:textColor="#D8B888"
+            app:layout_constraintLeft_toRightOf="@id/tv_gift"
+            app:layout_constraintTop_toTopOf="@id/tv_gift" />
+
+        <TextView
+            android:id="@+id/tv_gift_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开启后，其他用户在您的个人页面看不到礼物"
+            android:textColor="@color/color_light_font"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/view1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_gift" />
+
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_gift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@drawable/bg_switch"
+            android:checked="false"
+            android:clickable="false"
+            android:focusable="false"
+            android:thumb="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/driver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_rich"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_76"
+        android:background="@color/white"
+        android:descendantFocusability="blocksDescendants"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dp_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_gift">
+
+        <TextView
             android:id="@+id/tv_rich"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="隐藏财富值、魅力值"
+            android:text="隐藏财富/魅力等级"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_16"
             app:layout_constraintBottom_toTopOf="@+id/tv_rich_tip"
@@ -53,7 +200,7 @@
             android:id="@+id/tv_rich_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="打开后，其他用户将看不到您的魅力值与财富值"
+            android:text="开启后，将不对外显示财富等级、魅力等级"
             android:textColor="@color/color_light_font"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="@+id/view"
@@ -91,87 +238,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_gift"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:background="@color/white"
-        android:descendantFocusability="blocksDescendants"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/dp_16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_rich">
-
-        <TextView
-            android:id="@+id/tv_gift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="隐藏收到的礼物"
-            android:textColor="@color/color_normal"
-            android:textSize="@dimen/sp_16"
-            app:layout_constraintBottom_toTopOf="@+id/tv_gift_tip"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/tv_vip_gift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vip_can_set"
-            android:textColor="#D8B888"
-            app:layout_constraintLeft_toRightOf="@id/tv_gift"
-            app:layout_constraintTop_toTopOf="@id/tv_gift" />
-
-        <TextView
-            android:id="@+id/tv_gift_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="打开后，其他用户将看不到您收到的礼物"
-            android:textColor="@color/color_light_font"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintBottom_toBottomOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_gift" />
-
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sw_gift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:background="@drawable/bg_switch"
-            android:checked="false"
-            android:clickable="false"
-            android:focusable="false"
-            android:thumb="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:background="@color/driver"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_rank"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_76"
         android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
@@ -179,7 +249,7 @@
         android:paddingStart="@dimen/dp_16"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_gift">
+        app:layout_constraintTop_toBottomOf="@+id/cl_rich">
 
         <TextView
             android:id="@+id/tv_rank"
@@ -242,11 +312,10 @@
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_stories"
+        android:id="@+id/cl_location"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_76"
         android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
@@ -256,85 +325,11 @@
         app:layout_constraintTop_toBottomOf="@+id/cl_rank">
 
         <TextView
-            android:id="@+id/tv_stories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="关闭上头条、上电视"
-            android:textColor="@color/color_normal"
-            android:textSize="@dimen/sp_16"
-            app:layout_constraintBottom_toTopOf="@+id/tv_stories_tip"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/tv_vip_stories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vip_can_set"
-            android:textColor="#D8B888"
-            app:layout_constraintLeft_toRightOf="@id/tv_stories"
-            app:layout_constraintTop_toTopOf="@id/tv_stories" />
-
-        <TextView
-            android:id="@+id/tv_stories_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="打开开关后，您送礼将不会触发上头条、上电视效果"
-            android:textColor="@color/color_light_font"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintBottom_toBottomOf="@+id/view3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_stories" />
-
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sw_stories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:background="@drawable/bg_switch"
-            android:checked="false"
-            android:clickable="false"
-            android:focusable="false"
-            android:thumb="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view3"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:background="@color/driver"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_location"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:background="@color/white"
-        android:descendantFocusability="blocksDescendants"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/dp_16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_stories">
-
-        <TextView
             android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="不显示定位信息"
+            android:text="隐藏所在地信息"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_16"
             app:layout_constraintBottom_toTopOf="@+id/tv_location_tip"
@@ -348,6 +343,7 @@
             android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
             android:textColor="#D8B888"
+            android:visibility="gone"
             app:layout_constraintLeft_toRightOf="@id/tv_location"
             app:layout_constraintTop_toTopOf="@id/tv_location" />
 
@@ -355,7 +351,7 @@
             android:id="@+id/tv_location_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="不对外显示自己的定位信息，保护隐私"
+            android:text="关闭后不在对其他用户显示您的所在地"
             android:textColor="@color/color_light_font"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -387,71 +383,6 @@
             android:background="@color/driver"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_ycgrzydjzzs"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:background="@color/white"
-        android:descendantFocusability="blocksDescendants"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/dp_16"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_location">
-
-        <TextView
-            android:id="@+id/tv_ycgr_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="个人主页的家族展示"
-            android:textColor="@color/color_normal"
-            android:textSize="@dimen/sp_16"
-            app:layout_constraintBottom_toTopOf="@+id/tv_ycgr_context"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/tv_vip_ycgr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vip_can_set"
-            android:textColor="#D8B888"
-            app:layout_constraintLeft_toRightOf="@id/tv_ycgr_title"
-            app:layout_constraintTop_toTopOf="@id/tv_ycgr_title" />
-
-        <TextView
-            android:id="@+id/tv_ycgr_context"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开启后，家族将在个人主页展示出来"
-            android:textColor="@color/color_light_font"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_ycgr_title" />
-
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sw_ycgrzy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:background="@drawable/bg_switch"
-            android:checked="false"
-            android:clickable="false"
-            android:focusable="false"
-            android:thumb="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

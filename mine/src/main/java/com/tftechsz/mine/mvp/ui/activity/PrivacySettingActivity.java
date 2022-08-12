@@ -31,7 +31,7 @@ import com.tftechsz.mine.mvp.presenter.PrivacySettingPresenter;
 @Route(path = ARouterApi.ACTIVITY_PRIVACY_SETTING)
 public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView, PrivacySettingPresenter> implements View.OnClickListener, IPrivacySettingView {
 
-    private SwitchCompat mSwRich, mSwGift, mSwRank, mSwStories, mSwLocation, mswycgrzy, mSwRecommend;
+    private SwitchCompat mSwRich, mSwGift, mSwRank, mSwStories, mSwLocation, mSwRecommend;
     @Autowired
     UserProviderService service;
     private PrivacyDto mData;
@@ -53,8 +53,6 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         findViewById(R.id.tv_vip_gift).setVisibility(visible);
         findViewById(R.id.tv_vip_rank).setVisibility(visible);
         findViewById(R.id.tv_vip_stories).setVisibility(visible);
-        findViewById(R.id.tv_vip_location).setVisibility(visible);
-        findViewById(R.id.tv_vip_ycgr).setVisibility(visible);
         mSwRecommend = findViewById(R.id.sw_personalized_recommendation);
         boolean checked = MMKVUtils.getInstance().decodeBoolean(Constants.PARAMS_PERSONALIZED_RECOMMENDATION, true);
         mSwRecommend.setChecked(checked);
@@ -68,14 +66,12 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         findViewById(R.id.cl_rank).setOnClickListener(this);
         findViewById(R.id.cl_stories).setOnClickListener(this);
         findViewById(R.id.cl_location).setOnClickListener(this);
-        findViewById(R.id.cl_ycgrzydjzzs).setOnClickListener(this);
         findViewById(R.id.cl_personalized_recommendation).setOnClickListener(this);
         mSwRich = findViewById(R.id.sw_rich);
         mSwGift = findViewById(R.id.sw_gift);
         mSwRank = findViewById(R.id.sw_rank);
         mSwStories = findViewById(R.id.sw_stories);
         mSwLocation = findViewById(R.id.sw_location);
-        mswycgrzy = findViewById(R.id.sw_ycgrzy);
     }
 
 
@@ -104,20 +100,6 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
                 RxBus.getDefault().post(new RecommendChangeEvent(true));
                 toastTip("更改成功");
             }
-            return;
-        }
-        if (!service.getUserInfo().isVip() && service.getUserInfo().getSex() == 1) {
-            new OpenVipWindow(this).addOnClickListener(() -> ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_VIP)).showPopupWindow();
-            return;
-        }
-        if (id == R.id.cl_rich) {   //土豪魅力
-            getP().setPrivilege(1, mSwRich.isChecked() ? 0 : 1);
-        } else if (id == R.id.cl_gift) {   //礼物
-            getP().setPrivilege(2, mSwGift.isChecked() ? 0 : 1);
-        } else if (id == R.id.cl_rank) {   //排行榜
-            getP().setPrivilege(4, mSwRank.isChecked() ? 0 : 1);
-        } else if (id == R.id.cl_stories) {   //上电视上头条
-            getP().setPrivilege(3, mSwStories.isChecked() ? 0 : 1);
         } else if (id == R.id.cl_location) {   //位置信息
             if (mData != null && mData.open_hidden_location == 1) {
                 mCompositeDisposable.add(new RxPermissions(PrivacySettingActivity.this)
@@ -132,9 +114,27 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
             } else {
                 getP().setPrivilege(5, mSwLocation.isChecked() ? 0 : 1);
             }
-        } else if (id == R.id.cl_ycgrzydjzzs) {
-            getP().setPrivilege(6, mswycgrzy.isChecked() ? 0 : 1);
+        } else if (id == R.id.cl_rich) {   //土豪魅力
+            if (vipLimit()) return;
+            getP().setPrivilege(1, mSwRich.isChecked() ? 0 : 1);
+        } else if (id == R.id.cl_gift) {   //礼物
+            if (vipLimit()) return;
+            getP().setPrivilege(2, mSwGift.isChecked() ? 0 : 1);
+        } else if (id == R.id.cl_rank) {   //排行榜
+            if (vipLimit()) return;
+            getP().setPrivilege(4, mSwRank.isChecked() ? 0 : 1);
+        } else if (id == R.id.cl_stories) {   //上电视上头条
+            if (vipLimit()) return;
+            getP().setPrivilege(3, mSwStories.isChecked() ? 0 : 1);
         }
+    }
+
+    private boolean vipLimit() {
+        if (!service.getUserInfo().isVip() && service.getUserInfo().getSex() == 1) {
+            new OpenVipWindow(this).addOnClickListener(() -> ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_VIP)).showPopupWindow();
+            return true;
+        }
+        return false;
     }
 
     private void showRecommendClosePop() {
@@ -166,7 +166,6 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
             mSwStories.setChecked(data.open_hidden_headlines == 1);
             mSwRank.setChecked(data.open_hidden_intimacy_rank == 1);
             mSwLocation.setChecked(data.open_hidden_location == 1);
-            mswycgrzy.setChecked(data.open_show_family == 1);
         }
     }
 
@@ -189,9 +188,6 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
             if (mData != null) {
                 mData.open_hidden_location = value == 1 ? 1 : 0;
             }
-        }
-        if (type == 6 && data) {
-            mswycgrzy.setChecked(value == 1);
         }
     }
 
