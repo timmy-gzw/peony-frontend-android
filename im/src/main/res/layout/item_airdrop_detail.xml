@@ -12,7 +12,7 @@
         android:layout_height="@dimen/dp_50"
         android:layout_marginStart="@dimen/dp_20"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_default_avatar"
+        android:src="@mipmap/ic_default_avatar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

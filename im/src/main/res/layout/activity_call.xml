@@ -461,7 +461,7 @@
         <com.netease.nim.uikit.common.ui.imageview.HeadImageView
             android:id="@+id/iv_avatar"
             android:layout_margin="@dimen/dp_3"
-            tools:src="@drawable/ic_default_avatar"
+            tools:src="@mipmap/ic_default_avatar"
             android:layout_width="@dimen/dp_27"
             android:layout_height="@dimen/dp_27"/>
 

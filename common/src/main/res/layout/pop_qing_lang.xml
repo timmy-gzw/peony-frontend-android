@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/dp_25"
-        android:src="@drawable/ic_default_avatar"
+        android:src="@mipmap/ic_default_avatar"
         app:layout_constraintDimensionRatio="0.86"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
