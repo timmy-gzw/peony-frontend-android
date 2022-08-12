@@ -71,7 +71,8 @@
                 android:layout_width="@dimen/dp_160"
                 android:background="@drawable/bg_selector_noraml"
                 android:text="解绑"
-                android:textColor="@color/color_light_font"
+                android:textColor="@color/c_bind_wechat"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:enabled="false" />
@@ -80,11 +81,11 @@
                 android:id="@+id/msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="@dimen/dp_2"
                 android:layout_marginTop="@dimen/dp_30"
+                android:lineSpacingExtra="@dimen/dp_2"
+                android:text="1、账号绑定微信号，即使手机丢失也可找回账号哦\n2、若您想更换绑定微信号，请解绑后再进行重新绑定"
                 android:textColor="@color/color_999999"
-                android:textSize="@dimen/sp_12"
-                android:text="1、账号绑定微信号，即使手机丢失也可找回账号哦\n2、若您想更换绑定微信号，请解绑后再进行重新绑定" />
+                android:textSize="@dimen/sp_12" />
         </LinearLayout>
 
     </LinearLayout>

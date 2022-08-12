@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.huawei.agconnect'
 apply plugin: 'com.alibaba.arouter'
 apply plugin: 'privacy-sentry-plugin'
+apply plugin: 'android-junk-code'
 
 def name = 'OFFICIAL'
 def appName = "伊糖"
@@ -75,7 +76,12 @@ android {
             debuggable false
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "Peony_V${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
+                    def input = "";
+                    if (variant.productFlavors[0].name == "office")
+                        input = "Peony"
+                    else if (variant.productFlavors[0].name == "heart")
+                        input = "ivy"
+                    outputFileName = input + "_V${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
                 }
                 variant.mergeAssetsProvider.configure {
                     doLast {
@@ -130,6 +136,22 @@ android {
     }
 }
 
+androidJunkCode {
+    def heartConfig = {
+        packageBase = "com.tftechsz.ivy"
+        packageCount = 60
+        activityCountPerPackage = 8
+        excludeActivityJavaFile = false
+        otherCountPerPackage = 80
+        methodCountPerClass = 60
+        resPrefix = "ivy"
+        drawableCount = 600
+        stringCount = 600
+    }
+    variantConfig {
+        "heartRelease" heartConfig
+    }
+}
 
 repositories {
     flatDir {

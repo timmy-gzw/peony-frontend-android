@@ -543,6 +543,7 @@
     -dontwarn android.net.http.SslError
     -dontwarn Android.webkit.WebViewClient
 
+    -keep class cn.hx.plugin.ui.** {*;}
     #bugly
     -dontwarn com.tencent.bugly.**
     -keep public class com.tencent.bugly.**{*;}
