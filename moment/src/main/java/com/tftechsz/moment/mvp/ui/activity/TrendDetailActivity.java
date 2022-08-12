@@ -317,6 +317,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
         ivVip.setVisibility(dataBean.isVip() ? View.VISIBLE : View.GONE);  //是否vip
         mLikeButton.setLiked(dataBean.getIs_praise() == 1);//点赞了
         dynamicDetailpraise.setText(dataBean.getPraises() == 0 ? "点赞" : String.valueOf(dataBean.getPraises()));
+        dynamicDetailpraise.setTextColor(getResources().getColor(dataBean.getIs_praise() == 0 ? R.color.color_light_font : R.color.colorPrimary));
         //评论数
         dynamicDetailcommentNum.setText(dataBean.getComments() == 0 ? "评论" : String.valueOf(dataBean.getComments()));
         mTvDel.setVisibility(service.getUserId() == dataBean.getUser_id() ? View.VISIBLE : View.GONE); //自己的动态才可删除
@@ -549,6 +550,8 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
             RxBus.getDefault().post(new CommentEvent(1, dataBean.getBlog_id()));
             dynamicDetailpraise.setAnimationDuration(dataBean.getPraises() == 0 ? 0 : Interfaces.TICKERVIEW_ANIMATION_LIKE);
             dynamicDetailpraise.setText(String.valueOf(dataBean.getPraises() + 1));
+            dynamicDetailpraise.setTextColor(getResources().getColor(R.color.colorPrimary));
+
         }
     }
 

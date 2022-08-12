@@ -205,6 +205,12 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
     }
 
     @Override
+    public int setEmptyImg() {
+        return R.mipmap.ic_empty_friend;
+    }
+
+
+    @Override
     protected int getLayout() {
         return R.layout.fragment_friend;
     }

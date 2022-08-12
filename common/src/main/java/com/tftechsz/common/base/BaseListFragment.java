@@ -3,6 +3,7 @@ package com.tftechsz.common.base;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,7 +66,7 @@ public abstract class BaseListFragment<T> extends BaseMvpFragment<IListView<T>, 
 
             @Override
             protected void convert(@NonNull BaseViewHolder helper, T item) {
-                int realPosition = helper.getLayoutPosition() - adapter.getHeaderLayoutCount();
+                int realPosition = getItemPosition(item) - adapter.getHeaderLayoutCount();
                 bingViewHolder(helper, item, realPosition);
             }
 
@@ -73,6 +74,10 @@ public abstract class BaseListFragment<T> extends BaseMvpFragment<IListView<T>, 
         recyclerView.setAdapter(adapter);
         if (hasEmptyView()) {
             View v = LayoutInflater.from(getActivity()).inflate(R.layout.base_empty_view, null, false);
+            if (setEmptyImg() != 0) {
+                ImageView ivEmpty = v.findViewById(R.id.iv_empty);
+                ivEmpty.setImageResource(setEmptyImg());
+            }
             if (!TextUtils.isEmpty(setEmptyContent())) {
                 TextView tvContent = v.findViewById(R.id.tv_empty);
                 tvContent.setText(setEmptyContent());
@@ -124,4 +129,9 @@ public abstract class BaseListFragment<T> extends BaseMvpFragment<IListView<T>, 
     public abstract void bingViewHolder(BaseViewHolder helper, T item, int position);
 
     public abstract String setEmptyContent();
+
+    public int setEmptyImg() {
+        return 0;
+    }
+
 }
