@@ -84,6 +84,7 @@
                     android:text="审核中,不能操作"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/sp_12"
+                    android:textStyle="bold"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -121,8 +122,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="语音介绍"
-                        android:textColor="@color/color_normal"
+                        android:textColor="@color/color_mid_font"
                         android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/audit_audio_msg"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -206,9 +208,10 @@
                         android:layout_marginEnd="@dimen/dp_5"
                         android:layout_marginBottom="@dimen/dp_5"
                         android:gravity="end"
-                        android:text="未录制"
+                        android:text="去录制"
                         android:textColor="@color/color_999999"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/iv_audio_right"
@@ -238,8 +241,9 @@
                         android:layout_marginStart="@dimen/dp_16"
                         android:includeFontPadding="false"
                         android:text="交友宣言"
-                        android:textColor="@color/color_normal"
-                        android:textSize="@dimen/sp_16" />
+                        android:textColor="@color/color_mid_font"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/iv_right"
@@ -264,6 +268,7 @@
                         android:text="默默做好事，从不贪功劳"
                         android:textColor="@color/color_light_font"
                         android:textSize="15sp"
+                        android:textStyle="bold"
                         cb:align="right" />
 
                     <View
@@ -272,9 +277,9 @@
                         android:layout_height="0.5dp"
                         android:layout_alignParentBottom="true"
                         android:layout_marginStart="@dimen/dp_16"
-                        android:visibility="gone"
                         android:layout_marginEnd="@dimen/dp_16"
-                        android:background="@color/driver" />
+                        android:background="@color/driver"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/tv_sign_audit"
@@ -314,8 +319,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/dp_16"
                         android:text="昵称"
-                        android:textColor="@color/color_normal"
-                        android:textSize="@dimen/sp_16" />
+                        android:textColor="@color/color_mid_font"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/iv_name_right"
@@ -338,6 +344,7 @@
                         android:gravity="end"
                         android:textColor="@color/color_normal"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         tools:text="大气的鸡" />
 
                     <View
@@ -367,9 +374,12 @@
                     android:id="@+id/item_sex"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="性别"
+                    app:left_text_style="true"
                     app:right_arrow_visible="false"
                     app:right_switch_visible="false"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 
@@ -377,9 +387,12 @@
                     android:id="@+id/item_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="生日"
+                    app:left_text_style="true"
                     app:right_arrow_visible="true"
                     app:right_switch_visible="false"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 
@@ -388,9 +401,12 @@
                     android:id="@+id/item_constellation"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="星座"
+                    app:left_text_style="true"
                     app:right_arrow_visible="false"
                     app:right_switch_visible="false"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 
@@ -399,9 +415,12 @@
                     android:id="@+id/item_address"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="所在地"
+                    app:left_text_style="true"
                     app:right_arrow_visible="false"
                     app:right_switch_visible="false"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 
@@ -410,9 +429,12 @@
                     android:id="@+id/item_home_address"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="家乡"
+                    app:left_text_style="true"
                     app:right_arrow_visible="true"
                     app:right_switch_visible="false"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 
@@ -421,9 +443,12 @@
                     android:id="@+id/item_job"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="职业"
+                    app:left_text_style="true"
                     app:right_arrow_visible="true"
                     app:right_switch_visible="false"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 
@@ -432,9 +457,12 @@
                     android:id="@+id/item_height"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="身高"
+                    app:left_text_style="true"
                     app:right_arrow_visible="true"
                     app:right_switch_visible="false"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 
@@ -443,9 +471,12 @@
                     android:id="@+id/item_weight"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="体重"
+                    app:left_text_style="true"
                     app:right_arrow_visible="true"
                     app:right_switch_visible="false"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 
@@ -454,10 +485,13 @@
                     android:id="@+id/item_income"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    app:left_text_color="@color/color_mid_font"
                     app:left_text_content="年收入"
+                    app:left_text_style="true"
                     app:right_arrow_visible="true"
                     app:right_switch_visible="false"
-                    android:layout_marginBottom="@dimen/dp_10"
+                    app:right_text_style="true"
                     app:right_text_visible="true"
                     app:view_visible="false" />
 

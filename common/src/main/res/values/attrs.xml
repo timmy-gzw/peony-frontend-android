@@ -36,6 +36,7 @@
         <!--开关是否打开-->
         <attr name="right_switch_open" format="boolean" />
         <attr name="left_text_style" format="boolean" />
+        <attr name="right_text_style" format="boolean" />
         <!--左边文字颜色-->
         <attr name="left_text_color" format="color" />
         <!--左边文字内容-->

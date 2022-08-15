@@ -267,7 +267,7 @@
             android:layout_marginBottom="@dimen/dp_20"
             android:background="@drawable/shape_vip_price_bg_button"
             android:gravity="center"
-            android:text="@{is_vip?(TextUtils.isEmpty(item_price)?@string/renewal_now:@string/renewal_now_format(item_price)):(TextUtils.isEmpty(item_price)?@string/open_now:@string/open_now_format(item_price))}"
+            android:text="获取会员特权"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_18"
             app:layout_constraintBottom_toTopOf="@id/vip_agree"

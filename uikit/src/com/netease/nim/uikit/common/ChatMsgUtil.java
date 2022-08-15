@@ -22,6 +22,7 @@ import com.netease.nim.uikit.business.extension.FamilyInviteAttachment;
 import com.netease.nim.uikit.business.extension.GiftChatAttachment;
 import com.netease.nim.uikit.business.extension.GiftChatTeamAttachment;
 import com.netease.nim.uikit.common.util.Base64;
+import com.netease.nim.uikit.common.util.ClickUtils;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
@@ -88,6 +89,9 @@ public class ChatMsgUtil implements Serializable {
      * 拨打语音视频电话
      */
     public static void callMessage(int type, String from, String to, String matchType, boolean isMatch) {
+        if (!ClickUtils.canOperate()) {
+            return;
+        }
         ChatMsg chatMsg = new ChatMsg();
         chatMsg.type = type;
         chatMsg.cmd_type = ChatMsg.CALL_TYPE;

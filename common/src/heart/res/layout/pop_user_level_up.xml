@@ -71,12 +71,12 @@
 
     <TextView
         android:id="@+id/tv_level_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginEnd="@dimen/dp_24"
         android:gravity="center"
         android:textColor="@color/white"
+        android:layout_marginStart="@dimen/dp_20"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/iv_level_up_icon"

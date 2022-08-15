@@ -85,9 +85,14 @@ public class CommonItemView extends RelativeLayout {
             int leftTextColor = typedArray.getColor(R.styleable.CommonItemView_left_text_color, Color.BLACK);
             mTvLeft.setTextColor(leftTextColor);
 
-            boolean isBold = typedArray.getBoolean(R.styleable.CommonItemView_view_visible, false);
+            boolean isBold = typedArray.getBoolean(R.styleable.CommonItemView_left_text_style, false);
             if (isBold) {
                 mTvLeft.setTypeface(mTvLeft.getTypeface(), Typeface.BOLD);
+            }
+
+            boolean isRightBold = typedArray.getBoolean(R.styleable.CommonItemView_right_text_style, false);
+            if (isRightBold) {
+                mTvRight.setTypeface(mTvRight.getTypeface(), Typeface.BOLD);
             }
 
             String leftContent = typedArray.getString(R.styleable.CommonItemView_left_text_content);

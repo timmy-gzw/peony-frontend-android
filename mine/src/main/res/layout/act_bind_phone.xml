@@ -97,7 +97,7 @@
                         android:id="@+id/btn"
                         android:layout_marginLeft="@dimen/dp_12"
                         android:textSize="@dimen/sp_14"
-                        android:textColor="#F76576"
+                        android:textColor="@color/colorPrimary"
                         android:layout_marginRight="@dimen/dp_12"
                         android:layout_width="wrap_content"
                         android:textAlignment="center"
