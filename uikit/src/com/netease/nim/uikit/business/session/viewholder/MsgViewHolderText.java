@@ -112,7 +112,11 @@ public class MsgViewHolderText extends MsgViewHolderBase {
 
 //        MoonUtil.identifyRecentVHFaceExpressionAndTags(NimUIKit.getContext(), bodyTextView,getDisplayText(), ImageSpan.ALIGN_BOTTOM, 0.45f);
         bodyTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        bodyTextView.setLinkTextColor(Color.WHITE);
+        if(isReceivedMessage()){
+            bodyTextView.setLinkTextColor(Color.BLACK);
+        }else {
+            bodyTextView.setLinkTextColor(Color.WHITE);
+        }
         bodyTextView.setOnLongClickListener(longClickListener);
     }
 
