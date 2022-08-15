@@ -55,17 +55,17 @@ class GiftWallActivity : BaseMvpActivity<IGiftWallView, GiftWallPresenter>(), IG
 
     override fun initView(savedInstanceState: Bundle?) {
         ImmersionBar.with(this)
-                .titleBar(baseTitle)
-                .transparentBar()
-                .statusBarDarkFont(false)
-                .navigationBarDarkIcon(false)
-                .init()
+            .titleBar(baseTitle)
+            .transparentBar()
+            .statusBarDarkFont(false)
+            .navigationBarDarkIcon(false)
+            .init()
         ToolBarBuilder().showBack(true)
-                .setTitle(getString(R.string.gift_wall))
-                .setTitleColor(R.color.white)
-                .setBackTint(R.color.white)
-                .setBackgroundColor(0)
-                .build()
+            .setTitle(getString(R.string.gift_wall))
+            .setTitleColor(R.color.white)
+            .setBackTint(R.color.white)
+            .setBackgroundColor(0)
+            .build()
 
         if (userId.isNullOrBlank()) {
             binding.tvMyGiftWall.visibility = View.GONE
@@ -111,6 +111,6 @@ class GiftWallActivity : BaseMvpActivity<IGiftWallView, GiftWallPresenter>(), IG
     override fun onGetGiftSuccess(data: MutableList<GiftDto>?) {
         giftWallAdapter.setList(data)
         val count = data?.count { it.number > 0 }
-        binding.tvGiftCount.text = "$count/${data?.size ?: 0}"
+        binding.tvGiftCount.text = getString(R.string.gift_count_format, count, data?.size ?: 0)
     }
 }
