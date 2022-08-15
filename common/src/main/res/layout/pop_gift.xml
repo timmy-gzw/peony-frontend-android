@@ -776,7 +776,7 @@
                             android:paddingRight="@dimen/dp_10"
                             android:paddingBottom="@dimen/dp_5"
                             android:text="充值"
-                            android:textColor="#FF5A7B"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/sp_14" />
                     </LinearLayout>
 
