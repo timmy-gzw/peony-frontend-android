@@ -612,6 +612,16 @@ public class BaseWebViewActivity extends BaseMvpActivity {
         public void openSignIn(String signInJson) {
             showSignInDialog(signInJson);
         }
+
+        @JavascriptInterface
+        public String getVersionName() {
+            return AppUtils.getAppVersionName();
+        }
+
+        @JavascriptInterface
+        public int getVersionCode() {
+            return AppUtils.getAppVersionCode();
+        }
     }
 
     /**
