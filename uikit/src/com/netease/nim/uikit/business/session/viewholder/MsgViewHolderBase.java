@@ -774,11 +774,11 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
         if (tvRead != null && mUserInfo != null && mUserInfo.isVip() && message.getSessionType() == SessionTypeEnum.P2P && mUserInfo.getSex() == 2) {
             tvRead.setVisibility(View.VISIBLE);
             if (message.isRemoteRead()) {
-                tvRead.setTextColor(Color.parseColor("#FFFFFF"));
+                tvRead.setTextColor(context.getResources().getColor(R.color.main_bg_color));
                 tvRead.setText("已读");
             } else {
                 tvRead.setText("未读");
-                tvRead.setTextColor(Color.parseColor("#cccccc"));
+                tvRead.setTextColor(context.getResources().getColor(R.color.color_split_line_cccccc));
             }
         }
 
