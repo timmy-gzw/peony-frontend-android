@@ -8,6 +8,15 @@ ext {
             targetSdkVersion : 30
     ]
 
+    appVersion = [
+            versionName: "1.0.3",
+            versionCode: 44
+    ]
+
+    heartAppVersion = [
+            versionName: "1.0.0",
+            versionCode: 1
+    ]
 
     manifestPlaceholders = [
             UMENG_CHANNEL_VALUE: "OFFICIAL",

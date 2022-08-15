@@ -3705,9 +3705,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     private void checkCallMsg(int type) {
         String[] audioPermission = {Manifest.permission.RECORD_AUDIO};
-        String[] videoPermission = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        String[] videoPermission = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
+                , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
         mCompositeDisposable.add(new RxPermissions(this)
-                .request(type == 1 ? audioPermission : videoPermission)
+                .request(videoPermission)
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         call(type);

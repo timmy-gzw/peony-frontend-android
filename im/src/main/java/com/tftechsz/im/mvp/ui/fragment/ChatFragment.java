@@ -187,6 +187,8 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
     private int isUserOnline = 0;
     private MLinearLayoutManager mLayoutManager;
 
+    private boolean mIsChooseDel = false;
+
 
     @Override
     protected ChatPresenter initPresenter() {
@@ -307,6 +309,7 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
         mRvMessage.setAdapter(mAdapter);
         mAdapter.addChildClickViewIds(R.id.fl_iv_avatar, R.id.root);
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            if(mIsChooseDel) return;
             if (mAdapter.getData().get(position) != null && TextUtils.equals(mAdapter.getData().get(position).getContactId(), Constants.CUSTOMER_SERVICE)) {
                 startActivity(ActivityNoticeActivity.class, "chat_user", Constants.CUSTOMER_SERVICE);
                 return;
@@ -532,6 +535,7 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
                                 if (mAdapter != null && mType == 0) {
                                     Utils.runOnUiThread(() -> {
                                         mAdapter.setCheckShow(true);
+                                        mIsChooseDel = true;
 //                                        p.setTranX(mRvMessage);
                                     });
                                 }
@@ -548,6 +552,7 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
                                     });
                                     refreshMessages();
                                     mAdapter.setCheckShow(false);
+                                    mIsChooseDel = false;
                                     p.setBackTranX(mRvMessage);
                                 }
                             } else if (event.type == Constants.NOTIFY_REMOVE_USER) {   //移除用户
@@ -564,6 +569,7 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
                             } else if (event.type == Constants.NOTIFY_DELETE_MESSAGE_CANCEL) {  //取消删除
                                 if (mAdapter.getShow()) {
                                     mAdapter.setCheckShow(false);
+                                    mIsChooseDel = false;
                                     p.setBackTranX(mRvMessage);
                                 }
                             } else if (event.type == Constants.NOTIFY_UPDATE_INTIMACY) {   //更新亲密度

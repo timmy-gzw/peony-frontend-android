@@ -10,13 +10,11 @@
 
     <ImageView
         android:id="@+id/iv_pic"
-        android:layout_width="@dimen/dp_22"
-        android:layout_height="@dimen/dp_22"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
         android:layout_centerVertical="true"
-        android:scaleType="fitXY"
-        android:textColor="@color/color_normal"
-        android:textSize="@dimen/sp_15"
-        tools:src="@drawable/ic_record" />
+        android:scaleType="centerCrop"
+       />
 
     <TextView
         android:id="@+id/tv_name"

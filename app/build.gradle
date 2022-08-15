@@ -126,11 +126,15 @@ android {
         office {
             dimension 'office'
             applicationId "com.tftechsz.peony"
-            manifestPlaceholders = rootProject.ext.manifestPlaceholders
+            versionCode rootProject.ext.appVersion.versionCode
+            versionName rootProject.ext.appVersion.versionName
+            manifestPlaceholders = rootProject.ext.heartPlaceholders
         }
         heart {
             dimension 'office'
             applicationId "com.tftechsz.ivy"
+            versionCode rootProject.ext.heartAppVersion.versionCode
+            versionName rootProject.ext.heartAppVersion.versionName
             manifestPlaceholders = rootProject.ext.heartPlaceholders
         }
     }
