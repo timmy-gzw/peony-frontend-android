@@ -2226,7 +2226,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         SPUtils.remove(Constants.INVITED_EVENT);
         if (nertcCallingDelegate != null && nertcVideoCall != null) {
             nertcVideoCall.removeDelegate(nertcCallingDelegate);
-            nertcVideoCall.releaseNERtc();
             nertcCallingDelegate = null;
             nertcVideoCall = null;
         }

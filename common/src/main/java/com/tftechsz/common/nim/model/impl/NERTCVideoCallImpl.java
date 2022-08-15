@@ -1472,7 +1472,7 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
         status = STATE_IDLE;
         isinitNERtc = false;
         try {
-//            NERtc.getInstance().release();
+            NERtcEx.getInstance().release();
         } catch (Exception e) {
             e.printStackTrace();
         }
