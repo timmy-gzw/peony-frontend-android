@@ -65,4 +65,5 @@
     <string name="moment">动态</string>
     <string name="gift_wall">礼物墙</string>
     <string name="my_gift_wall">查看我的礼物墙</string>
+    <string name="gift_count_format">已点亮 %d/%d</string>
 </resources>
