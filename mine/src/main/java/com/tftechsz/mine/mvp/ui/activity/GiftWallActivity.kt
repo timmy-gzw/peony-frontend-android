@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.ConvertUtils
+import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ImmersionBar
 import com.netease.nim.uikit.common.UserInfo
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration
@@ -57,6 +58,7 @@ class GiftWallActivity : BaseMvpActivity<IGiftWallView, GiftWallPresenter>(), IG
         ImmersionBar.with(this)
             .titleBar(baseTitle)
             .transparentBar()
+            .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
             .statusBarDarkFont(false)
             .navigationBarDarkIcon(false)
             .init()

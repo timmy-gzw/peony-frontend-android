@@ -95,7 +95,6 @@ import com.youth.banner.adapter.BannerAdapter;
 import com.youth.banner.listener.OnPageChangeListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -285,7 +284,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         tvGiftCount = findViewById(R.id.tv_gift_count);
         clGift = findViewById(R.id.cl_mine_gift);
         mRvGift = findViewById(R.id.rv_gift);
-        mRvGift.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        mRvGift.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         giftAdapter = new GiftAdapter();
         mRvGift.setAdapter(giftAdapter);
         giftAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -697,7 +696,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 mTvGiftVip.setVisibility(View.GONE);
             } else {
                 List<GiftDto> giftList = data.subList(0, 3);
-                Collections.reverse(giftList);
                 giftAdapter.setList(giftList);
                 clGift.setVisibility(View.VISIBLE);
                 mTvGift.setVisibility(View.VISIBLE);
@@ -708,6 +706,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                         count++;
                     }
                 }
+                if (count <= 0) tvGiftTitle.setText(getString(R.string.receive_gift_empty));
                 tvGiftCount.setText(count + "/" + data.size());
             }
         }
