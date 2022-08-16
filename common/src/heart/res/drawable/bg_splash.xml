@@ -7,7 +7,7 @@
             android:src="@mipmap/bg_splash_heart" />
     </item>
 
-    <item android:bottom="400dp">
+    <item android:bottom="300dp">
         <bitmap
             android:gravity="center"
             android:src="@mipmap/ic_launcher_s" />

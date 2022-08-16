@@ -446,6 +446,17 @@ public class BaseWebViewActivity extends BaseMvpActivity {
             return service.getToken();
         }
 
+
+        /**
+         * token
+         */
+        @JavascriptInterface
+        public String getApiUa() {
+            if (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0)
+                return "";
+            return com.tftechsz.common.utils.AppUtils.getApiUa();
+        }
+
         /**
          * token
          */

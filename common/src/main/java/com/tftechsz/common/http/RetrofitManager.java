@@ -178,8 +178,7 @@ public class RetrofitManager {
 
         builder.addInterceptor(chain -> {
             //手机版本，厂商，uuid imsi appName,appVersion
-            String apiUa = "(Android" + AppUtils.getSystemVersion() + "/" + AppUtils.getDeviceBrand() + "_" + AppUtils.getSystemModel()
-                    + "/" + Utils.getUmId() + ") " + Constants.APP_NAME + "/" + AppUtils.getVersionName(BaseApplication.getInstance()) + "/" + Utils.getChannel();
+            String apiUa = AppUtils.getApiUa();
             //芍药号
             String userCode = service.getUserInfo() != null ? service.getUserInfo().getUser_code() : "";
 

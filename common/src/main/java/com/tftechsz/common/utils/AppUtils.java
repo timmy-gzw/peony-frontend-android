@@ -113,6 +113,12 @@ public class AppUtils {
         return res;
     }
 
+    public static String getApiUa() {
+        //手机版本，厂商，uuid imsi appName,appVersion
+        return "(Android" + getSystemVersion() + "/" + getDeviceBrand() + "_" + getSystemModel()
+                + "/" + Utils.getUmId() + ") " + Constants.APP_NAME + "/" + getVersionName(BaseApplication.getInstance()) + "/" + Utils.getChannel();
+    }
+
 
     public static String getMetaDataString(Context context, String key) {
         String res = "";

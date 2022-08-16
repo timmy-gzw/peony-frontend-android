@@ -633,6 +633,12 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             return service.getToken();
         }
 
+        @JavascriptInterface
+        public String getApiUa() {
+            if (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0)
+                return "";
+            return com.tftechsz.common.utils.AppUtils.getApiUa();
+        }
         /**
          * 上头条
          */
