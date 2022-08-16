@@ -518,7 +518,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             topicAdapter.setList(topics.subList(0, Math.min(topics.size(), 5)));
             mRvTopic.setAdapter(topicAdapter);
             topicAdapter.setOnItemClickListener((adapter, view, position) -> {
-                formrtAndSendMessage(topicAdapter.getItem(position));
+                formartAndSendMessage(topicAdapter.getItem(position));
             });
             mRvTopic.setVisibility(View.VISIBLE);
         }
@@ -1725,7 +1725,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             topicPop.setTopicItemClickListener(new TopicPop.TopicItemOnClickListener() {
                 @Override
                 public void onTopicItemClick(String text) {
-                    formrtAndSendMessage(text);
+                    formartAndSendMessage(text);
                 }
             });
             topicPop.showPopupWindow();
@@ -1843,7 +1843,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         });
     }
 
-    private void formrtAndSendMessage(String text) {
+    private void formartAndSendMessage(String text) {
         if (TextUtils.isEmpty(text) || TextUtils.isEmpty(text.trim())) {
             ToastHelper.showToast(getActivity(), "发送消息不能为空");
             return;
