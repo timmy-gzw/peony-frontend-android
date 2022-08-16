@@ -36,6 +36,7 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.mixpush.NIMPushClient;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.previewlibrary.ZoomMediaLoader;
+import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 import com.tencent.tauth.Tencent;
@@ -55,6 +56,7 @@ import com.tftechsz.common.push.MyPushContentProvider;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ImageLoaderUtil;
 import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.MyToastStyle;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
@@ -274,7 +276,7 @@ public class BaseApplication extends Application implements Application.Activity
      * 闪验
      */
     public void initShanyanSDK() {
-        OneKeyLoginManager.getInstance().init(this,Constants.SANYAN_APP_ID, (code, result) -> {
+        OneKeyLoginManager.getInstance().init(this, Constants.SANYAN_APP_ID, (code, result) -> {
         });
     }
 
@@ -312,7 +314,9 @@ public class BaseApplication extends Application implements Application.Activity
      * bugly初始化
      */
     public void initBugly() {
-        CrashReport.initCrashReport(this, CommonUtil.getBuglyAppKey(), BuildConfig.IS_DEBUG);
+        Bugly.init(this, CommonUtil.getBuglyAppKey(), BuildConfig.DEBUG);
+        CrashReport.setAppChannel(this, CommonUtil.getUmengChannel());
+        CrashReport.setDeviceId(this, Utils.getUmId());
     }
 
 
