@@ -76,7 +76,7 @@ android {
             debuggable false
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    def input = "";
+                    def input = ""
                     if (variant.productFlavors[0].name == "office")
                         input = "Peony"
                     else if (variant.productFlavors[0].name == "heart")
@@ -128,7 +128,7 @@ android {
             applicationId "com.tftechsz.peony"
             versionCode rootProject.ext.appVersion.versionCode
             versionName rootProject.ext.appVersion.versionName
-            manifestPlaceholders = rootProject.ext.heartPlaceholders
+            manifestPlaceholders = rootProject.ext.manifestPlaceholders
         }
         heart {
             dimension 'office'
