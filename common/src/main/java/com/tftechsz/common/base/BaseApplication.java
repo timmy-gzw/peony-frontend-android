@@ -317,6 +317,7 @@ public class BaseApplication extends Application implements Application.Activity
         Bugly.init(this, CommonUtil.getBuglyAppKey(), BuildConfig.DEBUG);
         CrashReport.setAppChannel(this, CommonUtil.getUmengChannel());
         CrashReport.setDeviceId(this, Utils.getUmId());
+        CrashReport.setDeviceModel(BaseApplication.getInstance(), com.tftechsz.common.utils.AppUtils.getModel());
     }
 
 

@@ -18,6 +18,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -338,6 +339,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                     public void onSuccess(BaseResponse<LoginDto> response) {
                                         UserManager.getInstance().setToken(response.getData().token);
                                         UserManager.getInstance().setUserId(response.getData().user_id);
+                                        CrashReport.setUserId(String.valueOf(response.getData().user_id));
                                         buriedPoint();
                                         doLogin(context, String.valueOf(response.getData().user_id), response.getData().token, response.getData(), type);
                                     }
