@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -190,6 +191,7 @@ public class ScrollerForbidView extends LinearLayout {
             //手指离开
             case MotionEvent.ACTION_UP:
                 getParent().requestDisallowInterceptTouchEvent(false);
+                Log.e(this.getClass().getSimpleName(), "onTouchEvent: "+"--isDrag:"+isDrag+" --mAdapter.getData().size():"+mAdapter.getData().size()+" --targetItemPosition:"+targetItemPosition);
                 //恢复按压效果
                 if (!isDrag) {
                     stopLoop();
