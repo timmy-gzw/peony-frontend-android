@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.constant.Interfaces;
@@ -24,6 +25,7 @@ public class HomeTopItemLayout extends LinearLayout {
     private Context mContext;
     private int oldTopSize;
     public CarrouselLayout mCarrousel;
+    private boolean isTop;
 
     public HomeTopItemLayout(Context context) {
         super(context);
@@ -48,12 +50,21 @@ public class HomeTopItemLayout extends LinearLayout {
 
     }
 
-    public void setData(ConfigInfo.Nav data, int topSize) {
+    public void setData(ConfigInfo.Nav data, int topSize, boolean isTop) {
+        this.isTop = isTop;
         if (oldTopSize != topSize) {
             removeAllViews();
             oldTopSize = topSize;
         }
-        View.inflate(mContext, R.layout.item_home_right, this);
+        if (topSize > 2) {
+            View.inflate(mContext, R.layout.item_home_top, this);
+        } else {
+            if (isTop) {
+                View.inflate(mContext, R.layout.item_home_right, this);
+            } else {
+                View.inflate(mContext, R.layout.item_home_right_new, this);
+            }
+        }
         ImageView bg = findViewById(R.id.bg_frame);
         ImageView right_img = findViewById(R.id.right_img);
         LinearLayout llAvatar2 = findViewById(R.id.ll_avatar2);
@@ -71,8 +82,16 @@ public class HomeTopItemLayout extends LinearLayout {
             if (data.img_list != null && data.img_list.size() >= 2) {
                 Utils.runOnUiThread(() -> {
                     if (llAvatar2.getChildCount() == 0) {
-                        View topLeft = LayoutInflater.from(mContext).inflate(R.layout.item_home_banner_ani, null);
-                        mCarrousel = topLeft.findViewById(R.id.carrousel);
+                        View topLeft;
+                        if (isTop) {
+                            topLeft = LayoutInflater.from(mContext).inflate(R.layout.item_home_banner_ani, null);
+                            mCarrousel = topLeft.findViewById(R.id.carrousel);
+                            mCarrousel.setR(ConvertUtils.dp2px(20));
+                        } else {
+                            topLeft = LayoutInflater.from(mContext).inflate(R.layout.item_home_banner_ani_new, null);
+                            mCarrousel = topLeft.findViewById(R.id.carrousel);
+                            mCarrousel.setR(ConvertUtils.dp2px(36));
+                        }
                         topLeft.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                         ImageView img1 = topLeft.findViewById(R.id.img_carrousel1);
                         ImageView img2 = topLeft.findViewById(R.id.img_carrousel2);

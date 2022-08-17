@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
@@ -83,6 +84,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
     private ScrollerForbidView mSvMessage;
     private HomeTopItemLayout mHomeItem1, mHomeItem2, mHomeItem3, mHomeItem4;
     private RechargePopWindow rechargePopWindow;
+    private CardView mCvView;
     private X5WebView webView;
     @Autowired
     UserProviderService service;
@@ -178,6 +180,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         ImmersionBar.with(this).titleBarMarginTop(R.id.appbarlayout).init();
         coordinatorLayout = getView(R.id.appbarlayout);
         mLl_home_top_item = getView(R.id.ll_home_top_item);
+        mCvView = getView(R.id.cv_view);
         webView = getView(R.id.webView);
         webView.setBackgroundColor(0);
         webView.getSettings().setJavaScriptEnabled(true);// 支持js
@@ -470,6 +473,13 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             lp.height = (int) ((ScreenUtils.getScreenWidth() - ConvertUtils.dp2px(40)) / 3.8f);
             lp2.setMarginStart(ConvertUtils.dp2px(15));
         }
+
+        ConstraintLayout.LayoutParams lp3 = (ConstraintLayout.LayoutParams) mCvView.getLayoutParams();
+        mCvView.setRadius(ConvertUtils.dp2px(10));
+        lp3.leftMargin = ConvertUtils.dp2px(16);
+        lp3.rightMargin =  ConvertUtils.dp2px(16);
+        mCvView.setLayoutParams(lp3);
+
         mLl_home_top_item.setLayoutParams(lp);
         mHomeItem2.setLayoutParams(lp2);
         mHomeItem3.setLayoutParams(lp2);
@@ -483,7 +493,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
 
     private void setTopData(HomeTopItemLayout homeTopItemLayout, @Nullable ConfigInfo.Nav nav) {
         if (nav != null && isAdded()) {
-            homeTopItemLayout.setData(nav, topSize);
+            homeTopItemLayout.setData(nav, topSize,true);
             homeTopItemLayout.setVisibility(View.VISIBLE);
         } else {
             homeTopItemLayout.setVisibility(View.GONE);

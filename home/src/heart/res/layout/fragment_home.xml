@@ -76,6 +76,7 @@
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardElevation="0dp"

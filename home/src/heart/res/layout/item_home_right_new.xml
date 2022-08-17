@@ -4,24 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="horizontal">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/bg_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="343:140"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="right"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_12"
+        android:paddingLeft="@dimen/dp_24"
         android:paddingRight="@dimen/dp_4"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="343:140"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/sp_26"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_10"
+                android:textSize="@dimen/sp_16"
                 app:autoSizeMinTextSize="@dimen/sp_8"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,8 +67,9 @@
 
         <LinearLayout
             android:id="@+id/ll_avatar2"
-            android:layout_width="@dimen/dp_75"
-            android:layout_height="@dimen/dp_46"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_80"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal"
@@ -82,12 +86,12 @@
             android:id="@+id/animation_view"
             android:layout_width="@dimen/dp_69"
             android:layout_height="@dimen/dp_69"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:visibility="gone"
             app:lottie_autoPlay="true"
             app:lottie_imageAssetsFolder="gift/"
-            app:lottie_loop="true"
-            tools:visibility="visible" />
+            app:lottie_loop="true" />
 
         <ImageView
             android:id="@+id/right_img"
@@ -98,6 +102,7 @@
             android:layout_marginEnd="@dimen/dp_33"
             android:layout_gravity="center"
             tools:visibility="visible" />
+
     </LinearLayout>
 
 

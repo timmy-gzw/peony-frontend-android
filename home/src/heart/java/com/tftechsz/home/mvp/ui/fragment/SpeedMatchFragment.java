@@ -81,7 +81,7 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
 
     private void setTopData(HomeTopItemLayout homeTopItemLayout, @Nullable ConfigInfo.Nav nav) {
         if (nav != null && isAdded()) {
-            homeTopItemLayout.setData(nav, 2);
+            homeTopItemLayout.setData(nav, 2,false);
             homeTopItemLayout.setVisibility(View.VISIBLE);
         } else {
             homeTopItemLayout.setVisibility(View.GONE);
