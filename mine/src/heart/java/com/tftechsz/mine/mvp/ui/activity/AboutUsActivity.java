@@ -79,7 +79,7 @@ public class AboutUsActivity extends BaseMvpActivity<IAboutUsView, AboutUsPresen
     @Override
     protected void initData() {
         super.initData();
-        mTvVersion.setText(getString(R.string.app_name) + " v" + AppUtils.getVersionName(this));
+        mTvVersion.setText(getString(R.string.app_name) + " V" + AppUtils.getVersionName(this));
         ConfigInfo configInfo = service.getConfigInfo();
         if (null != configInfo) {
             AboutAdapter adapter = new AboutAdapter(configInfo.api.about_bot);

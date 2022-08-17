@@ -23,6 +23,7 @@ import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.common.utils.AddSpaceTextWatcher;
+import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CountBackUtils;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.Utils;
@@ -142,6 +143,8 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        if(!ClickUtil.canOperate())
+            return;
         if (id == R.id.tv_get_code) {   //获取验证码
             mPhone = mEtPhone.getText().toString().replace(" ", "");
 //            if (!StringUtils.isPhone(mPhone)) {

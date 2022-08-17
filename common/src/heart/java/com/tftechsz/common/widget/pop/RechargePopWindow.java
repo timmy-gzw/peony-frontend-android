@@ -216,12 +216,18 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         adapter.setOnItemClickListener((adapter1, view, position) -> {
             adapter.setCheckPositions(position);
             mRechargeData = adapter.getItem(position);
+            if (mRechargeData != null) {
+                mTvPay.setText("立即支付" + mRechargeData.rmb + "元");
+            }
         });
         wayAdapter.setOnItemClickListener((adapter12, view, position) -> {
             wayAdapter.setCheckPositions(position);
             mPayTypeData = wayAdapter.getItem(position);
         });
 
+        if (mRechargeData != null) {
+            mTvPay.setText("立即支付" + mRechargeData.rmb + "元");
+        }
         if (!TextUtils.isEmpty(mRechargeDto.banner)) {
             GlideUtils.loadImage(mContext, mIvBanner, mRechargeDto.banner);
         } else {
