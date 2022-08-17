@@ -798,11 +798,23 @@ public final class Utils {
             umId = MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID);
             if (TextUtils.isEmpty(umId)) {
                 umId = com.tftechsz.common.utils.AppUtils.getDeviceId();
+            } else {
+                com.tftechsz.common.utils.AppUtils.saveDeviceIdType("oaid", umId);
             }
+        } else {
+            String deviceIdType = DeviceConfig.getDeviceIdType();
+            com.tftechsz.common.utils.AppUtils.saveDeviceIdType("u-" + deviceIdType, umId);
         }
-        logE("umid: " + umId);
+
         SPUtils.getInstance().put(Interfaces.SP_UMENG_ID, umId);
         return umId;
+    }
+
+    /**
+     * 获取device_id的来源 umeng: u-xx
+     */
+    public static String getDeviceIdType() {
+        return SPUtils.getInstance().getString(Interfaces.SP_DEVICE_ID_TYPE, "");
     }
 
     public static boolean checkNoTell(String phone) {

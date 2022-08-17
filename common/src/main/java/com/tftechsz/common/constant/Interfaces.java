@@ -145,6 +145,7 @@ interface Interfaces {
     String EXTRA_USER_INFO = "extra_user_info";
     String SP_UMENG_ID = "sp_umeng_id";
     String SP_OAID = "sp_oaid";
+    String SP_DEVICE_ID_TYPE = "sp_device_id_type";
     String EXTRA_INVITE_ID = "extra_invite_id";
     String EXTRA_RE_REQUEST = "extra_re_request";
     int TYPE_CAMERA = 1;

@@ -191,11 +191,13 @@ public class RetrofitManager {
                     yundunToken = MMKVUtils.getInstance().decodeString(Constants.YUNDUN_TOKEN);
                 }
             }
+            String deviceIdType = Utils.getDeviceIdType();
             Request request = chain.request().newBuilder()
                     .addHeader("x-auth-token", service.getToken())
                     .addHeader("api-ua", apiUa)
                     .addHeader("x-user-code", userCode)
                     .addHeader("x-anti-cheat-token", yundunToken)
+                    .addHeader("dit", deviceIdType)
                     .build();
             return chain.proceed(request);
         });

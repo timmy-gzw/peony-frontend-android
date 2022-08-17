@@ -26,6 +26,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
+import com.tftechsz.common.constant.Interfaces;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -67,6 +68,7 @@ public class AppUtils {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
+
     public static String getWXAppId() {
         return getMetaDataString("WX_APPID");
     }
@@ -75,7 +77,6 @@ public class AppUtils {
     public static String getWXAppSecret() {
         return getMetaDataString("WX_SECRET");
     }
-
 
 
     public static String getYXAppId() {
@@ -566,7 +567,6 @@ public class AppUtils {
 
     private static final String LOACL_DEVICE_ID = "my_device_loacl_device_id";
 
-
     //获取设备唯一id
     public static String getDeviceId() {
         String localDeviceId = getLocalDeviceId();
@@ -593,6 +593,7 @@ public class AppUtils {
             String s = readSDFile();
             if (!TextUtils.isEmpty(s)) {
                 savaString(LOACL_DEVICE_ID, s);
+                saveDeviceIdType(LOACL_DEVICE_ID, s);
                 return s;
             }
         } else {
@@ -606,6 +607,29 @@ public class AppUtils {
         savaString(LOACL_DEVICE_ID, diviceid);
         //加密保存
         saveFile(encrypt(diviceid));
+    }
+
+    public static void saveDeviceIdType(String key, String value) {
+        switch (key) {
+            case LOACL_DEVICE_ID:
+                com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_DEVICE_ID_TYPE, "local");
+                break;
+            case LOACL_IMEI:
+                com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_DEVICE_ID_TYPE, "imei");
+                break;
+            case LOACL_MAC:
+                com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_DEVICE_ID_TYPE, "mac");
+                break;
+            case LOACL_DEVICE_IMEI:
+                com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_DEVICE_ID_TYPE, "device_imei");
+                break;
+            case LOACL_UUID:
+                com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_DEVICE_ID_TYPE, "uuid");
+                break;
+            default:
+                com.blankj.utilcode.util.SPUtils.getInstance().put(Interfaces.SP_DEVICE_ID_TYPE, key);
+                break;
+        }
     }
 
     private static void saveFile(String str) {
@@ -676,6 +700,7 @@ public class AppUtils {
         if (TextUtils.isEmpty(localuuid)) {
             localuuid = UUID.randomUUID().toString().replace("-", "");
             savaString(LOACL_UUID, localuuid);
+            saveDeviceIdType(LOACL_UUID, localuuid);
         }
         return localuuid;
     }
@@ -704,6 +729,7 @@ public class AppUtils {
         if (!TextUtils.isEmpty(WLANMAC)) {
             WLANMAC = WLANMAC.replaceAll(":", "");
             savaString(LOACL_MAC, WLANMAC);
+            saveDeviceIdType(LOACL_MAC, WLANMAC);
         }
         return WLANMAC;
     }
@@ -844,6 +870,7 @@ public class AppUtils {
             imei = tm.getDeviceId();
             if (!TextUtils.isEmpty(imei)) {
                 savaString(LOACL_IMEI, imei);
+                saveDeviceIdType(LOACL_IMEI, imei);
             }
             return imei;
         } catch (Exception e) {
@@ -860,7 +887,6 @@ public class AppUtils {
     private static void savaString(String key, String value) {
         SharedPreferences sp = BaseApplication.getInstance().getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         sp.edit().putString(key, value).commit();//提交保存键值对
-
     }
 
 
