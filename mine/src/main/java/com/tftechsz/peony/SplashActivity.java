@@ -130,8 +130,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
             popWindow.setPrivacyListener(new PrivacyPopWindow.PrivacyListener() {
                 @Override
                 public void agree() {
-                    getP().lazyInit();
-                    initPermission();
+                    getP().lazyInit(() -> initPermission());
                 }
 
                 @Override
@@ -332,7 +331,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
                     //todo 混淆可能不起作用
                     Class aClass = Class.forName("com.tftechsz.im.mvp.ui.activity.VideoCallActivity");
                     boolean activityExistsInStack = ActivityUtils.isActivityExistsInStack(aClass);
-                    if(!activityExistsInStack){
+                    if (!activityExistsInStack) {
                         ARouterUtils.toMainActivity(finalMsg);
                     }
                 } catch (ClassNotFoundException e) {
@@ -341,7 +340,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
                 }
                 finish();
             }
-        },100);
+        }, 100);
 
     }
 

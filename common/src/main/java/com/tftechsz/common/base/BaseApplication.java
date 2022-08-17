@@ -10,6 +10,9 @@ import android.app.Instrumentation;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.Process;
 import android.text.TextUtils;
 import android.webkit.WebView;
@@ -56,7 +59,6 @@ import com.tftechsz.common.push.MyPushContentProvider;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ImageLoaderUtil;
 import com.tftechsz.common.utils.MMKVUtils;
-import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.MyToastStyle;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
@@ -186,10 +188,7 @@ public class BaseApplication extends Application implements Application.Activity
         UMConfigure.setLogEnabled(BuildConfig.DEBUG);
         if (isAgree) {
             getOaid();
-            initBugly();
-            initUmeng();
-            initUiKit();
-            initShanyanSDK();
+            initThirdParty();
         } else {//未同意隐私政策
             UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
         }
@@ -288,14 +287,39 @@ public class BaseApplication extends Application implements Application.Activity
         UMConfigure.setProcessEvent(true);
     }
 
-    public void getOaid() {
+    private static final int oaidWhat = 0x121;
+    private Handler oaidHandler = null;
+
+    public interface OnGetOaidListener {
+        void onGetOaid();
+    }
+
+    public void getOaid(OnGetOaidListener listener) {
+        // FIXME: 2022/8/17 待优化 OAID及第三方初始化流程
         if (TextUtils.isEmpty(MMKVUtils.getInstance().decodeString(Interfaces.SP_OAID))) {
+            if (listener != null) {
+                oaidHandler = new Handler(Looper.getMainLooper()) {
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        if (msg.what == oaidWhat) {
+                            listener.onGetOaid();
+                        }
+                    }
+                };
+                oaidHandler.sendEmptyMessageDelayed(oaidWhat, 1000);
+            }
             com.netease.nis.sdkwrapper.Utils.rL(new Object[]{null, BaseApplication.getInstance(),
                     true, (IIdentifierListener) (b, idSupplier) -> {
                 String oaid = idSupplier.getOAID();
                 MMKVUtils.getInstance().encode(Interfaces.SP_OAID, oaid);
+                if (oaidHandler != null) oaidHandler.removeMessages(oaidWhat);
+                if (listener != null) listener.onGetOaid();
             }, 28, 1606976968500L});
         }
+    }
+
+    public void getOaid() {
+        getOaid(null);
     }
 
     private LoginInfo getLoginInfo() {
@@ -310,13 +334,19 @@ public class BaseApplication extends Application implements Application.Activity
         }
     }
 
+    public void initThirdParty() {
+        initBugly();
+        initUmeng();
+        initUiKit();
+        initShanyanSDK();
+    }
+
     /**
      * bugly初始化
      */
     public void initBugly() {
         Bugly.init(this, CommonUtil.getBuglyAppKey(), BuildConfig.DEBUG);
         CrashReport.setAppChannel(this, CommonUtil.getUmengChannel());
-        CrashReport.setDeviceId(this, Utils.getUmId());
         CrashReport.setDeviceModel(BaseApplication.getInstance(), com.tftechsz.common.utils.AppUtils.getModel());
     }
 

@@ -803,7 +803,7 @@ public final class Utils {
             }
         } else {
             String deviceIdType = DeviceConfig.getDeviceIdType();
-            com.tftechsz.common.utils.AppUtils.saveDeviceIdType("u-" + deviceIdType, umId);
+            com.tftechsz.common.utils.AppUtils.saveDeviceIdType("u_" + deviceIdType, umId);
         }
 
         SPUtils.getInstance().put(Interfaces.SP_UMENG_ID, umId);
@@ -811,7 +811,7 @@ public final class Utils {
     }
 
     /**
-     * 获取device_id的来源 umeng: u-xx
+     * 获取device_id的来源 umeng id: u_xx
      */
     public static String getDeviceIdType() {
         return SPUtils.getInstance().getString(Interfaces.SP_DEVICE_ID_TYPE, "");
