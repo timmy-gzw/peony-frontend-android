@@ -285,6 +285,22 @@ public final class Utils {
     }
 
 
+    public static void runAndTimeout(final TargetRunListener target,final Runnable timeout, long delayMillis) {
+        Utils.UTIL_HANDLER.postDelayed(timeout, delayMillis);
+        /**
+         * 记得在call之后手动回调callBack
+         */
+        target.call(() -> Utils.UTIL_HANDLER.removeCallbacks(timeout));
+    }
+
+    public interface TargetRunListener{
+        void call(TargetCallBackListener listener);
+    }
+    private interface TargetCallBackListener{
+        void callBack();
+    }
+
+
     public static void removeHandler() {
         Utils.UTIL_HANDLER.removeCallbacksAndMessages(null);
 
