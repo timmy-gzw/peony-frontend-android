@@ -32,6 +32,12 @@ public class UploadAvatarPopWindow extends BaseBottomPop implements View.OnClick
 
     private void initUI() {
         TextView mTvTip = findViewById(R.id.tv_tip);
+        ImageView ivErrorAvater = findViewById(R.id.iv_error_avatar);
+        if(service.getUserInfo().isGirl()){
+            ivErrorAvater.setImageResource(R.mipmap.upload_avater_rule_girl);
+        }else {
+            ivErrorAvater.setImageResource(R.mipmap.upload_avater_rule_boy);
+        }
         findViewById(R.id.tv_upload).setOnClickListener(this);   // 知道了
 //        RoundedImageView ivAvatar = findViewById(R.id.iv_true_avatar);
 //        ivAvatar.setBackgroundResource(service.getUserInfo().getSex() == 1 ? R.mipmap.ic_boy_true_avatar : R.mipmap.ic_true_avatar);

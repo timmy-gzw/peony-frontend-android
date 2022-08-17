@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/iv_error_avatar"
-        android:background="@mipmap/upload_avater_rule"
+        android:background="@mipmap/upload_avater_rule_girl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
