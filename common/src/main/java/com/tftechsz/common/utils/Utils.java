@@ -284,6 +284,32 @@ public final class Utils {
         Utils.UTIL_HANDLER.postDelayed(runnable, delayMillis);
     }
 
+    public static Timeout setTimeout(Runnable runnable, long delayMillis){
+        UTIL_HANDLER.postDelayed(runnable,delayMillis);
+        return new Timeout(UTIL_HANDLER, runnable);
+    }
+
+
+    public static Timeout setTimeout(Handler handler, Runnable runnable, long delayMillis){
+        handler.postDelayed(runnable,delayMillis);
+        return new Timeout(handler, runnable);
+    }
+
+    static class Timeout {
+        private Handler handler;
+        private Runnable runnable;
+
+        public Timeout(Handler handler, Runnable runnable) {
+            this.handler = handler;
+            this.runnable = runnable;
+        }
+
+        public void cancel(){
+            if(handler != null)
+                handler.removeCallbacks(runnable);
+        }
+    }
+
 
     public static void removeHandler() {
         Utils.UTIL_HANDLER.removeCallbacksAndMessages(null);
