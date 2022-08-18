@@ -305,7 +305,8 @@ public final class Utils {
         }
 
         public void cancel(){
-            handler.removeCallbacks(runnable);
+            if(handler != null)
+                handler.removeCallbacks(runnable);
         }
     }
 
