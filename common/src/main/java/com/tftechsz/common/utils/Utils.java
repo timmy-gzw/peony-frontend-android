@@ -284,20 +284,29 @@ public final class Utils {
         Utils.UTIL_HANDLER.postDelayed(runnable, delayMillis);
     }
 
-
-    public static void runAndTimeout(final TargetRunListener target,final Runnable timeout, long delayMillis) {
-        Utils.UTIL_HANDLER.postDelayed(timeout, delayMillis);
-        /**
-         * 记得在call之后手动回调callBack
-         */
-        target.call(() -> Utils.UTIL_HANDLER.removeCallbacks(timeout));
+    public static Timeout setTimeout(Runnable runnable, long delayMillis){
+        UTIL_HANDLER.postDelayed(runnable,delayMillis);
+        return new Timeout(UTIL_HANDLER, runnable);
     }
 
-    public interface TargetRunListener{
-        void call(TargetCallBackListener listener);
+
+    public static Timeout setTimeout(Handler handler, Runnable runnable, long delayMillis){
+        handler.postDelayed(runnable,delayMillis);
+        return new Timeout(handler, runnable);
     }
-    private interface TargetCallBackListener{
-        void callBack();
+
+    static class Timeout {
+        private Handler handler;
+        private Runnable runnable;
+
+        public Timeout(Handler handler, Runnable runnable) {
+            this.handler = handler;
+            this.runnable = runnable;
+        }
+
+        public void cancel(){
+            handler.removeCallbacks(runnable);
+        }
     }
 
 
