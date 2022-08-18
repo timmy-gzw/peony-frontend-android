@@ -7,7 +7,6 @@ import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
-import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.MMKVUtils;
@@ -210,7 +209,7 @@ public class RetrofitManager {
         return builder.build();
     }
 
-    private final int logSubLenth = 5000;//每行log长度
+    private final int logSubLenth = 2000;//每行log长度
 
     private HttpLoggingInterceptor logInterceptor() {
         //新建log拦截器
