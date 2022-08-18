@@ -69,7 +69,7 @@ public class ShareHelper {
         if (!TextUtils.isEmpty(img)) {
             umImage = new UMImage(activity, img);
         } else {
-            umImage = new UMImage(activity, R.mipmap.ic_launcher_share);
+            umImage = new UMImage(activity, R.mipmap.ic_launcher);
         }
         umImage.compressFormat = Bitmap.CompressFormat.PNG;
         web.setThumb(umImage);
