@@ -29,14 +29,23 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.gyf.immersionbar.ImmersionBar;
-import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.bean.AccostDto;
+import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.netease.nim.uikit.common.UserInfo;
+import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.netease.nim.uikit.common.util.log.sdk.wrapper.NimLog;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.media.player.AudioPlayer;
 import com.netease.nimlib.sdk.media.player.OnPlayListener;
+import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.MsgServiceObserve;
+import com.netease.nimlib.sdk.msg.constant.MsgStatusEnum;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.adapter.FragmentVpAdapter;
@@ -52,6 +61,7 @@ import com.tftechsz.common.entity.NavigationLogEntity;
 import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.common.entity.TabEntity;
 import com.tftechsz.common.event.CommonEvent;
+import com.tftechsz.common.event.MessageCallEvent;
 import com.tftechsz.common.event.VoiceChatEvent;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
@@ -267,6 +277,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     }
 
     private void initListener() {
+        NIMClient.getService(MsgServiceObserve.class).observeMsgStatus(messageStatusObserver, true);
         mTobBack.setOnClickListener(this);
         mTvAttention.setOnClickListener(this);
         mTobMore.setOnClickListener(this);
@@ -708,7 +719,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     public void getCheckMsgSuccess(String userId, MsgCheckDto data, boolean isAutoShowGiftPanel) {
         if (null == data || !CommonUtil.hasPerformAccost(data.tips_msg, data.is_real_alert, data.is_self_alert, service.getUserInfo())) {
             if (isAutoShowGiftPanel) {
-                ARouterUtils.toChatP2PActivity(userId + "", NimUIKit.getCommonP2PSessionCustomization(), null, true);
+                p.showGiftPop(this, userId);
             } else {
                 CommonUtil.checkMsg(service.getConfigInfo(), userId, data);
             }
@@ -728,6 +739,67 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             });
             mVideoCallPopWindow.showPopupWindow();
         }
+    }
+
+    /**
+     * 消息状态变化观察者
+     */
+    private final Observer<IMMessage> messageStatusObserver = new Observer<IMMessage>() {
+        @Override
+        public void onEvent(IMMessage message) {
+            if (isMyMessage(message)) {
+                NimLog.i(TAG, String.format("content: %s, callbackExt: %s", message.getContent(), message.getCallbackExtension()));
+                getCallBackContent(message, message.getCallbackExtension());
+            }
+            LogUtil.e("=====================", message.getCallbackExtension() + "===" + isMyMessage(message) + "==" + message.getFromAccount() + "===" + service.getUserId());
+        }
+    };
+
+    /**
+     * 显示爱心
+     */
+    private void getCallBackContent(IMMessage message, String content) {
+        if (TextUtils.isEmpty(content)) return;
+        try {
+            ChatMsg chatMsg = ChatMsgUtil.parseMessage(content);
+            if (null != chatMsg) {   //消息回调（弹窗类型）
+                if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.ALERT_TYPE)) {   //通过消息返回值 弹出充值
+                    ChatMsg.Alert alert = JSON.parseObject(chatMsg.content, ChatMsg.Alert.class);
+                    if (alert == null) return;
+                    if (message != null && alert.is_fail) {
+                        message.setStatus(MsgStatusEnum.fail);
+                        NIMClient.getService(MsgService.class).updateIMMessageStatus(message);
+                        NIMClient.getService(MsgService.class).deleteChattingHistory(message);
+                        RxBus.getDefault().post(new MessageCallEvent(message, 1));
+                    }
+                }
+                LogUtil.e("===============", chatMsg.cmd_type + "======================");
+                //判断是否是礼物
+                if (TextUtils.equals("gift_play", chatMsg.cmd_type)) {
+                    com.tftechsz.common.entity.GiftDto gift = JSON.parseObject(chatMsg.content, com.tftechsz.common.entity.GiftDto.class);
+                    getP().sendGiftSuccess(gift, message);
+                }
+                if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.INTIMACY_TYPE)) {  //亲密度通知
+                    ChatMsg.Intimacy intimacy = JSON.parseObject(chatMsg.content, ChatMsg.Intimacy.class);
+                    //判断是否是礼物
+                    if (!TextUtils.isEmpty(chatMsg.child)) {
+                        ChatMsg chatMsgChild = JSON.parseObject(chatMsg.child, ChatMsg.class);
+                        if (chatMsgChild != null && TextUtils.equals("gift_play", chatMsgChild.cmd_type)) {
+                            com.tftechsz.common.entity.GiftDto gift = JSON.parseObject(chatMsgChild.content, com.tftechsz.common.entity.GiftDto.class);
+                            getP().sendGiftSuccess(gift, message);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean isMyMessage(IMMessage message) {
+        return message.getSessionType() == SessionTypeEnum.P2P
+                && message.getFromAccount() != null
+                && message.getFromAccount().equals(service.getUserId() + "");
     }
 
     /**
@@ -868,6 +940,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             mLottie.clearAnimation();
             mLottie = null;
         }
+        NIMClient.getService(MsgServiceObserve.class).observeMsgStatus(messageStatusObserver, false);
     }
 
     @Override
