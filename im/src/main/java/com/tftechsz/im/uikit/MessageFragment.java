@@ -182,6 +182,7 @@ import com.tftechsz.common.widget.pop.RedEnvelopeDetailsPopWindow;
 import com.tftechsz.common.widget.pop.RedEnvelopeReceivePopWindow;
 import com.tftechsz.common.widget.pop.RemoveCouplesPop;
 import com.tftechsz.common.widget.pop.TopicPop;
+import com.tftechsz.common.widget.pop.UserBanPopWindow;
 import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.common.widget.pop.WelcomeToFamilyPopWindow;
 import com.tftechsz.common.widget.rain.RedPacketViewHelper;
@@ -3437,9 +3438,12 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                             JoinLeaveRoom.ToUser toUser = response.getData().to_user;
                             if (toUser.isDisable()) {
                                 if (service.getConfigInfo() != null && service.getConfigInfo().share_config != null && service.getConfigInfo().share_config.user_disable != null) {
-                                    BaseWebViewActivity.start(getActivity(), "", service.getConfigInfo().share_config.user_disable.link + "&user_id=" + sessionId, 0, 13);
-                                    if (getActivity() != null)
-                                        getActivity().finish();
+                                    UserBanPopWindow userBanPopWindow = new UserBanPopWindow(getActivity(), v -> {
+                                        if (getActivity() != null)
+                                            getActivity().finish();
+                                    });
+                                    userBanPopWindow.setOutSideDismiss(false);
+                                    userBanPopWindow.showPopupWindow();
                                 }
                                 return;
                             }

@@ -33,7 +33,7 @@
                 android:layout_marginTop="@dimen/dp_17"
                 android:textSize="@dimen/sp_18"
                 android:layout_width="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/color_normal"
                 android:layout_height="wrap_content"/>
 
             <TextView

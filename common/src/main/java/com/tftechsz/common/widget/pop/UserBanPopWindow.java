@@ -18,11 +18,17 @@ public class UserBanPopWindow extends BaseCenterPop{
     private TextView tvContent,tvBtn;
 
     public UserBanPopWindow(Context context) {
+        this(context,null);
+    }
+
+    public UserBanPopWindow(Context context, View.OnClickListener listener) {
         super(context);
         tvContent = findViewById(R.id.tv_content);
         tvBtn = findViewById(R.id.tv_btn);
         tvBtn.setOnClickListener(v -> {
-            dismiss();
+            if(listener != null){
+                listener.onClick(v);
+            }
         });
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
         stringBuilder.append("由于该用户“存在严重违规行为”严重影响社区氛围，经官方判定封号，一起维护健康文明的社区环境，人人有责。");
