@@ -112,6 +112,7 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
             });
             bodyTextView.setText(span);
         }
+        bodyTextView.setText(content);
         bodyTextView.setMovementMethod(LinkMovementMethod.getInstance());
         bodyTextView.setOnLongClickListener(longClickListener);
     }
