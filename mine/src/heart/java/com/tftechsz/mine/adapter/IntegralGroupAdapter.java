@@ -95,10 +95,10 @@ public class IntegralGroupAdapter extends GroupedRecyclerViewAdapter {
             helper.setText(R.id.tv_time, exchangeRecord.getHeader() + " " + item.created_at).setText(R.id.tv_integral, item.integral_cost);
             //0.申请中，1.已兑换，2.不允许兑换
             if (item.status == 0) {
-                tvStatus.setText("审核中");
+                tvStatus.setText("审核中…");
                 tvStatus.setTextColor(ContextCompat.getColor(mContext, R.color.color_light_font));
             } else if (item.status == 1) {
-                tvStatus.setText("已兑换");
+                tvStatus.setText("兑换成功");
                 tvStatus.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
             } else if (item.status == 2) {
                 tvStatus.setText("兑换失败");
