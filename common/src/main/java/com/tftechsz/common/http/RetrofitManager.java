@@ -177,7 +177,7 @@ public class RetrofitManager {
 
         builder.addInterceptor(chain -> {
             //手机版本，厂商，uuid imsi appName,appVersion
-            String apiUa = AppUtils.getApiUa();
+            String apiUa = "";
             //芍药号
             String userCode = service.getUserInfo() != null ? service.getUserInfo().getUser_code() : "";
 
@@ -189,6 +189,13 @@ public class RetrofitManager {
                         || url.contains("/info/complete") || url.contains("/anti_cheat") || url.contains("/behavior/accost")) {
                     yundunToken = MMKVUtils.getInstance().decodeString(Constants.YUNDUN_TOKEN);
                 }
+                if (url.contains("/jsonConfig/")) {
+                    apiUa = "";
+                } else {
+                    apiUa = AppUtils.getApiUa();
+                }
+            } else {
+                apiUa = AppUtils.getApiUa();
             }
             String deviceIdType = Utils.getDeviceIdType();
             Request request = chain.request().newBuilder()

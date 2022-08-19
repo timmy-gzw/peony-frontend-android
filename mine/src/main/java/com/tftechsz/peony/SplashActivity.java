@@ -51,6 +51,7 @@ import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.NetworkUtil;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.dto.LoginDto;
 import com.tftechsz.mine.mvp.IView.ILoginView;
@@ -510,10 +511,29 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
         if (r || (time != 0 && TimeUtils.isToday(new Date(time)))) {
             loadMoreData();
         } else {
-            mCompositeDisposable.add(new RxPermissions(SplashActivity.this)
-                    .request(Manifest.permission.READ_PHONE_STATE)
-                    .subscribe(aBoolean -> loadMoreData()));
+            showGuidePop();
         }
+    }
+
+    private void showGuidePop() {
+        CustomPopWindow popWindow = new CustomPopWindow(this);
+        popWindow.setContent(getString(R.string.tip_read_phone_state))
+                .setIsCancel(false)
+                .setRightButton(getString(R.string.t_open))
+                .addOnClickListener(new CustomPopWindow.OnSelectListener() {
+                    @Override
+                    public void onCancel() {
+                        loadMoreData();
+                    }
+
+                    @Override
+                    public void onSure() {
+                        mCompositeDisposable.add(new RxPermissions(SplashActivity.this)
+                                .request(Manifest.permission.READ_PHONE_STATE)
+                                .subscribe(aBoolean -> loadMoreData()));
+                    }
+                });
+        popWindow.showPopupWindow();
     }
 
     @Override

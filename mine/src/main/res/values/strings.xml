@@ -67,4 +67,6 @@
     <string name="gift_wall">礼物墙</string>
     <string name="my_gift_wall">查看我的礼物墙</string>
     <string name="gift_count_format">已点亮 %d/%d</string>
+    <string name="tip_read_phone_state">为了完成必要的账号安全检查，保障您的账号安全，请授权我们使用您的设备权限</string>
+    <string name="t_open">开启</string>
 </resources>
