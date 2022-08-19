@@ -77,6 +77,7 @@ import com.tftechsz.common.utils.TopSmoothScroller;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.MyBannerImageHolder;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.common.widget.pop.UserBanPopWindow;
 import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.ProfilePhotoAdapter;
@@ -555,7 +556,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 BaseWebViewActivity.start(mContext, null, service.getConfigInfo().share_config.user_disable.link + "&user_id=" + mUserId, 0, 0);
                 finish();
             }*/
-            new CustomPopWindow(mContext).setContent(getString(R.string.user_is_disable)).setRightGone().setRightButton("我知道了").showPopupWindow();
+            UserBanPopWindow userBanPopWindow = new UserBanPopWindow(this);
+            userBanPopWindow.showPopupWindow();
             //return;
         }
         if (mUserInfo.isLogout()) { //用户不存在
