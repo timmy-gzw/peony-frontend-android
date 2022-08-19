@@ -48,7 +48,7 @@ public class OneKeyAccostAdapter extends BaseQuickAdapter<ChatMsg.AccostPopup, B
         if (item.is_selected) {
             iv_check.setImageResource(R.mipmap.ic_check_selector);
         } else {
-            iv_check.setImageResource(R.mipmap.ic_check_normal2);
+            iv_check.setImageResource(R.mipmap.ic_check_normal);
         }
     }
 }
