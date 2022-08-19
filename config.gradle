@@ -28,6 +28,7 @@ ext {
             VIVO_APP_ID        : "105568848",   //VIVO ID
             VIVO_APP_KEY       : "e677afe37c0e8667a2972d3076a7f953",
             buglyKey           : "e174b7f79a",
+            urlLinkHost        : "peony.com",
     ]
     heartPlaceholders = [
             UMENG_CHANNEL_VALUE: "OFFICIAL",
@@ -39,6 +40,7 @@ ext {
             VIVO_APP_ID        : "105583463",   //VIVO ID
             VIVO_APP_KEY       : "bbe6020b8edc6b951c8d8d9df52e0137",
             buglyKey           : "dbbaf62265",
+            urlLinkHost        : "ivy.peony.com",
     ]
 
 
