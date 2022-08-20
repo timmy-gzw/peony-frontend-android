@@ -33,10 +33,6 @@ android {
             res.srcDirs = ['office/res', 'office/res-ptr2', 'office/res-chatroom']
             java.srcDirs = ['office/src']
         }
-        jasmine{
-            res.srcDirs = ['office/res', 'office/res-ptr2', 'office/res-chatroom']
-            java.srcDirs = ['office/src']
-        }
     }
 
     compileOptions {
