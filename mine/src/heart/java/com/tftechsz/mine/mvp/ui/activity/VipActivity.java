@@ -146,8 +146,8 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
 
 
         if (service.getUserInfo().isVip()) {
-            long timeSpanByNow = TimeUtils.getTimeSpanByNow(service.getUserInfo().getVip_expiration_time(), TimeConstants.DAY);
-            if (timeSpanByNow <= 7) {
+            long timeSpanByNow = TimeUtils.getTimeSpanByNow(service.getUserInfo().getVip_expiration_time(), TimeConstants.HOUR);
+            if (timeSpanByNow <= 7*24) {
                 mBind.hint.setTextColor(ContextCompat.getColor(this, R.color.c_d72537));
             } else {
                 mBind.hint.setTextColor(ContextCompat.getColor(this, R.color.c_c89c5d));

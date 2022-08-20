@@ -397,6 +397,12 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                         mTvMember.setText("立即续费");
                         mExpiredTime.setText(userInfo.vip_expiration_time_desc_new);
                         mExpiredTime.setVisibility(View.VISIBLE);
+                        long timeSpanByNow = TimeUtils.getTimeSpanByNow(service.getUserInfo().getVip_expiration_time(), TimeConstants.HOUR);
+                        if (timeSpanByNow <= 7*24) {
+                            mExpiredTime.setTextColor(ContextCompat.getColor(getActivity(), R.color.c_d72537));
+                        } else {
+                            mExpiredTime.setTextColor(ContextCompat.getColor(getActivity(), R.color.c_c89c5d));
+                        }
                     } else {
                         mVipIcon.setVisibility(View.VISIBLE);
                         mTvMember.setText("立即开通");
