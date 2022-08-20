@@ -121,7 +121,7 @@ android {
     lintOptions {
         disable 'MissingTranslation'
     }
-    flavorDimensions('office')
+    flavorDimensions rootProject.ext.dimension
     productFlavors {
         office {
             dimension 'office'

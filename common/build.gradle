@@ -44,7 +44,7 @@ android {
         dataBinding = true
     }
 
-    flavorDimensions ('office')
+    flavorDimensions rootProject.ext.dimension
     productFlavors {
         office {
             dimension 'office'
