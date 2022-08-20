@@ -81,6 +81,8 @@ android {
                         input = "Peony"
                     else if (variant.productFlavors[0].name == "heart")
                         input = "ivy"
+                    else if (variant.productFlavors[0].name == "jasmine")
+                        input = "jasmine"
                     outputFileName = input + "_V${productFlavors[0].versionName}_${productFlavors[0].versionCode}.apk"
                 }
                 variant.mergeAssetsProvider.configure {
@@ -136,6 +138,13 @@ android {
             versionCode rootProject.ext.heartAppVersion.versionCode
             versionName rootProject.ext.heartAppVersion.versionName
             manifestPlaceholders = rootProject.ext.heartPlaceholders
+        }
+        jasmine {
+            dimension 'office'
+            applicationId "com.tftechsz.jasmine"
+            versionCode rootProject.ext.jasmineAppVersion.versionCode
+            versionName rootProject.ext.jasmineAppVersion.versionName
+            manifestPlaceholders = rootProject.ext.jasminePlaceholders
         }
     }
 }

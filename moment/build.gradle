@@ -47,6 +47,9 @@ android {
         heart {
             dimension 'office'
         }
+        jasmine {
+            dimension 'office'
+        }
     }
 
 }
