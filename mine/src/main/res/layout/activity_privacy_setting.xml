@@ -351,7 +351,7 @@
             android:id="@+id/tv_location_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="关闭后不在对其他用户显示您的所在地"
+            android:text="开启后其他用户将无法看您的所在地"
             android:textColor="@color/color_light_font"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="parent"
