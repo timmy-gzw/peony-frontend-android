@@ -39,18 +39,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    flavorDimensions ('office')
-    productFlavors {
-        office {
-            dimension 'office'
-        }
-        heart {
-            dimension 'office'
-        }
-        jasmine {
-            dimension 'office'
-        }
-    }
+    flavorDimensions rootProject.ext.dimension
+    productFlavors rootProject.ext.flavors
 
 }
 dependencies {

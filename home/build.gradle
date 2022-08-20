@@ -42,18 +42,8 @@ android {
         dataBinding =  true
     }
 
-    flavorDimensions ('office')
-    productFlavors {
-        office {
-            dimension 'office'
-        }
-        heart {
-            dimension 'office'
-        }
-        jasmine {
-            dimension 'office'
-        }
-    }
+    flavorDimensions rootProject.ext.dimension
+    productFlavors rootProject.ext.flavors
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

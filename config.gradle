@@ -1,3 +1,5 @@
+import java.awt.Dimension
+def dimensionName = "office"
 ext {
     //android开发版本配置
     android = [
@@ -8,9 +10,20 @@ ext {
             targetSdkVersion : 30
     ]
 
+    dimension = dimensionName
+
+    flavors = {
+        office {
+            dimension dimensionName
+        }
+        heart {
+            dimension dimensionName
+        }
+    }
+
     appVersion = [
             versionName: "1.0.3",
-            versionCode: 45
+            versionCode: 46
     ]
 
     heartAppVersion = [
