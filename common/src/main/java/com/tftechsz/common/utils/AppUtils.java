@@ -868,15 +868,15 @@ public class AppUtils {
             TelephonyManager tm = (TelephonyManager) BaseApplication.getInstance().getApplicationContext()
                     .getSystemService(Context.TELEPHONY_SERVICE);
             imei = tm.getDeviceId();
+            if (TextUtils.isEmpty(imei) || imei.startsWith("00000") || imei.equals("0")) {
+                imei = "";
+            }
+            if (!isCorrectImei(imei))
+                imei = "";
             if (!TextUtils.isEmpty(imei)) {
                 savaString(LOACL_IMEI, imei);
                 saveDeviceIdType(LOACL_IMEI, imei);
             }
-            if (TextUtils.isEmpty(imei) || imei.startsWith("00000") || imei.equals("0")) {
-               imei = "";
-            }
-            if (!isCorrectImei(imei))
-                imei = "";
             return imei;
         } catch (Exception e) {
 
@@ -904,9 +904,7 @@ public class AppUtils {
             }
             resultInt %= 10;
             resultInt = resultInt == 0 ? 0 : 10 - resultInt;
-            if (resultInt == check) {
-                return true;
-            }
+            return resultInt == check;
         }
         return false;
     }
