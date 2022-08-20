@@ -33,4 +33,5 @@
     <color name="c_exchange_num">@color/colorPrimary</color>
     <color name="c_993875FF">@color/colorPrimaryLight</color>
     <color name="c_99ff3a74">@color/colorPrimary</color>
+    <color name="c_tab_color">@color/colorPrimary</color>
 </resources>
