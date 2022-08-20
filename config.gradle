@@ -19,6 +19,9 @@ ext {
         heart {
             dimension dimensionName
         }
+        jasmine{
+            dimension dimensionName
+        }
     }
 
     appVersion = [
