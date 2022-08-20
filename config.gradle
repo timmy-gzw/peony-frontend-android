@@ -23,7 +23,7 @@ ext {
 
     appVersion = [
             versionName: "1.0.3",
-            versionCode: 46
+            versionCode: 47
     ]
 
     heartAppVersion = [
