@@ -1671,11 +1671,11 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 }
             }
         } else {
-            viewVideoView.setVisibility(View.GONE);
-            viewRemote.setVisibility(View.GONE);
-            ivCloseFace.setVisibility(View.GONE);
-            ivSmallCloseFace.setVisibility(View.GONE);
             if (mIsAccept) {
+                viewVideoView.setVisibility(View.GONE);
+                viewRemote.setVisibility(View.GONE);
+                ivCloseFace.setVisibility(View.GONE);
+                ivSmallCloseFace.setVisibility(View.GONE);
                 NERtc.getInstance().startVideoPreview();
                 NERtc.getInstance().enableLocalVideo(true);
                 if (isChangeVideo) {
