@@ -871,8 +871,8 @@ public class AppUtils {
             if (TextUtils.isEmpty(imei) || imei.startsWith("00000") || imei.equals("0")) {
                 imei = "";
             }
-            if (!isCorrectImei(imei))
-                imei = "";
+//            if (!isCorrectImei(imei))
+//                imei = "";
             if (!TextUtils.isEmpty(imei)) {
                 savaString(LOACL_IMEI, imei);
                 saveDeviceIdType(LOACL_IMEI, imei);
