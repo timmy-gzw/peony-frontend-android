@@ -1255,7 +1255,23 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                     if (videoView != null) {
                         nertcVideoCall.setupLocalView(videoView);
                     }
+                    if (isChangeVideo) {
+                        if (remoteVideoView != null) {
+                            nertcVideoCall.setupLocalView(remoteVideoView);
+                        }
+                        if (localVideoView != null) {
+                            nertcVideoCall.setupRemoteView(localVideoView, videoUid);
+                        }
+                    } else {
+                        if (localVideoView != null) {
+                            nertcVideoCall.setupLocalView(localVideoView);
+                        }
 
+                        if (remoteVideoView != null) {
+                            nertcVideoCall.setupRemoteView(remoteVideoView, videoUid);
+                        }
+
+                    }
                 }
 
                 viewVideoView.setVisibility(View.GONE);
