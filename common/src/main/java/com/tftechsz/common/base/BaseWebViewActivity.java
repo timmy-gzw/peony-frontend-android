@@ -47,6 +47,7 @@ import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.entity.RechargeDto;
+import com.tftechsz.common.entity.SignInSuccessBean;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.music.base.BaseMusicHelper;
@@ -642,10 +643,18 @@ public class BaseWebViewActivity extends BaseMvpActivity {
         runOnUiThread(() -> {
             if (signInPopWindow == null) {
                 signInPopWindow = new SignInPopWindow(this);
-                signInPopWindow.setSignInListener((popup, bean) -> {
-                    if (popup != null) popup.dismiss();
-                    if (bean != null) new SignSucessPopWindow(mContext).showPop(bean);
-                    if (bean != null && mWebView != null) mWebView.loadUrl("javascript:signInSuccess()");
+                signInPopWindow.setSignInListener(new SignInPopWindow.OnSignInListener() {
+                    @Override
+                    public void onSignInResult(SignInPopWindow popup, SignInSuccessBean bean) {
+                        if (popup != null) popup.dismiss();
+                        if (bean != null) new SignSucessPopWindow(mContext).showPop(bean);
+                        if (bean != null && mWebView != null) mWebView.loadUrl("javascript:signInSuccess()");
+                    }
+
+                    @Override
+                    public void cancelSign() {
+
+                    }
                 });
             }
             signInPopWindow.setData(signInJsonStr);

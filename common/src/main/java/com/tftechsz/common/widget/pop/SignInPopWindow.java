@@ -48,7 +48,15 @@ public class SignInPopWindow extends BaseCenterPop {
         tvSignIn = findViewById(R.id.tv_sign_in);
         tvDesc = findViewById(R.id.tv_sign_in_c);
         recyclerView = findViewById(R.id.sign_recy);
-        findViewById(R.id.ic_close).setOnClickListener(v -> dismiss());
+        findViewById(R.id.ic_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mSignInListener != null) {
+                    mSignInListener.cancelSign();
+                }
+                dismiss();
+            }
+        });
         tvSignIn.setOnClickListener(v -> signIn());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 4);
         recyclerView.addItemDecoration(new SpaceItemDecoration(ConvertUtils.dp2px(10f), ConvertUtils.dp2px(10f), false));
@@ -93,6 +101,8 @@ public class SignInPopWindow extends BaseCenterPop {
 
     public interface OnSignInListener {
         void onSignInResult(SignInPopWindow popup, SignInSuccessBean bean);
+
+        void cancelSign();
     }
 
     @Override

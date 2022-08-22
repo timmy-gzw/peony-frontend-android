@@ -288,9 +288,9 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                 fragmentList.add(new MineFragment());
                 vp.setOffscreenPageLimit(5);
                 fragmentPagerAdapter.notifyDataSetChanged();
-                initBus();
             }
         }, 1600);
+        initBus();
         //保存消息页位置
         MMKVUtils.getInstance().encode(Constants.KEY_CHAT_TAB_INDEX, 2);
 
@@ -918,13 +918,18 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                         if (popup != null) popup.dismiss();
                         MainActivity.this.onSignInResult(bean);
                     }
+
+                    @Override
+                    public void cancelSign() {
+                        showAccostDialog();
+                    }
                 });
                 mSignInPopWindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
                         signInBean = null;
                         //if (!signTag) {
-                        showAccostDialog();
+//                        showAccostDialog();
                         // }
                     }
                 });

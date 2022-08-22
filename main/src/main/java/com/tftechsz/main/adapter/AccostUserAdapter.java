@@ -45,7 +45,7 @@ public class AccostUserAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder
             llage.setBackgroundResource(com.tftechsz.common.R.drawable.bg_boy);
             sex.setImageResource(com.tftechsz.common.R.drawable.ic_boy);
         }
-        age.setText(item.getAge());
+        age.setText(item.getAge()+"");
         GlideUtils.loadRoundImage(getContext(), (ImageView) helper.getView(R.id.iv_avatar), item.getIcon());
         if (getData().get(helper.getLayoutPosition()).isSelected()) {
             ivCheck.setImageResource(R.mipmap.ic_check_selector);
