@@ -141,8 +141,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private NERTCVideoCall nertcVideoCall;
     private NERtcVideoView localVideoView, videoView, remoteVideoView;
     private TextView tvSwitch;  //切换摄像头
-    private HeadImageView ivUserIcon,ivAvater;
-    private TextView tvCallUser, tvCallComment,tvName;
+    private HeadImageView ivUserIcon, ivAvater;
+    private TextView tvCallUser, tvCallComment, tvName;
     private LinearLayout mLlIncome;
     private TextView tvSpeaker, tvMute;
     private TextView tvVideoSpeaker, tvVideoMute;
@@ -250,8 +250,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private TextView mTvReportUser;
     private TextView tvCallTip;
     private ConstraintLayout mClVideo;
-    private TextView mtvGenderAge,mtvCity,mtvConstellation,mtvJob;//语音通话：对方性别年龄，城市，星座，工作
-    private TextView mtvVideoGenderAge,mtvVideoCity,mtvVideoConstellation,mtvVideoJob;//视屏通话：对方性别年龄，城市，星座，工作
+    private TextView mtvGenderAge, mtvCity, mtvConstellation, mtvJob;//语音通话：对方性别年龄，城市，星座，工作
+    private TextView mtvVideoGenderAge, mtvVideoCity, mtvVideoConstellation, mtvVideoJob;//视屏通话：对方性别年龄，城市，星座，工作
 
     private void initPhoneStateListener() {
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -743,7 +743,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private void initIntent() {
         invitedEvent = (InvitedEvent) getIntent().getSerializableExtra(INVENT_EVENT);
         fromId = getIntent().getStringExtra(CALL_FROM_ID);
-        if(fromId == null && invitedEvent != null){
+        if (fromId == null && invitedEvent != null) {
             fromId = invitedEvent.getFromAccountId();
         }
         callId = getIntent().getStringExtra(CALL_ID);
@@ -784,7 +784,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     protected void initData() {
         initIntent();
         //获取对方用户信息
-        if(!TextUtils.isEmpty(fromId) || null != callOutUser) {
+        if (!TextUtils.isEmpty(fromId) || null != callOutUser) {
             getP().getUserInfoById(TextUtils.isEmpty(fromId) ? callOutUser.getUser_id() + "" : fromId);
         }
 //        tvCallComment.setText("速配成功，即将开始语音通话");
@@ -1008,11 +1008,11 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             if (mChannelType == 2) {//视频
                 text = "视频";
             }
-            tvCallComment.setText("邀请你"+text+"通话");
+            tvCallComment.setText("邀请你" + text + "通话");
         }
         int sex = service.getUserInfo().getSex(); //用户性别：0.未知，1.男，2.女
-        if(sex == 2){
-            setCost("接听后将收益更多积分","");
+        if (sex == 2) {
+            setCost("接听后将收益更多积分", "");
         }
         if (mChannelType == 1) {  //语音
             mFlVoiceBg.setVisibility(View.VISIBLE);
@@ -1255,23 +1255,24 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                     if (videoView != null) {
                         nertcVideoCall.setupLocalView(videoView);
                     }
-                    if (isChangeVideo) {
-                        if (remoteVideoView != null) {
-                            nertcVideoCall.setupLocalView(remoteVideoView);
-                        }
-                        if (localVideoView != null) {
-                            nertcVideoCall.setupRemoteView(localVideoView, videoUid);
-                        }
-                    } else {
-                        if (localVideoView != null) {
-                            nertcVideoCall.setupLocalView(localVideoView);
-                        }
+                    if (mIsAccept)
+                        if (isChangeVideo) {
+                            if (remoteVideoView != null) {
+                                nertcVideoCall.setupLocalView(remoteVideoView);
+                            }
+                            if (localVideoView != null) {
+                                nertcVideoCall.setupRemoteView(localVideoView, videoUid);
+                            }
+                        } else {
+                            if (localVideoView != null) {
+                                nertcVideoCall.setupLocalView(localVideoView);
+                            }
 
-                        if (remoteVideoView != null) {
-                            nertcVideoCall.setupRemoteView(remoteVideoView, videoUid);
-                        }
+                            if (remoteVideoView != null) {
+                                nertcVideoCall.setupRemoteView(remoteVideoView, videoUid);
+                            }
 
-                    }
+                        }
                 }
 
                 viewVideoView.setVisibility(View.GONE);
@@ -1339,15 +1340,15 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             });
         } else if (id == R.id.iv_small_voice) {
             //音视频通话进入后台模式，显示悬浮按钮
-            if(!checkOverlayDisplayPermission()){
+            if (!checkOverlayDisplayPermission()) {
                 getP().showAlertPermission(this);
-            }else{
+            } else {
                 smallWindow();
             }
 
         } else if (id == R.id.tv_report_user) {
             //举报
-            ARouterUtils.toBeforeReportActivity(mCallDir == 0?callOutUser.getUser_id():Integer.parseInt(fromId),1);//0 call out 1 call in
+            ARouterUtils.toBeforeReportActivity(mCallDir == 0 ? callOutUser.getUser_id() : Integer.parseInt(fromId), 1);//0 call out 1 call in
         }
     }
 
@@ -1674,15 +1675,17 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             viewRemote.setVisibility(View.GONE);
             ivCloseFace.setVisibility(View.GONE);
             ivSmallCloseFace.setVisibility(View.GONE);
-            NERtc.getInstance().startVideoPreview();
-            NERtc.getInstance().enableLocalVideo(true);
-            if (isChangeVideo) {
-                if (remoteVideoView != null) {
-                    nertcVideoCall.setupLocalView(remoteVideoView);
-                }
-            } else {
-                if (localVideoView != null) {
-                    nertcVideoCall.setupLocalView(localVideoView);
+            if (mIsAccept) {
+                NERtc.getInstance().startVideoPreview();
+                NERtc.getInstance().enableLocalVideo(true);
+                if (isChangeVideo) {
+                    if (remoteVideoView != null) {
+                        nertcVideoCall.setupLocalView(remoteVideoView);
+                    }
+                } else {
+                    if (localVideoView != null) {
+                        nertcVideoCall.setupLocalView(localVideoView);
+                    }
                 }
             }
         }
@@ -2508,47 +2511,47 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             mtvGenderAge.setVisibility(View.VISIBLE);
         }
 
-        if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
-            mtvCity.setText(getFiled(userInfo.info,"hometown").split(" ")[0]);
+        if (!TextUtils.isEmpty(getFiled(userInfo.info, "hometown"))) {
+            mtvCity.setText(getFiled(userInfo.info, "hometown").split(" ")[0]);
             mtvCity.setVisibility(View.VISIBLE);
         }
 
-        if (!TextUtils.isEmpty(getFiled(userInfo.info,"star_sign"))) {
-            mtvConstellation.setText(getFiled(userInfo.info,"star_sign"));
+        if (!TextUtils.isEmpty(getFiled(userInfo.info, "star_sign"))) {
+            mtvConstellation.setText(getFiled(userInfo.info, "star_sign"));
             mtvConstellation.setVisibility(View.VISIBLE);
         }
 
-        if (!TextUtils.isEmpty(getFiled(userInfo.info,"job"))) {
-            mtvJob.setText(getFiled(userInfo.info,"job"));
+        if (!TextUtils.isEmpty(getFiled(userInfo.info, "job"))) {
+            mtvJob.setText(getFiled(userInfo.info, "job"));
             mtvJob.setVisibility(View.VISIBLE);
         }
-        if(mChannelType == 2) {
+        if (mChannelType == 2) {
             if (userInfo.getAge() > 0) {
                 mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
                 mtvVideoGenderAge.setText(userInfo.getAge() + "");
                 mtvVideoGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
                 mtvVideoGenderAge.setVisibility(View.VISIBLE);
             }
-            if (!TextUtils.isEmpty(getFiled(userInfo.info,"hometown"))) {
-                mtvVideoCity.setText(getFiled(userInfo.info,"hometown").split(" ")[0]);
+            if (!TextUtils.isEmpty(getFiled(userInfo.info, "hometown"))) {
+                mtvVideoCity.setText(getFiled(userInfo.info, "hometown").split(" ")[0]);
                 mtvVideoCity.setVisibility(View.VISIBLE);
             }
 
-            if (!TextUtils.isEmpty(getFiled(userInfo.info,"star_sign"))) {
-                mtvVideoConstellation.setText(getFiled(userInfo.info,"star_sign"));
+            if (!TextUtils.isEmpty(getFiled(userInfo.info, "star_sign"))) {
+                mtvVideoConstellation.setText(getFiled(userInfo.info, "star_sign"));
                 mtvVideoConstellation.setVisibility(View.VISIBLE);
             }
 
-            if (!TextUtils.isEmpty(getFiled(userInfo.info,"job"))) {
-                mtvVideoJob.setText(getFiled(userInfo.info,"job"));
+            if (!TextUtils.isEmpty(getFiled(userInfo.info, "job"))) {
+                mtvVideoJob.setText(getFiled(userInfo.info, "job"));
                 mtvVideoJob.setVisibility(View.VISIBLE);
             }
         }
     }
 
-    private String getFiled(List<UserInfo.BaseInfo> list,String field){
+    private String getFiled(List<UserInfo.BaseInfo> list, String field) {
         for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).name.equals(field)){
+            if (list.get(i).name.equals(field)) {
                 return list.get(i).value;
             }
         }
