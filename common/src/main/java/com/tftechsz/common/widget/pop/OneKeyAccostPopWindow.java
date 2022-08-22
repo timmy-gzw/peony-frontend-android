@@ -46,7 +46,7 @@ public class OneKeyAccostPopWindow extends BaseCenterPop implements OnItemClickL
     private CompositeDisposable mCompositeDisposable;
     private PublicService mUserService;
     UserProviderService userService;
-    private TextView mAcbtn;
+    private TextView mAcbtn,mTvHint;
     private int mode;   // 1-一键搭讪 2-一键喜欢
 
     public OneKeyAccostPopWindow(Context context) {
@@ -76,6 +76,13 @@ public class OneKeyAccostPopWindow extends BaseCenterPop implements OnItemClickL
         findViewById(R.id.ll_btn).setOnClickListener(this);
         findViewById(R.id.del).setOnClickListener(this);
         mAcbtn.setText(CommonUtil.isBtnTextPop(userService) ? "一键喜欢" : "一键搭讪");
+
+        mTvHint = findViewById(R.id.top_hint);
+        if(userService.getUserInfo().isGirl()){
+            mTvHint.setText("今天的你和他们很有缘哦～");
+        }else{
+            mTvHint.setText("今天的你和她们很有缘哦～");
+        }
     }
 
     @Override
