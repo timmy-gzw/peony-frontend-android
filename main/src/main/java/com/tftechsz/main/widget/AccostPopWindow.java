@@ -88,13 +88,13 @@ public class AccostPopWindow extends BasePopupWindow implements View.OnClickList
                     }
                 }
                 if (canClick) {
-                    mTvAccost.setBackgroundResource(R.drawable.bg_red);
-                    mTvAccost.setTextColor(ContextCompat.getColor(mContext, R.color.color_normal));
-                    mTvAccost.setEnabled(true);
+                    llBtn.setBackgroundResource(R.drawable.bg_record_tip_radiu25);
+                    mTvAccost.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    llBtn.setEnabled(true);
                 } else {
-                    mTvAccost.setBackgroundResource(R.drawable.bg_gray_ee_radius25);
+                    llBtn.setBackgroundResource(R.drawable.bg_gray_ee_radius25);
                     mTvAccost.setTextColor(ContextCompat.getColor(mContext, R.color.color_light_font));
-                    mTvAccost.setEnabled(false);
+                    llBtn.setEnabled(false);
                 }
             }
         });
