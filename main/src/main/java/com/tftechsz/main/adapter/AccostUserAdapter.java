@@ -38,6 +38,7 @@ public class AccostUserAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder
         TextView age = helper.getView(com.tftechsz.common.R.id.tv_age);
         ImageView sex = helper.getView(com.tftechsz.common.R.id.iv_sex);
         LinearLayout llage = helper.getView(com.tftechsz.common.R.id.ll_age);
+        helper.setText(R.id.tv_name,item.getNickname());
         if (item.getSex() == 2) {
             llage.setBackgroundResource(com.tftechsz.common.R.drawable.bg_girl);
             sex.setImageResource(com.tftechsz.common.R.drawable.ic_girl);
@@ -47,7 +48,7 @@ public class AccostUserAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder
         }
         age.setText(item.getAge()+"");
         GlideUtils.loadRoundImage(getContext(), (ImageView) helper.getView(R.id.iv_avatar), item.getIcon());
-        if (getData().get(helper.getLayoutPosition()).isSelected()) {
+        if (getData().get(getItemPosition(item)).isSelected()) {
             ivCheck.setImageResource(R.mipmap.ic_check_selector);
         } else {
             ivCheck.setImageResource(R.mipmap.ic_check_normal);
