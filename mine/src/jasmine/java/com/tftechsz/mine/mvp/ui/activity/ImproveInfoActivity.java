@@ -89,10 +89,9 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        SoftHideKeyBoardUtil.assistActivity(this);
-        ivBack = findViewById(R.id.toolbar_back_all);
-        ImmersionBar.with(mActivity).titleBar(ivBack).transparentStatusBar().navigationBarDarkIcon(false).navigationBarColor(R.color.black).statusBarDarkFont(false, 0.2f).init();
-        ivBack.setOnClickListener(this);
+        new ToolBarBuilder().showBack(true)
+                .setTitle("完善个人资料")
+                .build();
         findViewById(R.id.tv_complete).setOnClickListener(this);
         mIvBoy = findViewById(R.id.iv_sex_boy);
         mIvBoy.setOnClickListener(this);
@@ -256,7 +255,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
             if (mCompleteReq.sex == 2) {
                 if (mGirlPop == null)
                     mGirlPop = new CustomPopWindow(mContext, 1)
-                            .setContent(new SpannableStringUtils.Builder()
+                            .setContentText(new SpannableStringUtils.Builder()
                                     .append("您当前选择的性别为:")
                                     .append(" 女")
                                     .setForegroundColor(Utils.getColor(R.color.red))

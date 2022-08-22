@@ -55,14 +55,10 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        ImmersionBar.with(mActivity).transparentStatusBar().navigationBarDarkIcon(false).navigationBarColor(R.color.black).statusBarDarkFont(false, 0.2f).init();
+        ImmersionBar.with(mActivity).transparentStatusBar().navigationBarDarkIcon(false).navigationBarColor(R.color.black).statusBarDarkFont(true, 0.2f).init();
         countBackUtils = new CountBackUtils();
         new ToolBarBuilder().showBack(true)
                 .setTitle("手机号码登录/注册")
-                .setTitleColor(R.color.white)
-                .setRightTextColor(R.color.white)
-                .setBackgroundColor(0)
-                .setBackTint(R.color.white)
                 .build();
         mEtPhone = findViewById(R.id.et_phone);
         mEtCode = findViewById(R.id.et_code);
@@ -131,14 +127,14 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
         Random random = new Random();
         int number = random.nextInt(mMax - mMin) + mMin + 1;
         String text1 = "附近有 ";
-        String text2 = number + "位“已真人认证”";
-        String text3 = " 用户在线\n登录即可查看";
+        String text2 = number + "";
+        String text3 = " 位“已真人认证”用户在线\n登录即可查看";
         SpannableStringBuilder spanString = new SpannableStringBuilder();
         StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append(text1).append(text2).append(text3);
         spanString.append(text1).append(text2).append(text3);
         int start = stringBuffer.indexOf(text2);
-        spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFD226")), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#FD4683")), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spanString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mTvTip.setText(spanString);
 
@@ -216,7 +212,8 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
     public void getCodeSuccess(String data) {
         mEtCode.setText("");
         Utils.setFocus(mEtCode);
-        countTime();
+        startActivity(GetCodeActivity.class, "phone", mPhone);
+//        countTime();
     }
 
     @Override
@@ -268,9 +265,14 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
 
 
     private void editListener() {
-        String code = Utils.getText(mEtCode);
-        tvLogin.setEnabled(!TextUtils.isEmpty(Utils.getText(mEtPhone))
-                && !TextUtils.isEmpty(code) && code.length() == 4);
+        String code = Utils.getText(mEtPhone);
+        tvGetCode.setEnabled((!TextUtils.isEmpty(Utils.getText(mEtPhone))
+                && code.length() == 13));
+        tvGetCode.setBackgroundResource((!TextUtils.isEmpty(Utils.getText(mEtPhone))
+                && code.length() == 13) ? R.drawable.shape_login_btn : R.drawable.shape_bg_login_phone);
+        tvGetCode.setTextColor((!TextUtils.isEmpty(Utils.getText(mEtPhone))
+                && code.length() == 13) ? Color.parseColor("#ffffff") : Color.parseColor("#999999"));
+
     }
 
     private class MyInputFilter implements TextWatcher {

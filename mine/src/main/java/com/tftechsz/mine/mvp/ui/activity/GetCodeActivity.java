@@ -1,5 +1,6 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -41,7 +42,7 @@ public class GetCodeActivity extends BaseMvpActivity<ILoginView, LoginPresenter>
     protected void initView(Bundle savedInstanceState) {
         countBackUtils = new CountBackUtils();
         new ToolBarBuilder().showBack(true)
-                .setTitle(getString(R.string.main_get_phone_code))
+                .setTitle("")
                 .build();
         phoneCode = findViewById(R.id.phone_code);
         mTvTip = findViewById(R.id.tv_tip);
@@ -60,7 +61,7 @@ public class GetCodeActivity extends BaseMvpActivity<ILoginView, LoginPresenter>
         super.initData();
         mOldToken = UserManager.getInstance().getToken();
         mPhone = getIntent().getStringExtra("phone");
-        mTvTip.setText("已发送到" + StringUtils.hintPhone(mPhone) + "请注意查收");
+        mTvTip.setText("验证码已发送到: +" + mPhone);
         countTime();
         phoneCode.setOnInputListener(new PhoneCode.OnInputListener() {
             @Override
@@ -68,6 +69,7 @@ public class GetCodeActivity extends BaseMvpActivity<ILoginView, LoginPresenter>
                 login(numberCode);
 
             }
+
             @Override
             public void onInput() {
 
@@ -95,14 +97,17 @@ public class GetCodeActivity extends BaseMvpActivity<ILoginView, LoginPresenter>
             public void countBacking(long time) {
                 mTvGetCode.setText("重新获取(" + time + "s)");
                 mTvGetCode.setEnabled(false);
-                mTvGetCode.setAlpha(0.4f);
+                mTvGetCode.setBackgroundResource(R.drawable.shape_bg_login_phone);
+                mTvGetCode.setTextColor(Color.parseColor("#999999"));
+
             }
 
             @Override
             public void finish() {
                 mTvGetCode.setText("重新获取");
                 mTvGetCode.setEnabled(true);
-                mTvGetCode.setAlpha(1f);
+                mTvGetCode.setBackgroundResource(R.drawable.shape_login_btn);
+                mTvGetCode.setTextColor(Color.parseColor("#ffffff"));
             }
         });
     }
