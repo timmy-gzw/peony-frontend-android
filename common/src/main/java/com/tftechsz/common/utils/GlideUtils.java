@@ -328,7 +328,7 @@ public class GlideUtils {
     }
 
     public static void loadRoundAvatarImage(Context context, ImageView iv, String url, int pic) {
-        loadRoundImage(context, iv, url, pic, 0, 10);
+        loadRoundImage(context, iv, url, pic, 0, 16);
     }
 
     public static void loadRoundAvatarImage(Context context, ImageView iv, String url, int pic, int errorPic) {
