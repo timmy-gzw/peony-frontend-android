@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.moment.R;
 import com.tftechsz.moment.mvp.entity.NoticeBean;
 
@@ -44,9 +45,10 @@ public class TrendNoticeAdapter extends BaseQuickAdapter<NoticeBean, BaseViewHol
         TextView type = helper.getView(R.id.tv_from_type);
         TextView content = helper.getView(R.id.tv_content);
         TextView time = helper.getView(R.id.tv_time);
-
-        GlideUtils.loadRoundImageRadius(getContext(), icon, item.getIcon());
-        GlideUtils.loadRoundImageRadius(getContext(), image, item.getImage());
+        int radius = Utils.getDimensPx(getContext(), R.dimen.trend_avater_image_radius);
+        GlideUtils.loadRoundImage(getContext(), icon, item.getIcon(),radius);
+        int radius2 = Utils.getDimensPx(getContext(), R.dimen.trend_avater_image_radius);
+        GlideUtils.loadRoundImage(getContext(), image, item.getImage(),radius2);
         CommonUtil.setUserName(name, item.getNickname(), item.isVip());
 
         switch (item.getFrom_type()) {
