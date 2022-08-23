@@ -1,3 +1,4 @@
+def dimensionName = "office"
 ext {
     //android开发版本配置
     android = [
