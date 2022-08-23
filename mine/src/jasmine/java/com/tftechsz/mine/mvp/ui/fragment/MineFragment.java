@@ -271,7 +271,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mTvAttention.setText(String.valueOf(userInfo.getWatch_number()));
         mTvFans.setText(String.valueOf(userInfo.getFans_number()));
         mVip_title.setText(new SpannableStringUtils.Builder().append("会员").append("｜尊享多重特权").create());
-        GlideUtils.loadRouteImage(getActivity(), mIvAvatar, userInfo.getIcon(), userInfo.getSex() == 1 ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
+        GlideUtils.loadRoundAvatarImage(getActivity(), mIvAvatar, userInfo.getIcon(), userInfo.getSex() == 1 ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
         mTvJifen.setText(userInfo.getIntegral());
         mTvJinbi.setText(userInfo.getCoin());
 
