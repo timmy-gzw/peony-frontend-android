@@ -1,5 +1,6 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class MineIntegralNewActivity extends BaseMvpActivity<IMineIntegralView, 
             baseTitle.setBackgroundResource(0);
         }
         mTvIntegralNum = findViewById(R.id.tv_integral_num);   //积分余额
+        mTvIntegralNum.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/D-DIN-Bold.ttf"));
         mTvWithdrawNum = findViewById(R.id.tv_withdraw_num);
 
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
