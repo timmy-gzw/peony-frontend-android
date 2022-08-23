@@ -490,10 +490,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             lp2.setMarginStart(ConvertUtils.dp2px(7));
             lp.height = (int) ((ScreenUtils.getScreenWidth() - ConvertUtils.dp2px(40)) / 3);
         } else {
-            //lp.height = ConvertUtils.dp2px(95);
-            mLl_home_top_item.setPadding(0, ConvertUtils.dp2px(10), 0, ConvertUtils.dp2px(10));
-            lp.height = (int) ((ScreenUtils.getScreenWidth() - ConvertUtils.dp2px(40)) / 3.8f);
-            lp2.setMarginStart(ConvertUtils.dp2px(15));
+            lp.height = ConvertUtils.dp2px(80);
         }
         mLl_home_top_item.setLayoutParams(lp);
         mHomeItem2.setLayoutParams(lp2);
