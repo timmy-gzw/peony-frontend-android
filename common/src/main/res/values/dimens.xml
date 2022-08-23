@@ -145,4 +145,5 @@
 
     <dimen name="trend_image_radius">10px</dimen>
     <dimen name="trend_avater_image_radius">6px</dimen>
+    <dimen name="publish_image_radius">@dimen/dp_6</dimen>
 </resources>

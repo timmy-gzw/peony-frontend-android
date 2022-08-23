@@ -3,4 +3,5 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="trend_image_radius">18px</dimen>
     <dimen name="trend_avater_image_radius">12px</dimen>
+    <dimen name="publish_image_radius">@dimen/dp_16</dimen>
 </resources>

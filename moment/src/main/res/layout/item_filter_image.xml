@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_margin="@dimen/dp_5"
         app:cardBackgroundColor="@color/transparent"
-        app:cardCornerRadius="@dimen/dp_5"
+        app:cardCornerRadius="@dimen/publish_image_radius"
         app:cardElevation="0px"
         app:cardUseCompatPadding="false"
         app:elevation="0dp"
