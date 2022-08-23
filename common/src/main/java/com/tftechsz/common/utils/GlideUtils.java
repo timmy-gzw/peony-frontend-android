@@ -244,7 +244,7 @@ public class GlideUtils {
      * 加载圆形图片
      */
     public static void loadCircleImage(Context context, ImageView iv, String url) {
-        loadCircleImage(context, iv, url, R.drawable.party_ic_seat);
+        loadCircleImage(context, iv, url, R.drawable.ic_default_avatar);
     }
 
     /**

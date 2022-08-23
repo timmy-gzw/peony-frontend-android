@@ -47,7 +47,7 @@ public class VoiceSignActivity extends BaseVoiceRecordActivity {
         waveLineView = findViewById(R.id.waveLineView);
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText("语音签名");
-        waveLineView.setLineColor(ColorUtils.getColor(R.color.driver));
+        waveLineView.setLineColor(ColorUtils.getColor(R.color.colorPrimary));
         waveLineView.setSensibility(3);
         waveLineView.setVolume(60);
         recordPaly.setOnClickListener(this);

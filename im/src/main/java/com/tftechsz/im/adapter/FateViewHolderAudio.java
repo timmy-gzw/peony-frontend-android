@@ -237,7 +237,7 @@ public class FateViewHolderAudio extends FateViewHolderBase {
 
     private void endPlayAnim() {
         if (isReceivedMessage()) {
-            animationView.setBackgroundResource(com.netease.nim.uikit.R.drawable.nim_audio_animation_list_left_3);
+            animationView.setBackgroundResource(com.netease.nim.uikit.R.drawable.nim_audio_animation_list_left_white_3);
         } else {
             animationView.setBackgroundResource(com.netease.nim.uikit.R.drawable.nim_audio_animation_list_right_3);
         }

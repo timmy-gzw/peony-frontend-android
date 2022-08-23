@@ -57,7 +57,7 @@ public class AccostRecordToAddActivity extends BaseVoiceRecordActivity {
         llRecordView = findViewById(R.id.ll_record_view);
         llRecordView.setOnClickListener(this);
         waveLineView = findViewById(R.id.waveLineView);
-        waveLineView.setLineColor(ColorUtils.getColor(R.color.driver));
+        waveLineView.setLineColor(ColorUtils.getColor(R.color.colorPrimary));
         waveLineView.setSensibility(3);
         waveLineView.setVolume(60);
         recordPaly.setOnClickListener(this);
