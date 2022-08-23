@@ -142,4 +142,7 @@
     <dimen name="step_tv_focus_size">25dp</dimen>
 
     <dimen name="real_name_avatar_wh">182dp</dimen>
+
+    <dimen name="trend_image_radius">10px</dimen>
+    <dimen name="trend_avater_image_radius">6px</dimen>
 </resources>

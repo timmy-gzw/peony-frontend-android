@@ -19,6 +19,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.netease.nim.uikit.common.DensityUtils;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.im.R;
 import com.tftechsz.im.mvp.ui.fragment.PartyChatListFragment;
 import com.tftechsz.im.mvp.ui.fragment.PartyChatOnLineFragment;
@@ -30,7 +31,6 @@ import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.entity.NavigationLogEntity;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.widget.DepthPageTransformer;
 
 import java.util.ArrayList;

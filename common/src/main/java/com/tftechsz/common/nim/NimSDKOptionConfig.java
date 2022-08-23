@@ -16,7 +16,6 @@ import com.netease.nimlib.sdk.msg.MessageNotifierCustomization;
 import com.netease.nimlib.sdk.msg.constant.NotificationExtraTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tftechsz.common.BuildConfig;
-import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
 import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.CommonUtil;

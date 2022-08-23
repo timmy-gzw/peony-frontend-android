@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -34,7 +33,6 @@ import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.AppManager;
-import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
@@ -46,10 +44,8 @@ import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
-import com.tftechsz.common.widget.AutoPollRecyclerView;
 import com.tftechsz.mine.BuildConfig;
 import com.tftechsz.mine.R;
-import com.tftechsz.mine.adapter.LoginImageAdapter;
 import com.tftechsz.mine.entity.dto.LoginDto;
 import com.tftechsz.mine.mvp.IView.ILoginView;
 import com.tftechsz.mine.mvp.presenter.LoginPresenter;

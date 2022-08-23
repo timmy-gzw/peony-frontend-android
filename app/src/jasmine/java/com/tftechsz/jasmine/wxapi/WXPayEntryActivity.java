@@ -15,6 +15,7 @@ import com.tencent.mm.opensdk.modelpay.PayResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tftechsz.common.utils.CommonUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
@@ -29,7 +30,6 @@ import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.other.GlobalDialogManager;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.Utils;
 
 import io.reactivex.disposables.CompositeDisposable;

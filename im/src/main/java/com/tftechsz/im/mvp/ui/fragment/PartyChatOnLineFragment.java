@@ -19,6 +19,7 @@ import com.netease.nim.uikit.bean.AccostDto;
 import com.netease.nim.uikit.common.UserInfo;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
+import com.tftechsz.common.utils.CommonUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.tftechsz.im.R;
 import com.tftechsz.im.adapter.OnlineListAdapter;
@@ -36,7 +37,6 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.Utils;
 
 import org.jetbrains.annotations.NotNull;

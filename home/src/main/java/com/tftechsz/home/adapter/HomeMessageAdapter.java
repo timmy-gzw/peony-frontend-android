@@ -20,10 +20,10 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.netease.nimlib.sdk.uinfo.UserService;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.home.R;
 import com.tftechsz.common.entity.MessageInfo;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.utils.CommonUtil;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -68,7 +68,8 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
 //        AvatarVipFrameView ivAvatar = holder.getView(R.id.iv_avatar);
 //        ivAvatar.setBgFrame(item.picture_frame);
         ImageView ivAvatar = holder.getView(R.id.iv_avatar);
-        GlideUtils.loadRoundImageRadius(getContext(), ivAvatar, item.getIcon());
+        int radius = Utils.getDimensPx(getContext(),R.dimen.trend_avater_image_radius);
+        GlideUtils.loadRoundImage(getContext(), ivAvatar, item.getIcon(),radius);
 
         holder.tvTime.setText(item.getCreated_at());
 //        helper.setText(R.id.tv_look_times, item.getProvince());  //浏览次数

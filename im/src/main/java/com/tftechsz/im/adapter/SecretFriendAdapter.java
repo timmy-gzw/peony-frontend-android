@@ -19,12 +19,12 @@ import com.netease.nim.uikit.impl.cache.StickTopCache;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.uinfo.UserService;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.im.R;
 import com.tftechsz.im.api.ChatApiService;
 import com.tftechsz.im.model.ContactInfo;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.StringUtils;
 import com.tftechsz.common.widget.chat.ChatTimeUtils;
 

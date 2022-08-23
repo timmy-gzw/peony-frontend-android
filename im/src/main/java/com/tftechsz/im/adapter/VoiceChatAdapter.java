@@ -11,10 +11,10 @@ import com.opensource.svgaplayer.SVGADrawable;
 import com.opensource.svgaplayer.SVGAImageView;
 import com.opensource.svgaplayer.SVGAParser;
 import com.opensource.svgaplayer.SVGAVideoEntity;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.im.R;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.nertcvoiceroom.model.VoiceRoomSeat;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.widget.CircleImageView;
 

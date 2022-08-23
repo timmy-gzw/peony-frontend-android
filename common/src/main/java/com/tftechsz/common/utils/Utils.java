@@ -1303,6 +1303,10 @@ public final class Utils {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, context.getResources().getDisplayMetrics());
     }
 
+    public static int getDimensPx(Context context, int dimen) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(dimen), context.getResources().getDisplayMetrics());
+    }
+
 
     @SuppressLint("PrivateApi")
     public static int calcStatusBarHeight(Context context) {

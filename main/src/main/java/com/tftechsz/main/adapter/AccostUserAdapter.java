@@ -10,10 +10,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.nim.uikit.common.UserInfo;
-import com.tftechsz.common.Constants;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
-import com.tftechsz.common.utils.StringUtils;
 import com.tftechsz.main.R;
 
 import java.util.List;

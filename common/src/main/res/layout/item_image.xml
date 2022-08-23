@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:radius="@dimen/dp_10"
+        app:radius="@dimen/trend_image_radius"
         tools:visibility="visible" />
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:radius="@dimen/dp_10"
+        app:radius="@dimen/trend_image_radius"
         tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

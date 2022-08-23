@@ -18,6 +18,7 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.StickTopSessionInfo;
 import com.netease.nimlib.sdk.uinfo.UserService;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.im.R;
 import com.tftechsz.im.mvp.iview.IChatSettingView;
 import com.tftechsz.im.mvp.presenter.ChatSettingPresenter;
@@ -28,11 +29,9 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.event.ChatMessageEvent;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.utils.ARouterUtils;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.widget.CommonItemView;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
-import com.tftechsz.common.widget.pop.ReportPopWindow;
 
 import androidx.appcompat.widget.SwitchCompat;
 

@@ -61,7 +61,7 @@
         app:layout_constraintStart_toEndOf="@id/img_vip_dii"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         app:layout_goneMarginStart="0dp"
-        tools:background="@drawable/bg_girl"
+        tools:background="@drawable/bg_girl_age_sex"
         tools:drawablePadding="@dimen/dp_2"
         tools:drawableStart="@drawable/ic_girl"
         tools:paddingHorizontal="@dimen/dp_4"
@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_210"
             android:layout_marginBottom="@dimen/dp_12"
-            app:round_corner="8dp"
+            app:round_corner="@dimen/trend_image_radius"
             tools:ignore="MissingConstraints">
 
             <com.tftechsz.common.player.view.PrepareView

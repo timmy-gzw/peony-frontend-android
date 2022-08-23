@@ -13,6 +13,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.im.R;
 import com.tftechsz.im.adapter.SecretFriendAdapter;
 import com.tftechsz.im.model.ContactInfo;
@@ -23,7 +24,6 @@ import com.tftechsz.im.uikit.P2PMessageActivity;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpFragment;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.utils.CommonUtil;
 
 import org.jetbrains.annotations.NotNull;
 

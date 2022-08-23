@@ -36,6 +36,7 @@ import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.im.R;
 import com.tftechsz.im.adapter.MessageAdapter;
 import com.tftechsz.im.model.ContactInfo;
@@ -52,7 +53,6 @@ import com.tftechsz.common.entity.ChatHistoryDto;
 import com.tftechsz.common.entity.MsgCheckDto;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.Utils;
 
 import java.util.ArrayList;

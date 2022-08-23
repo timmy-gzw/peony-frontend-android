@@ -16,7 +16,8 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never" />
+            android:overScrollMode="never"
+            tools:listitem="@layout/dynamic_item_image"/>
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 

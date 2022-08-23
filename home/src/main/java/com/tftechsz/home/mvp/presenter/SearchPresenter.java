@@ -3,6 +3,7 @@ package com.tftechsz.home.mvp.presenter;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.bean.AccostDto;
 import com.netease.nim.uikit.common.UserInfo;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.home.api.HomeApiService;
 import com.tftechsz.home.mvp.iview.ISearchView;
 import com.tftechsz.common.base.BasePresenter;
@@ -13,7 +14,6 @@ import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.AccostService;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
-import com.tftechsz.common.utils.CommonUtil;
 
 import java.util.List;
 

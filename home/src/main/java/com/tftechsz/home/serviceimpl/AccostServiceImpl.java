@@ -4,13 +4,13 @@ import android.content.Context;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.netease.nim.uikit.bean.AccostDto;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.home.api.HomeApiService;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.AccostService;
-import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.RxUtil;
 
 @Route(path = ARouterApi.ACCOST_SERVICE, name = "搭讪服务")

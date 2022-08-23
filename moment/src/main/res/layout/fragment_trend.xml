@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.4"
         app:tl_divider_padding="@dimen/dp_26"
-        app:tl_indicator_color="@color/colorPrimary"
+        app:tl_indicator_color="@color/trend_tab_indicator_color"
         app:tl_indicator_corner_radius="@dimen/dp_2"
         app:tl_indicator_height="@dimen/dp_4"
         app:tl_indicator_margin_top="@dimen/dp_10"

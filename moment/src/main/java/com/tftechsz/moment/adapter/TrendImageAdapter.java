@@ -1,5 +1,7 @@
 package com.tftechsz.moment.adapter;
 
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -10,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.tftechsz.common.entity.UserViewInfo;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.moment.R;
 
 import java.util.List;
@@ -35,7 +38,8 @@ public class TrendImageAdapter extends BaseQuickAdapter<UserViewInfo, BaseViewHo
             GlideUtils.loadRoundImageRadius(getContext(), iv1_5, item.getUrl());
         } else {
             iv1.setVisibility(View.VISIBLE);
-            GlideUtils.loadRoundImageRadius(getContext(), iv1, item.getUrl());
+            int radius = Utils.getDimensPx(getContext(),R.dimen.trend_image_radius);
+            GlideUtils.loadRoundImage(getContext(), iv1, item.getUrl(),radius);
         }
 
     }

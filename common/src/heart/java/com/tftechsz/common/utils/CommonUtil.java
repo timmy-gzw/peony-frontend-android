@@ -500,7 +500,7 @@ public class CommonUtil {
         }
 
         if (info.link.startsWith(Interfaces.LINK_PEONY_STORE_DOWNLOAD)) { // peony://store_download
-            com.tftechsz.common.utils.AppUtils.toMarket(context, com.blankj.utilcode.util.AppUtils.getAppPackageName(), null);
+            AppUtils.toMarket(context, com.blankj.utilcode.util.AppUtils.getAppPackageName(), null);
             return;
         }
 
