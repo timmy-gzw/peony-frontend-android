@@ -466,7 +466,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         mLl_home_top_item.setVisibility(View.GONE);
         topSize = 0;
         ConfigInfo configInfo = service.getConfigInfo();
-        if (configInfo == null || configInfo.share_config == null || configInfo.share_config.home_top_nav == null) {
+        if (configInfo == null || configInfo.sys == null || configInfo.sys.is_verified == 0 || configInfo.share_config == null || configInfo.share_config.home_top_nav == null) {
             return;
         }
         mHome_top_nav = configInfo.share_config.home_top_nav;

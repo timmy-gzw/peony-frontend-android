@@ -8,19 +8,19 @@
 
     <FrameLayout
         android:id="@+id/start_view"
-        android:layout_width="@dimen/dp_size_74"
-        android:layout_height="@dimen/dp_size_74"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginStart="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginBottom="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginBottom="@dimen/dp_14"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_avatar"
-            android:layout_width="@dimen/dp_size_74"
-            android:layout_height="@dimen/dp_size_74"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="centerCrop" />
 
         <ImageView
@@ -35,7 +35,8 @@
             android:id="@+id/iv_online"
             android:layout_width="@dimen/dp_10"
             android:layout_height="@dimen/dp_10"
-            android:layout_gravity="bottom|end"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/dp_3_5"
             android:background="@drawable/bg_dot_online" />
 
     </FrameLayout>
@@ -43,8 +44,9 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginBottom="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginBottom="@dimen/dp_14"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +57,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_12"
             android:paddingEnd="@dimen/dp_10">
 
             <TextView
@@ -111,11 +112,12 @@
                 android:id="@+id/tv_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_7"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:textColor="#666666"
+                android:textColor="#444444"
                 android:textSize="@dimen/sp_12"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/tv_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name"
                 tools:text="深圳 | 21岁 | 166cm | 护士" />
@@ -125,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_info"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_3_5"
                 android:singleLine="true"
                 android:textColor="#999999"
                 android:textSize="@dimen/sp_12"
@@ -190,7 +192,7 @@
             android:id="@+id/tv_accost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_3"
+            android:layout_marginStart="@dimen/dp_4"
             android:text="@string/accost"
             android:textColor="@color/c_btn_accost"
             android:textSize="@dimen/sp_12"
@@ -203,6 +205,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_0_5"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/dp_10"
         android:background="@color/EEEEEE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

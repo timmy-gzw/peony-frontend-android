@@ -19,8 +19,8 @@
     <color name="red_dot">#F55F4E</color>
 
     <color name="bg_color">#F9F9F9</color>
-    <color name="c_btn_p2p">@color/color_normal</color>
-    <color name="c_btn_accost">@color/white</color>
+    <color name="c_btn_p2p">@color/colorPrimary</color>
+    <color name="c_btn_accost">@color/color_normal</color>
     <color name="c_del_content">@color/color_light_font</color>
 
     <color name="c_4c000000">#ADADD7</color>
