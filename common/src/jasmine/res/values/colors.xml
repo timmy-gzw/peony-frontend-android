@@ -24,9 +24,6 @@
     <color name="c_del_content">@color/color_light_font</color>
 
     <color name="c_4c000000">#ADADD7</color>
-    <color name="c_50CD5C33">#1F1A35</color>
-    <color name="c_50CD5C33_2">#8282AA</color>
-    <color name="c_CD5C33">#ADADD7</color>
 
     <color name="color_update_version">#170B5F</color>
     <color name="c_exchange_num">@color/colorPrimary</color>
