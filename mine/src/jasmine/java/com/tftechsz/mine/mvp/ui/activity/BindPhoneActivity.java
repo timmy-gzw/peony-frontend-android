@@ -171,7 +171,7 @@ public class BindPhoneActivity extends BaseMvpActivity<IBindPhoneView, BindPhone
 
     private void performBtn(boolean b, long waitingTime) {
         if (b) {
-            mBind.btn.setText(String.format("重新获取(%ss)", waitingTime));
+            mBind.btn.setText(String.format("重新获取(q o%ss)", waitingTime));
             mBind.btn.setEnabled(false);
             mBind.btn.setBackgroundResource(R.drawable.bg_gray_radius8);
         } else {

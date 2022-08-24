@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -23,7 +24,6 @@ import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AnimationUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.MMKVUtils;
-import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.MatchPopWindow;
 import com.tftechsz.home.R;
@@ -44,19 +44,19 @@ import io.reactivex.functions.Consumer;
  */
 public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> implements RadarView.IScanningListener, View.OnClickListener, IRadarView {
 
-    private final int DELAY_TIME = 10 * 1000,TEXT_ANIMATION_TIME = 400,MATCH_INTERVAL_TIME = 1000;
+    private final int DELAY_TIME = 10 * 1000, TEXT_ANIMATION_TIME = 400, MATCH_INTERVAL_TIME = 1000;
     public static final String EXTRA_TYPE = "type";
-    private final int[] mBoyDefaultImages = {R.mipmap.default_radar_boy1,R.mipmap.default_radar_boy2,R.mipmap.default_radar_boy3,R.mipmap.default_radar_boy4,R.mipmap.default_radar_boy5,R.mipmap.default_radar_boy6};
-    private final int[] mGirlDefaultImages = {R.mipmap.default_radar_girl1,R.mipmap.default_radar_girl2,R.mipmap.default_radar_girl3,R.mipmap.default_radar_girl4,R.mipmap.default_radar_girl5,R.mipmap.default_radar_girl6};
-    private ImageView mRadarView,mScaleImageView1,mScaleImageView2,mScaleAlphaImageView1,mScaleAlphaImageView2,mScaleAlphaImageView3;
+    private final int[] mBoyDefaultImages = {R.mipmap.default_radar_boy1, R.mipmap.default_radar_boy2, R.mipmap.default_radar_boy3, R.mipmap.default_radar_boy4, R.mipmap.default_radar_boy5, R.mipmap.default_radar_boy6};
+    private final int[] mGirlDefaultImages = {R.mipmap.default_radar_girl1, R.mipmap.default_radar_girl2, R.mipmap.default_radar_girl3, R.mipmap.default_radar_girl4, R.mipmap.default_radar_girl5, R.mipmap.default_radar_girl6};
+    private ImageView mRadarView, mScaleImageView1, mScaleImageView2, mScaleAlphaImageView1, mScaleAlphaImageView2, mScaleAlphaImageView3;
     private ConstraintLayout mClRadar;  //背景图片
     private ImageView mIvRound, mIvRoundBig;  //圆圈图片
     private int mType;
     private MediaPlayer mediaPlayer;
-    private ImageView mIvAvatar,mMusicImageView,mRuleImageView;
+    private ImageView mIvAvatar, mMusicImageView, mRuleImageView;
     private TextView mTitleTv;
     private BarrageView mBarrageView;
-    private TextView mTvTip,mTvMatching,mTvMatchInterval;
+    private TextView mTvTip, mTvMatching, mTvMatchInterval;
     private LinearLayout mllPair;
     private MatchPopWindow matchPopWindow;
     private boolean isFirst = true;
@@ -79,7 +79,9 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        StatusBarUtil.fullScreen(this);
+        ImmersionBar.with(this).fullScreen(true)
+                .transparentBar()
+                .init();
         mIvAvatar = findViewById(R.id.iv_avatar);
         mRadarView = findViewById(R.id.radar_view);
         mScaleImageView1 = findViewById(R.id.scale_im1);
@@ -111,15 +113,15 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     }
 
     private boolean needShowPop() {
-            long lastShowMomentTime = MMKVUtils.getInstance().decodeLong(Constants.LAST_SHOW_MATCH_POP_TIME);//上次显示动态引导页的时间戳ms
-            long l = System.currentTimeMillis();
-            boolean sameDay = TimeUtil.isSameDay(lastShowMomentTime, l);
-            if (l > lastShowMomentTime && !sameDay) {
-                showPopWindow();
-                MMKVUtils.getInstance().encode(Constants.LAST_SHOW_MATCH_POP_TIME, l);
-                return true;
-            }
-            return false;
+        long lastShowMomentTime = MMKVUtils.getInstance().decodeLong(Constants.LAST_SHOW_MATCH_POP_TIME);//上次显示动态引导页的时间戳ms
+        long l = System.currentTimeMillis();
+        boolean sameDay = TimeUtil.isSameDay(lastShowMomentTime, l);
+        if (l > lastShowMomentTime && !sameDay) {
+            showPopWindow();
+            MMKVUtils.getInstance().encode(Constants.LAST_SHOW_MATCH_POP_TIME, l);
+            return true;
+        }
+        return false;
     }
 
 
@@ -129,12 +131,12 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         mType = getIntent().getIntExtra(EXTRA_TYPE, 1);
         if (mType == 2) {   //视频
             mTitleTv.setText("视频速配");
-            mllPair.setBackground(getResources().getDrawable(R.drawable.bg_blue_alpha99));
+            mllPair.setBackground(getResources().getDrawable(R.drawable.sp_radar_continue_pair_video));
             mClRadar.setBackgroundResource(R.mipmap.radar_video_bg);
             mIvRound.setBackgroundResource(R.drawable.round_video);
             mIvRoundBig.setBackgroundResource(R.drawable.round_video);
         } else {  //语音
-            mllPair.setBackground(getResources().getDrawable(R.drawable.bg_pink));
+            mllPair.setBackground(getResources().getDrawable(R.drawable.sp_radar_continue_pair));
             mClRadar.setBackgroundResource(R.mipmap.radar_voice_bg);
             mIvRound.setBackgroundResource(R.drawable.round_voice);
             mIvRoundBig.setBackgroundResource(R.drawable.round_video);
@@ -144,12 +146,12 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         initBus();
     }
 
-    private void randomImages(){
+    private void randomImages() {
         int sex = service.getUserInfo().getSex();
         int[] targetImages;
-        if(sex == 1){
+        if (sex == 1) {
             targetImages = mGirlDefaultImages;
-        }else{
+        } else {
             targetImages = mBoyDefaultImages;
         }
         List<Integer> indexs = new ArrayList<>();
@@ -167,23 +169,23 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
 
     private void startBarrage() {
         List<Barrage> mBarrages = new ArrayList<>();
-        String[] datas = {"衣衣 和 雨啊 速配成功","阿里 和 深爱的 速配成功","东方 和 爱笑的机器狗 速配成功","阿苏妲 和 马小龙 速配成功","小迷糊 和 雨啊 速配成功"};
+        String[] datas = {"衣衣 和 雨啊 速配成功", "阿里 和 深爱的 速配成功", "东方 和 爱笑的机器狗 速配成功", "阿苏妲 和 马小龙 速配成功", "小迷糊 和 雨啊 速配成功"};
         for (int i = 0; i < datas.length; i++) {
-            mBarrages.add(new Barrage(datas[i],getResources().getColor(R.color.white)));
+            mBarrages.add(new Barrage(datas[i], getResources().getColor(R.color.white)));
         }
         mBarrageView.setBarrages(mBarrages);
     }
 
-    private void stopBarrage(){
+    private void stopBarrage() {
         mBarrageView.destroy();
     }
 
 
     private void startAnimation() {
         startBarrage();
-        handler.postDelayed(run,200);
+        handler.postDelayed(run, 200);
 //        AnimationUtil.createAvatarAnimation(mIvAvatar);
-        AnimationUtil.createRotateRevertAnimation(mRadarView,2500);
+        AnimationUtil.createRotateRevertAnimation(mRadarView, 2500);
         AnimationUtil.createScaleAnimation(mScaleImageView1);
         AnimationUtil.createScaleAlphaAnimation(mScaleAlphaImageView1);
         Utils.runOnUiThreadDelayed(new Runnable() {
@@ -201,7 +203,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         }, 700);
     }
 
-    private void clearAnimation(){
+    private void clearAnimation() {
         stopBarrage();
         mIvAvatar.clearAnimation();
         mRadarView.clearAnimation();
@@ -227,12 +229,12 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         @Override
         public void run() {
             int len = mTvMatching.length();
-            if(len == 3){
+            if (len == 3) {
                 randomImages();
                 mTvMatching.setText(".");
-            }else if(len == 2){
+            } else if (len == 2) {
                 mTvMatching.setText("...");
-            }else{
+            } else {
                 mTvMatching.setText("..");
             }
             handler.postDelayed(this, TEXT_ANIMATION_TIME);
@@ -243,16 +245,16 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     private final Runnable runInterval = new Runnable() {
         @Override
         public void run() {
-            if(interval == 1){
+            if (interval == 1) {
                 interval = 3;
-                mTvMatchInterval.setText("（"+ interval +"S后自动参与速配）");
+                mTvMatchInterval.setText("（" + interval + "S后自动参与速配）");
                 mTvTip.setVisibility(View.VISIBLE);
                 mTvMatching.setVisibility(View.VISIBLE);
                 mllPair.setVisibility(View.GONE);
                 startMatch();
-            }else{
-                interval --;
-                mTvMatchInterval.setText("（"+ interval +"S后自动参与速配）");
+            } else {
+                interval--;
+                mTvMatchInterval.setText("（" + interval + "S后自动参与速配）");
                 handler.postDelayed(this, MATCH_INTERVAL_TIME);
             }
 
@@ -265,7 +267,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
      */
     private void initBus() {
         mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
-                .compose(this.<CommonEvent>bindToLifecycle())
+                .compose(this.bindToLifecycle())
                 .subscribe(
                         new Consumer<CommonEvent>() {
                             @Override
@@ -288,19 +290,19 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     @Override
     protected void onResume() {
         super.onResume();
-        if(isFirst){
+        if (isFirst) {
             isFirst = false;
-            if(!needShowPop()){
+            if (!needShowPop()) {
                 startMatch();
             }
-        }else{
+        } else {
             handler.postDelayed(runInterval, MATCH_INTERVAL_TIME);
         }
     }
 
     private void startMatch() {
         startAnimation();
-        if(!mMediaIsClose) {
+        if (!mMediaIsClose) {
             start();
         }
         if (mType == 1)
@@ -317,7 +319,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         mTvTip.setVisibility(View.GONE);
         mTvMatching.setVisibility(View.GONE);
         mllPair.setVisibility(View.VISIBLE);
-        if(null != matchPopWindow)
+        if (null != matchPopWindow)
             matchPopWindow.dismiss();
     }
 
@@ -338,7 +340,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         release();
     }
 
-    private void release(){
+    private void release() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
@@ -354,7 +356,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         if (mediaPlayer != null) {
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
-            AnimationUtil.createRotateRevertAnimation(mMusicImageView,1500);
+            AnimationUtil.createRotateRevertAnimation(mMusicImageView, 1500);
         }
     }
 
@@ -376,23 +378,23 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         if (id == R.id.toolbar_back_all) {
             finish();
         }
-        if(id == R.id.music_iv){
-            if(!mMediaIsClose){
+        if (id == R.id.music_iv) {
+            if (!mMediaIsClose) {
                 release();
                 mMediaIsClose = true;
                 mMusicImageView.setImageResource(R.mipmap.radar_musice_icon_un);
-            }else {
+            } else {
                 start();
                 mMediaIsClose = false;
                 mMusicImageView.setImageResource(R.mipmap.radar_music_icon);
             }
         }
-        if(id == R.id.rule_im){
+        if (id == R.id.rule_im) {
             //匹配规则
             stopMatch();
             showPopWindow();
         }
-        if(id == R.id.ll_pair){
+        if (id == R.id.ll_pair) {
             mTvTip.setVisibility(View.VISIBLE);
             mTvMatching.setVisibility(View.VISIBLE);
             mllPair.setVisibility(View.GONE);
@@ -401,13 +403,13 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
     }
 
     private void showPopWindow() {
-        if(null == matchPopWindow)
+        if (null == matchPopWindow)
             matchPopWindow = new MatchPopWindow(this, v -> startMatch());
         matchPopWindow.setOutSideTouchable(false);
         matchPopWindow.setOutSideDismiss(false);
         matchPopWindow
-                .setTitle(mType==2?"视频速配规则":"语音速配规则")
-                .setContent(mType==2?"1、 视频速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。":
+                .setTitle(mType == 2 ? "视频速配规则" : "语音速配规则")
+                .setContent(mType == 2 ? "1、 视频速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。" :
                         "1、 语音速配能帮您快速匹配有缘人，使用过程中需提高自我保护意识；\n\n2、 严禁谩骂，涉黄，广告，讨论敏感话题等行为，若遇不良体验请立即挂断并举报。")
                 .onSureClickListener(new View.OnClickListener() {
                     @Override
@@ -430,7 +432,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
             public void run() {
                 finish();
             }
-        },1000);
+        }, 1000);
     }
 
 }

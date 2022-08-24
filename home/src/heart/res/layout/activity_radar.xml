@@ -75,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@id/radar_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/bg_pink"
+        android:background="@drawable/sp_radar_continue_pair"
         android:gravity="center"
         android:layout_height="@dimen/dp_57">
 

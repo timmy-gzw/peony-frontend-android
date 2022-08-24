@@ -165,8 +165,10 @@ public class DressUpFragment extends BaseMvpFragment<IVipView, IVipPresenter> im
             DressUpBean item = mAdapter.getItem(i);
             item.setIs_active(i == isSel ? 1 : 0);
             TextView tv = (TextView) mAdapter.getViewByPosition(i, R.id.tv_is_active);
-            if (tv != null) {
-                tv.setVisibility(i == isSel ? View.VISIBLE : View.GONE);
+            TextView tv1 = (TextView) mAdapter.getViewByPosition(i, R.id.is_active);
+            if (tv != null && tv1 != null) {
+                tv.setVisibility(i == isSel ? View.INVISIBLE : View.VISIBLE);
+                tv1.setVisibility(i == isSel ? View.VISIBLE : View.GONE);
             } else {
                 mAdapter.setData(i, item);
             }
