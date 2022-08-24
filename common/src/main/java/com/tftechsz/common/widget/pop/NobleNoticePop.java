@@ -43,22 +43,22 @@ public class NobleNoticePop extends BaseCenterPop {
         if (notice != null) {
             GlideUtils.loadRouteImage(getContext(), mBind.icon, service.getUserInfo().getIcon());
             switch (notice.id) {
-                case 1:
-                    mBind.frameBg.setBackgroundResource(R.drawable.vip_style_picture_frame_s18_start);
-                    mBind.rootBg.setBackgroundResource(R.mipmap.noble_notice_bg_1);
-                    break;
-                case 2:
-                    mBind.frameBg.setBackgroundResource(R.drawable.vip_style_picture_frame_s19_start);
-                    mBind.rootBg.setBackgroundResource(R.mipmap.noble_notice_bg_2);
-                    break;
-                case 3:
-                    mBind.frameBg.setBackgroundResource(R.drawable.vip_style_picture_frame_s20_start);
-                    mBind.rootBg.setBackgroundResource(R.mipmap.noble_notice_bg_3);
-                    break;
-                case 4:
-                    mBind.frameBg.setBackgroundResource(R.drawable.vip_style_picture_frame_s21_start);
-                    mBind.rootBg.setBackgroundResource(R.mipmap.noble_notice_bg_4);
-                    break;
+//                case 1:
+//                    mBind.frameBg.setBackgroundResource(R.drawable.vip_style_picture_frame_s18_start);
+//                    mBind.rootBg.setBackgroundResource(R.mipmap.noble_notice_bg_1);
+//                    break;
+//                case 2:
+//                    mBind.frameBg.setBackgroundResource(R.drawable.vip_style_picture_frame_s19_start);
+//                    mBind.rootBg.setBackgroundResource(R.mipmap.noble_notice_bg_2);
+//                    break;
+//                case 3:
+//                    mBind.frameBg.setBackgroundResource(R.drawable.vip_style_picture_frame_s20_start);
+//                    mBind.rootBg.setBackgroundResource(R.mipmap.noble_notice_bg_3);
+//                    break;
+//                case 4:
+//                    mBind.frameBg.setBackgroundResource(R.drawable.vip_style_picture_frame_s21_start);
+//                    mBind.rootBg.setBackgroundResource(R.mipmap.noble_notice_bg_4);
+//                    break;
             }
             mBind.title.setText(notice.title);
             mBind.tips.setText(notice.tips);

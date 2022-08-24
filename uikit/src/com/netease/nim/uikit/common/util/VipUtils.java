@@ -28,6 +28,8 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.netease.nim.uikit.R;
+import com.netease.nim.uikit.common.UIUtils;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 
 import java.io.File;
 
@@ -66,14 +68,6 @@ public class VipUtils {
                     return R.drawable.vip_style_chat_bubble_s01_end;
                 }
                 return R.drawable.vip_style_chat_bubble_s01_start;
-
-            case 4:
-                if (isEnd) {
-                    return R.drawable.vip_style_chat_bubble_s02_end;
-                }
-                return R.drawable.vip_style_chat_bubble_s02_start;
-
-
             default:
                 if (isParty) {
                     return R.drawable.bg_black_tran10_radius12;
@@ -103,8 +97,6 @@ public class VipUtils {
      * @param isParty    是否派对聊天气泡
      */
     public static void setPersonalise(View view, int id, boolean isEnd, boolean isPicFrame, boolean isParty) {
-        //FIXME 暂不支持vip气泡 根据需求放开
-        id = 0;
         if (!isPicFrame) {
             // view.setBackgroundResource(getChatBubbleBackground(id, isEnd));
             setPadding(id, view, isParty);
@@ -140,7 +132,6 @@ public class VipUtils {
         String fileName = getFileName(id, isEnd, isPicFrame, isParty);
         String localFilePath = getLocalFilePath(fileName, isPicFrame);
         if (!TextUtils.isEmpty(localFilePath) && FileUtils.isFileExists(localFilePath) && ImageUtils.getBitmap(new File(localFilePath)) != null) { //如果缓存了直接加载, 否则进行下载
-            //UIUtils.logE("本地存在: " + localFilePath);
             view.setBackground(getNinePatchDrawable(ImageUtils.getBitmap(new File(localFilePath)), Utils.getApp()));
             return;
         }
@@ -163,11 +154,11 @@ public class VipUtils {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<File> target, boolean isFirstResource) {
                         //setPersonalise(view, 0, isEnd, isPicFrame); //失败时使用默认
-                        if (!isPicFrame) { //失败时使用本地
-                            view.setBackgroundResource(getChatBubbleBackground(finalId, isEnd, isParty));
-                        } else {
-                            view.setBackgroundResource(getPictureFrameBackground(finalId, isEnd, false));
-                        }
+//                        if (!isPicFrame) { //失败时使用本地
+//                            view.setBackgroundResource(getChatBubbleBackground(finalId, isEnd, isParty));
+//                        } else {
+//                            view.setBackgroundResource(getPictureFrameBackground(finalId, isEnd, false));
+//                        }
                         return false;
                     }
 
@@ -229,37 +220,7 @@ public class VipUtils {
             color = R.color.white;
         }
         switch (id) {
-            case 8:
-                color = R.color.color_4D92DA;
-                break;
-            case 9:
-                color = R.color.color_EF6094;
-                break;
-            case 11:
-                color = R.color.color_FA9F36;
-                break;
-            case 16:
-                color = R.color.color_F45933;
-                break;
-            case 17:
-                color = R.color.color_FFEDAE;
-                break;
-            case 29:
-                color = R.color.color_3D5B94;
-                break;
-            case 103:
-            case 104:
-            case 105:
-            case 106:
-            case 107:
-            case 108:
-            case 2001:
-            case 2002:
-            case 2003:
-            case 2004:
-            case 2005:
-            case 2006:
-            case 2007:
+            case 3:
                 color = R.color.white;
                 break;
         }
@@ -274,10 +235,9 @@ public class VipUtils {
     private static String getFileName(int id, boolean isEnd, boolean isPicFrame, boolean isParty) { //peony_3_start.9.png
         StringBuilder sb = new StringBuilder();
         switch (AppUtils.getAppPackageName()) {
-            case "com.tftechsz.peony":
-                sb.append("peony_");
+            case "com.tftechsz.jasmine":
+                sb.append("jasmine_");
                 break;
-
             case "com.tftechsz.hyacinth":
                 sb.append("hyacinth_");
                 break;

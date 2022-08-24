@@ -44,7 +44,7 @@
         android:visibility="gone"
         app:is_round="true"
         app:vip_height="@dimen/dp_size_59"
-        app:vip_margin="@dimen/dp_size_12"
+        app:vip_margin="@dimen/dp_size_7"
         app:vip_width="@dimen/dp_size_59" />
 
 
@@ -68,7 +68,7 @@
         android:visibility="gone"
         app:is_round="true"
         app:vip_height="@dimen/dp_size_59"
-        app:vip_margin="@dimen/dp_size_12"
+        app:vip_margin="@dimen/dp_size_7"
         app:vip_width="@dimen/dp_size_59" />
 
     <!--    <com.netease.nim.uikit.common.ui.imageview.AvatarImageView-->

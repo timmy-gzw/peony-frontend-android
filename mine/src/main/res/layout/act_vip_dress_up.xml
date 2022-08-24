@@ -45,9 +45,9 @@
                 app:tl_tab_vertical_gravity="Center"
                 app:tl_textBold="SELECT"
                 app:tl_textSelectColor="@color/color_normal"
-                app:tl_textSelectSize="@dimen/sp_15"
+                app:tl_textSelectSize="@dimen/sp_16"
                 app:tl_textUnSelectColor="@color/color_light_font"
-                app:tl_textUnSelectSize="@dimen/sp_15"
+                app:tl_textUnSelectSize="@dimen/sp_16"
                 app:tl_underline_gravity="BOTTOM" />
 
             <androidx.viewpager.widget.ViewPager

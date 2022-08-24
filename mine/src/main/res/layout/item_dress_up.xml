@@ -28,7 +28,7 @@
             android:paddingStart="@dimen/dp_20"
             android:paddingEnd="@dimen/dp_20"
             app:imageBackgroundUrl="@{item.url}"
-            app:layout_constraintDimensionRatio="h,8:5"
+            app:layout_constraintDimensionRatio="166:177"
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/red" />
 
@@ -47,33 +47,46 @@
         <TextView
             android:id="@+id/tv_is_active"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_5"
-            android:background="@drawable/sp_primary_r_25"
-            android:paddingStart="@dimen/dp_6"
-            android:paddingTop="@dimen/dp_2"
-            android:paddingEnd="@dimen/dp_6"
-            android:paddingBottom="@dimen/dp_2"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/bg_orange_radius8"
+            android:paddingHorizontal="@dimen/dp_12"
+            android:paddingVertical="@dimen/dp_6"
+            android:text="立即使用"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12"
+            android:visibility="@{item.is_active == 1 ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/du_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/is_active"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:paddingHorizontal="@dimen/dp_12"
+            android:paddingVertical="@dimen/dp_6"
             android:text="使用中"
-            android:textColor="@color/color_normal"
-            android:textSize="@dimen/sp_9"
+            android:textColor="#802A2426"
+            android:textSize="@dimen/sp_12"
             android:visibility="@{item.is_active == 1 ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="@id/du_bg"
-            app:layout_constraintTop_toTopOf="@id/du_bg" />
+            app:layout_constraintBottom_toBottomOf="@+id/du_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_6"
+            android:layout_marginBottom="@dimen/dp_10"
             android:gravity="center"
-            android:paddingHorizontal="@dimen/dp_3"
             android:text="@{item.title}"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toTopOf="@+id/tv_is_active"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/du_bg"
             tools:text="专属起泡" />
 
 
