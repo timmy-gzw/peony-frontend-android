@@ -13,12 +13,12 @@ import androidx.annotation.Nullable;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.netease.nim.uikit.common.ConfigInfo;
-import com.tftechsz.home.R;
-import com.tftechsz.home.widget.carrousellayout.CarrouselLayout;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.home.R;
+import com.tftechsz.home.widget.carrousellayout.CarrouselLayout;
 
 public class HomeTopItemLayout extends LinearLayout {
     private Context mContext;
@@ -71,7 +71,7 @@ public class HomeTopItemLayout extends LinearLayout {
         if (data == null) return;
         tvContent.setText(data.title_1);
         tvDesc.setText(data.title_2);
-        GlideUtils.loadImageNew(mContext, bg, data.bg_img, data.radius == 0 ? 10 : data.radius);
+        GlideUtils.loadImage(mContext, bg, data.bg_img);
         if (!TextUtils.isEmpty(data.link) && data.link.equals(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_JOIN_VIDEO_MATCH)) {
             if (data.img_list != null && data.img_list.size() >= 2) {
                 Utils.runOnUiThread(() -> {

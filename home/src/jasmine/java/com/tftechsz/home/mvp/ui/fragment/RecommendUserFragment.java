@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.CacheDiskUtils;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.google.gson.Gson;
 import com.netease.nim.uikit.api.NimUIKit;
@@ -37,8 +39,10 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.UpdateEvent;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.other.SpaceItemDecoration;
 import com.tftechsz.common.pagestate.PageStateConfig;
 import com.tftechsz.common.pagestate.PageStateManager;
+import com.tftechsz.common.refresh.FastScrollGridLayoutManager;
 import com.tftechsz.common.refresh.FastScrollLinearLayoutManager;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
@@ -76,7 +80,6 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
     private int lastItemCount;
     private boolean canLoadMore = true;
     private PageStateManager mPageManager;
-    public FastScrollLinearLayoutManager mLayoutManager;
     private int mOpenLocationType;
 
     public static RecommendUserFragment newInstance(String type) {
@@ -128,8 +131,17 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
         });
 
         mSmartRefreshLayout = getView(R.id.smart_refresh);
-        mLayoutManager = new FastScrollLinearLayoutManager(getActivity());
-        mRvUser.setLayoutManager(mLayoutManager);
+        if (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0) {
+            mRvUser.setPadding(ConvertUtils.dp2px(16f), ConvertUtils.dp2px(10f), ConvertUtils.dp2px(16f), ConvertUtils.dp2px(10f));
+            mRvUser.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.color_f9f9f9));
+            FastScrollGridLayoutManager mLayoutManager = new FastScrollGridLayoutManager(getActivity(), 2);
+            mRvUser.setLayoutManager(mLayoutManager);
+            mRvUser.setClipToPadding(false);
+            mRvUser.addItemDecoration(new SpaceItemDecoration(ConvertUtils.dp2px(5f), ConvertUtils.dp2px(5f), false));
+        } else {
+            FastScrollLinearLayoutManager mLayoutManager = new FastScrollLinearLayoutManager(getActivity());
+            mRvUser.setLayoutManager(mLayoutManager);
+        }
         mNotDataView = getLayoutInflater().inflate(R.layout.base_empty_view, (ViewGroup) mRvUser.getParent(), false);
         mSmartRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -187,7 +199,7 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
 
     @Override
     protected void initData() {
-        mAdapter = new RecommendAdapter(mType);
+        mAdapter = new RecommendAdapter(mType, service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
         mAdapter.onAttachedToRecyclerView(mRvUser);
         mRvUser.setAdapter(mAdapter);
         mAdapter.addChildClickViewIds(R.id.ll_accost);
