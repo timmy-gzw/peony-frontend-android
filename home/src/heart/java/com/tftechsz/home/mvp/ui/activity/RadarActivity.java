@@ -131,7 +131,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
         mType = getIntent().getIntExtra(EXTRA_TYPE, 1);
         if (mType == 2) {   //视频
             mTitleTv.setText("视频速配");
-            mllPair.setBackground(getResources().getDrawable(R.drawable.bg_blue_alpha99));
+            mllPair.setBackground(getResources().getDrawable(R.drawable.sp_radar_continue_pair_video));
             mClRadar.setBackgroundResource(R.mipmap.radar_video_bg);
             mIvRound.setBackgroundResource(R.drawable.round_video);
             mIvRoundBig.setBackgroundResource(R.drawable.round_video);
@@ -140,7 +140,7 @@ public class RadarActivity extends BaseMvpActivity<IRadarView, RadarPresenter> i
             mtvMatch.setTextColor(getResources().getColor(R.color.black));
             mTvMatchInterval.setTextColor(getResources().getColor(R.color.black));
         } else {  //语音
-            mllPair.setBackground(getResources().getDrawable(R.drawable.bg_pink));
+            mllPair.setBackground(getResources().getDrawable(R.drawable.sp_radar_continue_pair));
             mClRadar.setBackgroundResource(R.mipmap.radar_voice_bg);
             mIvRound.setBackgroundResource(R.drawable.round_voice);
             mIvRoundBig.setBackgroundResource(R.drawable.round_video);

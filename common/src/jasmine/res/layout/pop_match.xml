@@ -3,11 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/dp_35"
-    android:layout_marginEnd="@dimen/dp_35"
-    android:paddingBottom="@dimen/dp_20"
-    android:background="@drawable/sp_pop_bg">
-
+    android:layout_marginHorizontal="@dimen/dp_32"
+    android:background="@drawable/sp_pop_bg"
+    android:paddingBottom="@dimen/dp_20">
 
     <FrameLayout
         android:id="@+id/fl_title"
@@ -34,16 +32,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/dp_15"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:src="@mipmap/ic_close_pop" />
+        android:layout_marginTop="@dimen/dp_4"
+        android:src="@mipmap/ic_close_gray" />
 
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fl_title"
-        android:layout_marginHorizontal="@dimen/dp_25"
+        android:layout_marginHorizontal="@dimen/dp_20"
         android:layout_marginVertical="@dimen/dp_20"
         android:gravity="center_vertical"
         android:textColor="#666666"
@@ -54,17 +51,16 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@+id/tv_content"/>
+        android:layout_below="@+id/tv_content" />
 
     <LinearLayout
         android:id="@+id/ll_bot_0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view"
+        android:layout_marginHorizontal="@dimen/dp_20"
         android:gravity="center_vertical"
-        android:layout_marginHorizontal="@dimen/dp_40"
         android:orientation="horizontal">
-
 
 
         <TextView
@@ -72,10 +68,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/shape_login_btn"
             android:gravity="center"
             android:paddingTop="@dimen/dp_13"
             android:paddingBottom="@dimen/dp_13"
-            android:background="@drawable/bg_red"
             android:text="开始速配"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_18" />
