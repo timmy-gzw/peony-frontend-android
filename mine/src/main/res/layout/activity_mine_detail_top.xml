@@ -268,7 +268,7 @@
                         android:layout_marginStart="@dimen/dp_15"
                         android:layout_marginEnd="@dimen/dp_15"
                         android:layout_weight="1"
-                        android:text="完成真人认证，交友成功率提升10倍"
+                        android:text="@string/real_auth_tip"
                         android:textColor="@color/color_normal"
                         android:textSize="@dimen/sp_12" />
 
