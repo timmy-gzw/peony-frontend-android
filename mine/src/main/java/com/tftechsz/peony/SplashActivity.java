@@ -4,6 +4,7 @@ import static java.lang.Boolean.TRUE;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -516,24 +518,28 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
     }
 
     private void showGuidePop() {
-        CustomPopWindow popWindow = new CustomPopWindow(this);
-        popWindow.setContent(getString(R.string.tip_read_phone_state))
-                .setIsCancel(false)
-                .setRightButton(getString(R.string.t_open))
-                .addOnClickListener(new CustomPopWindow.OnSelectListener() {
-                    @Override
-                    public void onCancel() {
-                        loadMoreData();
-                    }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            loadMoreData();
+        } else {
+            CustomPopWindow popWindow = new CustomPopWindow(this);
+            popWindow.setContent(getString(R.string.tip_read_phone_state))
+                    .setIsCancel(false)
+                    .setRightButton(getString(R.string.t_open))
+                    .addOnClickListener(new CustomPopWindow.OnSelectListener() {
+                        @Override
+                        public void onCancel() {
+                            loadMoreData();
+                        }
 
-                    @Override
-                    public void onSure() {
-                        mCompositeDisposable.add(new RxPermissions(SplashActivity.this)
-                                .request(Manifest.permission.READ_PHONE_STATE)
-                                .subscribe(aBoolean -> loadMoreData()));
-                    }
-                });
-        popWindow.showPopupWindow();
+                        @Override
+                        public void onSure() {
+                            mCompositeDisposable.add(new RxPermissions(SplashActivity.this)
+                                    .request(Manifest.permission.READ_PHONE_STATE)
+                                    .subscribe(aBoolean -> loadMoreData()));
+                        }
+                    });
+            popWindow.showPopupWindow();
+        }
     }
 
     @Override
