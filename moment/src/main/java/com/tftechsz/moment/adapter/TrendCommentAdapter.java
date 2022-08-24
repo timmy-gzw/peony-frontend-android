@@ -52,7 +52,7 @@ public class TrendCommentAdapter extends BaseQuickAdapter<CommentListItem, BaseV
             builder.setSpan(new MyClickableSpan(false, constraintLayout, 0), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.setSpan(new MyClickableSpan(true, null, item.getReply_user_id()), 2, 2 + item.getReply_nickname().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.setSpan(new MyClickableSpan(false, constraintLayout, 0), 2 + item.getReply_nickname().length(), sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            builder.setSpan(new ForegroundColorSpan(Color.parseColor("#7F89F3")), 2, 2 + item.getReply_nickname().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.at)), 2, 2 + item.getReply_nickname().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             content.setText(builder);
             content.setMovementMethod(LinkMovementMethod.getInstance());

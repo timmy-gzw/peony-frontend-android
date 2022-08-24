@@ -1,0 +1,5 @@
+<resources>
+    <string name="ph_empty_notice">你还没发过动态呢，快去发布吧～</string>
+    <string name="ph_empty_comment">还没有评论哦，快来评论抢沙发吧～</string>
+    <string name="trend_guide_hint">有来找另一半的人吗，可以互相认识一下</string>
+</resources>
