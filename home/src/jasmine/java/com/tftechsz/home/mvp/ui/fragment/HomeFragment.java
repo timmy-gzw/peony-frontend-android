@@ -296,7 +296,10 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
     public void autoRefresh() {
         if (fragments != null && fragments.get(mViewPager.getCurrentItem()) != null && fragments.get(mViewPager.getCurrentItem()).mSmartRefreshLayout != null) {
             fragments.get(mViewPager.getCurrentItem()).mSmartRefreshLayout.autoRefresh();
-            fragments.get(mViewPager.getCurrentItem()).mLayoutManager.smoothScrollToPosition(fragments.get(mViewPager.getCurrentItem()).mRvUser, new RecyclerView.State(), 0);
+            RecyclerView.LayoutManager layoutManager = fragments.get(mViewPager.getCurrentItem()).mRvUser.getLayoutManager();
+            if (layoutManager != null) {
+                layoutManager.smoothScrollToPosition(fragments.get(mViewPager.getCurrentItem()).mRvUser, new RecyclerView.State(), 0);
+            }
         }
     }
 
@@ -661,6 +664,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                 return "";
             return com.tftechsz.common.utils.AppUtils.getApiUa();
         }
+
         /**
          * 上头条
          */

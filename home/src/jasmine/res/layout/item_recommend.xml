@@ -33,10 +33,10 @@
 
         <View
             android:id="@+id/iv_online"
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_10"
+            android:layout_width="@dimen/dp_9"
+            android:layout_height="@dimen/dp_9"
             android:layout_gravity="bottom"
-            android:layout_margin="@dimen/dp_3_5"
+            android:layout_margin="@dimen/dp_2"
             android:background="@drawable/bg_dot_online" />
 
     </FrameLayout>
