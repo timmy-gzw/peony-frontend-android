@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/bg_color"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/tool_bar" />
+
+        <com.tftechsz.common.widget.CommonItemView
+            android:id="@+id/item_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:background="@color/white"
+            app:left_text_content="手机号"
+            app:right_arrow_visible="true"
+            app:right_switch_visible="false"
+            app:right_text_content="去绑定"
+            app:right_text_visible="true" />
+
+        <com.tftechsz.common.widget.CommonItemView
+            android:id="@+id/item_wechat"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:background="@color/white"
+            app:left_text_content="微信"
+            app:right_arrow_visible="true"
+            app:right_switch_visible="false"
+            app:right_text_content="去绑定"
+            app:right_text_visible="true"
+            app:view_visible="false" />
+
+    </LinearLayout>
+</layout>

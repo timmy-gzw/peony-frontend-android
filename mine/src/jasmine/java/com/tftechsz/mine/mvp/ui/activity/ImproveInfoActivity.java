@@ -22,7 +22,6 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.blankj.utilcode.util.RegexUtils;
-import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -39,7 +38,6 @@ import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.NetworkUtil;
 import com.tftechsz.common.utils.SPUtils;
-import com.tftechsz.common.utils.SoftHideKeyBoardUtil;
 import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.CustomFilter;
