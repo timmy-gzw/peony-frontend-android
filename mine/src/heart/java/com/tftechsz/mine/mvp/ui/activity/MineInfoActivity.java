@@ -630,4 +630,9 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         mUserInfo = data;
         setUserInfo();
     }
+
+    @Override
+    public void getPhotoSuccess(List<String> data) {
+
+    }
 }
