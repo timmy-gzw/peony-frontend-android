@@ -453,5 +453,19 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                 }));
     }
 
+    /**
+     * 获取自己相册
+     */
+    public void getSelfPhoto(int pageSize) {
+        addNet(service.getSelfPhoto(pageSize).compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<List<String>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<String>> response) {
+                        if (getView() == null) return;
+                        getView().getPhotoSuccess(response.getData());
+                    }
+                }));
+    }
+
 
 }

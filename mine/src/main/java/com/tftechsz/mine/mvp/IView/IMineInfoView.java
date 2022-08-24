@@ -3,6 +3,8 @@ package com.tftechsz.mine.mvp.IView;
 import com.netease.nim.uikit.common.UserInfo;
 import com.tftechsz.common.base.MvpView;
 
+import java.util.List;
+
 public interface IMineInfoView extends MvpView {
 
 
@@ -23,4 +25,6 @@ public interface IMineInfoView extends MvpView {
     void uploadAvatarFail(String data);
 
     void getUserInfoSuccess(UserInfo data);
+
+    void getPhotoSuccess(List<String> data);
 }

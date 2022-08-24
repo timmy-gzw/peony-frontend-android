@@ -13,18 +13,25 @@ import android.os.Looper;
 import android.os.Message;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.netease.nim.uikit.common.UserInfo;
@@ -44,9 +51,13 @@ import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.CommonItemView;
 import com.tftechsz.common.widget.pop.UploadAvatarPopWindow;
 import com.tftechsz.mine.R;
+import com.tftechsz.mine.adapter.MinePictureAdapter;
+import com.tftechsz.mine.adapter.ProfilePhotoAdapter;
+import com.tftechsz.mine.adapter.TrendAdapter;
 import com.tftechsz.mine.mvp.IView.IMineInfoView;
 import com.tftechsz.mine.mvp.presenter.MineInfoPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,10 +95,13 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     private TextView mAudioNormal; //未录制
     private ImageView mIvAudio;  //播放按钮
     private MediaPlayer mMediaPlayer;  // 播放录音
-    private TextView mAudioIconMsg, mAudioAudioMsg;
     private String mediaUrl;
     private int mediaTime, mediaTimeTemp;
     private String[] strHometown;//家乡截取
+    private TextView mTvAudit;
+    private RecyclerView mRvPicture;
+    private MinePictureAdapter adapter;
+    private List<String> pictures;
 
     public static void startActivity(Context context, UserInfo userInfo) {
         Intent intent = new Intent(context, MineInfoActivity.class);
@@ -105,7 +119,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         new ToolBarBuilder().showBack(true)
                 .setTitle("我的资料")
                 .build();
-        mItemSign = findViewById(R.id.tv_right);
+        mItemSign = findViewById(R.id.tv_right_friend);
         mIvAvatar = findViewById(R.id.iv_avatar);
         mItemSex = findViewById(R.id.item_sex);
         mItemBirthday = findViewById(R.id.item_birthday);
@@ -127,8 +141,15 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         mIvAudio = findViewById(R.id.iv_audio);
         mAudioAudit = findViewById(R.id.tv_audio_audit);
         mAudioNormal = findViewById(R.id.tv_audio_normal);
-        mAudioIconMsg = findViewById(R.id.audit_icon_msg);
-        mAudioAudioMsg = findViewById(R.id.audit_audio_msg);
+        mTvAudit = findViewById(R.id.tv_audit);
+
+        mRvPicture = findViewById(R.id.rv_picture);
+        mRvPicture.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        pictures = new ArrayList<>();
+        pictures.add("");
+        adapter = new MinePictureAdapter(pictures);
+        mRvPicture.setAdapter(adapter);
+
         initListener();
         mMediaPlayer = new MediaPlayer();
         mMediaPlayer.setOnCompletionListener(mp -> {
@@ -161,6 +182,45 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                             }
                         }
                 ));
+        GestureDetector gestureDetector = new GestureDetector(this, new GestureDetector.OnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onShowPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_PHOTO);
+                return true;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return false;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                return false;
+            }
+        });
+
+        mRvPicture.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
     }
 
     @Override
@@ -176,6 +236,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         setUserInfo();
         p.getUserInfoDetail();
         p.initJsonData(this);
+        p.getSelfPhoto(20);
     }
 
     private void setUserInfo() {
@@ -183,8 +244,6 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
             return;
         }
         //GlideUtils.loadRoundAvatarImage(this, mIvAvatar, mUserInfo.getIcon(), mUserInfo.getSex() == 1 ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);   //头像
-        Utils.setTextOrVisibility(mAudioIconMsg, mUserInfo.limit_audit_icon_msg);
-        Utils.setTextOrVisibility(mAudioAudioMsg, mUserInfo.limit_audit_voice_msg);
         mItemSex.setRightText(mUserInfo.getSex() == 1 ? "男" : "女");
         mItemSex.getTvRight().setTextColor(ContextCompat.getColor(this, R.color.color_normal));
         //生日
@@ -309,10 +368,8 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         if (TextUtils.isEmpty(mUserInfo.audit_desc)) {
             mItemSign.setText(mUserInfo.getDesc());
             mTvSignAudit.setVisibility(View.GONE);
-            mItemSign.setTextColor(ContextCompat.getColor(this, R.color.color_normal));
         } else {
             mItemSign.setText(mUserInfo.audit_desc);
-            mItemSign.setTextColor(ContextCompat.getColor(this, R.color.color_normal));
             mTvSignAudit.setVisibility(View.VISIBLE);
         }
     }
@@ -320,12 +377,12 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     private void setSign() {
         if (TextUtils.isEmpty(mUserInfo.getDesc()) || TextUtils.equals("0", mUserInfo.getDesc())) {
             if (TextUtils.isEmpty(mUserInfo.audit_desc)) {
-                mItemSign.setText("待完善");
-                mItemSign.setTextColor(ContextCompat.getColor(this, R.color.red));
+                mTvAudit.setText("待完善");
+                mTvAudit.setVisibility(View.VISIBLE);
+                mItemSign.setVisibility(View.GONE);
                 mTvSignAudit.setVisibility(View.GONE);
             } else {
                 mItemSign.setText(mUserInfo.audit_desc);
-                mItemSign.setTextColor(ContextCompat.getColor(this, R.color.color_normal));
                 mTvSignAudit.setVisibility(View.VISIBLE);
             }
         } else {
@@ -581,7 +638,6 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                 if (data != null && mUserInfo != null) {
                     String desc = data.getStringExtra("type");
                     mItemSign.setText(desc);
-                    mItemSign.setTextColor(ContextCompat.getColor(this, R.color.color_normal));
                     mUserInfo.setDesc(desc);
                     if (service.getUserInfo() != null && service.getUserInfo().isGirl()) {
                         mTvSignAudit.setVisibility(View.VISIBLE);
@@ -622,5 +678,11 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     public void getUserInfoSuccess(UserInfo data) {
         mUserInfo = data;
         setUserInfo();
+    }
+
+    @Override
+    public void getPhotoSuccess(List<String> data) {
+        pictures.addAll(data);
+        adapter.notifyDataSetChanged();
     }
 }
