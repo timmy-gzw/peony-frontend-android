@@ -32,13 +32,13 @@ public class TrendImageAdapter extends BaseQuickAdapter<UserViewInfo, BaseViewHo
         iv1.setVisibility(View.GONE);
         iv1_5.setVisibility(View.GONE);
 
+        int radius = Utils.getDimensPx(getContext(),R.dimen.trend_image_radius);
         if (getData().size() == 1) {
             //imageView.serHeight((float) 1.5);
             iv1_5.setVisibility(View.VISIBLE);
-            GlideUtils.loadRoundImageRadius(getContext(), iv1_5, item.getUrl());
+            GlideUtils.loadRoundImage(getContext(), iv1_5, item.getUrl(),radius);
         } else {
             iv1.setVisibility(View.VISIBLE);
-            int radius = Utils.getDimensPx(getContext(),R.dimen.trend_image_radius);
             GlideUtils.loadRoundImage(getContext(), iv1, item.getUrl(),radius);
         }
 

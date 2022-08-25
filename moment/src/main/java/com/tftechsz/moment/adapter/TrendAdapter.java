@@ -153,10 +153,8 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         ViewGroup.LayoutParams lp = Utils.filterVideoWH(holder.mPlayerContainer.getLayoutParams(),
                 (int) (ScreenUtils.getScreenWidth() / Interfaces.VideoW), (int) (ScreenUtils.getScreenHeight() / Interfaces.VideoH), item.getVideo_size().get(0), item.getVideo_size().get(1));
         holder.mPlayerContainer.setLayoutParams(lp);
-        Glide.with(holder.mThumb.getContext())
-                .load(item.getMedia_mini() != null ? item.getMedia_mini().get(0) : item.getMedia().get(0))
-                .placeholder(android.R.color.darker_gray)
-                .into(holder.mThumb);
+        int radius = Utils.getDimensPx(getContext(),R.dimen.trend_image_radius);
+        GlideUtils.loadRoundImage(holder.mThumb.getContext(), holder.mThumb, item.getMedia_mini() != null ? item.getMedia_mini().get(0) : item.getMedia().get(0),android.R.color.darker_gray,0,radius);
     }
 
     public void praiseSuccess(int blog_id, int praises) {

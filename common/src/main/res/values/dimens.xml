@@ -145,6 +145,7 @@
     <dimen name="real_name_avatar_wh">182dp</dimen>
 
     <dimen name="trend_image_radius">10px</dimen>
+    <dimen name="trend_video_radius">8dp</dimen>
     <dimen name="trend_avater_image_radius">6px</dimen>
     <dimen name="publish_image_radius">@dimen/dp_6</dimen>
 

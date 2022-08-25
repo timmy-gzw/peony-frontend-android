@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_210"
             android:layout_marginBottom="@dimen/dp_12"
-            app:round_corner="@dimen/trend_image_radius"
+            app:round_corner="@dimen/trend_video_radius"
             tools:ignore="MissingConstraints">
 
             <com.tftechsz.common.player.view.PrepareView
