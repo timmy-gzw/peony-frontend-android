@@ -23,7 +23,7 @@ public class MinePictureAdapter extends BaseQuickAdapter<String, BaseViewHolder>
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, String item) {
-        if (helper.getLayoutPosition() == 0) {
+        if (TextUtils.isEmpty(item)) {
             helper.setImageResource(R.id.iv_pic, R.mipmap.ic_add);
         } else {
             GlideUtils.loadRouteImage(getContext(), helper.getView(R.id.iv_pic), item);
