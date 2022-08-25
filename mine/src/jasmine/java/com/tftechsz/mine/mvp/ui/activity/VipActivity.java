@@ -84,7 +84,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
     protected void initView(Bundle savedInstanceState) {
         mPayId = getIntent().getIntExtra(Interfaces.EXTRA_ID, 0);
         ImmersionBar.with(this).titleBar(mBind.toolbar).statusBarDarkFont(false).navigationBarColor(R.color.c_1d1d1d).init();
-        mBind.tvTitle.setText("VIP会员");
+        mBind.tvTitle.setText("会员中心");
         mBind.ivBack.setOnClickListener(v -> finish());
 
         GlideUtils.loadRouteImage(this, mBind.icon, service.getUserInfo().getIcon(), service.getUserInfo().isBoy() ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);
