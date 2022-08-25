@@ -2,4 +2,6 @@
     <string name="tab_home">首页</string>
     <string name="tab_trend">动态</string>
     <string name="tab_mine">我的</string>
+    <string name="retain_boy_tip">小哥哥要离开了吗，嘤嘤嘤～</string>
+    <string name="retain_girl_tip">小姐姐要离开了吗，嘤嘤嘤～</string>
 </resources>

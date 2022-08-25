@@ -1,3 +1,7 @@
 <resources>
     <string name="tab_home">缘分</string>
+
+    <string name="retain_boy_tip">真的要离开吗</string>
+    <string name="retain_girl_tip">真的要离开吗</string>
+    <string name="retain_girl_tip_2">缘分来之不易，快去寻找合适的Ta吧～</string>
 </resources>
