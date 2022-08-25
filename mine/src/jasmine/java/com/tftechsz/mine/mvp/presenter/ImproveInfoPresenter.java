@@ -157,7 +157,7 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
                     @Override
                     public void customLayout(View v) {
                         TextView title = v.findViewById(R.id.pick_c_title);
-                        title.setText("日期");
+                        title.setText("请选择你的出生日期");
                         v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

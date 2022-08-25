@@ -174,7 +174,7 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                         @Override
                         public void customLayout(View v) {
                             TextView title = v.findViewById(R.id.pick_c_title);
-                            title.setText("家乡");
+                            title.setText("请选择你的家乡");
                             v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -260,7 +260,7 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                         @Override
                         public void customLayout(View v) {
                             TextView title = v.findViewById(R.id.pick_c_title);
-                            title.setText("日期");
+                            title.setText("请选择你的出生日期");
                             v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -320,7 +320,7 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                         @Override
                         public void customLayout(View v) {
                             TextView title = v.findViewById(R.id.pick_c_title);
-                            title.setText("身高");
+                            title.setText("请选择你的身高（cm）");
                             v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -371,7 +371,7 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                         @Override
                         public void customLayout(View v) {
                             TextView title = v.findViewById(R.id.pick_c_title);
-                            title.setText("体重");
+                            title.setText("请选择你的体重（kg）");
                             v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -425,7 +425,7 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                         @Override
                         public void customLayout(View v) {
                             TextView title = v.findViewById(R.id.pick_c_title);
-                            title.setText("年收入");
+                            title.setText("当前年收入情况（元）");
                             v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
