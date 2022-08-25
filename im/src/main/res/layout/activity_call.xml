@@ -389,13 +389,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_6"
-                android:background="@drawable/shape_blue_alpha30"
+                android:background="@drawable/bg_boy_age_sex"
                 android:drawableLeft="@drawable/ic_boy"
                 android:drawablePadding="@dimen/dp_5"
                 android:paddingHorizontal="@dimen/dp_6"
                 android:paddingVertical="@dimen/dp_1"
                 android:text="22"
-                android:textColor="@color/color_99_ff"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_10"
                 android:visibility="gone"
                 tools:visibility="visible" />
@@ -477,6 +477,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_local_video_view"
         android:layout_width="84dp"
         android:layout_height="104dp"
         android:layout_below="@id/tv_call_tip"
@@ -484,7 +485,8 @@
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@mipmap/bg_video_call_preview"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="gone">
 
         <com.netease.lava.nertc.sdk.video.NERtcVideoView
             android:id="@+id/local_video_view"
@@ -779,13 +781,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_6"
-                android:background="@drawable/shape_blue_alpha30"
+                android:background="@drawable/bg_boy_age_sex"
                 android:drawableLeft="@drawable/ic_boy"
                 android:drawablePadding="@dimen/dp_5"
                 android:paddingHorizontal="@dimen/dp_6"
                 android:paddingVertical="@dimen/dp_1"
                 android:text="22"
-                android:textColor="@color/color_99_ff"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_10"
                 android:visibility="gone"
                 tools:visibility="visible" />
