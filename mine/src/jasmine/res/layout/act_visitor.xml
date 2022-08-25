@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="botVisibility"
+            type="boolean" />
+
+        <variable
+            name="visitorCount"
+            type="int" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/tool_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bot_cons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/smart_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_visitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingBottom="@dimen/dp_150" />
+            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/bg_vistor_bottom"
+                android:orientation="vertical"
+                android:visibility="@{botVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:gravity="center"
+                    android:text="多人反复访问你哦，快去看看吧"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/tv_unlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_marginHorizontal="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:background="@drawable/shape_vip_price_bg_button"
+                    android:gravity="center"
+                    android:text="开通会员，查看访客记录"
+                    android:textColor="#AE5818"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/vip_agree" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="-65dp"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:background="@mipmap/ic_discount_price"
+                    android:paddingStart="@dimen/dp_14"
+                    android:paddingTop="@dimen/dp_2"
+                    android:text="超值优惠"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/tv_unlock_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_51"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@mipmap/mine_ic_visitor"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:text='@{"有"+visitorCount+"人看过你"}'
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12"
+                    android:visibility="gone"
+                    app:drawableStartCompat="@mipmap/iv_unlock_tip"
+                    app:layout_constraintBottom_toTopOf="@id/tv_unlock"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="有8人看过你" />
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</layout>

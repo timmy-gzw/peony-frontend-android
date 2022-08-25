@@ -207,6 +207,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
                 if (mPop == null) {
                     mPop = new VipPayPopWindow(mActivity);
                 }
+                mPop.setPrice(" " + mPriceAdapter.getItem(oldSel).price + "元");
                 mPop.setTypeId(mPriceAdapter.getItem(oldSel).id);
 //                mPop.setisRecharge(service.getUserInfo().isVip());
                 mPop.setisRecharge(false);

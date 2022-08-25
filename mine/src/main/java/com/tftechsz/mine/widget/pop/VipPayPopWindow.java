@@ -71,6 +71,7 @@ public class VipPayPopWindow extends BaseBottomPop {
     private int oldSel = -1;
     private final Activity mActivity;
     private ChargePayAdapter adapter;
+    private String mPrice;
 
     public VipPayPopWindow(Activity context) {
         super(context);
@@ -102,6 +103,13 @@ public class VipPayPopWindow extends BaseBottomPop {
                     }));
         }
     }
+
+
+    public void setPrice(String price) {
+        this.mPrice = price;
+        mBind.tvPay.setText("立即充值" + price);
+    }
+
 
     public void setTypeId(int typeId) {
         this.typeId = typeId;

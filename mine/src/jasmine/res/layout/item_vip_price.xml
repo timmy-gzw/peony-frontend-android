@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_24"
             android:gravity="center"
-            android:text="限时"
+            android:text="@{item.nav_title}"
             android:background="@{item.sel ? @drawable/bg_vip_price_top_choose : @drawable/bg_vip_price_top_normal}"
             android:textColor="@{item.sel ? @color/white: @color/color_mid_font}"
             android:textSize="@dimen/sp_12"
