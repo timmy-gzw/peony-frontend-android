@@ -454,7 +454,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 AnimationUtil.createAnimation(mIvAccost);
             }
         }
-        getP().getGiftList(uid);
     }
 
     @Override
@@ -672,6 +671,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         } else {
             getP().getUserPhoto(MAX_SIZE, mUserId);
         }
+        getP().getGiftList(uid);
     }
 
     @Override
