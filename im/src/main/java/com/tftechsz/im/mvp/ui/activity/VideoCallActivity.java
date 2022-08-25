@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.drawable.Drawable;
-import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -137,7 +136,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private static final String CALL_USER_IS_ON_LINE = "call_user_is_on_line";
     private static final String CALL_FROM_ID = "from_id";
 
-    private View viewVideoView, viewRemote;
+    private View localVideoContainer,viewVideoView, viewRemote;
     private NERTCVideoCall nertcVideoCall;
     private NERtcVideoView localVideoView, videoView, remoteVideoView;
     private TextView tvSwitch;  //切换摄像头
@@ -645,6 +644,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
         mClVideo = findViewById(R.id.cl_video);
         ImmersionBar.with(this).hideBar(BarHide.FLAG_HIDE_BAR).titleBar(mClVideo).init();
+        localVideoContainer = findViewById(R.id.rl_local_video_view);
         localVideoView = findViewById(R.id.local_video_view);
         viewVideoView = findViewById(R.id.view_video_view);
         videoView = findViewById(R.id.video_view);
@@ -2003,6 +2003,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             if (localVideoView != null) {
                 localVideoView.setVisibility(View.GONE);
             }
+            if (localVideoContainer != null) {
+                localVideoContainer.setVisibility(View.GONE);
+            }
             NERtc.getInstance().enableLocalVideo(false);   //1
         } else {
             NERtcEx.getInstance().stopVideoPreview();
@@ -2019,6 +2022,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             }
             if (localVideoView != null) {
                 localVideoView.setVisibility(View.VISIBLE);
+            }
+            if (localVideoContainer != null) {
+                localVideoContainer.setVisibility(View.VISIBLE);
             }
 
             if (isFaceOn) {
@@ -2505,7 +2511,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     @Override
     public void getUserInfoSuccess(UserInfo userInfo) {
         if (userInfo.getAge() > 0) {
-            mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
+            mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.bg_boy_age_sex : R.drawable.bg_girl_age_sex));
             mtvGenderAge.setText(userInfo.getAge() + "");
             mtvGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
             mtvGenderAge.setVisibility(View.VISIBLE);
@@ -2527,7 +2533,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         }
         if (mChannelType == 2) {
             if (userInfo.getAge() > 0) {
-                mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.shape_blue_alpha30 : R.drawable.shape_pink_alpha30));
+                mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.bg_boy_age_sex : R.drawable.bg_girl_age_sex));
                 mtvVideoGenderAge.setText(userInfo.getAge() + "");
                 mtvVideoGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
                 mtvVideoGenderAge.setVisibility(View.VISIBLE);

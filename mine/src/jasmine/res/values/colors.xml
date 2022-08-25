@@ -3,4 +3,7 @@
 
     <color name="vip_title_color_choose">#FFBE74</color>
     <color name="vip_price_unit_color_choose">#9D4B0F</color>
+
+    <color name="vip_price_hint_color_choose">#FFE4B2</color>
+    <color name="vip_price_hint_color_normal">#928465</color>
 </resources>

@@ -3,14 +3,16 @@ package com.tftechsz.mine.mvp.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.text.style.UnderlineSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -20,6 +22,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.TimeUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.ARouterApi;
@@ -42,6 +46,9 @@ import com.tftechsz.mine.entity.dto.VipConfigBean;
 import com.tftechsz.mine.mvp.IView.IVipView;
 import com.tftechsz.mine.mvp.presenter.IVipPresenter;
 import com.tftechsz.mine.widget.pop.VipPayPopWindow;
+import com.tftechsz.mine.widget.pop.VipPowerPopWindow;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -62,6 +69,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
     private VipPayPopWindow mPop;
     private int mPayId;
     private boolean inPayStatus;
+    private VipPowerPopWindow mVipPower;
 
     @Override
     public IVipPresenter initPresenter() {
@@ -100,7 +108,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
                 if (!TextUtils.isEmpty(mineInfo.link)) {
                     int start = builder.toString().indexOf(mineInfo.title);
                     builder.setSpan(new PayTextClick(mContext, mineInfo), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    builder.setSpan(new UnderlineSpan(), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    builder.setSpan(new ForegroundColorSpan(Color.parseColor("#5397FF")), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
             mBind.vipAgree.setText(builder);
@@ -132,6 +140,15 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
         mPrivilegeAdapter = new VipPrivilegeAdapter();
         mBind.privilegeRecy.setLayoutManager(new GridLayoutManager(mContext, 4));
         mBind.privilegeRecy.setAdapter(mPrivilegeAdapter);
+        mPrivilegeAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+                if (mVipPower == null)
+                    mVipPower = new VipPowerPopWindow(mContext);
+                mVipPower.initData(mPrivilegeAdapter.getData(), position);
+                mVipPower.showPopupWindow();
+            }
+        });
 
         mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
                 .compose(this.bindToLifecycle())
@@ -207,6 +224,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
                 if (mPop == null) {
                     mPop = new VipPayPopWindow(mActivity);
                 }
+                mPop.setPrice(" " + mPriceAdapter.getItem(oldSel).price + "元");
                 mPop.setTypeId(mPriceAdapter.getItem(oldSel).id);
 //                mPop.setisRecharge(service.getUserInfo().isVip());
                 mPop.setisRecharge(false);
@@ -226,6 +244,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
     private void setPayButton(int position) {
         VipPriceBean item = mPriceAdapter.getItem(position);
         mBind.setItemPrice(item.price);
+        mBind.tvDiscountPrice.setText(item.reduce_price_title.replace("立","已"));
     }
 
     @Override

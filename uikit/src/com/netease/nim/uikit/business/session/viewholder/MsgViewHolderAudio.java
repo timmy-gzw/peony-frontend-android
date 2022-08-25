@@ -133,13 +133,7 @@ public class MsgViewHolderAudio extends MsgViewHolderBase {
         //Log.e("MsgViewHolderAudio.setLottieZip", "设置语音lottie" + id + " -- " + isEnd);
         StringBuilder sb = new StringBuilder("audio_");
         switch (id) {
-            case 8:
-            case 9:
-            case 11:
-            case 16:
-            case 17:
-            case 29:
-            case 103: //103为白色
+            case 3:
                 sb.append(id);
                 break;
 

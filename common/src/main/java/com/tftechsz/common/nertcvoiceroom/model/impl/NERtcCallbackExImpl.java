@@ -2,7 +2,6 @@ package com.tftechsz.common.nertcvoiceroom.model.impl;
 
 import android.graphics.Rect;
 
-import com.netease.lava.nertc.sdk.LastmileProbeResult;
 import com.netease.lava.nertc.sdk.NERtcCallbackEx;
 import com.netease.lava.nertc.sdk.stats.NERtcAudioVolumeInfo;
 import com.netease.lava.nertc.sdk.video.NERtcVideoStreamType;
@@ -114,10 +113,6 @@ public class NERtcCallbackExImpl implements NERtcCallbackEx {
     public void onLocalAudioVolumeIndication(int volume) {
     }
 
-    @Override
-    public void onLocalAudioVolumeIndication(int i, boolean b) {
-
-    }
 
     @Override
     public void onRemoteAudioVolumeIndication(NERtcAudioVolumeInfo[] volumeArray, int totalVolume) {
@@ -169,55 +164,6 @@ public class NERtcCallbackExImpl implements NERtcCallbackEx {
 
     }
 
-    @Override
-    public void onLocalPublishFallbackToAudioOnly(boolean b, NERtcVideoStreamType neRtcVideoStreamType) {
-
-    }
-
-    @Override
-    public void onRemoteSubscribeFallbackToAudioOnly(long l, boolean b, NERtcVideoStreamType neRtcVideoStreamType) {
-
-    }
-
-    @Override
-    public void onLastmileQuality(int i) {
-
-    }
-
-    @Override
-    public void onLastmileProbeResult(LastmileProbeResult lastmileProbeResult) {
-
-    }
-
-    @Override
-    public void onMediaRightChange(boolean b, boolean b1) {
-
-    }
-
-    @Override
-    public void onVirtualBackgroundSourceEnabled(boolean b, int i) {
-
-    }
-
-    @Override
-    public void onUserSubStreamAudioStart(long l) {
-
-    }
-
-    @Override
-    public void onUserSubStreamAudioStop(long l) {
-
-    }
-
-    @Override
-    public void onUserSubStreamAudioMute(long l, boolean b) {
-
-    }
-
-    @Override
-    public void onLocalVideoWatermarkState(NERtcVideoStreamType neRtcVideoStreamType, int i) {
-
-    }
 
 //    @Override
 //    public void onLocalPublishFallbackToAudioOnly(boolean b, NERtcVideoStreamType neRtcVideoStreamType) {
