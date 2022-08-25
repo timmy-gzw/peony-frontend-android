@@ -6,12 +6,14 @@ import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -167,7 +169,25 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
 
             }).setOptionsSelectChangeListener((options1, options2, options3) -> {
 
-                    }).setSubmitText("确定")//确定按钮文字
+                    })
+                    .setLayoutRes(R.layout.layout_pickerview_custom, new CustomListener() {
+                        @Override
+                        public void customLayout(View v) {
+                            TextView title = v.findViewById(R.id.pick_c_title);
+                            title.setText("家乡");
+                            v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    pvOptions.returnData();
+                                    pvOptions.dismiss();
+                                }
+                            });
+                        }
+                    })
+                    .setContentTextSize(18) //内容文字大小
+                    .setLineSpacingMultiplier(2.1f) //行高倍数
+                    .setTextColorCenter(ContextCompat.getColor(context, R.color.colorPrimary))//选中颜色
+                    .setSubmitText("确定")//确定按钮文字
                     .setCancelText("取消")//取消按钮文字
                     .setSubCalSize(18)//确定和取消文字大小
                     .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))
@@ -236,13 +256,30 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                     getView().getChooseBirthday(TimeUtils.dateToYYYYMMdd(date), TimeUtils.getAstro(moth, day));
                 }
             })
+                    .setLayoutRes(R.layout.layout_pickerview_custom, new CustomListener() {
+                        @Override
+                        public void customLayout(View v) {
+                            TextView title = v.findViewById(R.id.pick_c_title);
+                            title.setText("日期");
+                            v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    pvTime.returnData();
+                                    pvTime.dismiss();
+                                }
+                            });
+                        }
+                    })
+                    .setContentTextSize(18) //内容文字大小
+                    .setLineSpacingMultiplier(2.1f) //行高倍数
+                    .setTextColorCenter(ContextCompat.getColor(context, R.color.colorPrimary))//选中颜色
                     .setDecorView(relativeLayout)
                     .setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
                     .setCancelText("取消")//取消按钮文字
                     .setSubmitText("确定")//确认按钮文字
                     .setTitleSize(20)//标题文字大小
                     .setTitleText("日期")//标题文字
-                    .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
+                    .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
                     .isCyclic(false)//是否循环滚动
                     .setTitleColor(Color.BLACK)//标题文字颜色
                     .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))//确定按钮文字颜色
@@ -279,6 +316,23 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                     getView().getChooseHeight(list.get(options1));
                 }
             })
+                    .setLayoutRes(R.layout.layout_pickerview_custom, new CustomListener() {
+                        @Override
+                        public void customLayout(View v) {
+                            TextView title = v.findViewById(R.id.pick_c_title);
+                            title.setText("身高");
+                            v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    pvHeight.returnData();
+                                    pvHeight.dismiss();
+                                }
+                            });
+                        }
+                    })
+                    .setContentTextSize(18) //内容文字大小
+                    .setLineSpacingMultiplier(2.1f) //行高倍数
+                    .setTextColorCenter(ContextCompat.getColor(context, R.color.colorPrimary))//选中颜色
                     .setDecorView(relativeLayout)
                     .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .setCancelColor(ContextCompat.getColor(context, R.color.colorPrimary))
@@ -313,6 +367,23 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                     getView().getChooseWeight(list.get(options1));
                 }
             })
+                    .setLayoutRes(R.layout.layout_pickerview_custom, new CustomListener() {
+                        @Override
+                        public void customLayout(View v) {
+                            TextView title = v.findViewById(R.id.pick_c_title);
+                            title.setText("体重");
+                            v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    pvWeight.returnData();
+                                    pvWeight.dismiss();
+                                }
+                            });
+                        }
+                    })
+                    .setContentTextSize(18) //内容文字大小
+                    .setLineSpacingMultiplier(2.1f) //行高倍数
+                    .setTextColorCenter(ContextCompat.getColor(context, R.color.colorPrimary))//选中颜色
                     .setDecorView(relativeLayout)
                     .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .setCancelColor(ContextCompat.getColor(context, R.color.colorPrimary))
@@ -350,6 +421,23 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
 
                 }
             })
+                    .setLayoutRes(R.layout.layout_pickerview_custom, new CustomListener() {
+                        @Override
+                        public void customLayout(View v) {
+                            TextView title = v.findViewById(R.id.pick_c_title);
+                            title.setText("年收入");
+                            v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    pvWeight.returnData();
+                                    pvWeight.dismiss();
+                                }
+                            });
+                        }
+                    })
+                    .setContentTextSize(18) //内容文字大小
+                    .setLineSpacingMultiplier(2.1f) //行高倍数
+                    .setTextColorCenter(ContextCompat.getColor(context, R.color.colorPrimary))//选中颜色
                     .setDecorView(relativeLayout)
                     .setSubmitColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .setCancelColor(ContextCompat.getColor(context, R.color.colorPrimary))

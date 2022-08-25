@@ -8,8 +8,10 @@ import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.netease.nim.uikit.common.UserInfo;
@@ -26,6 +28,7 @@ import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.TimeUtils;
 import com.tftechsz.common.utils.UploadHelper;
 import com.tftechsz.common.utils.Utils;
+import com.tftechsz.mine.R;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.NearUserDto;
 import com.tftechsz.mine.entity.req.CompleteReq;
@@ -38,9 +41,12 @@ import java.util.Date;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
+import androidx.core.content.ContextCompat;
+
 public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
 
     public MineApiService service;
+    private TimePickerView pvTime;
 
     public ImproveInfoPresenter() {
         service = RetrofitManager.getInstance().createUserApi(MineApiService.class);
@@ -140,13 +146,30 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
 //        endDate.set(TimeUtils.getCurrentYear(), TimeUtils.getCurrentMonth() - 1, TimeUtils.getCurrentDay2());
         String[] split = Utils.getOldYearDate(-18).split("-");
         endDate.set(Integer.parseInt(split[0]),  TimeUtils.getCurrentMonth() - 1,  TimeUtils.getCurrentDay2());
-        TimePickerView pvTime = new TimePickerBuilder(context, new OnTimeSelectListener() {
+        pvTime = new TimePickerBuilder(context, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
                 if (null == getView()) return;
                 getView().chooseBirthday(TimeUtils.date2Str(date, "yyyy-MM-dd"));
             }
         })
+                .setLayoutRes(R.layout.layout_pickerview_custom, new CustomListener() {
+                    @Override
+                    public void customLayout(View v) {
+                        TextView title = v.findViewById(R.id.pick_c_title);
+                        title.setText("日期");
+                        v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pvTime.returnData();
+                                pvTime.dismiss();
+                            }
+                        });
+                    }
+                })
+                .setContentTextSize(18) //内容文字大小
+                .setLineSpacingMultiplier(2.1f) //行高倍数
+                .setTextColorCenter(ContextCompat.getColor(context, R.color.colorPrimary))//选中颜色
                 .setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
                 .setCancelText("取消")//取消按钮文字
                 .setSubmitText("确定")//确认按钮文字
