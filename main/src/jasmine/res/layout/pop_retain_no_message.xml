@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_28"
+    android:background="@drawable/sp_pop_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_20">
+
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="117dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="51dp"
+        android:background="@mipmap/ic_retain_no_message_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_pic"
+        tools:text="@string/retain_boy_tip" />
+
+    <TextView
+        android:id="@+id/tv_tip_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_21"
+        android:gravity="center"
+        android:text="@string/retain_girl_tip_2"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tip"
+        tools:text="@string/retain_boy_tip" />
+
+
+    <TextView
+        android:id="@+id/tv_quit"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:layout_marginVertical="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/bg_gray_radius15"
+        android:gravity="center"
+        android:text="残忍离开"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tip_d"
+        app:layout_constraintWidth_percent="0.42" />
+
+    <TextView
+        android:id="@+id/tv_stay"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:layout_marginVertical="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:background="@drawable/sp_primary_r_25"
+        android:gravity="center"
+        android:text="我再想想"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tip_d"
+        app:layout_constraintWidth_percent="0.42" />
+</androidx.constraintlayout.widget.ConstraintLayout>
