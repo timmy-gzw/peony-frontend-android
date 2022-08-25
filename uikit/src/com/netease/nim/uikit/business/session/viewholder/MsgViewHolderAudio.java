@@ -164,7 +164,7 @@ public class MsgViewHolderAudio extends MsgViewHolderBase {
         }
         audioLottie.setAnimation(sb.append(isEnd ? "_end.zip" : "_start.zip").toString());
 
-        animationView.setImageResource(isEnd ? R.drawable.nim_audio_animation_list_right_3 : R.drawable.nim_audio_animation_list_left_white_3);
+        animationView.setImageResource(isEnd ? R.drawable.nim_audio_animation_list_right_3 : R.drawable.nim_audio_animation_list_left_3);
         animationView.setVisibility(View.VISIBLE);
         audioLottie.setVisibility(View.GONE);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) animationView.getLayoutParams();
