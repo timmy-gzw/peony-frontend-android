@@ -33,7 +33,7 @@
           android:layout_gravity="center"
           android:background="@color/white"
           app:tl_divider_padding="@dimen/dp_6"
-          app:tl_indicator_color="@color/colorPrimary"
+          app:tl_indicator_color="@color/trend_tab_indicator_color"
           app:tl_indicator_corner_radius="@dimen/dp_2"
           app:tl_indicator_height="@dimen/dp_2"
           app:tl_tab_width="@dimen/dp_size_100"

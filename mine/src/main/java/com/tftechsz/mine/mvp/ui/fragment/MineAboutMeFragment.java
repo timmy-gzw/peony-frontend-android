@@ -232,13 +232,15 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.cl_local_tyrant) {    //土豪值
-            if (!TextUtils.isEmpty(mUserId))
+            //todo 当前接口不支持使用userId 查询（获取个人土豪和魅力等级）getAccostList
+            if (!String.valueOf(service.getUserId()).equals(mUserId))
                 return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.rich) {
                 MyWealthCharmLevelActivity.startActivity(getActivity(), "0", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
         } else if (id == R.id.cl_charm) {    //魅力值
-            if (!TextUtils.isEmpty(mUserId))
+            //todo 当前接口不支持使用userId 查询（获取个人土豪和魅力等级）getAccostList
+            if (!String.valueOf(service.getUserId()).equals(mUserId))
                 return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.charm) {
                 MyWealthCharmLevelActivity.startActivity(getActivity(), "1", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女

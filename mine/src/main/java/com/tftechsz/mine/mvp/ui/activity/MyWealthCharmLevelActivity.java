@@ -1,25 +1,19 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.flyco.tablayout.SlidingScaleTabLayout;
-import com.netease.nim.uikit.common.UserInfo;
 import com.tftechsz.common.adapter.FragmentVpAdapter;
 import com.tftechsz.common.base.BaseMvpActivity;
-import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.dto.GradeLevelDto;
 import com.tftechsz.mine.mvp.IView.IGradeIntroduceView;
 import com.tftechsz.mine.mvp.presenter.GradeIntroducePresenter;
-import com.tftechsz.mine.mvp.ui.fragment.FriendFragment;
 import com.tftechsz.mine.mvp.ui.fragment.WealthFragment;
 
 import java.util.ArrayList;
