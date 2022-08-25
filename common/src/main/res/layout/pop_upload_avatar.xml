@@ -20,7 +20,7 @@
         android:layout_below="@+id/iv_error_avatar"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_20"
-        android:background="@drawable/sp_primary_r_100"
+        android:background="@drawable/bg_red"
         android:textColor="@color/white"
         android:gravity="center"
         android:text="更换头像" />

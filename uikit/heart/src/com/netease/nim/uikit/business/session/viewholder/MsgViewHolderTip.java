@@ -85,7 +85,6 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
         if (tips.des.contains("跟她语音聊天") && tips.des.contains("跟她视频聊天")) {
             mLlleft.setVisibility(View.GONE);
             mtvTitle.setVisibility(View.VISIBLE);
-            mtvTitle.setText("友情提示");
             mRlBox.setBackground(context.getResources().getDrawable(R.drawable.ic_tip_top_right));
             mLlTitle.setPadding((int) context.getResources().getDimension(R.dimen.dp_size_12), (int) context.getResources().getDimension(R.dimen.dp_size_12), (int)context.getResources().getDimension(R.dimen.dp_size_12), (int)context.getResources().getDimension(R.dimen.dp_size_12));
             mClCall.setVisibility(View.VISIBLE);
