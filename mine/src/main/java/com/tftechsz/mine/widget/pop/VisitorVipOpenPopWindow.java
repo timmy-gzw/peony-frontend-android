@@ -10,7 +10,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,24 +19,21 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.bus.RxBus;
-import com.tftechsz.common.entity.NavigationLogEntity;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
-import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.PayTextClick;
 import com.tftechsz.common.widget.pop.BaseBottomPop;
 import com.tftechsz.mine.R;
-import com.tftechsz.mine.adapter.OpenVipAdapter;
+import com.tftechsz.mine.adapter.VisitorOpenVipAdapter;
 import com.tftechsz.mine.adapter.VipPriceAdapter;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.databinding.PopVipOpenBinding;
@@ -49,7 +45,7 @@ import io.reactivex.disposables.CompositeDisposable;
 /**
  * 开通VIP 弹窗
  */
-public class VipOpenPopWindow extends BaseBottomPop implements View.OnClickListener {
+public class VisitorVipOpenPopWindow extends BaseBottomPop implements View.OnClickListener {
     public MineApiService configService;
     private final CompositeDisposable mCompositeDisposable;
     private PopVipOpenBinding mBind;
@@ -60,7 +56,7 @@ public class VipOpenPopWindow extends BaseBottomPop implements View.OnClickListe
     private final UserProviderService service;
     private int currentPosition = 0;
 
-    public VipOpenPopWindow(Context context) {
+    public VisitorVipOpenPopWindow(Context context) {
         super(context);
         mCompositeDisposable = new CompositeDisposable();
         configService = RetrofitManager.getInstance().createConfigApi(MineApiService.class);
@@ -152,8 +148,8 @@ public class VipOpenPopWindow extends BaseBottomPop implements View.OnClickListe
                         }
 
                         if (data.privilege != null && data.privilege.size() > 0) {
-                            OpenVipAdapter openVipAdapter = new OpenVipAdapter(mContext, data.privilege);
-                            mBind.viewPager.setAdapter(openVipAdapter);
+                            VisitorOpenVipAdapter visitorOpenVipAdapter = new VisitorOpenVipAdapter(mContext, data.privilege);
+                            mBind.viewPager.setAdapter(visitorOpenVipAdapter);
                             mBind.viewPager.setCurrentItem(currentPosition);
                             mBind.viewPager.setOffscreenPageLimit(data.privilege.size());
                             setPoint(mBind.llPoint,data.privilege.size());

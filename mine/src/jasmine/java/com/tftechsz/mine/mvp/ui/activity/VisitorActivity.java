@@ -27,7 +27,7 @@ import com.tftechsz.mine.databinding.ActVisitorBinding;
 import com.tftechsz.mine.entity.VisitorDto;
 import com.tftechsz.mine.mvp.IView.IVisitorView;
 import com.tftechsz.mine.mvp.presenter.VisitorPresenter;
-import com.tftechsz.mine.widget.pop.VipOpenPopWindow;
+import com.tftechsz.mine.widget.pop.VisitorVipOpenPopWindow;
 
 import java.util.List;
 
@@ -101,7 +101,7 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
         mBind.tvUnlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VipOpenPopWindow pop = new VipOpenPopWindow(VisitorActivity.this);
+                VisitorVipOpenPopWindow pop = new VisitorVipOpenPopWindow(VisitorActivity.this);
                 pop.showPopupWindow();
             }
         });

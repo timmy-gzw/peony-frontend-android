@@ -17,12 +17,12 @@ import com.tftechsz.mine.entity.VipPrivilegeBean;
 
 import java.util.List;
 
-public class OpenVipAdapter extends RecyclerView.Adapter<OpenVipAdapter.ViewHolder> {
+public class VisitorOpenVipAdapter extends RecyclerView.Adapter<VisitorOpenVipAdapter.ViewHolder> {
     private final LayoutInflater mInflater;
     private final List<VipPrivilegeBean> vipPrivilege;
     private final Context context;
 
-    public OpenVipAdapter(Context context, List<VipPrivilegeBean> vipPrivilege) {
+    public VisitorOpenVipAdapter(Context context, List<VipPrivilegeBean> vipPrivilege) {
         this.context = context;
         this.vipPrivilege = vipPrivilege;
         this.mInflater = LayoutInflater.from(BaseApplication.getInstance());
