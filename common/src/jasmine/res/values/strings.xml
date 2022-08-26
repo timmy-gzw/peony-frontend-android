@@ -2,4 +2,5 @@
     <string name="app_name">甜伴交友</string>
     <string name="sign_in">立即签到</string>
     <string name="sign_in_success_format">%s</string>
+    <string name="auth_for_obtain_permission">完成认证可获得以下权限</string>
 </resources>
