@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_4"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_one_key_accost_tl"
+        android:src="@mipmap/ic_one_key_accost_tr"
         app:layout_constraintBottom_toBottomOf="@id/fl_title"
         app:layout_constraintEnd_toStartOf="@id/fl_title"
         app:layout_constraintTop_toTopOf="@id/fl_title"
