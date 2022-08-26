@@ -174,6 +174,7 @@ public abstract class ResponseObserver<T> extends ResourceSubscriber<T> {
                         final ChatMsg.Alert alert = JSON.parseObject(chatMsg.content, ChatMsg.Alert.class);
                         if (alert.template != 2) {
                             CommonUtil.showCustomPop(alert);
+                            onFail(0, "");
                         }
                     } else if (TextUtils.equals(chatMsg.cmd_type, ChatMsg.TIP_TYPE)) {  //吐司
                         final ChatMsg.Tips tips = JSON.parseObject(chatMsg.content, ChatMsg.Tips.class);

@@ -344,6 +344,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                     @Override
                                     public void onFail(int code, String msg) {
                                         super.onFail(code, msg);
+                                        OneKeyLoginManager.getInstance().setLoadingVisibility(false);
                                         if (null == getView()) return;
                                         if (getView() != null) {
                                             getView().onFail(0);
