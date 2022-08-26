@@ -5,43 +5,47 @@
     android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_sign_in_item_bg"
-    android:padding="@dimen/dp_5">
+    android:background="@drawable/shape_sign_in_item_bg">
 
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_light_font"
-        android:textSize="@dimen/sp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="未领取" />
 
-    <ImageView
-        android:id="@+id/iv_gold"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
-        android:maxWidth="@dimen/dp_36"
-        android:maxHeight="@dimen/dp_36"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_status"
-        tools:ignore="ContentDescription"
-        tools:src="@mipmap/peony_qd_wqd_icon" />
+        app:layout_constraintTop_toBottomOf="@id/tv_status">
 
-    <TextView
-        android:id="@+id/tv_gold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_3"
-        android:textColor="@color/color_light_font"
-        android:textSize="@dimen/sp_10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_gold"
-        tools:text="12金币" />
+        <ImageView
+            android:id="@+id/iv_gold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:maxWidth="@dimen/dp_36"
+            android:maxHeight="@dimen/dp_36"
+            android:layout_centerInParent="true"
+            tools:ignore="ContentDescription"
+            tools:src="@mipmap/peony_qd_wqd_icon" />
+
+        <TextView
+            android:id="@+id/tv_gold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_3"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:layout_centerInParent="true"
+            tools:text="+2" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
