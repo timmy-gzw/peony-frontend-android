@@ -40,7 +40,10 @@ public class AvatarImageView extends AppCompatImageView {
             .getDimension(
                     R.dimen.avatar_notification_size);
 
-    private final int DEFAULT_RADIUS = 7;
+    private final int DEFAULT_RADIUS = (int) NimUIKit.getContext()
+            .getResources()
+            .getDimension(
+                    R.dimen.px_avatar_image_view_radius);
     private static final int DEFAULT_AVATAR_RES_ID = R.drawable.ic_default_avatar;
     private String configInfo;
     private final static String CONFIG_INFO_KEY = "configInfo";

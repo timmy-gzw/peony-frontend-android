@@ -115,4 +115,6 @@
     <dimen name="robot_message_link_width">200dp</dimen>
 
     <dimen name="px_size_1">1px</dimen>
+
+    <dimen name="px_avatar_image_view_radius">7px</dimen>
 </resources>

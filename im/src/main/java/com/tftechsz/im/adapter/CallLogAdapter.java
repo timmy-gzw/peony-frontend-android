@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tftechsz.common.adapter.DataBindBaseViewHolder;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.im.BR;
 import com.tftechsz.im.R;
 import com.tftechsz.im.databinding.ItemCallLogBinding;
@@ -33,7 +34,7 @@ public class CallLogAdapter extends BaseQuickAdapter<CallLogDto, DataBindBaseVie
         CommonUtil.setUserName(binding.name, bean.user_nickname, bean.isVip());
         binding.setBotLineVisible(getItemCount() - 1 == helper.getLayoutPosition());
 //        binding.setEndIconVisible(bean.is_tag);
-        GlideUtils.loadRoundImage(getContext(), binding.icon, bean.user_icon);
+        GlideUtils.loadRoundImage(getContext(), binding.icon, bean.user_icon, Utils.getDimensPx(getContext(),R.dimen.px_avatar_image_view_radius));
         if (!TextUtils.isEmpty(bean.color) && bean.color.startsWith("#") && (bean.color.length() == 7 || bean.color.length() == 9)) {
             binding.desc.setTextColor(Color.parseColor(bean.color));
         }
