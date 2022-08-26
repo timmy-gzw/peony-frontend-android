@@ -194,8 +194,8 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         mRvRecharge.setAdapter(adapter);
         View footerView = LayoutInflater.from(mContext).inflate(R.layout.pop_recharge_footer, null);
         RecyclerView mRvPayWay = footerView.findViewById(R.id.rv_pay_way);
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(mContext);
-        mRvPayWay.setLayoutManager(layoutManager1);
+        mRvPayWay.setLayoutManager(new GridLayoutManager(mContext, 2));
+        mRvPayWay.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(20f), ConvertUtils.dp2px(10f), false));
         adapter.addFooterView(footerView);
         PayWayAdapter wayAdapter = new PayWayAdapter(mRechargeDto.payment_type, mRechargeDto, userService.getUserInfo());
         mRvPayWay.setAdapter(wayAdapter);
@@ -493,7 +493,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
 
 
         public PayWayAdapter(@Nullable List<PaymentTypeDto> data, RechargeQuickDto rechargeQuickDto, UserInfo userInfo) {
-            super(R.layout.item_payment_type, data);
+            super(R.layout.item_recharge_pay_type_2, data);
             checkPosition = 0;
             this.rechargeQuickDto = rechargeQuickDto;
             this.userInfo = userInfo;
@@ -506,10 +506,10 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
 
         @Override
         protected void convert(@NonNull BaseViewHolder helper, PaymentTypeDto item) {
+            helper.getView(R.id.cl_root).setSelected(checkPosition == getItemPosition(item));
             GlideUtils.loadRouteImage(getContext(), helper.getView(R.id.iv_icon), item.image);
             helper.setText(R.id.tv_pay_title, item.title);
-            CheckBox checkBox = helper.getView(R.id.checkbox);
-            checkBox.setChecked(checkPosition == helper.getLayoutPosition());
+            helper.setVisible(R.id.iv_checked, checkPosition == getItemPosition(item));
         }
     }
 
