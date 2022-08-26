@@ -96,9 +96,11 @@
     <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" />
     <permission
         android:name="${applicationId}.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
+        android:protectionLe1vel="signature" />
     <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
-
+    <queries>
+        <package android:name="com.tencent.mm" />
+    </queries>
 
     <application android:requestLegacyExternalStorage="true">
         <!--   workManager lazy init     -->
