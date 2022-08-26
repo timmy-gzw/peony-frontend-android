@@ -94,7 +94,7 @@ public class ExchangeDetailsActivity extends BaseMvpActivity<IExchangeDetailView
                 mTvExchangeNum.setText(number);
             }
             mTvCoin.setText(mShopInfo.cost);
-            mTvIntegral.setText(mShopInfo.integral);
+            mTvIntegral.setText(getString(R.string.exchange_coin_reduce) + mShopInfo.integral);
             if (!TextUtils.equals("coin", mShopInfo.type)) {
                 mTips.setVisibility(View.VISIBLE);
                 if (service.getConfigInfo() != null && service.getConfigInfo().sys != null && !TextUtils.isEmpty(service.getConfigInfo().sys.withdraw_tips)) {

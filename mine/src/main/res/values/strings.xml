@@ -27,6 +27,7 @@
     <string name="benifit_record">收益记录</string>
     <string name="integral_exchange">积分兑换</string>
     <string name="exchange_coin">兑换金币</string>
+    <string name="exchange_coin_reduce">""</string>
     <string name="vip_center">会员中心</string>
     <string name="vip_un_open">VIP会员未开通</string>
     <string name="vip_privilege">%d大特权，提升个性化体验</string>

@@ -6,7 +6,6 @@
     android:layout_height="60dp"
     android:layout_marginHorizontal="@dimen/dp_16"
     android:background="@drawable/bg_integral_exchange"
-    android:paddingStart="@dimen/dp_16"
     android:layout_marginTop="@dimen/dp_20"
     android:paddingEnd="@dimen/dp_16">
 
