@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_38"
+    tools:background="#33000000">
+
+    <View
+        android:id="@+id/iv_top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@mipmap/bg_pop_sign_in_header"
+        app:layout_constraintDimensionRatio="375:150"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/tv_daily_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_7"
+        android:src="@mipmap/sign_every_day"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_sign_in_c"
+        app:layout_constraintStart_toStartOf="@id/tv_sign_in_c" />
+
+    <TextView
+        android:id="@+id/tv_sign_in_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/dp_36"
+        android:background="@drawable/sp_white_c_5"
+        android:paddingHorizontal="@dimen/dp_8"
+        android:paddingVertical="@dimen/dp_2"
+        android:textColor="#C52828"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="@id/iv_top"
+        app:layout_constraintStart_toStartOf="@id/iv_top"
+        tools:text="已经连续签到 2 天" />
+
+    <LinearLayout
+        android:id="@+id/ll_sinn_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_bottom_radius10"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/iv_top">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sign_recy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_bottom_radius10"
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/dp_20"
+            android:paddingVertical="@dimen/dp_20" />
+
+        <TextView
+            android:id="@+id/tv_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/bg_red_sign"
+            android:gravity="center"
+            android:padding="@dimen/dp_14"
+            android:text="@string/sign_in"
+            android:textColor="@color/sel_text_fff_999_enable"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_33"
+        android:src="@mipmap/ic_close_white"
+        android:layout_marginEnd="@dimen/dp_9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_sinn_in"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
