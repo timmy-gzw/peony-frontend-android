@@ -171,19 +171,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/real_hint" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/iv_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/real_root"
+            android:scaleType="center"
+            android:src="@mipmap/ic_close_white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/dp_9"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
-    <ImageView
-        android:id="@+id/iv_del"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/real_root"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="@dimen/dp_30"
-        android:scaleType="center"
-        android:src="@mipmap/real_pop_del"
-        android:visibility="gone"
-        tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>
