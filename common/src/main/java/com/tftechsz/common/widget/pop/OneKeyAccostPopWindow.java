@@ -79,9 +79,9 @@ public class OneKeyAccostPopWindow extends BaseCenterPop implements OnItemClickL
 
         mTvHint = findViewById(R.id.top_hint);
         if(userService.getUserInfo().isGirl()){
-            mTvHint.setText("今天的你和他们很有缘哦～");
+            mTvHint.setText(getContext().getString(R.string.one_key_accost_boy));
         }else{
-            mTvHint.setText("今天的你和她们很有缘哦～");
+            mTvHint.setText(getContext().getString(R.string.one_key_accost_girl));
         }
     }
 

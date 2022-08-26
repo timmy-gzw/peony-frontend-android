@@ -96,7 +96,7 @@
     <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" />
     <permission
         android:name="${applicationId}.permission.C2D_MESSAGE"
-        android:protectionLe1vel="signature" />
+        android:protectionLevel="signature" />
     <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
     <queries>
         <package android:name="com.tencent.mm" />

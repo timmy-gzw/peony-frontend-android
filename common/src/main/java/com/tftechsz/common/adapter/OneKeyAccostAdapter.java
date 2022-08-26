@@ -32,10 +32,10 @@ public class OneKeyAccostAdapter extends BaseQuickAdapter<ChatMsg.AccostPopup, B
         LinearLayout llage = helper.getView(R.id.ll_age);
         if(null != item.sex){
             if(item.sex.equals("2")){
-                llage.setBackgroundResource(R.drawable.bg_girl);
+                llage.setBackgroundResource(R.drawable.bg_girl_age_sex);
                 sex.setImageResource(R.drawable.ic_girl);
             }else{
-                llage.setBackgroundResource(R.drawable.bg_boy);
+                llage.setBackgroundResource(R.drawable.bg_boy_age_sex);
                 sex.setImageResource(R.drawable.ic_boy);
             }
         }

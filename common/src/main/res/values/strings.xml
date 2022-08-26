@@ -73,4 +73,7 @@
     <string name="daily_sign_in">每日签到</string>
     <string name="get_more_coin">领取更多金币</string>
     <string name="sign_in_success_format">恭喜你获得%s</string>
+
+    <string name="one_key_accost_boy">今天的你和他们很有缘哦～</string>
+    <string name="one_key_accost_girl">今天的你和她们很有缘哦～</string>
 </resources>

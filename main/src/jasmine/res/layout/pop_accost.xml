@@ -4,9 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/dp_30"
+    android:layout_gravity="center"
+    android:layout_marginStart="@dimen/dp_30"
+    android:layout_marginEnd="@dimen/dp_30"
     android:background="@drawable/sp_pop_bg"
+    android:gravity="center"
+    android:orientation="vertical"
     android:padding="@dimen/dp_12">
+
+
+    <FrameLayout
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日佳缘"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/top_img"
@@ -32,56 +57,34 @@
         app:layout_constraintTop_toTopOf="@id/fl_title"
         tools:ignore="ContentDescription" />
 
+
     <ImageView
-        android:id="@+id/del"
+        android:id="@+id/iv_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_3"
         android:src="@mipmap/peony_gb_icon2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-
-    <FrameLayout
-        android:id="@+id/fl_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="今日佳缘"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/sp_18"
-            android:textStyle="bold" />
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/top_hint"
+        android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_6"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_3"
         android:text="恋爱天使为你推荐今日最佳缘分"
-        android:textColor="@color/color_normal"
-        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_mid_font"
+        android:textSize="@dimen/sp_13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fl_title" />
+        app:layout_constraintTop_toBottomOf="@+id/fl_title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recy"
+        android:id="@+id/rv_accost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/top_hint" />
+        app:layout_constraintTop_toBottomOf="@id/tv_content" />
+
 
     <LinearLayout
         android:id="@+id/ll_btn"
@@ -93,7 +96,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recy">
+        app:layout_constraintTop_toBottomOf="@id/rv_accost">
 
         <ImageView
             android:layout_width="wrap_content"

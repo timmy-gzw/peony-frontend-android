@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_90"
+        android:layout_margin="@dimen/dp_8"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/nim_avatar_default" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginHorizontal="@dimen/dp_8"
+        android:background="@drawable/bg_grey_alpha"
+        app:layout_constraintBottom_toBottomOf="@id/icon"
+        app:layout_constraintLeft_toLeftOf="@id/icon"
+        app:layout_constraintRight_toRightOf="@id/icon" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_4"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toTopOf="@id/ll_age"
+        app:layout_constraintStart_toStartOf="@id/ll_age"
+        tools:text="难过的乐曲" />
+
+    <LinearLayout
+        android:id="@+id/ll_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_6"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:background="@drawable/bg_boy"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/icon"
+        app:layout_constraintStart_toStartOf="@id/icon">
+
+        <ImageView
+            android:id="@+id/iv_sex"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_3"
+            android:src="@drawable/ic_boy" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_8"
+            tools:text="22" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_check"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:src="@mipmap/ic_check_selector"
+        app:layout_constraintEnd_toEndOf="@id/icon"
+        app:layout_constraintTop_toTopOf="@id/icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
