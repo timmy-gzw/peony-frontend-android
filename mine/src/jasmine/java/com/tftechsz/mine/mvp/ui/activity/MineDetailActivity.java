@@ -181,7 +181,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         ivPicAdd = findViewById(R.id.iv_profile_add);
         viewPicMask = findViewById(R.id.view_mask);
         ivPicAdd.setOnClickListener(this);
-        ivPicAdd.setVisibility(mUserId.equals(String.valueOf(service.getUserId())) ? View.VISIBLE : View.GONE);
+        ivPicAdd.setVisibility(TextUtils.isEmpty(mUserId) ? View.VISIBLE : View.GONE);
         mRvPic = findViewById(R.id.rv_profile_pic);
         mRvPic.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         mRvPic.addItemDecoration(new SpaceItemDecoration(ConvertUtils.dp2px(6), 0, false));
