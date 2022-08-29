@@ -94,8 +94,8 @@
                     android:layout_marginTop="-65dp"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:background="@mipmap/ic_discount_price"
-                    android:paddingStart="@dimen/dp_14"
                     android:paddingTop="@dimen/dp_2"
+                    android:gravity="center_horizontal"
                     android:text="超值优惠"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_10" />

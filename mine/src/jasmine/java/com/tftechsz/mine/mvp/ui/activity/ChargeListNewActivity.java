@@ -77,8 +77,6 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
         smartRefreshLayout.setOnRefreshListener(refreshLayout -> getRechargeInfo());
         RecyclerView rvCoins = findViewById(R.id.recycleview);
         rvCoins.setLayoutManager(new LinearLayoutManager(this));
-        rvCoins.addItemDecoration(new SpacingDecoration(0, ConvertUtils.dp2px(10f), true));
-        rvCoins.setPadding(ConvertUtils.dp2px(16f), 0, ConvertUtils.dp2px(16f), ConvertUtils.dp2px(16f));
         mAdapter = new RechargeAdapter();
         mAdapter.setEmptyView(new EmptyView(this));
         rvCoins.setAdapter(mAdapter);

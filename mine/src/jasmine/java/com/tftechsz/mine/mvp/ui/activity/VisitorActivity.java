@@ -1,5 +1,6 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.gyf.immersionbar.ImmersionBar;
+import com.netease.nim.uikit.common.util.log.sdk.wrapper.NimLog;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.iservice.UserProviderService;
@@ -142,8 +144,8 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
             if (tvBottomTip == null) {
                 tvBottomTip = new TextView(this);
                 tvBottomTip.setTextSize(12);
-                tvBottomTip.setTextColor(ContextCompat.getColor(this, R.color.color_light_font));
-                tvBottomTip.setText(getString(R.string.visitor_vip_tip));
+                tvBottomTip.setTextColor(Color.parseColor("#CCCCCC"));
+                tvBottomTip.setText(String.format(getString(R.string.visitor_vip_tip), service.getUserInfo().isGirl() ? "他" : "她"));
                 tvBottomTip.setGravity(Gravity.CENTER);
                 int padding = ConvertUtils.dp2px(16f);
                 tvBottomTip.setPadding(padding, padding, padding, padding);

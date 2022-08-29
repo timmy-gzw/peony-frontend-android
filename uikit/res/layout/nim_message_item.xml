@@ -40,6 +40,7 @@
         android:layout_height="@dimen/dp_size_59"
         android:layout_below="@+id/message_item_time"
         android:layout_marginStart="@dimen/dp_size_5"
+        android:layout_marginTop="@dimen/dp_size_5"
         android:layout_toEndOf="@id/message_item_multi_check_box"
         android:visibility="gone"
         app:is_round="true"
@@ -67,6 +68,7 @@
         android:layout_alignParentRight="true"
         android:visibility="gone"
         app:is_round="true"
+        android:layout_marginTop="@dimen/dp_size_5"
         app:vip_height="@dimen/dp_size_59"
         app:vip_margin="@dimen/dp_size_7"
         app:vip_width="@dimen/dp_size_59" />

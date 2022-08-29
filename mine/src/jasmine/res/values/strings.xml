@@ -7,4 +7,5 @@
     <string name="living_person_auth_tip">完成认证，交友成功率提升10倍</string>
     <string name="real_name_cert_tip">完成认证，解锁积分兑换等功能</string>
     <string name="exchange_coin_reduce">-</string>
+    <string name="visitor_vip_tip">除了%s们，还有不少人也看过你哦\n开通会员不错过缘分</string>
 </resources>
