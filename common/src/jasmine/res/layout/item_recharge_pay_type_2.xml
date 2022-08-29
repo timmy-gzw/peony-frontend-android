@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/cl_root"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/dp_62"
     android:background="@drawable/sel_s_primary_r_10">
 
@@ -43,8 +43,8 @@
         android:layout_centerVertical="true"
         android:background="@mipmap/ic_pay_type_selected_c"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

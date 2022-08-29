@@ -13,7 +13,6 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -473,8 +471,8 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         protected void convert(@NonNull BaseViewHolder helper, RechargeDto item) {
             RelativeLayout rlRoot = helper.getView(R.id.rl_root);
             TextView tvDesc = helper.getView(R.id.tv_desc);
-            helper.setText(R.id.tv_coin, item.coin.replace(getContext().getResources().getString(R.string.coin), ""))
-                    .setText(R.id.tv_rmb, "¥" + item.rmb);
+            helper.setText(R.id.tv_coin, item.coin)
+                    .setText(R.id.tv_rmb, item.rmb + "元");
             helper.setGone(R.id.ll_desc, TextUtils.isEmpty(item.title));
             tvDesc.setText(item.title);
             if (checkPosition == helper.getLayoutPosition()) {
