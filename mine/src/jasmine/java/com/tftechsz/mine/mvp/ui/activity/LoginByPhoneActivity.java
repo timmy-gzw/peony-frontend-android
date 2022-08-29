@@ -13,6 +13,7 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.KeyboardUtils;
@@ -43,6 +44,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
     private TextView mTvTip;
     private TextView tvGetCode;
     private TextView tvLogin;
+    private ImageView mIvDel;
     private final int mMax = 2000;
     private final int mMin = 1000;
     private CountBackUtils countBackUtils;
@@ -65,8 +67,10 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
         mTvTip = findViewById(R.id.tv_tip);
         tvGetCode = findViewById(R.id.tv_get_code);
         tvLogin = findViewById(R.id.tv_login);
+        mIvDel = findViewById(R.id.iv_del);
         tvGetCode.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
+        mIvDel.setOnClickListener(this);
         findViewById(R.id.tv_one_key_login).setOnClickListener(this);
         mEtPhone.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -159,6 +163,8 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
             toLogin();
         } else if (id == R.id.tv_one_key_login) {
             finish();
+        } else if (id == R.id.iv_del){
+            mEtPhone.setText("");
         }
     }
 
@@ -272,7 +278,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
                 && code.length() == 13) ? R.drawable.shape_login_btn : R.drawable.shape_bg_login_phone);
         tvGetCode.setTextColor((!TextUtils.isEmpty(Utils.getText(mEtPhone))
                 && code.length() == 13) ? Color.parseColor("#ffffff") : Color.parseColor("#999999"));
-
+        mIvDel.setVisibility(!TextUtils.isEmpty(code) ? View.VISIBLE : View.GONE );
     }
 
     private class MyInputFilter implements TextWatcher {

@@ -6,7 +6,7 @@
     android:layout_marginStart="@dimen/dp_35"
     android:layout_marginEnd="@dimen/dp_35"
     android:paddingBottom="@dimen/dp_20"
-    android:background="@drawable/bg_white">
+    android:background="@drawable/sp_pop_bg">
 
     <FrameLayout
         android:id="@+id/fl_title"
