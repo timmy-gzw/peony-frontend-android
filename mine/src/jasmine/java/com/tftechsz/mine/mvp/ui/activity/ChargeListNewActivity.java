@@ -94,7 +94,7 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
             }
             if (mRechargeBean == null) return;
             payPopWindow.setTypeId(mRechargeBean.id);
-            payPopWindow.setPayInfo(mRechargeBean.coin, mRechargeBean.rmb);
+            payPopWindow.setPayInfo(mRechargeBean.rmb, mRechargeBean.coin);
             payPopWindow.showPopupWindow();
         });
         initRxBus();

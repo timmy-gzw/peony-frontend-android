@@ -139,7 +139,7 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
             MMKVUtils.getInstance().encode(Constants.AGREED_TO_TOS, isChecked);
         });
         ConfigInfo configInfo = service.getConfigInfo();
-        String res = "同意《用户协议》和《隐私政策》";
+        String res = "我已阅读并同意《用户协议》和《隐私政策》";
         if (configInfo != null && configInfo.sys.user_protocol == 1) {
             mCheckBox.setVisibility(View.VISIBLE);
         } else {

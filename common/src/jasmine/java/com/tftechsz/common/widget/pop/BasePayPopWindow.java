@@ -88,7 +88,7 @@ public class BasePayPopWindow extends BaseBottomPop {
         if (mBind == null) return;
         if (!TextUtils.isEmpty(rmb) && !TextUtils.isEmpty(coin)) {
             mBind.tvPayInfo.setVisibility(View.VISIBLE);
-            mBind.tvPayInfo.setText(Html.fromHtml(getContext().getString(R.string.recharge_coin_rmb_format, coin, rmb)));
+            mBind.tvPayInfo.setText(Html.fromHtml(getContext().getString(R.string.recharge_coin_rmb_format, rmb, coin)));
             mBind.tvPay.setText(getContext().getString(R.string.recharge_now_format, rmb));
         } else {
             mBind.tvPayInfo.setVisibility(View.GONE);
