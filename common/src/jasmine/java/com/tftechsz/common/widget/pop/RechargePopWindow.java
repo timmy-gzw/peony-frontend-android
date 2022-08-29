@@ -6,11 +6,12 @@ import static com.tftechsz.common.constant.Interfaces.SCENE_NUMBER;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.text.style.UnderlineSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -182,7 +183,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
                 if (!TextUtils.isEmpty(mineInfo.link)) {
                     int start = builder.toString().indexOf(mineInfo.title);
                     builder.setSpan(new PayTextClick(mContext, mineInfo), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    builder.setSpan(new UnderlineSpan(), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    builder.setSpan(new ForegroundColorSpan(Color.parseColor("#5397FF")), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
             mTvContact.setText(builder);
@@ -193,7 +194,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         View footerView = LayoutInflater.from(mContext).inflate(R.layout.pop_recharge_footer, null);
         RecyclerView mRvPayWay = footerView.findViewById(R.id.rv_pay_way);
         mRvPayWay.setLayoutManager(new GridLayoutManager(mContext, 2));
-        mRvPayWay.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(20f), ConvertUtils.dp2px(10f), false));
+        mRvPayWay.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(10f), ConvertUtils.dp2px(10f), false));
         adapter.addFooterView(footerView);
         PayWayAdapter wayAdapter = new PayWayAdapter(mRechargeDto.payment_type, mRechargeDto, userService.getUserInfo());
         mRvPayWay.setAdapter(wayAdapter);
@@ -231,7 +232,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
 
     private void setPayButton() {
         if (mRechargeData != null) {
-            mTvPay.setText("立即支付" + mRechargeData.rmb + "元");
+            mTvPay.setText("立即充值 " + mRechargeData.rmb + "元");
         }
     }
 
