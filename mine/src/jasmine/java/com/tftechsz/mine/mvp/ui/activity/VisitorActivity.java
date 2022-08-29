@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -15,8 +14,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-import com.netease.nim.uikit.common.util.log.sdk.wrapper.NimLog;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.iservice.UserProviderService;
@@ -61,7 +60,7 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        ImmersionBar.setTitleBar(this, mBind.include);
+        ImmersionBar.with(this).titleBar(mBind.include).hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR).init();
         TextView title = mBind.include.findViewById(R.id.toolbar_title);
         title.setText("谁看过我");
         mBind.include.findViewById(R.id.toolbar_back_all).setOnClickListener(v -> finish());
