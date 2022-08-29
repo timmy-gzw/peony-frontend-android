@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="#aa000000">
+
+
+    <ImageView
+        android:id="@+id/level_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@mipmap/peony_qd_bbg_icon"
+        app:layout_constraintDimensionRatio="375:410"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <FrameLayout
+        android:id="@+id/icon_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rl_name"
+        app:layout_constraintVertical_bias="1"
+        android:layout_marginBottom="@dimen/dp_10"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/icon_stroke"
+            android:layout_width="@dimen/dp_size_80"
+            android:layout_height="@dimen/dp_size_80"
+            android:layout_gravity="center"
+            android:src="@drawable/bg_avater_wealth"
+            app:riv_corner_radius="@dimen/dp_21" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/dp_size_78"
+            android:layout_height="@dimen/dp_size_78"
+            android:layout_gravity="center"
+            android:src="@mipmap/mine_ic_girl_default"
+            app:riv_corner_radius="@dimen/dp_21" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/level_tips">
+        <ImageView
+            android:id="@+id/iv_level_up_icon"
+            android:layout_width="@dimen/dp_76"
+            android:layout_height="@dimen/dp_20"
+            android:src="@mipmap/mine_bg_rich_content"
+            android:layout_centerInParent="true"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_level_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_26"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10"
+            tools:text="我是称号" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/level_tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_80"
+        android:layout_marginBottom="@dimen/dp_45"
+        android:gravity="center"
+        android:textColor="#E57810"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="@id/level_bg"
+        app:layout_constraintEnd_toEndOf="@id/level_bg"
+        app:layout_constraintStart_toStartOf="@id/level_bg"
+        tools:text="恭喜！财富等级提升到LV.11" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

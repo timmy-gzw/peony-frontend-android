@@ -514,7 +514,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         } else if (id == R.id.ll_attention) {  // 个人/关注
             startMineFriend(MineFriendActivity.TYPE_WATCH);
         } else if (id == R.id.cl_top) {   //我的资料
-            ARouterUtils.toMineDetailActivity(String.valueOf(service.getUserId()));
+            ARouterUtils.toMineDetailActivity("");
         } else if (id == R.id.tv_setting) {  //设置
             startActivity(SettingActivity.class);
         } else if (id == R.id.ll_jifen) {  //收益
