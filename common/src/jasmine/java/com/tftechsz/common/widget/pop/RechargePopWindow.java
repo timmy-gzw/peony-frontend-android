@@ -204,6 +204,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
                 mRechargeData = adapter.getItem(i);
             }
         }
+        setPayButton();
         //获取默认选中
         for (int i = 0; i < mRechargeDto.payment_type.size(); i++) {
             if (mRechargeDto.payment_type.get(i).is_active == 1) {
@@ -214,6 +215,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         adapter.setOnItemClickListener((adapter1, view, position) -> {
             adapter.setCheckPositions(position);
             mRechargeData = adapter.getItem(position);
+            setPayButton();
         });
         wayAdapter.setOnItemClickListener((adapter12, view, position) -> {
             wayAdapter.setCheckPositions(position);
@@ -227,6 +229,11 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         }
     }
 
+    private void setPayButton() {
+        if (mRechargeData != null) {
+            mTvPay.setText("立即支付" + mRechargeData.rmb + "元");
+        }
+    }
 
     @Override
     protected View createPopupById() {
