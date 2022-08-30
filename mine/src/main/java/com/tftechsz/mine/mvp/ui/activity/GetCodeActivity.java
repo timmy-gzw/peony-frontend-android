@@ -10,13 +10,12 @@ import com.blankj.utilcode.util.SPUtils;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.common.utils.CountBackUtils;
 import com.tftechsz.common.utils.MMKVUtils;
-import com.tftechsz.common.utils.StringUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.dto.LoginDto;
-import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.mine.mvp.IView.ILoginView;
 import com.tftechsz.mine.mvp.presenter.LoginPresenter;
 import com.tftechsz.mine.utils.UserManager;
@@ -95,7 +94,7 @@ public class GetCodeActivity extends BaseMvpActivity<ILoginView, LoginPresenter>
         countBackUtils.countBack(Interfaces.WAITING_TIME, new CountBackUtils.Callback() {
             @Override
             public void countBacking(long time) {
-                mTvGetCode.setText("重新获取(" + time + "s)");
+                mTvGetCode.setText("重新获取(" + time + ")");
                 mTvGetCode.setEnabled(false);
                 mTvGetCode.setBackgroundResource(R.drawable.shape_bg_login_phone);
                 mTvGetCode.setTextColor(Color.parseColor("#999999"));

@@ -117,7 +117,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     @Override
     protected void initView(Bundle savedInstanceState) {
         new ToolBarBuilder().showBack(true)
-                .setTitle("我的资料")
+                .setTitle("编辑资料")
                 .build();
         mItemSign = findViewById(R.id.tv_right_friend);
         mIvAvatar = findViewById(R.id.iv_avatar);
