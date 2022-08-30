@@ -69,9 +69,9 @@ ext {
             UMENG_APPKEY       : "62f37e4f05844627b5188e6a",//友盟   √
             UMENG_PUSH_SECRET  : "88a1d7442b985a794588a762e76e524f",//友盟   √
             BAIDU_APPKEY       : "GzzOUnxY17OiR0E7ryE9GZysTSTjpC8l",   //百度key  √
-            VIVO_APP_ID        : "105583463",   //VIVO ID
-            VIVO_APP_KEY       : "bbe6020b8edc6b951c8d8d9df52e0137",
-            buglyKey           : "dbbaf62265",
+            VIVO_APP_ID        : "105586911",   //VIVO ID
+            VIVO_APP_KEY       : "c384302a365787908b90828389597ef6",
+            buglyKey           : "fb49a5468d",
             urlLinkHost        : "ivy.peony.com",
     ]
 
