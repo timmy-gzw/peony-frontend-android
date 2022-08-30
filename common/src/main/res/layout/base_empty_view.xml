@@ -24,7 +24,7 @@
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center_horizontal"
         android:text="暂无任何数据..."
-        android:textColor="@color/color_cc"
+        android:textColor="@color/c_empty_text"
         android:textSize="@dimen/sp_15" />
 
     <TextView

@@ -101,4 +101,5 @@
     <color name="at">#7F89F3</color>
     <color name="c_continue_pair">@color/c_99ff3a74</color>
     <color name="c_continue_pair_video">@color/c_993875FF</color>
+    <color name="c_empty_text">@color/color_cc</color>
 </resources>
