@@ -128,7 +128,7 @@ public class WealthFragment extends BaseMvpFragment {
     protected void initData() {
         getData();
         service = ARouter.getInstance().navigation(UserProviderService.class);
-        if (!String.valueOf(service.getUserId()).equals(userId)) {//他人
+        if (!TextUtils.isEmpty(userId)) {//他人
             mClBg.setVisibility(View.GONE);
         } else {//自己
             mClBg.setVisibility(View.VISIBLE);
