@@ -38,6 +38,9 @@ public class UserLevelUpPop extends BaseCenterPop {
         levelTips = findViewById(R.id.level_tips);
         ivLevelBg = findViewById(R.id.level_bg);
         GlideUtils.loadRouteImage(getContext(), icon, service.getUserInfo().getIcon());
+        findViewById(R.id.del).setOnClickListener(v->{
+            dismiss();
+        });
     }
 
     @Override

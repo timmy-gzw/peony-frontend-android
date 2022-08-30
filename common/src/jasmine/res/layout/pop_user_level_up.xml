@@ -92,5 +92,15 @@
         app:layout_constraintStart_toStartOf="@id/level_bg"
         tools:text="恭喜！财富等级提升到LV.11" />
 
+    <ImageView
+        android:id="@+id/del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_17"
+        android:src="@mipmap/ic_charm_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/level_bg" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
