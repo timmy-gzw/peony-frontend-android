@@ -9,9 +9,12 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
 import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.BaseCenterPop;
 import com.tftechsz.mine.widget.TextClick;
 import com.yl.lib.sentry.hook.PrivacySentry;
@@ -41,9 +44,9 @@ public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListe
         SpannableStringBuilder builder = new SpannableStringBuilder(res);
         int stat = res.indexOf("《");
         builder.setSpan(new TextClick(mContext, 0), stat, stat + 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#7F89F3")), stat, stat + 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Utils.getColor(R.color.link_color)), stat, stat + 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new TextClick(mContext, 1), stat + 9, stat + 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#7F89F3")), stat + 9, stat + 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Utils.getColor(R.color.link_color)), stat + 9, stat + 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvContent.setText(builder);
         tvContent.setMovementMethod(LinkMovementMethod.getInstance());
         findViewById(R.id.tv_agree).setOnClickListener(this);

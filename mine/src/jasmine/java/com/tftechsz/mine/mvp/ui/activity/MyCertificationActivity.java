@@ -46,6 +46,7 @@ public class MyCertificationActivity extends BaseMvpActivity<IMyCertificationVie
                 .setTitle("我的认证")
                 .setTitleColor(R.color.white)
                 .setBackgroundColor(0)
+                .showViewLine(false)
                 .setBackTint(R.color.white)
                 .build();
 

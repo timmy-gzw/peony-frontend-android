@@ -51,6 +51,7 @@ public class MineIntegralNewActivity extends BaseMvpActivity<IMineIntegralView, 
                 .setRightText(getString(R.string.benifit_record), this)
                 .setRightTextColor(R.color.white)
                 .setBackTint(R.color.white)
+                .showViewLine(false)
                 .build();
         if (baseTitle != null) {
             baseTitle.setBackgroundResource(0);

@@ -68,6 +68,7 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
                 .setRightText(getString(R.string.income_and_expenditude_records), v -> ARouterUtils.toIntegralDetailedActivity(1))
                 .setRightTextColor(R.color.white)
                 .setBackgroundColor(0)
+                .showViewLine(false)
                 .setBackTint(R.color.white)
                 .build();
         mTvCoin = findViewById(R.id.tv_coin_num);

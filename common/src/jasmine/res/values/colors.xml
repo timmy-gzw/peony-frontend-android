@@ -34,4 +34,5 @@
     <color name="at">#5397FF</color>
     <color name="c_continue_pair">@color/colorPrimary</color>
     <color name="c_continue_pair_video">#999638FF</color>
+    <color name="link_color">#5397FF</color>
 </resources>

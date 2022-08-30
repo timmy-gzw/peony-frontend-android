@@ -165,11 +165,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
         public TextView titleTv;
         public ImageView rightIv;
         public TextView rightTv;
+        public View  toolView;
         private String title;
         private int rightRes = -1;
         private View.OnClickListener rightListener, rightTextListener;
         private String rightText;
-        private boolean isBackShow;
+        private boolean isBackShow,isViewShow = true;
         private boolean isRightImgShow, isRightTxtShow = true;
         private int backgroundColor = -1, backViewColor = -1, titleTextColor, rightTextColor, rightTextBg;
         private int backRes = -1;
@@ -185,6 +186,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
                 rightIv = findViewById(R.id.toolbar_iv_menu);
                 rightTv = findViewById(R.id.toolbar_tv_menu);
                 toolbarMenu = findViewById(R.id.toolbar_menu);
+                toolView = findViewById(R.id.tool_view);
             }
         }
 
@@ -195,6 +197,11 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
 
         public ToolBarBuilder showBack(boolean isShow) {
             isBackShow = isShow;
+            return this;
+        }
+
+        public ToolBarBuilder showViewLine(boolean isShow) {
+            isViewShow = isShow;
             return this;
         }
 
@@ -276,13 +283,24 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             if (rightTextColor > 0) {
                 rightTv.setTextColor(getResources().getColor(rightTextColor));
             }
-            if (!TextUtils.isEmpty(rightText)) {
+            if (!TextUtils.isEmpty(rightText)) {{
                 rightTv.setText(rightText);
                 rightTv.setOnClickListener(rightTextListener);
                 if (rightTextBg > 0) {
                     rightTv.setBackgroundResource(rightTextBg);
                 }
             }
+                rightTv.setText(rightText);
+                rightTv.setOnClickListener(rightTextListener);
+                if (rightTextBg > 0) {
+                    rightTv.setBackgroundResource(rightTextBg);
+                }
+            }
+
+            if(!isViewShow){
+                toolView.setVisibility( View.INVISIBLE);
+            }
+
 
             if (isBackShow) {
                 backBtn.setVisibility(View.VISIBLE);

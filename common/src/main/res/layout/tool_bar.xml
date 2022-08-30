@@ -58,4 +58,12 @@
             android:textSize="@dimen/sp_14" />
 
     </LinearLayout>
+    <View
+        android:id="@+id/tool_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:visibility="gone"
+        android:background="@color/bg_color"
+        android:layout_below="@+id/toolbar_back_all"
+        />
 </RelativeLayout>

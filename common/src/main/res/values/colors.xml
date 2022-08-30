@@ -92,6 +92,7 @@
     <color name="c_50CD5C33_2">#CD5C33</color>
     <color name="c_CD5C33">#50CD5C33</color>
     <color name="c_exchange_num">#7F89F3</color>
+    <color name="link_color">#7F89F3</color>
     <color name="c_993875FF">#993875FF</color>
     <color name="c_99ff3a74">#99ff3a74</color>
     <color name="c_tab_color">@color/colorPrimary</color>
