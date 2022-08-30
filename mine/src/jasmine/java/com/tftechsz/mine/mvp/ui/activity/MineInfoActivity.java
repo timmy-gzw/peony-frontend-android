@@ -146,6 +146,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         mRvPicture = findViewById(R.id.rv_picture);
         mRvPicture.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         pictures = new ArrayList<>();
+        pictures.add("");
         adapter = new MinePictureAdapter(pictures);
         mRvPicture.setAdapter(adapter);
 
@@ -682,6 +683,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
 
     @Override
     public void getPhotoSuccess(List<String> data) {
+        pictures.clear();
         if(data.size()<8){
             pictures.add("");
         }
