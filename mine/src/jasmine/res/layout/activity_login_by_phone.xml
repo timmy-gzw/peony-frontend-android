@@ -156,7 +156,6 @@
                 android:layout_height="50dp"
                 android:background="@drawable/shape_bg_login_phone"
                 android:gravity="center"
-                android:padding="@dimen/dp_16"
                 android:text="@string/main_get_phone_code"
                 android:textColor="#999999"
                 android:textSize="@dimen/sp_16"
