@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.KeyEvent;
@@ -60,6 +61,7 @@ import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ConstraintUtil;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.MaxTextTwoLengthFilter;
 import com.tftechsz.common.widget.NumIndicator;
@@ -208,7 +210,12 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
                                 case 0: //回复
                                     com.blankj.utilcode.util.KeyboardUtils.showSoftInput();
                                     comment_id = event.getComment_id();
-                                    mEtComment.setHint("回复@" + event.getUser_name());
+                                    SpannableStringBuilder stringBuilder = new SpannableStringUtils.Builder()
+                                            .append("回复")
+                                            .append("@"+event.getUser_name())
+                                            .setForegroundColor(getResources().getColor(R.color.at))
+                                            .create();
+                                    mEtComment.setHint(stringBuilder);
                                     break;
 
                                 case -1: //删除
