@@ -101,7 +101,7 @@ public class EditInfoActivity extends BaseMvpActivity<IEditInfoView, EditInfoPre
         String mSign = getIntent().getStringExtra("sign");
 
         if (type == TYPE_NAME) {
-            mTvTitle.setText("修改昵称");
+            mTvTitle.setText(getString(R.string.edit_nickname));
             mEtContent.setText(service.getUserInfo().getNickname());
             mEtContent.setHint("昵称仅支持中文");
             length = Constants.MAX_NAME_LENGTH;

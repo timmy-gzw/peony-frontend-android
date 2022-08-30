@@ -400,13 +400,13 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
     public void chooseIncome(Context context, RelativeLayout relativeLayout, String income) {
         int position = 0;
         List<String> list = new ArrayList<>();
-        list.add("5W以下");
-        list.add("5~10W");
-        list.add("10~20W");
-        list.add("20~30W");
-        list.add("30~50W");
-        list.add("50~100W");
-        list.add("100W以上");
+        list.add("5万以下");
+        list.add("5~10万");
+        list.add("10~20万");
+        list.add("20~30万");
+        list.add("30~50万");
+        list.add("50~100万");
+        list.add("100万以上");
         for (int i = 0; i < list.size(); i++) {
             if (TextUtils.equals(income, list.get(i))) {
                 position = i;

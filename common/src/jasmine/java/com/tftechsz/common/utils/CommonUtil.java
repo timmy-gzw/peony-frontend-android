@@ -877,7 +877,7 @@ public class CommonUtil {
         }
 
         if (isSetColor) {
-            textview.setTextColor(Utils.getColor(R.color.red));
+            textview.setTextColor(Utils.getColor(R.color.vip_color));
         } else {
             textview.setTextColor(Utils.getColor(R.color.color_normal));
         }
