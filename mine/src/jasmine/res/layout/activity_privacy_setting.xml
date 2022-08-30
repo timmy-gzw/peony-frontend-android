@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_76"
         android:background="@color/white"
+        android:layout_marginTop="@dimen/dp_10"
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
