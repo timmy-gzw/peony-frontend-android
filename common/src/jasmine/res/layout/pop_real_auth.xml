@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/dp_26"
     android:layout_marginEnd="@dimen/dp_26">
@@ -99,14 +99,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/real_root"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         tools:visibility="visible">
 
         <ImageView
             android:id="@+id/top_bg"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:scaleType="fitXY"
             android:src="@mipmap/peony_zrrztc_tb_png"
@@ -115,10 +115,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/bg_white_bottom_radius10"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/real_title"
             app:layout_constraintTop_toTopOf="@id/real_title" />
 
         <TextView
@@ -140,11 +142,12 @@
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
             android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="@id/top_bg"
             app:layout_constraintTop_toBottomOf="@id/real_title" />
 
         <TextView
             android:id="@+id/real_hint"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_30"
@@ -152,6 +155,7 @@
             android:gravity="center_vertical"
             android:textColor="#FC5858"
             android:textSize="@dimen/sp_14"
+            app:layout_constraintLeft_toLeftOf="@id/top_bg"
             app:drawableStartCompat="@mipmap/peony_wwjg_icon_jasmine"
             app:layout_constraintTop_toBottomOf="@id/real_recy"
             tools:text="未通过真人认证，部分功能将会限制使用！" />

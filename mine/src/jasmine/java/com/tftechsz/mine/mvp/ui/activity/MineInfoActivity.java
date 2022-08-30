@@ -376,7 +376,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     private void setSign() {
         if (TextUtils.isEmpty(mUserInfo.getDesc()) || TextUtils.equals("0", mUserInfo.getDesc())) {
             if (TextUtils.isEmpty(mUserInfo.audit_desc)) {
-                mTvAudit.setText("待完善");
+                mTvAudit.setText("未填写");
                 mTvAudit.setVisibility(View.VISIBLE);
                 mItemSign.setVisibility(View.GONE);
                 mTvSignAudit.setVisibility(View.GONE);
@@ -640,6 +640,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                     mUserInfo.setDesc(desc);
                     if (service.getUserInfo() != null && service.getUserInfo().isGirl()) {
                         mTvSignAudit.setVisibility(View.VISIBLE);
+                        mTvAudit.setVisibility(View.GONE);
                         mUserInfo.audit_desc = desc;
                     }
                 }
