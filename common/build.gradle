@@ -91,7 +91,7 @@ android {
             buildConfigField "String", "APP_NAME", "\"jasmine\""
             buildConfigField "String", "WX_APPID", "\"wx0aaa345be1962d48\""
             buildConfigField "String", "WX_APP_SC", "\"10a13f412f15ff7e63a12e20d6842bfb\""
-            buildConfigField "String", "SANYAN_APP_ID", "\"jDDCmk66\""
+            buildConfigField "String", "SANYAN_APP_ID", "\"MDb1ScEG\""
             buildConfigField "String", "PUSH_XM_APP_ID", "\"2882303761520178998\""  //小米推送
             buildConfigField "String", "PUSH_XM_APP_KEY", "\"5492017822998\""
             buildConfigField "String", "PUSH_XM_CERT_NAME", "\"peony-push-cert-xm\""

@@ -53,7 +53,7 @@ public class ConfigUtils {
         }
         /************************************************自定义控件**************************************************************/
         Drawable logBtnImgPath = context.getResources().getDrawable(R.drawable.shape_login_btn);
-        Drawable background = context.getResources().getDrawable(R.drawable.bg_trans);
+        Drawable background = context.getResources().getDrawable(R.color.white);
 
         Drawable check = context.getResources().getDrawable(R.mipmap.icon_protocol_check);
         Drawable unCheck = context.getResources().getDrawable(R.mipmap.icon_protocol_normal);
@@ -75,11 +75,6 @@ public class ConfigUtils {
         RelativeLayout autoLoginLayout = (RelativeLayout) inflater.inflate(R.layout.activity_auto_login, null);
         RelativeLayout.LayoutParams customLayout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         autoLoginLayout.setLayoutParams(customLayout);
-        AutoPollRecyclerView mRvLogin = autoLoginLayout.findViewById(R.id.rv_login);
-        mRvLogin.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        LoginImageAdapter adapter = new LoginImageAdapter(BaseApplication.getInstance());
-        mRvLogin.setAdapter(adapter);
-        mRvLogin.start();
         RelativeLayout alternativeLoginsLayout = (RelativeLayout) inflater.inflate(R.layout.layout_alternative_login, null);
         RelativeLayout.LayoutParams layoutParamsOther = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         layoutParamsOther.setMargins(0, DensityUtils.dp2px(context, 30), 0, DensityUtils.dp2px(context, 60));
@@ -112,8 +107,8 @@ public class ConfigUtils {
                 .setAuthNavHidden(true)
                 .setNavReturnImgHidden(true)
                 //授权页号码栏：
-                .setNumberColor(context.getResources().getColor(R.color.white))  //设置手机号码字体颜色
-                .setNumFieldOffsetBottomY(325)    //设置号码栏相对于标题栏下边缘y偏移
+                .setNumberColor(context.getResources().getColor(R.color.color_normal))  //设置手机号码字体颜色
+                .setNumFieldOffsetBottomY(365)    //设置号码栏相对于标题栏下边缘y偏移
                 .setNumberSize(34)
                 .setNumFieldHeight(50)
                 //授权页登录按钮：
@@ -121,14 +116,14 @@ public class ConfigUtils {
                 .setLogBtnTextColor(context.getResources().getColor(R.color.white))   //设置登录按钮文字颜色
                 .setLogBtnImgPath(logBtnImgPath)   //设置登录按钮图片
                 .setLogBtnTextSize(18)
-                .setLogBtnHeight(60)
+                .setLogBtnHeight(50)
                 .setLogBtnWidth(300)
-                .setLogBtnOffsetBottomY(260)
+                .setLogBtnOffsetBottomY(300)
                 //授权页隐私栏：
                 .setAppPrivacyOne("用户协议", link)  //设置开发者隐私条款1名称和URL(名称，url)
                 .setAppPrivacyTwo("隐私政策", link1)  //设置开发者隐私条款1名称和URL(名称，url)
                 .setPrivacyText("同意", "", "", "", "")
-                .setAppPrivacyColor(Color.parseColor("#999999"), Color.parseColor("#ffffff"))    //	设置隐私条款名称颜色(基础文字颜色，协议文字颜色)
+                .setAppPrivacyColor(Color.parseColor("#8282AA"), Color.parseColor("#528EFF"))    //	设置隐私条款名称颜色(基础文字颜色，协议文字颜色)
                 .setPrivacyCustomToastText("请阅读并勾选协议")
                 .setPrivacySmhHidden(false)
                 .setUncheckedImgPath(unCheck)

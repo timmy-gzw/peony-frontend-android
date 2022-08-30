@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.robinhood.ticker.TickerView;
@@ -61,7 +62,8 @@ public class ChargeListNewActivity extends BaseMvpActivity<IChargePayView, Charg
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        ImmersionBar.with(mActivity).transparentBar().navigationBarDarkIcon(false).statusBarDarkFont(false, 0.2f).init();
+        ImmersionBar.with(mActivity).transparentStatusBar().navigationBarDarkIcon(false)
+                .statusBarDarkFont(false, 0.2f).init();
         new ToolBarBuilder().showBack(true)
                 .setTitle(getString(R.string.coin_recharge))
                 .setTitleColor(R.color.white)

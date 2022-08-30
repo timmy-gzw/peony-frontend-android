@@ -13,11 +13,37 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <include
+        <RelativeLayout
             android:id="@+id/include"
-            layout="@layout/tool_bar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/toolbar_back_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingEnd="@dimen/dp_15"
+                android:paddingBottom="@dimen/dp_10"
+                android:src="@mipmap/ic_back" />
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="@dimen/dp_50"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/ll_content"
@@ -40,7 +66,7 @@
                 app:tl_indicator_corner_radius="@dimen/dp_10"
                 app:tl_indicator_height="@dimen/dp_2"
                 app:tl_indicator_margin_top="@dimen/dp_10"
-                app:tl_indicator_width="@dimen/dp_10"
+                app:tl_indicator_width="@dimen/dp_20"
                 app:tl_tab_padding="@dimen/dp_10"
                 app:tl_tab_vertical_gravity="Center"
                 app:tl_textBold="SELECT"

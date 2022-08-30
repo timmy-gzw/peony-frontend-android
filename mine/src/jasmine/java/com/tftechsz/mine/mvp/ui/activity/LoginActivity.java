@@ -87,7 +87,7 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
         findViewById(R.id.iv_url).setOnClickListener(this);
         mCheckBox = findViewById(R.id.checkbox);
         mTvOtherLogin = findViewById(R.id.tv_other_phone);
-        mTvOtherLogin.setVisibility(View.GONE);
+        mTvOtherLogin.setVisibility(View.INVISIBLE);
         mTvAgreement = findViewById(R.id.tv_agreement);
         mLlBottom = findViewById(R.id.ll_bottom);
         findViewById(R.id.tv_wx_login).setOnClickListener(this);  //微信登录

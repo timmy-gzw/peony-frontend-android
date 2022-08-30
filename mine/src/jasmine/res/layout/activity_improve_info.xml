@@ -11,16 +11,16 @@
     <RelativeLayout
         android:id="@+id/base_tool_bar"
         android:layout_width="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_height="48dp"
         android:background="@color/white"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/toolbar_back_all"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="47dp"
             android:layout_centerVertical="true"
             android:paddingStart="@dimen/dp_20"
             android:paddingTop="@dimen/dp_10"
@@ -46,13 +46,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:gravity="center"
-            android:paddingTop="@dimen/dp_5"
-            android:paddingBottom="@dimen/dp_5"
-            android:paddingLeft="@dimen/dp_15"
-            android:paddingRight="@dimen/dp_15"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp_15"
-            android:layout_centerVertical="true">
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingRight="@dimen/dp_15"
+            android:paddingBottom="@dimen/dp_5">
 
             <ImageView
                 android:id="@+id/toolbar_iv_menu"
@@ -68,6 +68,13 @@
                 android:textSize="@dimen/sp_14" />
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/tool_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/toolbar_back_all"
+            android:background="@color/bg_color" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -150,7 +157,7 @@
                 android:id="@+id/iv_sex_boy"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_80"
-                android:layout_marginStart="@dimen/dp_62"
+                android:layout_marginStart="@dimen/dp_42"
                 android:layout_marginTop="@dimen/dp_10"
                 android:src="@drawable/sel_info_sex_boy"
                 app:layout_constraintEnd_toStartOf="@id/iv_sex_girl"
@@ -176,7 +183,7 @@
                 android:id="@+id/iv_sex_girl"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_80"
-                android:layout_marginEnd="@dimen/dp_62"
+                android:layout_marginEnd="@dimen/dp_42"
                 android:src="@drawable/sel_info_sex_girl"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_sex_boy"
@@ -225,7 +232,7 @@
                     android:layout_height="@dimen/dp_30"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="16dp"
                     android:gravity="center"
                     app:layout_constraintRight_toRightOf="parent">
 
@@ -270,7 +277,7 @@
                 android:id="@+id/view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_18"
+                android:layout_marginEnd="@dimen/dp_11"
                 android:background="@mipmap/ic_date_choose"
                 android:gravity="center_vertical"
                 app:layout_constraintBottom_toTopOf="@+id/et_code"

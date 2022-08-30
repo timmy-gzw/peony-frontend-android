@@ -57,7 +57,7 @@
             android:paddingTop="@dimen/dp_5"
             android:paddingEnd="@dimen/dp_14"
             android:paddingBottom="@dimen/dp_5"
-            android:text="移除"
+            android:text="移出"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="parent"

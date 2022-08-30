@@ -256,7 +256,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                             .setContentText(new SpannableStringUtils.Builder()
                                     .append("您当前选择的性别为:")
                                     .append(" 女生")
-                                    .setForegroundColor(Utils.getColor(R.color.red))
+                                    .setForegroundColor(Utils.getColor(R.color.colorPrimary))
                                     .append("\n一旦确认就不可更改，是否确认注册?")
                                     .create())
                             .setLeftButton("返回修改")

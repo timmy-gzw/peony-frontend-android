@@ -21,10 +21,10 @@
     <TextView
         android:id="@+id/tv_login"
         style="@style/CustomButton"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_50"
         android:layout_marginStart="@dimen/dp_30"
         android:layout_marginEnd="@dimen/dp_30"
-        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_60"
         android:background="@drawable/shape_login_btn"
         android:text="手机号码登录"
         android:textColor="@color/white"
