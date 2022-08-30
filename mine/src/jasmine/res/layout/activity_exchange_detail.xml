@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include
@@ -84,8 +84,12 @@
         android:id="@+id/tips"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
         android:lineSpacingExtra="@dimen/dp_2"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_20"
+        android:background="@drawable/bg_gray_radius15"
         android:textColor="@color/color_light_font"
         android:textSize="@dimen/sp_12"
         android:visibility="gone"

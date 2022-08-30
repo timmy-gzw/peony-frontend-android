@@ -17,7 +17,6 @@
         android:id="@+id/cl_stories"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_76"
-        android:layout_marginTop="@dimen/dp_20"
         android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"

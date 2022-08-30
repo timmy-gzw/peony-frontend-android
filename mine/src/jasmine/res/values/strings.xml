@@ -8,4 +8,6 @@
     <string name="real_name_cert_tip">完成认证，解锁积分兑换等功能</string>
     <string name="exchange_coin_reduce">-</string>
     <string name="visitor_vip_tip">除了%s们，还有不少人也看过你哦\n开通会员不错过缘分</string>
+    <string name="income_detail">我的收益</string>
+    <string name="income_exchage">兑换提现</string>
 </resources>

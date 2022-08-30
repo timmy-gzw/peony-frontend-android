@@ -35,8 +35,8 @@ public class IncomeDetailActivity extends BaseMvpActivity {
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager mViewPager = findViewById(R.id.vp_integral);
         List<String> titles = new ArrayList<>();
-        titles.add("收益");
-        titles.add("兑换");
+        titles.add(getString(R.string.income_detail));
+        titles.add(getString(R.string.income_exchage));
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(IncomeFragment.newInstance(0));//收益
         fragments.add(IncomeFragment.newInstance(2));//兑换
