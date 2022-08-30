@@ -78,4 +78,6 @@
     <string name="one_key_accost_girl">今天的你和她们很有缘哦～</string>
 
     <string name="upload_avatar_pop">更换头像</string>
+    <string name="video_cost">视频通话 (80金币每分钟)</string>
+    <string name="voice_cost">语音通话 (30金币每分钟)</string>
 </resources>

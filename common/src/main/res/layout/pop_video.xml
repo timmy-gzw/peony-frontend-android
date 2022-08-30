@@ -84,7 +84,7 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:padding="@dimen/dp_15"
-                android:text="视频通话 (80金币/分钟)"
+                android:text="@string/video_cost"
                 android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_17" />
 
@@ -106,7 +106,7 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:padding="@dimen/dp_15"
-                android:text="语音通话 (30金币/分钟)"
+                android:text="@string/voice_cost"
                 android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_17" />
         </RelativeLayout>
