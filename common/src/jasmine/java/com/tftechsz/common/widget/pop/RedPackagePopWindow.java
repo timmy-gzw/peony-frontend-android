@@ -69,6 +69,14 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
         tvFrom.setText(String.format("%s官方红包", mContext.getString(R.string.app_name)));
         findViewById(R.id.iv_close).setOnClickListener(this);
         mTvTitle.setText(redPacket.des);
+        setCameraDistance();
+    }
+
+    // 改变视角距离, 贴近屏幕,这个必须设置，因为如果不这么做，沿着Y轴旋转的过程中有可能产生超出屏幕的3D效果。
+    private void setCameraDistance() {
+        int distance = 16000;
+        float scale = mContext.getResources().getDisplayMetrics().density * distance;
+        mIvOpen.setCameraDistance(scale);
     }
 
 
@@ -78,12 +86,8 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
         if (id == R.id.rl_red) {
             mIvOpen.setClickable(false);
             ObjectAnimator animator = ObjectAnimator.ofFloat(mIvOpen,"rotationY",0.0f,90f);
-            animator.setDuration(500);
-            animator.setRepeatCount(0);
+            animator.setDuration(300);
             animator.setInterpolator(new LinearInterpolator());
-            animator.addUpdateListener(animation -> {
-                mIvOpen.setRotationY((float) animation.getAnimatedValue());
-            });
             animator.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
@@ -97,12 +101,8 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
                     rlBg.setBackgroundResource(R.mipmap.bg_red_package_jasmine_open);
                     mIvOpen.setRotationY(-270f);
                     ObjectAnimator animator2 = ObjectAnimator.ofFloat(mIvOpen,"rotationY",270.0f,360f);
-                    animator2.setDuration(500);
-                    animator2.setRepeatCount(0);
+                    animator2.setDuration(300);
                     animator2.setInterpolator(new LinearInterpolator());
-                    animator2.addUpdateListener(animation2 -> {
-                        mIvOpen.setRotationY((Float) animation2.getAnimatedValue());
-                    });
                     animator2.start();
                 }
 
