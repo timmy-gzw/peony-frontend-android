@@ -75,4 +75,6 @@
     <string name="real_auth_tip">完成真人认证，交友成功率提升10倍</string>
     <string name="vip_dress_use">使用中</string>
     <string name="vip_dress_start_use">立即使用</string>
+
+    <string name="choose_career">选择职业</string>
 </resources>

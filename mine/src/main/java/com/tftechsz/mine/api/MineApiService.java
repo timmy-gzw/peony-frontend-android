@@ -29,6 +29,7 @@ import com.tftechsz.mine.entity.UserCertifyBean;
 import com.tftechsz.mine.entity.VipPriceBean;
 import com.tftechsz.mine.entity.VipPrivilegeBean;
 import com.tftechsz.mine.entity.VisitorDto;
+import com.tftechsz.mine.entity.dto.CareerBean;
 import com.tftechsz.mine.entity.dto.ChargeInfoDto;
 import com.tftechsz.mine.entity.dto.ChargeItemDto;
 import com.tftechsz.mine.entity.dto.CheckExchangeDto;
@@ -144,12 +145,13 @@ public interface MineApiService {
 
     /**
      * 第三方解绑
-     *  有效值：wechat、qq
+     * 有效值：wechat、qq
+     *
      * @return
      */
     @FormUrlEncoded
     @POST("unbind/third")
-    Flowable<BaseResponse> unBindThird(@Field("type")String type);
+    Flowable<BaseResponse> unBindThird(@Field("type") String type);
 
     /**
      * 用户信息完善
@@ -706,10 +708,12 @@ public interface MineApiService {
 
     /**
      * 获取vip价格
+     *
      * @return
      */
     @GET("vip/new")
     Flowable<BaseResponse<VipConfigBean>> getVipInfo();
+
     /**
      * 设置会员特权
      *
@@ -868,4 +872,10 @@ public interface MineApiService {
     @FormUrlEncoded
     @POST("h5/invite/bind")
     Flowable<BaseResponse> setInviteCode(@Field("invite_code") String inviteCode);
+
+    /**
+     * 获取所有职业
+     */
+    @GET("xxxxxx")
+    Flowable<BaseResponse<List<CareerBean>>> getCareers();
 }

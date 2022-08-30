@@ -80,6 +80,7 @@ public class ARouterApi {
     public static final String ACTIVITY_NOTIFY_SETTING = "/mine/NotifySettingActivity";   //新消息通知
     public static final String ACTIVITY_INCOME_DETAIL = "/mine/IncomeDetailActivity";   //收益明细
     public static final String ACTIVITY_GIFT_WALL = "/mine/giftWall";   //礼物墙
+    public static final String ACTIVITY_CHOOSE_CAREER = "/mine/chooseCareer";   //选择职业
 
 
     //family

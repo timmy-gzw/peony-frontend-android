@@ -272,6 +272,9 @@
         <activity
             android:name=".mvp.ui.activity.GiftWallActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.ChooseCareerActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>
