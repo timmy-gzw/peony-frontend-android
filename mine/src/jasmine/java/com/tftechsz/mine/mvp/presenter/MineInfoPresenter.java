@@ -429,8 +429,8 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                             v.findViewById(R.id.tv_finish).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    pvWeight.returnData();
-                                    pvWeight.dismiss();
+                                    pvIncome.returnData();
+                                    pvIncome.dismiss();
                                 }
                             });
                         }
