@@ -7,6 +7,7 @@ import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.mine.R;
 import com.tftechsz.mine.api.MineApiService;
 import com.tftechsz.mine.entity.dto.LogoutStatusDto;
 import com.tftechsz.mine.mvp.IView.ILogoutView;
@@ -64,8 +65,8 @@ public class ILogoutPresenter extends BasePresenter<ILogoutView> {
     public void showPop(Context context, String repeat_msg) {
         if (mCustomPopWindow == null)
             mCustomPopWindow = new CustomPopWindow(context).setContent(repeat_msg)
-                    .setLeftButton("取消")
-                    .setRightButton("确定")
+                    .setLeftButton(context.getString(R.string.cancel))
+                    .setRightButton(context.getString(R.string.confirm))
                     .addOnClickListener(new CustomPopWindow.OnSelectListener() {
                         @Override
                         public void onCancel() {
