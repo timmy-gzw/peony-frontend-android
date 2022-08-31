@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/bg_color"
         android:layout_height="match_parent"
+        android:background="@color/bg_color"
         android:orientation="vertical">
 
         <include layout="@layout/tool_bar" />
@@ -29,6 +29,7 @@
             android:id="@+id/item_wechat"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
             android:background="@color/white"
             app:left_text_content="微信"
             app:right_arrow_visible="true"

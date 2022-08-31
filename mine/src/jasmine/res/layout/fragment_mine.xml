@@ -330,7 +330,7 @@
                         android:drawablePadding="@dimen/dp_3"
                         android:text="会员 | 开通立享8大特权"
                         android:textColor="#6A4224"
-                        android:textSize="@dimen/sp_16"
+                        android:textSize="@dimen/sp_14"
                         android:visibility="gone"
                         app:layout_constraintVertical_chainStyle="packed"
                         tools:visibility="visible" />

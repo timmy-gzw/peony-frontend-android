@@ -259,7 +259,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
         mTvName.setTextColor(getActivity().getResources().getColor(R.color.white));
         VipUtils.setPersonalise(mPicFrame, userInfo.picture_frame, false, true);
         //mPicFrame.setBackgroundResource(userInfo.picture_frame == 0 ? 0 : VipUtils.getPictureFrameBackground(userInfo.picture_frame));
-        mTvUserId.setText(String.format("%s号: ", getString(R.string.app_name)) + userInfo.getUser_code());
+        mTvUserId.setText(String.format("%s号: ", getString(R.string.mine_app_name)) + userInfo.getUser_code());
 
         if (userInfo.is_show_icon == 1) {
             mTvUserId.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(R.drawable.min_name_img_left), null, null, null);

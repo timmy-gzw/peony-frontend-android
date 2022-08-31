@@ -196,7 +196,7 @@ public class VisitorVipOpenPopWindow extends BaseBottomPop implements View.OnCli
 
     private void setPrice() {
         mBind.xf.setText("¥" + mPriceAdapter.getData().get(oldSel).price + " 立即开通");
-        mBind.tvDiscountPrice.setText(mPriceAdapter.getData().get(oldSel).reduce_price_title.replace("立","已"));
+        mBind.tvDiscountPrice.setText(mPriceAdapter.getData().get(oldSel).reduce_price_title.replace("立减","已省"));
     }
 
 

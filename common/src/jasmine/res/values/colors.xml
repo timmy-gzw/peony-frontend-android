@@ -37,4 +37,6 @@
     <color name="link_color">#5397FF</color>
     <color name="vip_color">#FF2F2F</color>
     <color name="c_empty_text">@color/color_normal</color>
+    <color name="green">#27E984</color>
+    <color name="c_ff4951">#FF2F2F</color>
 </resources>

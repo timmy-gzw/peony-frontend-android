@@ -244,7 +244,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
     private void setPayButton(int position) {
         VipPriceBean item = mPriceAdapter.getItem(position);
         mBind.setItemPrice(item.price);
-        mBind.tvDiscountPrice.setText(item.reduce_price_title.replace("立","已"));
+        mBind.tvDiscountPrice.setText(item.reduce_price_title.replace("立减","已省"));
     }
 
     @Override

@@ -122,8 +122,8 @@ public class ConfigUtils {
                 //授权页隐私栏：
                 .setAppPrivacyOne("用户协议", link)  //设置开发者隐私条款1名称和URL(名称，url)
                 .setAppPrivacyTwo("隐私政策", link1)  //设置开发者隐私条款1名称和URL(名称，url)
-                .setPrivacyText("同意", "", "", "", "")
-                .setAppPrivacyColor(Color.parseColor("#8282AA"), Color.parseColor("#528EFF"))    //	设置隐私条款名称颜色(基础文字颜色，协议文字颜色)
+                .setPrivacyText("我已阅读并同意", "", "", "", "")
+                .setAppPrivacyColor(Color.parseColor("#2A2A2A"), Color.parseColor("#528EFF"))    //	设置隐私条款名称颜色(基础文字颜色，协议文字颜色)
                 .setPrivacyCustomToastText("请阅读并勾选协议")
                 .setPrivacySmhHidden(false)
                 .setUncheckedImgPath(unCheck)

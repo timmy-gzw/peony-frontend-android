@@ -25,7 +25,7 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_10"
-            android:background="@drawable/shape_lt_rt_10_ffffff"
+            android:background="@drawable/shape_lt_rt_16_ffffff"
             app:layout_constraintBottom_toBottomOf="@+id/view_bg" />
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_4"
-            android:layout_marginBottom="@dimen/dp_30"
+            android:layout_marginBottom="@dimen/dp_50"
             android:drawablePadding="@dimen/dp_6"
             android:textColor="@color/white"
             android:textSize="40sp"
@@ -64,6 +64,7 @@
         layout="@layout/base_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dp_20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_recharge_header" />
 

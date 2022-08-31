@@ -269,7 +269,6 @@
                         android:text="@{@string/vip_privilege_8(vip_privilege_count)}"
                         android:textColor="@color/c_f4d9a4"
                         android:textSize="@dimen/sp_12"
-                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
