@@ -57,6 +57,7 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
         new ToolBarBuilder().showBack(true).setTitle("真人认证").build();
         mBinding.btn.setOnClickListener(this);
         mBinding.ivIcon.setOnClickListener(this);
+        mBinding.ivCheck.setOnClickListener(this);
         mPermission = new RxPermissions(mActivity);
         initRxBus();
 
