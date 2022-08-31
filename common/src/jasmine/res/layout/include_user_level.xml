@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/iv_local_tyrant_bg"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_18"
+                android:layout_height="@dimen/dp_20"
                 app:layout_constraintBottom_toTopOf="@id/tv_local_tyrant_level"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
             <ImageView
                 android:id="@+id/iv_charm_bg"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_18"
+                android:layout_height="@dimen/dp_20"
                 app:layout_constraintBottom_toTopOf="@id/tv_charm_level"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

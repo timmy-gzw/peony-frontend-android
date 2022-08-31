@@ -45,7 +45,7 @@ public class WealthFragment extends BaseMvpFragment {
     private RecyclerView mRvUpgrade, mRvLevelTitle;
     private ImageView mIvTitle,mIvCard;
     private UserProviderService service;
-    private TextView mTitleWealth,mWealthDesc,mTvAge;
+    private TextView mTitleWealth,mWealthDesc,mTvAge,title;
     private ImageView mAvaterBg;
 
     //type 0 财富 1 魅力
@@ -116,6 +116,7 @@ public class WealthFragment extends BaseMvpFragment {
         mTitleWealth = getView(R.id.tv_title_wealth);
         mWealthDesc = getView(R.id.tv_wealth_decs);
         mAvaterBg = getView(R.id.bg_image);
+        title = getView(R.id.title);
         type = getArguments().getString("type");
         userId = getArguments().getString("userId");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -147,6 +148,7 @@ public class WealthFragment extends BaseMvpFragment {
                 mTitleWealth.setText("什么是财富等级？");
                 mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注!");
                 mAvaterBg.setImageResource(R.mipmap.bg_wealth_avater);
+                title.setText("财富称号");
             } else {//魅力
                 mIvCard.setImageResource(R.mipmap.ic_card_charm);
                 mWealthDesc.setBackgroundResource(R.mipmap.bg_charm);
@@ -160,6 +162,7 @@ public class WealthFragment extends BaseMvpFragment {
                 mTitleWealth.setText("什么是魅力等级？");
                 mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");
                 mAvaterBg.setImageResource(R.mipmap.bg_charm_avater);
+                title.setText("魅力称号");
             }
             if (null != service) {
                 mTvName.setText(service.getUserInfo().getNickname());
