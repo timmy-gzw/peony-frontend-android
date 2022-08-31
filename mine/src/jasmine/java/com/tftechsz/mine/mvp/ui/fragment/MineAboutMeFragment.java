@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -67,7 +66,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     private GiftAdapter giftAdapter;
     private ArrayList<GiftDto> gifts = null;
 
-    private RelativeLayout mRlLevelHidden,mRlGiftHidden;
+    private ConstraintLayout mClLevelHidden, mClGiftHidden;
     private LinearLayout mLlLevelCover,mLlGiftCover;
 
     @Override
@@ -115,8 +114,8 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         tvGiftCount = getView(R.id.tv_gift_count);
         clGift = getView(R.id.cl_mine_gift);
         mRvGift = getView(R.id.rv_gift);
-        mRlLevelHidden = getView(R.id.rl_gift_hidden2);
-        mRlGiftHidden = getView(R.id.rl_gift_hidden);
+        mClLevelHidden = getView(R.id.cl_gift_hidden2);
+        mClGiftHidden = getView(R.id.cl_gift_hidden);
         mLlLevelCover = getView(R.id.ll_hidden);
         mLlGiftCover = getView(R.id.ll_hidden2);
         mRvGift.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -179,12 +178,12 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             if (mUserInfo.open_hidden_rank == 0) {
                 tvLevelVip.setVisibility(View.GONE);
             } else {
-                mRlLevelHidden.setVisibility(View.VISIBLE);
+                mClLevelHidden.setVisibility(View.VISIBLE);
             }
             if (mUserInfo.open_hidden_gift == 0) {
                 mTvGiftVip.setVisibility(View.GONE);
             } else {
-                mRlGiftHidden.setVisibility(View.VISIBLE);
+                mClGiftHidden.setVisibility(View.VISIBLE);
             }
         } else {
             tvLevelTitle.setText(mUserInfo.isGirl() ? getString(R.string.level_her) : getString(R.string.level_his));

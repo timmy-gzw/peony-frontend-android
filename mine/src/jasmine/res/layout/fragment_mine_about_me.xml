@@ -48,10 +48,10 @@
             tools:visibility="visible">
 
             <TextView
-                android:layout_marginTop="@dimen/dp_10"
                 android:id="@+id/tv_level_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/level_mine"
                 android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_15"
@@ -84,8 +84,8 @@
             <LinearLayout
                 android:id="@+id/ll_hidden"
                 android:layout_width="match_parent"
-                android:background="@drawable/bg_vip_rich"
                 android:layout_height="@dimen/dp_0"
+                android:background="@drawable/bg_vip_rich"
                 android:gravity="center"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/level"
@@ -94,65 +94,73 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_hidden_other"/>
+                    android:src="@mipmap/ic_hidden_other" />
 
                 <TextView
-                    android:textColor="#C5C3C2"
-                    android:textSize="@dimen/sp_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_6"
                     android:text="对方暂未开启该功能"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="#C5C3C2"
+                    android:textSize="@dimen/sp_12" />
 
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <RelativeLayout
-            android:id="@+id/rl_gift_hidden2"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_gift_hidden2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
-            android:background="@drawable/bg_gift_hidden"
             android:layout_marginHorizontal="@dimen/dp_6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_gift_hidden"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/cl_level"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/cl_level">
 
             <ImageView
                 android:id="@+id/ic_lock2"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/ic_gift_hidden"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintEnd_toStartOf="@id/tv_gift_hidden"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_gift_hidden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="4dp"
-                android:text="已隐藏"
                 android:layout_toEndOf="@+id/ic_lock2"
+                android:text="已隐藏"
                 android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_12"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ic_lock2"
+                app:layout_constraintTop_toTopOf="@id/ic_lock2" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
             android:id="@+id/tv_gift"
-            android:paddingTop="@dimen/dp_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_30"
+            android:paddingTop="@dimen/dp_10"
             android:text="@string/my_all_gift"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_level"/>
+            app:layout_constraintTop_toBottomOf="@+id/cl_level" />
 
         <TextView
             android:id="@+id/tv_gift_vip"
@@ -234,70 +242,79 @@
         <LinearLayout
             android:id="@+id/ll_hidden2"
             android:layout_width="0dp"
-            android:background="@drawable/bg_vip_rich"
             android:layout_height="@dimen/dp_0"
+            android:background="@drawable/bg_vip_rich"
             android:gravity="center"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@id/cl_mine_gift"
-            app:layout_constraintEnd_toEndOf="@id/cl_mine_gift"
             app:layout_constraintBottom_toBottomOf="@id/cl_mine_gift"
+            app:layout_constraintEnd_toEndOf="@id/cl_mine_gift"
+            app:layout_constraintStart_toStartOf="@id/cl_mine_gift"
             app:layout_constraintTop_toTopOf="@id/cl_mine_gift">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_hidden_other"/>
+                android:src="@mipmap/ic_hidden_other" />
 
             <TextView
-                android:textColor="#C5C3C2"
-                android:textSize="@dimen/sp_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_6"
                 android:text="对方暂未开启该功能"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textColor="#C5C3C2"
+                android:textSize="@dimen/sp_12" />
 
         </LinearLayout>
 
         <View
             android:id="@+id/view"
-            android:layout_marginTop="@dimen/dp_10"
-            app:layout_constraintTop_toBottomOf="@id/cl_mine_gift"
-            app:layout_constraintStart_toStartOf="@id/cl_mine_gift"
-            app:layout_constraintEnd_toEndOf="@id/cl_mine_gift"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_1"/>
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginTop="@dimen/dp_10"
+            app:layout_constraintEnd_toEndOf="@id/cl_mine_gift"
+            app:layout_constraintStart_toStartOf="@id/cl_mine_gift"
+            app:layout_constraintTop_toBottomOf="@id/cl_mine_gift" />
 
 
-        <RelativeLayout
-            android:id="@+id/rl_gift_hidden"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_gift_hidden"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
-            android:background="@drawable/bg_gift_hidden"
             android:layout_marginHorizontal="@dimen/dp_6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_gift_hidden"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_gift">
 
             <ImageView
                 android:id="@+id/ic_lock"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/ic_gift_hidden"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintEnd_toStartOf="@id/tv_gift_hidden_"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_gift_hidden_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="4dp"
-                android:text="已隐藏"
                 android:layout_toEndOf="@+id/ic_lock"
+                android:text="已隐藏"
                 android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_12"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintBottom_toBottomOf="@id/ic_lock"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ic_lock"
+                app:layout_constraintTop_toTopOf="@id/ic_lock" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

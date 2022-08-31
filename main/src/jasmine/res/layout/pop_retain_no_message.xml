@@ -40,7 +40,7 @@
         android:id="@+id/tv_tip_d"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_21"
+        android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:text="@string/retain_girl_tip_2"
         android:textColor="@color/color_light_font"
