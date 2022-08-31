@@ -2,11 +2,13 @@ package com.tftechsz.common.widget.pop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 
@@ -161,7 +163,7 @@ public class BasePayPopWindow extends BaseBottomPop {
                 if (!TextUtils.isEmpty(mineInfo.link)) {
                     int start = builder.toString().indexOf(mineInfo.title);
                     builder.setSpan(new PayTextClick(mContext, mineInfo), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    builder.setSpan(new UnderlineSpan(), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    builder.setSpan(new ForegroundColorSpan(Color.parseColor("#5397FF")), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
             mBind.tvTerms.setText(builder);

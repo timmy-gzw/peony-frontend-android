@@ -162,15 +162,15 @@ ext {
             "loadingdialog"         : "com.github.ydstar:loadingdialog:1.0.0",
             "WaveLineView"          : "com.github.Jay-Goo:WaveLineView:v1.0.4",
             "banner"                : "io.github.youth5201314:banner:2.2.2",
-            "umeng-common"          : "com.umeng.umsdk:common:9.5.0",
-            "umeng-asms"            : "com.umeng.umsdk:asms:1.5.0",
+            "umeng-common"          : "com.umeng.umsdk:common:9.5.2",
+            "umeng-asms"            : "com.umeng.umsdk:asms:1.6.3",
             "umeng-apm"             : "com.umeng.umsdk:apm:1.7.0",//U-APM产品包依赖(必选)
             "umeng-link"            : "com.umeng.umsdk:link:1.2.0",
-            "umeng-share-core"      : "com.umeng.umsdk:share-core:7.1.7",//分享核心库，必选
-            "umeng-share-board"     : "com.umeng.umsdk:share-board:7.1.7",//分享面板功能，可选
-            "umeng-share-qq"        : "com.umeng.umsdk:share-qq:7.1.7",//QQ完整版
+            "umeng-share-core"      : "com.umeng.umsdk:share-core:7.2.0",//分享核心库，必选
+            "umeng-share-board"     : "com.umeng.umsdk:share-board:7.2.0",//分享面板功能，可选
+            "umeng-share-qq"        : "com.umeng.umsdk:share-qq:7.2.0",//QQ完整版
             "umeng-share-qqopensdk" : 'com.tencent.tauth:qqopensdk:3.53.0',//QQ官方SDK依赖库,
-            "umeng-share-wx"        : "com.umeng.umsdk:share-wx:7.1.7",//微信完整版
+            "umeng-share-wx"        : "com.umeng.umsdk:share-wx:7.2.0",//微信完整版
             "umeng-share-wxopensdk" : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0", //微信官方SDK依赖库
             "imagePreview"          : "com.ycjiang:ImagePreview:2.3.5",  //图片
             "huawei-push"           : "com.huawei.hms:push:6.3.0.302",  //华为推送

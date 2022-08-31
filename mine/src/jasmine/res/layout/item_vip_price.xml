@@ -93,7 +93,7 @@
                 android:paddingEnd="@dimen/dp_4"
                 android:text="@{item.price}"
                 android:textColor="@{item.sel ? @color/vip_price_unit_color_choose: @color/color_normal}"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_25"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/price3"
                 app:layout_constraintStart_toEndOf="@id/price_unit"
