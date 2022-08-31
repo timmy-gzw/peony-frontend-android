@@ -255,7 +255,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                     mGirlPop = new CustomPopWindow(mContext, 1)
                             .setContentText(new SpannableStringUtils.Builder()
                                     .append("您当前选择的性别为:")
-                                    .append(" 女生")
+                                     .append(" 女生")
                                     .setForegroundColor(Utils.getColor(R.color.colorPrimary))
                                     .append("\n一旦确认就不可更改，是否确认注册?")
                                     .create())

@@ -304,7 +304,7 @@ public class AutoFitHelper {
 
     /**
      * Set the minimum text size to the given value, interpreted as "scaled pixel" units. This size
-     * is adjusted based on the current density and user font size preference.
+     * is adjusted based on the current density and user fonts size preference.
      *
      * @param size The scaled pixel size.
      * @attr ref me.grantland.R.styleable#AutofitTextView_minTextSize
@@ -350,7 +350,7 @@ public class AutoFitHelper {
 
     /**
      * Set the maximum text size to the given value, interpreted as "scaled pixel" units. This size
-     * is adjusted based on the current density and user font size preference.
+     * is adjusted based on the current density and user fonts size preference.
      *
      * @param size The scaled pixel size.
      * @attr ref android.R.styleable#TextView_textSize

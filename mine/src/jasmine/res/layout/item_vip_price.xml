@@ -27,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_6"
-        android:background="@{item.sel ? @drawable/bg_vip_price_choose : @drawable/bg_vip_price_unactive}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:background="@drawable/bg_vip_price_choose">
@@ -36,21 +35,21 @@
             android:id="@+id/tv_top"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_24"
+            android:background="@{item.sel ? @drawable/bg_vip_price_top_choose : @drawable/bg_vip_price_top_normal}"
             android:gravity="center"
             android:text="@{item.nav_title}"
-            android:visibility="@{TextUtils.isEmpty(item.nav_title) ? View.GONE : View.VISIBLE }"
-            android:background="@{item.sel ? @drawable/bg_vip_price_top_choose : @drawable/bg_vip_price_top_normal}"
             android:textColor="@{item.sel ? @color/white: @color/color_mid_font}"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold"
+            android:visibility="@{TextUtils.isEmpty(item.nav_title) ? View.GONE : View.VISIBLE }"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@{item.sel ? @drawable/bg_vip_price_choose : @drawable/bg_vip_price_unactive}"
             android:padding="@dimen/dp_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="97:134"
@@ -89,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
+                android:fontFamily="@font/ddinbold"
                 android:paddingStart="@dimen/dp_2"
                 android:paddingEnd="@dimen/dp_4"
                 android:text="@{item.price}"
@@ -104,6 +104,7 @@
                 android:id="@+id/price3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/ddinbold"
                 android:text="@{item.origin_price_title}"
                 android:textColor='#999999'
                 android:textSize="@dimen/sp_12"

@@ -143,8 +143,8 @@ public class VisitorActivity extends BaseMvpActivity<IVisitorView, VisitorPresen
             if (tvBottomTip == null) {
                 tvBottomTip = new TextView(this);
                 tvBottomTip.setTextSize(12);
-                tvBottomTip.setTextColor(Color.parseColor("#CCCCCC"));
-                tvBottomTip.setText(String.format(getString(R.string.visitor_vip_tip), service.getUserInfo().isGirl() ? "他" : "她"));
+//                tvBottomTip.setTextColor(Color.parseColor("#CCCCCC"));
+//                tvBottomTip.setText(String.format(getString(R.string.visitor_vip_tip), service.getUserInfo().isGirl() ? "他" : "她"));
                 tvBottomTip.setGravity(Gravity.CENTER);
                 int padding = ConvertUtils.dp2px(16f);
                 tvBottomTip.setPadding(padding, padding, padding, padding);

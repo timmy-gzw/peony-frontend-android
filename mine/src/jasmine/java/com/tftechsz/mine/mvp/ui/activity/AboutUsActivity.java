@@ -103,7 +103,7 @@ public class AboutUsActivity extends BaseMvpActivity<IAboutUsView, AboutUsPresen
                     textView.setPadding(ConvertUtils.dp2px(6), ConvertUtils.dp2px(3), ConvertUtils.dp2px(6), ConvertUtils.dp2px(3));
                     if (!TextUtils.isEmpty(mineInfo.info))
                         textView.setText(Html.fromHtml(mineInfo.info));
-//                    textView.setText(Html.fromHtml("<font color=\"#797979\">《<u>王者荣耀</u>》</font>"));
+//                    textView.setText(Html.fromHtml("<fonts color=\"#797979\">《<u>王者荣耀</u>》</fonts>"));
                     int finalI = i;
                     textView.setOnClickListener(v -> CommonUtil.performLink(mActivity, mineInfo, finalI, 0));
                     mBotLink.addView(textView);

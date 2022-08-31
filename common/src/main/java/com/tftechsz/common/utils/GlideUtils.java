@@ -354,17 +354,22 @@ public class GlideUtils {
                 .into(i);
     }
 
+
+    public static void loadImageGaussian(Context context, ImageView i, String url) {
+        loadImageGaussianRadius(context, i, url, 6);
+    }
+
     /**
      * 加载高斯模糊图片
      *
      * @param i
      * @param url
      */
-    public static void loadImageGaussian(Context context, ImageView i, String url) {
+    public static void loadImageGaussianRadius(Context context, ImageView i, String url, int radius) {
         if (!checkContext(context)) return;
         MultiTransformation multi = new MultiTransformation(
                 new BlurTransformation(12, 3),
-                new GlideRoundTransform(context, 6)
+                new GlideRoundTransform(context, radius)
         );
         Glide.with(i.getContext())
                 .load(url)
