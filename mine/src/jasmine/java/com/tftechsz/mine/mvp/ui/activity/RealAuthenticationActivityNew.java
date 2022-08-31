@@ -57,7 +57,6 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
         new ToolBarBuilder().showBack(true).setTitle("真人认证").build();
         mBinding.btn.setOnClickListener(this);
         mBinding.ivIcon.setOnClickListener(this);
-        mBinding.ivCheck.setOnClickListener(this);
         mPermission = new RxPermissions(mActivity);
         initRxBus();
 
@@ -142,9 +141,6 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
 
 
         }else if(id == R.id.iv_check){
-            if(!ClickUtil.canOperate()){
-                return;
-            }
             isCheck = !isCheck;
             mBinding.ivCheck.setImageResource(isCheck?R.mipmap.ic_check_selector:R.mipmap.ic_check_normal);
             mBinding.btn.setEnabled(isCheck);

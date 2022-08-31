@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_45"
+                    android:layout_marginTop="@dimen/dp_30"
                     android:background="@drawable/shape_bg_f9f9f9_radius_6"
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/dp_16"
