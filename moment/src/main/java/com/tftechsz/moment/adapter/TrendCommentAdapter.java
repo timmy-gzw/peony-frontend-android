@@ -42,7 +42,8 @@ public class TrendCommentAdapter extends BaseQuickAdapter<CommentListItem, BaseV
         TextView content = helper.getView(R.id.tv_content);
         TextView time = helper.getView(R.id.tv_time);
 
-        GlideUtils.loadRoundImageRadius(getContext(), headIcon, item.getIcon());
+        int radius = Utils.getDimensPx(getContext(), R.dimen.trend_avater_image_radius);
+        GlideUtils.loadRoundImage(getContext(), headIcon, item.getIcon(),radius);
         CommonUtil.setUserName(nickName, item.getNickname(), item.isVip());
         if (!TextUtils.isEmpty(item.getReply_nickname())) {
             StringBuffer sb = new StringBuffer();

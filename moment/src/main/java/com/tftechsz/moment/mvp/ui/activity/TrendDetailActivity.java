@@ -306,7 +306,8 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
         if (dataBean == null) return;
 //        GlideUtils.loadRoundImageRadius(this, mIvAvatar.getImageView(), dataBean.getIcon());
 //        mIvAvatar.setBgFrame(dataBean.picture_frame);
-        GlideUtils.loadRoundImageRadius(this, mIvAvatar, dataBean.getIcon());
+        int radius = Utils.getDimensPx(this, R.dimen.trend_avater_image_radius);
+        GlideUtils.loadRoundImage(this, mIvAvatar, dataBean.getIcon(),radius);
         CommonUtil.setUserName(dynamicDetailname, dataBean.getNickname(), false, dataBean.isVip());
 
         //内容
