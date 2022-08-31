@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:singleLine="true"
-            android:text="缘分天使"
+            android:text="@string/fate_angel"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold"

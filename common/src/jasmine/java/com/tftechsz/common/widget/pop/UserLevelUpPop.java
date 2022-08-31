@@ -2,6 +2,7 @@ package com.tftechsz.common.widget.pop;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ import com.tftechsz.common.utils.GlideUtils;
  */
 public class UserLevelUpPop extends BaseCenterPop {
     private ImageView ivLevelBg, ivLevelIcon;
-    private View iconStroke;
+    private ImageView iconStroke;
     private TextView levelTips, tvLevelTitle;
     private final UserProviderService service;
 
@@ -61,7 +62,7 @@ public class UserLevelUpPop extends BaseCenterPop {
         GlideUtils.loadImage(mContext, ivLevelIcon, url);
         if (data.user_type.equals("charm")) {
             ivLevelBg.setImageResource(R.mipmap.peony_bpqtt_img_2);
-            iconStroke.setBackgroundResource(R.drawable.bg_avater_charm);
+            iconStroke.setImageResource(R.drawable.bg_avater_charm);
             levelTips.setTextColor(Color.parseColor("#F31D72"));
         }
     }
