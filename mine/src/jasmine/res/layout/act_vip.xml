@@ -118,6 +118,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_icon"
                     app:riv_corner_radius="@dimen/dp_16"
+                    app:riv_border_color="#F9B870"
+                    app:riv_border_width="0.5dp"
                     tools:src="@mipmap/ic_default_avatar" />
 
                 <TextView
@@ -262,7 +264,7 @@
                         android:includeFontPadding="false"
                         android:text="@{@string/vip_privilege_8(vip_privilege_count)}"
                         android:textColor="@color/c_f4d9a4"
-                        android:textSize="@dimen/sp_18"
+                        android:textSize="@dimen/sp_12"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
