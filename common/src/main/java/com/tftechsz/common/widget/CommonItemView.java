@@ -85,6 +85,9 @@ public class CommonItemView extends RelativeLayout {
             int leftTextColor = typedArray.getColor(R.styleable.CommonItemView_left_text_color, Color.BLACK);
             mTvLeft.setTextColor(leftTextColor);
 
+            int rightTextColor = typedArray.getColor(R.styleable.CommonItemView_right_text_color, Color.BLACK);
+            mTvRight.setTextColor(rightTextColor);
+
             boolean isBold = typedArray.getBoolean(R.styleable.CommonItemView_left_text_style, false);
             if (isBold) {
                 mTvLeft.setTypeface(mTvLeft.getTypeface(), Typeface.BOLD);

@@ -291,7 +291,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/dp_44"
                     android:gravity="end"
-                    android:textColor="@color/color_normal"
+                    android:textColor="@color/color_light_font"
                     android:textSize="16sp"
                     tools:text="大气的鸡" />
 
@@ -323,8 +323,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 app:left_text_content="性别"
+                app:right_text_content="你好"
                 app:right_arrow_visible="false"
                 app:right_switch_visible="false"
+                app:right_text_color="@color/color_light_font"
                 app:right_text_visible="true" />
 
             <com.tftechsz.common.widget.CommonItemView
@@ -334,6 +336,7 @@
                 app:left_text_content="生日"
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
+                app:right_text_color="@color/color_light_font"
                 app:right_text_visible="true" />
 
 
@@ -344,6 +347,7 @@
                 app:left_text_content="星座"
                 app:right_arrow_visible="false"
                 app:right_switch_visible="false"
+                app:right_text_color="@color/color_light_font"
                 app:right_text_visible="true" />
 
 
@@ -354,6 +358,7 @@
                 app:left_text_content="所在地"
                 app:right_arrow_visible="false"
                 app:right_switch_visible="false"
+                app:right_text_color="@color/color_light_font"
                 app:right_text_visible="true" />
 
 
@@ -364,6 +369,7 @@
                 app:left_text_content="家乡"
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
+                app:right_text_color="@color/color_light_font"
                 app:right_text_visible="true" />
 
 
@@ -375,6 +381,7 @@
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
                 app:right_text_visible="true"
+                app:right_text_color="@color/color_light_font"
                 tools:visibility="gone" />
 
 
@@ -386,6 +393,7 @@
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
                 app:right_text_visible="true"
+                app:right_text_color="@color/color_light_font"
                 tools:visibility="gone" />
 
 
@@ -397,6 +405,7 @@
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
                 app:right_text_visible="true"
+                app:right_text_color="@color/color_light_font"
                 tools:visibility="gone" />
 
 
@@ -408,6 +417,7 @@
                 app:right_arrow_visible="true"
                 app:right_switch_visible="false"
                 app:right_text_visible="true"
+                app:right_text_color="@color/color_light_font"
                 tools:visibility="gone" />
 
             <RelativeLayout
@@ -466,7 +476,7 @@
                     android:textSize="@dimen/sp_10" />
             </RelativeLayout>
 
-            <com.tftechsz.common.widget.CBAlignTextView
+            <TextView
                 android:id="@+id/tv_right_friend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -245,7 +245,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         }
         //GlideUtils.loadRoundAvatarImage(this, mIvAvatar, mUserInfo.getIcon(), mUserInfo.getSex() == 1 ? R.mipmap.mine_ic_boy_default : R.mipmap.mine_ic_girl_default);   //头像
         mItemSex.setRightText(mUserInfo.getSex() == 1 ? "男" : "女");
-        mItemSex.getTvRight().setTextColor(ContextCompat.getColor(this, R.color.color_normal));
+        mItemSex.getTvRight().setTextColor(ContextCompat.getColor(this, R.color.color_light_font));
         //生日
         setInfo(mItemBirthday, mUserInfo.getBirthday());
         //星座
@@ -345,7 +345,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
             textView.setRightTextColor(this, R.color.red);
         } else {
             textView.setRightText(data);
-            textView.setRightTextColor(this, R.color.color_normal);
+            textView.setRightTextColor(this, R.color.color_light_font);
         }
     }
 
@@ -359,7 +359,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         } else {
             strHometown = data.split(" ");
             textView.setRightText(data);
-            textView.setRightTextColor(this, R.color.color_normal);
+            textView.setRightTextColor(this, R.color.color_light_font);
         }
     }
 
@@ -551,10 +551,10 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         if (mUserInfo != null) {
             mUserInfo.setBirthday(data);
             mItemBirthday.setRightText(data);
-            mItemBirthday.setRightTextColor(this, R.color.color_normal);
+            mItemBirthday.setRightTextColor(this, R.color.color_light_font);
             mUserInfo.constellation = data;
             mItemConstellation.setRightText(constellation);
-            mItemConstellation.setRightTextColor(this, R.color.color_normal);
+            mItemConstellation.setRightTextColor(this, R.color.color_light_font);
         }
     }
 
@@ -568,7 +568,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         if (mUserInfo != null) {
             mUserInfo.hometown = data;
             mItemHomeAddress.setRightText(data);
-            mItemHomeAddress.setRightTextColor(this, R.color.color_normal);
+            mItemHomeAddress.setRightTextColor(this, R.color.color_light_font);
         }
     }
 
@@ -582,7 +582,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         if (mUserInfo != null) {
             mUserInfo.setHeight(data);
             mItemHeight.setRightText(data);
-            mItemHeight.setRightTextColor(this, R.color.color_normal);
+            mItemHeight.setRightTextColor(this, R.color.color_light_font);
         }
     }
 
@@ -596,7 +596,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         if (mUserInfo != null) {
             mUserInfo.setWeight(data);
             mItemWeight.setRightText(data);
-            mItemWeight.setRightTextColor(this, R.color.color_normal);
+            mItemWeight.setRightTextColor(this, R.color.color_light_font);
         }
     }
 
@@ -610,7 +610,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         if (mUserInfo != null) {
             mUserInfo.setIncome(data);
             mItemIncome.setRightText(data);
-            mItemIncome.setRightTextColor(this, R.color.color_normal);
+            mItemIncome.setRightTextColor(this, R.color.color_light_font);
         }
     }
 
@@ -639,9 +639,10 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                     String desc = data.getStringExtra("type");
                     mItemSign.setText(desc);
                     mUserInfo.setDesc(desc);
+                    mItemSign.setVisibility(View.VISIBLE);
+                    mTvAudit.setVisibility(View.GONE);
                     if (service.getUserInfo() != null && service.getUserInfo().isGirl()) {
                         mTvSignAudit.setVisibility(View.VISIBLE);
-                        mTvAudit.setVisibility(View.GONE);
                         mUserInfo.audit_desc = desc;
                     }
                 }
