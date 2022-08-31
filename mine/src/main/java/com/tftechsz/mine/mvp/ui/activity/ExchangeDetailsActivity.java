@@ -18,6 +18,7 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.dto.ShopInfoDto;
 import com.tftechsz.mine.mvp.IView.IExchangeDetailView;
@@ -100,6 +101,8 @@ public class ExchangeDetailsActivity extends BaseMvpActivity<IExchangeDetailView
                 if (service.getConfigInfo() != null && service.getConfigInfo().sys != null && !TextUtils.isEmpty(service.getConfigInfo().sys.withdraw_tips)) {
                     mTips.setText(service.getConfigInfo().sys.withdraw_tips.replace(Constants.WEB_PARAMS_APP_NAME, AppUtils.getAppName()));
                 }
+            }else {
+                mTvCoin.setTextColor(Utils.getColor(R.color.c_exchange_coin));
             }
         }
         initRxBus();

@@ -6,4 +6,6 @@
 
     <color name="vip_price_hint_color_choose">#FFE4B2</color>
     <color name="vip_price_hint_color_normal">#928465</color>
+    <color name="c_exchange_coin">#FFBB12</color>
+
 </resources>

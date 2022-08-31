@@ -89,8 +89,8 @@ android {
         jasmine {
             dimension 'office'
             buildConfigField "String", "APP_NAME", "\"jasmine\""
-            buildConfigField "String", "WX_APPID", "\"wx0aaa345be1962d48\""
-            buildConfigField "String", "WX_APP_SC", "\"10a13f412f15ff7e63a12e20d6842bfb\""
+            buildConfigField "String", "WX_APPID", "\"wx5d0a60f9857addec\""
+            buildConfigField "String", "WX_APP_SC", "\"877597391120c172235dcaf6cc603c08\""
             buildConfigField "String", "SANYAN_APP_ID", "\"MDb1ScEG\""
             buildConfigField "String", "PUSH_XM_APP_ID", "\"2882303761520182217\""  //小米推送
             buildConfigField "String", "PUSH_XM_APP_KEY", "\"5102018224217\""

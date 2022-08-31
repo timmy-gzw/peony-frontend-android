@@ -5,4 +5,5 @@
     <color name="c_999999">#999999</color>
     <color name="c_4337FF">#4337FF</color>
     <color name="c_bind_wechat">@color/color_light_font</color>
+    <color name="c_exchange_coin">@color/color_normal</color>
 </resources>

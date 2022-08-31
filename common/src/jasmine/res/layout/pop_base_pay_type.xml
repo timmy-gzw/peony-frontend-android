@@ -233,7 +233,7 @@
             android:paddingTop="@dimen/dp_12"
             android:paddingBottom="@dimen/dp_12"
             android:text="确定添加账号"
-            android:textColor="@color/sel_text_confirm_333_fff"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
