@@ -145,7 +145,7 @@
                         android:id="@+id/tv_level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lv.1"
+                        android:text="LV.1"
                         android:textColor="@color/c_edd398"
                         android:textSize="@dimen/sp_12" />
 
@@ -163,7 +163,7 @@
                         android:id="@+id/tv_level_next"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lv.2"
+                        android:text="LV.2"
                         android:textColor="@color/c_edd398"
                         android:textSize="@dimen/sp_12" />
 

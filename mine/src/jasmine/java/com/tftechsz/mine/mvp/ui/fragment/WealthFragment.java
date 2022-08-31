@@ -68,9 +68,9 @@ public class WealthFragment extends BaseMvpFragment {
                     public void onSuccess(BaseResponse<GradeLevelDto> response) {
                         GradeLevelDto dto = response.getData();
                         mTvTitle.setText(dto.title);
-                        mTvLevel.setText("Lv." + dto.level);
+                        mTvLevel.setText("LV." + dto.level);
                         mTvNextLevelNum.setText("距离升级还差：" + dto.diff);
-                        mTvNextLevel.setText("Lv." + (dto.level + 1));
+                        mTvNextLevel.setText("LV." + (dto.level + 1));
                         BigDecimal myl = new BigDecimal(dto.total);
                         BigDecimal next = new BigDecimal(dto.total + "").add(new BigDecimal(dto.diff + ""));
                         BigDecimal progress = myl.divide(next, 2, BigDecimal.ROUND_UP).multiply(new BigDecimal("100"));
