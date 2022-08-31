@@ -28,7 +28,6 @@ import com.tftechsz.common.R;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.KeyBoardUtil;
 import com.tftechsz.common.utils.ToastUtil;
-import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.LoadingDialog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -165,12 +164,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
         public TextView titleTv;
         public ImageView rightIv;
         public TextView rightTv;
-        public View  toolView;
+        public View toolView;
         private String title;
         private int rightRes = -1;
         private View.OnClickListener rightListener, rightTextListener;
         private String rightText;
-        private boolean isBackShow,isViewShow = true;
+        private boolean isBackShow, isViewShow = true;
         private boolean isRightImgShow, isRightTxtShow = true;
         private int backgroundColor = -1, backViewColor = -1, titleTextColor, rightTextColor, rightTextBg;
         private int backRes = -1;
@@ -283,13 +282,14 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             if (rightTextColor > 0) {
                 rightTv.setTextColor(getResources().getColor(rightTextColor));
             }
-            if (!TextUtils.isEmpty(rightText)) {{
-                rightTv.setText(rightText);
-                rightTv.setOnClickListener(rightTextListener);
-                if (rightTextBg > 0) {
-                    rightTv.setBackgroundResource(rightTextBg);
+            if (!TextUtils.isEmpty(rightText)) {
+                {
+                    rightTv.setText(rightText);
+                    rightTv.setOnClickListener(rightTextListener);
+                    if (rightTextBg > 0) {
+                        rightTv.setBackgroundResource(rightTextBg);
+                    }
                 }
-            }
                 rightTv.setText(rightText);
                 rightTv.setOnClickListener(rightTextListener);
                 if (rightTextBg > 0) {
@@ -297,8 +297,8 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
                 }
             }
 
-            if(!isViewShow){
-                toolView.setVisibility( View.INVISIBLE);
+            if (!isViewShow) {
+                if (toolView != null) toolView.setVisibility(View.INVISIBLE);
             }
 
 
@@ -357,7 +357,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
         super.onDestroy();
         try {
             AppManager.getAppManager().removeActivity(this);
-            if(runnable != null){
+            if (runnable != null) {
                 runnable = null;
             }
             if (mLoadingDialog != null) {
