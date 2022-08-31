@@ -5,7 +5,7 @@
     <string name="sign_in">立即签到</string>
     <string name="sign_in_success_format">%s</string>
     <string name="auth_for_obtain_permission">完成认证可获得以下权限：</string>
-
+    <string name="pagestate_error_occurs">网络走丢了，请检查网络设置</string>
     <string name="one_key_accost_boy">恋爱天使为你推荐今日最佳缘分</string>
     <string name="one_key_accost_girl">恋爱天使为你推荐今日最佳缘分</string>
 

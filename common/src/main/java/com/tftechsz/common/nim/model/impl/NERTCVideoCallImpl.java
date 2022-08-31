@@ -700,6 +700,9 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
                     appKey = service.getConfigInfo().sys.yunxin_live_app_key;
                 }
             } else {  //1v1
+                int scenario = NERtcConstants.AudioScenario.SPEECH;
+                int profile = NERtcConstants.AudioProfile.STANDARD;
+                NERtcEx.getInstance().setAudioProfile(profile, scenario);
                 appKey = AppUtils.getYXAppId();
             }
             LogUtil.e("==============================", mode + "==================" + appKey);
