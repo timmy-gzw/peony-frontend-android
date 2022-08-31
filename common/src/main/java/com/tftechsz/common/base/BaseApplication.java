@@ -45,6 +45,7 @@ import com.tencent.mmkv.MMKV;
 import com.tencent.tauth.Tencent;
 import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
+import com.tftechsz.common.R;
 import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.event.CommonEvent;
@@ -59,7 +60,6 @@ import com.tftechsz.common.push.MyPushContentProvider;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.ImageLoaderUtil;
 import com.tftechsz.common.utils.MMKVUtils;
-import com.tftechsz.common.widget.MyToastStyle;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.yl.lib.sentry.hook.PrivacySentry;
@@ -195,7 +195,8 @@ public class BaseApplication extends Application implements Application.Activity
         // 监听的注册，必须在主进程中。
         HeytapPushManager.init(this, true);
         com.huawei.hms.support.common.ActivityMgr.INST.init(this);
-        ToastUtils.init(mApplication, new MyToastStyle());
+        ToastUtils.init(mApplication);
+        ToastUtils.setView(R.layout.layout_custom_toast);
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.LEGACY_MANUAL);
         VideoViewManager.setConfig(VideoViewConfig.newBuilder().setPlayerFactory(IjkPlayerFactory.create()).build());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

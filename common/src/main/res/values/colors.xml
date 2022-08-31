@@ -102,4 +102,5 @@
     <color name="c_continue_pair">@color/c_99ff3a74</color>
     <color name="c_continue_pair_video">@color/c_993875FF</color>
     <color name="c_empty_text">@color/color_cc</color>
+    <color name="c_toast_bg">@color/black</color>
 </resources>
