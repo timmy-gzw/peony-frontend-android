@@ -16,7 +16,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tab_height"
-        android:layout_marginBottom="@dimen/dp_3"
         android:orientation="horizontal">
 
         <com.flyco.tablayout.SlidingScaleTabLayout
@@ -32,7 +31,7 @@
             app:tl_indicator_corner_radius="@dimen/dp_2"
             app:tl_indicator_height="@dimen/dp_4"
             app:tl_indicator_margin_top="@dimen/dp_10"
-            app:tl_indicator_width="@dimen/dp_10"
+            app:tl_indicator_width="@dimen/dp_16"
             app:tl_tab_horizontal_gravity="Center"
             app:tl_tab_marginBottom="@dimen/dp_12"
             app:tl_tab_msg_marginRight="@dimen/dp_10"
