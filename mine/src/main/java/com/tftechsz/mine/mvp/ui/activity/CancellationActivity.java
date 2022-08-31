@@ -52,7 +52,7 @@ public class CancellationActivity extends BaseMvpActivity<ILogoutView, ILogoutPr
     @Override
     protected void initView(Bundle savedInstanceState) {
         new ToolBarBuilder().showBack(true)
-                .setTitle("注销账号")
+                .setTitle("账号注销")
                 .build();
         initListener();
         p.getLogoutStatus();
