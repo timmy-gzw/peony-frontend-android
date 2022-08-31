@@ -26,7 +26,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_gray"
             android:gravity="center_vertical"
-            android:hint="请输入打赏数量，最多9999"
+            android:hint="@string/input_gift_num_hint"
             android:maxLength="4"
             android:paddingStart="@dimen/dp_12"
             android:paddingBottom="@dimen/dp_2"
@@ -41,7 +41,7 @@
             android:layout_marginStart="@dimen/dp_10"
             android:background="@drawable/bg_red_radius10"
             android:gravity="center"
-            android:text="确定"
+            android:text="@string/input_gift_btn_text"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_15" />
 

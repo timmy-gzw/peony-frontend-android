@@ -23,7 +23,7 @@
     <color name="c_btn_accost">@color/color_normal</color>
     <color name="c_del_content">@color/color_light_font</color>
 
-    <color name="c_4c000000">#ADADD7</color>
+    <color name="c_4c000000">#000000</color>
 
     <color name="color_update_version">#170B5F</color>
     <color name="c_exchange_num">@color/colorPrimary</color>
