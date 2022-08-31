@@ -50,6 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="头像"
+                    android:textStyle="bold"
                     android:textColor="@color/color_normal"
                     android:textSize="@dimen/sp_16"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -120,6 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="语音签名"
+                    android:textStyle="bold"
                     android:textColor="@color/color_normal"
                     android:textSize="@dimen/sp_16"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -221,6 +223,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="个人相册"
+                    android:textStyle="bold"
                     android:textColor="@color/color_normal"
                     android:layout_marginBottom="@dimen/dp_6"
                     android:textSize="@dimen/sp_16"/>
@@ -239,6 +242,17 @@
                 style="@style/Driver"
                 android:layout_height="@dimen/dp_10"
                 android:background="@color/bg_color" />
+
+            <TextView
+                android:text="个人信息"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/color_normal"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_16"
+                android:layout_height="wrap_content"/>
 
             <RelativeLayout
                 android:id="@+id/rl_name"

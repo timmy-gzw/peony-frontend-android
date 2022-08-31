@@ -153,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp_30"
-            android:background="@mipmap/ic_close_red_package"
+            android:background="@mipmap/ic_red_close"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/rl_bg"
             />
