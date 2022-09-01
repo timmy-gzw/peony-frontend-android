@@ -610,6 +610,7 @@
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_180"
         android:layout_below="@+id/ll_userinfo"
+        android:layout_marginTop="@dimen/dp_16"
         android:layout_marginStart="@dimen/dp_16"
         android:visibility="visible" />
 
