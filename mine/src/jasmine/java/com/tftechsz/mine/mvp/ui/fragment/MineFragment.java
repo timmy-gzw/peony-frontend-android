@@ -195,7 +195,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                 } else if (mBotConfigList.get(position).link.startsWith(Interfaces.LINK_PEONY + Interfaces.LINK_PEONY_INVITE)) { //填写邀请码
                     CustomEditPopWindow2 popWindow = new CustomEditPopWindow2(getActivity());
                     popWindow.showNow(getParentFragmentManager(), "custom");
-                    popWindow.setHintContent("输入邀请码");
+                    popWindow.setHintContent("请输入对方专属邀请码");
                     popWindow.setEtLength(60);
                     popWindow.setTitle("填写邀请码");
                     popWindow.setSureDismiss(false);
