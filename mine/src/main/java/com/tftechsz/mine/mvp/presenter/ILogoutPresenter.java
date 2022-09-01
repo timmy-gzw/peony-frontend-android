@@ -65,8 +65,8 @@ public class ILogoutPresenter extends BasePresenter<ILogoutView> {
     public void showPop(Context context, String repeat_msg) {
         if (mCustomPopWindow == null)
             mCustomPopWindow = new CustomPopWindow(context).setContent(repeat_msg)
-                    .setLeftButton(context.getString(R.string.cancel))
-                    .setRightButton(context.getString(R.string.confirm))
+                    .setLeftButton(context.getString(R.string.account_cancellation))
+                    .setRightButton(context.getString(R.string.think_about))
                     .addOnClickListener(new CustomPopWindow.OnSelectListener() {
                         @Override
                         public void onCancel() {

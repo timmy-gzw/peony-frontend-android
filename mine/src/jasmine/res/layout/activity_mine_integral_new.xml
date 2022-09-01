@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color">
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/iv_header"
@@ -87,7 +87,8 @@
     <androidx.legacy.widget.Space
         android:id="@+id/space"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_10"
+        android:layout_height="@dimen/dp_20"
+        android:background="@drawable/shape_lt_rt_16_ffffff"
         app:layout_constraintBottom_toBottomOf="@id/iv_header" />
 
     <View
