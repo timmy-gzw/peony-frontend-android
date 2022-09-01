@@ -153,7 +153,7 @@ public class VipUtils {
                 .addListener(new RequestListener<File>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<File> target, boolean isFirstResource) {
-                        //setPersonalise(view, 0, isEnd, isPicFrame); //失败时使用默认
+                        setPersonalise(view, 0, isEnd, isPicFrame); //失败时使用默认
 //                        if (!isPicFrame) { //失败时使用本地
 //                            view.setBackgroundResource(getChatBubbleBackground(finalId, isEnd, isParty));
 //                        } else {
