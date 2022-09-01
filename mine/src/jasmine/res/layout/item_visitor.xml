@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_14"
                 android:layout_marginEnd="@dimen/dp_6"
-                android:background="@{item.isGirl ? @drawable/bg_girl : @drawable/bg_boy}"
+                android:background="@{item.isGirl ? @drawable/bg_girl_age_sex : @drawable/bg_boy_age_sex}"
                 android:drawableStart="@{item.isGirl  ? @drawable/ic_girl : @drawable/ic_boy}"
                 android:drawablePadding="@dimen/dp_2"
                 android:gravity="center"

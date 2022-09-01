@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_4"
                 android:gravity="center_vertical"
-                android:text="甜心币"
+                android:text="金币"
                 android:textColor="@color/color_normal"
                 android:textSize="@dimen/sp_14"
                 tools:ignore="ContentDescription" />
