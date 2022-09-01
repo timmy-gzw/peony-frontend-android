@@ -35,7 +35,7 @@ public class AccostUserAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder
         TextView age = helper.getView(com.tftechsz.common.R.id.tv_age);
         ImageView sex = helper.getView(com.tftechsz.common.R.id.iv_sex);
         LinearLayout llage = helper.getView(com.tftechsz.common.R.id.ll_age);
-        helper.setText(R.id.tv_name,item.getNickname());
+        helper.setText(R.id.tv_name, item.getNickname());
         if (item.getSex() == 2) {
             llage.setBackgroundResource(com.tftechsz.common.R.drawable.bg_girl_age_sex);
             sex.setImageResource(com.tftechsz.common.R.drawable.ic_girl);
@@ -43,8 +43,8 @@ public class AccostUserAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder
             llage.setBackgroundResource(com.tftechsz.common.R.drawable.bg_boy_age_sex);
             sex.setImageResource(com.tftechsz.common.R.drawable.ic_boy);
         }
-        age.setText(item.getAge()+"");
-        GlideUtils.loadRoundImage(getContext(), (ImageView) helper.getView(R.id.iv_avatar), item.getIcon());
+        age.setText(item.getAge() + "");
+        GlideUtils.loadRoundImage(getContext(), (ImageView) helper.getView(R.id.iv_avatar), item.getIcon(), getContext().getResources().getInteger(R.integer.one_key_accost_radius));
         if (getData().get(getItemPosition(item)).isSelected()) {
             ivCheck.setImageResource(R.mipmap.ic_check_selector);
         } else {
