@@ -51,10 +51,5 @@
         app:layout_constraintTop_toTopOf="@id/iv_shop"
         tools:text="350 积分" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5"
-        android:background="@color/divider_line_color"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
