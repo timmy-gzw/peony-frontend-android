@@ -609,7 +609,7 @@
         android:id="@+id/rv_call_chat"
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_180"
-        android:layout_below="@+id/tv_call_tip"
+        android:layout_below="@+id/ll_userinfo"
         android:layout_marginStart="@dimen/dp_16"
         android:visibility="visible" />
 
