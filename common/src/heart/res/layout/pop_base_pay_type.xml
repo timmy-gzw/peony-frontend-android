@@ -97,7 +97,7 @@
                         android:layout_marginTop="@dimen/dp_10"
                         android:background="@drawable/sp_primary_light_r_100"
                         android:hint="输入支付宝账号"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textNoSuggestions|textEmailAddress"
                         android:padding="@dimen/dp_16"
                         android:singleLine="true"
                         android:textColor="@color/color_normal"

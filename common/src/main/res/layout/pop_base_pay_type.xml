@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:hint="请输入你的支付宝账号"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textNoSuggestions|textEmailAddress"
                     android:paddingTop="@dimen/dp_8"
                     android:paddingBottom="@dimen/dp_12"
                     android:singleLine="true"

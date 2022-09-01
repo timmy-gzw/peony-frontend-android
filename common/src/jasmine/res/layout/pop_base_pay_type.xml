@@ -99,7 +99,7 @@
                         android:layout_marginEnd="@dimen/dp_60"
                         android:background="@color/transparent"
                         android:hint="请输入你的支付宝账号"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textNoSuggestions|textEmailAddress"
                         android:singleLine="true"
                         android:textColor="@color/color_normal"
                         android:textColorHint="@color/color_cc"
