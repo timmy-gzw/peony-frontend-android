@@ -14,14 +14,11 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.constant.TimeConstants;
-import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.gyf.immersionbar.ImmersionBar;
@@ -160,18 +157,6 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
                             }
                         }
                 ));
-
-
-        if (service.getUserInfo().isVip()) {
-            long timeSpanByNow = TimeUtils.getTimeSpanByNow(service.getUserInfo().getVip_expiration_time(), TimeConstants.DAY);
-            if (timeSpanByNow <= 7) {
-                mBind.hint.setTextColor(ContextCompat.getColor(this, R.color.c_d72537));
-            } else {
-                mBind.hint.setTextColor(ContextCompat.getColor(this, R.color.c_c89c5d));
-            }
-        } else {
-            mBind.hint.setTextColor(ContextCompat.getColor(this, R.color.c_c89c5d));
-        }
     }
 
     @Override
@@ -194,7 +179,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
 //        } else {
         p.getVipPrice();
 //        }
-        p.getVipPrivilege();
+        p.getVipConfig();
     }
 
     @Override
@@ -244,7 +229,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
     private void setPayButton(int position) {
         VipPriceBean item = mPriceAdapter.getItem(position);
         mBind.setItemPrice(item.price);
-        mBind.tvDiscountPrice.setText(item.reduce_price_title.replace("立减","已省"));
+        mBind.tvDiscountPrice.setText(item.reduce_price_title.replace("立减", "已省"));
     }
 
     @Override
@@ -267,12 +252,16 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
 
     @Override
     public void getVipPrivilegeSuccess(List<VipPrivilegeBean> bean) {
-        mPrivilegeAdapter.setList(bean);
-        mBind.setVipPrivilegeCount(bean == null ? 0 : bean.size());
+//        mPrivilegeAdapter.setList(bean);
+//        mBind.setVipPrivilegeCount(bean == null ? 0 : bean.size());
     }
 
     @Override
     public void getVipConfigSuccess(VipConfigBean data) {
+        mBind.setVipPrivilegeCount(data.privilege == null ? 0 : data.privilege.size());
+        mPrivilegeAdapter.setList(data.privilege);
+        mBind.setVipPrivilegeTitle(data.privilege_title);
+        mBind.setShoppingTitle(data.shopping_title);
 //        VipUtils.setPersonalise(mBind.chatBubble, data.chat_bubble, true);
 //        VipUtils.setPersonalise(mBind.picFrame, data.picture_frame, false, true);
     }

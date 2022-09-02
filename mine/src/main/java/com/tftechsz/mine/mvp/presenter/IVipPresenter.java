@@ -52,7 +52,7 @@ public class IVipPresenter extends BasePresenter<IVipView> {
 
     //vip装扮
     public void getVipConfig() {
-        addNet(userService.getVipConfig().compose(applySchedulers())
+        addNet(configService.getVipInfo().compose(applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<VipConfigBean>>() {
                     @Override
                     public void onSuccess(BaseResponse<VipConfigBean> response) {
