@@ -161,8 +161,20 @@ androidJunkCode {
         drawableCount = 600
         stringCount = 600
     }
+    def jasmineConfig = {
+        packageBase = "com.tftechsz.jasmine"
+        packageCount = 60
+        activityCountPerPackage = 8
+        excludeActivityJavaFile = false
+        otherCountPerPackage = 80
+        methodCountPerClass = 60
+        resPrefix = "jasmine"
+        drawableCount = 600
+        stringCount = 600
+    }
     variantConfig {
         "heartRelease" heartConfig
+        "jasmineRelease" jasmineConfig
     }
 }
 
