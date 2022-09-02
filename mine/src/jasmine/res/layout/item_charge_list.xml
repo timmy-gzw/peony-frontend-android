@@ -27,22 +27,21 @@
 
         <TextView
             android:id="@+id/tv_coin"
-            android:layout_width="87dp"
+            android:layout_width="@dimen/dp_120"
             android:layout_height="28dp"
             android:layout_marginStart="@dimen/dp_10"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:maxLines="1"
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold"
             app:autoSizeMinTextSize="@dimen/sp_10"
-            app:autoSizeTextType="uniform"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toTopOf="@+id/tv_coin_title"
             app:layout_constraintStart_toEndOf="@id/iv_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="12345566" />
+            tools:text="16" />
 
         <TextView
             android:id="@+id/tv_coin_title"
