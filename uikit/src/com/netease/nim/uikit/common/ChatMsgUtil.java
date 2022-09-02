@@ -53,6 +53,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 /**
  * 聊天工具类
@@ -516,7 +517,6 @@ public class ChatMsgUtil implements Serializable {
     /**
      * tip消息
      */
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public static SpannableStringBuilder getTipContent(String content, String color, OnSelectListener listener) {
         SpannableStringBuilder span = new SpannableStringBuilder();
         if (!TextUtils.isEmpty(content)) {
@@ -558,7 +558,7 @@ public class ChatMsgUtil implements Serializable {
                                 }
                             }, start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             if (TextUtils.isEmpty(color)) {
-                                spanString.setSpan(new ForegroundColorSpan(Utils.getApp().getColor(R.color.color_link_color)), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                spanString.setSpan(new ForegroundColorSpan(Utils.getApp().getResources().getColor(R.color.color_link_color)), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             } else {
                                 spanString.setSpan(new ForegroundColorSpan(Color.parseColor(color)), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             }
