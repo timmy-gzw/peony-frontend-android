@@ -199,6 +199,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
                     popWindow.setEtLength(60);
                     popWindow.setTitle("填写邀请码");
                     popWindow.setSureDismiss(false);
+                    popWindow.setRightButton("确认");
                     popWindow.addOnClickListener(new CustomEditPopWindow2.OnSelectListener() {
                         @Override
                         public void onCancel() {

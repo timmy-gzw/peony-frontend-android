@@ -2,6 +2,7 @@
 package com.netease.nim.uikit.common;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -14,7 +15,9 @@ import android.view.View;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ToastUtils;
+import com.blankj.utilcode.util.Utils;
 import com.google.gson.Gson;
+import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.business.extension.AVChatAttachment;
 import com.netease.nim.uikit.business.extension.AccostCardAttachment;
 import com.netease.nim.uikit.business.extension.AccostChatAttachment;
@@ -49,6 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 /**
  * 聊天工具类
@@ -512,6 +516,7 @@ public class ChatMsgUtil implements Serializable {
     /**
      * tip消息
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static SpannableStringBuilder getTipContent(String content, String color, OnSelectListener listener) {
         SpannableStringBuilder span = new SpannableStringBuilder();
         if (!TextUtils.isEmpty(content)) {
@@ -553,7 +558,7 @@ public class ChatMsgUtil implements Serializable {
                                 }
                             }, start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             if (TextUtils.isEmpty(color)) {
-                                spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#41B2F4")), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                spanString.setSpan(new ForegroundColorSpan(Utils.getApp().getColor(R.color.color_link_color)), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             } else {
                                 spanString.setSpan(new ForegroundColorSpan(Color.parseColor(color)), start, spanString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             }

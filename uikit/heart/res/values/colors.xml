@@ -6,4 +6,6 @@
     <color name="color_CFB78A">#7858FC</color>
     <color name="main_bg_color">#ADADD7</color>
     <color name="color_split_line_cccccc">#8282AA</color>
+
+    <color name="color_link_color">#5397FF</color>
 </resources>

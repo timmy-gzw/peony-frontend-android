@@ -177,7 +177,6 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
 //        if (service.getUserInfo().isVip()) {
 //            p.getVipConfig();
 //        } else {
-        p.getVipPrice();
 //        }
         p.getVipConfig();
     }
@@ -234,20 +233,7 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
 
     @Override
     public void getVipPriceSuccess(List<VipPriceBean> bean) {
-        if (mPayId > 0) {
-            for (VipPriceBean b : bean) {
-                b.setSel(b.id == mPayId);
-            }
-        }
-        mPriceAdapter.setList(bean);
-        for (int i = 0; i < bean.size(); i++) {
-            VipPriceBean vipPriceBean = bean.get(i);
-            if (vipPriceBean.isSel()) {
-                oldSel = i;
-                setPayButton(i);
-                break;
-            }
-        }
+
     }
 
     @Override
@@ -262,6 +248,23 @@ public class VipActivity extends BaseMvpActivity<IVipView, IVipPresenter> implem
         mPrivilegeAdapter.setList(data.privilege);
         mBind.setVipPrivilegeTitle(data.privilege_title);
         mBind.setShoppingTitle(data.shopping_title);
+
+        if (data.shopping != null && data.shopping.size() > 0) {
+            if (mPayId > 0) {
+                for (VipPriceBean b : data.shopping) {
+                    b.setSel(b.id == mPayId);
+                }
+            }
+            mPriceAdapter.setList(data.shopping);
+            for (int i = 0; i < data.shopping.size(); i++) {
+                VipPriceBean vipPriceBean = data.shopping.get(i);
+                if (vipPriceBean.isSel()) {
+                    oldSel = i;
+                    setPayButton(i);
+                    break;
+                }
+            }
+        }
 //        VipUtils.setPersonalise(mBind.chatBubble, data.chat_bubble, true);
 //        VipUtils.setPersonalise(mBind.picFrame, data.picture_frame, false, true);
     }

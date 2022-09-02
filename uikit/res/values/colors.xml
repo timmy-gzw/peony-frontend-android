@@ -98,4 +98,7 @@
     <color name="color_noble">#FFECCB</color>
     <color name="color_d1d1d1">#d1d1d1</color>
     <color name="c_1affffff">#1affffff</color>
+
+    <color name="color_link_color">#41B2F4</color>
+
 </resources>
