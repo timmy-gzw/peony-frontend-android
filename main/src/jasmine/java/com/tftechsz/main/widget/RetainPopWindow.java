@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.business.uinfo.UserInfoHelper;
@@ -18,6 +20,7 @@ import com.tftechsz.common.base.AppManager;
 import com.tftechsz.common.entity.MessageInfo;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.widget.pop.BaseCenterPop;
 import com.tftechsz.main.R;
 
@@ -55,7 +58,10 @@ public class RetainPopWindow extends BaseCenterPop implements View.OnClickListen
 
     public void initData(MessageInfo messageInfo) {
         this.messageInfo = messageInfo;
+        tvName.setTextColor(ContextCompat.getColor(getContext(), R.color.color_normal));
         tvName.setText(UserInfoHelper.getUserTitleName(messageInfo.getContactId(), SessionTypeEnum.P2P));
+        NimUserInfo userInfo = NIMClient.getService(UserService.class).getUserInfo(messageInfo.getContactId());
+        CommonUtil.setNameColor(userInfo, messageInfo.getContactId(), tvName, false);
         if (TextUtils.equals(UserInfoHelper.getUserTitleName(messageInfo.getContactId(), SessionTypeEnum.P2P), messageInfo.getContactId())) {
             List<String> list = new ArrayList<>();
             list.add(messageInfo.getFromAccount());
@@ -63,7 +69,9 @@ public class RetainPopWindow extends BaseCenterPop implements View.OnClickListen
                 @Override
                 public void onResult(int code, List<NimUserInfo> result, Throwable exception) {
                     if (result != null && result.size() > 0) {
-                        tvName.setText(result.get(0).getName());
+                        NimUserInfo nimUserInfo = result.get(0);
+                        tvName.setText(nimUserInfo.getName());
+                        CommonUtil.setNameColor(nimUserInfo, nimUserInfo.getAccount(), tvName, false);
                     }
                 }
             });
