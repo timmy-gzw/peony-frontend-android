@@ -83,7 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_80"
-        android:layout_marginBottom="@dimen/dp_45"
+        android:layout_marginBottom="@dimen/dp_20"
         android:gravity="center"
         android:textColor="#E57810"
         android:textSize="@dimen/sp_18"
