@@ -79,6 +79,7 @@ public class BarrageView extends RelativeLayout {
             maxTextSize = typedArray.getInt(R.styleable.BarrageView_max_text_size, DEFAULT_MAXTEXTSIZE);
             minTextSize = typedArray.getInt(R.styleable.BarrageView_min_text_size, DEFAULT_MINTEXTSIZE);
             lineHeight = typedArray.getDimensionPixelSize(R.styleable.BarrageView_line_height, BarrageTools.dp2px(context, DEFAULT_LINEHEIGHT));
+            lineHeight = lineHeight + textTopPadding + textBottomPadding;
             borderColor = typedArray.getColor(R.styleable.BarrageView_border_color, DEFAULT_BORDERCOLOR);
             random_color = typedArray.getBoolean(R.styleable.BarrageView_random_color, DEFAULT_RANDOMCOLOR);
             allow_repeat = typedArray.getBoolean(R.styleable.BarrageView_allow_repeat, DEFAULT_ALLOWREPEAT);
