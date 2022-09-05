@@ -10,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.ActionListener;
@@ -19,14 +17,11 @@ import com.chuanglan.shanyan_sdk.tool.ShanYanUIConfig;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.Constants;
-import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
-import com.tftechsz.common.widget.AutoPollRecyclerView;
 import com.tftechsz.mine.R;
-import com.tftechsz.mine.adapter.LoginImageAdapter;
 import com.tftechsz.mine.widget.pop.PrivacyPopWindow;
 
 
@@ -129,14 +124,14 @@ public class ConfigUtils {
                 .setUncheckedImgPath(unCheck)
                 .setCheckedImgPath(check)
                 .setPrivacyOffsetBottomY(20) //设置隐私条款相对于屏幕下边缘y偏
-                .setcheckBoxOffsetXY(0, 1)
                 .setPrivacyState(false)
                 .setPrivacyTextSize(12)
                 .setPrivacyOffsetX(5)
                 .setSloganHidden(true)
                 .setCheckBoxHidden(false)
                 .setCheckBoxWH(16, 16)
-                .setcheckBoxOffsetXY(0, 4)
+                .setcheckBoxOffsetXY(20, 4)
+                .setCheckBoxMargin(4, 4, 0, 4)
                 .setPrivacyGravityHorizontalCenter(true)
                 .setShanYanSloganTextColor(Color.parseColor("#ffffff"))
 //                .addCustomView(numberLayout, false, false, null)
