@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.tftechsz.common.R;
 
+import razerdp.basepopup.BasePopupWindow;
+
 /**
  * 用户封禁
  */
@@ -40,5 +42,10 @@ public class UserBanPopWindow extends BaseCenterPop{
     @Override
     protected View createPopupById() {
         return createPopupById(R.layout.pop_user_ban);
+    }
+
+    @Override
+    public BasePopupWindow setBackPressEnable(boolean backPressEnable) {
+        return super.setBackPressEnable(false);
     }
 }
