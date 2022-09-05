@@ -19,7 +19,7 @@ public class AccostPicAdapter extends BaseQuickAdapter<AccostSettingListBean, Ba
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, AccostSettingListBean item) {
-        GlideUtils.loadRouteImage(getContext(), helper.getView(R.id.icon), item.url);
+        GlideUtils.loadRoundImage(getContext(), helper.getView(R.id.icon), item.url);
         helper.setVisible(R.id.del, item.is_show == 1);
         helper.setVisible(R.id.under_review, item.is_show == 0);
     }

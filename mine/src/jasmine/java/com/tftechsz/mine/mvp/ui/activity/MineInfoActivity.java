@@ -247,7 +247,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         mItemSex.setRightText(mUserInfo.getSex() == 1 ? "男" : "女");
         mItemSex.getTvRight().setTextColor(ContextCompat.getColor(this, R.color.color_light_font));
         //生日
-        setInfo(mItemBirthday, mUserInfo.getBirthday());
+        setInfo(mItemBirthday, mUserInfo.getBirthday().replace("/","-"));
         //星座
         setInfo(mItemConstellation, mUserInfo.getConstellation());
         //所在地

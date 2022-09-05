@@ -273,7 +273,11 @@ public class TimeUtils {
     }
 
     public static String dateToYYYYMMdd(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.US);
+        return dateToYYYYMMdd(date,"/");
+    }
+
+    public static String dateToYYYYMMdd(Date date,String split) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy"+split+"MM"+split+"dd", Locale.US);
         String sDate = sdf.format(date);
         return sDate;
     }

@@ -253,7 +253,7 @@ public class MineInfoPresenter extends BasePresenter<IMineInfoView> {
                     int day = Integer.parseInt(Objects.requireNonNull(TimeUtils.date2Str(date, "dd")));
                     selectedDate.set(year, moth - 1, day);
                     if (null == getView()) return;
-                    getView().getChooseBirthday(TimeUtils.dateToYYYYMMdd(date), TimeUtils.getAstro(moth, day));
+                    getView().getChooseBirthday(TimeUtils.dateToYYYYMMdd(date,"-"), TimeUtils.getAstro(moth, day));
                 }
             })
                     .setLayoutRes(R.layout.layout_pickerview_custom, new CustomListener() {
