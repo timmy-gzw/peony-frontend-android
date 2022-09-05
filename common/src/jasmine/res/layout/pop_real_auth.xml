@@ -122,7 +122,7 @@
             android:layout_height="0dp"
             android:scaleType="fitXY"
             android:src="@mipmap/peony_zrrztc_tb_png"
-            app:layout_constraintDimensionRatio="3.16:1"
+            app:layout_constraintDimensionRatio="320:115"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
