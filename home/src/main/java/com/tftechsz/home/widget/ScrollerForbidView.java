@@ -94,6 +94,8 @@ public class ScrollerForbidView extends LinearLayout {
                 myHandler.sendEmptyMessageDelayed(LOOP_RECYCLER_VIEW_MSG, LOOP_INTERVAL);
             }
             position = 0;
+            targetItemPosition = position;
+            recyclerView.smoothScrollToPosition(targetItemPosition);
         });
     }
 
