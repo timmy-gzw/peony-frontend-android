@@ -132,29 +132,10 @@ public class MsgViewHolderAudio extends MsgViewHolderBase {
     private void setLottieZip(int id, boolean isEnd) {
         //Log.e("MsgViewHolderAudio.setLottieZip", "设置语音lottie" + id + " -- " + isEnd);
         StringBuilder sb = new StringBuilder("audio_");
-        switch (id) {
-            case 3:
-                sb.append(id);
-                break;
-
-            case 104:
-            case 105:
-            case 106:
-            case 107:
-            case 108:
-            case 2001:
-            case 2002:
-            case 2003:
-            case 2004:
-            case 2005:
-            case 2006:
-            case 2007:
-                sb.append(103);
-                break;
-
-            default:
-                sb.append("0");
-                break;
+        if (id == 3) {
+            sb.append(id);
+        } else {
+            sb.append("0");
         }
         audioLottie.setAnimation(sb.append(isEnd ? "_end.zip" : "_start.zip").toString());
 
