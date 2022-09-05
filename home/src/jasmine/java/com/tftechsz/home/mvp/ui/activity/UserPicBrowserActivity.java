@@ -250,7 +250,7 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
         );
 
         mIv_accost.setLiked(true);
-        mTv_accost.setText("私信");
+        mTv_accost.setText("私聊");
     }
 
 
