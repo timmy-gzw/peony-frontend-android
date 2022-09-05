@@ -136,7 +136,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     private static final String CALL_USER_IS_ON_LINE = "call_user_is_on_line";
     private static final String CALL_FROM_ID = "from_id";
 
-    private View localVideoContainer,viewVideoView, viewRemote;
+    private View localVideoContainer, viewVideoView, viewRemote;
     private NERTCVideoCall nertcVideoCall;
     private NERtcVideoView localVideoView, videoView, remoteVideoView;
     private TextView tvSwitch;  //切换摄像头
@@ -1699,11 +1699,27 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         mTvViolation.setVisibility(View.GONE);
         mTvViolationTip.setVisibility(View.GONE);
         NERtc.getInstance().startVideoPreview();
-        viewVideoView.setVisibility(View.GONE);
-        viewRemote.setVisibility(View.GONE);
         mSkipFrame = 5;
         if (mIsMeWarm)
             NERtc.getInstance().enableLocalVideo(true);
+        if (isFaceOn || isOpenFace) {
+            if (service.getUserInfo() != null && service.getUserInfo().isGirl()) {
+                if (isChangeVideo) {
+                    viewRemote.setVisibility(View.GONE);
+                } else {
+                    viewVideoView.setVisibility(View.GONE);
+                }
+            }else {
+                if (isChangeVideo) {
+                    viewVideoView.setVisibility(View.GONE);
+                } else {
+                    viewRemote.setVisibility(View.GONE);
+                }
+            }
+        } else {
+            viewVideoView.setVisibility(View.GONE);
+            viewRemote.setVisibility(View.GONE);
+        }
         mIsWarm = false;
         mIsMeWarm = false;
         Drawable drawable1 = null;
