@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <include
+        layout="@layout/tool_bar"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_youth_model_content"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_weight="1"
+        android:textColor="@color/color_mid_font"
+        />
+
+
+    <TextView
+        style="@style/CustomButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/dp_20"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tv_youth_model"
+        android:text="开启青少年模式"
+        android:textColor="@color/white"
+        />
+
+
+
+
+</LinearLayout>

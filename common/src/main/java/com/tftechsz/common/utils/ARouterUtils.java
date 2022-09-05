@@ -387,6 +387,10 @@ public class ARouterUtils {
                 .navigation();
     }
 
+    public static void toYouthModelActivity() {
+        ARouter.getInstance().build(ARouterApi.ACTIVITY_YOUTH_MODEL)
+                .navigation();
+    }
 
     /**
      * 跳转个人动态

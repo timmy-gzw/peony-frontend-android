@@ -267,7 +267,7 @@
                     android:layout_marginTop="@dimen/dp_5"
                     android:background="@color/transparent"
                     android:hint="请输入收款人支付宝账号"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textNoSuggestions|textEmailAddress"
                     android:paddingHorizontal="@dimen/sp_15"
                     android:singleLine="true"
                     android:textColor="@color/color_normal"

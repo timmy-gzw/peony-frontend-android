@@ -42,6 +42,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
     private CommonItemView mItemPrivacySetting;
     private CommonItemView mItemCallSetting;
     private CommonItemView mItemFaceSetting;
+    private CommonItemView mItemYouthModel;
 
 
     private int checkedItem, selectedItem;
@@ -78,6 +79,9 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
         mItemFaceSetting = findViewById(R.id.item_face_setting);
         mItemFaceSetting.setOnClickListener(this);  //美颜设置
         findViewById(R.id.item_black_list).setOnClickListener(this);    //黑名单设置
+
+        mItemYouthModel = findViewById(R.id.item_youth_model);
+        mItemYouthModel.setOnClickListener(this);
 
         CommonItemView itemAbout = findViewById(R.id.item_about);
         itemAbout.setOnClickListener(this);   //关于我们
@@ -118,15 +122,15 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
 
             List<ConfigInfo.MineInfo> list = CommonUtil.addMineInfo(service.getConfigInfo().share_config.my);
             List<String> links = new ArrayList<>();
-            for(ConfigInfo.MineInfo mineInfo:list){
+            for (ConfigInfo.MineInfo mineInfo : list) {
                 links.add(mineInfo.link);
             }
 
-            if(service.getUserInfo().isGirl() && links.contains(Interfaces.LINK_PEONY_ACCOST_SETTING)){
+            if (service.getUserInfo().isGirl() && links.contains(Interfaces.LINK_PEONY_ACCOST_SETTING)) {
                 mItemCallSetting.setVisibility(View.VISIBLE);
             }
 
-            if(links.contains(Interfaces.LINK_PEONY_FACIAL)){
+            if (links.contains(Interfaces.LINK_PEONY_FACIAL)) {
                 mItemFaceSetting.setVisibility(View.VISIBLE);
             }
 
@@ -135,6 +139,13 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
             } else {
                 mMItemChatsignnum.setVisibility(View.GONE);
             }
+
+            if (service.getConfigInfo().share_config.is_open_youth_mode == 1) {
+                mItemYouthModel.setVisibility(View.VISIBLE);
+            } else {
+                mItemYouthModel.setVisibility(View.GONE);
+            }
+
         }
     }
 
@@ -154,7 +165,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id != R.id.item_about && id != R.id.tv_exit && id != R.id.item_debug && CommonUtil.hasPerformAccost(service.getUserInfo()))
+        if (id != R.id.item_youth_model && id != R.id.item_about && id != R.id.tv_exit && id != R.id.item_debug && CommonUtil.hasPerformAccost(service.getUserInfo()))
             return;
         if (id == R.id.tv_exit) {  //退出登录
             p.loginOutPop(this);
@@ -162,7 +173,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
             ARouterUtils.toChargeSettingActivity();
         } else if (id == R.id.item_account_binding) {   //账号绑定
             ARouterUtils.toAccountManagerActivity();
-        }else if (id == R.id.item_call_setting) {   //招呼设置
+        } else if (id == R.id.item_call_setting) {   //招呼设置
             ARouterUtils.toAccostSettingActivity(null);
         } else if (id == R.id.item_privacy_setting) {  //隐私设置
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_PRIVACY_SETTING);
@@ -174,6 +185,8 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_ABOUT_US);
         } else if (id == R.id.item_notification) {  //通知
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_NOTIFY_SETTING);
+        } else if (id == R.id.item_youth_model) {
+            ARouterUtils.toYouthModelActivity();
         } else if (id == R.id.item_face_setting) {   //美颜设置
             mCompositeDisposable.add(new RxPermissions(this)
                     .request(Manifest.permission.READ_EXTERNAL_STORAGE

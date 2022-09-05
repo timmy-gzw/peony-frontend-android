@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/tool_bar" />
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="请设置密码"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_24" />
+
+
+    <com.tftechsz.mine.widget.PhoneCode
+        android:id="@+id/phone_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginEnd="@dimen/dp_50" />
+
+    <TextView
+        android:id="@+id/tv_next"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/dp_50"
+        android:enabled="false"
+        android:text="下一步"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="忘记密码"
+        android:textColor="@color/color_mid_font"
+        android:textSize="@dimen/sp_16"
+
+        />
+
+</LinearLayout>

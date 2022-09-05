@@ -68,5 +68,6 @@
     <string name="my_gift_wall">查看我的礼物墙</string>
     <string name="gift_count_format">已点亮 %d/%d</string>
     <string name="tip_read_phone_state">为了完成必要的账号安全检查，保障您的账号安全，请授权我们使用您的设备权限</string>
+    <string name="youtu_mode_content">开启青少年模式后，应用将被锁定，无法继续使用本应用核心功能。需输入密码关闭青少年模式，才能继续使用%s。\n\n%s是恋爱交友软件，禁止未满18周岁的未成年人注册使用，若您是未成年人，请退出应用！</string>
     <string name="t_open">开启</string>
 </resources>

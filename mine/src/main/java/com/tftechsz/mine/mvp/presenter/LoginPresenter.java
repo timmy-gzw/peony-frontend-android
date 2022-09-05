@@ -420,6 +420,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 context.finish();
             }
             if (null == getView()) return;
+            String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
+            if(!TextUtils.isEmpty(pass)){
+                ARouterUtils.toYouthModelActivity();
+                return;
+            }
             getView().loginSuccess(null);
         }
         LogUtil.i("TAG", "云信登录成功");

@@ -79,7 +79,7 @@ public class PhoneCode extends RelativeLayout {
             public void afterTextChanged(Editable editable) {
                 if (editable != null && editable.length() > 0) {
                     et_code.setText("");
-                    if (codes.size() < 6) {
+                    if (codes.size() < 4) {
                         if (editable.length() > 1) {
                             for (int i = 0; i < editable.length(); i++) {
                                 codes.add(editable.charAt(i) + "");
@@ -115,7 +115,6 @@ public class PhoneCode extends RelativeLayout {
         String code2 = "";
         String code3 = "";
         String code4 = "";
-        String code5 = "";
         if (codes.size() >= 1) {
             code1 = codes.get(0);
         }
@@ -137,12 +136,20 @@ public class PhoneCode extends RelativeLayout {
         callBack();//回调
     }
 
+
+
+    public void clearCode(){
+        codes.clear();
+        showCode();
+    }
+
+
     /**
      * 设置高亮颜色
      */
     private void setColor() {
         int color_default = Color.parseColor("#EEEEEE");
-        int color_focus = Color.parseColor("#FE4D6B");
+        int color_focus = Color.parseColor("#EEEEEE");
         v1.setBackgroundColor(color_default);
         v2.setBackgroundColor(color_default);
         v3.setBackgroundColor(color_default);
