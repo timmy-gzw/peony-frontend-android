@@ -15,4 +15,6 @@
     <string name="edit_nickname">设置昵称</string>
     <string name="account_cancellation">确认注销</string>
     <string name="think_about">我在想想</string>
+    <string name="accost_title">添加打招呼语</string>
+    <string name="accost_update">编辑打招呼语</string>
 </resources>

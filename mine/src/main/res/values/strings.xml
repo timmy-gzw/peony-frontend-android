@@ -80,4 +80,6 @@
     <string name="choose_career">选择职业</string>
     <string name="account_cancellation">取消</string>
     <string name="think_about">确定</string>
+    <string name="accost_title">新建内容</string>
+    <string name="accost_update">编辑内容</string>
 </resources>
