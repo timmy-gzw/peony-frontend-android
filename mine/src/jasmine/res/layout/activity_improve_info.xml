@@ -291,7 +291,6 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/bg_register_bg_noraml"
                 android:hint="邀请码(选填)"
-                android:inputType="textEmailAddress"
                 android:maxLength="20"
                 android:paddingStart="@dimen/dp_16"
                 android:singleLine="true"

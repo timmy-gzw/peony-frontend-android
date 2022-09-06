@@ -82,4 +82,6 @@
     <string name="voice_cost">语音通话 (30金币每分钟)</string>
     <string name="input_gift_num_hint">请输入打赏数量，最多9999</string>
     <string name="input_gift_btn_text">确定</string>
+
+    <string name="digits_character" translatable="false">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 </resources>
