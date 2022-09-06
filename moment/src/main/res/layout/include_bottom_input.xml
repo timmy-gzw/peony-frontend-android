@@ -30,7 +30,7 @@
             android:background="@drawable/bg_gray"
             android:clickable="true"
             android:focusable="true"
-            android:hint="请输入评论…"
+            android:hint="@string/hint_comment"
             android:imeOptions="actionDone"
             android:inputType="textAutoCorrect|textAutoComplete|textMultiLine|textCapSentences"
             android:maxLength="400"

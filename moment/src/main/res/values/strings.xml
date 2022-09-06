@@ -11,4 +11,6 @@
 
     <string name="personalized_recommend_tip">开启“个性化推荐”后可启用推荐动态</string>
     <string name="open_personalized_recommendation">立即开启</string>
+
+    <string name="hint_comment">请输入评论…</string>
 </resources>
