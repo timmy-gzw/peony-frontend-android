@@ -195,7 +195,7 @@ public class TrendDetailActivity extends BaseMvpActivity<IDynamicView, DynamicRe
                     mEtComment.requestFocus();
                 } else {//键盘关闭
                     comment_id = 0;
-                    mEtComment.setHint("请输入评论…");
+                    mEtComment.setHint(getString(R.string.hint_comment));
                     mEtComment.clearFocus();
                 }
             }
