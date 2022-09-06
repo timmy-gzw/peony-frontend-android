@@ -43,7 +43,6 @@ public class ScrollerForbidView extends LinearLayout {
     private final static int LOOP_INTERVAL = 3000;
     private VerticalLoopLayoutManager verticalLoopLayoutManager;
     private HomeMessageAdapter mAdapter;
-    private int position = 0;
     private int targetItemPosition = 0;
     private int size;
     Handler myHandler = new Handler(getMainLooper()) {
@@ -51,11 +50,6 @@ public class ScrollerForbidView extends LinearLayout {
         public void handleMessage(@NonNull Message msg) {
             if (msg.what == LOOP_RECYCLER_VIEW_MSG) {
                 int firstItem;
-                if (position == size - 1) {
-                    position = 0;
-                } else {
-                    position++;
-                }
                 if (mAdapter.getData().size() > 1) {
                     firstItem = verticalLoopLayoutManager.findFirstVisibleItemPosition();
                     targetItemPosition = (firstItem + 1) % size;
@@ -90,10 +84,12 @@ public class ScrollerForbidView extends LinearLayout {
             mAdapter.getData().clear();
             mAdapter.setList(messageInfoList);
             size = mAdapter.getData().size();
+            if(targetItemPosition>=size){
+                targetItemPosition = size-1;
+            }
             if (size > 1) {
                 myHandler.sendEmptyMessageDelayed(LOOP_RECYCLER_VIEW_MSG, LOOP_INTERVAL);
             }
-            position = 0;
         });
     }
 

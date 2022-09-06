@@ -61,6 +61,7 @@ public class Constants {
     public static final String PULL_WRIES_CONTENT = "pull_wries_content";  //牵线内容
     public static final String PULL_WRIES_TIME = "pull_wries_time";  //牵线内容
     public static final String CURRENT_TIME = "current_time";  //当前时间
+    public static final String LOCATION_CURRENT_TIME = "location_current_time";  //当前时间
     public static final String AGREED_TO_TOS = "protocol_status";   //协议勾选状态
     public static final String KEY_HAS_GET_INSTALL_PARAMS = "key_Has_Get_InstallParams";   //是否有h5过来的参数
     public static final String KEY_H5_PARAM = "key_h5_param";   //h5传
@@ -89,6 +90,10 @@ public class Constants {
     public static final String FAMILY_APPLY = "family_apply";  //通知申请
     public static final String FAMILY_AIT = "family_ait";  //ait消息
     public static final String BLOG_NOTICE = "blog_notice";  //动态通知
+
+    public static final String YOUTH_MODE_PASS = "youth_mode_pass";  //青少年模式
+
+
 
     public static final String DIRECT_RECHARGE = "direct_recharge";   //充值
 

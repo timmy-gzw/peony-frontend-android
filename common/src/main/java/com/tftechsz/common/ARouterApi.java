@@ -81,6 +81,8 @@ public class ARouterApi {
     public static final String ACTIVITY_INCOME_DETAIL = "/mine/IncomeDetailActivity";   //收益明细
     public static final String ACTIVITY_GIFT_WALL = "/mine/giftWall";   //礼物墙
     public static final String ACTIVITY_CHOOSE_CAREER = "/mine/chooseCareer";   //选择职业
+    public static final String ACTIVITY_YOUTH_MODEL = "/mine/YouthModelActivity";   //青少年模式
+
 
 
     //family

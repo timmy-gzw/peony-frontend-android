@@ -37,6 +37,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.baidu.location.BDLocation;
 import com.blankj.utilcode.util.FileUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ZipUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -107,6 +108,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -701,7 +703,9 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         if (mCompositeDisposable == null)
             mCompositeDisposable = new CompositeDisposable();
         boolean srl = MMKVUtils.getInstance().decodeBoolean(Constants.KEY_SRL, false);
-        if (srl) {
+        long time = MMKVUtils.getInstance().decodeLong(Constants.LOCATION_CURRENT_TIME);
+        if (srl && !TimeUtils.isToday(new Date(time))) {
+            MMKVUtils.getInstance().encode(Constants.LOCATION_CURRENT_TIME,System.currentTimeMillis());
             mCompositeDisposable.add(new RxPermissions(MainActivity.this)
                     .requestEach(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_NETWORK_STATE)

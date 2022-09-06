@@ -276,5 +276,12 @@
             android:name=".mvp.ui.activity.ChooseCareerActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".mvp.ui.activity.YouthModelActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.YouthModelPassActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
