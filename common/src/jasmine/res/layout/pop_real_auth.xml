@@ -105,20 +105,19 @@
         tools:visibility="visible">
 
 
-
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/bg_white_bottom_radius10"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="@id/real_title"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/top_bg" />
 
         <ImageView
             android:id="@+id/top_bg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="fitXY"
             android:src="@mipmap/peony_zrrztc_tb_png"
@@ -153,14 +152,17 @@
             android:id="@+id/real_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginHorizontal="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_30"
             android:drawablePadding="@dimen/dp_3"
             android:gravity="center_vertical"
             android:textColor="#FC5858"
             android:textSize="@dimen/sp_14"
-            app:layout_constraintLeft_toLeftOf="@id/top_bg"
             app:drawableStartCompat="@mipmap/peony_wwjg_icon_jasmine"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/top_bg"
             app:layout_constraintTop_toBottomOf="@id/real_recy"
             tools:text="未通过真人认证，部分功能将会限制使用！" />
 
@@ -184,12 +186,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/real_root"
+            android:layout_margin="@dimen/dp_9"
             android:scaleType="center"
             android:src="@mipmap/ic_close_white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="@dimen/dp_9"
             android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
