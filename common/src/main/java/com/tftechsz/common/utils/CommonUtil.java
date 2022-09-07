@@ -232,11 +232,11 @@ public class CommonUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(message != null && !TextUtils.isEmpty(message.getContent()) && message.getContent().contains("，<tag")){
+        if (message != null && !TextUtils.isEmpty(message.getContent()) && message.getContent().contains("，<tag")) {
             //你刚刚漏接了哈哈啊图的来电，快点给Ta回电哦，<tag url="peony://chatActivity/655">点击前往>></tag>
             String msg = message.getContent();
-            content = msg.substring(0,msg.indexOf("<tag"));
-            content += msg.substring(msg.indexOf(">")+1,msg.indexOf("</tag>"));
+            content = msg.substring(0, msg.indexOf("<tag"));
+            content += msg.substring(msg.indexOf(">") + 1, msg.indexOf("</tag>"));
         }
         return content;
     }
@@ -877,7 +877,7 @@ public class CommonUtil {
         }
 
         if (isSetColor) {
-            textview.setTextColor(Utils.getColor(R.color.red));
+            textview.setTextColor(Utils.getColor(R.color.vip_color));
         } else {
             textview.setTextColor(Utils.getColor(R.color.color_normal));
         }
@@ -905,7 +905,23 @@ public class CommonUtil {
                 ChatMsg.Vip vip = JSON.parseObject(userInfo.getExtension(), ChatMsg.Vip.class);
                 if (vip != null) {
                     setUserName(textView, UserInfoHelper.getUserTitleName(contactId, SessionTypeEnum.P2P), vip.is_vip == 1);
-                    ivAvatar.setBgFrame(vip.picture_frame);
+                    if (ivAvatar != null) ivAvatar.setBgFrame(vip.picture_frame);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 设置vip 信息
+     */
+    public static void setNameColor(NimUserInfo userInfo, String contactId, TextView textView, boolean showVipBadge) {
+        if (userInfo != null && userInfo.getExtension() != null && !TextUtils.isEmpty(userInfo.getExtension()) && !TextUtils.equals("\"\"", userInfo.getExtension())) {
+            try {
+                ChatMsg.Vip vip = JSON.parseObject(userInfo.getExtension(), ChatMsg.Vip.class);
+                if (vip != null) {
+                    setUserName(textView, UserInfoHelper.getUserTitleName(contactId, SessionTypeEnum.P2P), showVipBadge, vip.is_vip == 1);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
