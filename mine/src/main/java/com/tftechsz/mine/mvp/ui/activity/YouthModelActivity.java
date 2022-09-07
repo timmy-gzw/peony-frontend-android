@@ -42,7 +42,9 @@ public class YouthModelActivity extends BaseMvpActivity implements View.OnClickL
         String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
         mTvYouthModel.setText(!TextUtils.isEmpty(pass) ? "关闭青少年模式" : "开启青少年模式");
         TextView tvYouthModel = findViewById(R.id.tv_youth_model_content);
+        TextView tvYouthModel1 = findViewById(R.id.tv_youth_model_content1);
         tvYouthModel.setText(String.format(getString(R.string.youtu_mode_content), getString(R.string.app_name),getString(R.string.app_name)));
+        tvYouthModel1.setText(String.format(getString(R.string.youtu_mode_content1), getString(R.string.app_name)));
     }
 
     @Override

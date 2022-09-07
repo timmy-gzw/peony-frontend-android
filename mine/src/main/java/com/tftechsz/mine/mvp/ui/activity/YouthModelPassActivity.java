@@ -1,6 +1,7 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -36,7 +37,6 @@ public class YouthModelPassActivity extends BaseMvpActivity implements View.OnCl
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        new ToolBarBuilder().setTitle("青少年模式").showBack(true).build();
         youthPass = findViewById(R.id.phone_code);
         mPass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
         TextView tvNext = findViewById(R.id.tv_next);
@@ -44,12 +44,16 @@ public class YouthModelPassActivity extends BaseMvpActivity implements View.OnCl
         mTvTitle = findViewById(R.id.tv_title);
         TextView tvForget = findViewById(R.id.tv_forget);
         tvForget.setOnClickListener(this);
+        String title;
         if (!TextUtils.isEmpty(mPass)) {
+            title = "关闭青少年模式";
             mTvTitle.setText("请输入密码");
             tvForget.setVisibility(View.VISIBLE);
         }else{
+            title = "开启青少年模式";
             tvForget.setVisibility(View.GONE);
         }
+        new ToolBarBuilder().setTitle(title).showBack(true).build();
         youthPass.setOnInputListener(new PhoneCode.OnInputListener() {
             @Override
             public void onSuccess(String numberCode) {
@@ -59,7 +63,7 @@ public class YouthModelPassActivity extends BaseMvpActivity implements View.OnCl
             @Override
             public void onInput() {
                 tvNext.setEnabled(false);
-                tvNext.setTextColor(Utils.getColor(R.color.color_mid_font));
+                tvNext.setTextColor(Color.parseColor("#999999"));
             }
         });
 
@@ -78,7 +82,7 @@ public class YouthModelPassActivity extends BaseMvpActivity implements View.OnCl
                     mPass1 = youthPass.getPhoneCode();
                     isFirst = false;
                     youthPass.clearCode();
-                    mTvTitle.setText("确认密码");
+                    mTvTitle.setText("请确认密码");
                 } else {
                     String pass2 = youthPass.getPhoneCode();
                     if (TextUtils.equals(mPass1, pass2)) {

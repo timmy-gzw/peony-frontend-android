@@ -36,7 +36,7 @@ import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.VisitorOpenVipAdapter;
 import com.tftechsz.mine.adapter.VipPriceAdapter;
 import com.tftechsz.mine.api.MineApiService;
-import com.tftechsz.mine.databinding.PopVipOpenBinding;
+import com.tftechsz.mine.databinding.PopVistorVipOpenBinding;
 import com.tftechsz.mine.entity.VipPriceBean;
 import com.tftechsz.mine.entity.dto.VipConfigBean;
 
@@ -48,7 +48,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class VisitorVipOpenPopWindow extends BaseBottomPop implements View.OnClickListener {
     public MineApiService configService;
     private final CompositeDisposable mCompositeDisposable;
-    private PopVipOpenBinding mBind;
+    private PopVistorVipOpenBinding mBind;
     private VipPriceAdapter mPriceAdapter;
     private VipPayPopWindow mPop;
     private int mPayId;
@@ -68,7 +68,7 @@ public class VisitorVipOpenPopWindow extends BaseBottomPop implements View.OnCli
 
     @Override
     protected View createPopupById() {
-        View view = createPopupById(R.layout.pop_vip_open);
+        View view = createPopupById(R.layout.pop_vistor_vip_open);
         mBind = DataBindingUtil.bind(view);
         return view;
     }

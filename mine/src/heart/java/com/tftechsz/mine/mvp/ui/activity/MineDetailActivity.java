@@ -417,17 +417,14 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     }
 
     private void initNet() {
-        String uid;
         if (TextUtils.isEmpty(mUserId)) {   //自己
             //默认添加第一条数据
             TrendDto trendDto = new TrendDto();
             trendDto.image = "ADD";
             mTrendList.add(trendDto);
             p.getSelfTrend(3);
-            uid = UserManager.getInstance().getUserId() + "";
             p.getUserInfoDetail();
         } else {
-            uid = mUserId;
             p.getUserInfoById(mUserId);
             p.getUserTrend(4, mUserId);
             if (service.getUserInfo() != null && service.getUserInfo().getSex() != 1) {   //女性用户看其他人信息
@@ -671,7 +668,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         } else {
             getP().getUserPhoto(MAX_SIZE, mUserId);
         }
-        getP().getGiftList(uid);
+        getP().getGiftList(TextUtils.isEmpty(mUserId) ? UserManager.getInstance().getUserId() + "" : mUserId);
     }
 
     @Override
