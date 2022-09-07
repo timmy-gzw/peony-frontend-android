@@ -206,6 +206,7 @@
                         android:layout_height="match_parent"/>
 
                     <TextView
+                        android:id="@+id/title"
                         android:text="魅力称号"
                         android:layout_weight="1"
                         android:gravity="center"
