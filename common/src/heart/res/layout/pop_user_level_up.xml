@@ -111,7 +111,7 @@
         android:layout_marginBottom="@dimen/dp_21"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_13"
+        android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/level_bg"
         app:layout_constraintEnd_toEndOf="@id/level_bg"
