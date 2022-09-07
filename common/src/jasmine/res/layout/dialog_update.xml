@@ -40,7 +40,6 @@
             android:text="发现新版本"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
-            android:textStyle="bold"
             android:layout_marginTop="@dimen/dp_5"
             app:layout_constraintTop_toBottomOf="@id/iv_version"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +75,6 @@
 
             <TextView
                 android:text="更新内容"
-                android:textStyle="bold"
                 android:textSize="@dimen/sp_16"
                 android:textColor="@color/black"
                 android:layout_marginHorizontal="@dimen/dp_20"
@@ -133,7 +131,7 @@
                         android:layout_gravity="center_vertical"
                         android:max="100"
                         android:progressDrawable="@drawable/progressbar_horizontal"
-                        tools:progress="0" />
+                        tools:progress="10" />
 
                     <ImageView
                         android:id="@+id/iv_progress"
