@@ -106,6 +106,11 @@ public class NERtcCallbackExImpl implements NERtcCallbackEx {
     }
 
     @Override
+    public void onAudioEffectTimestampUpdate(long l, long l1) {
+
+    }
+
+    @Override
     public void onAudioEffectFinished(int effectId) {
     }
 
@@ -161,6 +166,21 @@ public class NERtcCallbackExImpl implements NERtcCallbackEx {
 
     @Override
     public void onMediaRelayReceiveEvent(int i, int i1, String s) {
+
+    }
+
+    @Override
+    public void onUserSubStreamAudioStart(long l) {
+
+    }
+
+    @Override
+    public void onUserSubStreamAudioStop(long l) {
+
+    }
+
+    @Override
+    public void onUserSubStreamAudioMute(long l, boolean b) {
 
     }
 

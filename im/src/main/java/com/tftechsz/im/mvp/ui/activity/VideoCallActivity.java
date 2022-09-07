@@ -1080,8 +1080,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                             }
                             setVideoCallback();
                         }
-                        NERtcEx.getInstance().adjustRecordingSignalVolume(400);
-                        NERtcEx.getInstance().adjustPlaybackSignalVolume(400);
+                        NERtcEx.getInstance().adjustRecordingSignalVolume(200);
+                        NERtcEx.getInstance().adjustPlaybackSignalVolume(200);
                     }
                 }));
         LogUtil.e(TAG, isOnLine + "");
