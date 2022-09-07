@@ -26,14 +26,16 @@
     <item
         android:id="@android:id/progress"
         android:gravity="center_vertical|fill_horizontal">
-        <shape>
-            <size android:height="16dp" />
-            <solid android:color="#E9E9E9" />
-            <corners android:radius="16dp" />
-            <gradient
-                android:startColor="#FD4580"
-                android:endColor="#FE4DCA"/>
-        </shape>
+        <scale android:scaleWidth="100%">
+            <shape>
+                <size android:height="16dp" />
+                <solid android:color="#E9E9E9" />
+                <corners android:radius="16dp" />
+                <gradient
+                    android:startColor="#FD4580"
+                    android:endColor="#FE4DCA"/>
+            </shape>
+        </scale>
     </item>
 
 </layer-list>
