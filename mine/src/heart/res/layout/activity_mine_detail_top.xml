@@ -187,6 +187,7 @@
                         android:layout_marginEnd="@dimen/dp_4"
                         android:textColor="@color/white"
                         android:visibility="gone"
+                        android:gravity="center_vertical"
                         tools:background="@drawable/bg_girl"
                         tools:drawableStart="@drawable/ic_girl"
                         tools:text="18"

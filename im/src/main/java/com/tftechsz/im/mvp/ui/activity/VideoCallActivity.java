@@ -1080,8 +1080,8 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                             }
                             setVideoCallback();
                         }
-                        NERtcEx.getInstance().adjustRecordingSignalVolume(100);
-                        NERtcEx.getInstance().adjustPlaybackSignalVolume(100);
+                        NERtcEx.getInstance().adjustRecordingSignalVolume(200);
+                        NERtcEx.getInstance().adjustPlaybackSignalVolume(200);
                     }
                 }));
         LogUtil.e(TAG, isOnLine + "");
@@ -2527,7 +2527,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
     @Override
     public void getUserInfoSuccess(UserInfo userInfo) {
         if (userInfo.getAge() > 0) {
-            mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.bg_boy_age_sex : R.drawable.bg_girl_age_sex));
+            mtvGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.bg_boy : R.drawable.bg_girl));
             mtvGenderAge.setText(userInfo.getAge() + "");
             mtvGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
             mtvGenderAge.setVisibility(View.VISIBLE);
@@ -2549,7 +2549,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         }
         if (mChannelType == 2) {
             if (userInfo.getAge() > 0) {
-                mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.bg_boy_age_sex : R.drawable.bg_girl_age_sex));
+                mtvVideoGenderAge.setBackground(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.bg_boy : R.drawable.bg_girl));
                 mtvVideoGenderAge.setText(userInfo.getAge() + "");
                 mtvVideoGenderAge.setCompoundDrawablesWithIntrinsicBounds(Utils.getDrawable(userInfo.getSex() == 1 ? R.drawable.ic_boy : R.drawable.ic_girl), null, null, null);
                 mtvVideoGenderAge.setVisibility(View.VISIBLE);
