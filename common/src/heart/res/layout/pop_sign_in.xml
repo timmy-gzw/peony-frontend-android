@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cl_top"
         android:layout_marginHorizontal="@dimen/dp_19"
-        android:layout_marginTop="-68dp"
+        android:layout_marginTop="-55dp"
         android:background="@mipmap/bg_sign_in"
         android:orientation="vertical">
 
@@ -81,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@mipmap/bg_pop_sign_in_header"
-            app:layout_constraintDimensionRatio="343:269"
+            app:layout_constraintDimensionRatio="343:165"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
