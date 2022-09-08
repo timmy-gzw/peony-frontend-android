@@ -28,6 +28,7 @@ public class YouthModelActivity extends BaseMvpActivity implements View.OnClickL
 
     private TextView mTvYouthModel;
     private ImageView mTvBack;
+    private TextView mTvStatus;
 
     @Override
     protected int getLayout() {
@@ -37,13 +38,16 @@ public class YouthModelActivity extends BaseMvpActivity implements View.OnClickL
     @Override
     protected void initView(Bundle savedInstanceState) {
         TextView tvTitle = findViewById(R.id.toolbar_title);
-        tvTitle.setText("青少年模式");
+        tvTitle.setText(getString(R.string.youth_mode_title));
         mTvBack = findViewById(R.id.toolbar_back_all);
         mTvBack.setOnClickListener(this);
         mTvYouthModel = findViewById(R.id.tv_youth_model);
         mTvYouthModel.setOnClickListener(this);
+        mTvStatus = findViewById(R.id.tv_youth_model_status);
         String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
         mTvYouthModel.setText(!TextUtils.isEmpty(pass) ? "关闭青少年模式" : "开启青少年模式");
+        mTvStatus.setText(!TextUtils.isEmpty(pass) ? "青少年模式" : "青少年模式未开启");
+        mTvBack.setVisibility(!TextUtils.isEmpty(pass) ? View.INVISIBLE : View.VISIBLE);
         TextView tvYouthModel = findViewById(R.id.tv_youth_model_content);
         TextView tvYouthModel1 = findViewById(R.id.tv_youth_model_content1);
         tvYouthModel.setText(String.format(getString(R.string.youtu_mode_content), getString(R.string.app_name),getString(R.string.app_name)));
@@ -88,6 +92,7 @@ public class YouthModelActivity extends BaseMvpActivity implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000 && resultCode == RESULT_OK) {
             mTvYouthModel.setText("关闭青少年模式");
+            mTvStatus.setText("青少年模式");
             mTvBack.setVisibility(View.INVISIBLE);
         }
     }

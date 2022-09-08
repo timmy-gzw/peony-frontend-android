@@ -84,4 +84,9 @@
     <string name="think_about">确定</string>
     <string name="accost_title">新建内容</string>
     <string name="accost_update">编辑内容</string>
+    <string name="youth_mode_title" />
+    <string name="youth_mode_close" />
+    <string name="youth_mode_open" />
+    <string name="youth_mode_sure_pass">确认密码</string>
+
 </resources>

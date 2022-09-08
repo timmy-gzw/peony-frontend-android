@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/dp_27"
@@ -7,13 +8,18 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:src="@mipmap/mine_ic_youth_mode" />
+
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_30"
-    />
+        android:layout_marginTop="@dimen/dp_30" />
 
 
     <TextView
@@ -21,9 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_10"
-        android:text="甜伴交友是交友脱单平台，禁止未满18周岁的未成年人注册使用！若您是未成年人，请退出应用，或进入青少年模式，感谢您的配合！"
+        android:text="为保护青少年健康成长，特推出青少年模式。该模式下部分功能无法正常使用，请监护人主动选择，并设置监护密码。"
         android:textColor="@color/color_normal"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold" />
 
 
     <TextView
@@ -31,17 +38,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_22"
+        android:drawablePadding="@dimen/dp_5"
         android:text="开启青少年模式"
-        android:textColor="@color/link_color"
-        android:textSize="@dimen/sp_14" />
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:drawableEndCompat="@mipmap/ic_arrow_red" />
 
 
     <TextView
         android:id="@+id/tv_know"
         style="@style/CustomButton"
-        android:layout_marginTop="@dimen/dp_13"
+        android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/bg_orange_radius25"
         android:text="我知道了"
         android:textColor="@color/white" />
 
