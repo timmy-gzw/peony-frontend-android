@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_30"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_30"
         android:text="开启青少年模式"
         android:drawablePadding="@dimen/dp_5"
         android:textColor="@color/link_color"

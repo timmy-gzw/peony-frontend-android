@@ -568,8 +568,8 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
             youthModelPop.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
-                    showSignInPop();
                     MMKVUtils.getInstance().encode(Constants.YOUTH_MODE_POP,true);
+                    showSignInPop();
                 }
             });
         }
