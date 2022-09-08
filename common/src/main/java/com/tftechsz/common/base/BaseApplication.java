@@ -39,7 +39,6 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.mixpush.NIMPushClient;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.previewlibrary.ZoomMediaLoader;
-import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 import com.tencent.tauth.Tencent;
@@ -346,7 +345,7 @@ public class BaseApplication extends Application implements Application.Activity
      * bugly初始化
      */
     public void initBugly() {
-        Bugly.init(this, CommonUtil.getBuglyAppKey(), BuildConfig.DEBUG);
+        CrashReport.initCrashReport(this, CommonUtil.getBuglyAppKey(), BuildConfig.DEBUG);
         CrashReport.setAppChannel(this, CommonUtil.getUmengChannel());
         CrashReport.setDeviceModel(BaseApplication.getInstance(), com.tftechsz.common.utils.AppUtils.getModel());
     }
