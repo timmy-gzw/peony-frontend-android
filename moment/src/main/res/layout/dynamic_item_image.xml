@@ -61,7 +61,7 @@
         app:layout_constraintStart_toEndOf="@id/img_vip_dii"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         app:layout_goneMarginStart="0dp"
-        tools:background="@drawable/bg_girl_age_sex"
+        tools:background="@drawable/bg_girl"
         tools:drawablePadding="@dimen/dp_2"
         tools:drawableStart="@drawable/ic_girl"
         tools:paddingHorizontal="@dimen/dp_4"

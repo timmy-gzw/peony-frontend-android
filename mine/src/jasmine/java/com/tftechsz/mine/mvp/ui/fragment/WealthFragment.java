@@ -171,10 +171,10 @@ public class WealthFragment extends BaseMvpFragment {
         }
         if(service.getUserInfo().isGirl()){
             mTvAge.setCompoundDrawablesWithIntrinsicBounds(getActivity().getResources().getDrawable(R.drawable.ic_girl),null,null,null);
-            mTvAge.setBackgroundResource(R.drawable.bg_girl_age_sex);
+            mTvAge.setBackgroundResource(R.drawable.bg_girl);
         }else{
             mTvAge.setCompoundDrawablesWithIntrinsicBounds(getActivity().getResources().getDrawable(R.drawable.ic_boy),null,null,null);
-            mTvAge.setBackgroundResource(R.drawable.bg_boy_age_sex);
+            mTvAge.setBackgroundResource(R.drawable.bg_boy);
         }
         mTvAge.setText(String.valueOf(service.getUserInfo().getAge()));
         LevelUpgradeAdapter upgradeAdapter = new LevelUpgradeAdapter(getActivity());

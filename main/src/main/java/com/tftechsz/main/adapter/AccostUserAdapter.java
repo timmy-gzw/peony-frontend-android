@@ -37,10 +37,10 @@ public class AccostUserAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder
         LinearLayout llage = helper.getView(com.tftechsz.common.R.id.ll_age);
         helper.setText(R.id.tv_name, item.getNickname());
         if (item.getSex() == 2) {
-            llage.setBackgroundResource(com.tftechsz.common.R.drawable.bg_girl_age_sex);
+            llage.setBackgroundResource(com.tftechsz.common.R.drawable.bg_girl);
             sex.setImageResource(com.tftechsz.common.R.drawable.ic_girl);
         } else {
-            llage.setBackgroundResource(com.tftechsz.common.R.drawable.bg_boy_age_sex);
+            llage.setBackgroundResource(com.tftechsz.common.R.drawable.bg_boy);
             sex.setImageResource(com.tftechsz.common.R.drawable.ic_boy);
         }
         age.setText(item.getAge() + "");
