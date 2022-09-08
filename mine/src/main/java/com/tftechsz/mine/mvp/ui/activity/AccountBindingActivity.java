@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.tftechsz.common.ARouterApi;
@@ -14,6 +15,8 @@ import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.http.BaseResponse;
+import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ActAccountBindBinding;
@@ -28,6 +31,9 @@ import com.tftechsz.mine.mvp.presenter.AccountBindingPresenter;
  */
 @Route(path = ARouterApi.ACTIVITY_ACCOUNT_BINDING)
 public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView, AccountBindingPresenter> implements IAccountBindingView {
+
+    @Autowired
+    UserProviderService service;
 
     private ActAccountBindBinding mBind;
     private GetBindData mBindData;
@@ -60,6 +66,7 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
                 Utils.toast("很抱歉，好像网络出问题了");
                 return;
             }
+            if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
             Intent intent = new Intent(mContext, BindPhoneHintActivity.class);
             intent.putExtra(Interfaces.EXTRA_DATA, mBindData);
             startActivity(intent);
@@ -69,6 +76,7 @@ public class AccountBindingActivity extends BaseMvpActivity<IAccountBindingView,
                 Utils.toast("很抱歉，好像网络出问题了");
                 return;
             }
+            if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
             if (mBindData.phone.is_bind != 1) {
                 Utils.toast("请先绑定手机号后再解绑");
                 return;

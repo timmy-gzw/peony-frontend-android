@@ -164,7 +164,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id != R.id.item_youth_model && id != R.id.item_about && id != R.id.tv_exit && id != R.id.item_debug && CommonUtil.hasPerformAccost(service.getUserInfo()))
+        if (id != R.id.item_account_binding && id != R.id.item_youth_model && id != R.id.item_about && id != R.id.tv_exit && id != R.id.item_debug && CommonUtil.hasPerformAccost(service.getUserInfo()))
             return;
         if (id == R.id.tv_exit) {  //退出登录
             p.loginOutPop(this);
