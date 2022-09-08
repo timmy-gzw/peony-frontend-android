@@ -76,7 +76,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         TextView tvUserInfo = getView(R.id.tv_user_info);
         RecyclerView rvUserInfo = getView(R.id.rv_user_info);
         rvUserInfo.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        rvUserInfo.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(15f), ConvertUtils.dp2px(6), false));
+        rvUserInfo.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(10f), ConvertUtils.dp2px(6), false));
         userInfoAdapter = new BaseUserInfoAdapter();
         userInfoAdapter.addChildClickViewIds(R.id.iv_copy);
         userInfoAdapter.setOnItemChildClickListener((adapter, view, position) -> {

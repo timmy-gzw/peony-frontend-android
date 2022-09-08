@@ -1,8 +1,10 @@
 package com.tftechsz.mine.adapter;
 
+import android.util.TypedValue;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.TextViewCompat;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -26,13 +28,21 @@ public class BaseUserInfoAdapter extends BaseQuickAdapter<UserInfo.BaseInfo, Bas
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, UserInfo.BaseInfo item) {
-        helper.setText(R.id.tv_value, item.value);
+        TextView tvValue = helper.getView(R.id.tv_value);
+        tvValue.setText(item.value);
 
         TextView textView = helper.getView(R.id.tv_name);
         textView.setText(item.title);
         if (textWidth > 0) {
             textView.setWidth(textWidth);
         }
-        helper.setGone(R.id.iv_copy, helper.getLayoutPosition() != 0);
+
+        if (helper.getLayoutPosition() == 0) {
+            helper.setGone(R.id.iv_copy, false);
+            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(tvValue, 8, 14, 1, TypedValue.COMPLEX_UNIT_SP);
+        } else {
+            helper.setGone(R.id.iv_copy, true);
+            TextViewCompat.setAutoSizeTextTypeWithDefaults(tvValue, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
+        }
     }
 }

@@ -15,7 +15,7 @@
             android:id="@+id/cl_local_tyrant"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_10"
             android:background="@drawable/bg_local_tyrant"
             android:paddingHorizontal="@dimen/dp_10"
             android:paddingTop="@dimen/dp_6"
