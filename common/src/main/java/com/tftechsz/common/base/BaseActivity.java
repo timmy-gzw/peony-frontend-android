@@ -40,7 +40,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
 
     protected final String TAG = getClass().getSimpleName();
 
-    private LoadingDialog mLoadingDialog;
     protected View baseTitle;
     protected CompositeDisposable mCompositeDisposable;
     public int mPageSize = 20;
@@ -360,10 +359,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements MvpVie
             if (runnable != null) {
                 runnable = null;
             }
-            if (mLoadingDialog != null) {
-                hideLoadingDialog();
-                mLoadingDialog = null;
-            }
+            hideLoadingDialog();
             ImmersionBar.destroy(this, null);
             if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
                 mCompositeDisposable.dispose();
