@@ -88,7 +88,7 @@ public class TrendCommentFragment extends BaseMvpFragment<ITrendCommentView, Tre
                 return false;
             }
             popWindow.putInfo(blogUserId, item.getUser_id());
-            popWindow.addOnClickListener(position1 -> {
+            popWindow.addOnClickListener((position1, str) -> {
                 switch (position1) {
 //                    case 0://回复
 //                        RxBus.getDefault().post(new CommentEvent(item.getComment_id(), item.getNickname()));
@@ -103,8 +103,13 @@ public class TrendCommentFragment extends BaseMvpFragment<ITrendCommentView, Tre
                         ToastUtil.showToast(mContext, "复制成功");
                         break;
 
-                    case 1://删除
-                        p.delTrendComment(item.getComment_id());
+                    case 1://删除/举报
+                        if ("删除".equals(str)) {
+                            p.delTrendComment(item.getComment_id());
+                        } else if ("举报".equals(str)) {
+                            // TODO: 2022/9/8 举报评论
+                            toastTip("敬请期待...");
+                        }
                         break;
                 }
             });
