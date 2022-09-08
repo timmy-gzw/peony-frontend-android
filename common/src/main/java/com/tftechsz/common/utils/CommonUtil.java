@@ -536,7 +536,7 @@ public class CommonUtil {
                 //Fixme 美颜设置权限申请优化
                 if (context instanceof FragmentActivity) {
                     FragmentActivity activity = (FragmentActivity) context;
-                    new RxPermissions(activity).request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                    new RxPermissions(activity).request(Manifest.permission.CAMERA)
                             .subscribe(aBoolean -> {
                                 if (aBoolean) {
                                     ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);

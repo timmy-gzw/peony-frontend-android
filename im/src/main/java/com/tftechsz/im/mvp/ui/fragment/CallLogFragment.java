@@ -105,8 +105,7 @@ public class CallLogFragment extends BaseMvpFragment<ICallLogView, CallLogPresen
     private void initPermissions(String userId, int type) {
         if (getActivity() != null) {
             mCompositeDisposable.add(new RxPermissions(getActivity())
-                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
+                    .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
                     .subscribe(aBoolean -> {
                         if (aBoolean) {
                             p.checkCallMsg(userId, type);

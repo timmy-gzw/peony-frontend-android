@@ -466,7 +466,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             //lp.height = -1;
             mLl_home_top_item.setPadding(0, 0, 0, 0);
             lp2.setMarginStart(ConvertUtils.dp2px(7));
-            lp.height = (int) ((ScreenUtils.getScreenWidth() - ConvertUtils.dp2px(40)) / 3);
+            lp.height = (ScreenUtils.getScreenWidth() - ConvertUtils.dp2px(40)) / 3;
         } else {
             //lp.height = ConvertUtils.dp2px(95);
             mLl_home_top_item.setPadding(0, ConvertUtils.dp2px(10), 0, ConvertUtils.dp2px(10));
@@ -605,8 +605,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
      */
     private void initPermissions(int type) {
         mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
+                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         getUserInfo(type);

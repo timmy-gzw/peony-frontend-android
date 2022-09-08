@@ -44,8 +44,8 @@ public class VideoCallPopWindow extends BasePopupWindow implements View.OnClickL
     private final UserProviderService service;
     private RechargeBeforePop beforePop;
     //触发场景
-    private int scene;
-    private String userId;
+    private final int scene;
+    private final String userId;
 
     public VideoCallPopWindow(Activity context, int scene, String userId) {
         super(context);
@@ -207,8 +207,7 @@ public class VideoCallPopWindow extends BasePopupWindow implements View.OnClickL
 
     private void initPermissions(int type) {
         mCompositeDisposable.add(new RxPermissions((FragmentActivity) mContext)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         if (!ClickUtil.canOperate()) return;

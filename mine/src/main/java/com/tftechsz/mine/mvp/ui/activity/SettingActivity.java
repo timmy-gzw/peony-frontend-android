@@ -188,8 +188,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
             ARouterUtils.toYouthModelActivity();
         } else if (id == R.id.item_face_setting) {   //美颜设置
             mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.READ_EXTERNAL_STORAGE
-                            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                    .request(Manifest.permission.CAMERA)
                     .subscribe(aBoolean -> {
                         if (aBoolean) {
                             startActivity(FaceUnitySettingActivity.class);

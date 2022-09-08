@@ -189,8 +189,7 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
      */
     private void initPermissions(int type) {
         mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
+                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         getUserInfo(type);
@@ -221,11 +220,7 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            setHomeItem(true, false);
-        } else {
-            setHomeItem(false, false);
-        }
+        setHomeItem(isVisibleToUser, false);
     }
 
 

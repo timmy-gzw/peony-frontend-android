@@ -1050,8 +1050,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             });
         }
         mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
                 .subscribe(aBoolean -> {
                     if (!aBoolean) {
                         getP().buriedPoint("noPermission", "permissionCheck", callId, String.valueOf(service.getUserId()));

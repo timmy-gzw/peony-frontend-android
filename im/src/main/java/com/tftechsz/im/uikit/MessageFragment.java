@@ -369,7 +369,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     private IntimacyGiftPop mIntimacyGiftPop;
 
-    private boolean mIsLoadRoom = false;  //是否加载语音房
+    private final boolean mIsLoadRoom = false;  //是否加载语音房
     public int mIsOpenRoom;  //0 未开启  1 开始语音闲聊
     protected RelativeLayout mLlVoiceWarm;
     protected TextView mTvVoiceWarm;
@@ -1782,7 +1782,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         //图片点击
         ivChatPhoto.setOnClickListener(v -> {
             mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
+                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                     .subscribe(aBoolean -> {
                         if (aBoolean) {
                             if (!TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy() && sessionType == SessionTypeEnum.P2P) {
@@ -2260,7 +2260,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         /**
          * 命令消息接收观察者
          */
-        commandObserver = (Observer<CustomNotification>) message -> {
+        commandObserver = message -> {
             if (message != null)
                 showIntimacy(null, message.getContent());
             if (message != null && !TextUtils.isEmpty(message.getContent())) {  //此处没有返回消息对应用户
@@ -3058,8 +3058,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private void initPermissions() {
         if (getActivity() != null) {
             mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
+                    .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
                     .subscribe(aBoolean -> {
                         if (aBoolean) {
                             checkCallMsg(1);
@@ -3106,8 +3105,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     public void onAudioRecord(View v, MotionEvent event) {
         if (getActivity() != null && isAdded() && !isDestroyed())
             mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.RECORD_AUDIO
-                            , Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .request(Manifest.permission.RECORD_AUDIO)
                     .subscribe(aBoolean -> {
                         if (aBoolean) {
                             if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -3709,8 +3707,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     private void checkCallMsg(int type) {
         String[] audioPermission = {Manifest.permission.RECORD_AUDIO};
-        String[] videoPermission = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        String[] videoPermission = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
         mCompositeDisposable.add(new RxPermissions(this)
                 .request(videoPermission)
                 .subscribe(aBoolean -> {
