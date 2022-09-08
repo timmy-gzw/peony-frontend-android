@@ -92,6 +92,7 @@ public class Constants {
     public static final String BLOG_NOTICE = "blog_notice";  //动态通知
 
     public static final String YOUTH_MODE_PASS = "youth_mode_pass";  //青少年模式
+    public static final String YOUTH_MODE_POP = "youth_mode_pop";  //青少年模式弹窗
 
 
 

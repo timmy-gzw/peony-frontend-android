@@ -60,7 +60,7 @@ public class GetCodeActivity extends BaseMvpActivity<ILoginView, LoginPresenter>
         super.initData();
         mOldToken = UserManager.getInstance().getToken();
         mPhone = getIntent().getStringExtra("phone");
-        mTvTip.setText("验证码已发送到: +" + mPhone);
+        mTvTip.setText("验证码已发送到: +86 " + mPhone);
         countTime();
         phoneCode.setOnInputListener(new PhoneCode.OnInputListener() {
             @Override

@@ -69,7 +69,9 @@
         style="@style/CustomButton"
         android:layout_marginBottom="@dimen/dp_20"
         android:text="开启青少年模式"
+        android:background="@drawable/sel_youth_model"
         android:textColor="@color/white"
+        android:enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

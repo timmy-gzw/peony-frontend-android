@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.tftechsz.mine.R;
 public class YouthModelActivity extends BaseMvpActivity implements View.OnClickListener {
 
     private TextView mTvYouthModel;
+    private ImageView mTvBack;
 
     @Override
     protected int getLayout() {
@@ -36,7 +38,8 @@ public class YouthModelActivity extends BaseMvpActivity implements View.OnClickL
     protected void initView(Bundle savedInstanceState) {
         TextView tvTitle = findViewById(R.id.toolbar_title);
         tvTitle.setText("青少年模式");
-        findViewById(R.id.toolbar_back_all).setOnClickListener(this);
+        mTvBack = findViewById(R.id.toolbar_back_all);
+        mTvBack.setOnClickListener(this);
         mTvYouthModel = findViewById(R.id.tv_youth_model);
         mTvYouthModel.setOnClickListener(this);
         String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
@@ -85,6 +88,7 @@ public class YouthModelActivity extends BaseMvpActivity implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000 && resultCode == RESULT_OK) {
             mTvYouthModel.setText("关闭青少年模式");
+            mTvBack.setVisibility(View.INVISIBLE);
         }
     }
 }

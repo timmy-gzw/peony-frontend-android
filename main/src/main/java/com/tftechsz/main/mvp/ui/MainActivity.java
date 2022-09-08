@@ -97,6 +97,7 @@ import com.tftechsz.main.R;
 import com.tftechsz.main.entity.UpdateLocationReq;
 import com.tftechsz.main.mvp.IView.IMainView;
 import com.tftechsz.main.mvp.presenter.MainPresenter;
+import com.tftechsz.main.widget.YouthModelPop;
 import com.tftechsz.mine.mvp.ui.fragment.MineFragment;
 import com.tftechsz.moment.mvp.ui.activity.SendTrendActivity;
 import com.tftechsz.moment.mvp.ui.fragment.TrendFragment;
@@ -151,6 +152,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
     private TrendFragment trendFragment;
     private ComponentName componentName1, componentName2;
     private PackageManager mPackageManager;
+    private YouthModelPop youthModelPop;
 
     public MainActivity() {
     }
@@ -547,9 +549,30 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         dialog.setOnSureClick(new UpdateDialog.OnSureClick() {
             @Override
             public void onCancel() {
-                showSignInPop();
+                showYouthModelPop();
             }
         });
+    }
+
+
+
+
+    public void showYouthModelPop() {
+        boolean youthPop = MMKVUtils.getInstance().decodeBoolean(Constants.YOUTH_MODE_POP);
+        if(youthPop){
+            showSignInPop();
+        }else {
+            if (youthModelPop == null)
+                youthModelPop = new YouthModelPop(this);
+            youthModelPop.showPopupWindow();
+            youthModelPop.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    showSignInPop();
+                    MMKVUtils.getInstance().encode(Constants.YOUTH_MODE_POP,true);
+                }
+            });
+        }
     }
 
 
@@ -681,7 +704,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                 } else {
                                     if (dialog != null && dialog.isShowing())
                                         return;
-                                    showSignInPop();
+                                    showYouthModelPop();
                                 }
                             }
                         }
@@ -705,7 +728,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         boolean srl = MMKVUtils.getInstance().decodeBoolean(Constants.KEY_SRL, false);
         long time = MMKVUtils.getInstance().decodeLong(Constants.LOCATION_CURRENT_TIME);
         if (srl && !TimeUtils.isToday(new Date(time))) {
-            MMKVUtils.getInstance().encode(Constants.LOCATION_CURRENT_TIME,System.currentTimeMillis());
+            MMKVUtils.getInstance().encode(Constants.LOCATION_CURRENT_TIME, System.currentTimeMillis());
             mCompositeDisposable.add(new RxPermissions(MainActivity.this)
                     .requestEach(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_NETWORK_STATE)
@@ -950,7 +973,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         signInBean = data;
         if (dialog != null && dialog.isShowing())
             return;
-        showSignInPop();
+        showYouthModelPop();
     }
 
     //获取签到列表失败
