@@ -222,13 +222,13 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         boolean showNearUser = MMKVUtils.getInstance().decodeBoolean(Constants.SHOW_NEAR_USER);
 
         for (ConfigInfo.HomeTabNav homeTabNav : homeTabLists) {
-            if(TextUtils.equals("recommend",homeTabNav.type)){
+            if (TextUtils.equals("recommend", homeTabNav.type)) {
                 recommendUserFragment = RecommendUserFragment.newInstance(homeTabNav.type);
                 if (recommendUserFragment != null) {
                     fragments.add(recommendUserFragment);
                     titles.add(homeTabNav.title);
                 }
-            }else {
+            } else {
                 titles.add(homeTabNav.title);
                 fragments.add(SpeedMatchFragment.newInstance());
             }
@@ -477,7 +477,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         ConstraintLayout.LayoutParams lp3 = (ConstraintLayout.LayoutParams) mCvView.getLayoutParams();
         mCvView.setRadius(ConvertUtils.dp2px(10));
         lp3.leftMargin = ConvertUtils.dp2px(16);
-        lp3.rightMargin =  ConvertUtils.dp2px(16);
+        lp3.rightMargin = ConvertUtils.dp2px(16);
         mCvView.setLayoutParams(lp3);
 
         mLl_home_top_item.setLayoutParams(lp);
@@ -493,7 +493,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
 
     private void setTopData(HomeTopItemLayout homeTopItemLayout, @Nullable ConfigInfo.Nav nav) {
         if (nav != null && isAdded()) {
-            homeTopItemLayout.setData(nav, topSize,true);
+            homeTopItemLayout.setData(nav, topSize, true);
             homeTopItemLayout.setVisibility(View.VISIBLE);
         } else {
             homeTopItemLayout.setVisibility(View.GONE);
@@ -604,15 +604,20 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
      * 申请权限
      */
     private void initPermissions(int type) {
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        getUserInfo(type);
-                    } else {
-                        PermissionUtil.showPermissionPop(getActivity());
-                    }
-                }));
+        final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                getUserInfo(type);
+                            } else {
+                                PermissionUtil.showPermissionPop(getActivity());
+                            }
+                        }));
+            }
+        });
     }
 
 
@@ -648,6 +653,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                 return "";
             return com.tftechsz.common.utils.AppUtils.getApiUa();
         }
+
         /**
          * 上头条
          */

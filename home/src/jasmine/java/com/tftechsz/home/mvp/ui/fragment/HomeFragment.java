@@ -619,15 +619,20 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
      * 申请权限
      */
     private void initPermissions(int type) {
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        getUserInfo(type);
-                    } else {
-                        PermissionUtil.showPermissionPop(getActivity());
-                    }
-                }));
+        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                getUserInfo(type);
+                            } else {
+                                PermissionUtil.showPermissionPop(getActivity());
+                            }
+                        }));
+            }
+        });
     }
 
 

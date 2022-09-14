@@ -1,24 +1,12 @@
 package com.tftechsz.common.widget.pop;
 
 import android.content.Context;
-import android.text.Html;
-import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.netease.nim.uikit.common.ChatMsgUtil;
-import com.netease.nim.uikit.common.ConfigInfo;
-import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.R;
-import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.utils.ClickUtil;
-import com.tftechsz.common.utils.CommonUtil;
-import com.tftechsz.common.utils.Utils;
 
 /**
  * 权限弹窗
@@ -28,13 +16,14 @@ public class PermissionPopWindow extends BaseCenterPop implements View.OnClickLi
     private TextView mTvContent;
     private TextView mTvSure;
     private TextView mTvCancel;
-    private boolean mIsDismiss = true;
+    private final boolean mIsDismiss = true;
 
     public PermissionPopWindow(Context context) {
         super(context);
         mContext = context;
         initUI();
         setOutSideTouchable(false);
+        setOutSideDismiss(false);
     }
 
 
@@ -71,7 +60,7 @@ public class PermissionPopWindow extends BaseCenterPop implements View.OnClickLi
             return;
         }
         int id = v.getId();
-        if (id == R.id.tv_sure ) {
+        if (id == R.id.tv_sure) {
             if (listener != null)
                 listener.onSure();
             if (mIsDismiss)

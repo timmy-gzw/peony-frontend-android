@@ -16,6 +16,7 @@ import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.ClickUtil;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.UploadHelper;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.AccostSettingListBean;
@@ -65,24 +66,28 @@ public class AccostRecordToAddActivity extends BaseVoiceRecordActivity {
         recordUpload.setOnClickListener(this);
         recordAgain.setOnClickListener(this);
         recordIcon.setOnTouchListener((v, event) -> {
-            mCompositeDisposable.add(new RxPermissions(AccostRecordToAddActivity.this)
-                    .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                            , Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .subscribe(grant -> {
-                        if (grant) {
-                            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                                touched = true;
-                                initStartRecord();
-                            } else if (event.getAction() == MotionEvent.ACTION_CANCEL
-                                    || event.getAction() == MotionEvent.ACTION_UP) {
-                                if (touched) {
-                                    endRecord(2);
+            final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions(AccostRecordToAddActivity.this)
+                            .request(permissions)
+                            .subscribe(grant -> {
+                                if (grant) {
+                                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                                        touched = true;
+                                        initStartRecord();
+                                    } else if (event.getAction() == MotionEvent.ACTION_CANCEL
+                                            || event.getAction() == MotionEvent.ACTION_UP) {
+                                        if (touched) {
+                                            endRecord(2);
+                                        }
+                                    }
+                                } else {
+                                    toastTip("请允许录音权限");
                                 }
-                            }
-                        } else {
-                            toastTip("请允许录音权限");
-                        }
-                    }));
+                            }));
+                }
+            });
             return true;
         });
         mAudioDir = new File(getCacheDir(), AUDIO_DIR_NAME);
@@ -132,7 +137,7 @@ public class AccostRecordToAddActivity extends BaseVoiceRecordActivity {
         super.onClick(view);
         if (view.getId() == R.id.iv_record_upload) {
             if (!ClickUtil.canOperate()) return;
-            if(TextUtils.isEmpty(filePath)){
+            if (TextUtils.isEmpty(filePath)) {
                 toastTip("请录制后上传");
                 return;
             }

@@ -25,7 +25,7 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.CommonUtil;
-import com.tftechsz.common.utils.Utils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.moment.R;
 import com.tftechsz.moment.mvp.ui.fragment.CustomTrendFragment;
@@ -124,16 +124,21 @@ public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFra
      * 打开图片/视频选择器
      */
     private void showMediaSelector() {
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
-                    } else {
-                        Utils.toast("请允许摄像头权限");
-                    }
-                })
-        );
+        String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+                            } else {
+                                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
+                            }
+                        })
+                );
+            }
+        });
     }
 
     private void setData() {

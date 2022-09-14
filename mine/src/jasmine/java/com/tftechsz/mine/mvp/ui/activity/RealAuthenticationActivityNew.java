@@ -3,7 +3,6 @@ package com.tftechsz.mine.mvp.ui.activity;
 import android.Manifest;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -57,7 +56,6 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
         new ToolBarBuilder().showBack(true).setTitle("真人认证").build();
         mBinding.btn.setOnClickListener(this);
         mBinding.ivIcon.setOnClickListener(this);
-        mBinding.ivCheck.setOnClickListener(this);
         mPermission = new RxPermissions(mActivity);
         initRxBus();
 
@@ -95,56 +93,60 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
         if (!ClickUtil.canOperate()) return;
         int id = v.getId();
         if (id == R.id.btn) {
-            mCompositeDisposable.add(mPermission.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            startActivity(FaceCheckActivity.class);
-                        } else {
-                            // TODO: fix this
-                            PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
-                        }
-                    }));
+            final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(mPermission.request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    startActivity(FaceCheckActivity.class);
+                                } else {
+                                    // TODO: fix this
+                                    PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
+                                }
+                            }));
+                }
+            });
         } else if (id == R.id.iv_icon) {
-            mCompositeDisposable.add(mPermission.request(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            if (mPopWindow == null) {
-                                mPopWindow = new UploadAvatarPopWindow(mContext);
-                                mPopWindow.addOnClickListener(() -> ChoosePicUtils.picSingle(mActivity, true, new OnResultCallbackListener<LocalMedia>() {
-                                    @Override
-                                    public void onResult(List<LocalMedia> result) {
-                                        if (result != null && result.size() > 0) {
-                                            LocalMedia localMedia = result.get(0);
-                                            if (localMedia.isCut()) {
-                                                path = localMedia.getCutPath();
-                                            } else {
-                                                path = localMedia.getPath();
+            final String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(mPermission.request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    if (mPopWindow == null) {
+                                        mPopWindow = new UploadAvatarPopWindow(mContext);
+                                        mPopWindow.addOnClickListener(() -> ChoosePicUtils.picSingle(mActivity, true, new OnResultCallbackListener<LocalMedia>() {
+                                            @Override
+                                            public void onResult(List<LocalMedia> result) {
+                                                if (result != null && result.size() > 0) {
+                                                    LocalMedia localMedia = result.get(0);
+                                                    if (localMedia.isCut()) {
+                                                        path = localMedia.getCutPath();
+                                                    } else {
+                                                        path = localMedia.getPath();
+                                                    }
+                                                    mBinding.msg.setText(null);
+                                                    mBinding.btn.setEnabled(false);
+                                                    getP().uploadAvatarNew(path);
+                                                }
                                             }
-                                            mBinding.msg.setText(null);
-                                            mBinding.btn.setEnabled(false);
-                                            getP().uploadAvatarNew(path);
-                                        }
+
+                                            @Override
+                                            public void onCancel() {
+
+                                            }
+
+                                        }));
                                     }
+                                    mPopWindow.showPopupWindow();
 
-                                    @Override
-                                    public void onCancel() {
-
-                                    }
-
-                                }));
-                            }
-                            mPopWindow.showPopupWindow();
-
-                        } else {
-                            Utils.toast("权限被禁止，无法选择本地图片");
-                        }
-                    }));
-
-
-        }else if(id == R.id.iv_check){
-            isCheck = !isCheck;
-            mBinding.ivCheck.setImageResource(isCheck?R.mipmap.ic_check_selector:R.mipmap.ic_check_normal);
-            mBinding.btn.setEnabled(isCheck);
+                                } else {
+                                    Utils.toast("权限被禁止，无法选择本地图片");
+                                }
+                            }));
+                }
+            });
         }
     }
 

@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.AppUtils;
@@ -26,8 +28,6 @@ import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.SignNumBean;
 import com.tftechsz.mine.mvp.IView.ISettingView;
 import com.tftechsz.mine.mvp.presenter.SettingPresenter;
-
-import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -187,15 +187,20 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
         } else if (id == R.id.item_youth_model) {
             ARouterUtils.toYouthModelActivity();
         } else if (id == R.id.item_face_setting) {   //美颜设置
-            mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.CAMERA)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            startActivity(FaceUnitySettingActivity.class);
-                        } else {
-                            PermissionUtil.showPermissionPop(SettingActivity.this);
-                        }
-                    }));
+            final String[] permissions = {Manifest.permission.CAMERA};
+            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions(this)
+                            .request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    startActivity(FaceUnitySettingActivity.class);
+                                } else {
+                                    PermissionUtil.showPermissionPop(SettingActivity.this);
+                                }
+                            }));
+                }
+            });
         } else if (id == R.id.item_debug) {
             mAlertDialog = new AlertDialog.Builder(this)
                     .setTitle("选择环境")

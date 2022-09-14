@@ -206,16 +206,22 @@ public class VideoCallPopWindow extends BasePopupWindow implements View.OnClickL
     }
 
     private void initPermissions(int type) {
-        mCompositeDisposable.add(new RxPermissions((FragmentActivity) mContext)
-                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        if (!ClickUtil.canOperate()) return;
-                        listener.chatType(type);
-                    } else {
-                        PermissionUtil.showPermissionPop(mContext);
-                    }
-                }));
+        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        FragmentActivity activity = (FragmentActivity) mContext;
+        PermissionUtil.beforeRequestPermission(activity, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(activity)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                if (!ClickUtil.canOperate()) return;
+                                listener.chatType(type);
+                            } else {
+                                PermissionUtil.showPermissionPop(mContext);
+                            }
+                        }));
+            }
+        });
     }
 
 

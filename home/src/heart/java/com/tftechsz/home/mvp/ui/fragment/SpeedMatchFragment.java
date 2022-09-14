@@ -29,7 +29,7 @@ import com.tftechsz.home.api.HomeApiService;
 import com.tftechsz.home.mvp.ui.activity.RadarActivity;
 import com.tftechsz.home.widget.HomeTopItemLayout;
 
-public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickListener{
+public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickListener {
     private UserProviderService service;
     private HomeTopItemLayout mHomeItem1, mHomeItem2, mHomeItem3, mHomeItem4;
     private ConfigInfo.HomeTopNav mHome_top_nav;
@@ -71,7 +71,7 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
             return;
         }
         mHome_top_nav = configInfo.share_config.home_tab_config_matching;
-        LogUtil.e("====",mHomeItem1 + "====" +configInfo.share_config.home_tab_config_matching+"==" + mHome_top_nav.nav_1);
+        LogUtil.e("====", mHomeItem1 + "====" + configInfo.share_config.home_tab_config_matching + "==" + mHome_top_nav.nav_1);
 
         setTopData(mHomeItem1, mHome_top_nav.nav_1);
         setTopData(mHomeItem2, mHome_top_nav.nav_2);
@@ -81,7 +81,7 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
 
     private void setTopData(HomeTopItemLayout homeTopItemLayout, @Nullable ConfigInfo.Nav nav) {
         if (nav != null && isAdded()) {
-            homeTopItemLayout.setData(nav, 2,false);
+            homeTopItemLayout.setData(nav, 2, false);
             homeTopItemLayout.setVisibility(View.VISIBLE);
         } else {
             homeTopItemLayout.setVisibility(View.GONE);
@@ -92,7 +92,7 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
     public void onClick(View v) {
         int id = v.getId();
         if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
-         if (id == R.id.home_top_item1) {
+        if (id == R.id.home_top_item1) {
             performHomeTop(mHome_top_nav.nav_1);
         } else if (id == R.id.home_top_item2) {
             performHomeTop(mHome_top_nav.nav_2);
@@ -173,6 +173,7 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
         }
         initPermissions(type);
     }
+
     /**
      * 显示充值列表
      */
@@ -188,15 +189,20 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
      * 申请权限
      */
     private void initPermissions(int type) {
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        getUserInfo(type);
-                    } else {
-                        PermissionUtil.showPermissionPop(getActivity());
-                    }
-                }));
+        final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                getUserInfo(type);
+                            } else {
+                                PermissionUtil.showPermissionPop(getActivity());
+                            }
+                        }));
+            }
+        });
     }
 
     public void getUserInfo(int type) {

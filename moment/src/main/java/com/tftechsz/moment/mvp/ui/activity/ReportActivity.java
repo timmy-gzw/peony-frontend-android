@@ -1,5 +1,6 @@
 package com.tftechsz.moment.mvp.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +20,7 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -27,6 +29,7 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.ClickUtil;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.UploadHelper;
 import com.tftechsz.common.widget.NumIndicator;
 import com.tftechsz.moment.R;
@@ -126,7 +129,23 @@ public class ReportActivity extends BaseMvpActivity<IReportView, ReportPresenter
         }
     }
 
-    private final GridImageAdapter.onAddPicClickListener onAddPicClickListener = () -> ChoosePicUtils.picMultiple(ReportActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, adapter.getList());
+    private final GridImageAdapter.onAddPicClickListener onAddPicClickListener = () -> {
+        final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                ChoosePicUtils.picMultiple(ReportActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, adapter.getList());
+                            } else {
+                                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
+                            }
+                        })
+                );
+            }
+        });
+    };
 
     private void initWidget() {
         FullyGridLayoutManager manager = new FullyGridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false);
@@ -245,7 +264,7 @@ public class ReportActivity extends BaseMvpActivity<IReportView, ReportPresenter
                         sb.append(uploadServerUrlList.get(i));
                         sb.append(",");
                     }
-                    uploadToBendServer(mEditText, reportType, blogId, mEditText.getEditableText().toString(), sb.toString().substring(0, sb.length() - 1));
+                    uploadToBendServer(mEditText, reportType, blogId, mEditText.getEditableText().toString(), sb.substring(0, sb.length() - 1));
                 }
             }
 

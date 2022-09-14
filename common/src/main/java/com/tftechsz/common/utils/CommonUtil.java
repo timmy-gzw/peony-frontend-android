@@ -536,14 +536,19 @@ public class CommonUtil {
                 //Fixme 美颜设置权限申请优化
                 if (context instanceof FragmentActivity) {
                     FragmentActivity activity = (FragmentActivity) context;
-                    new RxPermissions(activity).request(Manifest.permission.CAMERA)
-                            .subscribe(aBoolean -> {
-                                if (aBoolean) {
-                                    ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
-                                } else {
-                                    PermissionUtil.showPermissionPop(activity);
-                                }
-                            });
+                    String[] permissions = {Manifest.permission.CAMERA};
+                    PermissionUtil.beforeRequestPermission(activity, permissions, agreeToRequest -> {
+                        if (agreeToRequest) {
+                            new RxPermissions(activity).request(permissions)
+                                    .subscribe(aBoolean -> {
+                                        if (aBoolean) {
+                                            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
+                                        } else {
+                                            PermissionUtil.showPermissionPop(activity);
+                                        }
+                                    });
+                        }
+                    });
                 } else {
                     ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
                 }

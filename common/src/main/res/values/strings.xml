@@ -27,6 +27,8 @@
     <string name="dkplayer_error_message">视频源出了点问题，请稍后重试</string>
     <string name="chat_open_camera_permission">未获取此设备摄像头或麦克风权限,音视频功能无法正常使用。打开应用设置页以修改应用权限</string>
     <string name="chat_open_voice_permission">未获取此设备麦克风权限,录音功能无法正常使用。打开应用设置页以修改应用权限</string>
+    <string name="chat_open_storage_camera_permission">未获取存储和拍照权限,视频或相册功能无法正常使用。打开应用设置页以修改应用权限</string>
+    <string name="chat_open_storage_permission">未获取存储权限,相册功能无法正常使用。打开应用设置页以修改应用权限</string>
     <string name="video_transitions">video_transitions</string>
     <string name="transition_aac_add">transition_aac_add</string>
     <string name="transition_aac_recy">transition_aac_recy</string>
@@ -84,4 +86,8 @@
     <string name="input_gift_btn_text">确定</string>
 
     <string name="digits_character" translatable="false">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="permission_location">位置权限：为了基于地理位置向你推荐用户/查看附近动态，请授权我们获取位置权限</string>
+    <string name="permission_storage">存储权限：上传手机图片，保存文件至手机，发送图片、语音或者视频时，需要开启存储权限以便上传和存储图片/视频。</string>
+    <string name="permission_camera">相机权限：在向您提供身份认证，视频通话，拍摄图片或者视频时，您可以开启相机权限以便拍摄图片和录制视频。</string>
+    <string name="permission_record">麦克风权限：在提供语音或视频通话时，我们需要获取麦克风权限，您可以开启麦克风权限以便语音/视频通话时使用。</string>
 </resources>

@@ -21,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -30,8 +29,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.netease.nim.uikit.common.UserInfo;
@@ -46,14 +43,13 @@ import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.CommonItemView;
 import com.tftechsz.common.widget.pop.UploadAvatarPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.MinePictureAdapter;
-import com.tftechsz.mine.adapter.ProfilePhotoAdapter;
-import com.tftechsz.mine.adapter.TrendAdapter;
 import com.tftechsz.mine.mvp.IView.IMineInfoView;
 import com.tftechsz.mine.mvp.presenter.MineInfoPresenter;
 
@@ -144,7 +140,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         mTvAudit = findViewById(R.id.tv_audit);
 
         mRvPicture = findViewById(R.id.rv_picture);
-        mRvPicture.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        mRvPicture.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         pictures = new ArrayList<>();
         pictures.add("");
         adapter = new MinePictureAdapter(pictures);
@@ -247,7 +243,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         mItemSex.setRightText(mUserInfo.getSex() == 1 ? "男" : "女");
         mItemSex.getTvRight().setTextColor(ContextCompat.getColor(this, R.color.color_light_font));
         //生日
-        setInfo(mItemBirthday, mUserInfo.getBirthday().replace("/","-"));
+        setInfo(mItemBirthday, mUserInfo.getBirthday().replace("/", "-"));
         //星座
         setInfo(mItemConstellation, mUserInfo.getConstellation());
         //所在地
@@ -418,23 +414,16 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                     return;
                 }
             }
-            UploadAvatarPopWindow popWindow = new UploadAvatarPopWindow(this);
-            popWindow.addOnClickListener(() -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    // 先判断有没有权限
-                    if (Environment.isExternalStorageManager()) {
-                        choosePic();
-                    } else {
-                        Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                        intent.setData(Uri.parse("package:" + getPackageName()));
-                        startActivityForResult(intent, REQUEST_CODE);
-                    }
-                } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                // 先判断有没有权限
+                if (Environment.isExternalStorageManager()) {
                     choosePic();
+                } else {
+                    PermissionUtil.toAllFilePermissionSetting(this, REQUEST_CODE);
                 }
-            });
-            popWindow.showPopupWindow();
-
+            } else {
+                choosePic();
+            }
         } else if (id == R.id.item_birthday) {   //生日
             String text = Utils.getText(mItemBirthday.getTvRight());
             if (TextUtils.isEmpty(text)) {
@@ -512,33 +501,42 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
 
 
     private void choosePic() {
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ChoosePicUtils.picSingle(MineInfoActivity.this, true, new OnResultCallbackListener<LocalMedia>() {
-                            @Override
-                            public void onResult(List<LocalMedia> result) {
-                                if (result != null && result.size() > 0) {
-                                    LocalMedia localMedia = result.get(0);
-                                    if (localMedia.isCut()) {
-                                        path = localMedia.getCutPath();
-                                    } else {
-                                        path = localMedia.getPath();
-                                    }
-                                    getP().uploadAvatar(path);
-                                }
-                            }
+        final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                UploadAvatarPopWindow popWindow = new UploadAvatarPopWindow(this);
+                                popWindow.addOnClickListener(() -> {
+                                    ChoosePicUtils.picSingle(MineInfoActivity.this, true, new OnResultCallbackListener<LocalMedia>() {
+                                        @Override
+                                        public void onResult(List<LocalMedia> result) {
+                                            if (result != null && result.size() > 0) {
+                                                LocalMedia localMedia = result.get(0);
+                                                if (localMedia.isCut()) {
+                                                    path = localMedia.getCutPath();
+                                                } else {
+                                                    path = localMedia.getPath();
+                                                }
+                                                getP().uploadAvatar(path);
+                                            }
+                                        }
 
-                            @Override
-                            public void onCancel() {
+                                        @Override
+                                        public void onCancel() {
 
+                                        }
+                                    });
+                                });
+                                popWindow.showPopupWindow();
+                            } else {
+                                Utils.toast("请允许摄像头权限");
                             }
-                        });
-                    } else {
-                        Utils.toast("请允许摄像头权限");
-                    }
-                }));
+                        }));
+            }
+        });
     }
 
     /**
@@ -685,7 +683,7 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
     @Override
     public void getPhotoSuccess(List<String> data) {
         pictures.clear();
-        if(data.size()<8){
+        if (data.size() < 8) {
             pictures.add("");
         }
         pictures.addAll(data);

@@ -6,21 +6,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tftechsz.common.base.BaseMvpFragment;
+import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.utils.ClickUtil;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.im.R;
 import com.tftechsz.im.adapter.CallLogAdapter;
 import com.tftechsz.im.databinding.FragmentCallLogBinding;
 import com.tftechsz.im.model.dto.CallLogDto;
 import com.tftechsz.im.mvp.iview.ICallLogView;
 import com.tftechsz.im.mvp.presenter.CallLogPresenter;
-import com.tftechsz.common.base.BaseMvpFragment;
-import com.tftechsz.common.utils.ARouterUtils;
-import com.tftechsz.common.utils.ClickUtil;
-import com.tftechsz.common.utils.PermissionUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -104,15 +103,20 @@ public class CallLogFragment extends BaseMvpFragment<ICallLogView, CallLogPresen
 
     private void initPermissions(String userId, int type) {
         if (getActivity() != null) {
-            mCompositeDisposable.add(new RxPermissions(getActivity())
-                    .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            p.checkCallMsg(userId, type);
-                        } else {
-                            PermissionUtil.showPermissionPop(mActivity);
-                        }
-                    }));
+            String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+            PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions(getActivity())
+                            .request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    p.checkCallMsg(userId, type);
+                                } else {
+                                    PermissionUtil.showPermissionPop(mActivity);
+                                }
+                            }));
+                }
+            });
         }
     }
 

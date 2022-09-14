@@ -236,28 +236,29 @@ public class BaseWebViewActivity extends BaseMvpActivity {
 
                                         // For Android >=3.0
                                         public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
-
-                                            mCompositeDisposable.add(new RxPermissions(BaseWebViewActivity.this)
-                                                    .request(Manifest.permission.RECORD_AUDIO
-                                                            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                                                    .subscribe(aBoolean -> {
-                                                        if (!aBoolean) {
-                                                            PermissionUtil.showPermissionPopWebview(BaseWebViewActivity.this);
-                                                        } else {
-                                                            if (acceptType.equals("image/*")) {
-                                                                if (mUploadMessage != null) {
-                                                                    mUploadMessage.onReceiveValue(null);
-                                                                    return;
+                                            String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+                                            PermissionUtil.beforeRequestPermission(BaseWebViewActivity.this, permissions, agreeToRequest -> {
+                                                if (agreeToRequest) {
+                                                    mCompositeDisposable.add(new RxPermissions(BaseWebViewActivity.this)
+                                                            .request(permissions)
+                                                            .subscribe(aBoolean -> {
+                                                                if (!aBoolean) {
+                                                                    PermissionUtil.showPermissionPopWebview(BaseWebViewActivity.this);
+                                                                } else {
+                                                                    if (acceptType.equals("image/*")) {
+                                                                        if (mUploadMessage != null) {
+                                                                            mUploadMessage.onReceiveValue(null);
+                                                                            return;
+                                                                        }
+                                                                        mUploadMessage = uploadMsg;
+                                                                        selectImage();
+                                                                    } else {
+                                                                        onReceiveValue();
+                                                                    }
                                                                 }
-                                                                mUploadMessage = uploadMsg;
-                                                                selectImage();
-                                                            } else {
-                                                                onReceiveValue();
-                                                            }
-                                                        }
-                                                    }));
-
-
+                                                            }));
+                                                }
+                                            });
                                         }
 
                                         // For Android < 3.0
@@ -274,43 +275,43 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                                         @Override
                                         @SuppressLint("NewApi")
                                         public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-
-                                            mCompositeDisposable.add(new RxPermissions(BaseWebViewActivity.this)
-                                                    .request(Manifest.permission.RECORD_AUDIO
-                                                            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                                                    .subscribe(aBoolean -> {
-                                                        if (!aBoolean) {
-                                                            PermissionUtil.showPermissionPopWebview(BaseWebViewActivity.this);
-                                                        } else {
-
-                                                            if (fileChooserParams != null && fileChooserParams.getAcceptTypes() != null
-                                                                    && fileChooserParams.getAcceptTypes().length > 0 && fileChooserParams.getAcceptTypes()[0].equals("image/*")) {
-                                                                if (mUploadMessageArray != null) {
-                                                                    mUploadMessageArray.onReceiveValue(null);
+                                            String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+                                            PermissionUtil.beforeRequestPermission(BaseWebViewActivity.this, permissions, agreeToRequest -> {
+                                                if (agreeToRequest) {
+                                                    mCompositeDisposable.add(new RxPermissions(BaseWebViewActivity.this)
+                                                            .request(permissions)
+                                                            .subscribe(aBoolean -> {
+                                                                if (!aBoolean) {
+                                                                    PermissionUtil.showPermissionPopWebview(BaseWebViewActivity.this);
+                                                                } else {
+                                                                    if (fileChooserParams != null && fileChooserParams.getAcceptTypes() != null
+                                                                            && fileChooserParams.getAcceptTypes().length > 0 && fileChooserParams.getAcceptTypes()[0].equals("image/*")) {
+                                                                        if (mUploadMessageArray != null) {
+                                                                            mUploadMessageArray.onReceiveValue(null);
+                                                                        }
+                                                                        mUploadMessageArray = filePathCallback;
+                                                                        selectImage();
+                                                                    } else if (fileChooserParams != null && fileChooserParams.getAcceptTypes() != null
+                                                                            && fileChooserParams.getAcceptTypes().length > 0 && fileChooserParams.getAcceptTypes()[0].equals("video/*")) {
+                                                                        if (mUploadMessageArray != null) {
+                                                                            mUploadMessageArray.onReceiveValue(null);
+                                                                        }
+                                                                        mUploadMessageArray = filePathCallback;
+                                                                        recordVideo();
+                                                                    } else if (fileChooserParams != null && fileChooserParams.getAcceptTypes() != null
+                                                                            && fileChooserParams.getAcceptTypes().length > 0 && fileChooserParams.getAcceptTypes()[0].equals("*/*")) {
+                                                                        if (mUploadMessageArray != null) {
+                                                                            mUploadMessageArray.onReceiveValue(null);
+                                                                        }
+                                                                        mUploadMessageArray = filePathCallback;
+                                                                        openFileInput();
+                                                                    } else {
+                                                                        onReceiveValue();
+                                                                    }
                                                                 }
-                                                                mUploadMessageArray = filePathCallback;
-                                                                selectImage();
-                                                            } else if (fileChooserParams != null && fileChooserParams.getAcceptTypes() != null
-                                                                    && fileChooserParams.getAcceptTypes().length > 0 && fileChooserParams.getAcceptTypes()[0].equals("video/*")) {
-                                                                if (mUploadMessageArray != null) {
-                                                                    mUploadMessageArray.onReceiveValue(null);
-                                                                }
-                                                                mUploadMessageArray = filePathCallback;
-                                                                recordVideo();
-                                                            } else if (fileChooserParams != null && fileChooserParams.getAcceptTypes() != null
-                                                                    && fileChooserParams.getAcceptTypes().length > 0 && fileChooserParams.getAcceptTypes()[0].equals("*/*")) {
-                                                                if (mUploadMessageArray != null) {
-                                                                    mUploadMessageArray.onReceiveValue(null);
-                                                                }
-                                                                mUploadMessageArray = filePathCallback;
-                                                                openFileInput();
-                                                            } else {
-                                                                onReceiveValue();
-                                                            }
-
-
-                                                        }
-                                                    }));
+                                                            }));
+                                                }
+                                            });
 
                                             return true;
                                         }

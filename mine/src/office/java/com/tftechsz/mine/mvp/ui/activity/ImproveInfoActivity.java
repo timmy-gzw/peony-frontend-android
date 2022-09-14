@@ -2,11 +2,9 @@ package com.tftechsz.mine.mvp.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -38,6 +36,7 @@ import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.NetworkUtil;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.SoftHideKeyBoardUtil;
 import com.tftechsz.common.utils.SpannableStringUtils;
@@ -181,9 +180,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                 if (Environment.isExternalStorageManager()) {
                     choosePic();
                 } else {
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                    intent.setData(Uri.parse("package:" + getPackageName()));
-                    startActivityForResult(intent, REQUEST_CODE);
+                    PermissionUtil.toAllFilePermissionSetting(this, REQUEST_CODE);
                 }
             } else {
                 choosePic();
@@ -297,28 +294,33 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
 
 
     private void choosePic() {
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ChoosePicUtils.picSingle(this, true, new OnResultCallbackListener<LocalMedia>() {
-                            @Override
-                            public void onResult(List<LocalMedia> selectList) {
-                                if (null != selectList && selectList.size() > 0) {
-                                    mPath = selectList.get(0).getCutPath();
-                                    getP().uploadAvatar(mPath);
-                                }
-                            }
+        final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                ChoosePicUtils.picSingle(this, true, new OnResultCallbackListener<LocalMedia>() {
+                                    @Override
+                                    public void onResult(List<LocalMedia> selectList) {
+                                        if (null != selectList && selectList.size() > 0) {
+                                            mPath = selectList.get(0).getCutPath();
+                                            getP().uploadAvatar(mPath);
+                                        }
+                                    }
 
-                            @Override
-                            public void onCancel() {
+                                    @Override
+                                    public void onCancel() {
 
+                                    }
+                                });
+                            } else {
+                                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                             }
-                        });
-                    } else {
-                        Utils.toast("请允许摄像头权限");
-                    }
-                }));
+                        }));
+            }
+        });
     }
 
     private void showNoDataPop() {

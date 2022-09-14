@@ -38,6 +38,7 @@ import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
@@ -167,27 +168,37 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
             runOnUiThread(() -> GlobalDialogManager.getInstance().show(getFragmentManager(), "正在上传中，请稍等..."));
             p.uploadRealNameAvatar(mFontFile.getAbsolutePath(), RESULT_FONT_CARD);
         } else if (id == R.id.iv_font_card) {   //正面
-            mCompositeDisposable.add(mRxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            ARouterUtils.toRealCamera(mActivity, 1);
-                            //startOpenCamera(RESULT_FONT_CARD);
+            final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(mRxPermissions.request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    ARouterUtils.toRealCamera(mActivity, 1);
+                                    //startOpenCamera(RESULT_FONT_CARD);
 //            ChoosePicUtils.picSingle(this, RESULT_FONT_CARD);
-                        } else {
-                            toastTip("权限被禁止，无法打开相机");
-                        }
-                    }));
+                                } else {
+                                    toastTip("权限被禁止，无法打开相机");
+                                }
+                            }));
+                }
+            });
         } else if (id == R.id.iv_back_card) {  //反面
-            mCompositeDisposable.add(mRxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            ARouterUtils.toRealCamera(mActivity, 2);
-                            //startOpenCamera(RESULT_BACK_CARD);
+            final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(mRxPermissions.request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    ARouterUtils.toRealCamera(mActivity, 2);
+                                    //startOpenCamera(RESULT_BACK_CARD);
 //            ChoosePicUtils.picSingle(this, RESULT_BACK_CARD);
-                        } else {
-                            toastTip("权限被禁止，无法打开相机");
-                        }
-                    }));
+                                } else {
+                                    toastTip("权限被禁止，无法打开相机");
+                                }
+                            }));
+                }
+            });
         }
     }
 

@@ -1,5 +1,6 @@
 package com.tftechsz.mine.mvp.ui.activity;
 
+import android.Manifest;
 import android.app.Service;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
@@ -26,6 +28,7 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ChoosePicUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.MinePhotoAdapterNew;
@@ -76,21 +79,33 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
         mAdapter.setOnItemClickListener((ad, view, position) -> {
             if (mAdapter.getItemViewType(position) == Interfaces.TYPE_CAMERA) {
                 if (mAdapter.getItemCount() < 9) {
-                    ChoosePicUtils.picSingle(MinePhotoActivityNew.this, true, new OnResultCallbackListener<LocalMedia>() {
-                        @Override
-                        public void onResult(List<LocalMedia> result) {
-                            if (result != null && result.size() > 0) {
-                                mBtnUpload.setEnabled(true);
-                                p.updatePhoto(result.get(0));
-                            } else {
-                                toastTip(getString(R.string.picture_choose_fail));
-                            }
+                    final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+                    PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                        if (agreeToRequest) {
+                            mCompositeDisposable.add(new RxPermissions(this)
+                                    .request(permissions)
+                                    .subscribe(aBoolean -> {
+                                        if (aBoolean) {
+                                            ChoosePicUtils.picSingle(MinePhotoActivityNew.this, true, new OnResultCallbackListener<LocalMedia>() {
+                                                @Override
+                                                public void onResult(List<LocalMedia> result) {
+                                                    if (result != null && result.size() > 0) {
+                                                        mBtnUpload.setEnabled(true);
+                                                        p.updatePhoto(result.get(0));
+                                                    } else {
+                                                        toastTip(getString(R.string.picture_choose_fail));
+                                                    }
+                                                }
 
-                        }
+                                                @Override
+                                                public void onCancel() {
 
-                        @Override
-                        public void onCancel() {
-
+                                                }
+                                            });
+                                        } else {
+                                            PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
+                                        }
+                                    }));
                         }
                     });
                 } else {
@@ -261,7 +276,7 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
         if (data != null) {
             dtos.addAll(data);
         }
-        if(dtos.size()<8){
+        if (dtos.size() < 8) {
             MinePhotoDto mAddLocalMedia = new MinePhotoDto("ADD", 0);
             dtos.add(mAddLocalMedia);
         }

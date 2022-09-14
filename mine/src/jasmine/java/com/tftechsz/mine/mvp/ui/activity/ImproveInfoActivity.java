@@ -37,6 +37,7 @@ import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.NetworkUtil;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.common.utils.Utils;
@@ -178,9 +179,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                 if (Environment.isExternalStorageManager()) {
                     choosePic();
                 } else {
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                    intent.setData(Uri.parse("package:" + getPackageName()));
-                    startActivityForResult(intent, REQUEST_CODE);
+                    PermissionUtil.toAllFilePermissionSetting(this, REQUEST_CODE);
                 }
             } else {
                 choosePic();
@@ -255,7 +254,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                     mGirlPop = new CustomPopWindow(mContext, 1)
                             .setContentText(new SpannableStringUtils.Builder()
                                     .append("您当前选择的性别为:")
-                                     .append(" 女生")
+                                    .append(" 女生")
                                     .setForegroundColor(Utils.getColor(R.color.colorPrimary))
                                     .append("\n一旦确认就不可更改，是否确认注册?")
                                     .create())
@@ -292,30 +291,34 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
         }
     }
 
-
     private void choosePic() {
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ChoosePicUtils.picSingle(this, true, new OnResultCallbackListener<LocalMedia>() {
-                            @Override
-                            public void onResult(List<LocalMedia> selectList) {
-                                if (null != selectList && selectList.size() > 0) {
-                                    mPath = selectList.get(0).getCutPath();
-                                    getP().uploadAvatar(mPath);
-                                }
-                            }
+        final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                ChoosePicUtils.picSingle(this, true, new OnResultCallbackListener<LocalMedia>() {
+                                    @Override
+                                    public void onResult(List<LocalMedia> selectList) {
+                                        if (null != selectList && selectList.size() > 0) {
+                                            mPath = selectList.get(0).getCutPath();
+                                            getP().uploadAvatar(mPath);
+                                        }
+                                    }
 
-                            @Override
-                            public void onCancel() {
+                                    @Override
+                                    public void onCancel() {
 
+                                    }
+                                });
+                            } else {
+                                Utils.toast("请允许摄像头权限");
                             }
-                        });
-                    } else {
-                        Utils.toast("请允许摄像头权限");
-                    }
-                }));
+                        }));
+            }
+        });
     }
 
     private void showNoDataPop() {

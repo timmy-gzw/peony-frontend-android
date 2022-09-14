@@ -28,8 +28,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -621,15 +619,20 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
      * 申请权限
      */
     private void initPermissions(int type) {
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        getUserInfo(type);
-                    } else {
-                        PermissionUtil.showPermissionPop(getActivity());
-                    }
-                }));
+        final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                getUserInfo(type);
+                            } else {
+                                PermissionUtil.showPermissionPop(getActivity());
+                            }
+                        }));
+            }
+        });
     }
 
 
@@ -665,6 +668,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                 return "";
             return com.tftechsz.common.utils.AppUtils.getApiUa();
         }
+
         /**
          * 上头条
          */

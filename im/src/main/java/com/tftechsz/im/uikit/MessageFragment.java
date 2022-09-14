@@ -513,7 +513,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         ConfigInfo configInfo = service.getConfigInfo();
         List<String> topics = service.getUserInfo().getSex() == 1 ? configInfo.share_config.boy_quick_topic : configInfo.share_config.girl_quick_topic;
         //打乱顺序，取前五个
-        if(topics != null){
+        if (topics != null) {
             TopicAdapter topicAdapter = new TopicAdapter(0);
             Collections.shuffle(topics);
             topicAdapter.setList(topics.subList(0, Math.min(topics.size(), 5)));
@@ -1718,8 +1718,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             //话题icon
             ConfigInfo configInfo = service.getConfigInfo();
             List<String> data = service.getUserInfo().getSex() == 1 ? configInfo.share_config.boy_quick_topic : configInfo.share_config.girl_quick_topic;
-            if(data == null){
-                ToastUtil.showToast(getActivity(),"当前热聊话题还没有哦！");
+            if (data == null) {
+                ToastUtil.showToast(getActivity(), "当前热聊话题还没有哦！");
                 return;
             }
             TopicPop topicPop = new TopicPop(getActivity(), data);
@@ -1781,66 +1781,70 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
         //图片点击
         ivChatPhoto.setOnClickListener(v -> {
-            mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            if (!TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy() && sessionType == SessionTypeEnum.P2P) {
-                                float level = Float.parseFloat(mIntimacy.replace("℃", ""));
-                                if (level < service.getConfigInfo().sys.boy2girl_pic_intimacy) {
-                                    ToastUtil.showToast(requireActivity(), "亲密度>=" + service.getConfigInfo().sys.boy2girl_pic_intimacy + "度才能发送图片");
-                                    return;
-                                }
-                            } else if ((TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy()) && sessionType == SessionTypeEnum.P2P) {
-                                ToastUtil.showToast(requireActivity(), "亲密度>=" + service.getConfigInfo().sys.boy2girl_pic_intimacy + "度才能发送图片");
-                                return;
-                            }
-                            if (null == customPopWindow) {
-                                customPopWindow = new CustomPopWindow(getActivity());
-                            }
-                            String content;   //提示文字
-                            if (null != service.getConfigInfo() && null != service.getConfigInfo().sys && null != service.getConfigInfo().sys.content)
-                                content = service.getConfigInfo().sys.content.picture_warm;
-                            else
-                                content = "注意:照片请勿作假，涉黄，如被举报并核实，系统会自动禁用图片功能，严重者冻结账号";
-                            customPopWindow.setContent(content);
-                            customPopWindow.addOnClickListener(new CustomPopWindow.OnSelectListener() {
-                                @Override
-                                public void onCancel() {
-                                }
-
-                                @Override
-                                public void onSure() {
-                                    ChoosePicUtils.picSingle(getActivity(), new OnResultCallbackListener<LocalMedia>() {
-                                        @Override
-                                        public void onResult(List<LocalMedia> result) {
-                                            if (result != null && result.size() > 0) {
-                                                String imgPath;
-                                                if (result.get(0).isCompressed()) {
-                                                    imgPath = result.get(0).getCompressPath();
-                                                } else {
-                                                    imgPath = result.get(0).getRealPath();
-                                                }
-                                                if (!TextUtils.isEmpty(imgPath)) {
-                                                    File file = new File(imgPath);
-                                                    onPicked(file);
-                                                }
-                                            }
+            final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+            PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions(this)
+                            .request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    if (!TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy() && sessionType == SessionTypeEnum.P2P) {
+                                        float level = Float.parseFloat(mIntimacy.replace("℃", ""));
+                                        if (level < service.getConfigInfo().sys.boy2girl_pic_intimacy) {
+                                            ToastUtil.showToast(requireActivity(), "亲密度>=" + service.getConfigInfo().sys.boy2girl_pic_intimacy + "度才能发送图片");
+                                            return;
                                         }
-
+                                    } else if ((TextUtils.isEmpty(mIntimacy) && service != null && service.getUserInfo() != null && service.getUserInfo().isBoy()) && sessionType == SessionTypeEnum.P2P) {
+                                        ToastUtil.showToast(requireActivity(), "亲密度>=" + service.getConfigInfo().sys.boy2girl_pic_intimacy + "度才能发送图片");
+                                        return;
+                                    }
+                                    if (null == customPopWindow) {
+                                        customPopWindow = new CustomPopWindow(getActivity());
+                                    }
+                                    String content;   //提示文字
+                                    if (null != service.getConfigInfo() && null != service.getConfigInfo().sys && null != service.getConfigInfo().sys.content)
+                                        content = service.getConfigInfo().sys.content.picture_warm;
+                                    else
+                                        content = "注意:照片请勿作假，涉黄，如被举报并核实，系统会自动禁用图片功能，严重者冻结账号";
+                                    customPopWindow.setContent(content);
+                                    customPopWindow.addOnClickListener(new CustomPopWindow.OnSelectListener() {
                                         @Override
                                         public void onCancel() {
+                                        }
 
+                                        @Override
+                                        public void onSure() {
+                                            ChoosePicUtils.picSingle(getActivity(), new OnResultCallbackListener<LocalMedia>() {
+                                                @Override
+                                                public void onResult(List<LocalMedia> result) {
+                                                    if (result != null && result.size() > 0) {
+                                                        String imgPath;
+                                                        if (result.get(0).isCompressed()) {
+                                                            imgPath = result.get(0).getCompressPath();
+                                                        } else {
+                                                            imgPath = result.get(0).getRealPath();
+                                                        }
+                                                        if (!TextUtils.isEmpty(imgPath)) {
+                                                            File file = new File(imgPath);
+                                                            onPicked(file);
+                                                        }
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancel() {
+
+                                                }
+                                            });
                                         }
                                     });
+                                    customPopWindow.showPopupWindow();
+                                } else {
+                                    PermissionUtil.showPermissionPop(getActivity(), BaseApplication.getInstance().getString(R.string.chat_open_storage_camera_permission));
                                 }
-                            });
-                            customPopWindow.showPopupWindow();
-                        } else {
-                            PermissionUtil.showPermissionPop(getActivity(), "未获取存储和拍照权限,相册功能无法正常使用。打开应用设置页以修改应用权限");
-                        }
-                    }));
-
+                            }));
+                }
+            });
         });
     }
 
@@ -2602,10 +2606,10 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private void showGift(IMMessage message, ChatMsg chatMsg, int type) {
         //逻辑处理: 如果是自己发出的礼物 && 盲盒礼物 , 使用callbackExt对象添加 animations
         ChatMsg.Gift gift;
-        if(TextUtils.equals(chatMsg.cmd,ChatMsg.REPLY_ACCOST_TYPE)){
+        if (TextUtils.equals(chatMsg.cmd, ChatMsg.REPLY_ACCOST_TYPE)) {
             gift = new ChatMsg.Gift();
             gift.gift_info = JSON.parseArray(chatMsg.content, ChatMsg.AccostGift.class).get(0);
-        }else {
+        } else {
             gift = JSON.parseObject(chatMsg.content, ChatMsg.Gift.class);
         }
         ChatMsg cm = ChatMsgUtil.parseMessage(message.getCallbackExtension());
@@ -3057,15 +3061,20 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     private void initPermissions() {
         if (getActivity() != null) {
-            mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            checkCallMsg(1);
-                        } else {
-                            PermissionUtil.showPermissionPop(getActivity());
-                        }
-                    }));
+            final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+            PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions(this)
+                            .request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    checkCallMsg(1);
+                                } else {
+                                    PermissionUtil.showPermissionPop(getActivity());
+                                }
+                            }));
+                }
+            });
         }
     }
 
@@ -3103,45 +3112,51 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     @Override
     public void onAudioRecord(View v, MotionEvent event) {
-        if (getActivity() != null && isAdded() && !isDestroyed())
-            mCompositeDisposable.add(new RxPermissions(this)
-                    .request(Manifest.permission.RECORD_AUDIO)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                                inputPanel.touched = true;
-                                inputPanel.initAudioRecord();
-                                inputPanel.onStartAudioRecord();
-                            } else if (event.getAction() == MotionEvent.ACTION_CANCEL
-                                    || event.getAction() == MotionEvent.ACTION_UP) {
-                                inputPanel.touched = false;
-                                inputPanel.onEndAudioRecord(InputPanel.isCancelled(v, event));
-                            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                                inputPanel.touched = true;
-                                inputPanel.cancelAudioRecord(InputPanel.isCancelled(v, event));
-                            }
-                        } else {
-                            if (perPop == null)
-                                perPop = new CustomPopWindow(getActivity());
-                            perPop.setTitle("权限设置");
-                            perPop.setContent(getString(R.string.chat_open_voice_permission));
-                            perPop.setLeftButton("知道了");
-                            perPop.setRightButton("去设置");
-                            perPop.setOutSideDismiss(false);
-                            perPop.addOnClickListener(new CustomPopWindow.OnSelectListener() {
-                                @Override
-                                public void onCancel() {
+        if (getActivity() != null && isAdded() && !isDestroyed()) {
+            final String[] permissions = {Manifest.permission.RECORD_AUDIO};
+            PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions(this)
+                            .request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                                        inputPanel.touched = true;
+                                        inputPanel.initAudioRecord();
+                                        inputPanel.onStartAudioRecord();
+                                    } else if (event.getAction() == MotionEvent.ACTION_CANCEL
+                                            || event.getAction() == MotionEvent.ACTION_UP) {
+                                        inputPanel.touched = false;
+                                        inputPanel.onEndAudioRecord(InputPanel.isCancelled(v, event));
+                                    } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                                        inputPanel.touched = true;
+                                        inputPanel.cancelAudioRecord(InputPanel.isCancelled(v, event));
+                                    }
+                                } else {
+                                    if (perPop == null)
+                                        perPop = new CustomPopWindow(getActivity());
+                                    perPop.setTitle("权限设置");
+                                    perPop.setContent(getString(R.string.chat_open_voice_permission));
+                                    perPop.setLeftButton("知道了");
+                                    perPop.setRightButton("去设置");
+                                    perPop.setOutSideDismiss(false);
+                                    perPop.addOnClickListener(new CustomPopWindow.OnSelectListener() {
+                                        @Override
+                                        public void onCancel() {
 
-                                }
+                                        }
 
-                                @Override
-                                public void onSure() {
-                                    PermissionUtil.gotoPermission(BaseApplication.getInstance());
+                                        @Override
+                                        public void onSure() {
+                                            PermissionUtil.gotoPermission(BaseApplication.getInstance());
+                                        }
+                                    });
+                                    perPop.showPopupWindow();
                                 }
-                            });
-                            perPop.showPopupWindow();
-                        }
-                    }));
+                            }));
+                }
+            });
+        }
     }
 
 
@@ -3276,7 +3291,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                     continueSendGiftPopWindow.addOnClickListener(new ContinueSendGiftPopWindow.OnSelectListener() {
                         @Override
                         public void sendGift(GiftDto data, int num, List<String> userId, String name) {
-                            if(Double.parseDouble(service.getUserInfo().getCoin())>data.coin*num){
+                            if (Double.parseDouble(service.getUserInfo().getCoin()) > data.coin * num) {
                                 if (message.getSessionType() == SessionTypeEnum.Team) {  //群组
                                     if (userId != null) {
                                         isInTeamcallback(getActivity(), userId.get(0), 2, data, num, userId, name);
@@ -3287,7 +3302,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                     sendMessageGift(data, num, userId, name);
                                 }
                                 continueSendGiftPopWindow.dismiss();
-                            }else {
+                            } else {
                                 showRechargePop(sessionId);
                             }
                         }
@@ -3649,7 +3664,6 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     }
 
 
-
     /**
      * 进行游戏
      * type  1 = 骰子 2 = 剪刀石头布
@@ -3706,18 +3720,20 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
 
     private void checkCallMsg(int type) {
-        String[] audioPermission = {Manifest.permission.RECORD_AUDIO};
-        String[] videoPermission = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(videoPermission)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        call(type);
-                    } else {
-                        PermissionUtil.showPermissionPop(getActivity());
-                    }
-                }));
-
+        final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                call(type);
+                            } else {
+                                PermissionUtil.showPermissionPop(getActivity());
+                            }
+                        }));
+            }
+        });
     }
 
 

@@ -22,6 +22,7 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.SpannableStringUtils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.mvp.IView.IRealAuthView;
@@ -90,14 +91,19 @@ public class RealAuthenticationActivity extends BaseMvpActivity<IRealAuthView, R
             if (mRxPermissions == null) {
                 mRxPermissions = new RxPermissions(this);
             }
-            mCompositeDisposable.add(mRxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            ARouterUtils.toRealCamera(mActivity, 0);
-                        } else {
-                            toastTip("对不起, 没有权限无法进入");
-                        }
-                    }));
+            final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(mRxPermissions.request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    ARouterUtils.toRealCamera(mActivity, 0);
+                                } else {
+                                    toastTip("对不起, 没有权限无法进入");
+                                }
+                            }));
+                }
+            });
         }
     }
 

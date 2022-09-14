@@ -28,6 +28,7 @@ import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.mvp.IView.IRealAuthView;
@@ -178,38 +179,43 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
             if (mRxPermissions == null) {
                 mRxPermissions = new RxPermissions(this);
             }
-            mCompositeDisposable.add(mRxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            ChoosePicUtils.picSingle(mActivity, true, new OnResultCallbackListener<LocalMedia>() {
-                                @Override
-                                public void onResult(List<LocalMedia> result) {
-                                    mTvChange1.setText("点击更换");
-                                    if (result != null && result.size() > 0) {
-                                        LocalMedia localMedia = result.get(0);
-                                        if (localMedia.isCut()) {
-                                            mIconFile = localMedia.getCutPath();
-                                        } else {
-                                            mIconFile = localMedia.getPath();
+            final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(mRxPermissions.request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    ChoosePicUtils.picSingle(mActivity, true, new OnResultCallbackListener<LocalMedia>() {
+                                        @Override
+                                        public void onResult(List<LocalMedia> result) {
+                                            mTvChange1.setText("点击更换");
+                                            if (result != null && result.size() > 0) {
+                                                LocalMedia localMedia = result.get(0);
+                                                if (localMedia.isCut()) {
+                                                    mIconFile = localMedia.getCutPath();
+                                                } else {
+                                                    mIconFile = localMedia.getPath();
+                                                }
+                                                mIvAvatarError.setVisibility(View.GONE);
+                                                mTvUploadAvatar.setEnabled(mIvPhotoError.getVisibility() == View.GONE);
+
+                                                GlideUtils.loadRouteImage(mActivity, mIvAvatar, mIconFile);
+                                                //getP().uploadAvatar(path);
+                                            }
                                         }
-                                        mIvAvatarError.setVisibility(View.GONE);
-                                        mTvUploadAvatar.setEnabled(mIvPhotoError.getVisibility() == View.GONE);
 
-                                        GlideUtils.loadRouteImage(mActivity, mIvAvatar, mIconFile);
-                                        //getP().uploadAvatar(path);
-                                    }
+                                        @Override
+                                        public void onCancel() {
+
+                                        }
+
+                                    });
+                                } else {
+                                    PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                                 }
-
-                                @Override
-                                public void onCancel() {
-
-                                }
-
-                            });
-                        } else {
-                            toastTip("对不起, 没有权限无法进入");
-                        }
-                    }));
+                            }));
+                }
+            });
         } else if (id == R.id.iv_photo) {
             if (mRlChange1.getVisibility() == View.GONE) {
                 return;
@@ -217,14 +223,19 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
             if (mRxPermissions == null) {
                 mRxPermissions = new RxPermissions(this);
             }
-            mCompositeDisposable.add(mRxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            ARouterUtils.toRealCamera(mActivity, 0);
-                        } else {
-                            toastTip("对不起, 没有权限无法进入");
-                        }
-                    }));
+            final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(mRxPermissions.request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    ARouterUtils.toRealCamera(mActivity, 0);
+                                } else {
+                                    toastTip("对不起, 没有权限无法进入");
+                                }
+                            }));
+                }
+            });
         } else if (id == R.id.tv_upload_avatar) {   //提交认证
             if (mStatus == 0) {
                 //ARouterUtils.toMainActivity();
