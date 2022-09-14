@@ -37,6 +37,7 @@ import com.tftechsz.mine.entity.dto.ExchangeRecord;
 import com.tftechsz.mine.entity.dto.FriendDto;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.entity.dto.GradeLevelDto;
+import com.tftechsz.mine.entity.dto.LabelDto;
 import com.tftechsz.mine.entity.dto.LoginDto;
 import com.tftechsz.mine.entity.dto.LogoutStatusDto;
 import com.tftechsz.mine.entity.dto.MinePhotoDto;
@@ -878,4 +879,20 @@ public interface MineApiService {
      */
     @GET("xxxxxx")
     Flowable<BaseResponse<List<CareerBean>>> getCareers();
+
+    /**
+     * 获取我的标签
+     *
+     * @return
+     */
+    @GET("tag")
+    Flowable<BaseResponse<List<LabelDto>>> getTag();
+
+    /**
+     * 设置我的标签
+     */
+    @FormUrlEncoded
+    @POST("tag/set")
+    Flowable<BaseResponse<Boolean>> setTag(@Field("tag_id") String tagId);
+
 }

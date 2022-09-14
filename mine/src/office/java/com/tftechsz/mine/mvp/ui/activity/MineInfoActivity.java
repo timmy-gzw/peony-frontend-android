@@ -189,6 +189,9 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         mItemSex.getTvRight().setTextColor(ContextCompat.getColor(this, R.color.color_normal));
         //生日
         setInfo(mItemBirthday, mUserInfo.getBirthday());
+        if (mUserInfo != null && mUserInfo.isSelf()){
+            mItemBirthday.getIvRight().setVisibility(View.INVISIBLE);
+        }
         //星座
         setInfo(mItemConstellation, mUserInfo.getConstellation());
         //所在地
@@ -379,6 +382,8 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
             popWindow.showPopupWindow();
 
         } else if (id == R.id.item_birthday) {   //生日
+            if (mUserInfo != null && mUserInfo.isSelf())
+                return;
             String text = Utils.getText(mItemBirthday.getTvRight());
             if (TextUtils.isEmpty(text)) {
                 if (service.getUserInfo().isGirl()) {

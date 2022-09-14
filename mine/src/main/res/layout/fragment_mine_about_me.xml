@@ -43,7 +43,6 @@
             android:layout_marginEnd="@dimen/dp_16"
             android:orientation="vertical"
             android:paddingBottom="@dimen/dp_10"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_user_info"
             tools:visibility="visible">
@@ -72,6 +71,7 @@
                 app:layout_constraintTop_toTopOf="@id/tv_level_title" />
 
             <include
+                android:id="@+id/level"
                 layout="@layout/include_user_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,7 +80,71 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_level_title" />
 
+            <LinearLayout
+                android:id="@+id/ll_hidden"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:background="@drawable/bg_vip_rich"
+                android:gravity="center"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/level"
+                app:layout_constraintTop_toTopOf="@id/level">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_hidden_other" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:text="对方暂未开启该功能"
+                    android:textColor="#D8D8D8"
+                    android:textSize="@dimen/sp_12" />
+
+            </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_level">
+
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/my_label"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:drawableEndCompat="@mipmap/ic_arrow" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_label" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <TextView
             android:id="@+id/tv_gift"
@@ -92,9 +156,8 @@
             android:textColor="@color/color_normal"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_level"
+            app:layout_constraintTop_toBottomOf="@+id/cl_label"
             tools:visibility="visible" />
 
         <TextView
@@ -175,5 +238,33 @@
                 tools:spanCount="3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_hidden2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_0"
+            android:background="@drawable/bg_vip_rich"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/cl_mine_gift"
+            app:layout_constraintEnd_toEndOf="@id/cl_mine_gift"
+            app:layout_constraintStart_toStartOf="@id/cl_mine_gift"
+            app:layout_constraintTop_toTopOf="@id/cl_mine_gift">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_hidden_other" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:text="对方暂未开启该功能"
+                android:textColor="#D8D8D8"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

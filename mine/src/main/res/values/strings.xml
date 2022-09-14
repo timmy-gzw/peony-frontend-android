@@ -60,6 +60,9 @@
     <string name="level_mine">我的等级</string>
     <string name="level_his">他的等级</string>
     <string name="level_her">她的等级</string>
+    <string name="my_label">我的标签</string>
+    <string name="label_his">他的标签</string>
+    <string name="label_her">她的标签</string>
     <string name="receive_gift_my">我收到的礼物</string>
     <string name="receive_gift_his">他收到的礼物</string>
     <string name="receive_gift_her">她收到的礼物</string>

@@ -392,6 +392,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         mBind.tvAGift.setOnClickListener(this);
         mBind.report.setOnClickListener(this);
         mBind.selView.setOnClickListener(this);
+        mBind.tvAllProperties.setOnClickListener(this);
         findViewById(R.id.tv_manager).setOnClickListener(this);   //管理
         findViewById(R.id.tv_down_wheat).setOnClickListener(this);
         findViewById(R.id.tv_close_wheat).setOnClickListener(this);  //闭麦
@@ -982,6 +983,9 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         } else if (id == R.id.report) { //举报
             dismiss();
             ARouterUtils.toBeforeReportActivity(TextUtils.isEmpty(sessionId) ? 0 : Integer.parseInt(sessionId), 1);
+        } else if (id == R.id.tv_all_properties){
+            PropertiesPopWindow propertiesPopWindow = new PropertiesPopWindow(getContext());
+            propertiesPopWindow.showPopupWindow();
         } else if (id == R.id.view_dismiss)   //隐藏pop
             dismiss();
     }

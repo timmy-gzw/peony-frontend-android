@@ -5,6 +5,7 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -30,6 +31,7 @@ import com.tftechsz.mine.adapter.GiftAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 import com.tftechsz.mine.mvp.presenter.MineAboutMePresenter;
+import com.tftechsz.mine.mvp.ui.activity.LabelActivity;
 import com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity;
 import com.tftechsz.mine.utils.UserManager;
 
@@ -56,10 +58,15 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     private TextView mTvCharmTitle, mTvCharmLevel;   //魅力值相关
     private ImageView ivCharmBg, ivLocalTyrantBg;
 
+    private LinearLayout mLlLevelCover,mLlGiftCover;
+
     //礼物相关
     private RecyclerView mRvGift;  //礼物
     private TextView mTvGift, mTvGiftVip, tvGiftTitle, tvGiftCount;
     private ConstraintLayout clGift;
+
+    //标签
+    private TextView mTvLabel;
 
     private BaseUserInfoAdapter userInfoAdapter;
     private GiftAdapter giftAdapter;
@@ -95,6 +102,8 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
 
         getView(R.id.cl_local_tyrant).setOnClickListener(this);  //土豪值
         getView(R.id.cl_charm).setOnClickListener(this);  //亲密度
+        mTvLabel = getView(R.id.tv_label);
+        mTvLabel.setOnClickListener(this);
         //土豪值
         ivLocalTyrantBg = getView(R.id.iv_local_tyrant_bg);
         mTvLocalTyrantLevel = getView(R.id.tv_local_tyrant_level);
@@ -103,6 +112,8 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         ivCharmBg = getView(R.id.iv_charm_bg);
         mTvCharmLevel = getView(R.id.tv_charm_level);
         mTvCharmTitle = getView(R.id.tv_charm_title);
+        mLlLevelCover = getView(R.id.ll_hidden);
+        mLlGiftCover = getView(R.id.ll_hidden2);
         //礼物
         mTvGift = getView(R.id.tv_gift);
         mTvGiftVip = getView(R.id.tv_gift_vip);
@@ -163,7 +174,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             mTvCharmTitle.setText(mUserInfo.levels.charm.title);
             mTvCharmLevel.setText(getString(R.string.charm_lv_format, mUserInfo.levels.charm.level));
         } else {
-            mClLevel.setVisibility(View.GONE);
+            mLlLevelCover.setVisibility(View.VISIBLE);
         }
 
         if (TextUtils.isEmpty(mUserId)) {   //自己
@@ -180,6 +191,8 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         } else {
             tvLevelTitle.setText(mUserInfo.isGirl() ? getString(R.string.level_her) : getString(R.string.level_his));
             tvGiftTitle.setText(mUserInfo.isGirl() ? getString(R.string.receive_gift_her) : getString(R.string.receive_gift_his));
+            mTvLabel.setText(mUserInfo.isGirl() ? getString(R.string.label_her) : getString(R.string.label_his));
+            mTvLabel.setCompoundDrawables(null, null, null, null);
         }
     }
 
@@ -202,19 +215,18 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     public void getGiftSuccess(ArrayList<GiftDto> data) {
         gifts = data;
         if (null == data || data.size() <= 0) {
-            clGift.setVisibility(View.GONE);
-            mTvGift.setVisibility(View.GONE);
+            clGift.setVisibility(View.INVISIBLE);
             mTvGiftVip.setVisibility(View.GONE);
+            mLlGiftCover.setVisibility(View.VISIBLE);
         } else {
             if (mUserInfo != null && mUserInfo.open_hidden_gift == 1 && !TextUtils.isEmpty(mUserId)) {
-                clGift.setVisibility(View.GONE);
-                mTvGift.setVisibility(View.GONE);
+                clGift.setVisibility(View.INVISIBLE);
                 mTvGiftVip.setVisibility(View.GONE);
+                mLlGiftCover.setVisibility(View.VISIBLE);
             } else {
                 List<GiftDto> giftList = data.subList(0, 3);
                 giftAdapter.setList(giftList);
                 clGift.setVisibility(View.VISIBLE);
-                mTvGift.setVisibility(View.VISIBLE);
                 //fixme 礼物计数
                 int count = 0;
                 for (GiftDto dto : data) {
@@ -232,17 +244,21 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.cl_local_tyrant) {    //土豪值
-            if (!TextUtils.isEmpty(mUserId))
-                return;
+//            if (!TextUtils.isEmpty(mUserId))
+//                return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.rich) {
                 MyWealthCharmLevelActivity.startActivity(getActivity(), "0", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
         } else if (id == R.id.cl_charm) {    //魅力值
-            if (!TextUtils.isEmpty(mUserId))
-                return;
+//            if (!TextUtils.isEmpty(mUserId))
+//                return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.charm) {
                 MyWealthCharmLevelActivity.startActivity(getActivity(), "1", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
+        } else if (id == R.id.tv_label) {
+            if (!TextUtils.isEmpty(mUserId))
+                return;
+            startActivity(LabelActivity.class, "from", "info");
         }
 
     }
