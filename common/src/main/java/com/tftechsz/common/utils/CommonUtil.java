@@ -196,7 +196,7 @@ public class CommonUtil {
      * @return
      */
     public static String getWeChatAppId(ConfigInfo configInfo) {
-        String appId = "";
+        String appId = Constants.WX_APP_ID;
         if (null != configInfo && null != configInfo.api && null != configInfo.api.wechat) {
             appId = configInfo.api.wechat.appid;
         }

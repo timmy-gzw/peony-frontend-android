@@ -192,11 +192,8 @@ public class BaseApplication extends Application implements Application.Activity
             UMConfigure.preInit(this, getUmengAppKey(), getUmengChannel());
         }
         // 监听的注册，必须在主进程中。
-        HeytapPushManager.init(this, true);
-        com.huawei.hms.support.common.ActivityMgr.INST.init(this);
         ToastUtils.init(mApplication);
         ToastUtils.setView(R.layout.layout_custom_toast);
-        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.LEGACY_MANUAL);
         VideoViewManager.setConfig(VideoViewConfig.newBuilder().setPlayerFactory(IjkPlayerFactory.create()).build());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             WebView.setDataDirectorySuffix(Process.myPid() + "");
@@ -285,6 +282,7 @@ public class BaseApplication extends Application implements Application.Activity
     public void initUmeng() {
         UMConfigure.init(this, CommonUtil.getUmengAppKey(), CommonUtil.getUmengChannel(), UMConfigure.DEVICE_TYPE_PHONE, getUmengPushSecret());
         UMConfigure.setProcessEvent(true);
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.LEGACY_MANUAL);
     }
 
     private static final int oaidWhat = 0x121;
@@ -339,6 +337,7 @@ public class BaseApplication extends Application implements Application.Activity
         initUmeng();
         initUiKit();
         initShanyanSDK();
+        initThirdPartyPush();
     }
 
     /**
@@ -348,6 +347,11 @@ public class BaseApplication extends Application implements Application.Activity
         CrashReport.initCrashReport(this, CommonUtil.getBuglyAppKey(), BuildConfig.DEBUG);
         CrashReport.setAppChannel(this, CommonUtil.getUmengChannel());
         CrashReport.setDeviceModel(BaseApplication.getInstance(), com.tftechsz.common.utils.AppUtils.getModel());
+    }
+
+    public void initThirdPartyPush() {
+        HeytapPushManager.init(this, true);
+        com.huawei.hms.support.common.ActivityMgr.INST.init(this);
     }
 
 
