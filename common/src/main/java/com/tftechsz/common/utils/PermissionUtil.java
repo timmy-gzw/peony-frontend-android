@@ -172,7 +172,7 @@ public class PermissionUtil {
     public static void toAllFilePermissionSetting(Activity activity, int reqCode) {
         if (activity == null || activity.isFinishing()) return;
         PermissionPopWindow permissionPopWindow = new PermissionPopWindow(activity);
-        permissionPopWindow.setContentText(BaseApplication.getInstance().getString(R.string.permission_storage));
+        permissionPopWindow.setContentText(BaseApplication.getInstance().getString(R.string.permission_manager_all_file));
         permissionPopWindow.addOnClickListener(new PermissionPopWindow.OnSelectListener() {
             @Override
             public void onCancel() {

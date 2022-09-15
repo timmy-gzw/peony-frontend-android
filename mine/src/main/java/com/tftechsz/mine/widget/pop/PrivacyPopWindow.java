@@ -1,15 +1,12 @@
 package com.tftechsz.mine.widget.pop;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
 
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
@@ -40,7 +37,7 @@ public class PrivacyPopWindow extends BaseCenterPop implements View.OnClickListe
 
     private void initUI() {
         TextView tvContent = findViewById(R.id.tv_content);
-        String res = tvContent.getText().toString();
+        String res = mContext.getString(R.string.privacy_short_desc, getContext().getString(R.string.app_name));
         SpannableStringBuilder builder = new SpannableStringBuilder(res);
         int stat = res.indexOf("《");
         builder.setSpan(new TextClick(mContext, 0), stat, stat + 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
