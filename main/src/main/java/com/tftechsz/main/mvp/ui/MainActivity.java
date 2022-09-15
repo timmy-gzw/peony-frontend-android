@@ -474,7 +474,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         };
         bdLocationManager = new BDLocationManager();
         bdLocationManager.addListener(MainActivity.this);
-        requestPermissions();
+//        requestPermissions();
         Intent intent = new Intent(BaseApplication.getInstance(), CallService.class);
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
@@ -555,14 +555,17 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         });
     }
 
+    boolean isShowPopup = false;
 
     public void showYouthModelPop() {
-        requestPermissions();
+        if (!isShowPopup) {
+            isShowPopup = true;
+            requestPermissions();
+        }
     }
 
 
-
-    private void nextShowYouthModelPop(){
+    private void nextShowYouthModelPop() {
         boolean youthPop = MMKVUtils.getInstance().decodeBoolean(Constants.YOUTH_MODE_POP);
         if (youthPop) {
             showSignInPop();
@@ -759,12 +762,12 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                         nextShowYouthModelPop();
                                     }
                                 }));
-                    }else {
+                    } else {
                         nextShowYouthModelPop();
                     }
                 }
             });
-        }else {
+        } else {
             nextShowYouthModelPop();
         }
     }
