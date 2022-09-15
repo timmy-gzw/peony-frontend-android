@@ -399,7 +399,8 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         } else if (id == R.id.item_home_address) {   //家乡
             getP().showPicker(this, mRlMineInfo, strHometown);
         } else if (id == R.id.item_job) {   //工作
-            EditInfoActivity.startForJob(this, mItemJob.getTvRight().getText().toString(), REQUEST_JOB_CODE);
+//            EditInfoActivity.startForJob(this, mItemJob.getTvRight().getText().toString(), REQUEST_JOB_CODE);
+            startActivity(ChooseCareerActivity.class);
         } else if (id == R.id.item_height) {   //身高
             if (mUserInfo != null)
                 getP().chooseHeight(this, mRlMineInfo, mUserInfo.getHeight());

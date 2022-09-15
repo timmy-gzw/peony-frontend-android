@@ -71,8 +71,8 @@ class ChooseCareerActivity : BaseMvpActivity<IChooseCareerView, ChooseCareerPres
         getP().getCareers()
     }
 
-    override fun onGetCareer(career: List<CareerBean>?) {
-        careerAdapter.setList(career)
+    override fun onGetCareer(career: CareerBean?) {
+        careerAdapter.setList(career?.job_list)
         chooseParent(0)
     }
 
@@ -90,7 +90,7 @@ class ChooseCareerActivity : BaseMvpActivity<IChooseCareerView, ChooseCareerPres
             careerChildAdapter.getItem(careerChildAdapter.selectedIndex).isSelected = false
             careerChildAdapter.selectedIndex = -1
         }
-        careerChildAdapter.setList(careerAdapter.getItem(position).subCareers)
+        careerChildAdapter.setList(careerAdapter.getItem(position).child_list)
     }
 
     private fun chooseChild(position: Int) {

@@ -986,6 +986,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         } else if (id == R.id.tv_all_properties){
             PropertiesPopWindow propertiesPopWindow = new PropertiesPopWindow(getContext());
             propertiesPopWindow.showPopupWindow();
+
         } else if (id == R.id.view_dismiss)   //隐藏pop
             dismiss();
     }

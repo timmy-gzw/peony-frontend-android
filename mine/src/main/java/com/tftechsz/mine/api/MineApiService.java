@@ -877,8 +877,8 @@ public interface MineApiService {
     /**
      * 获取所有职业
      */
-    @GET("xxxxxx")
-    Flowable<BaseResponse<List<CareerBean>>> getCareers();
+    @GET("job/list")
+    Flowable<BaseResponse<CareerBean>> getCareers();
 
     /**
      * 获取我的标签

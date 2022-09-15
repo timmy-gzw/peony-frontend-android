@@ -5,6 +5,6 @@ import com.tftechsz.mine.entity.dto.CareerBean
 
 interface IChooseCareerView : MvpView {
 
-    fun onGetCareer(career: List<CareerBean>?)
+    fun onGetCareer(career: CareerBean?)
 
 }
