@@ -23,6 +23,8 @@ import com.tftechsz.common.widget.pop.PermissionPopWindow;
 
 public class PermissionUtil {
 
+    private static volatile PermissionPopWindow permissionPopWindow;
+
     public static void gotoPermission(Context context) {
 //        if (RomUtils.isXiaomi()) {
 //            PermissionUtil.gotoMiuiPermission(context);//小米
@@ -219,7 +221,11 @@ public class PermissionUtil {
         if (sb == null || TextUtils.isEmpty(sb)) {
             permissionPopListener.onShowPermissionPop(true);
         } else {
-            PermissionPopWindow permissionPopWindow = new PermissionPopWindow(activity);
+            if(permissionPopWindow == null)
+                permissionPopWindow = new PermissionPopWindow(activity);
+            if(permissionPopWindow.isShowing()){
+                return;
+            }
             permissionPopWindow.setContentText(sb);
             permissionPopWindow.addOnClickListener(new PermissionPopWindow.OnSelectListener() {
                 @Override
