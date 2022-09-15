@@ -53,6 +53,10 @@ public class PermissionPopWindow extends BaseCenterPop implements View.OnClickLi
         return this;
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
 
     @Override
     public void onClick(View v) {

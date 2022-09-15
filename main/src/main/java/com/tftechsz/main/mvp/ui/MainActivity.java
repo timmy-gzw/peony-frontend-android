@@ -557,6 +557,12 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
 
 
     public void showYouthModelPop() {
+        requestPermissions();
+    }
+
+
+
+    private void nextShowYouthModelPop(){
         boolean youthPop = MMKVUtils.getInstance().decodeBoolean(Constants.YOUTH_MODE_POP);
         if (youthPop) {
             showSignInPop();
@@ -750,11 +756,16 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                                             MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_PROVINCE);
                                             getP().updateLocationReq("open");
                                         }
+                                        nextShowYouthModelPop();
                                     }
                                 }));
+                    }else {
+                        nextShowYouthModelPop();
                     }
                 }
             });
+        }else {
+            nextShowYouthModelPop();
         }
     }
 
