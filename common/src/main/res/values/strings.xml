@@ -88,7 +88,7 @@
     <string name="digits_character" translatable="false">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="permission_location">位置权限：为了基于地理位置向你推荐用户/查看附近动态，请授权我们获取位置权限</string>
     <string name="permission_storage">存储权限：上传手机图片，保存文件至手机，发送图片、语音或者视频时，需要开启存储权限以便上传和存储图片/视频。</string>
-    <string name="permission_camera">相机权限：在向您提供身份认证，视频通话，拍摄图片或者视频时，您可以开启相机权限以便拍摄图片和录制视频。</string>
+    <string name="permission_camera">相机权限：在向您提供头像设置，身份认证，视频通话，拍摄图片或者视频时，您可以开启相机权限以便拍摄图片和录制视频。</string>
     <string name="permission_record">麦克风权限：在提供语音或视频通话时，我们需要获取麦克风权限，您可以开启麦克风权限以便语音/视频通话时使用。</string>
     <string name="permission_manager_all_file">所有文件管理：需要获取所有文件的管理权限，以便在应用中正常上传/发送手机图片</string>
 
