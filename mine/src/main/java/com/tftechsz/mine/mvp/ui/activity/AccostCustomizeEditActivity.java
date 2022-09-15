@@ -60,7 +60,7 @@ public class AccostCustomizeEditActivity extends BaseMvpActivity<IAccostSettingV
 
     @Override
     protected void initData() {
-        Utils.setEditCardTextChangedListener(mEdit, mEdtCount, 60, true);
+        Utils.setEditCardTextChangedListener(mEdit, mEdtCount, 30, true);
         Utils.setFocus(mEdit);
         if (!TextUtils.isEmpty(mExtraContent)) {
             mEdit.setText(mExtraContent);

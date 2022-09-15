@@ -56,10 +56,10 @@ public class CustomFilter implements InputFilter {
         int needLength = 0;
         int length = 0;
         for (int i = 0; i < sq.length(); i++) {
-            if (sq.charAt(i) < 128)
+//            if (sq.charAt(i) < 128)
                 length += 1;
-            else
-                length += 2;
+//            else
+//                length += 2;
             ++needLength;
             if (subLength <= length) {
                 return sq.subSequence(0, needLength);
@@ -74,10 +74,10 @@ public class CustomFilter implements InputFilter {
             return length;
         else {
             for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) < 128)
+//                if (s.charAt(i) < 128)
                     length += 1;
-                else
-                    length += 2;
+//                else
+//                    length += 2;
             }
         }
         return length;

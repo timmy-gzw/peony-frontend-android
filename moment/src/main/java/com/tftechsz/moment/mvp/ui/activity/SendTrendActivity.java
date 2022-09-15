@@ -115,7 +115,7 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
         ivVideoDel.setOnClickListener(this);
         mRecyclerViewGrallyPic = findViewById(R.id.rv_report_pic);
         initWidget();
-        Utils.setEditCardTextChangedListener(mEditText, tvNumber, 1000, false);
+        Utils.setEditCardTextChangedListener(mEditText, tvNumber, 500, false);
 
         mCompositeDisposable.add(RxView.clicks(findViewById(R.id.pubish))
                 .throttleFirst(2, TimeUnit.SECONDS)
