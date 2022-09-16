@@ -312,6 +312,8 @@ public class TrendNoticeActivity extends BaseMvpActivity<INoticeView, INoticePre
                             }
                         })
                 );
+            } else {
+                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
             }
         });
     }

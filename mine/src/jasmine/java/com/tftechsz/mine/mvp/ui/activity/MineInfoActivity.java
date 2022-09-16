@@ -535,6 +535,8 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                                 Utils.toast("请允许摄像头权限");
                             }
                         }));
+            } else {
+                Utils.toast("请允许摄像头权限");
             }
         });
     }

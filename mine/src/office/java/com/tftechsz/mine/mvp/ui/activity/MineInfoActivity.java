@@ -482,6 +482,8 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                             }
                         }));
 
+            } else {
+                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
             }
         });
     }

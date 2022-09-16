@@ -547,6 +547,8 @@ public class CommonUtil {
                                             PermissionUtil.showPermissionPop(activity);
                                         }
                                     });
+                        } else {
+                            PermissionUtil.showPermissionPop(activity);
                         }
                     });
                 } else {

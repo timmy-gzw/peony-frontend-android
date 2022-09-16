@@ -106,6 +106,8 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
                                             PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                                         }
                                     }));
+                        } else {
+                            PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                         }
                     });
                 } else {

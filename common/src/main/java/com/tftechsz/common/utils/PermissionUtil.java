@@ -218,10 +218,10 @@ public class PermissionUtil {
         if (sb == null || TextUtils.isEmpty(sb)) {
             permissionPopListener.onShowPermissionPop(true);
         } else {
-            if(event != null && event.getAction() != MotionEvent.ACTION_DOWN){
+            if (event != null && event.getAction() != MotionEvent.ACTION_DOWN) {
                 return;
             }
-            PermissionPopWindow permissionPopWindow = new PermissionPopWindow(BaseApplication.getInstance());
+            PermissionPopWindow permissionPopWindow = new PermissionPopWindow(activity);
             permissionPopWindow.setContentText(sb);
             permissionPopWindow.addOnClickListener(new PermissionPopWindow.OnSelectListener() {
                 @Override
@@ -237,11 +237,12 @@ public class PermissionUtil {
             permissionPopWindow.showPopupWindow();
         }
     }
+
     /**
      * 请求权限前的说明弹窗
      */
     public static void beforeCheckPermission(Activity activity, String[] permissions, OnShowPermissionPopListener permissionPopListener) {
-        beforeCheckPermission(activity,null,permissions,permissionPopListener);
+        beforeCheckPermission(activity, null, permissions, permissionPopListener);
     }
 
     public static String permissionTipMap(String permission) {

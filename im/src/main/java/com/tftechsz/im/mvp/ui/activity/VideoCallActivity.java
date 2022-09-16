@@ -1087,6 +1087,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                                 NERtcEx.getInstance().adjustPlaybackSignalVolume(200);
                             }
                         }));
+            } else {
+                getP().buriedPoint("noPermission", "permissionCheck", callId, String.valueOf(service.getUserId()));
+                Utils.runOnUiThreadDelayed(() -> getP().showPermission(VideoCallActivity.this), 500);
             }
         });
         LogUtil.e(TAG, isOnLine + "");

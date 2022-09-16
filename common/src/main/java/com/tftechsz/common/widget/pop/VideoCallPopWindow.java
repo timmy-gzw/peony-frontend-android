@@ -220,6 +220,8 @@ public class VideoCallPopWindow extends BasePopupWindow implements View.OnClickL
                                 PermissionUtil.showPermissionPop(mContext);
                             }
                         }));
+            } else {
+                PermissionUtil.showPermissionPop(mContext);
             }
         });
     }

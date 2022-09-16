@@ -102,6 +102,8 @@ public class RealAuthenticationActivity extends BaseMvpActivity<IRealAuthView, R
                                     toastTip("对不起, 没有权限无法进入");
                                 }
                             }));
+                } else {
+                    toastTip("对不起, 没有权限无法进入");
                 }
             });
         }

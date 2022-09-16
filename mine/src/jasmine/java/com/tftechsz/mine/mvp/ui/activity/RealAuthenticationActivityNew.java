@@ -105,6 +105,9 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
                                     PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
                                 }
                             }));
+                } else {
+                    // TODO: fix this
+                    PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
                 }
             });
         } else if (id == R.id.iv_icon) {
@@ -145,6 +148,8 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
                                     Utils.toast("权限被禁止，无法选择本地图片");
                                 }
                             }));
+                } else {
+                    Utils.toast("权限被禁止，无法选择本地图片");
                 }
             });
         }

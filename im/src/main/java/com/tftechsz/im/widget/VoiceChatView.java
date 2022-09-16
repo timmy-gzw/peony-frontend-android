@@ -491,9 +491,11 @@ public class VoiceChatView extends LinearLayout implements View.OnClickListener,
                                             }
                                         }));
                             } else {
-                                ToastUtil.showToast(BaseApplication.getInstance(), "请允许录音权限");
+                                PermissionUtil.showPermissionPop(activity);
                             }
                         }));
+            } else {
+                PermissionUtil.showPermissionPop(activity);
             }
         });
     }

@@ -1843,6 +1843,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                     PermissionUtil.showPermissionPop(getActivity(), BaseApplication.getInstance().getString(R.string.chat_open_storage_camera_permission));
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(getActivity(), BaseApplication.getInstance().getString(R.string.chat_open_storage_camera_permission));
                 }
             });
         });
@@ -3073,6 +3075,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                     PermissionUtil.showPermissionPop(getActivity());
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(getActivity());
                 }
             });
         }
@@ -3154,6 +3158,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                     perPop.showPopupWindow();
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(getActivity());
                 }
             });
         }
@@ -3732,6 +3738,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                                 PermissionUtil.showPermissionPop(getActivity());
                             }
                         }));
+            } else {
+                PermissionUtil.showPermissionPop(getActivity());
             }
         });
     }

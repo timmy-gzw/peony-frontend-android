@@ -137,6 +137,8 @@ public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFra
                             }
                         })
                 );
+            } else {
+                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
             }
         });
     }

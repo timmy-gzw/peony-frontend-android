@@ -78,6 +78,8 @@ public class VoiceSignActivity extends BaseVoiceRecordActivity {
                                 }
                             }));
 
+                } else {
+                    toastTip("请允许录音权限");
                 }
             });
             return true;

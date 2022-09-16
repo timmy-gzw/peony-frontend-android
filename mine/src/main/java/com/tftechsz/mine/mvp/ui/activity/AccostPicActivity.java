@@ -166,6 +166,8 @@ public class AccostPicActivity extends BaseMvpActivity<IAccostSettingView, IAcco
                                 }
                             })
                     );
+                } else {
+                    PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_permission));
                 }
             });
         }

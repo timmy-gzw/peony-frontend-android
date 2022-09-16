@@ -115,6 +115,8 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
                                         getP().showPop();
                                     }
                                 }));
+                    } else {
+                        getP().showPop();
                     }
                 });
             } else {

@@ -214,6 +214,8 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
                                     PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                 }
             });
         } else if (id == R.id.iv_photo) {

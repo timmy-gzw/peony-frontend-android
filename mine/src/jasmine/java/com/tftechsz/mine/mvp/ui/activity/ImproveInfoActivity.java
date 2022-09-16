@@ -317,6 +317,8 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                                 Utils.toast("请允许摄像头权限");
                             }
                         }));
+            } else {
+                Utils.toast("请允许摄像头权限");
             }
         });
     }

@@ -118,6 +118,8 @@ public class SelfCheckActivity extends BaseMvpActivity implements View.OnClickLi
                                                             PermissionUtil.showPermissionPop(mActivity);
                                                         }
                                                     }));
+                                        } else {
+                                            PermissionUtil.showPermissionPop(mActivity);
                                         }
                                     });
                                     return;

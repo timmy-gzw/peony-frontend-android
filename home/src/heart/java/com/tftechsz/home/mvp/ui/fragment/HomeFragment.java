@@ -616,6 +616,8 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
                                 PermissionUtil.showPermissionPop(getActivity());
                             }
                         }));
+            } else {
+                PermissionUtil.showPermissionPop(getActivity());
             }
         });
     }

@@ -201,6 +201,8 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
                                 PermissionUtil.showPermissionPop(getActivity());
                             }
                         }));
+            } else {
+                PermissionUtil.showPermissionPop(getActivity());
             }
         });
     }

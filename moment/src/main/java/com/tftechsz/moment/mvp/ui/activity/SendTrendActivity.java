@@ -180,6 +180,8 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
                                 }
                             })
                     );
+                } else {
+                    PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                 }
             });
         }

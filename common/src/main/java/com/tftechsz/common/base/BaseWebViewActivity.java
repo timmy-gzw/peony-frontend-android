@@ -257,6 +257,8 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                                                                     }
                                                                 }
                                                             }));
+                                                } else {
+                                                    PermissionUtil.showPermissionPopWebview(BaseWebViewActivity.this);
                                                 }
                                             });
                                         }
@@ -310,6 +312,8 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                                                                     }
                                                                 }
                                                             }));
+                                                } else {
+                                                    PermissionUtil.showPermissionPopWebview(BaseWebViewActivity.this);
                                                 }
                                             });
 

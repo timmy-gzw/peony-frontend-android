@@ -104,6 +104,9 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
                                     PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
                                 }
                             }));
+                } else {
+                    // TODO: fix this
+                    PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
                 }
             });
         } else if (id == R.id.iv_icon) {
@@ -144,6 +147,8 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
                                     PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_permission));
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_permission));
                 }
             });
 

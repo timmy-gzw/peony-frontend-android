@@ -59,6 +59,8 @@ public class SendTrendPop extends BasePopupWindow {
                                     PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
                 }
             });
         });
@@ -77,6 +79,8 @@ public class SendTrendPop extends BasePopupWindow {
                                     PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
                 }
 
             });

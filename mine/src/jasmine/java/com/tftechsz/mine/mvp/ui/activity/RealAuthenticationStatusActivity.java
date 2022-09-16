@@ -215,6 +215,8 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
                                     toastTip("对不起, 没有权限无法进入");
                                 }
                             }));
+                } else {
+                    toastTip("对不起, 没有权限无法进入");
                 }
             });
         } else if (id == R.id.iv_photo) {
@@ -235,6 +237,8 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
                                     toastTip("对不起, 没有权限无法进入");
                                 }
                             }));
+                } else {
+                    toastTip("对不起, 没有权限无法进入");
                 }
             });
         } else if (id == R.id.tv_upload_avatar) {   //提交认证

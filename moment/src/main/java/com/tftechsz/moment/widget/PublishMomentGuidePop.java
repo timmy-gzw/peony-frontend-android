@@ -189,6 +189,8 @@ public class PublishMomentGuidePop extends BaseBottomPop implements ITrendView {
                             }
                         })
                 );
+            } else {
+                PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
             }
         });
     }

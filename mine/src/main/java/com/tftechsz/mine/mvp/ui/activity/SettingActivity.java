@@ -199,6 +199,8 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
                                     PermissionUtil.showPermissionPop(SettingActivity.this);
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(SettingActivity.this);
                 }
             });
         } else if (id == R.id.item_debug) {

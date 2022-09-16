@@ -319,6 +319,8 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                                 PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                             }
                         }));
+            } else {
+                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
             }
         });
     }

@@ -143,6 +143,8 @@ public class ReportActivity extends BaseMvpActivity<IReportView, ReportPresenter
                             }
                         })
                 );
+            } else {
+                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
             }
         });
     };

@@ -242,6 +242,8 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
                             }
                         })
                 );
+            } else {
+                PermissionUtil.showPermissionPop(getActivity(), getString(R.string.chat_open_storage_camera_permission));
             }
         });
     }

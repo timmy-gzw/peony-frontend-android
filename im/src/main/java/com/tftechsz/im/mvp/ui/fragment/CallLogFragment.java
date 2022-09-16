@@ -115,6 +115,8 @@ public class CallLogFragment extends BaseMvpFragment<ICallLogView, CallLogPresen
                                     PermissionUtil.showPermissionPop(mActivity);
                                 }
                             }));
+                } else {
+                    PermissionUtil.showPermissionPop(mActivity);
                 }
             });
         }
