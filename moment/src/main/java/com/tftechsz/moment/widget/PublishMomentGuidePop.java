@@ -165,7 +165,7 @@ public class PublishMomentGuidePop extends BaseBottomPop implements ITrendView {
 
     private void showMediaSelector() {
         String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        PermissionUtil.beforeRequestPermission(mActivity, permissions, agreeToRequest -> {
+        PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(mActivity)
                         .request(permissions)

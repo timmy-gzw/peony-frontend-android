@@ -537,7 +537,7 @@ public class CommonUtil {
                 if (context instanceof FragmentActivity) {
                     FragmentActivity activity = (FragmentActivity) context;
                     String[] permissions = {Manifest.permission.CAMERA};
-                    PermissionUtil.beforeRequestPermission(activity, permissions, agreeToRequest -> {
+                    PermissionUtil.beforeCheckPermission(activity, permissions, agreeToRequest -> {
                         if (agreeToRequest) {
                             new RxPermissions(activity).request(permissions)
                                     .subscribe(aBoolean -> {

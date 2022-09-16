@@ -190,7 +190,7 @@ public class PermissionUtil {
         permissionPopWindow.showPopupWindow();
     }
 
-    public static void beforeRequestPermission(Activity activity, MotionEvent event, String[] permissions, OnShowPermissionPopListener permissionPopListener) {
+    public static void beforeCheckPermission(Activity activity, MotionEvent event, String[] permissions, OnShowPermissionPopListener permissionPopListener) {
         if (permissionPopListener == null) return;
         if (activity == null || activity.isFinishing()) {
             permissionPopListener.onShowPermissionPop(true);
@@ -240,8 +240,8 @@ public class PermissionUtil {
     /**
      * 请求权限前的说明弹窗
      */
-    public static void beforeRequestPermission(Activity activity, String[] permissions, OnShowPermissionPopListener permissionPopListener) {
-        beforeRequestPermission(activity,null,permissions,permissionPopListener);
+    public static void beforeCheckPermission(Activity activity, String[] permissions, OnShowPermissionPopListener permissionPopListener) {
+        beforeCheckPermission(activity,null,permissions,permissionPopListener);
     }
 
     public static String permissionTipMap(String permission) {

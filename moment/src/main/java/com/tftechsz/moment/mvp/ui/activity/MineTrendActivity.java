@@ -125,7 +125,7 @@ public class MineTrendActivity extends BaseMvpActivity implements CustomTrendFra
      */
     private void showMediaSelector() {
         String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+        PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(this)
                         .request(permissions)

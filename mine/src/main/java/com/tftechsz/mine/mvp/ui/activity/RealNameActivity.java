@@ -169,7 +169,7 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
             p.uploadRealNameAvatar(mFontFile.getAbsolutePath(), RESULT_FONT_CARD);
         } else if (id == R.id.iv_font_card) {   //正面
             final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(mRxPermissions.request(permissions)
                             .subscribe(aBoolean -> {
@@ -185,7 +185,7 @@ public class RealNameActivity extends BaseMvpActivity<IRealNameView, RealNamePre
             });
         } else if (id == R.id.iv_back_card) {  //反面
             final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(mRxPermissions.request(permissions)
                             .subscribe(aBoolean -> {

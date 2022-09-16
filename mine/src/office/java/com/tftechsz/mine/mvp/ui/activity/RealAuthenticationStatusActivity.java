@@ -180,7 +180,7 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
                 mRxPermissions = new RxPermissions(this);
             }
             final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(mRxPermissions.request(permissions)
                             .subscribe(aBoolean -> {
@@ -224,7 +224,7 @@ public class RealAuthenticationStatusActivity extends BaseMvpActivity<IRealAuthV
                 mRxPermissions = new RxPermissions(this);
             }
             final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(mRxPermissions.request(permissions)
                             .subscribe(aBoolean -> {

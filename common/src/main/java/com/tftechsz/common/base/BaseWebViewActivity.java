@@ -237,7 +237,7 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                                         // For Android >=3.0
                                         public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
                                             String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-                                            PermissionUtil.beforeRequestPermission(BaseWebViewActivity.this, permissions, agreeToRequest -> {
+                                            PermissionUtil.beforeCheckPermission(BaseWebViewActivity.this, permissions, agreeToRequest -> {
                                                 if (agreeToRequest) {
                                                     mCompositeDisposable.add(new RxPermissions(BaseWebViewActivity.this)
                                                             .request(permissions)
@@ -276,7 +276,7 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                                         @SuppressLint("NewApi")
                                         public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
                                             String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-                                            PermissionUtil.beforeRequestPermission(BaseWebViewActivity.this, permissions, agreeToRequest -> {
+                                            PermissionUtil.beforeCheckPermission(BaseWebViewActivity.this, permissions, agreeToRequest -> {
                                                 if (agreeToRequest) {
                                                     mCompositeDisposable.add(new RxPermissions(BaseWebViewActivity.this)
                                                             .request(permissions)

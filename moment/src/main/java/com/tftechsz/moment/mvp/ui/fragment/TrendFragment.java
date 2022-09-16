@@ -230,7 +230,7 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
      */
     private void showMediaSelector() {
         final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-        PermissionUtil.beforeRequestPermission(mActivity, permissions, agreeToRequest -> {
+        PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
                         .request(permissions)

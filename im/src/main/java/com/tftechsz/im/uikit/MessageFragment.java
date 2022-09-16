@@ -1782,7 +1782,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
         //图片点击
         ivChatPhoto.setOnClickListener(v -> {
             final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-            PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions(this)
                             .request(permissions)
@@ -3062,7 +3062,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     private void initPermissions() {
         if (getActivity() != null) {
             final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
-            PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions(this)
                             .request(permissions)
@@ -3114,7 +3114,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     public void onAudioRecord(View v, MotionEvent event) {
         if (getActivity() != null && isAdded() && !isDestroyed()) {
             final String[] permissions = {Manifest.permission.RECORD_AUDIO};
-            PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(getActivity(),event, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions(this)
                             .request(permissions)
@@ -3721,7 +3721,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
     private void checkCallMsg(int type) {
         final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
-        PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+        PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(this)
                         .request(permissions)

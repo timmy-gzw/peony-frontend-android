@@ -67,7 +67,7 @@ public class AccostRecordToAddActivity extends BaseVoiceRecordActivity {
         recordAgain.setOnClickListener(this);
         recordIcon.setOnTouchListener((v, event) -> {
             final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-            PermissionUtil.beforeRequestPermission(this,event, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(this,event, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions(AccostRecordToAddActivity.this)
                             .request(permissions)

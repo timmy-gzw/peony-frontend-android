@@ -104,7 +104,7 @@ public class CallLogFragment extends BaseMvpFragment<ICallLogView, CallLogPresen
     private void initPermissions(String userId, int type) {
         if (getActivity() != null) {
             String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
-            PermissionUtil.beforeRequestPermission(getActivity(), permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions(getActivity())
                             .request(permissions)

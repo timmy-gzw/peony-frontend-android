@@ -477,7 +477,7 @@ public class VoiceChatView extends LinearLayout implements View.OnClickListener,
         }
         FragmentActivity activity = (FragmentActivity) getContext();
         final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-        PermissionUtil.beforeRequestPermission(activity, permissions, agreeToRequest -> {
+        PermissionUtil.beforeCheckPermission(activity, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(activity)
                         .request(permissions)

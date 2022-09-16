@@ -104,7 +104,7 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         } else if (id == R.id.cl_location) {   //位置信息
             if (mData != null && mData.open_hidden_location == 1) {
                 final String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-                PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                     if (agreeToRequest) {
                         mCompositeDisposable.add(new RxPermissions(PrivacySettingActivity.this)
                                 .request(permissions)

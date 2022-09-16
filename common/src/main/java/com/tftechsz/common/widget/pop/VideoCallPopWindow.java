@@ -208,7 +208,7 @@ public class VideoCallPopWindow extends BasePopupWindow implements View.OnClickL
     private void initPermissions(int type) {
         String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
         FragmentActivity activity = (FragmentActivity) mContext;
-        PermissionUtil.beforeRequestPermission(activity, permissions, agreeToRequest -> {
+        PermissionUtil.beforeCheckPermission(activity, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(activity)
                         .request(permissions)

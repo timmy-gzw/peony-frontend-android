@@ -300,7 +300,7 @@ public class TrendNoticeActivity extends BaseMvpActivity<INoticeView, INoticePre
 
     private void showMediaSelector() {
         final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-        PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+        PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
                         .request(permissions)

@@ -107,7 +107,7 @@ public class SelfCheckActivity extends BaseMvpActivity implements View.OnClickLi
                             if (response.getData() != null) {
                                 if (response.getData().pass) {//身份证验证成功, 进行活体
                                     final String[] permissions = {Manifest.permission.CAMERA};
-                                    PermissionUtil.beforeRequestPermission(SelfCheckActivity.this, permissions, agreeToRequest -> {
+                                    PermissionUtil.beforeCheckPermission(SelfCheckActivity.this, permissions, agreeToRequest -> {
                                         if (agreeToRequest) {
                                             mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity).request(permissions)
                                                     .subscribe(aBoolean -> {

@@ -46,7 +46,7 @@ public class SendTrendPop extends BasePopupWindow {
         mRoot.setBackgroundResource(isTop ? R.mipmap.pop_send_tred_bg_top : R.mipmap.pop_send_tred_bg_bot);
         findViewById(R.id.type_pic).setOnClickListener(v -> {
             String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            PermissionUtil.beforeRequestPermission(mActivity, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
                             .request(permissions)
@@ -64,7 +64,7 @@ public class SendTrendPop extends BasePopupWindow {
         });
         findViewById(R.id.type_mp4).setOnClickListener(v -> {
             String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            PermissionUtil.beforeRequestPermission(mActivity, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
                             .request(permissions)

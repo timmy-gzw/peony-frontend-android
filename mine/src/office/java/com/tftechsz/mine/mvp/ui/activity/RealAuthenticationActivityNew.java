@@ -93,7 +93,7 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
         int id = v.getId();
         if (id == R.id.btn) {
             final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(mPermission.request(permissions)
                             .subscribe(aBoolean -> {
@@ -108,7 +108,7 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
             });
         } else if (id == R.id.iv_icon) {
             final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(mPermission.request(permissions)
                             .subscribe(aBoolean -> {

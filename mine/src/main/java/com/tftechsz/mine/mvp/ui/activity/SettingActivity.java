@@ -188,7 +188,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
             ARouterUtils.toYouthModelActivity();
         } else if (id == R.id.item_face_setting) {   //美颜设置
             final String[] permissions = {Manifest.permission.CAMERA};
-            PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions(this)
                             .request(permissions)

@@ -1051,7 +1051,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
             });
         }
         String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
-        PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+        PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(this)
                         .request(permissions)

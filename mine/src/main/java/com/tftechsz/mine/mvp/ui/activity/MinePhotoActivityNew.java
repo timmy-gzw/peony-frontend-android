@@ -80,7 +80,7 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
             if (mAdapter.getItemViewType(position) == Interfaces.TYPE_CAMERA) {
                 if (mAdapter.getItemCount() < 9) {
                     final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-                    PermissionUtil.beforeRequestPermission(this, permissions, agreeToRequest -> {
+                    PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                         if (agreeToRequest) {
                             mCompositeDisposable.add(new RxPermissions(this)
                                     .request(permissions)

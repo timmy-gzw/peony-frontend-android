@@ -738,7 +738,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         if (srl && !TimeUtils.isToday(new Date(time))) {
             MMKVUtils.getInstance().encode(Constants.LOCATION_CURRENT_TIME, System.currentTimeMillis());
             final String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE};
-            PermissionUtil.beforeRequestPermission(this, permissions, new PermissionUtil.OnShowPermissionPopListener() {
+            PermissionUtil.beforeCheckPermission(this, permissions, new PermissionUtil.OnShowPermissionPopListener() {
                 @Override
                 public void onShowPermissionPop(boolean agreeToRequest) {
                     if (agreeToRequest) {
