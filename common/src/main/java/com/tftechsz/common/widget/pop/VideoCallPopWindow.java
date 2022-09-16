@@ -206,7 +206,12 @@ public class VideoCallPopWindow extends BasePopupWindow implements View.OnClickL
     }
 
     private void initPermissions(int type) {
-        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        String[] permissions;
+        if (type == 1) {
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO};
+        } else {
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        }
         FragmentActivity activity = (FragmentActivity) mContext;
         PermissionUtil.beforeCheckPermission(activity, permissions, agreeToRequest -> {
             if (agreeToRequest) {

@@ -189,7 +189,12 @@ public class SpeedMatchFragment extends BaseMvpFragment implements View.OnClickL
      * 申请权限
      */
     private void initPermissions(int type) {
-        final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        String[] permissions;
+        if (type == 1) {//语音
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO};
+        } else {
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        }
         PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(this)

@@ -3118,7 +3118,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
     public void onAudioRecord(View v, MotionEvent event) {
         if (getActivity() != null && isAdded() && !isDestroyed()) {
             final String[] permissions = {Manifest.permission.RECORD_AUDIO};
-            PermissionUtil.beforeCheckPermission(getActivity(),event, permissions, agreeToRequest -> {
+            PermissionUtil.beforeCheckPermission(getActivity(), event, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(new RxPermissions(this)
                             .request(permissions)
@@ -3726,7 +3726,12 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
 
     private void checkCallMsg(int type) {
-        final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        String[] permissions;
+        if (type == 2) {//语音
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO};
+        } else {
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        }
         PermissionUtil.beforeCheckPermission(getActivity(), permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(this)
