@@ -284,6 +284,7 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                                                             .request(permissions)
                                                             .subscribe(aBoolean -> {
                                                                 if (!aBoolean) {
+                                                                    filePathCallback.onReceiveValue(null);
                                                                     PermissionUtil.showPermissionPopWebview(BaseWebViewActivity.this);
                                                                 } else {
                                                                     if (fileChooserParams != null && fileChooserParams.getAcceptTypes() != null
@@ -313,6 +314,7 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                                                                 }
                                                             }));
                                                 } else {
+                                                    filePathCallback.onReceiveValue(null);
                                                     PermissionUtil.showPermissionPopWebview(BaseWebViewActivity.this);
                                                 }
                                             });
@@ -326,7 +328,6 @@ public class BaseWebViewActivity extends BaseMvpActivity {
                                             if (TextUtils.isEmpty(title))
                                                 ((TextView) findViewById(R.id.toolbar_title)).setText(s);
                                         }
-
                                     }
         );
         mWebView.setWebViewClient(new WebViewClient() {
