@@ -1050,7 +1050,12 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 }
             });
         }
-        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        String[] permissions;
+        if (mChannelType == 1) {//语音
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO};
+        } else {
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        }
         PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions(this)
