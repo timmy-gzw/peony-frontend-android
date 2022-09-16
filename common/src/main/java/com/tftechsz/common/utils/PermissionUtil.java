@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
@@ -23,7 +24,6 @@ import com.tftechsz.common.widget.pop.PermissionPopWindow;
 
 public class PermissionUtil {
 
-    private static volatile PermissionPopWindow permissionPopWindow;
 
     public static void gotoPermission(Context context) {
 //        if (RomUtils.isXiaomi()) {
@@ -190,10 +190,7 @@ public class PermissionUtil {
         permissionPopWindow.showPopupWindow();
     }
 
-    /**
-     * 请求权限前的说明弹窗
-     */
-    public static void beforeRequestPermission(Activity activity, String[] permissions, OnShowPermissionPopListener permissionPopListener) {
+    public static void beforeRequestPermission(Activity activity, MotionEvent event, String[] permissions, OnShowPermissionPopListener permissionPopListener) {
         if (permissionPopListener == null) return;
         if (activity == null || activity.isFinishing()) {
             permissionPopListener.onShowPermissionPop(true);
@@ -221,11 +218,10 @@ public class PermissionUtil {
         if (sb == null || TextUtils.isEmpty(sb)) {
             permissionPopListener.onShowPermissionPop(true);
         } else {
-            if(permissionPopWindow == null)
-                permissionPopWindow = new PermissionPopWindow(activity);
-            if(permissionPopWindow.isShowing()){
+            if(event != null && event.getAction() != MotionEvent.ACTION_DOWN){
                 return;
             }
+            PermissionPopWindow permissionPopWindow = new PermissionPopWindow(BaseApplication.getInstance());
             permissionPopWindow.setContentText(sb);
             permissionPopWindow.addOnClickListener(new PermissionPopWindow.OnSelectListener() {
                 @Override
@@ -240,6 +236,12 @@ public class PermissionUtil {
             });
             permissionPopWindow.showPopupWindow();
         }
+    }
+    /**
+     * 请求权限前的说明弹窗
+     */
+    public static void beforeRequestPermission(Activity activity, String[] permissions, OnShowPermissionPopListener permissionPopListener) {
+        beforeRequestPermission(activity,null,permissions,permissionPopListener);
     }
 
     public static String permissionTipMap(String permission) {
