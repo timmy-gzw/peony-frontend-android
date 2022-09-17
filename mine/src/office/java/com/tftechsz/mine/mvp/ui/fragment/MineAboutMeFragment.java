@@ -31,7 +31,6 @@ import com.tftechsz.mine.adapter.GiftAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 import com.tftechsz.mine.mvp.presenter.MineAboutMePresenter;
-import com.tftechsz.mine.mvp.ui.activity.LabelActivity;
 import com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity;
 import com.tftechsz.mine.utils.UserManager;
 
@@ -58,7 +57,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     private TextView mTvCharmTitle, mTvCharmLevel;   //魅力值相关
     private ImageView ivCharmBg, ivLocalTyrantBg;
 
-    private LinearLayout mLlLevelCover,mLlGiftCover;
+    private LinearLayout mLlLevelCover, mLlGiftCover;
 
     //礼物相关
     private RecyclerView mRvGift;  //礼物
@@ -258,7 +257,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         } else if (id == R.id.tv_label) {
             if (!TextUtils.isEmpty(mUserId))
                 return;
-            startActivity(LabelActivity.class, "from", "info");
+            ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "info").navigation();
         }
 
     }
