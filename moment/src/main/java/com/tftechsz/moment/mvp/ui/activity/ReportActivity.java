@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -31,6 +32,7 @@ import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.UploadHelper;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.NumIndicator;
 import com.tftechsz.moment.R;
 import com.tftechsz.moment.adapter.GridImageAdapter;
@@ -137,7 +139,10 @@ public class ReportActivity extends BaseMvpActivity<IReportView, ReportPresenter
                         .request(permissions)
                         .subscribe(aBoolean -> {
                             if (aBoolean) {
-                                ChoosePicUtils.picMultiple(ReportActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, adapter.getList());
+                                Class aClass = Class.forName("com.tftechsz.im.mvp.ui.activity.VideoCallActivity");
+                                boolean activityExistsInStack = ActivityUtils.isActivityExistsInStack(aClass);
+                                System.out.println("activityExistsInStack："+activityExistsInStack);
+                                ChoosePicUtils.picMultiple(ReportActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, adapter.getList(),false, !activityExistsInStack);
                             } else {
                                 PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                             }
