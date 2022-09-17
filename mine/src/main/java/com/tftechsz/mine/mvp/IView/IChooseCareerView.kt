@@ -7,4 +7,6 @@ interface IChooseCareerView : MvpView {
 
     fun onGetCareer(career: CareerBean?)
 
+    fun updateUserInfoSuccess(job: String?)
+
 }

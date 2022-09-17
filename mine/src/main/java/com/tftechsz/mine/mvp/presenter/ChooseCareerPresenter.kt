@@ -13,12 +13,28 @@ class ChooseCareerPresenter : BasePresenter<IChooseCareerView>() {
     private val service: MineApiService by lazy { RetrofitManager.getInstance().createUserApi(MineApiService::class.java) }
 
     fun getCareers() {
-        // TODO: 选择职业接口
         addNet(
             service.careers.compose(applySchedulers())
                 .subscribeWith(object : ResponseObserver<BaseResponse<CareerBean>>() {
                     override fun onSuccess(t: BaseResponse<CareerBean>?) {
                         view?.onGetCareer(t?.data)
+                    }
+                })
+        )
+    }
+
+
+    /**
+     * 更新用户信息
+     */
+    fun updateUserInfo(job: String?, jobId: String) {
+        val map = mapOf("job" to job, "job_id" to jobId)
+        addNet(
+            service.updateUserInfo(createRequestBody(map)).compose(applySchedulers())
+                .subscribeWith(object : ResponseObserver<BaseResponse<String?>?>() {
+                    override fun onSuccess(response: BaseResponse<String?>?) {
+                        if (view == null) return
+                        view.updateUserInfoSuccess(job)
                     }
                 })
         )

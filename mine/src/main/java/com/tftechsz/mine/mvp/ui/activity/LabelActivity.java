@@ -8,17 +8,13 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tftechsz.common.base.BaseMvpActivity;
-import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.LabelAdapter;
 import com.tftechsz.mine.entity.dto.LabelDto;
-import com.tftechsz.mine.entity.dto.LabelInfoDto;
 import com.tftechsz.mine.mvp.IView.ILabelView;
 import com.tftechsz.mine.mvp.presenter.LabelPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> implements ILabelView, View.OnClickListener {
@@ -51,43 +47,26 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
     protected void initData() {
         super.initData();
         mFrom = getIntent().getStringExtra("from");
-        if(TextUtils.equals(mFrom,"info")){
+        if (TextUtils.equals(mFrom, "info")) {
             mTvJump.setVisibility(View.GONE);
-        }else {
+        } else {
             mTvSave.setText("立即交友");
         }
         mAdapter = new LabelAdapter();
         mRvLabel.setAdapter(mAdapter);
-        List<LabelDto> list = new ArrayList<>();
-        for (int j = 0; j < 10; j++) {
-            LabelDto data = new LabelDto();
-            data.title = "第三方";
-            List<LabelInfoDto> list1 = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                LabelInfoDto labelInfoDto = new LabelInfoDto();
-                labelInfoDto.name = "阿克苏浪费";
-                list1.add(labelInfoDto);
-            }
-            data.list = list1;
-            list.add(data);
-        }
-        mAdapter.setList(list);
-        mAdapter.addOnSelectListener(new LabelAdapter.OnSelectListener() {
-            @Override
-            public void select() {
-                StringBuilder stringBuffer = new StringBuilder();
-                int number = 0;
-                for (int i = 0; i < mAdapter.getData().size(); i++) {
-                    for (int j = 0; j < mAdapter.getData().get(i).list.size(); j++) {
-                        if (mAdapter.getData().get(i).list.get(j).is_select == 1) {
-                            stringBuffer.append(mAdapter.getData().get(i).list.get(j).id);
-                            stringBuffer.append(",");
-                            number += 1;
-                        }
+        mAdapter.addOnSelectListener(() -> {
+            StringBuilder stringBuffer = new StringBuilder();
+            int number = 0;
+            for (int i = 0; i < mAdapter.getData().size(); i++) {
+                for (int j = 0; j < mAdapter.getData().get(i).list.size(); j++) {
+                    if (mAdapter.getData().get(i).list.get(j).is_select == 1) {
+                        stringBuffer.append(mAdapter.getData().get(i).list.get(j).id);
+                        stringBuffer.append(",");
+                        number += 1;
                     }
                 }
-                mTvChooseNum.setText("(已选 " + number + "/15)");
             }
+            mTvChooseNum.setText("(已选 " + number + "/15)");
         });
     }
 
@@ -98,7 +77,7 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
 
     @Override
     public void getTagSuccess(List<LabelDto> data) {
-
+        mAdapter.setList(data);
     }
 
     @Override
