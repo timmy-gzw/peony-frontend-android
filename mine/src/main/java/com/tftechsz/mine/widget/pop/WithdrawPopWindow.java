@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.tftechsz.common.http.BaseResponse;
+import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.utils.RxUtil;
@@ -19,16 +20,16 @@ import razerdp.basepopup.BasePopupWindow;
  * 提现确认弹窗
  */
 public class WithdrawPopWindow extends BasePopupWindow implements View.OnClickListener {
-    public MineApiService service;
+    public PublicService service;
     private TextView mTvAccount, mTvPhone;
     protected CompositeDisposable mCompositeDisposable;
-    public MineApiService userService;
+    public PublicService userService;
 
     public WithdrawPopWindow(Context context) {
         super(context);
         mCompositeDisposable = new CompositeDisposable();
-        service = RetrofitManager.getInstance().createExchApi(MineApiService.class);
-        userService = RetrofitManager.getInstance().createUserApi(MineApiService.class);
+        service = RetrofitManager.getInstance().createExchApi(PublicService.class);
+        userService = RetrofitManager.getInstance().createUserApi(PublicService.class);
         initUI();
         setPopupFadeEnable(true);
     }
@@ -97,7 +98,7 @@ public class WithdrawPopWindow extends BasePopupWindow implements View.OnClickLi
      * 提现方式获取
      */
     public void withdrawWay() {
-        mCompositeDisposable.add(userService.withdrawWay().compose(RxUtil.applySchedulers())
+        mCompositeDisposable.add(userService.withdrawWay(0).compose(RxUtil.applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<WithdrawReq.Withdraw>>() {
                     @Override
                     public void onSuccess(BaseResponse<WithdrawReq.Withdraw> response) {

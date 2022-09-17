@@ -445,6 +445,13 @@ public interface PublicService {
     Flowable<BaseResponse<String>> withdraw(@Body WithdrawReq withdraw);
 
     /**
+     * 用户支付宝提现方式获取
+     * @param out_warn 0 主账户 1 备用账号
+     */
+    @GET("info/withdraw")
+    Flowable<BaseResponse<WithdrawReq.Withdraw>> withdrawWay(@Query("out_warn")int out_warn);
+
+    /**
      * 背包礼物检测
      *
      * @return
