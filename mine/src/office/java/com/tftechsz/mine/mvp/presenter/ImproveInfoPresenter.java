@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
@@ -208,7 +209,8 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
                         if (response.getData() != null && getView() != null) {
                             MMKVUtils.getInstance().encode(Constants.SHOW_NEAR_USER, response.getData().show_near_user);
                             MMKVUtils.getInstance().encode(Constants.SHOW_PARTY_ICON, response.getData().show_party_icon);
-                            ARouterUtils.toPathWithId(ARouterApi.MAIN_MAIN);
+//                            ARouterUtils.toPathWithId(ARouterApi.MAIN_MAIN);
+                            ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "init").navigation();
                             activity.finish();
                         }
                     }

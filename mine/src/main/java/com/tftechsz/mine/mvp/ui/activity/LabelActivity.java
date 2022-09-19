@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.LabelAdapter;
 import com.tftechsz.mine.entity.dto.LabelDto;
@@ -26,6 +27,7 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
     private LabelAdapter mAdapter;
     private String mFrom;
     private final StringBuilder tagIdSB = new StringBuilder();
+    private View ivBack;
 
     @Override
     protected int getLayout() {
@@ -37,7 +39,8 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
         mRvLabel = findViewById(R.id.rv_label);
         mRvLabel.setLayoutManager(new LinearLayoutManager(this));
         mRvLabel.setItemViewCacheSize(20);
-        findViewById(R.id.toolbar_back_all).setOnClickListener(this);
+        ivBack = findViewById(R.id.toolbar_back_all);
+        ivBack.setOnClickListener(this);
         mTvSave = findViewById(R.id.tv_save);
         mTvChooseNum = findViewById(R.id.toolbar_choose_title);
         mTvSave.setOnClickListener(this);
@@ -53,7 +56,8 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
         mFrom = getIntent().getStringExtra("from");
         if (TextUtils.equals(mFrom, "info")) {
             mTvJump.setVisibility(View.GONE);
-        } else {
+        } else if (TextUtils.equals(mFrom, "init")) {
+            ivBack.setVisibility(View.GONE);
             mTvSave.setText("立即交友");
         }
         mAdapter = new LabelAdapter();
@@ -94,6 +98,14 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
     @Override
     public void setTagSuccess(Boolean data) {
         toastTip("保存成功");
+        finishTag();
+    }
+
+    private void finishTag() {
+        if (TextUtils.equals(mFrom, "init")) {
+            ARouterUtils.toPathWithId(ARouterApi.MAIN_MAIN);
+        }
+        finish();
     }
 
     @Override
@@ -105,10 +117,10 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
             if (tagIdSB.length() > 0) {
                 getP().setTag(tagIdSB.toString());
             } else {
-                finish();
+                finishTag();
             }
         } else if (id == R.id.toolbar_tv_menu) {
-
+            finishTag();
         }
     }
 }

@@ -19,6 +19,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ClipboardUtils;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.tftechsz.common.ARouterApi;
@@ -28,6 +32,7 @@ import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
 import com.tftechsz.mine.adapter.GiftAdapter;
+import com.tftechsz.mine.adapter.LabelDisplayAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 import com.tftechsz.mine.mvp.presenter.MineAboutMePresenter;
@@ -70,6 +75,10 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     private BaseUserInfoAdapter userInfoAdapter;
     private GiftAdapter giftAdapter;
     private ArrayList<GiftDto> gifts = null;
+    //标签
+    private View clLabel;
+    private RecyclerView rvLabel;
+    private LabelDisplayAdapter labelDisplayAdapter;
 
     @Override
     protected int getLayout() {
@@ -98,6 +107,9 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         mClLevel = getView(R.id.cl_level);
         tvLevelTitle = getView(R.id.tv_level_title);
         tvLevelVip = getView(R.id.tv_level_vip);
+
+        clLabel = getView(R.id.cl_label);
+        rvLabel = getView(R.id.rv_label);
 
         getView(R.id.cl_local_tyrant).setOnClickListener(this);  //土豪值
         getView(R.id.cl_charm).setOnClickListener(this);  //亲密度
@@ -192,6 +204,26 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             tvGiftTitle.setText(mUserInfo.isGirl() ? getString(R.string.receive_gift_her) : getString(R.string.receive_gift_his));
             mTvLabel.setText(mUserInfo.isGirl() ? getString(R.string.label_her) : getString(R.string.label_his));
             mTvLabel.setCompoundDrawables(null, null, null, null);
+        }
+
+        if (mUserInfo != null && mUserInfo.tag_list != null && !mUserInfo.tag_list.isEmpty()) {
+            clLabel.setVisibility(View.VISIBLE);
+            if (labelDisplayAdapter == null) {
+                FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext(), FlexDirection.ROW);
+                layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+                layoutManager.setAlignItems(AlignItems.FLEX_START);
+                rvLabel.setLayoutManager(layoutManager);
+                labelDisplayAdapter = new LabelDisplayAdapter();
+                rvLabel.setAdapter(labelDisplayAdapter);
+            }
+
+            labelDisplayAdapter.setList(mUserInfo.getTagList());
+        } else {
+            if (TextUtils.isEmpty(mUserId)) {
+                clLabel.setVisibility(View.VISIBLE);
+            } else {
+                clLabel.setVisibility(View.GONE);
+            }
         }
     }
 
