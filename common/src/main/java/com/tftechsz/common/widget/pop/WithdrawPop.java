@@ -155,11 +155,7 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
                     @Override
                     public void onSuccess(BaseResponse<Boolean> stringBaseResponse) {
                         mBind.setIsNext(true);
-                        if(TextUtils.isEmpty(mBind.etName.getText())) {
-                            mBind.setIsClick(false);
-                        }else {
-                            mBind.setIsClick(true);
-                        }
+                        textChange();
                         Utils.setFocus(mBind.etName);
                     }
                 }));
