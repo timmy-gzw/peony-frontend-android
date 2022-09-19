@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.alipay.sdk.app.PayTask;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.netease.nim.uikit.business.uinfo.UserInfoHelper;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.ChatMsgUtil;
@@ -151,7 +152,7 @@ public class MainPresenter extends BasePresenter<IMainView> {
                             @Override
                             public void run() {
                                 ChatMsg.RedPacket intimacy = JSON.parseObject(chatMsg.content, ChatMsg.RedPacket.class);
-                                RedPackagePopWindow popWindow = new RedPackagePopWindow(BaseApplication.getInstance(), intimacy);
+                                RedPackagePopWindow popWindow = new RedPackagePopWindow(ActivityUtils.getTopActivity(), intimacy);
                                 popWindow.addOnClickListener(new RedPackagePopWindow.OnSelectListener() {
                                     @Override
                                     public void onCancel() {
