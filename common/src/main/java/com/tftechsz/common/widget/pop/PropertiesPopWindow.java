@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.tftechsz.common.R;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.Utils;
 
 import java.util.ArrayList;
@@ -29,7 +30,13 @@ public class PropertiesPopWindow extends BaseBottomPop {
     private void initUI() {
         findViewById(R.id.tv_cancel).setOnClickListener(v -> dismiss());
         findViewById(R.id.tv_all_properties).setOnClickListener(v -> dismiss());
-        findViewById(R.id.tv_properties_record).setOnClickListener(v -> dismiss());
+        findViewById(R.id.tv_properties_record).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ARouterUtils.toIntegralDetailedActivity(3);
+                dismiss();
+            }
+        });
     }
 
 
