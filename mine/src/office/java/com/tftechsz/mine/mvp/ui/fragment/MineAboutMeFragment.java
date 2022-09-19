@@ -40,6 +40,7 @@ import com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity;
 import com.tftechsz.mine.utils.UserManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -206,21 +207,19 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             mTvLabel.setCompoundDrawables(null, null, null, null);
         }
 
-        if (mUserInfo != null && mUserInfo.tag_list != null && !mUserInfo.tag_list.isEmpty()) {
-            clLabel.setVisibility(View.VISIBLE);
-            if (labelDisplayAdapter == null) {
-                FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext(), FlexDirection.ROW);
-                layoutManager.setJustifyContent(JustifyContent.FLEX_START);
-                layoutManager.setAlignItems(AlignItems.FLEX_START);
-                rvLabel.setLayoutManager(layoutManager);
-                labelDisplayAdapter = new LabelDisplayAdapter();
-                rvLabel.setAdapter(labelDisplayAdapter);
-            }
+        setupUserTag();
+    }
 
+    private void setupUserTag() {
+        if (mUserInfo != null && mUserInfo.getTagList() != null && !mUserInfo.getTagList().isEmpty()) {
+            clLabel.setVisibility(View.VISIBLE);
+            initLabelView();
             labelDisplayAdapter.setList(mUserInfo.getTagList());
         } else {
             if (TextUtils.isEmpty(mUserId)) {
                 clLabel.setVisibility(View.VISIBLE);
+                initLabelView();
+                labelDisplayAdapter.setList(Collections.singletonList("ADD_TAG"));
             } else {
                 clLabel.setVisibility(View.GONE);
             }
@@ -292,5 +291,26 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "info").navigation();
         }
 
+    }
+
+    private void initLabelView() {
+        if (labelDisplayAdapter == null) {
+            FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext(), FlexDirection.ROW);
+            layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+            layoutManager.setAlignItems(AlignItems.FLEX_START);
+            rvLabel.setLayoutManager(layoutManager);
+            labelDisplayAdapter = new LabelDisplayAdapter();
+            rvLabel.setAdapter(labelDisplayAdapter);
+            labelDisplayAdapter.setOnItemClickListener((adapter, view, position) -> {
+                if (adapter.getItemViewType(position) == LabelDisplayAdapter.TYPE_ADD) {
+                    ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "info").navigation();
+                }
+            });
+        }
+    }
+
+    public void refreshUserInfo(UserInfo userInfo) {
+        this.mUserInfo = userInfo;
+        setUserInfo();
     }
 }

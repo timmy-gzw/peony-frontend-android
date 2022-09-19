@@ -254,4 +254,10 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         }
 
     }
+
+
+    public void refreshUserInfo(UserInfo userInfo) {
+        this.mUserInfo = userInfo;
+        setUserInfo();
+    }
 }

@@ -85,6 +85,7 @@ import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.entity.dto.TrendDto;
 import com.tftechsz.mine.mvp.IView.IMineDetailView;
 import com.tftechsz.mine.mvp.presenter.MineDetailPresenter;
+import com.tftechsz.mine.mvp.ui.fragment.MineAboutMeFragment;
 import com.tftechsz.mine.widget.pop.GuardPopWindow;
 import com.tftechsz.mine.widget.pop.MineDetailMorePopWindow;
 import com.youth.banner.Banner;
@@ -104,6 +105,8 @@ import razerdp.basepopup.BasePopupWindow;
 @Route(path = ARouterApi.ACTIVITY_MINE_DETAIL)
 public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDetailPresenter> implements IMineDetailView, View.OnClickListener {
     private final int MAX_SIZE = 9;
+
+    List<Fragment> fragments = new ArrayList<>();
 
     private Banner mBanner;
     private RecyclerView mRvPic;//相册
@@ -244,7 +247,6 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         entities.add(new TabEntity(firstTabName, R.drawable.bg_triangle_up_333, 0));
         entities.add(new TabEntity(getString(R.string.moment), R.drawable.bg_triangle_up_333, 0));
         mTabLayout.setTabData(entities);
-        List<Fragment> fragments = new ArrayList<>();
         fragments.add((Fragment) ARouter.getInstance()
                 .build(ARouterApi.FRAGMENT_USER_INFO)
                 .withSerializable("user_info", mUserInfo)
@@ -548,7 +550,15 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     @Override
     public void getUserInfoSuccess(UserInfo userInfo) {
         mUserInfo = userInfo;
-        setupTabAndViewPager();
+
+        if (fragments.size() > 0) {
+            Fragment fragment = fragments.get(0);
+            if (fragment instanceof MineAboutMeFragment && fragment.isAdded()) {
+                ((MineAboutMeFragment) fragment).refreshUserInfo(mUserInfo);
+            }
+        } else {
+            setupTabAndViewPager();
+        }
         if (mPageManager != null)
             mPageManager.showContent();
         if (mUserInfo.isDisable()) { //如果用户被禁用

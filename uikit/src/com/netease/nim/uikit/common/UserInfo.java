@@ -69,7 +69,7 @@ public class UserInfo implements Serializable {
     public int status;  // 1=正常;2=禁用;3=禁言;4=注销;5=禁用
     private int nobility_level; //贵族等级
     public PartyPlayMy play_party;//显示派对信息
-    public List<String> tag_list;
+    private List<String> tag_list;
 
     public List<BaseInfo> info;
     public Level levels;

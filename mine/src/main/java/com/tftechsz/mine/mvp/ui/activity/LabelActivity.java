@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.tftechsz.common.ARouterApi;
+import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
+import com.tftechsz.common.bus.RxBus;
+import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.LabelAdapter;
 import com.tftechsz.mine.entity.dto.LabelDto;
+import com.tftechsz.mine.entity.dto.LabelInfoDto;
 import com.tftechsz.mine.mvp.IView.ILabelView;
 import com.tftechsz.mine.mvp.presenter.LabelPresenter;
 
@@ -26,7 +30,7 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
     private TextView mTvSave, mTvChooseNum, mTvJump;
     private LabelAdapter mAdapter;
     private String mFrom;
-    private final StringBuilder tagIdSB = new StringBuilder();
+    private StringBuilder tagIdSB;
     private View ivBack;
 
     @Override
@@ -63,6 +67,7 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
         mAdapter = new LabelAdapter();
         mRvLabel.setAdapter(mAdapter);
         mAdapter.addOnSelectListener(() -> {
+            if (tagIdSB == null) tagIdSB = new StringBuilder();
             tagIdSB.setLength(0);
             selectedCount();
         });
@@ -72,11 +77,14 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
         int number = 0;
         for (int i = 0; i < mAdapter.getData().size(); i++) {
             for (int j = 0; j < mAdapter.getData().get(i).list.size(); j++) {
-                if (mAdapter.getData().get(i).list.get(j).is_select == 1) {
-                    if (tagIdSB.length() > 0) {
-                        tagIdSB.append(",");
+                LabelInfoDto dto = mAdapter.getData().get(i).list.get(j);
+                if (dto.is_select == 1) {
+                    if (tagIdSB != null) {
+                        if (tagIdSB.length() > 0) {
+                            tagIdSB.append(",");
+                        }
+                        tagIdSB.append(dto.id);
                     }
-                    tagIdSB.append(mAdapter.getData().get(i).list.get(j).id);
                     number += 1;
                 }
             }
@@ -98,6 +106,7 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
     @Override
     public void setTagSuccess(Boolean data) {
         toastTip("保存成功");
+        RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_UPDATE_USER_INFO));
         finishTag();
     }
 
@@ -114,10 +123,10 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
         if (id == R.id.toolbar_back_all) {
             finish();
         } else if (id == R.id.tv_save) {
-            if (tagIdSB.length() > 0) {
-                getP().setTag(tagIdSB.toString());
-            } else {
+            if (tagIdSB == null) {
                 finishTag();
+            } else {
+                getP().setTag(tagIdSB.toString());
             }
         } else if (id == R.id.toolbar_tv_menu) {
             finishTag();
