@@ -91,7 +91,7 @@ public class MinePhotoActivityNew extends BaseMvpActivity<IMinePhotoViewNew, Min
                                                 public void onResult(List<LocalMedia> result) {
                                                     if (result != null && result.size() > 0) {
                                                         mBtnUpload.setEnabled(true);
-                                                        p.updatePhoto(result.get(0));
+                                                        getP().updatePhoto(result.get(0));
                                                     } else {
                                                         toastTip(getString(R.string.picture_choose_fail));
                                                     }
