@@ -34,16 +34,6 @@ import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tftechsz.common.utils.CommonUtil;
-import com.tftechsz.im.R;
-import com.tftechsz.im.adapter.VoiceChatAdapter;
-import com.tftechsz.im.api.ChatApiService;
-import com.tftechsz.im.model.dto.VoiceChatDto;
-import com.tftechsz.im.model.dto.VoiceRoleCheckDto;
-import com.tftechsz.im.model.dto.VoiceRoleCheckNewDto;
-import com.tftechsz.im.widget.pop.EditVoiceNamePopWindow;
-import com.tftechsz.im.widget.pop.VoiceChatApplyPopWindow;
-import com.tftechsz.im.widget.pop.VoiceNoticePopWindow;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.bus.RxBus;
@@ -67,14 +57,25 @@ import com.tftechsz.common.nim.model.impl.NERTCVideoCallImpl;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.AnimationUtil;
 import com.tftechsz.common.utils.ClickUtil;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.CountBackUtils;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.NetworkUtil;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.CircleImageView;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
+import com.tftechsz.im.R;
+import com.tftechsz.im.adapter.VoiceChatAdapter;
+import com.tftechsz.im.api.ChatApiService;
+import com.tftechsz.im.model.dto.VoiceChatDto;
+import com.tftechsz.im.model.dto.VoiceRoleCheckDto;
+import com.tftechsz.im.model.dto.VoiceRoleCheckNewDto;
+import com.tftechsz.im.widget.pop.EditVoiceNamePopWindow;
+import com.tftechsz.im.widget.pop.VoiceChatApplyPopWindow;
+import com.tftechsz.im.widget.pop.VoiceNoticePopWindow;
 
 import java.util.List;
 
@@ -474,22 +475,29 @@ public class VoiceChatView extends LinearLayout implements View.OnClickListener,
             Utils.toast("您已经在麦上");
             return;
         }
-        mCompositeDisposable.add(new RxPermissions((FragmentActivity) getContext())
-                .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        , Manifest.permission.READ_EXTERNAL_STORAGE)
-                .subscribe(grant -> {
-                    if (grant) {
-                        mCompositeDisposable.add(chatApiService.joinRoom(seat == null ? 99 : seat.getIndex())
-                                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
-                                    @Override
-                                    public void onSuccess(BaseResponse<Boolean> response) {
+        FragmentActivity activity = (FragmentActivity) getContext();
+        final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        PermissionUtil.beforeCheckPermission(activity, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(activity)
+                        .request(permissions)
+                        .subscribe(grant -> {
+                            if (grant) {
+                                mCompositeDisposable.add(chatApiService.joinRoom(seat == null ? 99 : seat.getIndex())
+                                        .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
+                                            @Override
+                                            public void onSuccess(BaseResponse<Boolean> response) {
 
-                                    }
-                                }));
-                    } else {
-                        ToastUtil.showToast(BaseApplication.getInstance(), "请允许录音权限");
-                    }
-                }));
+                                            }
+                                        }));
+                            } else {
+                                PermissionUtil.showPermissionPop(activity);
+                            }
+                        }));
+            } else {
+                PermissionUtil.showPermissionPop(activity);
+            }
+        });
     }
 
 

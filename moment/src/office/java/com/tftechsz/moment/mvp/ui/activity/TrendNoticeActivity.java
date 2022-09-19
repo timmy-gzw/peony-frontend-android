@@ -34,6 +34,7 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.CircleBean;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ChoosePicUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.ScreenUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
@@ -255,14 +256,10 @@ public class TrendNoticeActivity extends BaseMvpActivity<INoticeView, INoticePre
                 mAdapter.addData(data);
             }
         }
-        if (size < mPageSize) {
-            //第一页如果不够一页就不显示没有更多数据布局
-            mSmartRefreshLayout.setEnableLoadMore(false);
-            //mAdapter.loadMoreEnd(false);
-        } else {
-            mSmartRefreshLayout.setEnableLoadMore(true);
-            //mAdapter.loadMoreComplete();
-        }
+        //第一页如果不够一页就不显示没有更多数据布局
+        //mAdapter.loadMoreEnd(false);
+        //mAdapter.loadMoreComplete();
+        mSmartRefreshLayout.setEnableLoadMore(size >= mPageSize);
     }
 
     @Override
@@ -302,16 +299,23 @@ public class TrendNoticeActivity extends BaseMvpActivity<INoticeView, INoticePre
     }
 
     private void showMediaSelector() {
-        mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
-                    } else {
-                        Utils.toast("请允许摄像头权限");
-                    }
-                })
-        );
+        final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+                            } else {
+                                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
+                            }
+                        })
+                );
+            } else {
+                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
+            }
+        });
     }
 
     private boolean isShouldHideInput(View v, MotionEvent event) {

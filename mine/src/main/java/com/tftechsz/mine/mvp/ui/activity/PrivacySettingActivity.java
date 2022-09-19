@@ -18,6 +18,7 @@ import com.tftechsz.common.event.RecommendChangeEvent;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
 import com.tftechsz.common.widget.pop.OpenVipWindow;
 import com.tftechsz.mine.R;
@@ -102,15 +103,22 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
             }
         } else if (id == R.id.cl_location) {   //位置信息
             if (mData != null && mData.open_hidden_location == 1) {
-                mCompositeDisposable.add(new RxPermissions(PrivacySettingActivity.this)
-                        .request(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-                        .subscribe(aBoolean -> {
-                            if (aBoolean) {
-                                getP().setPrivilege(5, mSwLocation.isChecked() ? 0 : 1);
-                            } else {
-                                getP().showPop();
-                            }
-                        }));
+                final String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+                PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+                    if (agreeToRequest) {
+                        mCompositeDisposable.add(new RxPermissions(PrivacySettingActivity.this)
+                                .request(permissions)
+                                .subscribe(aBoolean -> {
+                                    if (aBoolean) {
+                                        getP().setPrivilege(5, mSwLocation.isChecked() ? 0 : 1);
+                                    } else {
+                                        getP().showPop();
+                                    }
+                                }));
+                    } else {
+                        getP().showPop();
+                    }
+                });
             } else {
                 getP().setPrivilege(5, mSwLocation.isChecked() ? 0 : 1);
             }

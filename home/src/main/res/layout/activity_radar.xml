@@ -99,7 +99,7 @@
     <com.tftechsz.home.widget.BarrageView.BarrageView
         android:id="@+id/barrage_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_100"
+        android:layout_height="0dp"
         app:allow_repeat="true"
         app:layout_constraintBottom_toTopOf="@id/radar_view"
         app:layout_constraintTop_toBottomOf="@id/toolbar_back_all"

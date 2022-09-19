@@ -29,6 +29,7 @@ import java.util.Set;
  */
 
 public class BarrageView extends RelativeLayout {
+    private static final String TAG = BarrageView.class.getSimpleName();
     private Set<Integer> existMarginValues = new HashSet<>();
     private int linesCount;
 
@@ -116,8 +117,8 @@ public class BarrageView extends RelativeLayout {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            checkBarrage();
             sendEmptyMessageDelayed(0, INTERVAL);
+            checkBarrage();
         }
     };
 
@@ -147,6 +148,10 @@ public class BarrageView extends RelativeLayout {
 
         int leftMargin = getRight() - getLeft() - getPaddingLeft();
         int verticalMargin = getRandomTopMargin();
+        if(verticalMargin == -1){
+            mHandler.removeMessages(0);
+            return;
+        }
         textView.setTag(verticalMargin);
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams
                 .WRAP_CONTENT);
@@ -184,7 +189,8 @@ public class BarrageView extends RelativeLayout {
         if (linesCount == 0) {
             linesCount = validHeightSpace / lineHeight;
             if (linesCount == 0) {
-                throw new RuntimeException("Not enough space to show text.");
+                Log.e(TAG, "Not enough space to show text");
+                return -1;
             }
         }
         while (true) {

@@ -26,6 +26,7 @@ import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.NumIndicator;
@@ -163,28 +164,35 @@ public class PublishMomentGuidePop extends BaseBottomPop implements ITrendView {
     }
 
     private void showMediaSelector() {
-        mCompositeDisposable.add(new RxPermissions(mActivity)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, selectList, new OnResultCallbackListener<LocalMedia>() {
-                            @Override
-                            public void onResult(List<LocalMedia> result) {
-                                selectList.clear();
-                                selectList.addAll(result);
-                                adapter.notifyDataSetChanged();
-                                checkPublishButtonEnable();
-                            }
+        String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(mActivity)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, selectList, new OnResultCallbackListener<LocalMedia>() {
+                                    @Override
+                                    public void onResult(List<LocalMedia> result) {
+                                        selectList.clear();
+                                        selectList.addAll(result);
+                                        adapter.notifyDataSetChanged();
+                                        checkPublishButtonEnable();
+                                    }
 
-                            @Override
-                            public void onCancel() {
+                                    @Override
+                                    public void onCancel() {
+                                    }
+                                });
+                            } else {
+                                PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
                             }
-                        });
-                    } else {
-                        Utils.toast("请允许摄像头权限");
-                    }
-                })
-        );
+                        })
+                );
+            } else {
+                PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
+            }
+        });
     }
 
     //上传到后端PHP

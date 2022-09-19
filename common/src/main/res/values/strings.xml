@@ -27,6 +27,8 @@
     <string name="dkplayer_error_message">视频源出了点问题，请稍后重试</string>
     <string name="chat_open_camera_permission">未获取此设备摄像头或麦克风权限,音视频功能无法正常使用。打开应用设置页以修改应用权限</string>
     <string name="chat_open_voice_permission">未获取此设备麦克风权限,录音功能无法正常使用。打开应用设置页以修改应用权限</string>
+    <string name="chat_open_storage_camera_permission">未获取存储和拍照权限,视频或相册功能无法正常使用。打开应用设置页以修改应用权限</string>
+    <string name="chat_open_storage_permission">未获取存储权限,相册功能无法正常使用。打开应用设置页以修改应用权限</string>
     <string name="video_transitions">video_transitions</string>
     <string name="transition_aac_add">transition_aac_add</string>
     <string name="transition_aac_recy">transition_aac_recy</string>
@@ -51,7 +53,7 @@
     <string name="not_enough_backpacks">背包礼物数量不足</string>
     <string name="alipay_type">支付宝支付</string>
 
-    <string name="privacy_short_desc">请您充分阅读并理解《用户服务协议》及《用户隐私政策》。 \n1、在您浏览使用时，我们会收集您的设备信息、操作日志等用于平台安全风控，并申请存储权限用于下载及缓存。 \n2、在您使用上传、分享等服务时，我们需要获取您设备的摄像头、麦克风、相册、地理位置、存储空间等权限，但该等权限均需经您明示授权才会为实现功能或服务时使用。 \n您可以在相关页面访问、修改、删除您的个人信息或管理您的授权。</string>
+    <string name="privacy_short_desc">请您充分阅读并理解《用户服务协议》及《用户隐私政策》。\n1.为保障平台安全和运营安全，我们会申请系统权限收集手机号码、IMEI、IMSI、应用列表等设备信息用于平台安全风控。\n2.通讯录、GPS、摄像头、麦克风、相册等敏感权限均不会默认开启，只有经过明示授权才会为实现功能或服务时使用，你均可以拒绝且不影响您继续使用%s。\n3.我们尊重您的选择权，您可以在相关页面访问、修改、删除您的个人信息或管理您的授权。</string>
 
     <string name="accosted">已搭讪</string>
     <string name="accost">搭讪</string>
@@ -84,4 +86,11 @@
     <string name="input_gift_btn_text">确定</string>
 
     <string name="digits_character" translatable="false">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="permission_location">位置权限：为了基于地理位置向你推荐用户/查看附近动态，请授权我们获取位置权限</string>
+    <string name="permission_storage">存储权限：上传手机图片，保存文件至手机，发送图片、语音或者视频时，需要开启存储权限以便上传和存储图片/视频。</string>
+    <string name="permission_camera">相机权限：在向您提供头像设置，身份认证，视频通话，拍摄图片或者视频时，您可以开启相机权限以便拍摄图片和录制视频。</string>
+    <string name="permission_record">麦克风权限：在提供语音或视频通话时，我们需要获取麦克风权限，您可以开启麦克风权限以便语音/视频通话时使用。</string>
+    <string name="permission_manager_all_file">所有文件管理：需要获取所有文件的管理权限，以便在应用中正常上传/发送手机图片</string>
+
+    <string name="youth_mode_short_desc">为保护青少年健康成长，特推出青少年模式。该模式下部分功能无法正常使用，请监护人主动选择，并设置监护密码。</string>
 </resources>

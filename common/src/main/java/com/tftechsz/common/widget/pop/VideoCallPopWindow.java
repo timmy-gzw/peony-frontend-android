@@ -44,8 +44,8 @@ public class VideoCallPopWindow extends BasePopupWindow implements View.OnClickL
     private final UserProviderService service;
     private RechargeBeforePop beforePop;
     //触发场景
-    private int scene;
-    private String userId;
+    private final int scene;
+    private final String userId;
 
     public VideoCallPopWindow(Activity context, int scene, String userId) {
         super(context);
@@ -206,17 +206,29 @@ public class VideoCallPopWindow extends BasePopupWindow implements View.OnClickL
     }
 
     private void initPermissions(int type) {
-        mCompositeDisposable.add(new RxPermissions((FragmentActivity) mContext)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        if (!ClickUtil.canOperate()) return;
-                        listener.chatType(type);
-                    } else {
-                        PermissionUtil.showPermissionPop(mContext);
-                    }
-                }));
+        String[] permissions;
+        if (type == 1) {
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO};
+        } else {
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        }
+        FragmentActivity activity = (FragmentActivity) mContext;
+        PermissionUtil.beforeCheckPermission(activity, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(activity)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                if (!ClickUtil.canOperate()) return;
+                                listener.chatType(type);
+                            } else {
+                                PermissionUtil.showPermissionPop(mContext);
+                            }
+                        }));
+            } else {
+                PermissionUtil.showPermissionPop(mContext);
+            }
+        });
     }
 
 

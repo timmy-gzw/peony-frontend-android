@@ -69,9 +69,12 @@ public class GlobalDialogManager {
     public synchronized void dismiss() {
         try {
             if (mLoadingDialog != null && mIsShow && manager != null) {
-                mLoadingDialog.dismissAllowingStateLoss();
+                //todo mLoadingDialog.getFragmentManager() 可能为空
+                if(mLoadingDialog.getFragmentManager() != null){
+                    mLoadingDialog.dismissAllowingStateLoss();
+                }
                 mIsShow = false;
-                //mLoadingDialog = null;
+                mLoadingDialog = null;
                 //INSTANCE = null;
             }
         } catch (Exception e) {

@@ -569,23 +569,6 @@ public interface MineApiService {
     @POST("shouxinyi/alipay/create")
     Flowable<BaseResponse<String>> SXYalipay(@Field("type_id") int type_id, @Field("from_type") String from_type);
 
-
-    /**
-     * 提现到支付宝
-     *
-     * @return
-     */
-    @POST("convert/rmb")
-    Flowable<BaseResponse<String>> withdraw(@Body WithdrawReq withdraw);
-
-
-    /**
-     * 用户提现方式获取
-     */
-    @GET("info/withdraw")
-    Flowable<BaseResponse<WithdrawReq.Withdraw>> withdrawWay();
-
-
     /**
      * 微信支付
      *

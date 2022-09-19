@@ -103,6 +103,7 @@ import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CountBackUtils;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
@@ -1049,41 +1050,53 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 }
             });
         }
-        mCompositeDisposable.add(new RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                .subscribe(aBoolean -> {
-                    if (!aBoolean) {
-                        getP().buriedPoint("noPermission", "permissionCheck", callId, String.valueOf(service.getUserId()));
-                        Utils.runOnUiThreadDelayed(() -> getP().showPermission(VideoCallActivity.this), 500);
-                    } else {
-                        NERtcVideoConfig videoConfig = new NERtcVideoConfig();
-                        videoConfig.frontCamera = true;
-                        videoConfig.frameRate = NERtcVideoConfig.NERtcVideoFrameRate.FRAME_RATE_FPS_30;
-                        videoConfig.minFramerate = 25;
-                        videoConfig.videoProfile = NERtcConstants.VideoProfile.HD720P;
-                        videoConfig.videoCropMode = RTCVideoCropMode.kRTCVideoCropMode16x9;
-                        NERtc.getInstance().setLocalVideoConfig(videoConfig);
-                        if (mChannelType == 2) {  //视频
-                            int code = NERtcEx.getInstance().startVideoPreview();
-                            NERtc.getInstance().enableLocalVideo(true);
-                            if (code != 0) { //失败
-                                NERtcEx.getInstance().stopVideoPreview();
-                                code = NERtcEx.getInstance().startVideoPreview();
+        String[] permissions;
+        if (mChannelType == 1) {//语音
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO};
+        } else {
+            permissions = new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
+        }
+        PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions(this)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (!aBoolean) {
+                                getP().buriedPoint("noPermission", "permissionCheck", callId, String.valueOf(service.getUserId()));
+                                Utils.runOnUiThreadDelayed(() -> getP().showPermission(VideoCallActivity.this), 500);
+                            } else {
+                                NERtcVideoConfig videoConfig = new NERtcVideoConfig();
+                                videoConfig.frontCamera = true;
+                                videoConfig.frameRate = NERtcVideoConfig.NERtcVideoFrameRate.FRAME_RATE_FPS_30;
+                                videoConfig.minFramerate = 25;
+                                videoConfig.videoProfile = NERtcConstants.VideoProfile.HD720P;
+                                videoConfig.videoCropMode = RTCVideoCropMode.kRTCVideoCropMode16x9;
+                                NERtc.getInstance().setLocalVideoConfig(videoConfig);
+                                if (mChannelType == 2) {  //视频
+                                    int code = NERtcEx.getInstance().startVideoPreview();
+                                    NERtc.getInstance().enableLocalVideo(true);
+                                    if (code != 0) { //失败
+                                        NERtcEx.getInstance().stopVideoPreview();
+                                        code = NERtcEx.getInstance().startVideoPreview();
+                                    }
+                                    if (code != 0) {
+                                        toastTip("相机被其它应用占用,请退出应用进入系统相机重启尝试");
+                                    }
+                                    Log.e("----neRtcVideoFrame-00-", code + "");
+                                    if (nertcVideoCall != null && videoView != null) {
+                                        nertcVideoCall.setupLocalView(videoView);
+                                    }
+                                    setVideoCallback();
+                                }
+                                NERtcEx.getInstance().adjustRecordingSignalVolume(200);
+                                NERtcEx.getInstance().adjustPlaybackSignalVolume(200);
                             }
-                            if (code != 0) {
-                                toastTip("相机被其它应用占用,请退出应用进入系统相机重启尝试");
-                            }
-                            Log.e("----neRtcVideoFrame-00-", code + "");
-                            if (nertcVideoCall != null && videoView != null) {
-                                nertcVideoCall.setupLocalView(videoView);
-                            }
-                            setVideoCallback();
-                        }
-                        NERtcEx.getInstance().adjustRecordingSignalVolume(200);
-                        NERtcEx.getInstance().adjustPlaybackSignalVolume(200);
-                    }
-                }));
+                        }));
+            } else {
+                getP().buriedPoint("noPermission", "permissionCheck", callId, String.valueOf(service.getUserId()));
+                Utils.runOnUiThreadDelayed(() -> getP().showPermission(VideoCallActivity.this), 500);
+            }
+        });
         LogUtil.e(TAG, isOnLine + "");
         if (mCallDir == 0 && isOnLine == 0) {
             toastTip("对方不在线");
@@ -1709,7 +1722,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
                 } else {
                     viewVideoView.setVisibility(View.GONE);
                 }
-            }else {
+            } else {
                 if (isChangeVideo) {
                     viewVideoView.setVisibility(View.GONE);
                 } else {

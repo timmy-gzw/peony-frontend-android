@@ -94,6 +94,11 @@ public class ChoosePicUtils {
 
     public static void picMultiple(Activity activity, int size, int requestCode, List<LocalMedia> selectList
             , boolean isSelVideo) {
+        picMultiple(activity, size, requestCode, selectList, isSelVideo,true);
+    }
+
+    public static void picMultiple(Activity activity, int size, int requestCode, List<LocalMedia> selectList
+            , boolean isSelVideo,boolean isCamera) {
         PictureSelector.create(activity)
                 .openGallery(isSelVideo ? /*PictureMimeType.ofImage() &*/ PictureMimeType.ofAll() : PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频
                 .imageEngine(GlideEngine.createGlideEngine()) // 外部传入图片加载引擎，必传项
@@ -120,7 +125,7 @@ public class ChoosePicUtils {
                     //Utils.playVideo(activity, localMedia.getRealPath());
                 })
                 .isEnablePreviewAudio(false) // 是否可播放音频
-                .isCamera(true)// 是否显示拍照按钮
+                .isCamera(isCamera)// 是否显示拍照按钮
                 .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
                 //.isCompress(true)// 是否压缩
                 //.compressFocusAlpha(true)//压缩后是否保持图片的透明通道
@@ -171,4 +176,5 @@ public class ChoosePicUtils {
                 .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
                 .forResult(listener);//结果回调onActivityResult code
     }
+
 }

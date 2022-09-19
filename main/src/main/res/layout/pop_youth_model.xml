@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_10"
-        android:text="为保护青少年健康成长，特推出青少年模式。该模式下部分功能无法正常使用，请监护人主动选择，并设置监护密码。"
+        android:text="@string/youth_mode_short_desc"
         android:textColor="@color/color_normal"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold" />

@@ -86,7 +86,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
     private static boolean firstEnter = true; // 是否首次进入
     private int requestCount = 0;
     private int umLinkCount = 0;
-
+    private CustomPopWindow mPrePopWindow;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -521,8 +521,9 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             loadMoreData();
         } else {
-            CustomPopWindow popWindow = new CustomPopWindow(this);
-            popWindow.setContent(getString(R.string.tip_read_phone_state))
+            if(mPrePopWindow == null)
+                mPrePopWindow = new CustomPopWindow(this);
+            mPrePopWindow.setContent(getString(R.string.tip_read_phone_state))
                     .setIsCancel(false)
                     .setRightButton(getString(R.string.t_open))
                     .addOnClickListener(new CustomPopWindow.OnSelectListener() {
@@ -538,7 +539,7 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
                                     .subscribe(aBoolean -> loadMoreData()));
                         }
                     });
-            popWindow.showPopupWindow();
+            mPrePopWindow.showPopupWindow();
         }
     }
 

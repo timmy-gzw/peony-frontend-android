@@ -34,6 +34,7 @@ import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.entity.CircleBean;
 import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ChoosePicUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.ScreenUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
@@ -302,16 +303,21 @@ public class TrendNoticeActivity extends BaseMvpActivity<INoticeView, INoticePre
     }
 
     private void showMediaSelector() {
-        mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
-                    } else {
-                        Utils.toast("请允许摄像头权限");
-                    }
-                })
-        );
+        final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+                            } else {
+                                Utils.toast("请允许摄像头权限");
+                            }
+                        })
+                );
+            }
+        });
     }
 
     private boolean isShouldHideInput(View v, MotionEvent event) {

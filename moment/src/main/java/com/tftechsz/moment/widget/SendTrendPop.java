@@ -13,6 +13,7 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.constant.Interfaces;
 import com.tftechsz.common.utils.ChoosePicUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.moment.R;
 
@@ -25,10 +26,10 @@ import razerdp.basepopup.BasePopupWindow;
  */
 public class SendTrendPop extends BasePopupWindow {
     private final Activity mActivity;
-    private boolean isTop;
+    private final boolean isTop;
     private View mNull_view;
     private LinearLayout mRoot;
-    private CompositeDisposable mCompositeDisposable;
+    private final CompositeDisposable mCompositeDisposable;
 
     public SendTrendPop(Activity mActivity, boolean isTop) {
         super(mActivity);
@@ -44,30 +45,45 @@ public class SendTrendPop extends BasePopupWindow {
         mNull_view.setOnClickListener(v -> dismiss());
         mRoot.setBackgroundResource(isTop ? R.mipmap.pop_send_tred_bg_top : R.mipmap.pop_send_tred_bg_bot);
         findViewById(R.id.type_pic).setOnClickListener(v -> {
-            mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
-                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            dismiss();
-                            SPUtils.getInstance().put(Interfaces.SP_SEL_VIDEO, false);
-                            ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST);
-                        } else {
-                            Utils.toast("请允许摄像头权限");
-                        }
-                    }));
+            String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
+                            .request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    dismiss();
+                                    SPUtils.getInstance().put(Interfaces.SP_SEL_VIDEO, false);
+                                    ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST);
+                                } else {
+                                    PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
+                                }
+                            }));
+                } else {
+                    PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
+                }
+            });
         });
         findViewById(R.id.type_mp4).setOnClickListener(v -> {
-            mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
-                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            dismiss();
-                            SPUtils.getInstance().put(Interfaces.SP_SEL_VIDEO, true);
-                            ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
-                        } else {
-                            Utils.toast("请允许摄像头权限");
-                        }
-                    }));
+            String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
+                            .request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    dismiss();
+                                    SPUtils.getInstance().put(Interfaces.SP_SEL_VIDEO, true);
+                                    ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+                                } else {
+                                    PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
+                                }
+                            }));
+                } else {
+                    PermissionUtil.showPermissionPop(mActivity, mActivity.getString(R.string.chat_open_storage_camera_permission));
+                }
+
+            });
         });
     }
 

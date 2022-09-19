@@ -32,7 +32,7 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
         helper.setText(R.id.content, item.title);
         helper.setVisible(R.id.tv_under_review, item.is_show == 0);
         helper.setText(R.id.tv_voice_time, item.time + "\"");
-        ivVoice.setBackgroundResource(R.drawable.nim_audio_animation_list_left_3);
+        ivVoice.setImageResource(R.drawable.nim_audio_animation_list_left_3);
         ivVoice.setColorFilter(Color.WHITE);
         int currentBubbleWidth = calculateBubbleWidth(item.time);
         ViewGroup.LayoutParams layoutParams = llVoice.getLayoutParams();
@@ -72,7 +72,7 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
     }
 
     public void play(ImageView animationView) {
-        animationView.setBackgroundResource(R.drawable.nim_audio_animation_list_left);
+        animationView.setImageResource(R.drawable.nim_audio_animation_list_left);
         animationView.setColorFilter(Color.WHITE);
         if (animationView.getBackground() instanceof AnimationDrawable) {
             AnimationDrawable animation = (AnimationDrawable) animationView.getBackground();
@@ -84,7 +84,7 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
         if (animationView.getBackground() instanceof AnimationDrawable) {
             AnimationDrawable animation = (AnimationDrawable) animationView.getBackground();
             animation.stop();
-            animationView.setBackgroundResource(R.drawable.nim_audio_animation_list_left_3);
+            animationView.setImageResource(R.drawable.nim_audio_animation_list_left_3);
             animationView.setColorFilter(Color.WHITE);
         }
     }

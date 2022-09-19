@@ -12,6 +12,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.other.GlobalDialogManager;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.mvp.presenter.VoiceSignPresenter;
 
@@ -56,24 +57,31 @@ public class VoiceSignActivity extends BaseVoiceRecordActivity {
         recordUpload.setOnClickListener(this);
         recordAgain.setOnClickListener(this);
         recordIcon.setOnTouchListener((v, event) -> {
-            mCompositeDisposable.add(new RxPermissions(VoiceSignActivity.this)
-                    .request(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                            , Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .subscribe(grant -> {
-                        if (grant) {
-                            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                                touched = true;
-                                initStartRecord();
-                            } else if (event.getAction() == MotionEvent.ACTION_CANCEL
-                                    || event.getAction() == MotionEvent.ACTION_UP) {
-                                if (touched) {
-                                    endRecord(5);
+            final String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            PermissionUtil.beforeCheckPermission(this,event, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions(VoiceSignActivity.this)
+                            .request(permissions)
+                            .subscribe(grant -> {
+                                if (grant) {
+                                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                                        touched = true;
+                                        initStartRecord();
+                                    } else if (event.getAction() == MotionEvent.ACTION_CANCEL
+                                            || event.getAction() == MotionEvent.ACTION_UP) {
+                                        if (touched) {
+                                            endRecord(5);
+                                        }
+                                    }
+                                } else {
+                                    toastTip("请允许录音权限");
                                 }
-                            }
-                        } else {
-                            toastTip("请允许录音权限");
-                        }
-                    }));
+                            }));
+
+                } else {
+                    toastTip("请允许录音权限");
+                }
+            });
             return true;
         });
         mAudioDir = new File(getCacheDir(), AUDIO_DIR_NAME);

@@ -1,12 +1,11 @@
 package com.tftechsz.moment.mvp.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -27,6 +26,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.bus.RxBus;
@@ -37,6 +37,7 @@ import com.tftechsz.common.event.EventBusConstant;
 import com.tftechsz.common.other.GlobalDialogManager;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.GlideUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.NumIndicator;
 import com.tftechsz.moment.R;
@@ -163,12 +164,26 @@ public class SendTrendActivity extends BaseMvpActivity<ITrendView, TrendPresente
             if (Environment.isExternalStorageManager()) {
                 ChoosePicUtils.picMultiple(SendTrendActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, selectList, true);
             } else {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                intent.setData(Uri.parse("package:" + getPackageName()));
-                startActivityForResult(intent, REQUEST_CODE);
+                PermissionUtil.toAllFilePermissionSetting(this, REQUEST_CODE);
             }
         } else {
-            ChoosePicUtils.picMultiple(SendTrendActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, selectList, true);
+            final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
+                if (agreeToRequest) {
+                    mCompositeDisposable.add(new RxPermissions(this)
+                            .request(permissions)
+                            .subscribe(aBoolean -> {
+                                if (aBoolean) {
+                                    ChoosePicUtils.picMultiple(SendTrendActivity.this, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, selectList, true);
+                                } else {
+                                    PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
+                                }
+                            })
+                    );
+                } else {
+                    PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
+                }
+            });
         }
     };
 

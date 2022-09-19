@@ -83,6 +83,7 @@ import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.UpdateDialog;
@@ -473,7 +474,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         };
         bdLocationManager = new BDLocationManager();
         bdLocationManager.addListener(MainActivity.this);
-        requestPermissions();
+//        requestPermissions();
         Intent intent = new Intent(BaseApplication.getInstance(), CallService.class);
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
@@ -554,21 +555,28 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         });
     }
 
-
-
+    boolean isShowPopup = false;
 
     public void showYouthModelPop() {
+        if (!isShowPopup) {
+            isShowPopup = true;
+            requestPermissions();
+        }
+    }
+
+
+    private void nextShowYouthModelPop() {
         boolean youthPop = MMKVUtils.getInstance().decodeBoolean(Constants.YOUTH_MODE_POP);
-        if(youthPop){
+        if (youthPop) {
             showSignInPop();
-        }else {
+        } else {
             if (youthModelPop == null)
                 youthModelPop = new YouthModelPop(this);
             youthModelPop.showPopupWindow();
             youthModelPop.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
-                    MMKVUtils.getInstance().encode(Constants.YOUTH_MODE_POP,true);
+                    MMKVUtils.getInstance().encode(Constants.YOUTH_MODE_POP, true);
                     showSignInPop();
                 }
             });
@@ -729,26 +737,38 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         long time = MMKVUtils.getInstance().decodeLong(Constants.LOCATION_CURRENT_TIME);
         if (srl && !TimeUtils.isToday(new Date(time))) {
             MMKVUtils.getInstance().encode(Constants.LOCATION_CURRENT_TIME, System.currentTimeMillis());
-            mCompositeDisposable.add(new RxPermissions(MainActivity.this)
-                    .requestEach(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_NETWORK_STATE)
-                    .subscribe(new Consumer<Permission>() {
-                        @Override
-                        public void accept(Permission permission) {
-                            if (permission.granted) {
-                                if (permission.name.equals(Manifest.permission.ACCESS_FINE_LOCATION) || permission.name.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                                    bdLocationManager.initGPS();
-                                    bdLocationManager.startLoc();
-                                }
-                            } else {
-                                MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_LATITUDE);
-                                MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_LONGITUDE);
-                                MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_CITY);
-                                MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_PROVINCE);
-                                getP().updateLocationReq("open");
-                            }
-                        }
-                    }));
+            final String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE};
+            PermissionUtil.beforeCheckPermission(this, permissions, new PermissionUtil.OnShowPermissionPopListener() {
+                @Override
+                public void onShowPermissionPop(boolean agreeToRequest) {
+                    if (agreeToRequest) {
+                        mCompositeDisposable.add(new RxPermissions(MainActivity.this)
+                                .requestEach(permissions)
+                                .subscribe(new Consumer<Permission>() {
+                                    @Override
+                                    public void accept(Permission permission) {
+                                        if (permission.granted) {
+                                            if (permission.name.equals(Manifest.permission.ACCESS_FINE_LOCATION) || permission.name.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                                                bdLocationManager.initGPS();
+                                                bdLocationManager.startLoc();
+                                            }
+                                        } else {
+                                            MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_LATITUDE);
+                                            MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_LONGITUDE);
+                                            MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_CITY);
+                                            MMKVUtils.getInstance().removeKey(service.getUserId() + Constants.LOCATION_PROVINCE);
+                                            getP().updateLocationReq("open");
+                                        }
+                                        nextShowYouthModelPop();
+                                    }
+                                }));
+                    } else {
+                        nextShowYouthModelPop();
+                    }
+                }
+            });
+        } else {
+            nextShowYouthModelPop();
         }
     }
 

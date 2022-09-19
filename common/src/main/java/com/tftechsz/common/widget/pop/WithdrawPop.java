@@ -25,6 +25,7 @@ import com.tftechsz.common.utils.AddSpaceTextWatcher;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CountBackUtils;
 import com.tftechsz.common.utils.MyInputTextBoldFilter;
+import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.utils.Utils;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -38,6 +39,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, MyInputTextBoldFilter.TextChangedCallBack {
 
     UserProviderService service;
+    public PublicService userService;
     private PopWithdrawBindBinding mBind;
     private CompositeDisposable mCompositeDisposable;
     private CountBackUtils countBackUtils;
@@ -67,6 +69,7 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
 
     private void initUI() {
         countBackUtils = new CountBackUtils();
+        userService = RetrofitManager.getInstance().createUserApi(PublicService.class);
         service = ARouter.getInstance().navigation(UserProviderService.class);
         mCompositeDisposable = new CompositeDisposable();
 
@@ -76,7 +79,7 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
         ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) mBind.scrollView.getLayoutParams();
         lp.matchConstraintMaxHeight = ScreenUtils.getScreenHeight() / 3;
         mBind.scrollView.setLayoutParams(lp);
-
+        withdrawWay();
     }
 
     private void initListener() {
@@ -115,6 +118,30 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
     }
 
     /**
+     * 提现方式获取
+     */
+    public void withdrawWay() {
+        mCompositeDisposable.add(userService.withdrawWay(1).compose(RxUtil.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<WithdrawReq.Withdraw>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<WithdrawReq.Withdraw> response) {
+                        if (response.getData() != null) {
+                            mBind.etName.setText(response.getData().name);
+                            mBind.etPhone.setText(response.getData().phone);
+                            mBind.etNumber.setText(response.getData().account);
+                            mBind.etCard.setText(response.getData().identity);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFail(int code, String msg) {
+                        super.onFail(code, msg);
+                    }
+                }));
+    }
+
+    /**
      * 下一步检测短信
      */
     private void checkPhoneCode() {
@@ -128,7 +155,7 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
                     @Override
                     public void onSuccess(BaseResponse<Boolean> stringBaseResponse) {
                         mBind.setIsNext(true);
-                        mBind.setIsClick(false);
+                        textChange();
                         Utils.setFocus(mBind.etName);
                     }
                 }));

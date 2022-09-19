@@ -2,6 +2,7 @@ package com.tftechsz.mine.mvp.presenter;
 
 import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.http.BaseResponse;
+import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.mine.api.MineApiService;
@@ -10,12 +11,12 @@ import com.tftechsz.mine.mvp.IView.IWithdrawView;
 
 public class WithdrawPresenter extends BasePresenter<IWithdrawView> {
 
-    public MineApiService service;
-    public MineApiService userService;
+    public PublicService service;
+    public PublicService userService;
 
     public WithdrawPresenter() {
-        service = RetrofitManager.getInstance().createExchApi(MineApiService.class);
-        userService = RetrofitManager.getInstance().createUserApi(MineApiService.class);
+        service = RetrofitManager.getInstance().createExchApi(PublicService.class);
+        userService = RetrofitManager.getInstance().createUserApi(PublicService.class);
     }
 
 
@@ -23,7 +24,7 @@ public class WithdrawPresenter extends BasePresenter<IWithdrawView> {
      * 提现方式获取
      */
     public void withdrawWay() {
-        addNet(userService.withdrawWay().compose(applySchedulers())
+        addNet(userService.withdrawWay(0).compose(applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<WithdrawReq.Withdraw>>(getView()) {
                     @Override
                     public void onSuccess(BaseResponse<WithdrawReq.Withdraw> response) {

@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.KeyboardUtils;
@@ -24,9 +27,6 @@ import com.tftechsz.common.utils.PermissionUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.databinding.ActSelfCheckBinding;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * 包 名 : com.tftechsz.mine.mvp.ui.activity
@@ -106,15 +106,22 @@ public class SelfCheckActivity extends BaseMvpActivity implements View.OnClickLi
                         public void onSuccess(BaseResponse<RealCheckDto> response) {
                             if (response.getData() != null) {
                                 if (response.getData().pass) {//身份证验证成功, 进行活体
-                                    mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity).request(Manifest.permission.CAMERA)
-                                            .subscribe(aBoolean -> {
-                                                if (aBoolean) {
-                                                    ARouterUtils.toFaceCheck(true);
-                                                    finish();
-                                                } else {
-                                                    PermissionUtil.showPermissionPop(mActivity);
-                                                }
-                                            }));
+                                    final String[] permissions = {Manifest.permission.CAMERA};
+                                    PermissionUtil.beforeCheckPermission(SelfCheckActivity.this, permissions, agreeToRequest -> {
+                                        if (agreeToRequest) {
+                                            mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity).request(permissions)
+                                                    .subscribe(aBoolean -> {
+                                                        if (aBoolean) {
+                                                            ARouterUtils.toFaceCheck(true);
+                                                            finish();
+                                                        } else {
+                                                            PermissionUtil.showPermissionPop(mActivity);
+                                                        }
+                                                    }));
+                                        } else {
+                                            PermissionUtil.showPermissionPop(mActivity);
+                                        }
+                                    });
                                     return;
                                 }
                                 toastTip(response.getData().msg);

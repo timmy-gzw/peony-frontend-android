@@ -196,7 +196,7 @@ public class CommonUtil {
      * @return
      */
     public static String getWeChatAppId(ConfigInfo configInfo) {
-        String appId = "";
+        String appId = Constants.WX_APP_ID;
         if (null != configInfo && null != configInfo.api && null != configInfo.api.wechat) {
             appId = configInfo.api.wechat.appid;
         }
@@ -536,14 +536,21 @@ public class CommonUtil {
                 //Fixme 美颜设置权限申请优化
                 if (context instanceof FragmentActivity) {
                     FragmentActivity activity = (FragmentActivity) context;
-                    new RxPermissions(activity).request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-                            .subscribe(aBoolean -> {
-                                if (aBoolean) {
-                                    ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
-                                } else {
-                                    PermissionUtil.showPermissionPop(activity);
-                                }
-                            });
+                    String[] permissions = {Manifest.permission.CAMERA};
+                    PermissionUtil.beforeCheckPermission(activity, permissions, agreeToRequest -> {
+                        if (agreeToRequest) {
+                            new RxPermissions(activity).request(permissions)
+                                    .subscribe(aBoolean -> {
+                                        if (aBoolean) {
+                                            ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
+                                        } else {
+                                            PermissionUtil.showPermissionPop(activity);
+                                        }
+                                    });
+                        } else {
+                            PermissionUtil.showPermissionPop(activity);
+                        }
+                    });
                 } else {
                     ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_FACIAL_SETTING);
                 }

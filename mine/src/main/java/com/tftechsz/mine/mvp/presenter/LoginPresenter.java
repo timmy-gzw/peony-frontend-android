@@ -11,6 +11,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.google.gson.Gson;
 import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.util.MD5Util;
 import com.netease.nim.uikit.common.util.log.LogUtil;
@@ -89,7 +90,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         configService = RetrofitManager.getInstance().createApi(MineApiService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? Constants.HOST_TEST : url : Constants.HOST);
         publicService = RetrofitManager.getInstance().createApi(PublicService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? Constants.HOST_TEST : url : Constants.HOST);
         userService = ARouter.getInstance().navigation(UserProviderService.class);
-        regToWx();
     }
 
     /**
@@ -100,6 +100,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
             ToastUtil.showToast(context, "手机未安装微信");
             return;
         }
+        regToWx();
         SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
         req.state = "none";
@@ -107,10 +108,12 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     }
 
     public void regToWx() {
+        ConfigInfo configInfo = userService.getConfigInfo();
+        String weChatAppId = CommonUtil.getWeChatAppId(configInfo);
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
-        api = WXAPIFactory.createWXAPI(BaseApplication.getInstance(), Constants.WX_APP_ID);
+        api = WXAPIFactory.createWXAPI(BaseApplication.getInstance(), weChatAppId);
         // 将应用的appId注册到微信
-        api.registerApp(Constants.WX_APP_ID);
+        api.registerApp(weChatAppId);
     }
 
     /**
@@ -421,7 +424,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
             }
             if (null == getView()) return;
             String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
-            if(!TextUtils.isEmpty(pass)){
+            if (!TextUtils.isEmpty(pass)) {
                 ARouterUtils.toYouthModelActivity();
                 return;
             }

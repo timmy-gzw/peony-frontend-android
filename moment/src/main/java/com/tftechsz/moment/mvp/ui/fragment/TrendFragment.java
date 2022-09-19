@@ -229,16 +229,23 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
      * 打开图片/视频选择器
      */
     private void showMediaSelector() {
-        mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
-                    } else {
-                        PermissionUtil.showPermissionPop(getActivity(), "未获取存储和拍照权限,相册功能无法正常使用。打开应用设置页以修改应用权限");
-                    }
-                })
-        );
+        final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
+            if (agreeToRequest) {
+                mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
+                        .request(permissions)
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                ChoosePicUtils.picMultiple(mActivity, Interfaces.PIC_SELCTED_NUM, PictureConfig.CHOOSE_REQUEST, null, true);
+                            } else {
+                                PermissionUtil.showPermissionPop(getActivity(), getString(R.string.chat_open_storage_camera_permission));
+                            }
+                        })
+                );
+            } else {
+                PermissionUtil.showPermissionPop(getActivity(), getString(R.string.chat_open_storage_camera_permission));
+            }
+        });
     }
 
     @Override
