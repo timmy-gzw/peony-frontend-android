@@ -44,6 +44,7 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
     private CompositeDisposable mCompositeDisposable;
     private CountBackUtils countBackUtils;
     private String typeId;
+    private WithdrawReq.Withdraw withdrawRes;
 
     public WithdrawPop(String type_id) {
         super(Utils.getApp());
@@ -117,6 +118,15 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
         }
     }
 
+    private void showPop(){
+        BasePayTypePopWindow popWindow = new BasePayTypePopWindow(getContext(),1);
+        if(withdrawRes != null && withdrawRes.is_show == 1){
+            popWindow.setInfo(withdrawRes.account,withdrawRes.name,withdrawRes.identity,withdrawRes.phone);
+            popWindow.setTypeId(typeId);
+        }
+        popWindow.showPopupWindow();
+    }
+
     /**
      * 提现方式获取
      */
@@ -125,11 +135,8 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
                 .subscribeWith(new ResponseObserver<BaseResponse<WithdrawReq.Withdraw>>() {
                     @Override
                     public void onSuccess(BaseResponse<WithdrawReq.Withdraw> response) {
-                        if (response.getData() != null) {
-                            mBind.etName.setText(response.getData().name);
-                            mBind.etPhone.setText(response.getData().phone);
-                            mBind.etNumber.setText(response.getData().account);
-                            mBind.etCard.setText(response.getData().identity);
+                        if (response.getData() != null ) {
+                            withdrawRes = response.getData();
                         }
 
                     }
@@ -154,9 +161,8 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
                 .subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
                     @Override
                     public void onSuccess(BaseResponse<Boolean> stringBaseResponse) {
-                        mBind.setIsNext(true);
-                        textChange();
-                        Utils.setFocus(mBind.etName);
+                        dismiss();
+                        showPop();
                     }
                 }));
     }

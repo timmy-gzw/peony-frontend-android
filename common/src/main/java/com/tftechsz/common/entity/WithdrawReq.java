@@ -11,6 +11,7 @@ public class WithdrawReq {
         public String name;  // 真实名称
         public String identity;    // 身份证
         public String phone;    // 手机号
+        public int is_show;//是否显示支付宝备用账号
     }
 
 
