@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_confirm"
+            app:layout_constraintBottom_toTopOf="@id/iv_check"
             app:layout_constraintHeight_max="400dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_pop_title">
@@ -233,6 +233,33 @@
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/iv_check"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:src="@mipmap/ic_check_selector"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_confirm"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"/>
+
+        <TextView
+            android:id="@+id/tv_check_tip"
+            android:textColor="@color/color_light_font"
+            android:textSize="@dimen/sp_12"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toTopOf="@id/iv_check"
+            app:layout_constraintBottom_toBottomOf="@id/iv_check"
+            app:layout_constraintLeft_toRightOf="@id/iv_check"
+            android:layout_marginStart="@dimen/dp_8"
+            android:text="保留本次填写新账户信息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tv_confirm"
