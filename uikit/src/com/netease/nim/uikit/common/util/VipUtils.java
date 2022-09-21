@@ -29,7 +29,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.common.UIUtils;
-import com.netease.nim.uikit.common.util.log.LogUtil;
 
 import java.io.File;
 
@@ -146,19 +145,12 @@ public class VipUtils {
             return;
         }
         //UIUtils.logE("本地不存在, 开始下载: " + getNetPicUrl(fileName, isPicFrame && id > 17));
-        int finalId = id;
         Glide.with(Utils.getApp())
                 .downloadOnly()
                 .load(getNetPicUrl(fileName, isPicFrame))
                 .addListener(new RequestListener<File>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<File> target, boolean isFirstResource) {
-                        setPersonalise(view, 0, isEnd, isPicFrame); //失败时使用默认
-//                        if (!isPicFrame) { //失败时使用本地
-//                            view.setBackgroundResource(getChatBubbleBackground(finalId, isEnd, isParty));
-//                        } else {
-//                            view.setBackgroundResource(getPictureFrameBackground(finalId, isEnd, false));
-//                        }
                         return false;
                     }
 
@@ -167,16 +159,11 @@ public class VipUtils {
                         File localFile = new File(localFilePath);
                         FileUtils.createOrExistsFile(localFile);//创建文件
                         FileUtils.copy(file, localFile);//下载的文件移动到指定目录
-                        if (!TextUtils.isEmpty(localFilePath) && ImageUtils.getBitmap(localFile) != null) {
-                            view.setBackground(getNinePatchDrawable(ImageUtils.getBitmap(localFile), Utils.getApp()));
-                        } else {
-                            if (!isPicFrame) { //失败时使用本地
-                                view.setBackgroundResource(getChatBubbleBackground(finalId, isEnd, isParty));
-                            } else {
-                                view.setBackgroundResource(getPictureFrameBackground(finalId));
+                        UIUtils.runOnUiThread(() -> {
+                            if (!TextUtils.isEmpty(localFilePath) && ImageUtils.getBitmap(localFile) != null) {
+                                view.setBackground(getNinePatchDrawable(ImageUtils.getBitmap(localFile), Utils.getApp()));
                             }
-                        }
-                        //UIUtils.logE("下载成功: " + localFile.getPath());
+                        });
                         return false;
                     }
                 }).submit();
