@@ -1330,6 +1330,13 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
             segmentData_temp = Interfaces.SEGMENT_DATA;
         }
 
+        if (isPackMode()) {
+            mBind.setIsBagPackage(true);
+        } else {
+            mBind.setIsBagPackage(false);
+
+        }
+
         if (giftDto.is_choose_num == 1) { //需要选择数量
             mBind.setIsChooseNum(true);
             if (giftDto.tag_value == 4) {//如果是幸运礼物
@@ -1373,81 +1380,6 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
             }
 
         }
-
-        if (giftDto.getId() == 193 || giftDto.getId() == 194) {
-            //盲盒点击埋点
-            ARouter.getInstance()
-                    .navigation(MineService.class)
-                    .trackEvent("派对内盲盒礼物点击", "blind_box_click", "", JSON.toJSONString(new NavigationLogEntity(service.getUserId(), roomId, giftDto.getId() == 193 ? 1 : 2, System.currentTimeMillis(), CommonUtil.getOSName(), Constants.APP_NAME)), null);
-        }
-
-        if (mType == 3 || mBind.rlInfo.getVisibility() == View.VISIBLE) {
-            return;
-        }
-
-        if (mMapGiftSelected.get(giftDto.getId()) == null) {
-            //请求横幅信息
-            mCompositeDisposable.add(RetrofitManager.getInstance()
-                    .createUserApi(PublicService.class)
-                    .giftInfoActivity(createRequestBody(new ActivityGiftInfoQuestBean(giftDto.getId(), getScene())))
-                    .compose(BasePresenter.applySchedulers())
-                    .subscribeWith(new ResponseObserver<BaseResponse<ActivityGiftInfoDto>>() {
-                        @Override
-                        public void onSuccess(BaseResponse<ActivityGiftInfoDto> accostDtoBaseResponse) {
-//显示横幅
-                            if (accostDtoBaseResponse.getData() != null) {
-
-                                mMapGiftSelected.put(giftDto.getId(), accostDtoBaseResponse.getData());
-                                constraintLayout.setVisibility(View.VISIBLE);
-                                GlideUtils.loadBorderImg(mContext, mMapGiftSelected.get(giftDto.getId()).icon, roundedImageView);
-                                if (!StringUtils.isTrimEmpty(mMapGiftSelected.get(giftDto.getId()).title)) {
-                                    mTvGiftText.setText(mMapGiftSelected.get(giftDto.getId()).title);
-                                }
-                                if (!StringUtils.isTrimEmpty(mMapGiftSelected.get(giftDto.getId()).nickname)) {
-                                    mTvPopGiftNameText.setText(mMapGiftSelected.get(giftDto.getId()).nickname);
-                                }
-
-                                setVisibles(accostDtoBaseResponse.getData());
-                                mBind.llGift.setBackgroundResource(R.color.white);
-                            } else {
-                                constraintLayout.setVisibility(View.GONE);
-                                mImgActivityBottom1.setVisibility(View.GONE);
-                                mBind.llGift.setBackgroundResource(mBind.clWheat.getVisibility() == View.VISIBLE ? R.color.white : R.drawable.bg_white_top_radius10);
-                            }
-                        }
-
-                        @Override
-                        public void onFail(int code, String msg) {
-                            super.onFail(code, msg);
-                            constraintLayout.setVisibility(View.GONE);
-                            mImgActivityBottom1.setVisibility(View.GONE);
-                            mBind.llGift.setBackgroundResource(mBind.clWheat.getVisibility() == View.VISIBLE ? R.color.white : R.drawable.bg_white_top_radius10);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
-                            constraintLayout.setVisibility(View.GONE);
-                            mImgActivityBottom1.setVisibility(View.GONE);
-                            mBind.llGift.setBackgroundResource(mBind.clWheat.getVisibility() == View.VISIBLE ? R.color.white : R.drawable.bg_white_top_radius10);
-                        }
-                    }));
-        } else {
-            if (mMapGiftSelected.get(giftDto.getId()) != null) {
-                //显示横幅
-                constraintLayout.setVisibility(View.VISIBLE);
-                setVisibles(mMapGiftSelected.get(giftDto.getId()));
-                GlideUtils.loadBorderImg(mContext, mMapGiftSelected.get(giftDto.getId()).icon, roundedImageView);
-                if (!StringUtils.isTrimEmpty(mMapGiftSelected.get(giftDto.getId()).title)) {
-                    mTvGiftText.setText(mMapGiftSelected.get(giftDto.getId()).title);
-                }
-                if (!StringUtils.isTrimEmpty(mMapGiftSelected.get(giftDto.getId()).nickname)) {
-                    mTvPopGiftNameText.setText(mMapGiftSelected.get(giftDto.getId()).nickname);
-                }
-                mBind.llGift.setBackgroundResource(R.color.white);
-            }
-        }
-
 
     }
 

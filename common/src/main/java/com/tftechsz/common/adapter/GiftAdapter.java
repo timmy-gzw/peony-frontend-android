@@ -101,8 +101,10 @@ public class GiftAdapter extends BaseQuickAdapter<GiftDto, GiftAdapter.ViewHolde
             holder.expired_time.setText(item.getExpired_time());
             holder.tvGiftType.setVisibility(View.GONE);
             holder.num.setVisibility(View.VISIBLE);
+            holder.price.setVisibility(View.GONE);
             holder.num.setText(String.format("x%s", item.getNumber()));
         } else {
+            holder.price.setVisibility(View.VISIBLE);
             holder.num.setVisibility(View.GONE);
             holder.expired_time.setVisibility(View.GONE);
         }
