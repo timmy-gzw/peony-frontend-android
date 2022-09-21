@@ -40,7 +40,7 @@ public class WealthFragment extends BaseMvpFragment {
     private String type, userId;
     private ConstraintLayout mClBg;
     private ImageView mIvAvatar;
-    private TextView mTvName, mTvTitle, mTvLevel, mTvNextLevelNum, mTvNextLevel;
+    private TextView mTvName, mTvTitle, mTvLevel, mTvNextLevelNum, mTvNextLevel,mTitle;
     private ProgressBar mProgressbar;
     private RecyclerView mRvUpgrade, mRvLevelTitle;
     private ImageView mIvTitle;
@@ -112,6 +112,7 @@ public class WealthFragment extends BaseMvpFragment {
         mRvLevelTitle = getView(R.id.rv_level_title);
         mTitleWealth = getView(R.id.tv_title_wealth);
         mWealthDesc = getView(R.id.tv_wealth_decs);
+        mTitle = getView(R.id.title);
         type = getArguments().getString("type");
         userId = getArguments().getString("userId");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -126,29 +127,31 @@ public class WealthFragment extends BaseMvpFragment {
     protected void initData() {
         getData();
         service = ARouter.getInstance().navigation(UserProviderService.class);
-        if (type.equals("0")) {//财富
-            mClBg.setBackgroundResource(R.mipmap.bg_wealth_level);
-            mTvName.setTextColor(Utils.getColor(R.color.c_edd398));
-            mTvLevel.setTextColor(Utils.getColor(R.color.c_edd398));
-            mTvNextLevelNum.setTextColor(Utils.getColor(R.color.c_edd398));
-            mTvNextLevel.setTextColor(Utils.getColor(R.color.c_edd398));
-            mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
-            mTitleWealth.setText("什么是财富等级");
-            mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注");
-        } else {//魅力
-            mClBg.setBackgroundResource(R.mipmap.bg_charm_level);
-            mTvName.setTextColor(Utils.getColor(R.color.c_4337FF));
-            mTvLevel.setTextColor(Utils.getColor(R.color.c_4337FF));
-            mTvNextLevelNum.setTextColor(Utils.getColor(R.color.c_4337FF));
-            mTvNextLevel.setTextColor(Utils.getColor(R.color.c_4337FF));
-            mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_charm_bg));
-            mTitleWealth.setText("什么是魅力等级");
-            mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");
-        }
         if (!TextUtils.isEmpty(userId)) {//他人
             mClBg.setVisibility(View.GONE);
         } else {//自己
             mClBg.setVisibility(View.VISIBLE);
+            if (type.equals("0")) {//财富
+                mClBg.setBackgroundResource(R.mipmap.bg_wealth_level);
+                mTvName.setTextColor(Utils.getColor(R.color.c_edd398));
+                mTvLevel.setTextColor(Utils.getColor(R.color.c_edd398));
+                mTvNextLevelNum.setTextColor(Utils.getColor(R.color.c_edd398));
+                mTvNextLevel.setTextColor(Utils.getColor(R.color.c_edd398));
+                mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
+                mTitleWealth.setText("什么是财富等级");
+                mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注");
+                mTitle.setText("财富称号");
+            } else {//魅力
+                mClBg.setBackgroundResource(R.mipmap.bg_charm_level);
+                mTvName.setTextColor(Utils.getColor(R.color.c_4337FF));
+                mTvLevel.setTextColor(Utils.getColor(R.color.c_4337FF));
+                mTvNextLevelNum.setTextColor(Utils.getColor(R.color.c_4337FF));
+                mTvNextLevel.setTextColor(Utils.getColor(R.color.c_4337FF));
+                mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_charm_bg));
+                mTitleWealth.setText("什么是魅力等级");
+                mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");
+                mTitle.setText("魅力称号");
+            }
             if (null != service) {
                 mTvName.setText(service.getUserInfo().getNickname());
                 Glide.with(getActivity()).load(service.getUserInfo().getIcon()).into(mIvAvatar);

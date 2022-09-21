@@ -45,7 +45,7 @@ public class GlobalDialogManager {
         if (manager == null || mIsShow) {
             return;
         }
-        if(null != manager.findFragmentByTag("loadingDialog")){
+        if(null != manager.findFragmentByTag("loadingDialog")&&manager.isDestroyed()){
             return;
         }
         init();

@@ -1,5 +1,7 @@
 package com.netease.nim.uikit.common;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -34,6 +36,16 @@ public class UIUtils {
     public static void logE(Object s) {
         if (AppUtils.isAppDebug()) {
             Log.e("UIUtils.logE", String.valueOf(s));
+        }
+    }
+
+    public static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
+
+    public static void runOnUiThread(Runnable runnable) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            runnable.run();
+        } else {
+            MAIN_HANDLER.post(runnable);
         }
     }
 }
