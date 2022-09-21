@@ -2,6 +2,7 @@ package com.tftechsz.mine.mvp.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -55,6 +58,7 @@ import com.umeng.umlink.MobclickLink;
 import com.umeng.umlink.UMLinkListener;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * 登陆页面
@@ -62,6 +66,7 @@ import java.util.HashMap;
 @Route(path = ARouterApi.MINE_LOGIN)
 public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> implements View.OnClickListener, ILoginView {
 
+    private TextView mTvTip;
     private TextView mTvOtherLogin;
     private TextView mTvAgreement;
     private ChatMsg.JumpMessage mJumpMessage;
@@ -73,6 +78,8 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
     private LinearLayout mLlBottom;
     private boolean isFirst;
     private int umLinkCount = 0;
+    private final int mMax = 10000;
+    private final int mMin = 8000;
 
 
     @Override
@@ -90,6 +97,7 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
         mTvOtherLogin.setVisibility(View.INVISIBLE);
         mTvAgreement = findViewById(R.id.tv_agreement);
         mLlBottom = findViewById(R.id.ll_bottom);
+        mTvTip = findViewById(R.id.tv_tip);
         findViewById(R.id.tv_wx_login).setOnClickListener(this);  //微信登录
         findViewById(R.id.tv_qq_login).setOnClickListener(this);   //QQ 登录
         ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) mLlBottom.getLayoutParams();
@@ -104,6 +112,21 @@ public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> i
             //从来没调用过getInstallParam方法，适当延时调用getInstallParam方法
             MobclickLink.getInstallParams(LoginActivity.this, umlinkAdapter);
         }
+
+
+        Random random = new Random();
+        int number = random.nextInt(mMax - mMin) + mMin + 1;
+        String text1 = "已有 ";
+        String text2 = number + " ";
+        String text3 = getString(R.string.login_random_str);
+        SpannableStringBuilder spanString = new SpannableStringBuilder();
+        StringBuilder stringBuffer = new StringBuilder();
+        stringBuffer.append(text1).append(text2).append(text3);
+        spanString.append(text1).append(text2).append(text3);
+        int start = stringBuffer.indexOf(text2);
+        spanString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.colorPrimary)), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanString.setSpan(new StyleSpan(Typeface.BOLD), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTvTip.setText(spanString);
     }
 
     @Override

@@ -2,13 +2,21 @@ package com.tftechsz.mine.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
@@ -17,12 +25,15 @@ import com.chuanglan.shanyan_sdk.tool.ShanYanUIConfig;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.Constants;
+import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.StatusBarUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.widget.pop.PrivacyPopWindow;
+
+import java.util.Random;
 
 
 public class ConfigUtils {
@@ -67,9 +78,8 @@ public class ConfigUtils {
 //        numberParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 //        numberParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 //        numberLayout.setLayoutParams(numberParams);
-        RelativeLayout autoLoginLayout = (RelativeLayout) inflater.inflate(R.layout.activity_auto_login, null);
-        RelativeLayout.LayoutParams customLayout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        autoLoginLayout.setLayoutParams(customLayout);
+        ConstraintLayout autoLoginLayout = (ConstraintLayout) inflater.inflate(R.layout.activity_auto_login, null);
+        cusLogins(autoLoginLayout);
         RelativeLayout alternativeLoginsLayout = (RelativeLayout) inflater.inflate(R.layout.layout_alternative_login, null);
         RelativeLayout.LayoutParams layoutParamsOther = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         layoutParamsOther.setMargins(0, DensityUtils.dp2px(context, 30), 0, DensityUtils.dp2px(context, 60));
@@ -158,6 +168,27 @@ public class ConfigUtils {
         otherPhoneView.setOnClickListener(v -> {   //其他手机号码
             showLogin(loginWay, context, 2);   //其他手机号码
         });
+    }
+
+    private static void cusLogins(View view) {
+        TextView tvTip = view.findViewById(R.id.tv_tip);
+        if (tvTip != null) {
+            final int mMax = 10000;
+            final int mMin = 8000;
+            Random random = new Random();
+            int number = random.nextInt(mMax - mMin) + mMin + 1;
+            String text1 = "已有 ";
+            String text2 = number + " ";
+            String text3 = BaseApplication.getInstance().getString(R.string.login_random_str);
+            SpannableStringBuilder spanString = new SpannableStringBuilder();
+            StringBuilder stringBuffer = new StringBuilder();
+            stringBuffer.append(text1).append(text2).append(text3);
+            spanString.append(text1).append(text2).append(text3);
+            int start = stringBuffer.indexOf(text2);
+            spanString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(BaseApplication.getInstance(), R.color.colorPrimary)), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spanString.setSpan(new StyleSpan(Typeface.BOLD), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvTip.setText(spanString);
+        }
     }
 
 
