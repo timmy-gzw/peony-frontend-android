@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="tab_select_color">#2A2426</color>
+    <color name="tab_select_color">#8130FF</color>
     <color name="tab_normal_color">#AEAEAE</color>
 
 </resources>

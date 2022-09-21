@@ -198,8 +198,8 @@
                 android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                app:normal_color="#4DFD4683"
-                app:progress_color="#FD4683"
+                app:normal_color="#4DA924FF"
+                app:progress_color="#A924FF"
                 android:layout_gravity="center"
                 android:gravity="center"
                 app:progress="0"
@@ -248,8 +248,8 @@
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginBottom="20dp"
         android:text="长按录制"
-        android:textColor="#FE4E6B"
+        android:textColor="#FF2F2F"
         android:textSize="@dimen/sp_15"
-        android:textStyle="normal" />
+        android:textStyle="bold" />
 
 </LinearLayout>

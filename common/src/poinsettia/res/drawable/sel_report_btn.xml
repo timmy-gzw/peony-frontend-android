@@ -15,7 +15,7 @@
 
             <corners android:radius="@dimen/dp_8" />
 
-            <gradient android:endColor="#FE4DCA" android:startColor="#FD4580" android:type="linear" />
+            <gradient android:endColor="#A924FF" android:startColor="#A924FF" android:type="linear" />
 
         </shape>
     </item>

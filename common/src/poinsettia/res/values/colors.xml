@@ -3,9 +3,9 @@
 
     <color name="colorPrimary">#FFA924FF</color>
     <color name="colorPrimaryLight">#FFAA24FF</color>
-    <color name="colorPrimaryDark">#FD4683</color>
-    <color name="colorAccent">#FD4580</color>
-    <color name="c_40primary">#66FD4683</color>
+    <color name="colorPrimaryDark">#FFA924FF</color>
+    <color name="colorAccent">#FFA924FF</color>
+    <color name="c_40primary">#66A924FF</color>
 
     <color name="color_normal">#2A2426</color>
     <color name="color_light_font">#666666</color>
@@ -19,7 +19,7 @@
     <color name="red_dot">#F55F4E</color>
 
     <color name="bg_color">#F9F9F9</color>
-    <color name="c_btn_p2p">@color/colorPrimary</color>
+    <color name="c_btn_p2p">#FD4683</color>
     <color name="c_btn_accost">@color/color_normal</color>
     <color name="c_del_content">@color/color_light_font</color>
 

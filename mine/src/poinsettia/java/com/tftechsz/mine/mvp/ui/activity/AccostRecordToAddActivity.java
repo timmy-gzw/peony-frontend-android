@@ -40,7 +40,7 @@ public class AccostRecordToAddActivity extends BaseVoiceRecordActivity {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initView(Bundle savedInstanceState) {
-        new ToolBarBuilder().showBack(true).setTitle("语音招呼录制")
+        new ToolBarBuilder().showBack(true).setTitle("招呼设置")
                 .setRightText(Interfaces.ACCOST_RECORD_TOMY, v -> finish())
                 .build();
         voiceImageView = findViewById(R.id.iv_voice);

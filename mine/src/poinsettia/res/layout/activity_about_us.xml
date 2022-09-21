@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <include
+        layout="@layout/tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:layout_marginTop="@dimen/dp_60"
+        android:background="@mipmap/mine_ic_launcher_about"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/base_tool_bar" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:background="@drawable/bg_white_radius15"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_version" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:background="@drawable/bg_white_radius15"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_version"
+
+        >
+
+        <com.tftechsz.common.widget.CommonItemView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            app:left_text_content="用户协议"
+            app:right_arrow_visible="true"
+            app:right_switch_visible="false"
+            app:right_text_visible="false" />
+
+        <com.tftechsz.common.widget.CommonItemView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            app:left_text_content="隐私权政策"
+            app:right_arrow_visible="true"
+            app:right_switch_visible="false"
+            app:right_text_visible="false" />
+
+        <com.tftechsz.common.widget.CommonItemView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            app:left_text_content="平台行为规范"
+            app:right_arrow_visible="true"
+            app:right_switch_visible="false"
+            app:right_text_visible="false"
+            app:view_visible="false" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:gravity="center"
+        android:textColor="@color/color_cc"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toTopOf="@id/bot_link"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Copyright ©2021 芍药\nAll Rights Reserved" />
+
+    <LinearLayout
+        android:id="@+id/bot_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:orientation="horizontal"
+        android:textColor="@color/color_mid_font"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
