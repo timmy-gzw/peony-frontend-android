@@ -8,6 +8,7 @@ import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.entity.dto.LabelDto;
 import com.tftechsz.mine.entity.dto.LabelInfoDto;
@@ -50,6 +51,7 @@ public class LabelAdapter extends BaseQuickAdapter<LabelDto, BaseViewHolder> {
                     adapter.setData(position, item);
                 } else {
                     if (number >= 15) {
+                        ToastUtil.showToast(getContext(),"最多可选择15个标签哦~");
                         return;
                     } else {
                         item.setIs_select(1);
