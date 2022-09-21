@@ -135,39 +135,39 @@ public class WealthFragment extends BaseMvpFragment {
             mClBg.setVisibility(View.GONE);
         } else {//自己
             mClBg.setVisibility(View.VISIBLE);
-            if (type.equals("0")) {//财富
-                mIvCard.setImageResource(R.mipmap.ic_card_wealth);
-                mWealthDesc.setBackgroundResource(R.mipmap.bg_wealth);
-                mClBg.setBackgroundResource(R.drawable.bg_card_wealth);
-                mWealthDesc.setTextColor(Color.parseColor("#B2500A"));
-                mTvName.setTextColor(Utils.getColor(R.color.c_edd398));
-                mTvLevel.setTextColor(Utils.getColor(R.color.c_edd398));
-                mTvNextLevelNum.setTextColor(Utils.getColor(R.color.white));
-                mTvNextLevel.setTextColor(Utils.getColor(R.color.c_edd398));
-                mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
-                mTitleWealth.setText("什么是财富等级？");
-                mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注!");
-                mAvaterBg.setImageResource(R.mipmap.bg_wealth_avater);
-                title.setText("财富称号");
-            } else {//魅力
-                mIvCard.setImageResource(R.mipmap.ic_card_charm);
-                mWealthDesc.setBackgroundResource(R.mipmap.bg_charm);
-                mClBg.setBackgroundResource(R.drawable.bg_card_charm);
-                mWealthDesc.setTextColor(Utils.getColor(R.color.white));
-                mTvName.setTextColor(Utils.getColor(R.color.white));
-                mTvLevel.setTextColor(Utils.getColor(R.color.white));
-                mTvNextLevelNum.setTextColor(Utils.getColor(R.color.white));
-                mTvNextLevel.setTextColor(Utils.getColor(R.color.white));
-                mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
-                mTitleWealth.setText("什么是魅力等级？");
-                mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");
-                mAvaterBg.setImageResource(R.mipmap.bg_charm_avater);
-                title.setText("魅力称号");
-            }
-            if (null != service) {
-                mTvName.setText(service.getUserInfo().getNickname());
-                Glide.with(getActivity()).load(service.getUserInfo().getIcon()).into(mIvAvatar);
-            }
+        }
+        if (type.equals("0")) {//财富
+            mIvCard.setImageResource(R.mipmap.ic_card_wealth);
+            mWealthDesc.setBackgroundResource(R.mipmap.bg_wealth);
+            mClBg.setBackgroundResource(R.drawable.bg_card_wealth);
+            mWealthDesc.setTextColor(Color.parseColor("#B2500A"));
+            mTvName.setTextColor(Utils.getColor(R.color.c_edd398));
+            mTvLevel.setTextColor(Utils.getColor(R.color.c_edd398));
+            mTvNextLevelNum.setTextColor(Utils.getColor(R.color.white));
+            mTvNextLevel.setTextColor(Utils.getColor(R.color.c_edd398));
+            mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
+            mTitleWealth.setText("什么是财富等级？");
+            mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注!");
+            mAvaterBg.setImageResource(R.mipmap.bg_wealth_avater);
+            title.setText("财富称号");
+        } else {//魅力
+            mIvCard.setImageResource(R.mipmap.ic_card_charm);
+            mWealthDesc.setBackgroundResource(R.mipmap.bg_charm);
+            mClBg.setBackgroundResource(R.drawable.bg_card_charm);
+            mWealthDesc.setTextColor(Utils.getColor(R.color.white));
+            mTvName.setTextColor(Utils.getColor(R.color.white));
+            mTvLevel.setTextColor(Utils.getColor(R.color.white));
+            mTvNextLevelNum.setTextColor(Utils.getColor(R.color.white));
+            mTvNextLevel.setTextColor(Utils.getColor(R.color.white));
+            mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
+            mTitleWealth.setText("什么是魅力等级？");
+            mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");
+            mAvaterBg.setImageResource(R.mipmap.bg_charm_avater);
+            title.setText("魅力称号");
+        }
+        if (null != service) {
+            mTvName.setText(service.getUserInfo().getNickname());
+            Glide.with(getActivity()).load(service.getUserInfo().getIcon()).into(mIvAvatar);
         }
         if(service.getUserInfo().isGirl()){
             mTvAge.setCompoundDrawablesWithIntrinsicBounds(getActivity().getResources().getDrawable(R.drawable.ic_girl),null,null,null);
