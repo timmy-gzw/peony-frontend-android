@@ -85,7 +85,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         holder.btnLike.setLiked(item.isPraise());
         holder.mPosition = holder.getLayoutPosition();
         holder.tvLikeCount.setText(item.getPraises() == 0 ? "点赞" : String.valueOf(item.getPraises()));
-        holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0 ? R.color.color_light_font : R.color.colorPrimary));
+        holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0 ? R.color.color_light_font : R.color.color_trend_thumbs_up));
         holder.tvDiscussCount.setText(item.getComments() == 0 ? "评论" : String.valueOf(item.getComments()));
         holder.setVisible(R.id.iv_real, item.isReal());  //是否真人
         holder.mPlayerContainer.setTransitionName(Utils.getString(R.string.video_transitions));
