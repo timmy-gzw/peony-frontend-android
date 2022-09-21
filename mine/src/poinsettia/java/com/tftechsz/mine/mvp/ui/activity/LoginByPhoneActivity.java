@@ -138,7 +138,7 @@ public class LoginByPhoneActivity extends BaseMvpActivity<ILoginView, LoginPrese
         stringBuffer.append(text1).append(text2).append(text3);
         spanString.append(text1).append(text2).append(text3);
         int start = stringBuffer.indexOf(text2);
-        spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#FD4683")), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#FF2F2F")), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spanString.setSpan(new StyleSpan(Typeface.BOLD), start, start + text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mTvTip.setText(spanString);
 

@@ -17,7 +17,7 @@
         android:layout_marginBottom="@dimen/dp_20"
         android:gravity="center"
         android:text="个人信息保护指引"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/color_normal"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold" />
 

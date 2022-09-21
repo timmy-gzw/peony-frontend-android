@@ -2,6 +2,7 @@ package com.tftechsz.mine.mvp.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -255,7 +256,7 @@ public class ImproveInfoActivity extends BaseMvpActivity<IImproveInfoView, Impro
                             .setContentText(new SpannableStringUtils.Builder()
                                     .append("您当前选择的性别为:")
                                     .append(" 女生")
-                                    .setForegroundColor(Utils.getColor(R.color.colorPrimary))
+                                    .setForegroundColor(Color.parseColor("#FF5590"))
                                     .append("\n一旦确认就不可更改，是否确认注册?")
                                     .create())
                             .setLeftButton("返回修改")
