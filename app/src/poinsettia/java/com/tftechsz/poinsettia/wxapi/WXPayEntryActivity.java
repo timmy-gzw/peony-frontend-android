@@ -1,4 +1,4 @@
-package com.tftechsz.jasmine.wxapi;
+package com.tftechsz.poinsettia.wxapi;
 
 
 import android.app.Activity;
