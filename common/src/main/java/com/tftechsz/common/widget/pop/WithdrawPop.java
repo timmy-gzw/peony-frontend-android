@@ -122,8 +122,8 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
         BasePayTypePopWindow popWindow = new BasePayTypePopWindow(getContext(),1);
         if(withdrawRes != null && withdrawRes.is_show == 1){
             popWindow.setInfo(withdrawRes.account,withdrawRes.name,withdrawRes.identity,withdrawRes.phone);
-            popWindow.setTypeId(typeId);
         }
+        popWindow.setTypeId(typeId);
         popWindow.showPopupWindow();
     }
 
