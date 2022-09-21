@@ -10,7 +10,7 @@
     <item android:state_enabled="true">
         <shape>
             <corners android:radius="@dimen/dp_8" />
-            <gradient android:endColor="#FD4580" android:startColor="#FE4DCA" android:type="linear" android:angle="180" />
+            <gradient android:endColor="#AA24FF" android:startColor="#583DFF" android:type="linear" android:angle="180" />
         </shape>
     </item>
 
