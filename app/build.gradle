@@ -146,6 +146,13 @@ android {
             versionName rootProject.ext.jasmineAppVersion.versionName
             manifestPlaceholders = rootProject.ext.jasminePlaceholders
         }
+        poinsettia {
+            dimension 'office'
+            applicationId "com.emeraldtechhn.poinsettia"
+            versionCode rootProject.ext.poinsettiaAppVersion.versionCode
+            versionName rootProject.ext.poinsettiaAppVersion.versionName
+            manifestPlaceholders = rootProject.ext.poinsettiaPlaceholders
+        }
     }
 }
 
@@ -172,9 +179,21 @@ androidJunkCode {
         drawableCount = 600
         stringCount = 600
     }
+    def poinsettiaConfig = {
+        packageBase = "com.emeraldtechhn.poinsettia"
+        packageCount = 60
+        activityCountPerPackage = 8
+        excludeActivityJavaFile = false
+        otherCountPerPackage = 80
+        methodCountPerClass = 60
+        resPrefix = "poinsettia"
+        drawableCount = 600
+        stringCount = 600
+    }
     variantConfig {
         "heartRelease" heartConfig
         "jasmineRelease" jasmineConfig
+        "poinsettiaRelease" poinsettiaConfig
     }
 }
 

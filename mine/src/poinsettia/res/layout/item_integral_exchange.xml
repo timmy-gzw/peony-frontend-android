@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginHorizontal="@dimen/dp_16"
+    android:background="@drawable/bg_integral_exchange"
+    android:layout_marginTop="@dimen/dp_20"
+    android:paddingEnd="@dimen/dp_16">
+
+    <ImageView
+        android:id="@+id/iv_shop"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/chat_ic_emoji" />
+
+    <TextView
+        android:id="@+id/tv_coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_shop"
+        app:layout_constraintStart_toEndOf="@id/iv_shop"
+        app:layout_constraintTop_toTopOf="@id/iv_shop"
+        tools:text="100元人民币" />
+
+    <TextView
+        android:id="@+id/tv_integral"
+        android:layout_width="86dp"
+        android:layout_height="@dimen/dp_35"
+        android:background="@drawable/sp_profit_list_btn"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingTop="@dimen/dp_4"
+        android:paddingBottom="@dimen/dp_4"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:autoSizeMinTextSize="@dimen/sp_10"
+        app:autoSizeTextType="none"
+        app:layout_constraintBottom_toBottomOf="@id/iv_shop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_shop"
+        tools:text="350 积分" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

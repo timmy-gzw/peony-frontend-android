@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_28"
+    android:layout_marginEnd="@dimen/dp_28"
+    android:background="@drawable/sp_pop_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:text="用户封禁"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center"
+        android:text="由于该用户“存在严重违规行为”严重影响社区氛围，经官方判定封号，一起维护健康文明的社区环境，人人有责。"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
+        android:id="@+id/tv_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/bg_red"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="@dimen/dp_38"
+        android:paddingVertical="@dimen/dp_15"
+        android:text="我知道了"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+        android:textStyle="bold" />
+
+</LinearLayout>

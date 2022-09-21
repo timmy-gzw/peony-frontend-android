@@ -106,6 +106,26 @@ android {
             buildConfigField "String", "PUSH_OPPO_APP_SECRET", "\"55492894580f44a2b8745497b3286c44\""
             buildConfigField "String", "PUSH_OPPO_CERT_NAME", "\"peony-push-cert-opp\""
         }
+        poinsettia {
+            dimension 'office'
+            buildConfigField "String", "APP_NAME", "\"poinsettia\""
+            buildConfigField "String", "WX_APPID", "\"wx5d0a60f9857addec\""
+            buildConfigField "String", "WX_APP_SC", "\"877597391120c172235dcaf6cc603c08\""
+            buildConfigField "String", "SANYAN_APP_ID", "\"MDb1ScEG\""
+            buildConfigField "String", "PUSH_XM_APP_ID", "\"2882303761520182217\""  //小米推送
+            buildConfigField "String", "PUSH_XM_APP_KEY", "\"5102018224217\""
+            buildConfigField "String", "PUSH_XM_CERT_NAME", "\"peony-push-cert-xm\""
+            buildConfigField "String", "PUSH_HW_APP_ID", "\"106970141\""  //华为推送
+            buildConfigField "String", "PUSH_HW_CERT_NAME", "\"peony-push-cert-hw\""
+            buildConfigField "String", "PUSH_MZ_APP_ID", "\"149688\""   //魅族推送
+            buildConfigField "String", "PUSH_MZ_APP_KEY", "\"b31b772c33d64897a589d0d90db8c7fa\""
+            buildConfigField "String", "PUSH_MZ_CERT_NAME", "\"peony-push-cert-meizu\""
+            buildConfigField "String", "PUSH_VIVO_CERT_NAME", "\"peony-push-cert-vivo\""   ////vivo推送
+            buildConfigField "String", "PUSH_OPPO_APP_ID", "\"30870351\""   ////oppo推送
+            buildConfigField "String", "PUSH_OPPO_APP_KEY", "\"530d8d861693421f96339373aef8013e\""
+            buildConfigField "String", "PUSH_OPPO_APP_SECRET", "\"55492894580f44a2b8745497b3286c44\""
+            buildConfigField "String", "PUSH_OPPO_CERT_NAME", "\"peony-push-cert-opp\""
+        }
 
     }
 

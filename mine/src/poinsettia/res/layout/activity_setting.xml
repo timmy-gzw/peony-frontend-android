@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/tool_bar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_exit"
+        android:layout_below="@+id/base_tool_bar"
+        android:layout_marginBottom="@dimen/dp_20">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_account_binding"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="账号管理"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_charge_setting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="收费设置"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false"
+                tools:visibility="visible" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_privacy_setting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="隐私设置"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_call_setting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:visibility="gone"
+                app:left_text_content="招呼设置"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false"
+                tools:visibility="visible" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_face_setting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:visibility="gone"
+                app:left_text_content="美颜设置"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false"
+                tools:visibility="visible" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_notification"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="新消息通知"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_chatsignnum"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:visibility="gone"
+                app:left_text_content="聊天卡"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false"
+                tools:visibility="visible" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_black_list"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="黑名单"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_youth_model"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="青少年模式"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_about"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="关于"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="false" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_debug"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                android:visibility="gone"
+                app:left_text_color="@color/red"
+                app:left_text_content="环境切换(debug)"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="true"
+                app:view_visible="false" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_exit"
+        style="@style/CustomButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/shape_bg_exit_login"
+        android:text="@string/login_out"
+        android:textColor="@color/white" />
+</RelativeLayout>

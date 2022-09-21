@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#FFA924FF</color>
+    <color name="colorPrimaryLight">#FFAA24FF</color>
+    <color name="colorPrimaryDark">#FD4683</color>
+    <color name="colorAccent">#FD4580</color>
+    <color name="c_40primary">#66FD4683</color>
+
+    <color name="color_normal">#2A2426</color>
+    <color name="color_light_font">#666666</color>
+    <color name="color_mid_font">#666666</color>
+
+    <color name="color_ADADD7">#ADADD7</color>
+    <color name="color_8282AA">#8282AA</color>
+
+    <color name="c_f78765">#298AF8</color>
+    <color name="c_fe4f6b">#A257FF</color>
+    <color name="red_dot">#F55F4E</color>
+
+    <color name="bg_color">#F9F9F9</color>
+    <color name="c_btn_p2p">@color/colorPrimary</color>
+    <color name="c_btn_accost">@color/color_normal</color>
+    <color name="c_del_content">@color/color_light_font</color>
+
+    <color name="c_4c000000">#80000000</color>
+
+    <color name="color_update_version">#170B5F</color>
+    <color name="c_exchange_num">@color/colorPrimary</color>
+    <color name="c_993875FF">@color/colorPrimaryLight</color>
+    <color name="c_99ff3a74">@color/colorPrimary</color>
+    <color name="c_tab_color">@color/black</color>
+    <color name="trend_tab_indicator_color">@color/black</color>
+    <color name="at">#5397FF</color>
+    <color name="c_continue_pair">@color/colorPrimary</color>
+    <color name="c_continue_pair_video">#999638FF</color>
+    <color name="link_color">#5397FF</color>
+    <color name="vip_color">#FF2F2F</color>
+    <color name="c_empty_text">@color/color_normal</color>
+    <color name="green">#27E984</color>
+    <color name="c_ff4951">#FF2F2F</color>
+</resources>

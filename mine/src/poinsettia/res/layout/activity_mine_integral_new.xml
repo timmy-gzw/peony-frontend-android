@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@mipmap/bg_integral_header"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="375:218"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <include
+        layout="@layout/tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_integral"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:text="@string/integral_balance"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toTopOf="@id/tv_integral_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/base_tool_bar"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_integral_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_withdraw_num"
+        app:layout_constraintStart_toStartOf="@id/tv_integral"
+        app:layout_constraintTop_toBottomOf="@id/tv_integral"
+        tools:text="169.00" />
+
+    <TextView
+        android:id="@+id/tv_withdraw_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintStart_toStartOf="@id/tv_integral_num"
+        app:layout_constraintTop_toBottomOf="@id/tv_integral_num"
+        tools:text="0.42" />
+
+    <TextView
+        android:id="@+id/tv_exchange_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_8"
+        android:background="@drawable/sp_20881300_c_5"
+        android:paddingStart="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_3"
+        android:paddingEnd="@dimen/dp_12"
+        android:visibility="gone"
+        android:paddingBottom="@dimen/dp_3"
+        android:text="@string/exchange_record"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintBottom_toBottomOf="@id/tv_withdraw_num"
+        app:layout_constraintStart_toEndOf="@id/tv_withdraw_num"
+        app:layout_constraintTop_toTopOf="@id/tv_withdraw_num" />
+
+    <androidx.legacy.widget.Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_20"
+        android:background="@drawable/shape_lt_rt_16_ffffff"
+        app:layout_constraintBottom_toBottomOf="@id/iv_header" />
+
+    <View
+        android:id="@+id/view_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_lt_rt_16_ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/space" />
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_42"
+        android:layout_marginTop="@dimen/dp_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_bg"
+        app:tl_divider_padding="@dimen/dp_26"
+        app:tl_indicator_color="@color/color_normal"
+        app:tl_indicator_corner_radius="@dimen/dp_2"
+        app:tl_indicator_height="@dimen/dp_2"
+        app:tl_indicator_margin_top="@dimen/dp_10"
+        app:tl_indicator_width="@dimen/dp_20"
+        app:tl_tab_marginBottom="@dimen/dp_12"
+        app:tl_tab_msg_marginRight="@dimen/dp_10"
+        app:tl_tab_space_equal="true"
+        app:tl_tab_vertical_gravity="Bottom"
+        app:tl_textBold="SELECT"
+        app:tl_textSelectColor="@color/color_normal"
+        app:tl_textSelectSize="@dimen/sp_16"
+        app:tl_textUnSelectColor="@color/color_light_font"
+        app:tl_textUnSelectSize="@dimen/sp_16"
+        app:tl_underline_gravity="BOTTOM" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_integral"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_30"
+    android:layout_marginEnd="@dimen/dp_30"
+    android:background="@drawable/sp_pop_bg"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:gravity="center"
+        android:text="个人信息保护指引"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200">
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/dp_8"
+                android:text="@string/privacy_short_desc"
+                android:textColor="@color/color_normal"
+                android:textSize="@dimen/sp_12"
+
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_agree"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:background="@drawable/shape_login_btn"
+        android:gravity="center"
+        android:text="同意并继续"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        style="@style/CustomButton"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@color/transparent"
+        android:gravity="center"
+        android:text="不同意退出APP"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_15" />
+
+
+</LinearLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_local_tyrant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/bg_local_tyrant"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_11"
+            android:paddingBottom="@dimen/dp_6"
+            app:layout_constraintEnd_toStartOf="@id/cl_charm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_local_tyrant_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_20"
+                app:layout_constraintBottom_toTopOf="@id/tv_local_tyrant_level"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_local_tyrant_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_24"
+                android:layout_marginEnd="@dimen/dp_6"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintBottom_toBottomOf="@id/iv_local_tyrant_bg"
+                app:layout_constraintEnd_toEndOf="@id/iv_local_tyrant_bg"
+                app:layout_constraintStart_toStartOf="@id/iv_local_tyrant_bg"
+                app:layout_constraintTop_toTopOf="@id/iv_local_tyrant_bg"
+                tools:text="勇往直前" />
+
+            <TextView
+                android:id="@+id/tv_local_tyrant_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_normal"
+                android:layout_marginTop="@dimen/dp_8"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_local_tyrant_bg"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="财富等级" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_charm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_local_tyrant"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_11"
+            android:paddingBottom="@dimen/dp_6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cl_local_tyrant"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_charm_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_20"
+                app:layout_constraintBottom_toTopOf="@id/tv_charm_level"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_charm_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_24"
+                android:layout_marginEnd="@dimen/dp_6"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintBottom_toBottomOf="@id/iv_charm_bg"
+                app:layout_constraintEnd_toEndOf="@id/iv_charm_bg"
+                app:layout_constraintStart_toStartOf="@id/iv_charm_bg"
+                app:layout_constraintTop_toTopOf="@id/iv_charm_bg"
+                tools:text="勇往直前" />
+
+            <TextView
+                android:id="@+id/tv_charm_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_normal"
+                android:layout_marginTop="@dimen/dp_8"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_charm_bg"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="魅力等级" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

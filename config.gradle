@@ -21,6 +21,9 @@ ext {
         jasmine {
             dimension dimensionName
         }
+        poinsettia {
+            dimension dimensionName
+        }
     }
 
     appVersion = [
@@ -34,6 +37,11 @@ ext {
     ]
 
     jasmineAppVersion = [
+            versionName: "1.0.0",
+            versionCode: 1
+    ]
+
+    poinsettiaAppVersion = [
             versionName: "1.0.0",
             versionCode: 1
     ]
@@ -73,6 +81,18 @@ ext {
             VIVO_APP_KEY       : "c384302a365787908b90828389597ef6",
             buglyKey           : "fb49a5468d",
             urlLinkHost        : "jasmine.peony.com",
+    ]
+    poinsettiaPlaceholders = [
+            UMENG_CHANNEL_VALUE: "OFFICIAL",
+            app_label          : "彩糖交友",
+            YUNXIN_APP_ID      : "9c3106de8f4c4b69e7ff47b6b6c7aad3",// 云信APP_ID  √
+            UMENG_APPKEY       : "63105e8905844627b5392c15",//友盟   √
+            UMENG_PUSH_SECRET  : "f032abb095aae2edb3ecb3a2b5b36fa3",//友盟   √
+            BAIDU_APPKEY       : "yYYo2zoutGPfZRilaoBetevBzg0Mq884",   //百度key  √
+            VIVO_APP_ID        : "105586911",   //VIVO ID
+            VIVO_APP_KEY       : "c384302a365787908b90828389597ef6",
+            buglyKey           : "17835fcb22",
+            urlLinkHost        : "poinsettia.peony.com",
     ]
 
 

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_charge_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/tool_bar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/base_tool_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_message_price"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/white"
+                app:left_text_content="消息价格"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="true" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_voice_setting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_below="@+id/item_message_price"
+                android:background="@color/white"
+                app:left_text_content="语音接听"
+                app:right_arrow_visible="false"
+                app:right_switch_visible="true"
+                app:right_text_visible="false" />
+
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_voice_price"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_below="@+id/item_voice_setting"
+                android:background="@color/white"
+                app:left_text_content="语音价格设置"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="true" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_video_setting"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_below="@+id/item_voice_price"
+                android:background="@color/white"
+                app:left_text_content="视频接听"
+                app:right_arrow_visible="false"
+                app:right_switch_visible="true"
+                app:right_text_visible="false" />
+
+            <com.tftechsz.common.widget.CommonItemView
+                android:id="@+id/item_video_price"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_below="@+id/item_video_setting"
+                android:background="@color/white"
+                android:gravity="center"
+                app:left_text_content="视频价格设置"
+                app:right_arrow_visible="true"
+                app:right_switch_visible="false"
+                app:right_text_visible="true"
+                app:view_visible="false" />
+
+            <TextView
+                android:id="@+id/tv_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_video_price"
+                android:visibility="gone"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_22"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:text="别人主动给你发消息所需花费的金币数，能否语音视频呼叫你、收费多少，都遵从本页内的设定。\n\n
+相互关注，发消息免费；相互守护，语音、视频通话免费；月老牵线，私聊由男生支付金币。\n\n
+随着你魅力等级的提升，所能设置的价格也将提高。"
+                android:textColor="@color/color_light_font"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_tip"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:text="如何提升魅力"
+                android:textColor="@color/blue_7F89F3"
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>
