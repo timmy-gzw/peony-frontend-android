@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +40,8 @@ import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.event.UpdateEvent;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.layoutmanager.CardLayoutManager;
+import com.tftechsz.common.layoutmanager.ItemTouchHelperCallback;
 import com.tftechsz.common.other.SpaceItemDecoration;
 import com.tftechsz.common.pagestate.PageStateConfig;
 import com.tftechsz.common.pagestate.PageStateManager;
@@ -131,17 +134,6 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
         });
 
         mSmartRefreshLayout = getView(R.id.smart_refresh);
-        if (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0) {
-            mRvUser.setPadding(ConvertUtils.dp2px(16f), ConvertUtils.dp2px(10f), ConvertUtils.dp2px(16f), ConvertUtils.dp2px(10f));
-            mRvUser.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.color_f9f9f9));
-            FastScrollGridLayoutManager mLayoutManager = new FastScrollGridLayoutManager(getActivity(), 2);
-            mRvUser.setLayoutManager(mLayoutManager);
-            mRvUser.setClipToPadding(false);
-            mRvUser.addItemDecoration(new SpaceItemDecoration(ConvertUtils.dp2px(5f), ConvertUtils.dp2px(5f), false));
-        } else {
-            FastScrollLinearLayoutManager mLayoutManager = new FastScrollLinearLayoutManager(getActivity());
-            mRvUser.setLayoutManager(mLayoutManager);
-        }
         mNotDataView = getLayoutInflater().inflate(R.layout.base_empty_view, (ViewGroup) mRvUser.getParent(), false);
         mSmartRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -200,6 +192,17 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
     @Override
     protected void initData() {
         mAdapter = new RecommendAdapter(mType, service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
+        if (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0) {
+            mSmartRefreshLayout.setPrimaryColorsId(R.color.transparent);
+            CardLayoutManager cardLayoutManager = new CardLayoutManager();
+            mRvUser.setLayoutManager(cardLayoutManager);
+            ItemTouchHelperCallback itemTouchHelperCallback = new ItemTouchHelperCallback(mAdapter);
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
+            itemTouchHelper.attachToRecyclerView(mRvUser);
+        } else {
+            FastScrollLinearLayoutManager mLayoutManager = new FastScrollLinearLayoutManager(getActivity());
+            mRvUser.setLayoutManager(mLayoutManager);
+        }
         mAdapter.onAttachedToRecyclerView(mRvUser);
         mRvUser.setAdapter(mAdapter);
         mAdapter.addChildClickViewIds(R.id.ll_accost);

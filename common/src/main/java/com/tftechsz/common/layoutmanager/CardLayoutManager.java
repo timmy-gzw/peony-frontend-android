@@ -44,8 +44,8 @@ public class CardLayoutManager extends RecyclerView.LayoutManager {
             int heightPadding = (int) ((getHeight() - realHeight) / 2f);
 
             //摆放child
-            layoutDecorated(view, widthPadding, heightPadding,
-                    widthPadding + realWidth, heightPadding + realHeight);
+            int top = (int) Math.abs((CardConfig.SHOW_MAX_COUNT - 1) * CardConfig.SHOW_MAX_COUNT * CardConfig.SCALE * CardConfig.TRANSLATION_Y);
+            layoutDecorated(view, 0, top, realWidth, top + realHeight);
             //根据索引，来位移和缩放child
             int level = count - i - 1;
             //level范围（CardConfig.SHOW_MAX_COUNT-1）- 0

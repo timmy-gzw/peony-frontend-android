@@ -10,11 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.home.R;
@@ -24,6 +28,7 @@ public class HomeTopItemLayout extends LinearLayout {
     private Context mContext;
     private int oldTopSize;
     public CarrouselLayout mCarrousel;
+    private UserProviderService service;
 
     public HomeTopItemLayout(Context context) {
         super(context);
@@ -45,7 +50,7 @@ public class HomeTopItemLayout extends LinearLayout {
      */
     private void init(Context context) {
         mContext = context;
-
+        service = ARouter.getInstance().navigation(UserProviderService.class);
     }
 
     public void setData(ConfigInfo.Nav data, int topSize) {
@@ -58,6 +63,13 @@ public class HomeTopItemLayout extends LinearLayout {
         } else {
 //            View.inflate(mContext, R.layout.item_home_left, this);
             View.inflate(mContext, R.layout.item_home_right, this);
+        }
+        if(service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0){
+            ConstraintLayout constraintLayout = findViewById(R.id.content);
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(constraintLayout);
+            constraintSet.setDimensionRatio(R.id.bg_frame,"164:97");
+            constraintSet.applyTo(constraintLayout);
         }
         ImageView bg = findViewById(R.id.bg_frame);
         ImageView right_img = findViewById(R.id.right_img);

@@ -35,7 +35,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         Object remove = mAdapter.getData().remove(viewHolder.getLayoutPosition());
         if(viewHolder.getLayoutPosition() == 0) {
-            mAdapter.getData().add(remove);
+            mAdapter.getData().add(0,remove);
         }
         mAdapter.notifyDataSetChanged();
     }
@@ -58,7 +58,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
             //获取的view从下层到上层
             View view = recyclerView.getChildAt(i);
 
-            int level = CardConfig.SHOW_MAX_COUNT - i - 1;
+            int level = count - i - 1;
             //level范围（CardConfig.SHOW_MAX_COUNT-1）-0，每个child最大只移动一个CardConfig.TRANSLATION_Y和放大CardConfig.SCALE
 
             if (level == CardConfig.SHOW_MAX_COUNT - 1) { // 最下层的不动和最后第二层重叠

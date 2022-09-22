@@ -271,7 +271,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             titles.add("附近");
 
         }
-        mTabLayout.setVisibility(titles.size() > 1 ? View.VISIBLE : View.GONE);
+        mTabLayout.setVisibility((service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0)?View.VISIBLE:titles.size() > 1 ? View.VISIBLE : View.GONE);
 
         mViewPager.setAdapter(new FragmentVpAdapter(getChildFragmentManager(), fragments, titles));
         mTabLayout.setViewPager(mViewPager);
@@ -306,7 +306,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_home_ga;
     }
 
 
