@@ -72,7 +72,7 @@ public class AccostVoiceAdapter extends BaseQuickAdapter<AccostSettingListBean, 
     }
 
     public void play(ImageView animationView) {
-        animationView.setImageResource(R.drawable.nim_audio_animation_list_left);
+        animationView.setImageResource(R.drawable.nim_audio_animation_list_left_white);
         animationView.setColorFilter(Color.WHITE);
         if (animationView.getBackground() instanceof AnimationDrawable) {
             AnimationDrawable animation = (AnimationDrawable) animationView.getBackground();
