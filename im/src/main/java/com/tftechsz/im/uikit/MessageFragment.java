@@ -3235,7 +3235,7 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 //跳转金币清单
                 @Override
                 public void onAddAmount() {
-                    ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_INTEGRAL);
+//                    ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_INTEGRAL);
                 }
 
                 @Override
