@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_6"
-                android:background="@drawable/bg_recharge_pop_btn"
+                android:background="@drawable/bg_task_pop_btn"
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/sp_16"
                 android:paddingVertical="@dimen/dp_10"
