@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:drawablePadding="@dimen/dp_4"
             android:text="金币余额不足，马上充值别错过缘分～"
-            android:textColor="@color/colorPrimary"
+            android:textColor="#FD4683"
             android:textSize="@dimen/sp_14"
             app:drawableStartCompat="@mipmap/ic_recharge_coin" />
 
