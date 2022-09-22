@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_40"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#FD4683"
         android:textSize="@dimen/sp_21"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tv_exchange_num"
