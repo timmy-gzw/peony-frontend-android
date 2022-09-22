@@ -229,7 +229,7 @@ public class TrendFragment extends BaseMvpFragment implements View.OnClickListen
      * 打开图片/视频选择器
      */
     private void showMediaSelector() {
-        final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
         PermissionUtil.beforeCheckPermission(mActivity, permissions, agreeToRequest -> {
             if (agreeToRequest) {
                 mCompositeDisposable.add(new RxPermissions((FragmentActivity) mActivity)
