@@ -109,9 +109,9 @@ android {
         poinsettia {
             dimension 'office'
             buildConfigField "String", "APP_NAME", "\"poinsettia\""
-            buildConfigField "String", "WX_APPID", "\"wx5d0a60f9857addec\""
-            buildConfigField "String", "WX_APP_SC", "\"877597391120c172235dcaf6cc603c08\""
-            buildConfigField "String", "SANYAN_APP_ID", "\"MDb1ScEG\""
+            buildConfigField "String", "WX_APPID", "\"wx08523955c3f9c568\""
+            buildConfigField "String", "WX_APP_SC", "\"8d89184f6070d3fd6204f187fff97072\""
+            buildConfigField "String", "SANYAN_APP_ID", "\"qv1U7WPC\""
             buildConfigField "String", "PUSH_XM_APP_ID", "\"2882303761520182217\""  //小米推送
             buildConfigField "String", "PUSH_XM_APP_KEY", "\"5102018224217\""
             buildConfigField "String", "PUSH_XM_CERT_NAME", "\"peony-push-cert-xm\""
