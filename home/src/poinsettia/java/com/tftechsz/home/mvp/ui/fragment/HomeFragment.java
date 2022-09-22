@@ -307,7 +307,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
     }
 
     private boolean isGa(){
-        return (true || service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
+        return (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
     }
 
     @Override
