@@ -191,8 +191,8 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
 
     @Override
     protected void initData() {
-        mAdapter = new RecommendAdapter(mType, true||service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
-        if (true||service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0) {
+        mAdapter = new RecommendAdapter(mType, service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
+        if (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0) {
             mSmartRefreshLayout.setPrimaryColorsId(R.color.transparent);
             CardLayoutManager cardLayoutManager = new CardLayoutManager();
             mRvUser.setLayoutManager(cardLayoutManager);
