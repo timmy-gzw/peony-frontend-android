@@ -44,8 +44,8 @@ public class CommentPopWindow extends BaseBottomPop {
         list.add("复制");
         if (blogUserId == service.getUserId() || userId == service.getUserId()) {
             list.add("删除");
-        } else {
-            list.add("举报");
+//        } else {
+//            list.add("举报");
         }
 
         if (mAdapter == null) {

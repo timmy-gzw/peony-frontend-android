@@ -140,7 +140,7 @@ public class WealthFragment extends BaseMvpFragment {
             mTvNextLevel.setTextColor(Utils.getColor(R.color.c_edd398));
             mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
             mTitleWealth.setText("什么是财富等级");
-            mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注");
+            mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注!");
             mTitle.setText("财富称号");
         } else {//魅力
             mClBg.setBackgroundResource(R.mipmap.bg_charm_level);
