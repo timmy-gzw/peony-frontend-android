@@ -22,10 +22,10 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -148,7 +148,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
     private int mFamilyId;
     private final UserProviderService service;
     private int formType; //0默认  1家族   2派对
-    private boolean mIsFirst = true;
+    private final boolean mIsFirst = true;
     private ImageView mMore;
     private RechargeBeforePop beforePop;
     private ConstraintLayout constraintLayout;
@@ -173,7 +173,10 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
 
     //派对相关管理
     private boolean mIsMySelf, mIsManager, isOnSeat;
-    private int from_type, scene, partyRoleId, silenceSwitch;
+    private final int from_type;
+    private final int scene;
+    private int partyRoleId;
+    private int silenceSwitch;
     private PartyInfoDto partyInfoDto;
     private GifTitleAdapter mGifTitleAdapter;
     private int titleIndex = 0;
@@ -918,7 +921,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         } else if (id == R.id.tv_user_message) {  //私信
             ARouterUtils.toChatP2PActivity(sessionId, NimUIKit.getCommonP2PSessionCustomization(), null);
             dismiss();
-        }  else if (id == R.id.more) { //更多
+        } else if (id == R.id.more) { //更多
             RetrofitManager.getInstance().createFamilyApi(PublicService.class)
                     .getFamilyRole(sessionId)
                     .compose(BasePresenter.applySchedulers())
@@ -983,10 +986,19 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         } else if (id == R.id.report) { //举报
             dismiss();
             ARouterUtils.toBeforeReportActivity(TextUtils.isEmpty(sessionId) ? 0 : Integer.parseInt(sessionId), 1);
-        } else if (id == R.id.tv_all_properties){
-            PropertiesPopWindow propertiesPopWindow = new PropertiesPopWindow(getContext());
-            propertiesPopWindow.showPopupWindow();
-
+        } else if (id == R.id.tv_all_properties) {
+            try {
+                Class aClass = Class.forName("com.tftechsz.im.mvp.ui.activity.VideoCallActivity");
+                boolean activityExistsInStack = ActivityUtils.isActivityExistsInStack(aClass);
+                if (!activityExistsInStack) {
+                    PropertiesPopWindow propertiesPopWindow = new PropertiesPopWindow(getContext());
+                    propertiesPopWindow.showPopupWindow();
+                } else {
+                    ToastUtil.showToast(BaseApplication.getInstance(), "请在视频通话结束后查看");
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         } else if (id == R.id.view_dismiss)   //隐藏pop
             dismiss();
     }
@@ -1330,12 +1342,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
             segmentData_temp = Interfaces.SEGMENT_DATA;
         }
 
-        if (isPackMode()) {
-            mBind.setIsBagPackage(true);
-        } else {
-            mBind.setIsBagPackage(false);
-
-        }
+        mBind.setIsBagPackage(isPackMode());
 
         if (giftDto.is_choose_num == 1) { //需要选择数量
             mBind.setIsChooseNum(true);
