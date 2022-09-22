@@ -118,7 +118,7 @@
             app:layout_constraintTop_toTopOf="@id/rl_tab"
             tools:visibility="visible" />
 
-        <androidx.viewpager.widget.ViewPager
+        <com.tftechsz.home.widget.NoScrollVP
             android:id="@+id/vp"
             android:layout_marginTop="@dimen/dp_17"
             android:layout_width="match_parent"

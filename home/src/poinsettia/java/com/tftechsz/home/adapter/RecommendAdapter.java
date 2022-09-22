@@ -27,6 +27,8 @@ import com.tftechsz.home.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -73,14 +75,39 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
         TextView tvName = helper.getView(R.id.tv_name);
         ImageView ivAvatar = helper.getView(R.id.iv_avatar);
         String name = StringUtils.handleText(item.getNickname(), Constants.MAX_NAME_LENGTH);
-        CommonUtil.setUserName(tvName, name, item.isVip());
+
         helper.setGone(R.id.iv_real_people, item.getIs_real() != 1);  //是否真人
-        helper.setText(R.id.tv_info, item.tags);
         if (isGa) {
+            RecyclerView recyclerView = helper.getView(R.id.rv);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            recyclerView.setLayoutManager(layoutManager);
+            List<String> dates;
+            if(item.tags.contains("|")) {
+                dates = Arrays.asList(item.tags.trim().split("\\|"));
+            }else {
+                dates = new ArrayList<>();
+                dates.add(item.tags.trim());
+            }
+            recyclerView.setAdapter(new BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_home_tag, dates) {
+                @Override
+                protected void convert(@NonNull BaseViewHolder baseViewHolder, String s) {
+                    baseViewHolder.setText(R.id.tv,s);
+                }
+            });
+            CommonUtil.setUserName(tvName, name, false);
+            if (item.isVip()) {
+                tvName.setTextColor(Utils.getColor(com.tftechsz.common.R.color.vip_color));
+            } else {
+                tvName.setTextColor(Utils.getColor(com.tftechsz.common.R.color.white));
+            }
+            helper.setVisible(R.id.iv_vip,item.isVip());
             helper.setVisible(R.id.iv_online, item.getIs_online() == 1); //是否在线  1:在线
             GlideUtils.loadRoundImage(getContext(), ivAvatar, item.getIcon(), 16);
             helper.setImageResource(R.id.ll_accost, item.isAccost() ? R.mipmap.ic_home_ga_p2p : R.mipmap.ic_home_ga_accost);//私聊/搭讪
         } else {
+            helper.setText(R.id.tv_info, item.tags);
+            CommonUtil.setUserName(tvName, name, item.isVip());
             View bgFrame = helper.getView(R.id.bg_frame);
 
             if (mType == 1) {   //推荐

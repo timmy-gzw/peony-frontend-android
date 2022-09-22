@@ -53,8 +53,8 @@
 
     <LinearLayout
         android:id="@+id/ll_info"
-        app:layout_constraintBottom_toTopOf="@id/tv_info"
-        app:layout_constraintLeft_toLeftOf="@id/tv_info"
+        app:layout_constraintBottom_toTopOf="@id/rv"
+        app:layout_constraintLeft_toLeftOf="@id/rv"
         android:layout_marginBottom="@dimen/dp_20"
         android:layout_width="wrap_content"
         android:gravity="center_vertical"
@@ -70,6 +70,8 @@
 
         <ImageView
             android:id="@+id/iv_vip"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_marginEnd="@dimen/dp_6"
             android:layout_height="wrap_content"
@@ -87,27 +89,22 @@
 
     </LinearLayout>
 
-
-
-    <TextView
-        android:id="@+id/tv_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginBottom="@dimen/dp_16"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
         app:layout_constraintEnd_toEndOf="@id/iv_avatar"
         app:layout_constraintStart_toStartOf="@id/iv_avatar"
-        tools:text="深圳 | 21岁 | 166cm | 护士" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_home_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <ImageView
         android:id="@+id/ll_accost"
-        android:layout_width="@dimen/dp_52"
-        android:layout_height="@dimen/dp_52"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
         android:layout_marginEnd="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_size_50"
         android:src="@mipmap/ic_home_ga_accost"

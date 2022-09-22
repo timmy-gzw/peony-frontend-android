@@ -180,10 +180,13 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             if (verticalOffset < -150) {
                 if (mTabLayout != null) mTabLayout.setBackgroundResource(R.color.white);
                 //fixme 个性化推荐审核开关使用
-                if (mTabLayout != null && mTabLayout.getVisibility() == View.GONE) mViewPager.setBackgroundResource(R.color.white);
+                if (mTabLayout != null && mTabLayout.getVisibility() == View.GONE)
+                    mViewPager.setBackgroundResource(R.color.white);
             } else {
-                if (mTabLayout != null) mTabLayout.setBackgroundResource(R.drawable.bg_white_top_radius20);
-                if (mTabLayout != null && mTabLayout.getVisibility() == View.GONE) mViewPager.setBackgroundResource(R.drawable.bg_white_top_radius20);
+                if (mTabLayout != null)
+                    mTabLayout.setBackgroundResource(R.drawable.bg_white_top_radius20);
+                if (mTabLayout != null && mTabLayout.getVisibility() == View.GONE)
+                    mViewPager.setBackgroundResource(R.drawable.bg_white_top_radius20);
             }
         });
         mLl_home_top_item = getView(R.id.ll_home_top_item);
@@ -271,7 +274,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             titles.add("附近");
 
         }
-        mTabLayout.setVisibility((service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0)?View.VISIBLE:titles.size() > 1 ? View.VISIBLE : View.GONE);
+        mTabLayout.setVisibility(isGa() ? View.VISIBLE : titles.size() > 1 ? View.VISIBLE : View.GONE);
 
         mViewPager.setAdapter(new FragmentVpAdapter(getChildFragmentManager(), fragments, titles));
         mTabLayout.setViewPager(mViewPager);
@@ -303,10 +306,13 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         }
     }
 
+    private boolean isGa(){
+        return (true || service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
+    }
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_home_ga;
+        return  isGa()? R.layout.fragment_home_ga : R.layout.fragment_home;
     }
 
 
