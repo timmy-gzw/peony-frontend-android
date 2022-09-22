@@ -29,8 +29,6 @@ public class BaseUserInfoAdapter extends BaseQuickAdapter<UserInfo.BaseInfo, Bas
     @Override
     protected void convert(@NonNull BaseViewHolder helper, UserInfo.BaseInfo item) {
         TextView tvValue = helper.getView(R.id.tv_value);
-        tvValue.setText(item.value);
-
         TextView textView = helper.getView(R.id.tv_name);
         textView.setText(item.title);
         if (textWidth > 0) {
@@ -39,10 +37,12 @@ public class BaseUserInfoAdapter extends BaseQuickAdapter<UserInfo.BaseInfo, Bas
 
         if (helper.getLayoutPosition() == 0) {
             helper.setGone(R.id.iv_copy, false);
-            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(tvValue, 8, 14, 1, TypedValue.COMPLEX_UNIT_SP);
+            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(tvValue, 8, 12, 1, TypedValue.COMPLEX_UNIT_SP);
         } else {
             helper.setGone(R.id.iv_copy, true);
             TextViewCompat.setAutoSizeTextTypeWithDefaults(tvValue, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
+            tvValue.setTextSize(12);
         }
+        tvValue.setText(item.value);
     }
 }
