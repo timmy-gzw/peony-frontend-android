@@ -101,7 +101,7 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
             } else {
                 tvName.setTextColor(Utils.getColor(com.tftechsz.common.R.color.white));
             }
-            helper.setVisible(R.id.iv_vip,item.isVip());
+            helper.setGone(R.id.iv_vip,item.isVip());
             helper.setVisible(R.id.iv_online, item.getIs_online() == 1); //是否在线  1:在线
             GlideUtils.loadRoundImage(getContext(), ivAvatar, item.getIcon(), 16);
             helper.setImageResource(R.id.ll_accost, item.isAccost() ? R.mipmap.ic_home_ga_p2p : R.mipmap.ic_home_ga_accost);//私聊/搭讪
