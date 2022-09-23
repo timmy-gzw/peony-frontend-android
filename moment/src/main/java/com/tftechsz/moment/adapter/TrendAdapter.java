@@ -281,7 +281,9 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
 //            tvAddress = view.findViewById(R.id.tv_address);
             tvAccost = view.findViewById(R.id.tv_accost);//私信
             rvTrendImage = view.findViewById(R.id.rv_trend_image);
-            mPlayerContainer.setOnClickListener(v -> mOnItemChildClickListener.onItemChildClick(mPosition, mPlayerContainer));
+            if (mPlayerContainer != null && mOnItemChildClickListener != null) {
+                mPlayerContainer.setOnClickListener(v -> mOnItemChildClickListener.onItemChildClick(mPosition, mPlayerContainer));
+            }
             //通过tag将ViewHolder和itemView绑定
             view.setTag(this);
         }
