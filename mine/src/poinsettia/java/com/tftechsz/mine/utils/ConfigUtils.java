@@ -79,6 +79,8 @@ public class ConfigUtils {
 //        numberParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 //        numberLayout.setLayoutParams(numberParams);
         ConstraintLayout autoLoginLayout = (ConstraintLayout) inflater.inflate(R.layout.activity_auto_login, null);
+        ConstraintLayout.LayoutParams customLayout = new ConstraintLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        autoLoginLayout.setLayoutParams(customLayout);
         cusLogins(autoLoginLayout);
         RelativeLayout alternativeLoginsLayout = (RelativeLayout) inflater.inflate(R.layout.layout_alternative_login, null);
         RelativeLayout.LayoutParams layoutParamsOther = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
