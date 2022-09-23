@@ -83,16 +83,16 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(layoutManager);
             List<String> dates;
-            if(item.tags.contains("|")) {
+            if (item.tags.contains("|")) {
                 dates = Arrays.asList(item.tags.trim().split("\\|"));
-            }else {
+            } else {
                 dates = new ArrayList<>();
                 dates.add(item.tags.trim());
             }
             recyclerView.setAdapter(new BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_home_tag, dates) {
                 @Override
                 protected void convert(@NonNull BaseViewHolder baseViewHolder, String s) {
-                    baseViewHolder.setText(R.id.tv,s);
+                    baseViewHolder.setText(R.id.tv, s);
                 }
             });
             CommonUtil.setUserName(tvName, name, false);
@@ -101,7 +101,7 @@ public class RecommendAdapter extends BaseQuickAdapter<UserInfo, BaseViewHolder>
             } else {
                 tvName.setTextColor(Utils.getColor(com.tftechsz.common.R.color.white));
             }
-            helper.setGone(R.id.iv_vip,item.isVip());
+            helper.setGone(R.id.iv_vip, !item.isVip());
             helper.setVisible(R.id.iv_online, item.getIs_online() == 1); //是否在线  1:在线
             GlideUtils.loadRoundImage(getContext(), ivAvatar, item.getIcon(), 16);
             helper.setImageResource(R.id.ll_accost, item.isAccost() ? R.mipmap.ic_home_ga_p2p : R.mipmap.ic_home_ga_accost);//私聊/搭讪

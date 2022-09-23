@@ -13,7 +13,7 @@
         app:radius="@dimen/dp_16"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_default_avatar"
-        app:layout_constraintDimensionRatio="343:487"
+        app:layout_constraintDimensionRatio="343:600"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

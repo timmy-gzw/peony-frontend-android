@@ -265,7 +265,11 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             recommendUserFragment = RecommendUserFragment.newInstance(homeTabNav.type);
             if (recommendUserFragment != null) {
                 fragments.add(recommendUserFragment);
-                titles.add(homeTabNav.title);
+                String title = homeTabNav.title;
+                if(isGa()&&!TextUtils.isEmpty(title)){
+                    title =  title.replace("推荐","缘分");
+                }
+                titles.add(title);
             }
         }
 
@@ -306,13 +310,13 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         }
     }
 
-    private boolean isGa(){
+    private boolean isGa() {
         return (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
     }
 
     @Override
     protected int getLayout() {
-        return  isGa()? R.layout.fragment_home_ga : R.layout.fragment_home;
+        return isGa() ? R.layout.fragment_home_ga : R.layout.fragment_home;
     }
 
 
