@@ -20,7 +20,6 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.like.LikeButton;
@@ -68,8 +67,8 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
 //        AvatarVipFrameView ivAvatar = holder.getView(R.id.iv_avatar);
 //        ivAvatar.setBgFrame(item.picture_frame);
         ImageView ivAvatar = holder.getView(R.id.iv_avatar);
-        int radius = Utils.getDimensPx(getContext(),R.dimen.trend_avater_image_radius);
-        GlideUtils.loadRoundImage(getContext(), ivAvatar, item.getIcon(),radius);
+        int radius = Utils.getDimensPx(getContext(), R.dimen.trend_avater_image_radius);
+        GlideUtils.loadRoundImage(getContext(), ivAvatar, item.getIcon(), radius);
 
         holder.tvTime.setText(item.getCreated_at());
 //        helper.setText(R.id.tv_look_times, item.getProvince());  //浏览次数
@@ -85,7 +84,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         holder.btnLike.setLiked(item.isPraise());
         holder.mPosition = holder.getLayoutPosition();
         holder.tvLikeCount.setText(item.getPraises() == 0 ? "点赞" : String.valueOf(item.getPraises()));
-        holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0 ? R.color.color_light_font : R.color.color_trend_thumbs_up));
+        holder.tvLikeCount.setTextColor(context.getResources().getColor(item.getIs_praise() == 0 ? R.color.color_light_font : R.color.c_like));
         holder.tvDiscussCount.setText(item.getComments() == 0 ? "评论" : String.valueOf(item.getComments()));
         holder.setVisible(R.id.iv_real, item.isReal());  //是否真人
         holder.mPlayerContainer.setTransitionName(Utils.getString(R.string.video_transitions));
@@ -153,8 +152,10 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         ViewGroup.LayoutParams lp = Utils.filterVideoWH(holder.mPlayerContainer.getLayoutParams(),
                 (int) (ScreenUtils.getScreenWidth() / Interfaces.VideoW), (int) (ScreenUtils.getScreenHeight() / Interfaces.VideoH), item.getVideo_size().get(0), item.getVideo_size().get(1));
         holder.mPlayerContainer.setLayoutParams(lp);
-        int radius = Utils.getDimensPx(getContext(),R.dimen.trend_image_radius);
-        GlideUtils.loadRoundImage(holder.mThumb.getContext(), holder.mThumb, item.getMedia_mini() != null ? item.getMedia_mini().get(0) : item.getMedia().get(0),android.R.color.darker_gray,0,radius);
+        int radius = Utils.getDimensPx(getContext(), R.dimen.trend_image_radius);
+        if (holder.mThumb != null) {
+            GlideUtils.loadRoundImage(holder.mThumb.getContext(), holder.mThumb, item.getMedia_mini() != null ? item.getMedia_mini().get(0) : item.getMedia().get(0), android.R.color.darker_gray, 0, radius);
+        }
     }
 
     public void praiseSuccess(int blog_id, int praises) {
@@ -169,7 +170,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
                 if (likeCount != null) {
                     likeCount.setAnimationDuration(praises == 1 ? 0 : Interfaces.TICKERVIEW_ANIMATION_LIKE);
                     likeCount.setText(String.valueOf(praises));
-                    likeCount.setTextColor(context.getResources().getColor(praises == 0 ? R.color.color_light_font : R.color.colorPrimary));
+                    likeCount.setTextColor(context.getResources().getColor(praises == 0 ? R.color.color_light_font : R.color.c_like));
                 }
                 break;
             }
@@ -240,7 +241,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
         TickerView tvLike = (TickerView) getViewByPosition(clickPosition, R.id.tv_like_count);
         if (tvLike != null) {
             tvLike.setText(data.getPraises() == 0 ? "点赞" : String.valueOf(data.getPraises()));
-            tvLike.setTextColor(context.getResources().getColor(data.getIs_praise() == 0 ? R.color.color_light_font : R.color.colorPrimary));
+            tvLike.setTextColor(context.getResources().getColor(data.getIs_praise() == 0 ? R.color.color_light_font : R.color.c_like));
         }
 
         TickerView tvLikeCount = (TickerView) getViewByPosition(clickPosition, R.id.tv_discuss_count);
@@ -265,7 +266,9 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
             mImgVip = view.findViewById(R.id.img_vip_dii);
             constraintLayout = view.findViewById(R.id.dynamic_item_image_root_view);
             mPrepareView = view.findViewById(R.id.prepare_view);
-            mThumb = mPrepareView.findViewById(R.id.thumb);
+            if (mPrepareView != null) {
+                mThumb = mPrepareView.findViewById(R.id.thumb);
+            }
             //videoBg = view.findViewById(R.id.video_bg);
             tvName = view.findViewById(R.id.tv_name);
             tvTime = view.findViewById(R.id.tv_time);

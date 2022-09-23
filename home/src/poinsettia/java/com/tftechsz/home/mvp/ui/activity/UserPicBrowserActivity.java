@@ -225,7 +225,7 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
     private void performLike(int is_praise_picture, int praise_picture_count) {
         mTv_like.setAnimationDuration(300);
         mTv_like.setText(String.valueOf(praise_picture_count));
-        mTv_like.setTextColor(getResources().getColor(is_praise_picture == 1 ? R.color.colorPrimary : R.color.color_light_font));
+        mTv_like.setTextColor(getResources().getColor(is_praise_picture == 1 ? R.color.c_like : R.color.color_light_font));
         mLlLike.setBackground(getResources().getDrawable(is_praise_picture == 1?R.drawable.shape_border_fd4683_radius_100:R.drawable.shape_border_979797_radius_100));
         mIv_like.setLiked(is_praise_picture != 0);
     }
