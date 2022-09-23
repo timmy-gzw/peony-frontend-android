@@ -1,47 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/sp_pop_bg"
+    android:orientation="vertical">
 
-    <View
-        android:id="@+id/view_top"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginHorizontal="@dimen/dp_20"
- />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/iv_bg"
         android:layout_width="wrap_content"
-        android:layout_marginTop="-46dp"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:src="@mipmap/bg_intmacy_upgrade"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_bg"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:src="@mipmap/bg_intmacy_upgrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_go_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_49"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/bg_red_radius100"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_92"
+        android:text="继续聊天升级"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintBottom_toBottomOf="@id/iv_bg"
+        app:layout_constraintLeft_toLeftOf="@id/iv_bg"
+        app:layout_constraintRight_toRightOf="@id/iv_bg" />
 
-        <TextView
-            android:id="@+id/tv_go_chat"
-            app:layout_constraintBottom_toBottomOf="@id/iv_bg"
-            app:layout_constraintLeft_toLeftOf="@id/iv_bg"
-            app:layout_constraintRight_toRightOf="@id/iv_bg"
-            android:text="继续聊天升级"
-            android:layout_marginBottom="@dimen/dp_20"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/dp_92"
-            android:textSize="@dimen/sp_16"
-            android:textColor="@color/white"
-            android:background="@drawable/bg_red_radius100"
-            android:layout_height="@dimen/dp_49"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
