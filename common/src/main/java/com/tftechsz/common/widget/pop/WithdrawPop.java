@@ -43,7 +43,7 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
     private PopWithdrawBindBinding mBind;
     private CompositeDisposable mCompositeDisposable;
     private CountBackUtils countBackUtils;
-    private String typeId;
+    private final String typeId;
     private WithdrawReq.Withdraw withdrawRes;
 
     public WithdrawPop(String type_id) {
@@ -118,12 +118,12 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
         }
     }
 
-    private void showPop(){
-        BasePayTypePopWindow popWindow = new BasePayTypePopWindow(getContext(),1);
-        if(withdrawRes != null && withdrawRes.is_show == 1){
-            popWindow.setInfo(withdrawRes.account,withdrawRes.name,withdrawRes.identity,withdrawRes.phone);
-            popWindow.setTypeId(typeId);
+    private void showPop() {
+        BasePayTypePopWindow popWindow = new BasePayTypePopWindow(getContext(), 1);
+        if (withdrawRes != null && withdrawRes.is_show == 1) {
+            popWindow.setInfo(withdrawRes.account, withdrawRes.name, withdrawRes.identity, withdrawRes.phone);
         }
+        popWindow.setTypeId(typeId);
         popWindow.showPopupWindow();
     }
 
