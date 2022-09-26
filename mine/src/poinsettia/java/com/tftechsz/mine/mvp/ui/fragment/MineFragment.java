@@ -167,7 +167,7 @@ public class MineFragment extends BaseMvpFragment<IMineView, MinePresenter> impl
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_mine;
+        return CommonUtil.isGa(service) ?  R.layout.fragment_mine_ga :  R.layout.fragment_mine;
     }
 
     @Override
