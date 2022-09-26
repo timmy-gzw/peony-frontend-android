@@ -40,7 +40,7 @@ public class MessageNotificationPopWindow extends BaseCenterPop {
         setOutSideDismiss(false);
         findViewById(R.id.iv_del).setOnClickListener(v -> dismiss());
         mIvGif = findViewById(R.id.iv_gif);
-        if(isGa()){
+        if(CommonUtil.isGa()){
             Glide.with(context).load(R.drawable.ga_notification).into(mIvGif);
         }else if (RomUtils.isHuawei()) {
             Glide.with(context).load(R.drawable.gif_notification_huawei).into(mIvGif);
@@ -68,10 +68,6 @@ public class MessageNotificationPopWindow extends BaseCenterPop {
 
     @Override
     protected View createPopupById() {
-        return createPopupById(isGa()?R.layout.pop_message_notification_ga:R.layout.pop_message_notification);
-    }
-
-    private boolean isGa(){
-        return CommonUtil.isGa(ARouter.getInstance().navigation(UserProviderService.class));
+        return createPopupById(CommonUtil.isGa()?R.layout.pop_message_notification_ga:R.layout.pop_message_notification);
     }
 }

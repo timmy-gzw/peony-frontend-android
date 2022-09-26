@@ -134,6 +134,14 @@ public class CommonUtil {
         WatchMan.setSeniorCollectStatus(false); //提交token后，关闭传感器数据采集
     }
 
+    /**
+     * 判断是否是ga环境
+     * @return
+     */
+    public static boolean isGa() {
+        UserProviderService service = ARouter.getInstance().navigation(UserProviderService.class);
+        return isGa(service);
+    }
 
     /**
      * 判断是否是ga环境
