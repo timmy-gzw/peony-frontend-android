@@ -9,11 +9,15 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.RomUtils;
+import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.tftechsz.common.R;
 import com.tftechsz.common.constant.Interfaces;
+import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.CommonUtil;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -36,7 +40,9 @@ public class MessageNotificationPopWindow extends BaseCenterPop {
         setOutSideDismiss(false);
         findViewById(R.id.iv_del).setOnClickListener(v -> dismiss());
         mIvGif = findViewById(R.id.iv_gif);
-        if (RomUtils.isHuawei()) {
+        if(isGa()){
+            Glide.with(context).load(R.drawable.ga_notification).into(mIvGif);
+        }else if (RomUtils.isHuawei()) {
             Glide.with(context).load(R.drawable.gif_notification_huawei).into(mIvGif);
         } else if (RomUtils.isVivo()) {
             Glide.with(context).load(R.drawable.gif_notification_vivo).into(mIvGif);
@@ -62,6 +68,10 @@ public class MessageNotificationPopWindow extends BaseCenterPop {
 
     @Override
     protected View createPopupById() {
-        return createPopupById(R.layout.pop_message_notification);
+        return createPopupById(isGa()?R.layout.pop_message_notification_ga:R.layout.pop_message_notification);
+    }
+
+    private boolean isGa(){
+        return CommonUtil.isGa(ARouter.getInstance().navigation(UserProviderService.class));
     }
 }
