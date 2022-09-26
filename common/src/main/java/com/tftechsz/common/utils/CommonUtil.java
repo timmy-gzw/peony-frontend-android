@@ -140,7 +140,7 @@ public class CommonUtil {
      * @param service
      * @return
      */
-    private boolean isGa(UserProviderService service) {
+    public static boolean isGa(UserProviderService service) {
         return (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
     }
     /**

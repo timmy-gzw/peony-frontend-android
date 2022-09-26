@@ -266,7 +266,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             if (recommendUserFragment != null) {
                 fragments.add(recommendUserFragment);
                 String title = homeTabNav.title;
-                if(isGa()&&!TextUtils.isEmpty(title)){
+                if(CommonUtil.isGa(service)&&!TextUtils.isEmpty(title)){
                     title =  title.replace("推荐","缘分");
                 }
                 titles.add(title);
@@ -278,7 +278,7 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
             titles.add("附近");
 
         }
-        mTabLayout.setVisibility(isGa() ? View.VISIBLE : titles.size() > 1 ? View.VISIBLE : View.GONE);
+        mTabLayout.setVisibility(CommonUtil.isGa(service) ? View.VISIBLE : titles.size() > 1 ? View.VISIBLE : View.GONE);
 
         mViewPager.setAdapter(new FragmentVpAdapter(getChildFragmentManager(), fragments, titles));
         mTabLayout.setViewPager(mViewPager);
@@ -310,13 +310,10 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
         }
     }
 
-    private boolean isGa() {
-        return (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
-    }
 
     @Override
     protected int getLayout() {
-        return isGa() ? R.layout.fragment_home_ga : R.layout.fragment_home;
+        return CommonUtil.isGa(service) ? R.layout.fragment_home_ga : R.layout.fragment_home;
     }
 
 
