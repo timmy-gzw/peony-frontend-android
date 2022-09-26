@@ -54,7 +54,7 @@ public class TrendAdapter extends BaseQuickAdapter<CircleBean, TrendAdapter.Tend
     private final OnItemChildVideoClickListener mOnItemChildClickListener;
 
     public TrendAdapter(Activity context, OnItemChildVideoClickListener mOnItemChildClickListener) {
-        super(R.layout.dynamic_item_image);
+        super(CommonUtil.isGa()?R.layout.dynamic_item_image_ga:R.layout.dynamic_item_image);
         this.mOnItemChildClickListener = mOnItemChildClickListener;
         this.context = context;
         ARouter.getInstance().inject(this);
