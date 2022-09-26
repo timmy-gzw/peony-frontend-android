@@ -24,6 +24,7 @@ import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpFragment;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
@@ -67,21 +68,25 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     private ArrayList<GiftDto> gifts = null;
 
     private ConstraintLayout mClLevelHidden, mClGiftHidden;
-    private LinearLayout mLlLevelCover,mLlGiftCover;
+    private LinearLayout mLlLevelCover, mLlGiftCover;
+    private TextView tvSignInfoGa;//GA环境下参数
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_mine_about_me;
+        return CommonUtil.isGa() ? R.layout.fragment_mine_about_me_ga : R.layout.fragment_mine_about_me;
     }
 
     @Override
     public void initUI(Bundle savedInstanceState) {
+        if (CommonUtil.isGa(service)) {
+            tvSignInfoGa = getView(R.id.tv_sign_info);
+        }
         //用户基本信息
         TextView tvUserInfo = getView(R.id.tv_user_info);
         RecyclerView rvUserInfo = getView(R.id.rv_user_info);
-        rvUserInfo.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        rvUserInfo.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(10f), ConvertUtils.dp2px(6), false));
-        userInfoAdapter = new BaseUserInfoAdapter();
+        rvUserInfo.setLayoutManager(new GridLayoutManager(getContext(), CommonUtil.isGa(service) ? 3 : 2));
+        rvUserInfo.addItemDecoration(new SpacingDecoration(CommonUtil.isGa(service) ? 0 : ConvertUtils.dp2px(10f), ConvertUtils.dp2px(6), false));
+        userInfoAdapter = new BaseUserInfoAdapter(CommonUtil.isGa(service));
         userInfoAdapter.addChildClickViewIds(R.id.iv_copy);
         userInfoAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.iv_copy) {
@@ -185,9 +190,11 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             } else {
                 mClGiftHidden.setVisibility(View.VISIBLE);
             }
+            if (tvSignInfoGa != null) tvSignInfoGa.setText(TextUtils.isEmpty(mUserInfo.getDesc()) ? "填写交友宣言更容易获得别人关注哦~" : mUserInfo.getDesc());
         } else {
             tvLevelTitle.setText(mUserInfo.isGirl() ? getString(R.string.level_her) : getString(R.string.level_his));
             tvGiftTitle.setText(mUserInfo.isGirl() ? getString(R.string.receive_gift_her) : getString(R.string.receive_gift_his));
+            if (tvSignInfoGa != null) tvSignInfoGa.setText(TextUtils.isEmpty(mUserInfo.getDesc()) ? "对方很懒，还没有交友宣言~" : mUserInfo.getDesc());
         }
     }
 

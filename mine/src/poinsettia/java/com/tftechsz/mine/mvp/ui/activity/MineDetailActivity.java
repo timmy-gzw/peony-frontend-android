@@ -181,7 +181,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         ivPicAdd = findViewById(R.id.iv_profile_add);
         viewPicMask = findViewById(R.id.view_mask);
         ivPicAdd.setOnClickListener(this);
-        ivPicAdd.setVisibility(TextUtils.isEmpty(mUserId) ? View.VISIBLE : View.GONE);
+        ivPicAdd.setVisibility(CommonUtil.isGa() ? View.GONE : (TextUtils.isEmpty(mUserId) ? View.VISIBLE : View.GONE));
         mRvPic = findViewById(R.id.rv_profile_pic);
         mRvPic.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         mRvPic.addItemDecoration(new SpaceItemDecoration(ConvertUtils.dp2px(6), 0, false));
@@ -241,8 +241,8 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             }
         }
         ArrayList<CustomTabEntity> entities = new ArrayList<>();
-        entities.add(new TabEntity(firstTabName, R.drawable.bg_triangle_up_333, 0));
-        entities.add(new TabEntity(getString(R.string.moment), R.drawable.bg_triangle_up_333, 0));
+        entities.add(new TabEntity(firstTabName, CommonUtil.isGa() ? 0 : R.drawable.bg_triangle_up_333, 0));
+        entities.add(new TabEntity(getString(R.string.moment), CommonUtil.isGa() ? 0 : R.drawable.bg_triangle_up_333, 0));
         mTabLayout.setTabData(entities);
         List<Fragment> fragments = new ArrayList<>();
         fragments.add((Fragment) ARouter.getInstance()
@@ -542,7 +542,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_mine_detail;
+        return CommonUtil.isGa() ? R.layout.activity_mine_detail_ga : R.layout.activity_mine_detail;
     }
 
     @Override
@@ -813,18 +813,18 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         if (!TextUtils.isEmpty(mUserInfo.audit_voice)) {
             mTvVoiceTime.setText("审核中");
             mIvVoice.setBackgroundResource(R.mipmap.mine_ic_voice_record);
-            mLlVoice.setVisibility(View.VISIBLE);
+            mLlVoice.setVisibility(CommonUtil.isGa() ? View.GONE : View.VISIBLE);
         } else {
             if (TextUtils.isEmpty(mUserInfo.voice)) {   //没有音视频文件
                 mIvVoice.setBackgroundResource(R.mipmap.mine_ic_voice_record);
                 mTvVoiceTime.setText("录制语音");
-                mLlVoice.setVisibility(TextUtils.isEmpty(mUserId) ? View.VISIBLE : View.GONE);
+                mLlVoice.setVisibility(CommonUtil.isGa() ? View.GONE : (TextUtils.isEmpty(mUserId) ? View.VISIBLE : View.GONE));
             } else {
                 mIvVoice.setBackgroundResource(R.mipmap.mine_ic_voice_stop);
                 mediaTime = Utils.filterTime(mUserInfo.voice_time);
                 mediaTimeTemp = mediaTime;
                 mTvVoiceTime.setText(mUserInfo.voice_time);
-                mLlVoice.setVisibility(View.VISIBLE);
+                mLlVoice.setVisibility(CommonUtil.isGa() ? View.GONE : View.VISIBLE);
                 resetMediaPlayer(mUserInfo.voice, TextUtils.equals(getLocalClassName(), AppManager.getAppManager().currentActivity().getLocalClassName()));
             }
         }
