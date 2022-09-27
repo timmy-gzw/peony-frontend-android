@@ -51,6 +51,19 @@
     ########记录生成的日志数据，gradle build时 在本项目根目录输出-end######
     #####混淆保护自己项目的部分代码以及引用的第三方jar包library#######
 
+
+
+
+
+    #junk code 垃圾代码配置
+    ###### com.tftechsz.ivy.atest为前面配置的packageBase
+    # -keep class com.tftechsz.ivy.joke.** {*;}
+    # -keep class com.tftechsz.jasmine.joke.** {*;}
+    -keep class com.emeraldtechhn.poinsettia.joke.** {*;}
+
+
+
+
     #如果不想混淆 keep 掉
     -keep class com.lippi.recorder.iirfilterdesigner.** {*; }
     #友盟
