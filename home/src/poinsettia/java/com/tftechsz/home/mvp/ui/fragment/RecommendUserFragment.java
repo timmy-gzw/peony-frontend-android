@@ -191,7 +191,7 @@ public class RecommendUserFragment extends BaseMvpFragment<IHomeView, HomePresen
 
     @Override
     protected void initData() {
-        boolean isGa = service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0;
+        boolean isGa = CommonUtil.isGa();
         mAdapter = new RecommendAdapter(mType, isGa);
         if (isGa) {
             mSmartRefreshLayout.setPrimaryColorsId(R.color.transparent);
