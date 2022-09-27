@@ -28,6 +28,7 @@ public class UserBanPopWindow extends BaseCenterPop{
         tvContent = findViewById(R.id.tv_content);
         tvBtn = findViewById(R.id.tv_btn);
         tvBtn.setOnClickListener(v -> {
+            dismiss();
             if(listener != null){
                 listener.onClick(v);
             }
