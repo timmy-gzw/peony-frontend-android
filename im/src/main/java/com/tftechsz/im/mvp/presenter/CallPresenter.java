@@ -306,8 +306,8 @@ public class CallPresenter extends BasePresenter<ICallView> {
     /**
      * 检测男生是否又钱通话
      */
-    public void checkAcceptCheck(InviteParamBuilder paramBuilder, String account) {
-        addNet(service.checkAcceptCheck(userService.getCallId()).compose(applySchedulers())
+    public void checkAcceptCheck(InviteParamBuilder paramBuilder, String account,String callId) {
+        addNet(service.checkAcceptCheck(callId).compose(applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<CallStatusInfo>>() {
                     @Override
                     public void onSuccess(BaseResponse<CallStatusInfo> response) {
