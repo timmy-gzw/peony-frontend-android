@@ -185,14 +185,14 @@ androidJunkCode {
     }
     def poinsettiaConfig = {
         packageBase = "com.emeraldtechhn.poinsettia"
-        packageCount = 60
-        activityCountPerPackage = 8
+        packageCount = 70
+        activityCountPerPackage = 10
         excludeActivityJavaFile = false
-        otherCountPerPackage = 80
-        methodCountPerClass = 60
+        otherCountPerPackage = 100
+        methodCountPerClass = 80
         resPrefix = "poinsettia"
-        drawableCount = 600
-        stringCount = 600
+        drawableCount = 700
+        stringCount = 700
     }
     variantConfig {
         "heartRelease" heartConfig
