@@ -18,7 +18,7 @@ buildscript {
         classpath 'com.huawei.agconnect:agcp:1.4.2.300'
         classpath "com.alibaba:arouter-register:1.0.2"
         // 隐私权限
-        classpath 'com.github.allenymt.PrivacySentry:plugin-sentry:1.0.7'
+        classpath 'com.github.allenymt.PrivacySentry:plugin-sentry:1.1.0'
         classpath "com.github.qq549631030:android-junk-code:1.1.2"
 
     }
