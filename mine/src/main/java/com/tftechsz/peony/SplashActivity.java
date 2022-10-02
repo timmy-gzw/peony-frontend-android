@@ -234,6 +234,11 @@ public class SplashActivity extends BaseMvpActivity<ILoginView, LoginPresenter> 
 
     // 处理收到的Intent
     private void onIntent() {
+        String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
+        if (!TextUtils.isEmpty(pass)) {
+            ARouterUtils.toYouthModelActivity();
+            return;
+        }
         // 已经登录过了，处理过来的请求
         Intent intent = getIntent();
         if (intent != null) {
