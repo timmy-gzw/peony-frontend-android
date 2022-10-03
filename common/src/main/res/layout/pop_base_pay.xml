@@ -89,7 +89,7 @@
             android:id="@+id/tv_terms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_15"
+            android:paddingHorizontal="@dimen/dp_25"
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="center"
             android:paddingBottom="@dimen/dp_20"
