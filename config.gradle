@@ -200,7 +200,7 @@ ext {
             "integration"           : "com.github.bumptech.glide:okhttp3-integration:4.11.0",
             "glide-extension"       : "com.gitee.arcns:glide-extension:0.3",
             "mmkv"                  : "com.tencent:mmkv:1.2.11",
-            "livedetect"            : "io.github.yidun:livedetect:3.0.8",
+            "livedetect"            : "io.github.yidun:livedetect:3.1.7",
             "realtimeblurview"      : "com.github.mmin18:realtimeblurview:1.2.1",
             "gif"                   : "pl.droidsonroids.gif:android-gif-drawable:1.2.22",
             "ctpv"                  : "com.sfyc.ctpv:library:1.1.3",
