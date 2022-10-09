@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
-
 import com.blankj.utilcode.util.FileUtils;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.R;
@@ -33,6 +31,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import androidx.annotation.RequiresApi;
 import zlc.season.rxdownload4.utils.HttpUtilKt;
 
 /**
@@ -50,6 +49,7 @@ public class UpdateDialog extends Dialog {
     private Activity mContext;
     private static final int DOWN_UPDATE = 1;
     private static final int DOWN_OVER = 2;
+    private boolean isDownSuccess = false;
     private int progress;// 当前进度
     private boolean interceptFlag = false;// 用户取消下载
     private long currentTime;
@@ -61,9 +61,11 @@ public class UpdateDialog extends Dialog {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case DOWN_UPDATE:
+                    isDownSuccess = false;
                     mIvClose.setVisibility(View.INVISIBLE);
                     mFlProgress.setVisibility(View.VISIBLE);
                     mTvSure.setVisibility(View.GONE);
+                    mTvSure.setText("立即体验");
                     int imageStart = 0;
                     if (mPbProgress.getProgress() > 0) {
                         int right = (int) ((mPbProgress.getWidth() - mPbProgress.getPaddingLeft() - mPbProgress.getPaddingRight()) / (mPbProgress.getMax() * 1.0f) * mPbProgress.getProgress() - DensityUtils.dp2px(mContext, 3) + mPbProgress.getPaddingLeft());
@@ -81,7 +83,10 @@ public class UpdateDialog extends Dialog {
                     break;
 
                 case DOWN_OVER:
-                    mIvProgress.setVisibility(View.INVISIBLE);
+                    isDownSuccess = true;
+                    mFlProgress.setVisibility(View.INVISIBLE);
+                    mTvSure.setVisibility(View.VISIBLE);
+                    mTvSure.setText("立即安装");
                     /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         boolean hasInstallPermission = isHasInstallPermissionWithO(mContext);
                         if (!hasInstallPermission) {
@@ -91,7 +96,7 @@ public class UpdateDialog extends Dialog {
                             installApk();
                         }
                     } else {*/
-                    installApk();
+
                     //}
                     break;
             }
@@ -137,16 +142,20 @@ public class UpdateDialog extends Dialog {
 
     private void initListener() {
         mTvSure.setOnClickListener(v -> {
-            if (updateInfo.link_type == 1) {   //浏览器打开
-                Uri uri = Uri.parse(updateInfo.link.replace("browser://", ""));
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                mContext.startActivity(intent);
+            if(isDownSuccess){
+                installApk();
+            }else {
+                if (updateInfo.link_type == 1) {   //浏览器打开
+                    Uri uri = Uri.parse(updateInfo.link.replace("browser://", ""));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    mContext.startActivity(intent);
 //                downloadApk();
-            } else if (updateInfo.link_type == 2) {
-                downloadApk();
-            } else {
-                String packName = mContext.getPackageName();
-                AppUtils.toMarket(mContext, packName, null);
+                } else if (updateInfo.link_type == 2) {
+                    downloadApk();
+                } else {
+                    String packName = mContext.getPackageName();
+                    AppUtils.toMarket(mContext, packName, null);
+                }
             }
         });
         mIvClose.setOnClickListener(v -> {

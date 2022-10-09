@@ -567,6 +567,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 finish();
             }*/
             UserBanPopWindow userBanPopWindow = new UserBanPopWindow(this);
+            userBanPopWindow.setOutSideDismiss(false);
             userBanPopWindow.showPopupWindow();
             //return;
         }

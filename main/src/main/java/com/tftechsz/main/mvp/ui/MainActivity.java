@@ -410,6 +410,11 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
 
 
     private void parseIntent() {
+        String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
+        if (!TextUtils.isEmpty(pass)) {
+            ARouterUtils.toYouthModelActivity();
+            return;
+        }
         Intent intent = getIntent();
         IMMessage message = (IMMessage) intent.getSerializableExtra(
                 NimIntent.EXTRA_NOTIFY_CONTENT);

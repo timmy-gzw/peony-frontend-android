@@ -19,6 +19,7 @@ import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.ChoosePicUtils;
 import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.GlideUtils;
@@ -92,20 +93,18 @@ public class RealAuthenticationActivityNew extends BaseMvpActivity<IRealAuthView
         if (!ClickUtil.canOperate()) return;
         int id = v.getId();
         if (id == R.id.btn) {
-            final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            final String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
             PermissionUtil.beforeCheckPermission(this, permissions, agreeToRequest -> {
                 if (agreeToRequest) {
                     mCompositeDisposable.add(mPermission.request(permissions)
                             .subscribe(aBoolean -> {
                                 if (aBoolean) {
-                                    startActivity(FaceCheckActivity.class);
+                                    ARouterUtils.toFaceCheck(false);
                                 } else {
-                                    // TODO: fix this
                                     PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
                                 }
                             }));
                 } else {
-                    // TODO: fix this
                     PermissionUtil.showPermissionPop(RealAuthenticationActivityNew.this);
                 }
             });
