@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
-
 import com.blankj.utilcode.util.FileUtils;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.tftechsz.common.R;
@@ -33,6 +31,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import androidx.annotation.RequiresApi;
 import zlc.season.rxdownload4.utils.HttpUtilKt;
 
 /**
@@ -66,6 +65,7 @@ public class UpdateDialog extends Dialog {
                     mIvClose.setVisibility(View.INVISIBLE);
                     mFlProgress.setVisibility(View.VISIBLE);
                     mTvSure.setVisibility(View.GONE);
+                    mTvSure.setText("立即体验");
                     int imageStart = 0;
                     if (mPbProgress.getProgress() > 0) {
                         int right = (int) ((mPbProgress.getWidth() - mPbProgress.getPaddingLeft() - mPbProgress.getPaddingRight()) / (mPbProgress.getMax() * 1.0f) * mPbProgress.getProgress() - DensityUtils.dp2px(mContext, 3) + mPbProgress.getPaddingLeft());
@@ -86,6 +86,7 @@ public class UpdateDialog extends Dialog {
                     isDownSuccess = true;
                     mFlProgress.setVisibility(View.INVISIBLE);
                     mTvSure.setVisibility(View.VISIBLE);
+                    mTvSure.setText("立即安装");
                     /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         boolean hasInstallPermission = isHasInstallPermissionWithO(mContext);
                         if (!hasInstallPermission) {
