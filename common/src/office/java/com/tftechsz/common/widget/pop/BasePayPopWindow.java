@@ -2,16 +2,15 @@ package com.tftechsz.common.widget.pop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.view.View;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.PayTask;
@@ -43,6 +42,8 @@ import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.PayTextClick;
 import com.umeng.analytics.MobclickAgent;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -159,6 +160,7 @@ public class BasePayPopWindow extends BaseBottomPop {
                 if (!TextUtils.isEmpty(mineInfo.link)) {
                     int start = builder.toString().indexOf(mineInfo.title);
                     builder.setSpan(new PayTextClick(mContext, mineInfo), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FE4D6B")),  start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     builder.setSpan(new UnderlineSpan(), start, start + mineInfo.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
