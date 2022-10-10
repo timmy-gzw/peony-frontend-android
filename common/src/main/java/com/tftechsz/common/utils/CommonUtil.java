@@ -135,6 +135,23 @@ public class CommonUtil {
     }
 
     /**
+     * 判断是否是ga环境
+     * @return
+     */
+    public static boolean isGa() {
+        UserProviderService service = ARouter.getInstance().navigation(UserProviderService.class);
+        return isGa(service);
+    }
+
+    /**
+     * 判断是否是ga环境
+     * @param service
+     * @return
+     */
+    public static boolean isGa(UserProviderService service) {
+        return (service == null || service.getConfigInfo() == null || service.getConfigInfo().sys == null || service.getConfigInfo().sys.is_verified == 0);
+    }
+    /**
      * 跳转群聊页面
      */
     public static void startTeamChatActivity(Activity activity, String teamId) {

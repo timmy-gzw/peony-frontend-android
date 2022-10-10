@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/space"
+        app:layout_constraintTop_toBottomOf="@id/base_tool_bar" />
+
+    <ImageView
+        android:id="@+id/iv_shop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_10"
+        android:scaleType="fitCenter"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/base_tool_bar"
+        tools:src="@mipmap/ic_default_avatar" />
+
+    <TextView
+        android:id="@+id/tv_coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_40"
+        android:textColor="#FD4683"
+        android:textSize="@dimen/sp_21"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_exchange_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_shop"
+        tools:text="500 绑定金币" />
+
+    <TextView
+        android:id="@+id/tv_exchange_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:textColor="@color/color_cc"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintStart_toStartOf="@id/tv_coin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin"
+        tools:text="4007人兑换"
+        tools:visibility="visible" />
+
+    <androidx.legacy.widget.Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_20"
+        app:layout_constraintTop_toBottomOf="@id/tv_exchange_num" />
+
+    <TextView
+        android:id="@+id/tv_integral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:textColor="#FC5858"
+        android:textSize="@dimen/sp_21"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_exchange_num"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_coin"
+        tools:text="400积分" />
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/bg_gray_radius15"
+        android:lineSpacingExtra="@dimen/dp_2"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_20"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/tv_integral"
+        app:layout_constraintStart_toStartOf="@id/tv_coin"
+        app:layout_constraintTop_toBottomOf="@id/bg"
+        tools:text="提现必看\n1.目前只支持支付宝提现，提现需扣除3%手续费；
+\n2.不填写真实资料会造成无法汇款，提现后3个工作日内到账；
+\n3.身份证信息需要跟当前绑定的支付宝账号信息一致；
+\n4.积分兑换人民币规则最终解释权归伊糖所有。"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_exchange"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/bg_pay_btn"
+        android:text="立即兑换"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,6 +47,7 @@ public class VipUtils {
     public static int getPictureFrameBackground(int id, boolean isEnd, boolean isRound) { //头像框
         switch (id) {
             case 1:
+            case 1001:
                 if (isEnd) {
                     return R.drawable.vip_style_picture_frame_s01_end;
                 }
@@ -63,6 +64,7 @@ public class VipUtils {
     public static int getChatBubbleBackground(int id, boolean isEnd, boolean isParty) {
         switch (id) {
             case 3:
+            case 2001:
                 if (isEnd) {
                     return R.drawable.vip_style_chat_bubble_s01_end;
                 }
@@ -207,6 +209,7 @@ public class VipUtils {
             color = R.color.white;
         }
         switch (id) {
+            case 2001:
             case 3:
                 color = R.color.white;
                 break;

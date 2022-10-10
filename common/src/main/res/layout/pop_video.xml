@@ -1,117 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/sp_pop_bg"
+    android:paddingTop="@dimen/dp_4">
 
-    <View
-        android:id="@+id/view_top"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginHorizontal="@dimen/dp_20"
-        android:background="@drawable/bg_pop_top_red" />
+    <FrameLayout
+        android:id="@+id/fl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="语音/视频通话"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+    </FrameLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/bg_white"
-        android:paddingBottom="@dimen/dp_10">
+        android:layout_below="@+id/fl_title"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/fl_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_15">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_6"
-                android:layout_marginTop="@dimen/dp_5"
-                android:text="语音/视频通话"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold" />
-
-        </FrameLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:id="@+id/rl_tip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fl_title"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_marginStart="-50dp"
+            android:layout_marginEnd="@dimen/dp_7"
+            android:layout_marginBottom="-15dp"
+            android:layout_toEndOf="@+id/tv_video">
 
-
-            <RelativeLayout
-                android:id="@+id/rl_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-50dp"
-                android:layout_marginEnd="@dimen/dp_7"
-                android:layout_marginBottom="-15dp"
-                android:layout_toEndOf="@+id/tv_video">
-
-                <ImageView
-                    android:id="@+id/iv_face_off"
-                    android:layout_width="@dimen/dp_110"
-                    android:layout_height="@dimen/dp_29"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/ic_face_off_tip" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:paddingTop="@dimen/dp_4"
-                    android:paddingBottom="@dimen/dp_9"
-                    android:text="可不露脸接听视频"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_11" />
-
-            </RelativeLayout>
-
+            <ImageView
+                android:id="@+id/iv_face_off"
+                android:layout_width="@dimen/dp_110"
+                android:layout_height="@dimen/dp_29"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_face_off_tip" />
 
             <TextView
-                android:id="@+id/tv_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_tip"
-                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
                 android:gravity="center"
-                android:padding="@dimen/dp_15"
-                android:text="@string/video_cost"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_17" />
+                android:paddingTop="@dimen/dp_4"
+                android:paddingBottom="@dimen/dp_9"
+                android:text="可不露脸接听视频"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_11" />
 
-            <View
-                android:id="@+id/view"
-                style="@style/Driver"
-                android:layout_below="@+id/tv_video"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginEnd="@dimen/dp_20"
-                android:background="@color/driver"
-
-                />
-
-            <TextView
-                android:id="@+id/tv_audio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:padding="@dimen/dp_15"
-                android:text="@string/voice_cost"
-                android:textColor="@color/color_normal"
-                android:textSize="@dimen/sp_17" />
         </RelativeLayout>
 
-    </RelativeLayout>
 
+        <TextView
+            android:id="@+id/tv_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_tip"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="@dimen/dp_15"
+            android:text="@string/video_cost"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_17" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/Driver"
+            android:layout_below="@+id/tv_video"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:background="@color/driver"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="@dimen/dp_15"
+            android:text="@string/voice_cost"
+            android:textColor="@color/color_normal"
+            android:textSize="@dimen/sp_17" />
+    </RelativeLayout>
 
 </RelativeLayout>

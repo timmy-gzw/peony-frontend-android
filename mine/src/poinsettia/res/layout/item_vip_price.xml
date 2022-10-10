@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.tftechsz.mine.entity.VipPriceBean" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="com.tftechsz.mine.R" />
+    </data>
+
+    <!--        android:paddingStart="@{item.position == item.selIndex ? @dimen/dp_2 : @dimen/dp_0}"-->
+    <!--        android:paddingEnd="@{item.position == item.selIndex ? @dimen/dp_2 : @dimen/dp_0}"-->
+    <!--        android:paddingBottom="@{item.position == item.selIndex ? @dimen/dp_2 : @dimen/dp_0}"-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:background="@drawable/bg_vip_price_choose">
+
+        <TextView
+            android:id="@+id/tv_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_24"
+            android:background="@{item.sel ? @drawable/bg_vip_price_top_choose : @drawable/bg_vip_price_top_normal}"
+            android:gravity="center"
+            android:text="@{item.nav_title}"
+            android:textColor="@{item.sel ? @color/white: @color/color_mid_font}"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
+            android:visibility="@{TextUtils.isEmpty(item.nav_title) ? View.GONE : View.VISIBLE }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@{item.sel ? @drawable/bg_vip_price_choose : @drawable/bg_vip_price_unactive}"
+            android:paddingVertical="@dimen/dp_10"
+            android:paddingHorizontal="@dimen/dp_5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="97:134"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_top">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
+                android:text="@{item.title}"
+                android:textColor="@{item.sel ? @color/vip_title_color_choose: @color/color_normal}"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="月会员" />
+
+            <TextView
+                android:id="@+id/price_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥"
+                android:textColor="@{item.sel ? @color/vip_price_unit_color_choose: @color/color_normal}"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/price2"
+                app:layout_constraintEnd_toStartOf="@id/price2"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/price2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:fontFamily="@font/ddinbold"
+                android:paddingStart="@dimen/dp_2"
+                android:paddingEnd="@dimen/dp_4"
+                android:text="@{item.price}"
+                android:textColor="@{item.sel ? @color/vip_price_unit_color_choose: @color/color_normal}"
+                android:textSize="@dimen/sp_25"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/price3"
+                app:layout_constraintStart_toEndOf="@id/price_unit"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="180" />
+
+            <TextView
+                android:id="@+id/price3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ddinbold"
+                android:text="@{item.origin_price_title}"
+                android:textColor='#999999'
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{TextUtils.isEmpty(item.origin_price_title) ? View.GONE : View.VISIBLE }"
+                app:layout_constraintBaseline_toBaselineOf="@id/price2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/price2"
+                tools:text="79"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/price1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@{item.desc}"
+                android:textColor='@color/c_bd8f52'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toTopOf="@id/price4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/price2"
+                tools:text="3个月" />
+
+            <TextView
+                android:id="@+id/price4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@{item.sel ? @drawable/shape_vip_price_bg_button_choose : @drawable/shape_vip_price_bg_normal}"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/dp_4"
+                android:text="@{item.reduce_price_title}"
+                android:textColor='#FF2F2F'
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{TextUtils.isEmpty(item.reduce_price_title) ? View.GONE : View.VISIBLE }"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/price1"
+                app:layout_constraintWidth_min="@dimen/dp_70"
+                tools:background="@drawable/shape_vip_price_bg_normal"
+                tools:text="立省30元"
+                tools:textColor="@color/c_763d06"
+                tools:visibility="visible" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

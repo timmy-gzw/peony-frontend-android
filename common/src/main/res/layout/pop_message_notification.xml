@@ -32,9 +32,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lineSpacingMultiplier="1.1"
         android:layout_marginTop="@dimen/dp_5"
         android:gravity="center"
+        android:lineSpacingMultiplier="1.1"
         android:text="开启通知，实时接收消息提醒，别错过\nTa的消息哦～"
         android:textColor="#ff666666"
         android:textSize="12sp" />
@@ -47,9 +47,9 @@
         android:layout_marginTop="@dimen/dp_30"
         android:layout_marginEnd="@dimen/dp_size_38"
         android:layout_marginBottom="@dimen/dp_30"
-        android:textColor="@color/white"
-        android:background="@drawable/bg_red"
-        android:text="立即开启" />
+        android:background="@drawable/shape_login_btn"
+        android:text="立即开启"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

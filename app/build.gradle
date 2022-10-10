@@ -40,29 +40,28 @@ android {
         resConfigs("zh", "zh-rCN")
     }
     signingConfigs {
-        release {
+        peony {
             storeFile file('peony.jks')
             storePassword "cikJayHiow"
             keyAlias "peony"
             keyPassword "Pixiznuf"
         }
-        debug {
-            storeFile file('peony.jks')
+        emerald {
+            storeFile file('emerald.jks')
             storePassword "cikJayHiow"
-            keyAlias "peony"
-            keyPassword "Pixiznuf"
+            keyAlias "emerald"
+            keyPassword "cikJayHiow"
         }
     }
     buildTypes {
 
         debug {
+            signingConfig null //null 走flavor配置
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources false
-            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
             manifestPlaceholders = [app_icon: "@mipmap/ic_launcher"]
         }
 
@@ -70,7 +69,6 @@ android {
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
-            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
@@ -83,6 +81,8 @@ android {
                         input = "ivy"
                     else if (variant.productFlavors[0].name == "jasmine")
                         input = "jasmine"
+                    else if (variant.productFlavors[0].name == "poinsettia")
+                        input = "poinsettia"
                     outputFileName = input + "_V${productFlavors[0].versionName}_${productFlavors[0].versionCode}.apk"
                 }
                 variant.mergeAssetsProvider.configure {
@@ -130,6 +130,7 @@ android {
             applicationId "com.tftechsz.peony"
             versionCode rootProject.ext.appVersion.versionCode
             versionName rootProject.ext.appVersion.versionName
+            signingConfig signingConfigs.peony
             manifestPlaceholders = rootProject.ext.manifestPlaceholders
         }
         heart {
@@ -137,6 +138,7 @@ android {
             applicationId "com.tftechsz.ivy"
             versionCode rootProject.ext.heartAppVersion.versionCode
             versionName rootProject.ext.heartAppVersion.versionName
+            signingConfig signingConfigs.peony
             manifestPlaceholders = rootProject.ext.heartPlaceholders
         }
         jasmine {
@@ -144,14 +146,23 @@ android {
             applicationId "com.tftechsz.jasmine"
             versionCode rootProject.ext.jasmineAppVersion.versionCode
             versionName rootProject.ext.jasmineAppVersion.versionName
+            signingConfig signingConfigs.peony
             manifestPlaceholders = rootProject.ext.jasminePlaceholders
+        }
+        poinsettia {
+            dimension 'office'
+            applicationId "com.emeraldtechhn.poinsettia"
+            versionCode rootProject.ext.poinsettiaAppVersion.versionCode
+            versionName rootProject.ext.poinsettiaAppVersion.versionName
+            signingConfig signingConfigs.emerald
+            manifestPlaceholders = rootProject.ext.poinsettiaPlaceholders
         }
     }
 }
 
 androidJunkCode {
     def heartConfig = {
-        packageBase = "com.tftechsz.ivy"
+        packageBase = "com.tftechsz.ivy.atest"
         packageCount = 60
         activityCountPerPackage = 8
         excludeActivityJavaFile = false
@@ -162,7 +173,7 @@ androidJunkCode {
         stringCount = 600
     }
     def jasmineConfig = {
-        packageBase = "com.tftechsz.jasmine"
+        packageBase = "com.tftechsz.jasmine.atest"
         packageCount = 60
         activityCountPerPackage = 8
         excludeActivityJavaFile = false
@@ -172,9 +183,21 @@ androidJunkCode {
         drawableCount = 600
         stringCount = 600
     }
+    def poinsettiaConfig = {
+        packageBase = "com.emeraldtechhn.poinsettia.atest"
+        packageCount = 100
+        activityCountPerPackage = 50
+        excludeActivityJavaFile = false
+        otherCountPerPackage = 100
+        methodCountPerClass = 70
+        resPrefix = "poinsettia"
+        drawableCount = 800
+        stringCount = 800
+    }
     variantConfig {
         "heartRelease" heartConfig
         "jasmineRelease" jasmineConfig
+        "poinsettiaRelease" poinsettiaConfig
     }
 }
 

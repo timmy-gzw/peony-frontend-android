@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="@id/tv_cancel_tip"
+        app:layout_constraintTop_toBottomOf="@id/base_tool_bar" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:text="注销后，你的帐号将："
+        android:textColor="#FF2F2F"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/base_tool_bar" />
+
+    <com.tftechsz.common.widget.AlignTextView
+        android:id="@+id/tv_cancel_tip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_15"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:text="1. 无法登录芍药APP；\n\n2. 所有信息将被永久删除（动态、圈子等内容），你的好友无法再与你取得联系（包括关注，粉丝，家族等）； \n\n3. 绑定手机/微信/QQ账号将会解绑，解绑后可再次注册芍药（注册需满足通用规定，如同一手机/微信/QQ账号，180天内只能注册一个芍药帐号）； \n\n4.你的实名信息会解绑，解绑后可以再次绑定其他芍药号；\n\n5. 家族长注销后，家族将会被自动解散。" />
+
+    <TextView
+        android:id="@+id/tv_cancellation"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@drawable/sel_login_btn"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cancel_tip"
+        tools:text="申请注销当前账号"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="#FC5858"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cancellation"
+        tools:text="注销倒计时：6天22时48分59秒"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

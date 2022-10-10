@@ -37,6 +37,10 @@ android {
             res.srcDirs = ['jasmine/res', 'jasmine/res-ptr2', 'jasmine/res-chatroom']
             java.srcDirs = ['jasmine/src']
         }
+        poinsettia{
+            res.srcDirs = ['poinsettia/res', 'poinsettia/res-ptr2', 'poinsettia/res-chatroom']
+            java.srcDirs = ['poinsettia/src']
+        }
     }
 
     compileOptions {

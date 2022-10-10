@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dp_27"
+    android:background="@drawable/sp_pop_bg"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_30"
+        android:src="@mipmap/mine_ic_youth_mode" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="@string/youth_mode_short_desc"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_16" />
+
+
+    <TextView
+        android:id="@+id/tv_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="开启青少年模式"
+        android:drawablePadding="@dimen/dp_5"
+        android:textColor="@color/link_color"
+        android:textSize="@dimen/sp_14"
+        app:drawableEndCompat="@mipmap/ic_arrow_blue" />
+
+
+    <TextView
+        android:id="@+id/tv_know"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/dp_13"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/sel_youth_model"
+        android:text="我知道了"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

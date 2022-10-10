@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="login_by_one_ley">返回使用一键登录</string>
+    <string name="mine_accost_record">录制一些魅力十足的声音，会让异性更喜欢你哦！</string>
+    <string name="real_auth_tip">完成真人认证，交友成功率提升10倍</string>
+    <string name="benifit_record">收益明细</string>
+    <string name="vip_un_open">尚未开通至尊会员</string>
+    <string name="vip_privilege_8">至尊会员%d大特权</string>
+    <string name="living_person_auth_tip">完成认证，交友成功率提升10倍</string>
+    <string name="real_name_cert_tip">完成认证，解锁积分兑换等功能</string>
+    <string name="exchange_coin_reduce">-</string>
+    <string name="visitor_vip_tip">除了%s们，还有不少人也看过你哦\n开通会员不错过缘分</string>
+    <string name="income_detail">我的收益</string>
+    <string name="income_exchage">提现兑换</string>
+    <string name="edit_nickname">设置昵称</string>
+    <string name="account_cancellation">确认注销</string>
+    <string name="think_about">我在想想</string>
+    <string name="accost_title">添加打招呼语</string>
+    <string name="accost_update">编辑打招呼语</string>
+    <string name="login_random_str">人在彩糖邂逅爱情</string>
+</resources>

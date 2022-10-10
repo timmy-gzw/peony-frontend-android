@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/bg_splash_jasmine" />
+    <item
+        android:bottom="480dp"
+        android:top="170dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/bg_splash_center" />
+    </item>
+    <item
+        android:bottom="40dp"
+        android:top="580dp">
+        <bitmap
+            android:gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher_s" />
+    </item>
+
+</layer-list>

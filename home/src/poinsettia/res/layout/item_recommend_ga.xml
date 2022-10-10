@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="@dimen/dp_16"
+    android:layout_height="wrap_content">
+
+    <com.netease.nim.uikit.common.ui.imageview.RoundImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:radius="@dimen/dp_16"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_default_avatar"
+        app:layout_constraintDimensionRatio="343:600"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+
+    <View
+        app:layout_constraintTop_toTopOf="@id/temp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bg_ga_home_item"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <View
+        android:id="@+id/temp"
+        android:layout_marginBottom="@dimen/dp_20"
+        app:layout_constraintBottom_toTopOf="@id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:fontFamily="sans-serif-condensed-light"
+        android:maxLength="12"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_21"
+        android:textStyle="bold"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintLeft_toLeftOf="@id/ll_info"
+        app:layout_constraintBottom_toTopOf="@id/ll_info"
+        tools:drawablePadding="@dimen/dp_3"
+        tools:text="喵了个喵" />
+
+    <LinearLayout
+        android:id="@+id/ll_info"
+        app:layout_constraintBottom_toTopOf="@id/rv"
+        app:layout_constraintLeft_toLeftOf="@id/rv"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_real_people"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home_icon_real_people"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/iv_vip"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/vip_icon_bg2"
+            tools:ignore="ContentDescription" />
+
+        <View
+            android:id="@+id/iv_online"
+            android:layout_width="35dp"
+            android:layout_height="@dimen/dp_14"
+            android:layout_gravity="bottom|end"
+            android:background="@mipmap/bg_home_online"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+        app:layout_constraintEnd_toEndOf="@id/iv_avatar"
+        app:layout_constraintStart_toStartOf="@id/iv_avatar"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_home_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/ll_accost"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_size_50"
+        android:src="@mipmap/ic_home_ga_accost"
+        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+        app:layout_constraintEnd_toEndOf="@id/iv_avatar"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

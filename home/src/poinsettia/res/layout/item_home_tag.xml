@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
+
+	<TextView
+		android:id="@+id/tv"
+		tools:text="广东深圳"
+		android:textColor="@color/white"
+		android:textSize="@dimen/sp_12"
+		android:layout_marginEnd="@dimen/dp_5"
+		android:paddingVertical="@dimen/dp_6"
+		android:paddingHorizontal="@dimen/sp_8"
+		android:background="@drawable/bg_home_tag"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+
+
+
+</RelativeLayout>

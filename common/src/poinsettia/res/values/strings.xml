@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">彩糖交友</string>
+    <string name="mine_app_name">用户</string>
+    <string name="recharge_coin_rmb_format"><![CDATA[充值金额 <font color=#A924FF>%s元=%s</font>]]></string>
+    <string name="sign_in">立即签到</string>
+    <string name="sign_in_success_format">%s</string>
+    <string name="auth_for_obtain_permission">完成认证可获得以下权限：</string>
+    <string name="pagestate_error_occurs">网络走丢了，请检查网络设置</string>
+    <string name="one_key_accost_boy">恋爱天使为你推荐今日最佳缘分</string>
+    <string name="one_key_accost_girl">恋爱天使为你推荐今日最佳缘分</string>
+
+    <string name="upload_avatar_pop">上传我的靓照</string>
+    <string name="video_cost">视频通话 (80金币/分钟)</string>
+    <string name="voice_cost">语音通话 (30金币/分钟)</string>
+    <string name="input_gift_num_hint">请输入礼物数量，最多9999</string>
+    <string name="input_gift_btn_text">发送</string>
+</resources>
