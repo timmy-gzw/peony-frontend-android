@@ -23,6 +23,7 @@ import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpFragment;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
@@ -77,7 +78,7 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         RecyclerView rvUserInfo = getView(R.id.rv_user_info);
         rvUserInfo.setLayoutManager(new GridLayoutManager(getContext(), 2));
         rvUserInfo.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(15f), ConvertUtils.dp2px(6), false));
-        userInfoAdapter = new BaseUserInfoAdapter();
+        userInfoAdapter = new BaseUserInfoAdapter(CommonUtil.isGa());
         userInfoAdapter.addChildClickViewIds(R.id.iv_copy);
         userInfoAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.iv_copy) {

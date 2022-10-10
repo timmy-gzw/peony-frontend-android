@@ -252,7 +252,7 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         RecyclerView rvUserInfo = findViewById(R.id.rv_user_info);
         rvUserInfo.setLayoutManager(new GridLayoutManager(this, 2));
         rvUserInfo.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(15f), ConvertUtils.dp2px(6), false));
-        userInfoAdapter = new BaseUserInfoAdapter();
+        userInfoAdapter = new BaseUserInfoAdapter(CommonUtil.isGa());
         userInfoAdapter.addChildClickViewIds(R.id.iv_copy);
         userInfoAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.iv_copy) {
