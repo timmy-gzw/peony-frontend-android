@@ -95,7 +95,7 @@ public class FloatVideoWindowService extends Service {
     private void initWindow() {
 
         mWindowManager = (WindowManager) getApplicationContext().getSystemService(WINDOW_SERVICE);
-        wmParams = getParams();//设置好悬浮窗的参数
+        wmParams = getParams1();//设置好悬浮窗的参数
         // 悬浮窗默认显示以左上角为起始坐标
         wmParams.gravity = Gravity.END | Gravity.TOP;
         //悬浮窗的开始位置，因为设置的是从左上角开始，所以屏幕左上角是x=0;y=0
@@ -110,7 +110,7 @@ public class FloatVideoWindowService extends Service {
         isSmall = true;
     }
 
-    private WindowManager.LayoutParams getParams() {
+    private WindowManager.LayoutParams getParams1() {
         wmParams = new WindowManager.LayoutParams();
         //设置window type 下面变量2002是在屏幕区域显示，2003则可以显示在状态栏之上
         //悬浮窗的显示问题

@@ -4,6 +4,7 @@ import static com.netease.nim.uikit.business.session.constant.Extras.EXTRA_TYPE_
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -312,6 +313,10 @@ public class ARouterUtils {
      * 跳转语音视频
      */
     public static void toCallActivity(InvitedEvent chatMsg, int type, String matchType, String callId, boolean isMatch) {
+        String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
+        if (!TextUtils.isEmpty(pass)) {
+            return;
+        }
         ARouter.getInstance().build(ARouterApi.ACTIVITY_VIDEO_CALL)
                 .withInt("call_dir", 1)
                 .withInt("call_type", type)
@@ -336,6 +341,10 @@ public class ARouterUtils {
      * 跳转语音视频
      */
     public static void toCallActivity(String fromId, int type, String matchType, String callId, boolean isMatch) {
+        String pass = MMKVUtils.getInstance().decodeString(Constants.YOUTH_MODE_PASS);
+        if (!TextUtils.isEmpty(pass)) {
+            return;
+        }
         ARouter.getInstance().build(ARouterApi.ACTIVITY_VIDEO_CALL)
                 .withInt("call_dir", 1)
                 .withInt("call_type", type)

@@ -270,5 +270,6 @@ dependencies {
 
     api rootProject.ext.dependencies["bugly-crash"]
     api rootProject.ext.dependencies["shanyan"]
+    api rootProject.ext.dependencies["antifake"]
 
 }
