@@ -20,6 +20,10 @@ public class BaseUserInfoAdapter extends BaseQuickAdapter<UserInfo.BaseInfo, Bas
         super(isGa ? R.layout.item_base_info_ga : R.layout.item_base_info);
     }
 
+    public BaseUserInfoAdapter() {
+        this(false);
+    }
+
     public void setTextViewMaxWidth(int textWidth) {
         this.textWidth = textWidth;
     }

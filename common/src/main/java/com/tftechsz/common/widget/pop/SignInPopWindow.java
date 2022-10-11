@@ -48,7 +48,7 @@ public class SignInPopWindow extends BaseCenterPop {
         tvSignIn = findViewById(R.id.tv_sign_in);
         tvDesc = findViewById(R.id.tv_sign_in_c);
         recyclerView = findViewById(R.id.sign_recy);
-        findViewById(R.id.ic_close).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mSignInListener != null) {

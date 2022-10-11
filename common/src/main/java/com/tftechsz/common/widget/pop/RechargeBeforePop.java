@@ -33,6 +33,9 @@ public class RechargeBeforePop extends BaseBottomPop {
                 listener.recharge();
             dismiss();
         });
+        if(CommonUtil.isGa()){
+            findViewById(R.id.cl_get_coin).setVisibility(View.GONE);
+        }
         findViewById(R.id.tv_task).setOnClickListener(v -> {
             if (null != configInfo && configInfo.share_config != null && configInfo.share_config.my != null) {
                 for (int i = 0; i < configInfo.share_config.my.size(); i++) {

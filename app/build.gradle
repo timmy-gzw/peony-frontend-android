@@ -162,7 +162,7 @@ android {
 
 androidJunkCode {
     def heartConfig = {
-        packageBase = "com.tftechsz.ivy.atest"
+        packageBase = "com.tftechsz.ivy.joke"
         packageCount = 60
         activityCountPerPackage = 8
         excludeActivityJavaFile = false
@@ -173,7 +173,7 @@ androidJunkCode {
         stringCount = 600
     }
     def jasmineConfig = {
-        packageBase = "com.tftechsz.jasmine.atest"
+        packageBase = "com.tftechsz.jasmine.joke"
         packageCount = 60
         activityCountPerPackage = 8
         excludeActivityJavaFile = false
@@ -184,7 +184,7 @@ androidJunkCode {
         stringCount = 600
     }
     def poinsettiaConfig = {
-        packageBase = "com.emeraldtechhn.poinsettia.atest"
+        packageBase = "com.emeraldtechhn.poinsettia.joke"
         packageCount = 60
         activityCountPerPackage = 8
         excludeActivityJavaFile = false
