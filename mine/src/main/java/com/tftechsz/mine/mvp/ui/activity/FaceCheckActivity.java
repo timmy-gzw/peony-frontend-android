@@ -76,11 +76,13 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
     private ActionType mCurrentActionType = ActionType.ACTION_STRAIGHT_AHEAD;
     private ActionType[] mActions;
     private boolean isOpenVoice = true;
-    private final MediaPlayer mPlayer = new MediaPlayer();
+    private MediaPlayer mPlayer = new MediaPlayer();
     private CustomPopWindow mPopWindow;
+    private CustomPopWindow timeoutPopWindow;
     private ActFaceCheckBinding mBind;
     private LayoutTvStepBinding mStepBinding2, mStepBinding3, mStepBinding4;
     private boolean mIsPartyMode;
+    private boolean isPopShowing = false;
 
     @Override
     public RealAuthPresenter initPresenter() {
@@ -98,9 +100,7 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
         ImmersionBar.with(mActivity).barColor(R.color.white).fitsSystemWindows(true).init();
         mBind.surfaceView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         mBind.imgBtnBack.setOnClickListener(view -> {
-            if (mAliveDetector != null) {
-                mAliveDetector.stopDetect();
-            }
+            stopDetect();
             finish();
         });
         mBind.ivVoice.setOnClickListener(v -> {
@@ -120,6 +120,8 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
     protected void onResume() {
         super.onResume();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        resetDetect();
     }
 
     private void initRxBus() {
@@ -246,20 +248,23 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
             public void onOverTime() {
                 runOnUiThread(() -> {
                     mBind.pvCountTime.cancelCountTimeAnimation();
-                    new CustomPopWindow(mContext, 1).setLeftButton("退出")
-                            .setRightButton("重试")
-                            .setTitle("检测超时")
-                            .setContent("请在规定时间内完成动作")
-                            .addOnClickListener(FaceCheckActivity.this)
-                            .setOutSideDismiss(false)
-                            .setBackPressEnable(false)
-                            .showPopupWindow();
+                    if (timeoutPopWindow == null) {
+                        timeoutPopWindow = new CustomPopWindow(mContext, 1);
+                        timeoutPopWindow.setLeftButton("退出")
+                                .setRightButton("重试")
+                                .setTitle("检测超时")
+                                .setContent("请在规定时间内完成动作")
+                                .addOnClickListener(FaceCheckActivity.this)
+                                .setOutSideDismiss(false)
+                                .setBackPressEnable(false);
+                    }
+                    timeoutPopWindow.showPopupWindow();
+                    isPopShowing = true;
                 });
             }
         });
         mAliveDetector.setSensitivity(AliveDetector.SENSITIVITY_NORMAL);
         mAliveDetector.setTimeOut(1000 * 30);
-        mAliveDetector.startDetect();
     }
 
     private void initCountTimeView() {
@@ -423,11 +428,7 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
     }
 
     public static boolean isDestroy(Activity mActivity) {
-        if (mActivity == null || mActivity.isFinishing() || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && mActivity.isDestroyed())) {
-            return true;
-        } else {
-            return false;
-        }
+        return mActivity == null || mActivity.isFinishing() || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && mActivity.isDestroyed());
     }
 
     private void updateGif(int currentActionIndex) {
@@ -486,7 +487,7 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
             return fileDescriptor;
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG, "getAssetFileDescriptor error" + e.toString());
+            Log.e(TAG, "getAssetFileDescriptor error" + e);
         }
         return null;
     }
@@ -499,7 +500,7 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
             mPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG, "playSound error" + e.toString());
+            Log.e(TAG, "playSound error" + e);
         }
     }
 
@@ -519,6 +520,7 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
                     .setOutSideDismiss(false)
                     .setBackPressEnable(false)
                     .showPopupWindow();
+            isPopShowing = true;
         });
     }
 
@@ -549,6 +551,7 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
                 mPopWindow = new CustomPopWindow(mContext, 1).setLeftButton("退出").setRightButton("重试").addOnClickListener(this);
             }
             mPopWindow.setContent(data.msg).setOutSideDismiss(false).setBackPressEnable(false).showPopupWindow();
+            isPopShowing = true;
         }
     }
 
@@ -559,13 +562,25 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        stopDetect();
+    }
+
+    @Override
     protected void onDestroy() {
+        mBind.pvCountTime.cancelCountTimeAnimation();
+        releaseDetect();
+        if (mPlayer != null) {
+            if (mPlayer.isPlaying()) {
+                mPlayer.stop();
+            }
+            mPlayer.reset();
+            mPlayer.release();
+            mPlayer = null;
+        }
         super.onDestroy();
         Utils.setWindowBrightness(this, WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE);
-        if (mAliveDetector != null) {
-            mAliveDetector.stopDetect();
-        }
-        mBind.pvCountTime.cancelCountTimeAnimation();
     }
 
     @Override
@@ -575,9 +590,27 @@ public class FaceCheckActivity extends BaseMvpActivity<IRealAuthView, RealAuthPr
 
     @Override
     public void onSure() {
+        isPopShowing = false;
+        resetDetect();
+    }
+
+    private void stopDetect() {
+        mBind.pvCountTime.cancelCountTimeAnimation();
+        if (mAliveDetector != null) mAliveDetector.stopDetect();
+    }
+
+    private void resetDetect() {
+        if (isPopShowing) return;
         resetIndicator();
         resetGif();
         mBind.pvCountTime.startCountTimeAnimation();
-        mAliveDetector.startDetect();
+        if (mAliveDetector != null) mAliveDetector.startDetect();
+    }
+
+    private void releaseDetect() {
+        if (mAliveDetector != null) {
+            mAliveDetector.stopDetect();
+            mAliveDetector.destroy();
+        }
     }
 }

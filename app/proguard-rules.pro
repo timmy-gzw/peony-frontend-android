@@ -532,18 +532,13 @@
        *;
     }
 
-    -keep class com.netease.nis.alivedetected.entity.**{*;}
-    -keep class com.netease.nis.alivedetected.AliveDetector  {#不会混淆类名
-        public <methods>;
-    }
-    -keep class com.netease.nis.alivedetected.DetectedEngine{
-        native <methods>;
-    }
-    -keep class com.netease.nis.alivedetected.NISCameraPreview  {#不会混淆类名
-        public <methods>;
-    }
-    -keep class com.netease.nis.alivedetected.DetectedListener{*;}
-    -keep class com.netease.nis.alivedetected.ActionType  { *;}
+    # 易盾活体检测
+    -keeppackagenames com.netease.nis.alivedetected
+    -keep class com.netease.nis.**{*;}
+    -dontwarn com.netease.nis.alivedetected.**
+    -keep class com.netease.cloud.nos.yidun.**{*;}
+    -dontwarn com.netease.cloud.nos.yidun.**
+
     -keep class pl.droidsonroids.gif.**{*;}
 
     -keep class net.sourceforge.pinyin4j.** { *;}
