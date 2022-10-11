@@ -375,8 +375,6 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                 choosePic();
             }
         } else if (id == R.id.item_birthday) {   //生日
-            if (mUserInfo != null && mUserInfo.isSelf())
-                return;
             String text = Utils.getText(mItemBirthday.getTvRight());
             if (TextUtils.isEmpty(text)) {
                 if (service.getUserInfo().isGirl()) {
