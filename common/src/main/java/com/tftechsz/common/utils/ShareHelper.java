@@ -2,17 +2,22 @@ package com.tftechsz.common.utils;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.netease.nim.uikit.common.ConfigInfo;
 import com.tencent.connect.share.QQShare;
 import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
+import com.tftechsz.common.iservice.UserProviderService;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -62,7 +67,27 @@ public class ShareHelper {
         if (TextUtils.isEmpty(url)) {
             return;
         }
-
+        if (type == 1) {
+            IWXAPI api;
+            UserProviderService service = ARouter.getInstance().navigation(UserProviderService.class);
+            ConfigInfo configInfo = service.getConfigInfo();
+            String weChatAppId = CommonUtil.getWeChatAppId(configInfo);
+            // 通过WXAPIFactory工厂，获取IWXAPI的实例
+            api = WXAPIFactory.createWXAPI(BaseApplication.getInstance(), weChatAppId);
+            WXWebpageObject webpage = new WXWebpageObject();
+            webpage.webpageUrl = url;
+            WXMediaMessage msg = new WXMediaMessage(webpage);
+            msg.title = title;
+            msg.description = content;
+            Bitmap thumbBmp = BitmapFactory.decodeResource(activity.getResources(), R.mipmap.ic_launcher_share);
+            msg.thumbData = Utils.bmpToByteArray(thumbBmp, true);
+            SendMessageToWX.Req req = new SendMessageToWX.Req();
+            req.transaction = buildTransaction("webpage");
+            req.message = msg;
+            req.scene = SendMessageToWX.Req.WXSceneSession;
+            api.sendReq(req);
+            return;
+        }
         UMWeb web = new UMWeb(Utils.performUrl(url));
         web.setTitle(title);//标题
         UMImage umImage;
