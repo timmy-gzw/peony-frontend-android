@@ -374,7 +374,7 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
         for (int i = firstVisiblePos; i <= lastVisiblePos; i++) {
             if (contactInfos.size() > i) {
                 ContactInfo item = contactInfos.get(i);
-                if (timeMillis - item.tag_time > 30000) {
+                if (timeMillis - item.tag_time > 30000 && !TextUtils.isEmpty(item.getContactId())) {
                     ids.add(item.getContactId());
                 }
             }
