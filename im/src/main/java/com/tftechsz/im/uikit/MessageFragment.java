@@ -3441,6 +3441,8 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
             setWindowBg("");
         }
         JSONObject finalJson = json;
+        if(TextUtils.isEmpty(sessionId) || TextUtils.equals("0",sessionId))
+            return;
         mCompositeDisposable.add(new RetrofitManager().createIMApi(ChatApiService.class).joinP2PRoom(sessionId)
                 .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<JoinLeaveRoom>>() {
                     @Override
