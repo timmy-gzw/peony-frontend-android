@@ -894,7 +894,7 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
         if (location != null) {
             UpdateLocationReq addressReq = new UpdateLocationReq();
             addressReq.fromTpe = "open";
-            if (location.getLatitude() <= 4.9E-324 && !TextUtils.isEmpty(location.getAddress().address)) {
+            if (location.getLatitude() != 4.9E-324 && !TextUtils.isEmpty(location.getAddress().address)) {
                 addressReq.latitude = location.getLatitude();
                 addressReq.longitude = location.getLongitude();
                 addressReq.province = location.getProvince();

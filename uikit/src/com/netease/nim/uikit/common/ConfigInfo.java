@@ -259,6 +259,8 @@ public class ConfigInfo {
         public String yunxin_live_app_key;  //云信语音房key
         public String withdraw_tips;//提现文案
         public int is_main_tab_lottie_config; //是否读取主页tab的动画配置
+        public int location_get_source;  //0 ip获取位置  1 权限经纬度获取位置
+
         private String param_encrypt_key;// 接口加密key  为空不加密 通过getEncryptKey()取值
 
         /**
