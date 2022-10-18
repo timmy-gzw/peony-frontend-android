@@ -11,6 +11,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.nim.uikit.common.ui.imageview.CircleImageView;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
@@ -31,6 +32,7 @@ import com.tftechsz.mine.entity.dto.FriendDto;
 import com.tftechsz.mine.mvp.ui.activity.MineFriendActivity;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,10 +74,10 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
         view.setVisibility(datas.size() > 0 ? View.VISIBLE : View.GONE);
         adapter.setOnItemClickListener((adapter1, view, position) ->
                 ARouterUtils.toMineDetailActivity(String.valueOf(adapter.getItem(position).user_id)));
-        requestMessages(true,datas);
+        requestMessages(true,datas,page);
     }
 
-    private void requestMessages(boolean delay,List<FriendDto> datas) {
+    private void requestMessages(boolean delay,List<FriendDto> datas, int page) {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             NIMClient.getService(SdkLifecycleObserver.class).observeMainProcessInitCompleteResult(new Observer<Boolean>() {
                 @Override
@@ -104,7 +106,9 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
                                             }
                                         }
                                     }
-                                    adapter.setList(datas);
+                                    if(page == 1){
+                                        adapter.setList(datas);
+                                    }
                                 }
                             });
                 }
@@ -122,10 +126,11 @@ public class FriendFragment extends BaseListFragment<FriendDto> {
     public void bingViewHolder(BaseViewHolder helper, FriendDto item, int position) {
         CircleImageView ivAvatar = helper.getView(R.id.iv_avatar);
         CommonUtil.setUserName(helper.getView(R.id.tv_name), item.nickname, false,item.is_vip == 1);
-        Glide.with(getActivity()).load(item.icon).into(ivAvatar);
+        Glide.with(mContext).load(item.icon).into(ivAvatar);
         CommonUtil.setSexAndAge(getContext(), item.sex, item.age, helper.getView(R.id.iv_sex));
         helper.setGone(R.id.iv_real_people, item.is_real != 1);  //是否真人
         helper.setGone(R.id.tv_vip, item.is_vip != 1);  //是否vip
+        helper.setVisible(R.id.intimacy,false);
         if(item.intimacy_val != 0) {
             helper.setText(R.id.intimacy, item.intimacy_val+"");
             helper.setVisible(R.id.intimacy,true);
