@@ -40,7 +40,7 @@ public class BDLocationManager {
                 mLocClient = new LocationClient(BaseApplication.getInstance());
             LocationClientOption option = new LocationClientOption();
             // 打开gps
-            option.setScanSpan(10000);
+            option.setScanSpan(0);
             option.setIsNeedAddress(true);
             option.setNeedNewVersionRgc(true);
             option.setLocationNotify(true);
