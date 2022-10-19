@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.work.Data;
@@ -773,6 +774,11 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                 }
             });
         } else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                bdLocationManager.initGPS();
+                bdLocationManager.startLoc();
+            }
             nextShowYouthModelPop();
         }
     }
@@ -910,6 +916,8 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                 }
             }
             getP().updateLocation(addressReq);
+            bdLocationManager.stopLoc();
+            bdLocationManager.removeListener();
         }
     }
 

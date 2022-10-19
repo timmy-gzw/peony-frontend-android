@@ -132,10 +132,6 @@
             android:value="${BAIDU_APPKEY}" />
 
         <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-        <service
             android:name="com.tftechsz.common.nim.service.CallService"
             android:enabled="true"
             android:exported="true">
