@@ -89,8 +89,8 @@ ext {
             UMENG_APPKEY       : "632c400f05844627b551bb08",//友盟   √
             UMENG_PUSH_SECRET  : "4741e48c1324c9be0e6fd7d05af8aa96",//友盟   √
             BAIDU_APPKEY       : "9b4bQwlL1n1nhKZleIR4Cvh3R1l4w9so",   //百度key  √
-            VIVO_APP_ID        : "105586911",   //VIVO ID
-            VIVO_APP_KEY       : "c384302a365787908b90828389597ef6",
+            VIVO_APP_ID        : "105593755",   //VIVO ID  √
+            VIVO_APP_KEY       : "9350e1f238e6a06917a5a9cff319bfa0", //  √
             buglyKey           : "17835fcb22",
             urlLinkHost        : "poinsettia.peony.com",
     ]

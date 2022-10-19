@@ -114,17 +114,17 @@ android {
             buildConfigField "String", "SANYAN_APP_ID", "\"qv1U7WPC\""
             buildConfigField "String", "PUSH_XM_APP_ID", "\"2882303761520182217\""  //小米推送
             buildConfigField "String", "PUSH_XM_APP_KEY", "\"5102018224217\""
-            buildConfigField "String", "PUSH_XM_CERT_NAME", "\"peony-push-cert-xm\""
-            buildConfigField "String", "PUSH_HW_APP_ID", "\"106970141\""  //华为推送
-            buildConfigField "String", "PUSH_HW_CERT_NAME", "\"peony-push-cert-hw\""
+            buildConfigField "String", "PUSH_XM_CERT_NAME", "\"poinsettia-push-cert-xm\""//  √
+            buildConfigField "String", "PUSH_HW_APP_ID", "\"107099765\""  //华为推送//  √
+            buildConfigField "String", "PUSH_HW_CERT_NAME", "\"poinsettia-push-cert-hw\""//  √
             buildConfigField "String", "PUSH_MZ_APP_ID", "\"149688\""   //魅族推送
             buildConfigField "String", "PUSH_MZ_APP_KEY", "\"b31b772c33d64897a589d0d90db8c7fa\""
-            buildConfigField "String", "PUSH_MZ_CERT_NAME", "\"peony-push-cert-meizu\""
-            buildConfigField "String", "PUSH_VIVO_CERT_NAME", "\"peony-push-cert-vivo\""   ////vivo推送
-            buildConfigField "String", "PUSH_OPPO_APP_ID", "\"30870351\""   ////oppo推送
-            buildConfigField "String", "PUSH_OPPO_APP_KEY", "\"530d8d861693421f96339373aef8013e\""
-            buildConfigField "String", "PUSH_OPPO_APP_SECRET", "\"55492894580f44a2b8745497b3286c44\""
-            buildConfigField "String", "PUSH_OPPO_CERT_NAME", "\"peony-push-cert-opp\""
+            buildConfigField "String", "PUSH_MZ_CERT_NAME", "\"poinsettia-push-cert-meizu\""
+            buildConfigField "String", "PUSH_VIVO_CERT_NAME", "\"poinsettia-push-cert-vivo\""   ////vivo推送  √
+            buildConfigField "String", "PUSH_OPPO_APP_ID", "\"30885363\""   ////oppo推送//  √
+            buildConfigField "String", "PUSH_OPPO_APP_KEY", "\"fec2551ac2c7421caec763716ba6657b\""//  √
+            buildConfigField "String", "PUSH_OPPO_APP_SECRET", "\"b0a75a50fbb14318ad21aa275fb80b7b\""//  √
+            buildConfigField "String", "PUSH_OPPO_CERT_NAME", "\"poinsettia-push-cert-opp\""//  √
         }
 
     }
