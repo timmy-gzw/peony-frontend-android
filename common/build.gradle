@@ -112,8 +112,8 @@ android {
             buildConfigField "String", "WX_APPID", "\"wx08523955c3f9c568\""
             buildConfigField "String", "WX_APP_SC", "\"8d89184f6070d3fd6204f187fff97072\""
             buildConfigField "String", "SANYAN_APP_ID", "\"qv1U7WPC\""
-            buildConfigField "String", "PUSH_XM_APP_ID", "\"2882303761520182217\""  //小米推送
-            buildConfigField "String", "PUSH_XM_APP_KEY", "\"5102018224217\""
+            buildConfigField "String", "PUSH_XM_APP_ID", "\"2882303761520187388\""  //小米推送
+            buildConfigField "String", "PUSH_XM_APP_KEY", "\"5762018750388\""
             buildConfigField "String", "PUSH_XM_CERT_NAME", "\"poinsettia-push-cert-xm\""//  √
             buildConfigField "String", "PUSH_HW_APP_ID", "\"107099765\""  //华为推送//  √
             buildConfigField "String", "PUSH_HW_CERT_NAME", "\"poinsettia-push-cert-hw\""//  √
