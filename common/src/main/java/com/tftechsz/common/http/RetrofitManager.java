@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.iservice.UserProviderService;
@@ -65,62 +66,62 @@ public class RetrofitManager {
 
 
     public synchronized <T> T createUserApi(Class<T> clazz) {
-        setUrl(Constants.HOST_USER);
+        setUrl(ApiConstants.HOST_USER);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createFamilyApi(Class<T> clazz) {
-        setUrl(Constants.HOST_FAMILY);
+        setUrl(ApiConstants.HOST_FAMILY);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createChatRoomApi(Class<T> clazz) {
-        setUrl(Constants.HOST_CHAT_ROOM);
+        setUrl(ApiConstants.HOST_CHAT_ROOM);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createIMApi(Class<T> clazz) {
-        setUrl(Constants.HOST_IM);
+        setUrl(ApiConstants.HOST_IM);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createIMApi2(Class<T> clazz) {
-        setUrl2(Constants.HOST_IM);
+        setUrl2(ApiConstants.HOST_IM);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createPaymentApi(Class<T> clazz) {
-        setUrl(Constants.HOST_PAYMENT);
+        setUrl(ApiConstants.HOST_PAYMENT);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createUploadApi(Class<T> clazz) {
-        setUrl(Constants.HOST_UPLOAD);
+        setUrl(ApiConstants.HOST_UPLOAD);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createUploadCheatApi(Class<T> clazz) {
-        setUrl(Constants.HOST_USER, 2);
+        setUrl(ApiConstants.HOST_USER, 2);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createBlogApi(Class<T> clazz) {
-        setUrl(Constants.HOST_BLOG);
+        setUrl(ApiConstants.HOST_BLOG);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createConfigApi(Class<T> clazz) {
-        setUrl(Constants.HOST_CONFIG);
+        setUrl(ApiConstants.HOST_CONFIG);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createExchApi(Class<T> clazz) {
-        setUrl(Constants.HOST_EXCH);
+        setUrl(ApiConstants.HOST_EXCH);
         return retrofit.create(clazz);
     }
 
     public synchronized <T> T createPartyApi(Class<T> clazz) {
-        setUrl(Constants.HOST_PARTY);
+        setUrl(ApiConstants.HOST_PARTY);
         return retrofit.create(clazz);
     }
 

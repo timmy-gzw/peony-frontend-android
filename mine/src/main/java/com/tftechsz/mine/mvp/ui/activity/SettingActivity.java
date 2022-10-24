@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tftechsz.common.ARouterApi;
+import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.constant.Interfaces;
@@ -214,7 +215,7 @@ public class SettingActivity extends BaseMvpActivity<ISettingView, SettingPresen
                         CharSequence[] hostName = getResources().getTextArray(R.array.host_name);
                         CharSequence[] hostUrl = getResources().getTextArray(R.array.host_url);
                         SPUtils.put(Constants.CURRENT_HOST, hostUrl[selectedItem]);
-                        if (TextUtils.equals(hostUrl[selectedItem], Constants.HOST)) {
+                        if (TextUtils.equals(hostUrl[selectedItem], ApiConstants.HOST)) {
                             SPUtils.put(Constants.IS_COMPLETE_INFO, 0);
                             SPUtils.remove("token");
                         }

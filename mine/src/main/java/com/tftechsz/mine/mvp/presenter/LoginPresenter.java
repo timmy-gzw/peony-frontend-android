@@ -24,6 +24,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tftechsz.common.ARouterApi;
+import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.AppManager;
 import com.tftechsz.common.base.BaseApplication;
@@ -87,8 +88,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         UserManager.init(BaseApplication.getInstance());
         String url = SPUtils.getString(Constants.CURRENT_HOST);
         Utils.logE("baseurl=" + url);
-        configService = RetrofitManager.getInstance().createApi(MineApiService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? Constants.HOST_TEST : url : Constants.HOST);
-        publicService = RetrofitManager.getInstance().createApi(PublicService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? Constants.HOST_TEST : url : Constants.HOST);
+        configService = RetrofitManager.getInstance().createApi(MineApiService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? ApiConstants.HOST_TEST : url : ApiConstants.HOST);
+        publicService = RetrofitManager.getInstance().createApi(PublicService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? ApiConstants.HOST_TEST : url : ApiConstants.HOST);
         userService = ARouter.getInstance().navigation(UserProviderService.class);
     }
 
@@ -176,7 +177,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      */
     public void getConfig(int flag) {
         if (flag == 3) {
-            configService = RetrofitManager.getInstance().createApi(MineApiService.class, BuildConfig.DEBUG ? Constants.HOST_TEST : Constants.HOST_RESERVE);
+            configService = RetrofitManager.getInstance().createApi(MineApiService.class, BuildConfig.DEBUG ? ApiConstants.HOST_TEST : ApiConstants.HOST_RESERVE);
         }
         addNet(configService.getConfig().compose(io_main())
                 .subscribeWith(new ResponseObserver<BaseResponse<String>>() {
@@ -219,7 +220,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 .retryOnConnectionFailure(false)
                 .build();
         Request.Builder builder = new Request.Builder();
-        Request request = builder.get().url(BuildConfig.DEBUG ? Constants.HOST_TEST_DOWN : Constants.HOST_DOWN).build();
+        Request request = builder.get().url(BuildConfig.DEBUG ? ApiConstants.HOST_TEST_DOWN : ApiConstants.HOST_DOWN).build();
         Call call = ClientBuilder.newCall(request);
         call.enqueue(new Callback() {
             @Override

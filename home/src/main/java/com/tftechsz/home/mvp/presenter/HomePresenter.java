@@ -4,12 +4,9 @@ import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.bean.AccostDto;
+import com.netease.nim.uikit.common.util.MD5Util;
 import com.netease.nim.uikit.common.util.log.LogUtil;
-import com.tftechsz.common.utils.CommonUtil;
-import com.tftechsz.home.BuildConfig;
-import com.tftechsz.home.api.HomeApiService;
-import com.tftechsz.home.entity.req.RecommendReq;
-import com.tftechsz.home.mvp.iview.IHomeView;
+import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BasePresenter;
@@ -21,10 +18,14 @@ import com.tftechsz.common.iservice.AccostService;
 import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AesUtil;
-import com.netease.nim.uikit.common.util.MD5Util;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.NetworkUtil;
 import com.tftechsz.common.utils.SPUtils;
+import com.tftechsz.home.BuildConfig;
+import com.tftechsz.home.api.HomeApiService;
+import com.tftechsz.home.entity.req.RecommendReq;
+import com.tftechsz.home.mvp.iview.IHomeView;
 
 import org.apache.commons.codec.binary.Base64;
 import org.jetbrains.annotations.NotNull;
@@ -101,9 +102,9 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         String lon = MMKVUtils.getInstance().decodeString(userService.getUserId() + Constants.LOCATION_LONGITUDE);
         double curLat = TextUtils.isEmpty(lat) ? 0 : Double.parseDouble(Objects.requireNonNull(lat));
         double curLon = TextUtils.isEmpty(lon) ? 0 : Double.parseDouble(Objects.requireNonNull(lon));
-        if(curLat == 0 || curLon == 0)
+        if (curLat == 0 || curLon == 0)
             return;
-        addNet(service.getNearUser(page, 20,curLon ,curLat).compose(applySchedulers())
+        addNet(service.getNearUser(page, 20, curLon, curLat).compose(applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<RecommendReq>>() {
                     @Override
                     public void onSuccess(BaseResponse<RecommendReq> response) {
@@ -173,11 +174,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         HomeApiService configService;
         if (flag == 0) {
             String newUrl = SPUtils.getString(Constants.CURRENT_HOST);
-            configService = RetrofitManager.getInstance().createApi(HomeApiService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(newUrl) ? Constants.HOST_TEST : newUrl : Constants.HOST);
+            configService = RetrofitManager.getInstance().createApi(HomeApiService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(newUrl) ? ApiConstants.HOST_TEST : newUrl : ApiConstants.HOST);
         } else if (flag == 2) {
             configService = RetrofitManager.getInstance().createApi(HomeApiService.class, url);
         } else {
-            configService = RetrofitManager.getInstance().createApi(HomeApiService.class, BuildConfig.DEBUG ? Constants.HOST_TEST : Constants.HOST_RESERVE);
+            configService = RetrofitManager.getInstance().createApi(HomeApiService.class, BuildConfig.DEBUG ? ApiConstants.HOST_TEST : ApiConstants.HOST_RESERVE);
         }
         addNet(configService.getConfig().compose(BasePresenter.applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<String>>() {
@@ -230,7 +231,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 .writeTimeout(2, TimeUnit.SECONDS)
                 .build();
         Request.Builder builder = new Request.Builder();
-        Request request = builder.get().url(BuildConfig.DEBUG ? Constants.HOST_TEST_DOWN : Constants.HOST_DOWN).build();
+        Request request = builder.get().url(BuildConfig.DEBUG ? ApiConstants.HOST_TEST_DOWN : ApiConstants.HOST_DOWN).build();
         Call call = ClientBuilder.newCall(request);
         call.enqueue(new Callback() {
             @Override

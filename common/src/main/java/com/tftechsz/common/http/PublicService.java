@@ -1,7 +1,7 @@
 package com.tftechsz.common.http;
 
 
-import com.tftechsz.common.Constants;
+import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.entity.AccostModeDto;
 import com.tftechsz.common.entity.AccostPopupDto;
 import com.tftechsz.common.entity.ActivityGiftInfoDto;
@@ -446,10 +446,11 @@ public interface PublicService {
 
     /**
      * 用户支付宝提现方式获取
+     *
      * @param out_warn 0 主账户 1 备用账号
      */
     @GET("info/withdraw")
-    Flowable<BaseResponse<WithdrawReq.Withdraw>> withdrawWay(@Query("out_warn")int out_warn);
+    Flowable<BaseResponse<WithdrawReq.Withdraw>> withdrawWay(@Query("out_warn") int out_warn);
 
     /**
      * 背包礼物检测
@@ -485,7 +486,7 @@ public interface PublicService {
     /**
      * 获取审核相关配置
      */
-    @GET(Constants.HOST_REVIEW_CONFIG)
+    @GET(ApiConstants.HOST_REVIEW_CONFIG)
     Flowable<ReviewBean> getReviewConfig(@Path("packageName") String packageName,
                                          @Path("channel") String channel,
                                          @Path("versionName") String versionName);
