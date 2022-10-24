@@ -174,7 +174,6 @@ public class RetrofitManager {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(time * 1000, TimeUnit.MILLISECONDS).readTimeout(time * 1000, TimeUnit.MILLISECONDS);
 
-
         builder.addInterceptor(chain -> {
             //手机版本，厂商，uuid imsi appName,appVersion
             String apiUa = "";
@@ -212,7 +211,7 @@ public class RetrofitManager {
             builder.addInterceptor(logInterceptor());
             builder.sslSocketFactory(createSSLSocketFactory(), mMyTrustManager);//屏蔽ssl整数验证
         }
-
+        builder.addInterceptor(new EncryptionInterceptor());
         return builder.build();
     }
 

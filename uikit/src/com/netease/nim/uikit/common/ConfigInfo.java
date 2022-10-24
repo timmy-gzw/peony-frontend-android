@@ -2,6 +2,9 @@ package com.netease.nim.uikit.common;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
+
+import com.netease.nim.uikit.common.util.MD5Util;
 
 import java.io.Serializable;
 import java.util.List;
@@ -256,6 +259,21 @@ public class ConfigInfo {
         public String yunxin_live_app_key;  //云信语音房key
         public String withdraw_tips;//提现文案
         public int is_main_tab_lottie_config; //是否读取主页tab的动画配置
+        private String param_encrypt_key;// 接口加密key  为空不加密 通过getEncryptKey()取值
+
+        /**
+         * @return 接口加密key
+         */
+        public String getEncryptKey() {
+            if (TextUtils.isEmpty(param_encrypt_key)) {
+                return "";
+            }
+            String md5Str = MD5Util.toMD532(param_encrypt_key);
+            if (TextUtils.isEmpty(md5Str) || md5Str.length() < 16) {
+                return "";
+            }
+            return md5Str.substring(0, 16);
+        }
     }
 
     public static class OpenFamilyAdd {
