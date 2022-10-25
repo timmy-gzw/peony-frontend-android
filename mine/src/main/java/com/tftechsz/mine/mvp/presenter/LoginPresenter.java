@@ -340,7 +340,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                     public void onSuccess(BaseResponse<LoginDto> response) {
                                         UserManager.getInstance().setToken(response.getData().token);
                                         UserManager.getInstance().setUserId(response.getData().user_id);
-                                        CrashReport.setUserId(String.valueOf(response.getData().user_id));
                                         buriedPoint();
                                         doLogin(context, String.valueOf(response.getData().user_id), response.getData().token, response.getData(), type);
                                     }
@@ -406,6 +405,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         initNotificationConfig();
         NimCache.setAccount(account);
         NimUIKit.loginSuccess(account);
+        //设置bugly上报id
+        CrashReport.setUserId(account);
         if (data != null) {   //没有账号登录
             if (data.is_complete == 0) {  //未完善资料
                 Intent intent = new Intent(context, ImproveInfoActivity.class);
