@@ -800,6 +800,12 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
                     Utils.toast("请选择要送出的礼物");
                     return;
                 }
+                if (dto.id <= 0) {
+                    ARouter.getInstance()
+                            .navigation(MineService.class)
+                            .trackEvent("礼物数据异常", "send_gift", "p2p_send_gift",
+                                    JSON.toJSONString(dto), null);
+                }
 
                 if (!dto.can_use && !TextUtils.isEmpty(dto.cannot_use_msg)) { //礼物不可发送
                     CommonUtil.performLink(getContext(), new ConfigInfo.MineInfo(dto.cannot_use_msg));
