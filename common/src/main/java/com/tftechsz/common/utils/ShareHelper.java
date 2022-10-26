@@ -77,8 +77,8 @@ public class ShareHelper {
             WXWebpageObject webpage = new WXWebpageObject();
             webpage.webpageUrl = url;
             WXMediaMessage msg = new WXMediaMessage(webpage);
-            msg.title = title;
-            msg.description = content;
+            msg.title = TextUtils.isEmpty(title) ? com.blankj.utilcode.util.Utils.getApp().getString(R.string.app_name) : title;
+            msg.description = TextUtils.isEmpty(content) ? com.blankj.utilcode.util.Utils.getApp().getString(R.string.app_name) : content;
             Bitmap thumbBmp = BitmapFactory.decodeResource(activity.getResources(), R.mipmap.ic_launcher_share);
             msg.thumbData = Utils.bmpToByteArray(thumbBmp, true);
             SendMessageToWX.Req req = new SendMessageToWX.Req();
