@@ -74,6 +74,7 @@ class EncryptionInterceptor : Interceptor {
                 .removeHeader("x-user-code")
                 .removeHeader("x-anti-cheat-token")
                 .removeHeader("dit")
+                .removeHeader("is-emulator")
                 .url(dstHttpUrl)
                 .method("POST", dstReqBody)
                 .build()
