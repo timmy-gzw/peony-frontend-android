@@ -17,7 +17,18 @@
         android:layout_marginTop="@dimen/dp_60"
         android:src="@mipmap/mine_ic_youth_mode" />
 
-
+    <TextView
+        android:id="@+id/tv_youth_model_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="青少年模式未开启"
+        android:visibility="gone"
+        android:textColor="@color/color_normal"
+        android:textSize="@dimen/sp_24"
+        android:textStyle="bold"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

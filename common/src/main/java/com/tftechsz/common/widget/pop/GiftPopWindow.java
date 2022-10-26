@@ -22,10 +22,10 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -148,7 +148,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
     private int mFamilyId;
     private final UserProviderService service;
     private int formType; //0默认  1家族   2派对
-    private boolean mIsFirst = true;
+    private final boolean mIsFirst = true;
     private ImageView mMore;
     private RechargeBeforePop beforePop;
     private ConstraintLayout constraintLayout;
@@ -173,7 +173,10 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
 
     //派对相关管理
     private boolean mIsMySelf, mIsManager, isOnSeat;
-    private int from_type, scene, partyRoleId, silenceSwitch;
+    private final int from_type;
+    private final int scene;
+    private int partyRoleId;
+    private int silenceSwitch;
     private PartyInfoDto partyInfoDto;
     private GifTitleAdapter mGifTitleAdapter;
     private int titleIndex = 0;
@@ -392,6 +395,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         mBind.tvAGift.setOnClickListener(this);
         mBind.report.setOnClickListener(this);
         mBind.selView.setOnClickListener(this);
+        mBind.tvAllProperties.setOnClickListener(this);
         findViewById(R.id.tv_manager).setOnClickListener(this);   //管理
         findViewById(R.id.tv_down_wheat).setOnClickListener(this);
         findViewById(R.id.tv_close_wheat).setOnClickListener(this);  //闭麦
@@ -923,7 +927,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         } else if (id == R.id.tv_user_message) {  //私信
             ARouterUtils.toChatP2PActivity(sessionId, NimUIKit.getCommonP2PSessionCustomization(), null);
             dismiss();
-        }  else if (id == R.id.more) { //更多
+        } else if (id == R.id.more) { //更多
             RetrofitManager.getInstance().createFamilyApi(PublicService.class)
                     .getFamilyRole(sessionId)
                     .compose(BasePresenter.applySchedulers())
@@ -988,6 +992,19 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         } else if (id == R.id.report) { //举报
             dismiss();
             ARouterUtils.toBeforeReportActivity(TextUtils.isEmpty(sessionId) ? 0 : Integer.parseInt(sessionId), 1);
+        } else if (id == R.id.tv_all_properties) {
+            try {
+                Class aClass = Class.forName("com.tftechsz.im.mvp.ui.activity.VideoCallActivity");
+                boolean activityExistsInStack = ActivityUtils.isActivityExistsInStack(aClass);
+                if (!activityExistsInStack) {
+                    PropertiesPopWindow propertiesPopWindow = new PropertiesPopWindow(getContext());
+                    propertiesPopWindow.showPopupWindow();
+                } else {
+                    ToastUtil.showToast(BaseApplication.getInstance(), "请在视频通话结束后查看");
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         } else if (id == R.id.view_dismiss)   //隐藏pop
             dismiss();
     }
@@ -1331,6 +1348,8 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
             segmentData_temp = Interfaces.SEGMENT_DATA;
         }
 
+        mBind.setIsBagPackage(isPackMode());
+
         if (giftDto.is_choose_num == 1) { //需要选择数量
             mBind.setIsChooseNum(true);
             if (giftDto.tag_value == 4) {//如果是幸运礼物
@@ -1374,81 +1393,6 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
             }
 
         }
-
-        if (giftDto.getId() == 193 || giftDto.getId() == 194) {
-            //盲盒点击埋点
-            ARouter.getInstance()
-                    .navigation(MineService.class)
-                    .trackEvent("派对内盲盒礼物点击", "blind_box_click", "", JSON.toJSONString(new NavigationLogEntity(service.getUserId(), roomId, giftDto.getId() == 193 ? 1 : 2, System.currentTimeMillis(), CommonUtil.getOSName(), Constants.APP_NAME)), null);
-        }
-
-        if (mType == 3 || mBind.rlInfo.getVisibility() == View.VISIBLE) {
-            return;
-        }
-
-        if (mMapGiftSelected.get(giftDto.getId()) == null) {
-            //请求横幅信息
-            mCompositeDisposable.add(RetrofitManager.getInstance()
-                    .createUserApi(PublicService.class)
-                    .giftInfoActivity(createRequestBody(new ActivityGiftInfoQuestBean(giftDto.getId(), getScene())))
-                    .compose(BasePresenter.applySchedulers())
-                    .subscribeWith(new ResponseObserver<BaseResponse<ActivityGiftInfoDto>>() {
-                        @Override
-                        public void onSuccess(BaseResponse<ActivityGiftInfoDto> accostDtoBaseResponse) {
-//显示横幅
-                            if (accostDtoBaseResponse.getData() != null) {
-
-                                mMapGiftSelected.put(giftDto.getId(), accostDtoBaseResponse.getData());
-                                constraintLayout.setVisibility(View.VISIBLE);
-                                GlideUtils.loadBorderImg(mContext, mMapGiftSelected.get(giftDto.getId()).icon, roundedImageView);
-                                if (!StringUtils.isTrimEmpty(mMapGiftSelected.get(giftDto.getId()).title)) {
-                                    mTvGiftText.setText(mMapGiftSelected.get(giftDto.getId()).title);
-                                }
-                                if (!StringUtils.isTrimEmpty(mMapGiftSelected.get(giftDto.getId()).nickname)) {
-                                    mTvPopGiftNameText.setText(mMapGiftSelected.get(giftDto.getId()).nickname);
-                                }
-
-                                setVisibles(accostDtoBaseResponse.getData());
-                                mBind.llGift.setBackgroundResource(R.color.white);
-                            } else {
-                                constraintLayout.setVisibility(View.GONE);
-                                mImgActivityBottom1.setVisibility(View.GONE);
-                                mBind.llGift.setBackgroundResource(mBind.clWheat.getVisibility() == View.VISIBLE ? R.color.white : R.drawable.bg_white_top_radius10);
-                            }
-                        }
-
-                        @Override
-                        public void onFail(int code, String msg) {
-                            super.onFail(code, msg);
-                            constraintLayout.setVisibility(View.GONE);
-                            mImgActivityBottom1.setVisibility(View.GONE);
-                            mBind.llGift.setBackgroundResource(mBind.clWheat.getVisibility() == View.VISIBLE ? R.color.white : R.drawable.bg_white_top_radius10);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
-                            constraintLayout.setVisibility(View.GONE);
-                            mImgActivityBottom1.setVisibility(View.GONE);
-                            mBind.llGift.setBackgroundResource(mBind.clWheat.getVisibility() == View.VISIBLE ? R.color.white : R.drawable.bg_white_top_radius10);
-                        }
-                    }));
-        } else {
-            if (mMapGiftSelected.get(giftDto.getId()) != null) {
-                //显示横幅
-                constraintLayout.setVisibility(View.VISIBLE);
-                setVisibles(mMapGiftSelected.get(giftDto.getId()));
-                GlideUtils.loadBorderImg(mContext, mMapGiftSelected.get(giftDto.getId()).icon, roundedImageView);
-                if (!StringUtils.isTrimEmpty(mMapGiftSelected.get(giftDto.getId()).title)) {
-                    mTvGiftText.setText(mMapGiftSelected.get(giftDto.getId()).title);
-                }
-                if (!StringUtils.isTrimEmpty(mMapGiftSelected.get(giftDto.getId()).nickname)) {
-                    mTvPopGiftNameText.setText(mMapGiftSelected.get(giftDto.getId()).nickname);
-                }
-                mBind.llGift.setBackgroundResource(R.color.white);
-            }
-        }
-
 
     }
 

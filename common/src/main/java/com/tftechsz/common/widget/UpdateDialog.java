@@ -98,6 +98,7 @@ public class UpdateDialog extends Dialog {
                     } else {*/
 
                     //}
+                    installApk();
                     break;
             }
             super.handleMessage(msg);

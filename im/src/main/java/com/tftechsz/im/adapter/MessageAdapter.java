@@ -183,7 +183,7 @@ public class MessageAdapter extends BaseQuickAdapter<ContactInfo, BaseViewHolder
 
     private void loadFromLocal(ContactInfo item, TextView textView, ImageView redPackage, QueryDirectionEnum direction) {
         NIMClient.getService(MsgService.class)
-                .queryMessageListEx(MessageBuilder.createEmptyMessage(item.getFromAccount(), SessionTypeEnum.P2P, item.getTime()), direction, 3, false)
+                .queryMessageListEx(MessageBuilder.createEmptyMessage(item.getFromAccount(), SessionTypeEnum.P2P, item.getTime()), direction, 4, false)
                 .setCallback(new RequestCallbackWrapper<List<IMMessage>>() {
                     @Override
                     public void onResult(int code, List<IMMessage> messages, Throwable exception) {

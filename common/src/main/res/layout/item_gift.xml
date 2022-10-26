@@ -45,7 +45,7 @@
         android:paddingBottom="@dimen/dp_3"
         android:textColor="@color/color_light_font"
         android:textSize="@dimen/sp_9"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/expired_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="1金币" />
@@ -56,9 +56,9 @@
         android:layout_height="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_4"
         android:layout_marginEnd="@dimen/dp_7"
+        android:scaleType="fitEnd"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        android:scaleType="fitEnd"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/ic_bg_gift_move"
         tools:visibility="visible" />
@@ -67,43 +67,40 @@
         android:id="@+id/num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginEnd="@dimen/dp_7"
         android:background="@drawable/shape_gift_pack_num"
         android:gravity="center"
-        android:letterSpacing="0.03"
-        android:textColor="@color/white"
+        android:paddingHorizontal="@dimen/dp_6"
+        android:paddingBottom="@dimen/dp_2"
+        android:paddingTop="@dimen/dp_1"
+        android:textColor="@color/color_normal"
         android:textSize="@dimen/sp_10"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/iv"
-        app:layout_constraintEnd_toEndOf="@id/iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="x15"
         tools:visibility="visible" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <com.tftechsz.common.widget.AutoFitTextView
+        android:id="@+id/expired_time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_3"
         android:layout_marginTop="@dimen/dp_6"
-        app:layout_constraintEnd_toStartOf="@id/tv_gift_type"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_6"
+        android:paddingVertical="@dimen/dp_1"
+        android:singleLine="true"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_9"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.tftechsz.common.widget.AutoFitTextView
-            android:id="@+id/expired_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_333333_alpha_20"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/dp_6"
-            android:paddingVertical="@dimen/dp_1"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_10"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="1天后过期过期1天后过期1天后过期"
-            tools:visibility="visible" />
-    </LinearLayout>
+        tools:text="1天后过期过期1天后过期1天后过期"
+        tools:visibility="visible" />
 
     <View
         android:id="@+id/can_use_bg"

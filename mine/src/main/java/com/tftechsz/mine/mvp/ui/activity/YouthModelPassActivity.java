@@ -46,11 +46,11 @@ public class YouthModelPassActivity extends BaseMvpActivity implements View.OnCl
         tvForget.setOnClickListener(this);
         String title;
         if (!TextUtils.isEmpty(mPass)) {
-            title = "关闭青少年模式";
+            title = getString(R.string.youth_mode_close);
             mTvTitle.setText("请输入密码");
             tvForget.setVisibility(View.VISIBLE);
         }else{
-            title = "开启青少年模式";
+            title = getString(R.string.youth_mode_open);
             tvForget.setVisibility(View.GONE);
         }
         new ToolBarBuilder().setTitle(title).showBack(true).build();
@@ -63,7 +63,7 @@ public class YouthModelPassActivity extends BaseMvpActivity implements View.OnCl
             @Override
             public void onInput() {
                 tvNext.setEnabled(false);
-                tvNext.setTextColor(Color.parseColor("#999999"));
+                tvNext.setTextColor(Utils.getColor(R.color.c_youth_mode_next));
             }
         });
 
@@ -82,7 +82,7 @@ public class YouthModelPassActivity extends BaseMvpActivity implements View.OnCl
                     mPass1 = youthPass.getPhoneCode();
                     isFirst = false;
                     youthPass.clearCode();
-                    mTvTitle.setText("请确认密码");
+                    mTvTitle.setText(getString(R.string.youth_mode_sure_pass));
                 } else {
                     String pass2 = youthPass.getPhoneCode();
                     if (TextUtils.equals(mPass1, pass2)) {

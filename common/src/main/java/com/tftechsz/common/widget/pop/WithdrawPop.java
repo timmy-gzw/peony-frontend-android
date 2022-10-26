@@ -43,7 +43,7 @@ public class WithdrawPop extends BaseBottomPop implements View.OnClickListener, 
     private PopWithdrawBindBinding mBind;
     private CompositeDisposable mCompositeDisposable;
     private CountBackUtils countBackUtils;
-    private final String typeId;
+    private String typeId;
     private WithdrawReq.Withdraw withdrawRes;
 
     public WithdrawPop(String type_id) {

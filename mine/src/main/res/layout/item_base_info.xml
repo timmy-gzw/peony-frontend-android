@@ -12,7 +12,8 @@
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
         android:includeFontPadding="false"
         android:textColor="@color/color_light_font"
         android:textSize="@dimen/sp_12"
@@ -24,11 +25,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="喵了个咪儿" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_value"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:ellipsize="end"
+        android:gravity="center_vertical"
         android:includeFontPadding="false"
         android:maxLines="1"
         android:textColor="@color/color_normal"

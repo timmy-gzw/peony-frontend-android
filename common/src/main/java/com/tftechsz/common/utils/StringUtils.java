@@ -98,11 +98,12 @@ public class StringUtils {
         int count = 0;
         for (int i = 0; i < text.length(); i++) {
             char item = text.charAt(i);
-            if (item < 128) {
-                count++;
-            } else {
-                count += 2;
-            }
+//            if (item < 128) {
+//                count++;
+//            } else {
+//                count += 2;
+//            }
+            count++;
         }
         return count;
     }

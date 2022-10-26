@@ -22,6 +22,10 @@
             name="is_choose_num"
             type="boolean" />
 
+        <variable
+            name="is_bag_package"
+            type="boolean" />
+
         <import type="android.view.View" />
     </data>
 
@@ -783,11 +787,52 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_0_5"
+                        android:visibility="gone"
                         android:background="@color/EEEEEE"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:visibility="@{is_bag_package ? View.VISIBLE : View.GONE }"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="道具背包"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/bg_properties_package"
+                        android:layout_marginStart="@dimen/dp_16"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold"
+                        android:paddingVertical="@dimen/dp_4"
+                        android:paddingHorizontal="@dimen/dp_8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_all_properties"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="所有道具"
+                        android:layout_marginTop="@dimen/dp_11"
+                        android:layout_marginEnd="@dimen/dp_16"
+                        android:textColor="@color/color_normal"
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:drawableEndCompat="@mipmap/ic_arrow_bottom" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -929,7 +974,7 @@
                         android:text="数量"
                         android:textColor="@color/color_999999"
                         android:textSize="@dimen/sp_14"
-                        android:visibility="@{is_choose_num ? bot_sel ? View.GONE : View.VISIBLE : View.GONE }"
+                        android:visibility="@{is_bag_package ? View.GONE : View.VISIBLE}"
                         app:layout_constraintBottom_toBottomOf="@id/st_layout"
                         app:layout_constraintStart_toEndOf="@id/ll_bot_let"
                         app:layout_constraintTop_toTopOf="@id/st_layout"
@@ -939,7 +984,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:background="@drawable/shape_bg_f9f9f9_radius"
-                        android:visibility="@{is_choose_num ? View.VISIBLE : View.INVISIBLE }"
+                        android:visibility="@{is_bag_package ? View.INVISIBLE : View.VISIBLE }"
                         app:layout_constraintBottom_toBottomOf="@id/st_layout"
                         app:layout_constraintEnd_toEndOf="@id/tv_send_gift"
                         app:layout_constraintStart_toStartOf="@id/st_layout"
@@ -951,7 +996,7 @@
                         android:layout_height="@dimen/dp_36"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/dp_6"
-                        android:visibility="@{is_choose_num ? View.VISIBLE : View.INVISIBLE }"
+                        android:visibility="@{is_bag_package ? View.INVISIBLE : View.VISIBLE }"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/tv_send_gift"
                         app:layout_constraintHorizontal_weight="4"
@@ -981,6 +1026,7 @@
                         android:text="赠送"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp_14"
+                        android:visibility="@{is_bag_package ? View.INVISIBLE : View.VISIBLE }"
                         app:layout_constraintBottom_toBottomOf="@id/st_layout"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/st_layout"

@@ -22,6 +22,8 @@ import com.tftechsz.common.bus.RxBus;
 import com.tftechsz.common.entity.SystemAccostDto;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.Utils;
 import com.tftechsz.main.R;
 import com.tftechsz.main.adapter.AccostUserAdapter;
 
@@ -104,6 +106,7 @@ public class AccostPopWindow extends BasePopupWindow implements View.OnClickList
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.ll_btn) {   //一键搭讪
+            Utils.toast("一键搭讪成功");
             for (int i = 0; i < mAdapter.getData().size(); i++) {
                 if (mAdapter.getData().get(i).isSelected()) {
                     ChatMsgUtil.sendAccostMessage(String.valueOf(service.getUserId()), String.valueOf(mAdapter.getData().get(i).getUser_id()), mData.gift_info.gift.id, mData.gift_info.gift.name, mData.gift_info.gift.image, mData.gift_info.gift.animation, mData.gift_info.msg, 8,mData.accost_from);

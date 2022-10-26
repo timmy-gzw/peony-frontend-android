@@ -5,9 +5,12 @@ import android.text.TextUtils;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.snail.antifake.deviceid.AndroidDeviceIMEIUtil;
+import com.snail.antifake.jni.EmulatorDetectUtil;
 import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.BuildConfig;
 import com.tftechsz.common.Constants;
+import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.MMKVUtils;
@@ -197,6 +200,7 @@ public class RetrofitManager {
             } else {
                 apiUa = AppUtils.getApiUa();
             }
+            boolean isEmulator =  EmulatorDetectUtil.isEmulatorFromAll(BaseApplication.getInstance());
             String deviceIdType = Utils.getDeviceIdType();
             Request request = chain.request().newBuilder()
                     .addHeader("x-auth-token", service.getToken())
@@ -204,6 +208,7 @@ public class RetrofitManager {
                     .addHeader("x-user-code", userCode)
                     .addHeader("x-anti-cheat-token", yundunToken)
                     .addHeader("dit", deviceIdType)
+                    .addHeader("is-emulator", String.valueOf(isEmulator ? 1 : 0))
                     .build();
             return chain.proceed(request);
         });

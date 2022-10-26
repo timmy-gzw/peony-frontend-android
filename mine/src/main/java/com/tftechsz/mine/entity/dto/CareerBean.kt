@@ -1,3 +1,9 @@
 package com.tftechsz.mine.entity.dto
 
-data class CareerBean(val id: Int, val name: String, var isSelected: Boolean, val subCareers: List<CareerBean>?)
+class CareerBean {
+
+    var job_list: MutableList<CareerInfoDto>? = null
+    var job_pid_mine : Int = 0
+    var job_id_mine : Int = 0
+
+}

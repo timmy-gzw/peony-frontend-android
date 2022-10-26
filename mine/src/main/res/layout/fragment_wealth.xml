@@ -144,7 +144,7 @@
                 android:id="@+id/tv_wealth_decs"
                 android:layout_marginTop="@dimen/dp_10"
                 android:textColor="@color/c_999999"
-                android:text="财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注"
+                android:text="财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注!"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

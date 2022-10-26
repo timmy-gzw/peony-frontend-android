@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
 
@@ -13,8 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_40"
         android:text="请设置密码"
+        android:textStyle="bold"
         android:textColor="@color/color_normal"
         android:textSize="@dimen/sp_24" />
 
@@ -23,14 +25,14 @@
         android:id="@+id/phone_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_50"
-        android:layout_marginEnd="@dimen/dp_50" />
+        android:layout_marginStart="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginEnd="@dimen/dp_60" />
 
     <TextView
         android:id="@+id/tv_next"
         style="@style/CustomButton"
-        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_100"
         android:enabled="false"
         android:text="下一步"
         />
@@ -41,10 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_10"
-        android:text="忘记密码"
-        android:textColor="@color/color_mid_font"
-        android:textSize="@dimen/sp_16"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="忘记密码？"
+        android:textColor="@color/color_light_font"
+        android:textSize="@dimen/sp_12"
 
         />
 

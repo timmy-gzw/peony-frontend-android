@@ -283,5 +283,8 @@
         <activity
             android:name=".mvp.ui.activity.YouthModelPassActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.LabelActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

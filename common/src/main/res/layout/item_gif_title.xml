@@ -67,6 +67,7 @@
             android:layout_width="@dimen/dp_1"
             android:layout_height="@dimen/dp_10"
             android:background="@color/EEEEEE"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

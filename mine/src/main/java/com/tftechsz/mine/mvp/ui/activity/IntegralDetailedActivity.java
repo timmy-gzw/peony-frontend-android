@@ -64,8 +64,8 @@ public class IntegralDetailedActivity extends BaseMvpActivity<IIntegralDetailVie
             title = "兑换记录";
             mTvEmpty.setText("暂无兑换记录");
         } else if (mType == 3) {   //聊天卡消耗记录
-            title = "消耗记录";
-            mTvEmpty.setText("暂无消耗记录");
+            title = "道具记录";
+            mTvEmpty.setText("暂无道具记录");
         } else if (mType == 4) {   //音符清单
             title = "音符清单";
             mTvEmpty.setText("暂无音符数据");

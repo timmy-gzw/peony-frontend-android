@@ -104,7 +104,7 @@ public class EditInfoActivity extends BaseMvpActivity<IEditInfoView, EditInfoPre
             mTvTitle.setText(getString(R.string.edit_nickname));
             mEtContent.setText(service.getUserInfo().getNickname());
             mEtContent.setHint("昵称仅支持中文");
-            length = Constants.MAX_NAME_LENGTH;
+            length = 6;
             p.setLength(mEtContent, length);
 //            mEtContent.setFilters(new InputFilter[]{new ChineseFilter()});
         } else if (type == TYPE_JOB) {
@@ -121,7 +121,7 @@ public class EditInfoActivity extends BaseMvpActivity<IEditInfoView, EditInfoPre
                 mEtContent.setText(mSign);
             else
                 mEtContent.setHint("一个好的宣言可以更吸引Ta哟～");
-            length = 40;
+            length = 20;
             p.setLength(mEtContent, length);
         }
         mTvNumber.setText(StringUtils.judgeTextLength(mEtContent.getText().toString()) + "/" + length);

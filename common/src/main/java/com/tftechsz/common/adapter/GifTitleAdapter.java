@@ -26,7 +26,7 @@ public class GifTitleAdapter extends BaseQuickAdapter<GifTitleDto, DataBindBaseV
         bind.setVariable(BR.item, bean);
         bind.executePendingBindings();
 
-        bind.endLine.setVisibility(helper.getLayoutPosition() == getItemCount() - 1 ? View.GONE : View.VISIBLE);
+//        bind.endLine.setVisibility(helper.getLayoutPosition() == getItemCount() - 1 ? View.GONE : View.VISIBLE);
     }
 
     public int getPosition() {

@@ -15,7 +15,7 @@ import com.tftechsz.mine.mvp.IView.IChooseCareerView
 import com.tftechsz.mine.mvp.presenter.ChooseCareerPresenter
 
 /**
- *  TODO 选择职业
+ *  选择职业
  */
 @Route(path = ARouterApi.ACTIVITY_CHOOSE_CAREER)
 class ChooseCareerActivity : BaseMvpActivity<IChooseCareerView, ChooseCareerPresenter>(), IChooseCareerView {
@@ -58,11 +58,12 @@ class ChooseCareerActivity : BaseMvpActivity<IChooseCareerView, ChooseCareerPres
         }
         binding.ivDone.setOnClickListener {
             val position = careerChildAdapter.selectedIndex
-            if (position > 0 && position < careerChildAdapter.itemCount) {
-                val name = careerChildAdapter.getItem(position).name
-                setResult(RESULT_OK, intent.putExtra("type", name))
+            if (position >= 0 && position < careerChildAdapter.itemCount) {
+                val item = careerChildAdapter.getItem(position)
+                p?.updateUserInfo(item.name, item.id.toString())
+            } else {
+                toastTip("请选择职业")
             }
-            finish()
         }
     }
 
@@ -71,12 +72,32 @@ class ChooseCareerActivity : BaseMvpActivity<IChooseCareerView, ChooseCareerPres
         getP().getCareers()
     }
 
-    override fun onGetCareer(career: List<CareerBean>?) {
-        careerAdapter.setList(career)
-        chooseParent(0)
+    override fun onGetCareer(career: CareerBean?) {
+        careerAdapter.setList(career?.job_list)
+        chooseDefault(career?.job_pid_mine ?: 0, career?.job_id_mine ?: 0)
+    }
+
+    override fun updateUserInfoSuccess(job: String?) {
+        toastTip("更改成功")
+        setResult(RESULT_OK, intent.putExtra("type", job ?: ""))
+        finish()
+    }
+
+    private fun chooseDefault(pid: Int, cid: Int) {
+        if (pid < 0 || cid < 0) {
+            chooseParent(0)
+            return
+        }
+        val pIndex = careerAdapter.data.indexOfFirst { it.id == pid }
+        chooseParent(pIndex)
+        binding.rvCareerParent.scrollToPosition(pIndex)
+        val cIndex = careerChildAdapter.data.indexOfFirst { it.id == cid }
+        chooseChild(cIndex)
+        binding.rvCareerChild.scrollToPosition(cIndex)
     }
 
     private fun chooseParent(position: Int) {
+        if (position >= careerAdapter.itemCount) return
         if (careerAdapter.selectedIndex == position) return
         if (careerAdapter.selectedIndex >= 0) {
             careerAdapter.getItem(careerAdapter.selectedIndex).isSelected = false
@@ -90,10 +111,11 @@ class ChooseCareerActivity : BaseMvpActivity<IChooseCareerView, ChooseCareerPres
             careerChildAdapter.getItem(careerChildAdapter.selectedIndex).isSelected = false
             careerChildAdapter.selectedIndex = -1
         }
-        careerChildAdapter.setList(careerAdapter.getItem(position).subCareers)
+        careerChildAdapter.setList(careerAdapter.getItem(position).child_list)
     }
 
     private fun chooseChild(position: Int) {
+        if (position >= careerChildAdapter.itemCount) return
         if (careerChildAdapter.selectedIndex == position) return
         if (careerChildAdapter.selectedIndex >= 0) {
             careerChildAdapter.getItem(careerChildAdapter.selectedIndex).isSelected = false

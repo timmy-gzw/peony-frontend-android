@@ -23,7 +23,7 @@ import java.util.List;
  * 描 述 : 动态-评论回复pop
  */
 public class CommentPopWindow extends BaseBottomPop {
-    private Context mContext;
+    private final Context mContext;
     private int userId, blogUserId;
 
     UserProviderService service;
@@ -44,6 +44,8 @@ public class CommentPopWindow extends BaseBottomPop {
         list.add("复制");
         if (blogUserId == service.getUserId() || userId == service.getUserId()) {
             list.add("删除");
+//        } else {
+//            list.add("举报");
         }
 
         if (mAdapter == null) {
@@ -51,7 +53,7 @@ public class CommentPopWindow extends BaseBottomPop {
             rv.setAdapter(mAdapter);
             mAdapter.setOnItemClickListener((adapter, view, position) -> {
                 if (listener != null) {
-                    listener.click(position);
+                    listener.click(position, mAdapter.getItem(position));
                 }
                 dismiss();
             });
@@ -67,7 +69,7 @@ public class CommentPopWindow extends BaseBottomPop {
     }
 
     public interface OnClicksListener {
-        void click(int pos);
+        void click(int pos, String str);
     }
 
     public OnClicksListener listener;

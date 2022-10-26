@@ -511,39 +511,6 @@ public class ChatPresenter extends BasePresenter<IChatView> {
 
     }
 
-
-    /**
-     * 加载本地消息
-     */
-    private String loadFromLocal(ContactInfo contactInfo, String account, long time, QueryDirectionEnum direction) {
-        final String[] messageContent = new String[1];
-        NIMClient.getService(MsgService.class)
-                .queryMessageListEx(MessageBuilder.createEmptyMessage(account, SessionTypeEnum.P2P, time), direction, 5, false)
-                .setCallback(new RequestCallbackWrapper<List<IMMessage>>() {
-                    @Override
-                    public void onResult(int code, List<IMMessage> messages, Throwable exception) {
-                        if (messages != null) {
-                            for (IMMessage message : messages) {
-                                if (TextUtils.isEmpty(message.getContent())) {
-                                    String content = getMessage(BaseApplication.getInstance(), contactInfo, message, String.valueOf(userProviderService.getUserId()), account);
-                                    if (TextUtils.isEmpty(message.getContent()) || TextUtils.equals("[礼物]", message.getContent()) || TextUtils.equals("call", message.getContent())) {
-                                        messageContent[0] = content;
-                                        contactInfo.content = messageContent[0];
-                                        break;
-                                    }
-                                } else {
-                                    messageContent[0] = message.getContent();
-                                    contactInfo.content = messageContent[0];
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });
-        return messageContent[0];
-    }
-
-
     /**
      * 获取最近消息
      */

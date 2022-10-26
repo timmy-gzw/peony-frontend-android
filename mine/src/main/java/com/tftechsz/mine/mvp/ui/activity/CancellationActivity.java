@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.base.BaseMvpActivity;
 import com.tftechsz.common.iservice.UserProviderService;
+import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.AlignTextView;
 import com.tftechsz.mine.R;
@@ -36,7 +37,7 @@ public class CancellationActivity extends BaseMvpActivity<ILogoutView, ILogoutPr
     private TimerTask mTimerTask;
     private int countTime;
     private boolean isLogout;
-    private String hint = "1. 无法登录%sAPP；\n\n" +
+    private final String hint = "1. 无法登录%sAPP；\n\n" +
             "2. 所有信息将被永久删除（动态、圈子等内容），你的好友无法再与你取得联系（包括关注，粉丝，家族等）； \n\n" +
             "3. 绑定手机/微信/QQ账号将会解绑，解绑后可再次注册%s（注册需满足通用规定，如同一手机/微信/QQ账号，90天内只能注册一个%s帐号）； \n\n" +
             "4. 你的实名信息会解绑，180天后可以再次绑定其他%s号；\n\n" +
@@ -91,6 +92,8 @@ public class CancellationActivity extends BaseMvpActivity<ILogoutView, ILogoutPr
                 p.unDestroyAccount();
                 return;
             }
+
+            if (CommonUtil.hasPerformAccost(service.getUserInfo())) return;
             mLogoutAgreementPop = new LogoutAgreementPop(mContext, agreementUrl, () -> mBtn.postDelayed(() -> {
                 if (!TextUtils.isEmpty(mRepeatMsg))
                     getP().showPop(this, mRepeatMsg);
