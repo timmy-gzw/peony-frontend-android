@@ -57,8 +57,8 @@
 
     #junk code 垃圾代码配置
     ###### com.tftechsz.ivy.atest为前面配置的packageBase
-    # -keep class com.tftechsz.ivy.joke.** {*;}
-    # -keep class com.tftechsz.jasmine.joke.** {*;}
+    -keep class com.tftechsz.ivy.joke.** {*;}
+    -keep class com.tftechsz.jasmine.joke.** {*;}
     -keep class com.emeraldtechhn.poinsettia.joke.** {*;}
 
 

@@ -163,25 +163,25 @@ android {
 androidJunkCode {
     def heartConfig = {
         packageBase = "com.tftechsz.ivy.joke"
-        packageCount = 60
-        activityCountPerPackage = 8
+        packageCount = 140
+        activityCountPerPackage = 20
         excludeActivityJavaFile = false
-        otherCountPerPackage = 80
-        methodCountPerClass = 60
+        otherCountPerPackage = 100
+        methodCountPerClass = 80
         resPrefix = "ivy"
-        drawableCount = 600
-        stringCount = 600
+        drawableCount = 700
+        stringCount = 700
     }
     def jasmineConfig = {
         packageBase = "com.tftechsz.jasmine.joke"
-        packageCount = 60
-        activityCountPerPackage = 8
+        packageCount = 50
+        activityCountPerPackage = 7
         excludeActivityJavaFile = false
-        otherCountPerPackage = 80
-        methodCountPerClass = 60
+        otherCountPerPackage = 70
+        methodCountPerClass = 50
         resPrefix = "jasmine"
-        drawableCount = 600
-        stringCount = 600
+        drawableCount = 500
+        stringCount = 500
     }
     def poinsettiaConfig = {
         packageBase = "com.emeraldtechhn.poinsettia.joke"

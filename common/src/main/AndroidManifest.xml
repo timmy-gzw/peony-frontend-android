@@ -6,6 +6,9 @@
     <uses-permission
         android:name="android.permission.READ_CONTACTS"
         tools:node="remove" />
+    <uses-permission
+        android:name="android.permission.RECEIVE_BOOT_COMPLETED"
+        tools:node="remove" />
 
     <!-- 权限声明 -->
     <!-- 访问网络状态-->
@@ -68,7 +71,6 @@
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_INSTALL" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- 以上为友盟推送需要的基本权限，需要自行添加至您的AndroidManifest文件中 end-->
     <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
@@ -170,7 +172,8 @@
         <receiver
             android:name="com.netease.nimlib.service.NimReceiver"
             android:exported="false"
-            android:process=":core">
+            android:process=":core"
+            tools:node="remove">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
