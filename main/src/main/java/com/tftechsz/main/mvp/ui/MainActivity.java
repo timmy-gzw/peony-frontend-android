@@ -916,8 +916,6 @@ public class MainActivity extends BaseMvpActivity<IMainView, MainPresenter> impl
                 }
             }
             getP().updateLocation(addressReq);
-            bdLocationManager.stopLoc();
-            bdLocationManager.removeListener();
         }
     }
 
