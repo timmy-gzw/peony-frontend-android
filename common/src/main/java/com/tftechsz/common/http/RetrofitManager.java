@@ -200,7 +200,7 @@ public class RetrofitManager {
             } else {
                 apiUa = AppUtils.getApiUa();
             }
-            boolean isEmulator =  EmulatorDetectUtil.isEmulatorFromAll(BaseApplication.getInstance());
+            boolean isEmulator =  EmulatorDetectUtil.isEmulator(BaseApplication.getInstance());
             String deviceIdType = Utils.getDeviceIdType();
             Request request = chain.request().newBuilder()
                     .addHeader("x-auth-token", service.getToken())

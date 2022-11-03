@@ -59,8 +59,8 @@ android {
             signingConfig null //null 走flavor配置
             zipAlignEnabled true
             // 移除无用的resource文件
-            shrinkResources false
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [app_icon: "@mipmap/ic_launcher"]
         }

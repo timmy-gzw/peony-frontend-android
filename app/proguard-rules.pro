@@ -551,6 +551,8 @@
     -dontwarn android.net.http.SslError
     -dontwarn Android.webkit.WebViewClient
 
+    -keep class com.snail.antifake.** {*;}
+
     -keep class cn.hx.plugin.ui.** {*;}
     #bugly
     -dontwarn com.tencent.bugly.**
