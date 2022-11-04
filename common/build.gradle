@@ -147,7 +147,7 @@ dependencies {
     api(name: 'netmobsecLib_4.4.6.8', ext: 'aar')
     api(name: 'oaid_sdk_1.0.25', ext: 'aar')
     api(name: 'com.heytap.msp-push-3.0.0', ext: 'aar')
-    api(name: 'vivo_pushsdk_v3.0.0.4_484', ext: 'aar')
+    api(name: 'vivo_pushSDK_v3.0.0.4_484', ext: 'aar')
 
     api rootProject.ext.support["kotlin"]
     api rootProject.ext.support["design"]
