@@ -1,9 +1,16 @@
 pipeline {
-    agent any
+    agent {
+        label 'android'
+    }
     stages {
-        stage('Stage 1') {
+        stage('Compile') {
             steps {
-                echo 'Hello world!'
+                script {
+                    sh 'echo "Now Compile the source code"'
+                    sh 'env | grep $HOME'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew assembleOfficeDebug -i'
+                }
             }
         }
     }
