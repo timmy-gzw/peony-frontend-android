@@ -239,3 +239,22 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.3"
 
 }
+
+// ./gradlew -q printVersion -PinputFlavorName=office
+// support for jenkinsfile
+task printVersion {
+    doLast {
+        def vName = ''
+        def vCode = 0
+        android.applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def flavor = variant.productFlavors[0]
+                if (flavor.name == inputFlavorName) {
+                    vName = flavor.versionName
+                    vCode = flavor.versionCode
+                }
+            }
+        }
+        print "${vName}_${vCode}"
+    }
+}
