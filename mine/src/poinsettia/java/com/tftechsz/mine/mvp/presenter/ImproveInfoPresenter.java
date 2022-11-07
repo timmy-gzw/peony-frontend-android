@@ -1,5 +1,7 @@
 package com.tftechsz.mine.mvp.presenter;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -10,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
@@ -22,7 +27,6 @@ import com.tftechsz.common.base.BasePresenter;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
-import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.TimeUtils;
@@ -38,10 +42,6 @@ import com.tftechsz.mine.utils.UserManager;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
-
-import static android.content.Context.CLIPBOARD_SERVICE;
-
-import androidx.core.content.ContextCompat;
 
 public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
 
@@ -145,7 +145,7 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
         startDate.set(1900, 0, 1);
 //        endDate.set(TimeUtils.getCurrentYear(), TimeUtils.getCurrentMonth() - 1, TimeUtils.getCurrentDay2());
         String[] split = Utils.getOldYearDate(-18).split("-");
-        endDate.set(Integer.parseInt(split[0]),  TimeUtils.getCurrentMonth() - 1,  TimeUtils.getCurrentDay2());
+        endDate.set(Integer.parseInt(split[0]), TimeUtils.getCurrentMonth() - 1, TimeUtils.getCurrentDay2());
         pvTime = new TimePickerBuilder(context, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
@@ -225,7 +225,8 @@ public class ImproveInfoPresenter extends BasePresenter<IImproveInfoView> {
                         if (response.getData() != null && getView() != null) {
                             MMKVUtils.getInstance().encode(Constants.SHOW_NEAR_USER, response.getData().show_near_user);
                             MMKVUtils.getInstance().encode(Constants.SHOW_PARTY_ICON, response.getData().show_party_icon);
-                            ARouterUtils.toPathWithId(ARouterApi.MAIN_MAIN);
+//                            ARouterUtils.toPathWithId(ARouterApi.MAIN_MAIN);
+                            ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "init").navigation();
                             activity.finish();
                         }
                     }

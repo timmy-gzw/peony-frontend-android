@@ -8,4 +8,5 @@
     <color name="vip_price_hint_color_normal">#928465</color>
     <color name="c_exchange_coin">#FFBB12</color>
 
+    <color name="c_label_text">#F561FF</color>
 </resources>

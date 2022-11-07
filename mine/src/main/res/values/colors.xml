@@ -8,4 +8,6 @@
     <color name="c_exchange_coin">@color/color_normal</color>
 
     <color name="c_youth_mode_next">@color/white</color>
+
+    <color name="c_label_text">@color/colorPrimary</color>
 </resources>

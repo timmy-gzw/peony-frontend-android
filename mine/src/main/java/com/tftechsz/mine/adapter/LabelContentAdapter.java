@@ -23,7 +23,7 @@ public class LabelContentAdapter extends BaseQuickAdapter<LabelInfoDto, BaseView
         tvLabel.setText(item.name);
         if (item.is_select == 1) {
             tvLabel.setBackgroundResource(R.drawable.bg_label_select);
-            tvLabel.setTextColor(Utils.getColor(R.color.colorPrimary));
+            tvLabel.setTextColor(Utils.getColor(R.color.c_label_text));
         } else {
             tvLabel.setBackgroundResource(R.drawable.bg_label_normal);
             tvLabel.setTextColor(Utils.getColor(R.color.color_light_font));

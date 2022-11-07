@@ -41,7 +41,7 @@ public class LabelDisplayAdapter extends BaseQuickAdapter<String, BaseViewHolder
             TextView tvLabel = holder.getView(R.id.tv_content);
             tvLabel.setText(label);
             tvLabel.setBackgroundResource(R.drawable.bg_label_select);
-            tvLabel.setTextColor(Utils.getColor(R.color.colorPrimary));
+            tvLabel.setTextColor(Utils.getColor(R.color.c_label_text));
             tvLabel.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
     }
