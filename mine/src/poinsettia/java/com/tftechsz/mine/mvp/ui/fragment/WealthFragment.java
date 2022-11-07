@@ -43,9 +43,9 @@ public class WealthFragment extends BaseMvpFragment {
     private TextView mTvName, mTvTitle, mTvLevel, mTvNextLevelNum, mTvNextLevel;
     private ProgressBar mProgressbar;
     private RecyclerView mRvUpgrade, mRvLevelTitle;
-    private ImageView mIvTitle,mIvCard;
+    private ImageView mIvTitle, mIvCard;
     private UserProviderService service;
-    private TextView mTitleWealth,mWealthDesc,mTvAge,title;
+    private TextView mTitleWealth, mWealthDesc, mTvAge, title;
     private ImageView mAvaterBg;
 
     //type 0 财富 1 魅力
@@ -62,7 +62,7 @@ public class WealthFragment extends BaseMvpFragment {
 
 
     public void getData() {
-        mCompositeDisposable.add(RetrofitManager.getInstance().createUserApi(MineApiService.class).getAccostList(type=="0"?"rich":"charm").compose(BasePresenter.applySchedulers())
+        mCompositeDisposable.add(RetrofitManager.getInstance().createUserApi(MineApiService.class).getAccostList(type == "0" ? "rich" : "charm").compose(BasePresenter.applySchedulers())
                 .subscribeWith(new ResponseObserver<BaseResponse<GradeLevelDto>>() {
                     @Override
                     public void onSuccess(BaseResponse<GradeLevelDto> response) {
@@ -75,18 +75,18 @@ public class WealthFragment extends BaseMvpFragment {
                         BigDecimal next = new BigDecimal(dto.total + "").add(new BigDecimal(dto.diff + ""));
                         BigDecimal progress = myl.divide(next, 2, BigDecimal.ROUND_UP).multiply(new BigDecimal("100"));
                         mProgressbar.setProgress(progress.intValue());
-                        if(null != service){
-                            List<ConfigInfo.LevelLadder> levelDatas =  type == "0" ? service.getConfigInfo().share_config.wealth_level_ladder : service.getConfigInfo().share_config.charm_level_ladder;
-                            ConfigInfo.LevelLadder temp = levelDatas.get(levelDatas.size()-1);
+                        if (null != service) {
+                            List<ConfigInfo.LevelLadder> levelDatas = type == "0" ? service.getConfigInfo().share_config.wealth_level_ladder : service.getConfigInfo().share_config.charm_level_ladder;
+                            ConfigInfo.LevelLadder temp = levelDatas.get(levelDatas.size() - 1);
                             for (int i = 0; i < levelDatas.size(); i++) {
                                 ConfigInfo.LevelLadder levelLadder = levelDatas.get(i);
-                                if(dto.level>=levelLadder.min_level&&dto.level<=levelLadder.max_level){
+                                if (dto.level >= levelLadder.min_level && dto.level <= levelLadder.max_level) {
                                     temp = levelLadder;
                                     break;
                                 }
                             }
                             ConfigInfo config = getConfig(mContext);
-                            Glide.with(getActivity()).load(config.api.oss.cdn_scheme + config.api.oss.cdn.pl+temp.icon).into(mIvTitle);
+                            Glide.with(getActivity()).load(config.api.oss.cdn_scheme + config.api.oss.cdn.pl + temp.icon).into(mIvTitle);
                         }
                     }
                 }));
@@ -135,45 +135,45 @@ public class WealthFragment extends BaseMvpFragment {
             mClBg.setVisibility(View.GONE);
         } else {//自己
             mClBg.setVisibility(View.VISIBLE);
-            if (type.equals("0")) {//财富
-                mIvCard.setImageResource(R.mipmap.ic_card_wealth);
-                mWealthDesc.setBackgroundResource(R.mipmap.bg_wealth);
-                mClBg.setBackgroundResource(R.drawable.bg_card_wealth);
-                mWealthDesc.setTextColor(Color.parseColor("#B2500A"));
-                mTvName.setTextColor(Utils.getColor(R.color.c_edd398));
-                mTvLevel.setTextColor(Utils.getColor(R.color.c_edd398));
-                mTvNextLevelNum.setTextColor(Utils.getColor(R.color.white));
-                mTvNextLevel.setTextColor(Utils.getColor(R.color.c_edd398));
-                mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
-                mTitleWealth.setText("什么是财富等级？");
-                mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注!");
-                mAvaterBg.setImageResource(R.mipmap.bg_wealth_avater);
-                title.setText("财富称号");
-            } else {//魅力
-                mIvCard.setImageResource(R.mipmap.ic_card_charm);
-                mWealthDesc.setBackgroundResource(R.mipmap.bg_charm);
-                mClBg.setBackgroundResource(R.drawable.bg_card_charm);
-                mWealthDesc.setTextColor(Utils.getColor(R.color.white));
-                mTvName.setTextColor(Utils.getColor(R.color.white));
-                mTvLevel.setTextColor(Utils.getColor(R.color.white));
-                mTvNextLevelNum.setTextColor(Utils.getColor(R.color.white));
-                mTvNextLevel.setTextColor(Utils.getColor(R.color.white));
-                mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
-                mTitleWealth.setText("什么是魅力等级？");
-                mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");
-                mAvaterBg.setImageResource(R.mipmap.bg_charm_avater);
-                title.setText("魅力称号");
-            }
             if (null != service) {
                 mTvName.setText(service.getUserInfo().getNickname());
                 Glide.with(getActivity()).load(service.getUserInfo().getIcon()).into(mIvAvatar);
             }
         }
-        if(service.getUserInfo().isGirl()){
-            mTvAge.setCompoundDrawablesWithIntrinsicBounds(getActivity().getResources().getDrawable(R.drawable.ic_girl),null,null,null);
+        if (type.equals("0")) {//财富
+            mIvCard.setImageResource(R.mipmap.ic_card_wealth);
+            mWealthDesc.setBackgroundResource(R.mipmap.bg_wealth);
+            mClBg.setBackgroundResource(R.drawable.bg_card_wealth);
+            mWealthDesc.setTextColor(Color.parseColor("#B2500A"));
+            mTvName.setTextColor(Utils.getColor(R.color.c_edd398));
+            mTvLevel.setTextColor(Utils.getColor(R.color.c_edd398));
+            mTvNextLevelNum.setTextColor(Utils.getColor(R.color.white));
+            mTvNextLevel.setTextColor(Utils.getColor(R.color.c_edd398));
+            mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
+            mTitleWealth.setText("什么是财富等级？");
+            mWealthDesc.setText("财富等级是您在平台中财富实力的象征，等级越高越容易获得异性的关注!");
+            mAvaterBg.setImageResource(R.mipmap.bg_wealth_avater);
+            title.setText("财富称号");
+        } else {//魅力
+            mIvCard.setImageResource(R.mipmap.ic_card_charm);
+            mWealthDesc.setBackgroundResource(R.mipmap.bg_charm);
+            mClBg.setBackgroundResource(R.drawable.bg_card_charm);
+            mWealthDesc.setTextColor(Utils.getColor(R.color.white));
+            mTvName.setTextColor(Utils.getColor(R.color.white));
+            mTvLevel.setTextColor(Utils.getColor(R.color.white));
+            mTvNextLevelNum.setTextColor(Utils.getColor(R.color.white));
+            mTvNextLevel.setTextColor(Utils.getColor(R.color.white));
+            mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_bg));
+            mTitleWealth.setText("什么是魅力等级？");
+            mWealthDesc.setText("魅力等级是您在平台魅力的象征，等级越高表示您越受欢迎!");
+            mAvaterBg.setImageResource(R.mipmap.bg_charm_avater);
+            title.setText("魅力称号");
+        }
+        if (service.getUserInfo().isGirl()) {
+            mTvAge.setCompoundDrawablesWithIntrinsicBounds(getActivity().getResources().getDrawable(R.drawable.ic_girl), null, null, null);
             mTvAge.setBackgroundResource(R.drawable.bg_girl);
-        }else{
-            mTvAge.setCompoundDrawablesWithIntrinsicBounds(getActivity().getResources().getDrawable(R.drawable.ic_boy),null,null,null);
+        } else {
+            mTvAge.setCompoundDrawablesWithIntrinsicBounds(getActivity().getResources().getDrawable(R.drawable.ic_boy), null, null, null);
             mTvAge.setBackgroundResource(R.drawable.bg_boy);
         }
         mTvAge.setText(String.valueOf(service.getUserInfo().getAge()));
