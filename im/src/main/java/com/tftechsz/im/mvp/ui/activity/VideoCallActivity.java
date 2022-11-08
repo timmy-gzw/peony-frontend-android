@@ -785,6 +785,7 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
 
     @Override
     protected void initData() {
+        service = ARouter.getInstance().navigation(UserProviderService.class);
         initIntent();
         //获取对方用户信息
         if (!TextUtils.isEmpty(fromId) || null != callOutUser) {
@@ -800,7 +801,6 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         NIMClient.getService(MsgServiceObserve.class).observeMsgStatus(messageStatusObserver, true);
         NIMClient.getService(MsgServiceObserve.class).observeCustomNotification(commandObserver, true);
         NimUIKit.getUserInfoObservable().registerObserver(userInfoObserver, true);
-        service = ARouter.getInstance().navigation(UserProviderService.class);
         Drawable drawable;
         if (mChannelType == 2) {  //视频
             initFace();
