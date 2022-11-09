@@ -755,8 +755,9 @@ public class VideoCallActivity extends BaseMvpActivity<ICallView, CallPresenter>
         matchType = getIntent().getStringExtra(CALL_MATCH_TYPE);   //是否是询问匹配中
         isOnLine = getIntent().getIntExtra(CALL_USER_IS_ON_LINE, 1);
         SPUtils.remove(Constants.INVITED_EVENT);
-        if(TextUtils.isEmpty(callId))
-            callId = service.getCallId();
+        if(TextUtils.isEmpty(callId)){
+            getP().buriedPoint("callId", "callId为空", callId, String.valueOf(service.getCallId()));
+        }
     }
 
     private synchronized void callInstance() {
