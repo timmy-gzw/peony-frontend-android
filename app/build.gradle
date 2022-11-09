@@ -185,7 +185,7 @@ androidJunkCode {
     }
     def poinsettiaConfig = {
         packageBase = "com.emeraldtechhn.poinsettia.joke"
-        packageCount = 200
+        packageCount = 210
         activityCountPerPackage = 25
         excludeActivityJavaFile = false
         otherCountPerPackage = 100
