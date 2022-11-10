@@ -42,7 +42,7 @@ public class GiftChildVpAdapter extends BaseQuickAdapter<List<GiftDto>, BaseView
             setPoint(llPoint, 0);
         } else { //有数据
             setPoint(llPoint, giftDtos.size());
-            selGift.set(getItemPosition(giftDtos), giftDtos.get(0));
+            selGift.set(holder.getLayoutPosition(), giftDtos.get(0));
             mGiftVp.setVisibility(View.VISIBLE);
             ivEmpty.setVisibility(View.GONE);
             tvEmpty.setVisibility(View.GONE);
@@ -58,10 +58,10 @@ public class GiftChildVpAdapter extends BaseQuickAdapter<List<GiftDto>, BaseView
                     mIGiftVpOnItemClick.onitemClickGiftInfoActivityGet(vpAdapter.getGift(position));
                     mIGiftVpOnItemClick.onItemCurrent(position);
                     setCurrentPoint(llPoint, position);
-                    selGift.set(getItemPosition(giftDtos), vpAdapter.getGift(position));
+                    selGift.set(holder.getLayoutPosition(), vpAdapter.getGift(position));
                 }
             });
-            giftVpAdapters.set(getItemPosition(giftDtos), vpAdapter);
+            giftVpAdapters.set(holder.getLayoutPosition(), vpAdapter);
         }
     }
 
