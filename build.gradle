@@ -9,6 +9,7 @@ buildscript {
         // 配置HMS Core SDK的Maven仓地址。
         maven { url 'https://developer.huawei.com/repo/' }
         jcenter()
+        mavenCentral()
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     }
     dependencies {
@@ -50,6 +51,7 @@ allprojects {
         maven { url 'https://developer.huawei.com/repo/' }
 //        maven { url 'https://dl.bintray.com/mikaelzero/maven' }
         jcenter()
+        mavenCentral()
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/repository/public/' }
         mavenLocal()
