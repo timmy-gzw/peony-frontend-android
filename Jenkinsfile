@@ -18,28 +18,104 @@ properties([
                 choice(
                         choices: ['debug', 'release'],
                         description: '''选择构建类型：
-1.debug->测试包；
-2.release->正式包''',
+                                        1.debug->测试包；
+                                        2.release->正式包'''.stripIndent(),
                         name: 'P_BUILD_TYPE'
                 ),
                 choice(
                         choices: ['office', 'heart', 'jasmine', 'poinsettia', 'hyacinth'],
                         description: '''选择构建版本：
-1.office->伊糖；
-2.heart->心心相念；
-3.jasmine->甜伴交友；
-4.poinsettia->彩糖交友；
-5.hyacinth->友缘交友''',
+                                        1.office->伊糖；
+                                        2.heart->心心相念；
+                                        3.jasmine->甜伴交友；
+                                        4.poinsettia->彩糖交友；
+                                        5.hyacinth->友缘交友'''.stripIndent(),
                         name: 'P_BUILD_FLAVOR'
-                ),
-                booleanParam(
-                        description: '是否添加多渠道',
-                        name: 'P_MULTI_CHANNEL'
                 ),
                 booleanParam(
                         description: '是否开启加固',
                         name: 'P_IS_PROTECTION'
                 ),
+                booleanParam(
+                        description: '是否打渠道包',
+                        name: 'P_MULTI_CHANNEL'
+                ),
+                [$class              : 'CascadeChoiceParameter',
+                 choiceType          : 'PT_CHECKBOX',
+                 description         : '选择渠道',
+                 filterLength        : 1,
+                 filterable          : true,
+                 name                : 'P_CHANNELS',
+                 randomName          : 'choice-parameter-2402480143720',
+                 referencedParameters: 'P_MULTI_CHANNEL',
+                 script              : [$class        : 'GroovyScript',
+                                        fallbackScript: [classpath: [],
+                                                         oldScript: '',
+                                                         sandbox  : true,
+                                                         script   : "return getFullChannels()"],
+                                        script        : [classpath: [],
+                                                         oldScript: '',
+                                                         sandbox  : true,
+                                                         script   : """
+                                                                    try {
+                                                                        if (P_MULTI_CHANNEL) {
+                                                                            return getFullChannels()
+                                                                        } else {
+                                                                            return []
+                                                                        }
+                                                                    } catch (e) {
+                                                                        return [e.toString()]
+                                                                    }
+
+                                                                    static List<String> getFullChannels() {
+                                                                        return ['OFFICIAL',
+                                                                                'YINGYONGBAO',
+                                                                                'YINGYONGBAO_WHITE',
+                                                                                'HUAWEI',
+                                                                                'XIAOMI',
+                                                                                'OPPO',
+                                                                                'VIVO',
+                                                                                'BAIDU',
+                                                                                'SAMSUNG',
+                                                                                'DOUYIN',
+                                                                                'DOUYIN_WHITE',
+                                                                                'KUAISHOU',
+                                                                                'KUAISHOU_WHITE',
+                                                                                'CPS',
+                                                                                '20001',
+                                                                                '20002',
+                                                                                '20003',
+                                                                                '20004',
+                                                                                '20005',
+                                                                                '20006',
+                                                                                '20007',
+                                                                                '20008',
+                                                                                '20009',
+                                                                                '20010',
+                                                                                '20011',
+                                                                                '20012',
+                                                                                '20013',
+                                                                                '20014',
+                                                                                '20015',
+                                                                                '20016',
+                                                                                '20017',
+                                                                                '20018',
+                                                                                '20019',
+                                                                                '20020',
+                                                                                '9001',
+                                                                                '9002',
+                                                                                '9003',
+                                                                                '9004',
+                                                                                '9005',
+                                                                                '600001',
+                                                                                '600002',
+                                                                                '600003',
+                                                                                '600004',
+                                                                                '600005']
+                                                                    }""".stripIndent()
+                                        ]
+                 ]
+                ],
                 booleanParam(
                         description: '是否上传到蒲公英',
                         name: 'P_IS_UPLOAD_TO_PGYER'
@@ -56,6 +132,8 @@ pipeline {
         P_LARK_WEBHOOK = 'https://open.feishu.cn/open-apis/bot/v2/hook/5dfe4993-0b8d-4794-a49b-4ae040a33585'
         P_PGYER_AK = 'e41e5e13a39820ec00368964f8ee7e2c'
         P_PGYER_UK = 'c070ee284e3940d5fb8785d8c18d9ab0'
+        P_YIDUN_HOME = '/yidun'
+        P_OSS_HOME = '/data-oss'
     }
 
     stages {
@@ -78,7 +156,7 @@ pipeline {
             steps {
                 echo ">>>>>> 开始编译 <<<<<<<"
                 script {
-                    echo "构建分支：${P_BUILD_BRANCH}\n构建版本：${P_BUILD_FLAVOR}\n构建类型：${P_BUILD_TYPE}\n是否多渠道：[${P_MULTI_CHANNEL}]\n是否加固：[${P_IS_PROTECTION}]\n是否上传到蒲公英：[${P_IS_UPLOAD_TO_PGYER}]"
+                    echo "构建分支：${P_BUILD_BRANCH}\n构建版本：${P_BUILD_FLAVOR}\n构建类型：${P_BUILD_TYPE}\n是否加固：[${P_IS_PROTECTION}]\n是否上传到蒲公英：[${P_IS_UPLOAD_TO_PGYER}]\n是否多渠道：[${P_MULTI_CHANNEL}]\n多渠道：[${P_CHANNELS}]"
                     sh 'env | grep $HOME'
                     sh 'chmod +x ./gradlew'
 
@@ -105,22 +183,20 @@ pipeline {
             steps {
                 echo ">>>>>> 加固阶段 <<<<<<<"
                 script {
-                    def configPath = "/yidun/config.ini"
+                    def configPath = "${env.P_YIDUN_HOME}/config.ini"
                     def configContent = genYidunConfigText()
                     writeFile(encoding: 'utf-8', file: configPath, text: configContent)
                     echo ">>>>>> 易盾配置信息：<<<<<<"
                     sh "cat ${configPath}"
 
-                    if (P_MULTI_CHANNEL) {
-                        def channelPath = "/yidun/channel.txt"
-                        writeFile(encoding: 'utf-8', file: channelPath, text: getFullChannels())
+                    echo ">>>>>> 开始加固 <<<<<<<"
+                    def yidunJarPath = "${env.P_YIDUN_HOME}/NHPProtect.jar"
+                    if (params.P_MULTI_CHANNEL) {
+                        def channelPath = "${env.P_YIDUN_HOME}/channel.txt"
+                        writeFile(encoding: 'utf-8', file: channelPath, text: genChannels())
                         echo ">>>>>> 多渠道配置信息：<<<<<<"
                         sh "cat ${channelPath}"
-                    }
 
-                    echo ">>>>>> 开始加固 <<<<<<<"
-                    def yidunJarPath = "/yidun/NHPProtect.jar"
-                    if (P_MULTI_CHANNEL) {
                         sh "java -jar $yidunJarPath -yunconfig -fullapk -apksign -zipalign -channel -input ${env.P_APK_PATH}"
                     } else {
                         sh "java -jar $yidunJarPath -yunconfig -fullapk -apksign -zipalign -input ${env.P_APK_PATH}"
@@ -138,31 +214,30 @@ pipeline {
             steps {
                 script {
                     echo ">>>>>> Publish <<<<<<<"
-                    if (P_BUILD_TYPE == 'release') {
+                    if (params.P_BUILD_TYPE == 'release') {
                         def localApks = getShEchoResult("find app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE} -name '*.apk'")
                         def fileFolder = "${P_BUILD_FLAVOR}${P_BUILD_TYPE}/${env.P_VERSION_NAME}/${getDate()}"
-                        def artifactsDir = "/data-oss/$fileFolder"
-                        sh "mkdir -p ${artifactsDir}"
-                        sh "cp ${localApks} ${artifactsDir}"
+                        def artifactsOssDir = "${env.P_OSS_HOME}/$fileFolder"
+                        sh "mkdir -p ${artifactsOssDir}"
+                        sh "cp ${localApks} ${artifactsOssDir}"
                         def ossPrefix = 'https://artifacts-apk.oss-cn-shenzhen.aliyuncs.com/'
-                        env.P_FILE_URLS = sh(script: "ls $artifactsDir", returnStdout: true)
+                        env.P_FILE_URLS = sh(script: "ls $artifactsOssDir", returnStdout: true)
                                 .trim()
                                 .split("\n")
                                 .collect { "$ossPrefix$fileFolder/$it" }
                                 .join('\n')
 
                         def mapping = getShEchoResult("find app/build/outputs/mapping -name 'mapping.txt'")
-                        sh "cp ${mapping} ${artifactsDir}"
-                    } else {
-                        if (P_IS_UPLOAD_TO_PGYER) {
-                            try {
-                                echo ">>>>>> uploading to pgyer <<<<<<<"
-                                def pgyerBean = sendToPgyer()
-                                env.appShortcutUrl = "https://www.pgyer.com/${pgyerBean.data.appShortcutUrl}"
-                                env.appQRCodeURL = pgyerBean.data.appQRCodeURL
-                            } catch (e) {
-                                e.printStackTrace()
-                            }
+                        sh "cp ${mapping} ${artifactsOssDir}"
+                    }
+
+                    if (params.P_IS_UPLOAD_TO_PGYER) {
+                        try {
+                            def pgyerBean = sendToPgyer()
+                            env.appShortcutUrl = "https://www.pgyer.com/${pgyerBean.data.appShortcutUrl}"
+                            env.appQRCodeURL = pgyerBean.data.appQRCodeURL
+                        } catch (e) {
+                            e.printStackTrace()
                         }
                     }
                 }
@@ -176,7 +251,7 @@ pipeline {
                 // app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE}/*.apk
                 // app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE}/channels/*.apk
                 archiveArtifacts allowEmptyArchive: true, artifacts: "app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE}/**/*.apk", caseSensitive: false, followSymlinks: false, onlyIfSuccessful: true
-                archiveArtifacts allowEmptyArchive: true, artifacts: "app/build/outputs/mapping/${P_BUILD_FLAVOR}/${P_BUILD_TYPE}/mapping.txt", caseSensitive: false, followSymlinks: false, onlyIfSuccessful: true
+                archiveArtifacts allowEmptyArchive: true, artifacts: "app/build/outputs/mapping/${P_BUILD_FLAVOR}${P_BUILD_TYPE}/mapping.txt", caseSensitive: false, followSymlinks: false, onlyIfSuccessful: true
 
                 def apkPathExist = env.P_APK_PATH != null && !(env.P_APK_PATH.toString().isEmpty())
                 if (apkPathExist) {
@@ -247,64 +322,16 @@ aliaspswd=${config[3]}
 signmod=0
 
 [Channel]
-path=channel.txt
+path=${env.P_YIDUN_HOME}/channel.txt
 """
 }
 
-// 所有渠道信息
-static String getFullChannels() {
-    return '''
-OFFICIAL|UMENG_CHANNEL
-YINGYONGBAO|UMENG_CHANNEL
-YINGYONGBAO_WHITE|UMENG_CHANNEL
-HUAWEI|UMENG_CHANNEL
-XIAOMI|UMENG_CHANNEL
-OPPO|UMENG_CHANNEL
-VIVO|UMENG_CHANNEL
-BAIDU|UMENG_CHANNEL
-SAMSUNG|UMENG_CHANNEL
-DOUYIN|UMENG_CHANNEL
-DOUYIN_WHITE|UMENG_CHANNEL
-KUAISHOU|UMENG_CHANNEL
-KUAISHOU_WHITE|UMENG_CHANNEL
-CPS|UMENG_CHANNEL
-20001|UMENG_CHANNEL
-20002|UMENG_CHANNEL
-20003|UMENG_CHANNEL
-20004|UMENG_CHANNEL
-20005|UMENG_CHANNEL
-20006|UMENG_CHANNEL
-20007|UMENG_CHANNEL
-20008|UMENG_CHANNEL
-20009|UMENG_CHANNEL
-20010|UMENG_CHANNEL
-20011|UMENG_CHANNEL
-20012|UMENG_CHANNEL
-20013|UMENG_CHANNEL
-20014|UMENG_CHANNEL
-20015|UMENG_CHANNEL
-20016|UMENG_CHANNEL
-20017|UMENG_CHANNEL
-20018|UMENG_CHANNEL
-20019|UMENG_CHANNEL
-20020|UMENG_CHANNEL
-9001|UMENG_CHANNEL
-9002|UMENG_CHANNEL
-9003|UMENG_CHANNEL
-9004|UMENG_CHANNEL
-9005|UMENG_CHANNEL
-600001|UMENG_CHANNEL
-600002|UMENG_CHANNEL
-600003|UMENG_CHANNEL
-600004|UMENG_CHANNEL
-600005|UMENG_CHANNEL
-'''
-}
-
-static List<String> getFullChannelsOnly() {
-    def newList = getFullChannels().collect { it.split("\\|")[0] }
-    newList.sort { it }
-    return newList
+// 渠道信息
+String genChannels() {
+    return P_CHANNELS.trim()
+            .split(",")
+            .collect { "$it|UMENG_CHANNEL" }
+            .join('\n')
 }
 
 static def getDate() {
