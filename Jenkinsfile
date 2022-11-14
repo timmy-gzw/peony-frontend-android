@@ -5,7 +5,7 @@ properties([
                 gitParameter(branch: '',
                         branchFilter: 'origin/(.*)',
                         defaultValue: 'main',
-                        description: '构建分支',
+                        description: '选择构建分支',
                         name: 'P_BUILD_BRANCH',
                         quickFilterEnabled: true,
                         requiredParameter: true,
@@ -17,14 +17,14 @@ properties([
                 ),
                 choice(
                         choices: ['debug', 'release'],
-                        description: '''构建类型：
+                        description: '''选择构建类型：
 1.debug->测试包；
 2.release->正式包''',
                         name: 'P_BUILD_TYPE'
                 ),
                 choice(
                         choices: ['office', 'heart', 'jasmine', 'poinsettia', 'hyacinth'],
-                        description: '''构建版本：
+                        description: '''选择构建版本：
 1.office->伊糖；
 2.heart->心心相念；
 3.jasmine->甜伴交友；
@@ -78,7 +78,7 @@ pipeline {
             steps {
                 echo ">>>>>> 开始编译 <<<<<<<"
                 script {
-                    echo "构建分支：${P_BUILD_BRANCH}\n构建版本：${P_BUILD_FLAVOR}\n构建类型：${P_BUILD_TYPE}\n是否多渠道：[${P_MULTI_CHANNEL}]\n是否加固：[${P_IS_PROTECTION}]"
+                    echo "构建分支：${P_BUILD_BRANCH}\n构建版本：${P_BUILD_FLAVOR}\n构建类型：${P_BUILD_TYPE}\n是否多渠道：[${P_MULTI_CHANNEL}]\n是否加固：[${P_IS_PROTECTION}]\n是否上传到蒲公英：[${P_IS_UPLOAD_TO_PGYER}]"
                     sh 'env | grep $HOME'
                     sh 'chmod +x ./gradlew'
 
@@ -138,24 +138,33 @@ pipeline {
             steps {
                 script {
                     echo ">>>>>> Publish <<<<<<<"
-                    def fileFolder = "${P_BUILD_FLAVOR}${P_BUILD_TYPE}/${env.P_VERSION_NAME}/${getDate()}"
-                    def artifactsDir = "/data-oss/" + fileFolder
-                    def apks = getShEchoResult("find app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE} -name '*.apk'")
-                    sh "mkdir -p ${artifactsDir}"
-                    sh "cp ${apks} ${artifactsDir}"
-                    def mapping = getShEchoResult("find app/build/outputs/mapping -name 'mapping.txt'")
-                    sh "cp ${mapping} ${artifactsDir}"
-                    def ossPrefix = 'https://artifacts-apk.oss-cn-shenzhen.aliyuncs.com/'
-                    env.P_FILE_URLS = sh(script: "ls $artifactsDir", returnStdout: true)
-                            .trim()
-                            .split("\n")
-                            .collect { "$ossPrefix$fileFolder/$it" }
-                            .join('\n')
+                    if (P_BUILD_TYPE == 'release') {
+                        def localApks = getShEchoResult("find app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE} -name '*.apk'")
+                        def fileFolder = "${P_BUILD_FLAVOR}${P_BUILD_TYPE}/${env.P_VERSION_NAME}/${getDate()}"
+                        def artifactsDir = "/data-oss/$fileFolder"
+                        sh "mkdir -p ${artifactsDir}"
+                        sh "cp ${localApks} ${artifactsDir}"
+                        def ossPrefix = 'https://artifacts-apk.oss-cn-shenzhen.aliyuncs.com/'
+                        env.P_FILE_URLS = sh(script: "ls $artifactsDir", returnStdout: true)
+                                .trim()
+                                .split("\n")
+                                .collect { "$ossPrefix$fileFolder/$it" }
+                                .join('\n')
 
-                    def artifactsApks = apks.replace(" ", ',')
-                    def artifactsMappings = mapping.replace(" ", ',')
-                    archiveArtifacts allowEmptyArchive: true, artifacts: "$artifactsApks", caseSensitive: false, followSymlinks: false, onlyIfSuccessful: true
-                    archiveArtifacts allowEmptyArchive: true, artifacts: "$artifactsMappings", caseSensitive: false, followSymlinks: false, onlyIfSuccessful: true
+                        def mapping = getShEchoResult("find app/build/outputs/mapping -name 'mapping.txt'")
+                        sh "cp ${mapping} ${artifactsDir}"
+                    } else {
+                        if (P_IS_UPLOAD_TO_PGYER) {
+                            try {
+                                echo ">>>>>> uploading to pgyer <<<<<<<"
+                                def pgyerBean = sendToPgyer()
+                                env.appShortcutUrl = "https://www.pgyer.com/${pgyerBean.data.appShortcutUrl}"
+                                env.appQRCodeURL = pgyerBean.data.appQRCodeURL
+                            } catch (e) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -164,16 +173,14 @@ pipeline {
     post {
         always {
             script {
+                // app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE}/*.apk
+                // app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE}/channels/*.apk
+                archiveArtifacts allowEmptyArchive: true, artifacts: "app/build/outputs/apk/${P_BUILD_FLAVOR}/${P_BUILD_TYPE}/**/*.apk", caseSensitive: false, followSymlinks: false, onlyIfSuccessful: true
+                archiveArtifacts allowEmptyArchive: true, artifacts: "app/build/outputs/mapping/${P_BUILD_FLAVOR}/${P_BUILD_TYPE}/mapping.txt", caseSensitive: false, followSymlinks: false, onlyIfSuccessful: true
+
                 def apkPathExist = env.P_APK_PATH != null && !(env.P_APK_PATH.toString().isEmpty())
                 if (apkPathExist) {
                     currentBuild.description = "${currentBuild.description}\n构建产物：\n${env.P_FILE_URLS}"
-                }
-
-                if (apkPathExist && P_IS_UPLOAD_TO_PGYER) {
-                    echo ">>>>>> uploading to pgyer <<<<<<<"
-                    def pgyerBean = sendToPgyer()
-                    env.appShortcutUrl = "https://www.pgyer.com/${pgyerBean.data.appShortcutUrl}"
-                    env.appQRCodeURL = pgyerBean.data.appQRCodeURL
                 }
 
                 def larkTitleAndMsg = genLarkTitleAndMsg(
@@ -186,7 +193,7 @@ pipeline {
                 sendToLark(msgContent)
 
                 //清理工作空间
-                deleteDir()
+//                deleteDir()
             }
         }
     }
@@ -216,13 +223,13 @@ String genYidunConfigText() {
     String[] config = ["${WORKSPACE}/app/peony.jks", 'peony', 'cikJayHiow', 'Pixiznuf']
     switch (P_BUILD_FLAVOR) {
         case "poinsettia":
-            config[0] = "${WORKSPACE}/app/emerald.jks"
+            config[0] = "${WORKSPACE}/app/emerald.jks" as String
             config[1] = "emerald"
             config[2] = "cikJayHiow"
             config[3] = "cikJayHiow"
             break
         case "hyacinth":
-            config[0] = "${WORKSPACE}/app/hyacinth.jks"
+            config[0] = "${WORKSPACE}/app/hyacinth.jks" as String
             config[1] = "hyacinth"
             config[2] = "cikJayHiow"
             config[3] = "cikJayHiow"
@@ -233,7 +240,7 @@ String genYidunConfigText() {
 key=836e5705ed124e93a6ef30bdf16542c1e334
 
 [apksign]
-keystore=${config[0]}
+keystore=${config[0] as String}
 alias=${config[1]}
 pswd=${config[2]}
 aliaspswd=${config[3]}
@@ -249,6 +256,48 @@ static String getFullChannels() {
     return '''
 OFFICIAL|UMENG_CHANNEL
 YINGYONGBAO|UMENG_CHANNEL
+YINGYONGBAO_WHITE|UMENG_CHANNEL
+HUAWEI|UMENG_CHANNEL
+XIAOMI|UMENG_CHANNEL
+OPPO|UMENG_CHANNEL
+VIVO|UMENG_CHANNEL
+BAIDU|UMENG_CHANNEL
+SAMSUNG|UMENG_CHANNEL
+DOUYIN|UMENG_CHANNEL
+DOUYIN_WHITE|UMENG_CHANNEL
+KUAISHOU|UMENG_CHANNEL
+KUAISHOU_WHITE|UMENG_CHANNEL
+CPS|UMENG_CHANNEL
+20001|UMENG_CHANNEL
+20002|UMENG_CHANNEL
+20003|UMENG_CHANNEL
+20004|UMENG_CHANNEL
+20005|UMENG_CHANNEL
+20006|UMENG_CHANNEL
+20007|UMENG_CHANNEL
+20008|UMENG_CHANNEL
+20009|UMENG_CHANNEL
+20010|UMENG_CHANNEL
+20011|UMENG_CHANNEL
+20012|UMENG_CHANNEL
+20013|UMENG_CHANNEL
+20014|UMENG_CHANNEL
+20015|UMENG_CHANNEL
+20016|UMENG_CHANNEL
+20017|UMENG_CHANNEL
+20018|UMENG_CHANNEL
+20019|UMENG_CHANNEL
+20020|UMENG_CHANNEL
+9001|UMENG_CHANNEL
+9002|UMENG_CHANNEL
+9003|UMENG_CHANNEL
+9004|UMENG_CHANNEL
+9005|UMENG_CHANNEL
+600001|UMENG_CHANNEL
+600002|UMENG_CHANNEL
+600003|UMENG_CHANNEL
+600004|UMENG_CHANNEL
+600005|UMENG_CHANNEL
 '''
 }
 
