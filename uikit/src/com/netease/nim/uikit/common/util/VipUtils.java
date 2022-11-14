@@ -162,7 +162,7 @@ public class VipUtils {
                         FileUtils.createOrExistsFile(localFile);//创建文件
                         FileUtils.copy(file, localFile);//下载的文件移动到指定目录
                         UIUtils.runOnUiThread(() -> {
-                            if (!TextUtils.isEmpty(localFilePath) && ImageUtils.getBitmap(localFile) != null) {
+                            if (!TextUtils.isEmpty(localFilePath) && localFile.exists() && ImageUtils.getBitmap(localFile) != null) {
                                 view.setBackground(getNinePatchDrawable(ImageUtils.getBitmap(localFile), Utils.getApp()));
                             }
                         });
