@@ -28,6 +28,10 @@ import com.blankj.utilcode.util.ClipboardUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.bumptech.glide.Glide;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.appbar.AppBarLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.bean.AccostDto;
@@ -82,6 +86,7 @@ import com.tftechsz.common.widget.pop.VideoCallPopWindow;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
 import com.tftechsz.mine.adapter.GiftAdapter;
+import com.tftechsz.mine.adapter.LabelDisplayAdapter;
 import com.tftechsz.mine.adapter.ProfilePhotoAdapter;
 import com.tftechsz.mine.adapter.TrendAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
@@ -96,6 +101,7 @@ import com.youth.banner.adapter.BannerAdapter;
 import com.youth.banner.listener.OnPageChangeListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -177,6 +183,13 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
     private List<TrendDto> mTrendList;
 
     private TrendAdapter mTrendAdapter;   //动态
+
+    //标签
+    private TextView mTvLabel;
+    //标签
+    private View clLabel;
+    private RecyclerView rvLabel;
+    private LabelDisplayAdapter labelDisplayAdapter;
 
     private BaseUserInfoAdapter userInfoAdapter;
     private GiftAdapter giftAdapter;
@@ -267,6 +280,11 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         mClLevel = findViewById(R.id.cl_level);
         tvLevelTitle = findViewById(R.id.tv_level_title);
         tvLevelVip = findViewById(R.id.tv_level_vip);
+
+        clLabel = findViewById(R.id.cl_label);
+        rvLabel = findViewById(R.id.rv_label);
+        mTvLabel = findViewById(R.id.tv_label);
+        mTvLabel.setOnClickListener(this);
 
         findViewById(R.id.cl_local_tyrant).setOnClickListener(this);  //土豪值
         findViewById(R.id.cl_charm).setOnClickListener(this);  //亲密度
@@ -449,6 +467,22 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             } else {
                 mIvAccost.setImageResource(R.mipmap.mine_ic_accost);
                 AnimationUtil.createAnimation(mIvAccost);
+            }
+        }
+    }
+
+    private void setupUserTag() {
+        if (mUserInfo != null && mUserInfo.getTagList() != null && !mUserInfo.getTagList().isEmpty()) {
+            clLabel.setVisibility(View.VISIBLE);
+            initLabelView();
+            labelDisplayAdapter.setList(mUserInfo.getTagList());
+        } else {
+            if (TextUtils.isEmpty(mUserId)) {
+                clLabel.setVisibility(View.VISIBLE);
+                initLabelView();
+                labelDisplayAdapter.setList(Collections.singletonList("ADD_TAG"));
+            } else {
+                clLabel.setVisibility(View.GONE);
             }
         }
     }
@@ -999,7 +1033,11 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         } else {
             tvLevelTitle.setText(mUserInfo.isGirl() ? getString(R.string.level_her) : getString(R.string.level_his));
             tvGiftTitle.setText(mUserInfo.isGirl() ? getString(R.string.receive_gift_her) : getString(R.string.receive_gift_his));
+            mTvLabel.setText(mUserInfo.isGirl() ? getString(R.string.label_her) : getString(R.string.label_his));
+            mTvLabel.setCompoundDrawables(null, null, null, null);
         }
+
+        setupUserTag();
 
 //        mRlIsSelf.setVisibility(mUserInfo.isPartyGirl() ? View.GONE : View.VISIBLE);// 语音房女用户进入个人主页，不显示真人认证
         CommonUtil.setUserName(mTvName, mUserInfo.getNickname(), false, mUserInfo.isVip());
@@ -1142,14 +1180,14 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
         } else if (id == R.id.tv_attention) {
             followOrUnfollow();
         } else if (id == R.id.cl_local_tyrant) {    //土豪值
-            if (!TextUtils.isEmpty(mUserId))
-                return;
+//            if (!TextUtils.isEmpty(mUserId))
+//                return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.rich) {
                 MyWealthCharmLevelActivity.startActivity(this, "0", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
         } else if (id == R.id.cl_charm) {    //魅力值
-            if (!TextUtils.isEmpty(mUserId))
-                return;
+//            if (!TextUtils.isEmpty(mUserId))
+//                return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.charm) {
                 MyWealthCharmLevelActivity.startActivity(this, "1", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
@@ -1260,6 +1298,10 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
             ARouterUtils.toPathWithId(ARouterApi.ACTIVITY_MINE_PHOTO);
         } else if (id == R.id.tv_mine_gift) {//礼物
             p.getMsgCheck(mUserId, true);
+        } else if (id == R.id.tv_label) {
+            if (!TextUtils.isEmpty(mUserId))
+                return;
+            ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "info").navigation();
         }
     }
 
@@ -1293,5 +1335,21 @@ public class MineDetailActivity extends BaseMvpActivity<IMineDetailView, MineDet
                 .navigation(MineService.class)
                 .trackEvent("搭讪按钮点击事件", "accost_click", "", JSON.toJSONString(new NavigationLogEntity(CommonUtil.getOSName(), Constants.APP_NAME, service.getUserId(), toUserId + "", type, 2, System.currentTimeMillis())), null);
 
+    }
+
+    private void initLabelView() {
+        if (labelDisplayAdapter == null) {
+            FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this, FlexDirection.ROW);
+            layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+            layoutManager.setAlignItems(AlignItems.FLEX_START);
+            rvLabel.setLayoutManager(layoutManager);
+            labelDisplayAdapter = new LabelDisplayAdapter();
+            rvLabel.setAdapter(labelDisplayAdapter);
+            labelDisplayAdapter.setOnItemClickListener((adapter, view, position) -> {
+                if (adapter.getItemViewType(position) == LabelDisplayAdapter.TYPE_ADD) {
+                    ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "info").navigation();
+                }
+            });
+        }
     }
 }

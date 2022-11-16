@@ -4,14 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,6 +23,7 @@ import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
@@ -394,7 +393,8 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
         } else if (id == R.id.item_home_address) {   //家乡
             getP().showPicker(this, mRlMineInfo, strHometown);
         } else if (id == R.id.item_job) {   //工作
-            EditInfoActivity.startForJob(this, mItemJob.getTvRight().getText().toString(), REQUEST_JOB_CODE);
+            //            EditInfoActivity.startForJob(this, mItemJob.getTvRight().getText().toString(), REQUEST_JOB_CODE);
+            ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_CAREER).navigation(this, REQUEST_JOB_CODE);
         } else if (id == R.id.item_height) {   //身高
             if (mUserInfo != null)
                 getP().chooseHeight(this, mRlMineInfo, mUserInfo.getHeight());
@@ -486,11 +486,11 @@ public class MineInfoActivity extends BaseMvpActivity<IMineInfoView, MineInfoPre
                                 });
                                 popWindow.showPopupWindow();
                             } else {
-                                Utils.toast("请允许摄像头权限");
+                                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
                             }
                         }));
             } else {
-                Utils.toast("请允许摄像头权限");
+                PermissionUtil.showPermissionPop(this, getString(R.string.chat_open_storage_camera_permission));
             }
         });
     }

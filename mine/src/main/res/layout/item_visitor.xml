@@ -113,7 +113,7 @@
             android:textSize="@dimen/sp_15"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/time"
+            app:layout_constraintEnd_toStartOf="@id/tv_count"
             app:layout_constraintStart_toStartOf="@id/tv_vis_name"
             app:layout_constraintTop_toBottomOf="@id/tv_vis_name"
             tools:text="不要轻易说爱我" />
