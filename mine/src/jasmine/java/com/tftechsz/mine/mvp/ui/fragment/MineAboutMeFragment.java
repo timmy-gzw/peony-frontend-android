@@ -19,6 +19,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ClipboardUtils;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.tftechsz.common.ARouterApi;
@@ -28,6 +32,7 @@ import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.mine.R;
 import com.tftechsz.mine.adapter.BaseUserInfoAdapter;
 import com.tftechsz.mine.adapter.GiftAdapter;
+import com.tftechsz.mine.adapter.LabelDisplayAdapter;
 import com.tftechsz.mine.entity.dto.GiftDto;
 import com.tftechsz.mine.mvp.IView.IMineAboutMeView;
 import com.tftechsz.mine.mvp.presenter.MineAboutMePresenter;
@@ -35,6 +40,7 @@ import com.tftechsz.mine.mvp.ui.activity.MyWealthCharmLevelActivity;
 import com.tftechsz.mine.utils.UserManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -62,12 +68,19 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     private TextView mTvGift, mTvGiftVip, tvGiftTitle, tvGiftCount;
     private ConstraintLayout clGift;
 
+    //标签
+    private TextView mTvLabel;
+    //标签
+    private View clLabel;
+    private RecyclerView rvLabel;
+    private LabelDisplayAdapter labelDisplayAdapter;
+
     private BaseUserInfoAdapter userInfoAdapter;
     private GiftAdapter giftAdapter;
     private ArrayList<GiftDto> gifts = null;
 
     private ConstraintLayout mClLevelHidden, mClGiftHidden;
-    private LinearLayout mLlLevelCover,mLlGiftCover;
+    private LinearLayout mLlLevelCover, mLlGiftCover;
 
     @Override
     protected int getLayout() {
@@ -96,6 +109,11 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         mClLevel = getView(R.id.cl_level);
         tvLevelTitle = getView(R.id.tv_level_title);
         tvLevelVip = getView(R.id.tv_level_vip);
+
+        clLabel = getView(R.id.cl_label);
+        rvLabel = getView(R.id.rv_label);
+        mTvLabel = getView(R.id.tv_label);
+        mTvLabel.setOnClickListener(this);
 
         getView(R.id.cl_local_tyrant).setOnClickListener(this);  //土豪值
         getView(R.id.cl_charm).setOnClickListener(this);  //亲密度
@@ -139,6 +157,23 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
             mTvGiftVip.setVisibility(View.GONE);
         }
     }
+
+    private void setupUserTag() {
+        if (mUserInfo != null && mUserInfo.getTagList() != null && !mUserInfo.getTagList().isEmpty()) {
+            clLabel.setVisibility(View.VISIBLE);
+            initLabelView();
+            labelDisplayAdapter.setList(mUserInfo.getTagList());
+        } else {
+            if (TextUtils.isEmpty(mUserId)) {
+                clLabel.setVisibility(View.VISIBLE);
+                initLabelView();
+                labelDisplayAdapter.setList(Collections.singletonList("ADD_TAG"));
+            } else {
+                clLabel.setVisibility(View.GONE);
+            }
+        }
+    }
+
 
     @Override
     protected void initData() {
@@ -188,7 +223,11 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
         } else {
             tvLevelTitle.setText(mUserInfo.isGirl() ? getString(R.string.level_her) : getString(R.string.level_his));
             tvGiftTitle.setText(mUserInfo.isGirl() ? getString(R.string.receive_gift_her) : getString(R.string.receive_gift_his));
+            mTvLabel.setText(mUserInfo.isGirl() ? getString(R.string.label_her) : getString(R.string.label_his));
+            mTvLabel.setCompoundDrawables(null, null, null, null);
         }
+
+        setupUserTag();
     }
 
     private void initNet() {
@@ -240,21 +279,40 @@ public class MineAboutMeFragment extends BaseMvpFragment<IMineAboutMeView, MineA
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.cl_local_tyrant) {    //土豪值
-            if (!TextUtils.isEmpty(mUserId))
-                return;
+//            if (!TextUtils.isEmpty(mUserId))
+//                return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.rich) {
                 MyWealthCharmLevelActivity.startActivity(getActivity(), "0", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
         } else if (id == R.id.cl_charm) {    //魅力值
-            if (!TextUtils.isEmpty(mUserId))
-                return;
+//            if (!TextUtils.isEmpty(mUserId))
+//                return;
             if (null != mUserInfo.levels && null != mUserInfo.levels.charm) {
                 MyWealthCharmLevelActivity.startActivity(getActivity(), "1", mUserInfo.getSex() + "", mUserId); //用户性别：0.未知，1.男，2.女
             }
+        } else if (id == R.id.tv_label) {
+            if (!TextUtils.isEmpty(mUserId))
+                return;
+            ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "info").navigation();
         }
 
     }
 
+    private void initLabelView() {
+        if (labelDisplayAdapter == null) {
+            FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext(), FlexDirection.ROW);
+            layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+            layoutManager.setAlignItems(AlignItems.FLEX_START);
+            rvLabel.setLayoutManager(layoutManager);
+            labelDisplayAdapter = new LabelDisplayAdapter();
+            rvLabel.setAdapter(labelDisplayAdapter);
+            labelDisplayAdapter.setOnItemClickListener((adapter, view, position) -> {
+                if (adapter.getItemViewType(position) == LabelDisplayAdapter.TYPE_ADD) {
+                    ARouter.getInstance().build(ARouterApi.ACTIVITY_CHOOSE_TAG).withString("from", "info").navigation();
+                }
+            });
+        }
+    }
 
     public void refreshUserInfo(UserInfo userInfo) {
         this.mUserInfo = userInfo;
