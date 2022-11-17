@@ -360,7 +360,6 @@ public class HomeFragment extends BaseMvpFragment implements View.OnClickListene
     private void showHot() {
         Utils.runOnUiThread(() -> {
             ConfigInfo.DownH5Resource onHot = service.getConfigInfo().sys.loading_h5.onhot;
-
             if (!StringUtils.isTrimEmpty(onHot.url)) {
                 webView.loadUrl(onHot.url);
                 webView.setVisibility(View.VISIBLE);
