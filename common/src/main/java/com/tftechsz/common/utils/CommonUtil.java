@@ -44,7 +44,10 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.NIMAntiSpamOption;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
@@ -1060,7 +1063,14 @@ public class CommonUtil {
         });
     }
 
-    public static PayReq performWxReq(WxPayResultInfo wx) {
+    public static BaseReq performWxReq(WxPayResultInfo wx) {
+        if(TextUtils.equals(wx.getType(),"applet")){
+            WXLaunchMiniProgram.Req req1 = new WXLaunchMiniProgram.Req();
+            req1.userName = wx.getGh_id(); // 填小程序原始id
+            req1.path = wx.getPath();
+            req1.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW;// 可选打开 开发版，体验版和正式版
+            return req1;
+        }
         PayReq req = new PayReq();
         req.appId = wx.getAppid();
         req.partnerId = wx.getPartnerid();
@@ -1069,7 +1079,7 @@ public class CommonUtil {
         req.timeStamp = String.valueOf(wx.getTimestamp());
         req.sign = wx.getSign();
         req.extData = wx.getOrder_no();
-        req.packageValue = wx.getPackageX();//"Sign=WXPay"
+        req.packageValue = wx.getPackageX(); //"Sign=WXPay"
         return req;
     }
 

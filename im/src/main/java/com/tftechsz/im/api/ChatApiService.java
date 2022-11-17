@@ -163,14 +163,6 @@ public interface ChatApiService {
     @GET("intimacy/list")
     Flowable<BaseResponse<List<MessageIntimacyDto>>> updateIntimacy(@Query("ids") String ids);
 
-    /**
-     * 获取快捷支付金额
-     *
-     * @return
-     */
-    @GET("payment/quick")
-    Flowable<BaseResponse<RechargeQuickDto>> quickRecharge();
-
 
     /**
      * 语音匹配

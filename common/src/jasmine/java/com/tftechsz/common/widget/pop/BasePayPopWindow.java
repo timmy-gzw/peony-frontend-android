@@ -20,6 +20,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.PayTask;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.netease.nim.uikit.common.PaymentTypeDto;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
@@ -37,15 +38,20 @@ import com.tftechsz.common.entity.SXYWxPayResultInfo;
 import com.tftechsz.common.entity.WxPayResultInfo;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.http.BaseResponse;
+import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.http.ResponseObserver;
+import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.PayService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.PayTextClick;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
@@ -63,6 +69,7 @@ public class BasePayPopWindow extends BaseBottomPop {
     private PopBasePayBinding mBind;
     private final CompositeDisposable mCompositeDisposable;
     UserProviderService userService;
+    PublicService publicService;
     private final PayService service;
     private int typeId;
     private IWXAPI mApi;
@@ -77,6 +84,7 @@ public class BasePayPopWindow extends BaseBottomPop {
         mCompositeDisposable = new CompositeDisposable();
         userService = ARouter.getInstance().navigation(UserProviderService.class);
         service = ARouter.getInstance().navigation(PayService.class);
+        publicService = RetrofitManager.getInstance().createConfigApi(PublicService.class);
         initUI();
     }
 
@@ -195,6 +203,28 @@ public class BasePayPopWindow extends BaseBottomPop {
             mApi.registerApp(TextUtils.isEmpty(appId) ? Constants.WX_APP_ID : appId);
             mApi.sendReq(CommonUtil.performWxReq(wx));
         }).start();
+    }
+
+
+    public void getPaymentType(){
+        mCompositeDisposable.add(publicService.getRechargeNewList()
+                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<List<PaymentTypeDto>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<PaymentTypeDto>> response) {
+                        if(response!=null&&response.getData()!=null){
+                            adapter = new ChargePayAdapter(response.getData());
+                            mBind.rvPayWay.setAdapter(adapter);
+                            adapter.setList(response.getData());
+                            adapter.setOnItemClickListener((adapter1, view, position) -> {
+                                if (typeId != 0) {
+                                    adapter.notifyDataPosition(position);
+                                } else {
+                                    Utils.toast("订单类型为空!");
+                                }
+                            });
+                        }
+                    }
+                }));
     }
 
     /**

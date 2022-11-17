@@ -13,6 +13,9 @@ public class WxPayResultInfo {
     private String timestamp;
     private String sign;
     private String order_no;
+    private String gh_id;
+    private String path;
+    private String type;  //wechat   applet
 
     public String getOrder_no() {
         return order_no;
@@ -76,5 +79,29 @@ public class WxPayResultInfo {
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+    public String getGh_id() {
+        return gh_id;
+    }
+
+    public void setGh_id(String gh_id) {
+        this.gh_id = gh_id;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -1,6 +1,7 @@
 package com.tftechsz.common.http;
 
 
+import com.netease.nim.uikit.common.PaymentTypeDto;
 import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.entity.AccostModeDto;
 import com.tftechsz.common.entity.AccostPopupDto;
@@ -15,6 +16,7 @@ import com.tftechsz.common.entity.GifTitleDto;
 import com.tftechsz.common.entity.GiftDto;
 import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.common.entity.PartyInfoDto;
+import com.tftechsz.common.entity.PaymentDto;
 import com.tftechsz.common.entity.RealCheckDto;
 import com.tftechsz.common.entity.RealStatusInfoDto;
 import com.tftechsz.common.entity.RechargeQuickDto;
@@ -145,6 +147,14 @@ public interface PublicService {
      */
     @GET("payment/quick")
     Flowable<BaseResponse<RechargeQuickDto>> quickRecharge();
+
+    /**
+     * 获取充值金额
+     *
+     * @return
+     */
+    @GET("payment/new")
+    Flowable<BaseResponse<List<PaymentTypeDto>>> getRechargeNewList();
 
     /**
      * 上传错误日志
