@@ -86,6 +86,7 @@ public class BasePayPopWindow extends BaseBottomPop {
         service = ARouter.getInstance().navigation(PayService.class);
         publicService = RetrofitManager.getInstance().createConfigApi(PublicService.class);
         initUI();
+        initRxBus();
     }
 
     public void setTypeId(int typeId) {
@@ -104,6 +105,25 @@ public class BasePayPopWindow extends BaseBottomPop {
             mBind.tvPayInfo.setVisibility(View.GONE);
         }
     }
+
+    private void initRxBus() {
+        mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
+                .subscribe(
+                        event -> {
+                            if (event.type == Constants.NOTIFY_PAY_FAIL) {
+                                getPaymentType();
+                            }
+                        }
+                ));
+    }
+
+
+    @Override
+    public void onShowing() {
+        super.onShowing();
+        getPaymentType();
+    }
+
 
     @Override
     protected View createPopupById() {
@@ -152,18 +172,7 @@ public class BasePayPopWindow extends BaseBottomPop {
         mBind.rvPayWay.setLayoutManager(new LinearLayoutManager(mContext));
         mBind.rvPayWay.addItemDecoration(new SpacingDecoration(0, ConvertUtils.dp2px(10f), false));
         ConfigInfo configInfo = userService.getConfigInfo();
-        if (configInfo != null && configInfo.share_config != null && configInfo.share_config.payment_type != null) {
-            adapter = new ChargePayAdapter(configInfo.share_config.payment_type);
-            mBind.rvPayWay.setAdapter(adapter);
-            adapter.setList(configInfo.share_config.payment_type);
-            adapter.setOnItemClickListener((adapter1, view, position) -> {
-                if (typeId != 0) {
-                    adapter.notifyDataPosition(position);
-                } else {
-                    Utils.toast("订单类型为空!");
-                }
-            });
-        }
+        getPaymentType();
         if (configInfo != null && configInfo.api != null && configInfo.api.recharge_bottom != null && configInfo.api.recharge_bottom.size() > 0) {
             SpannableStringBuilder builder = new SpannableStringBuilder();
             for (ConfigInfo.MineInfo mineInfo : configInfo.api.recharge_bottom) {
@@ -206,12 +215,12 @@ public class BasePayPopWindow extends BaseBottomPop {
     }
 
 
-    public void getPaymentType(){
+    public void getPaymentType() {
         mCompositeDisposable.add(publicService.getRechargeNewList()
                 .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<List<PaymentTypeDto>>>() {
                     @Override
                     public void onSuccess(BaseResponse<List<PaymentTypeDto>> response) {
-                        if(response!=null&&response.getData()!=null){
+                        if (response != null && response.getData() != null) {
                             adapter = new ChargePayAdapter(response.getData());
                             mBind.rvPayWay.setAdapter(adapter);
                             adapter.setList(response.getData());
@@ -259,7 +268,7 @@ public class BasePayPopWindow extends BaseBottomPop {
                         RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_UPDATE_USER_INFO_SUCCESS));
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付成功");
                     } else {
-                        LogUtil.e("==========","==" + payResult.toString());
+                        getPaymentType();
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付失败");
                     }
 

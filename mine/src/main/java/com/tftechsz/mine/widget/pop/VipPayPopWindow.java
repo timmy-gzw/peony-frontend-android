@@ -12,9 +12,11 @@ import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.PayTask;
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.netease.nim.uikit.common.PaymentTypeDto;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.widget.pop.RechargePopWindow;
 import com.umeng.analytics.MobclickAgent;
@@ -48,6 +50,7 @@ import java.util.List;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -64,6 +67,7 @@ public class VipPayPopWindow extends BaseBottomPop {
     private PopVipPayBinding mBind;
     private final CompositeDisposable mCompositeDisposable;
     UserProviderService userService;
+    PublicService publicService;
     private final PayService service;
     private int typeId;
     private IWXAPI mApi;
@@ -79,7 +83,9 @@ public class VipPayPopWindow extends BaseBottomPop {
         mCompositeDisposable = new CompositeDisposable();
         userService = ARouter.getInstance().navigation(UserProviderService.class);
         service = ARouter.getInstance().navigation(PayService.class);
+        publicService = RetrofitManager.getInstance().createConfigApi(PublicService.class);
         initUI();
+        initRxBus();
     }
 
     public void setisRecharge(boolean isRecharge) {//是否续费
@@ -104,6 +110,22 @@ public class VipPayPopWindow extends BaseBottomPop {
         }
     }
 
+    private void initRxBus() {
+        mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
+                .subscribe(
+                        event -> {
+                            if (event.type == Constants.NOTIFY_PAY_FAIL) {
+                                getPaymentType();
+                            }
+                        }
+                ));
+    }
+
+    @Override
+    public void onShowing() {
+        super.onShowing();
+        getPaymentType();
+    }
 
     public void setPrice(String price) {
         this.mPrice = price;
@@ -208,17 +230,7 @@ public class VipPayPopWindow extends BaseBottomPop {
                 .create());
         mBind.vipAgree.setMovementMethod(LinkMovementMethod.getInstance());*/
 
-        if (configInfo != null && configInfo.share_config != null && configInfo.share_config.payment_type != null) {
-            adapter = new ChargePayAdapter(configInfo.share_config.payment_type);
-            mBind.payRecy.setAdapter(adapter);
-            adapter.setOnItemClickListener((adapter1, view, position) -> {
-                if (typeId != 0) {
-                    adapter.notifyDataPosition(position);
-                } else {
-                    Utils.toast("您还未选择套餐");
-                }
-            });
-        }
+        getPaymentType();
     }
 
     public void getWxOrderNum(int typeId) {
@@ -264,15 +276,36 @@ public class VipPayPopWindow extends BaseBottomPop {
     }
 
 
+    public void getPaymentType() {
+        mCompositeDisposable.add(publicService.getRechargeNewList()
+                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<List<PaymentTypeDto>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<PaymentTypeDto>> response) {
+                        if (response != null && response.getData() != null) {
+                            adapter = new ChargePayAdapter(response.getData());
+                            mBind.payRecy.setAdapter(adapter);
+                            adapter.setOnItemClickListener((adapter1, view, position) -> {
+                                if (typeId != 0) {
+                                    adapter.notifyDataPosition(position);
+                                } else {
+                                    Utils.toast("您还未选择套餐");
+                                }
+                            });
+                        }
+                    }
+                }));
+    }
+
+
     /**
      * 支付宝
      */
     public void wakeUpAliPay(final String orderInfo) {
         Disposable disposable = Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            PayTask alipay = new PayTask((Activity) mContext);
-            String result = alipay.pay(orderInfo, true);
-            emitter.onNext(result);
-        }).subscribeOn(Schedulers.newThread())
+                    PayTask alipay = new PayTask((Activity) mContext);
+                    String result = alipay.pay(orderInfo, true);
+                    emitter.onNext(result);
+                }).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
                     AlipayResultInfo payResult = new AlipayResultInfo(s);
                     String resultStatus = payResult.getResultStatus();
@@ -283,6 +316,7 @@ public class VipPayPopWindow extends BaseBottomPop {
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付成功");
                     } else {
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付失败");
+                        getPaymentType();
                     }
                 });
         mCompositeDisposable.add(disposable);

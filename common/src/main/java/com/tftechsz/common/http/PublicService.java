@@ -153,7 +153,7 @@ public interface PublicService {
      *
      * @return
      */
-    @GET("payment/new")
+    @GET("payment/get")
     Flowable<BaseResponse<List<PaymentTypeDto>>> getRechargeNewList();
 
     /**

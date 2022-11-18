@@ -78,6 +78,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                         RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_UPDATE_USER_INFO_SUCCESS));
                     } else {
                         Utils.toast("支付失败");
+                        RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PAY_FAIL));
                     }
                     break;
             }

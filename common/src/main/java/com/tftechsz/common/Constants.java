@@ -173,6 +173,8 @@ public class Constants {
     public static final int NOTIFY_ENTER_FAMILY = 1087;  //通知进入家族
     public static final int NOTIFY_FAMILY_COUPLE_PASTER = 1088;  //组情侣礼包贴片
     public static final int NOTIFY_FAMILY_RELIEVE_APPLY = 1089;  //家族情侣解除申请
+    public static final int NOTIFY_PAY_FAIL = 1090;  //通知支付失败
+
 
 
     public static final int PAR_LOVE_SWITCH = 5;  //爱意值开关

@@ -40,13 +40,15 @@ public class UserBanPopWindow extends BaseCenterPop{
         tvContent.setText(stringBuilder);
     }
 
+
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
     @Override
     protected View createPopupById() {
         return createPopupById(R.layout.pop_user_ban);
     }
 
-    @Override
-    public BasePopupWindow setBackPressEnable(boolean backPressEnable) {
-        return super.setBackPressEnable(false);
-    }
 }

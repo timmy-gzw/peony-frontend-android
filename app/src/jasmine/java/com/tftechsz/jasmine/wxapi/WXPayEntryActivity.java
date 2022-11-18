@@ -91,6 +91,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                     @Override
                     public void onFail(int code, String msg) {
                         super.onFail(code, msg);
+                        RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_PAY_FAIL));
                         GlobalDialogManager.getInstance().dismiss();
                     }
 
