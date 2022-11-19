@@ -119,6 +119,9 @@ public class LabelActivity extends BaseMvpActivity<ILabelView, LabelPresenter> i
 
     @Override
     public void onClick(View view) {
+        if(isFastClick()){
+            return;
+        }
         int id = view.getId();
         if (id == R.id.toolbar_back_all) {
             finish();
