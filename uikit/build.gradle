@@ -70,12 +70,12 @@ dependencies {
 //    api 'me.everything:overscroll-decor-android:1.0.4'
     api "me.leolin:ShortcutBadger:1.1.22@aar"
     api 'com.alibaba:fastjson:1.2.73'
-    api "com.netease.nimlib:basesdk:9.2.8"
-    api "com.netease.nimlib:lucene:9.2.8"
-    api "com.netease.nimlib:chatroom:9.2.8"
-    api "com.netease.nimlib:superteam:9.2.8"
-    api "com.netease.nimlib:push:9.2.8"//厂商推送
-    api "com.netease.nimlib:avsignalling:9.2.8"//信令服务需要
+    api "com.netease.nimlib:basesdk:8.9.107"
+    api "com.netease.nimlib:lucene:8.9.107"
+    api "com.netease.nimlib:chatroom:8.9.107"
+    api "com.netease.nimlib:superteam:8.9.107"
+    api "com.netease.nimlib:push:8.9.107"//厂商推送
+    api "com.netease.nimlib:avsignalling:8.9.107"//信令服务需要
     api "com.netease.yunxin:nertc:4.2.147"//音视频通话
     api "com.netease.nimlib:neliveplayer:3.2.1"//点播
     api "com.netease:gslb:1.1.2"//点播
