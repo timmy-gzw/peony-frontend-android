@@ -583,6 +583,17 @@ public class ARouterUtils {
                 .navigation();
     }
 
+
+    public static void toUserPicBrowserActivity(int uid, int index, String firstIcon, boolean flagIsBoy , ArrayList<String> pictureList) {
+        ARouter.getInstance().build(ARouterApi.ACTIVITY_USER_PIC_BROWSER)
+                .withInt(Interfaces.EXTRA_UID, uid)
+                .withInt(Interfaces.EXTRA_INDEX, index)
+                .withString(Interfaces.EXTRA_FIRST_ICON, firstIcon)
+                .withBoolean(Interfaces.EXTRA_ISBOY_ICON, flagIsBoy)
+                .withStringArrayList(Interfaces.EXTRA_PICTURE_LIST,  pictureList)
+                .navigation();
+    }
+
     /**
      * 跳转到我的家族
      */

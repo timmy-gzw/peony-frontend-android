@@ -20,6 +20,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.like.LikeButton;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.bean.AccostDto;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.robinhood.ticker.TickerView;
 import com.tftechsz.common.ARouterApi;
 import com.tftechsz.common.Constants;
@@ -68,6 +69,8 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
     private LinearLayout mLlAccost;
     private boolean mFlagIsBoy;
 
+    public List<String> mPictureList;
+
     @Override
     protected int getLayout() {
         return R.layout.act_user_pic_browser;
@@ -105,6 +108,7 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
         mIndexPos = getIntent().getIntExtra(Interfaces.EXTRA_INDEX, 0);
         mFirstIcon = getIntent().getStringExtra(Interfaces.EXTRA_FIRST_ICON);
         mFlagIsBoy = getIntent().getBooleanExtra(Interfaces.EXTRA_ISBOY_ICON, false);
+        mPictureList = getIntent().getStringArrayListExtra(Interfaces.EXTRA_PICTURE_LIST);
         p.getInfoPicture(mUid);
 
         mIv_accost.setUnlikeDrawableRes(
@@ -187,15 +191,27 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
         performAccost(bean.getIs_accost());
 
         List<Fragment> list = new ArrayList<>();
-        if (!TextUtils.isEmpty(mFirstIcon)) {
+
+
+        if (mPictureList != null && mPictureList.size() > 0) {
+            for (int i = 0; i < mPictureList.size(); i++) {
+                String picUri = mPictureList.get(i);
+                int pos = i;
+                //list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(picUri, picUri, null, pos, true, mIndexPos != pos)));
+                list.add(PicLoadFragment.newInstance(pos, picUri));
+            }
+            LogUtil.e("======",mPictureList+"======23412412");
+        }else {
+            if (!TextUtils.isEmpty(mFirstIcon)) {
 //            list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(mFirstIcon, mFirstIcon, null, 0, true, mIndexPos != 0)));
-            list.add(PicLoadFragment.newInstance(0, mFirstIcon));
-        }
-        for (int i = 0; i < bean.getPicture().size(); i++) {
-            String picUri = bean.getPicture().get(i);
-            int pos = TextUtils.isEmpty(mFirstIcon) ? i : i + 1;
-            //list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(picUri, picUri, null, pos, true, mIndexPos != pos)));
-            list.add(PicLoadFragment.newInstance(pos, picUri));
+                list.add(PicLoadFragment.newInstance(0, mFirstIcon));
+            }
+            for (int i = 0; i < bean.getPicture().size(); i++) {
+                String picUri = bean.getPicture().get(i);
+                int pos = TextUtils.isEmpty(mFirstIcon) ? i : i + 1;
+                //list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(picUri, picUri, null, pos, true, mIndexPos != pos)));
+                list.add(PicLoadFragment.newInstance(pos, picUri));
+            }
         }
         mViewPager.setAdapter(new FragmentVpAdapter(getSupportFragmentManager(), list));
         mViewPager.setOffscreenPageLimit(list.size());
@@ -226,7 +242,7 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
         mTv_like.setAnimationDuration(300);
         mTv_like.setText(String.valueOf(praise_picture_count));
         mTv_like.setTextColor(getResources().getColor(is_praise_picture == 1 ? R.color.c_like : R.color.color_light_font));
-        mLlLike.setBackground(getResources().getDrawable(is_praise_picture == 1?R.drawable.shape_border_fd4683_radius_100:R.drawable.shape_border_979797_radius_100));
+        mLlLike.setBackground(getResources().getDrawable(is_praise_picture == 1 ? R.drawable.shape_border_fd4683_radius_100 : R.drawable.shape_border_979797_radius_100));
         mIv_like.setLiked(is_praise_picture != 0);
     }
 

@@ -20,6 +20,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.business.session.audio.MessageAudioControl;
 import com.netease.nim.uikit.common.ChatMsg;
@@ -64,8 +68,11 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
         mRvUserinfo = findViewById(R.id.rv_userinfo);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 4);
         mRvPhoto.setLayoutManager(gridLayoutManager);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(context, 3);
-        mRvUserinfo.setLayoutManager(gridLayoutManager1);
+
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(context, FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        layoutManager.setAlignItems(AlignItems.FLEX_START);
+        mRvUserinfo.setLayoutManager(layoutManager);
 
     }
 
@@ -90,7 +97,7 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
                     @Override
                     public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                         if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)
-                            NimUIKitImpl.getSessionListener().onCardPhotoClicked(context, message, position, card.picture.get(position));
+                            NimUIKitImpl.getSessionListener().onCardPhotoClicked(context, message, position, card.picture.get(position),card.picture);
                     }
                 });
             } else {
@@ -135,7 +142,7 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
     }
 
 
-    public class UserInfoAdapter extends BaseQuickAdapter<String, com.chad.library.adapter.base.viewholder.BaseViewHolder> {
+    public static class UserInfoAdapter extends BaseQuickAdapter<String, com.chad.library.adapter.base.viewholder.BaseViewHolder> {
 
 
         public UserInfoAdapter() {

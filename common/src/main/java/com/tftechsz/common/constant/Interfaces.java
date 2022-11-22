@@ -32,6 +32,7 @@ interface Interfaces {
     String EXTRA_TREND = "extra_trend";
     String VIDEO_PATH_KEY = "video_path_key";
     String EXTRA_ISBOY_ICON = "extra_isboy_icon";
+    String EXTRA_PICTURE_LIST = "extra_picture_list";
     int VIDEO_TRIM_REQUEST_CODE = 998;
     int PAY_REQUEST_CODE = 997;
     int EXTRA_REAL_CAMERA = 996;

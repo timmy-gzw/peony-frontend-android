@@ -840,7 +840,7 @@ public class ChatMsg implements Serializable {
         public String desc;
         public String hometown;
         public List<String> tags;
-        public List<String> picture;
+        public ArrayList<String> picture;
 
     }
 

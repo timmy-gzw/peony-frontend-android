@@ -3212,9 +3212,9 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
                 }
 
                 @Override
-                public void onCardPhotoClicked(Context context, IMMessage message, int position, String url) {
+                public void onCardPhotoClicked(Context context, IMMessage message, int position, String url,ArrayList<String> pictureList) {
                     int userId = TextUtils.equals(String.valueOf(service.getUserId()), message.getFromAccount()) ? service.getUserId() : Integer.parseInt(message.getFromAccount());
-                    ARouterUtils.toUserPicBrowserActivity(userId, position,url, (service.getUserInfo() != null && service.getUserInfo().isBoy()));
+                    ARouterUtils.toUserPicBrowserActivity(userId, position,url, (service.getUserInfo() != null && service.getUserInfo().isBoy()),pictureList);
                 }
 
                 @Override
