@@ -72,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_size_23"
             android:layout_marginEnd="@dimen/dp_size_17"
+            android:layout_marginStart="@dimen/dp_4"
             tools:itemCount="4"
             tools:listitem="@layout/nim_message_item_user_info_photo" />
 
@@ -129,6 +130,7 @@
             android:id="@+id/rv_photo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_size_50"
+            android:layout_marginStart="@dimen/dp_4"
             android:layout_marginEnd="@dimen/dp_size_17"
             tools:itemCount="4"
             tools:listitem="@layout/nim_message_item_user_info_photo" />

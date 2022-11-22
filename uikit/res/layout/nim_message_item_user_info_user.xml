@@ -9,7 +9,7 @@
         android:id="@+id/tv_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_4"
+        android:layout_marginEnd="6dp"
         android:background="@drawable/bg_userinfo_gray"
         android:drawablePadding="3dp"
         android:paddingHorizontal="@dimen/dp_size_10"
