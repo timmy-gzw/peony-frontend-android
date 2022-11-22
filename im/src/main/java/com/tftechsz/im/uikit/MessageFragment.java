@@ -3204,11 +3204,17 @@ public class MessageFragment extends TFragment implements ModuleProxy, View.OnCl
 
                 @Override
                 public void onCardClicked(Context context, IMMessage message) {
-                    if (TextUtils.equals(String.valueOf(service.getUserId()), message.getSessionId())) {
+                    if (TextUtils.equals(String.valueOf(service.getUserId()), message.getFromAccount())) {
                         ARouterUtils.toMineDetailActivity("");
                     } else {
-                        ARouterUtils.toMineDetailActivity(String.valueOf(message.getSessionId()));
+                        ARouterUtils.toMineDetailActivity(String.valueOf(message.getFromAccount()));
                     }
+                }
+
+                @Override
+                public void onCardPhotoClicked(Context context, IMMessage message, int position, String url) {
+                    int userId = TextUtils.equals(String.valueOf(service.getUserId()), message.getFromAccount()) ? service.getUserId() : Integer.parseInt(message.getFromAccount());
+                    ARouterUtils.toUserPicBrowserActivity(userId, position,url, (service.getUserInfo() != null && service.getUserInfo().isBoy()));
                 }
 
                 @Override

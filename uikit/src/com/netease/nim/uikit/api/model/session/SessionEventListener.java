@@ -18,6 +18,10 @@ public interface SessionEventListener {
     // 卡片点击事件处理，一般用于打开用户资料页面
     void onCardClicked(Context context, IMMessage message);
 
+
+    void onCardPhotoClicked(Context context, IMMessage message ,int position , String url);
+
+
     void onAitClicked(String account);
 
     // 头像长按事件处理，一般用于群组@功能，或者弹出菜单，做拉黑，加好友等功能

@@ -36,6 +36,7 @@ import com.netease.nim.uikit.common.DensityUtils;
 import com.netease.nim.uikit.common.UserInfo;
 import com.netease.nim.uikit.common.ui.imageview.AvatarVipFrameView;
 import com.netease.nim.uikit.common.util.DownloadHelper;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.msg.MessageBuilder;
 import com.netease.nimlib.sdk.msg.MsgService;
@@ -856,6 +857,9 @@ public class CommonUtil {
             if (service.getConfigInfo() != null && service.getConfigInfo().share_config != null)
                 isYiDun = service.getConfigInfo().share_config.is_handle_accost_yidun == 1;
             boolean finalIsYiDun = isYiDun;
+            if (!TextUtils.isEmpty(data.accost_resume)) {
+                singleThreadExecutor.schedule(() -> ChatMsgUtil.sendCardAccostMessage(finalIsYiDun, String.valueOf(service.getUserId()), String.valueOf(user_id), data.accost_resume, data.sub_from_type, data.accost_from, false), 100, TimeUnit.MILLISECONDS);
+            }
             if (!TextUtils.isEmpty(data.from_accost_card)) {
                 singleThreadExecutor.schedule(() -> ChatMsgUtil.sendCardAccostMessage(finalIsYiDun, String.valueOf(service.getUserId()), String.valueOf(user_id), data.from_accost_card, data.sub_from_type, data.accost_from, true), 100, TimeUnit.MILLISECONDS);
             }

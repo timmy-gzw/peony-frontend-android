@@ -34,6 +34,7 @@ public class ChatMsg implements Serializable {
     public static final String FAMILY_INIT = "family_init";   //创建家族
     public static final String ACCOST_TYPE = "accost";  //搭讪类型
     public static final String ACCOST_CARD = "accost_card";  //搭讪信息卡片
+    public static final String ACCOST_RESUME = "accost_resume";  //搭讪信息卡片
     public static final String ACCOST_LOCATION = "accost_location";  //附近搭讪类型
     public static final String FAMILY_TIPS = "family_tips";  //家族tip
     public static final String FAMILY_COUPLE_TIPS = "couple_tips";  //家族tip
@@ -834,13 +835,13 @@ public class ChatMsg implements Serializable {
      */
     public static class AccostCard {
         public String icon;
-        public String voice;
-        public String voice_time;
-        public int sex;
-        public String tags;
+        public int is_self;
+        public int is_real;
         public String desc;
-        public String tips;
-        public List<String> quick_picture;
+        public String hometown;
+        public List<String> tags;
+        public List<String> picture;
+
     }
 
     /**

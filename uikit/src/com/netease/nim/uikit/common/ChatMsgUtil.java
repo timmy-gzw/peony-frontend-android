@@ -334,7 +334,7 @@ public class ChatMsgUtil implements Serializable {
      */
     public static void sendCardAccostMessage(boolean isYiDun, String from, String to, String content, int subFromType, int accostFrom, Boolean isDelete) {
         ChatMsg chatMsg = new ChatMsg();
-        chatMsg.cmd_type = ChatMsg.ACCOST_CARD;
+        chatMsg.cmd_type = ChatMsg.ACCOST_RESUME;
         chatMsg.cmd = "default";
         chatMsg.to = to;
         chatMsg.from = from;

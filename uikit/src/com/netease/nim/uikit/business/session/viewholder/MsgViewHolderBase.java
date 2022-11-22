@@ -22,11 +22,13 @@ import com.alibaba.fastjson.JSON;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.session.SessionCustomization;
+import com.netease.nim.uikit.business.extension.AccostCardAttachment;
 import com.netease.nim.uikit.business.session.helper.MessageHelper;
 import com.netease.nim.uikit.business.session.module.list.MsgAdapter;
 import com.netease.nim.uikit.business.team.helper.TeamHelper;
 import com.netease.nim.uikit.business.uinfo.UserInfoHelper;
 import com.netease.nim.uikit.common.ChatMsg;
+import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.CommonUtil;
 import com.netease.nim.uikit.common.DensityUtils;
 import com.netease.nim.uikit.common.UIUtils;
@@ -46,10 +48,12 @@ import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.attachment.FileAttachment;
 import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.constant.MsgStatusEnum;
+import com.netease.nimlib.sdk.msg.constant.NotificationType;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.MsgThreadOption;
 import com.netease.nimlib.sdk.team.TeamService;
+import com.netease.nimlib.sdk.team.model.MemberChangeAttachment;
 import com.netease.nimlib.sdk.uinfo.UserService;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 
@@ -398,6 +402,12 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
      * 设置时间显示
      */
     private void setTimeTextView() {
+        ChatMsg chatMsg = ChatMsgUtil.parseMessage(message);
+        if (chatMsg != null && TextUtils.equals(ChatMsg.ACCOST_RESUME, chatMsg.cmd_type)) {   //搭讪卡片消息
+            getMsgAdapter().setShowTime(message, false);
+        }
+
+
         if (getMsgAdapter().needShowTime(message)) {
             timeTextView.setVisibility(View.VISIBLE);
         } else {
@@ -407,9 +417,6 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
 
         String text = TimeUtil.getTimeShowString(message.getTime(), false);
         timeTextView.setText(text);
-//        if (message.getSessionType() == SessionTypeEnum.Team) {
-//
-//        }
         timeTextView.setBackgroundResource(R.color.transparent);
         timeTextView.setTextColor(ContextCompat.getColor(context, R.color.color_999999));
     }
