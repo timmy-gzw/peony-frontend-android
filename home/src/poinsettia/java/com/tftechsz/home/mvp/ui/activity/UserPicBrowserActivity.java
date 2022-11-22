@@ -196,11 +196,9 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
         if (mPictureList != null && mPictureList.size() > 0) {
             for (int i = 0; i < mPictureList.size(); i++) {
                 String picUri = mPictureList.get(i);
-                int pos = i;
                 //list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(picUri, picUri, null, pos, true, mIndexPos != pos)));
-                list.add(PicLoadFragment.newInstance(pos, picUri));
+                list.add(PicLoadFragment.newInstance(i, picUri));
             }
-            LogUtil.e("======",mPictureList+"======23412412");
         }else {
             if (!TextUtils.isEmpty(mFirstIcon)) {
 //            list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(mFirstIcon, mFirstIcon, null, 0, true, mIndexPos != 0)));
