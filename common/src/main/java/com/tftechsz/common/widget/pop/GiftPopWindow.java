@@ -815,7 +815,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
                             .navigation(MineService.class)
                             .trackEvent("礼物数据异常，进行更改后", "send_gift", "p2p_send_gift",
                                     JSON.toJSONString(dto), null);
-                    if (null == dto) {
+                    if (null == dto || dto.id <= 0) {
                         Utils.toast("请重新打开礼物弹窗进行赠送");
                         return;
                     }
