@@ -135,6 +135,7 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
                     .dontAnimate();          //缓存全尺寸
             Glide.with(context)              //配置上下文
                     .asDrawable()
+                    .placeholder(R.drawable.ic_default_avatar)
                     .apply(options)
                     .load(s)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                     .into(typeImage);
