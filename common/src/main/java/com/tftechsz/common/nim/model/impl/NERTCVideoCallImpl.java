@@ -309,6 +309,12 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
                                         if (callMsg.type != null)
                                             service.setMatchType(callMsg.type);
                                         service.setCallId(callId);
+                                        if(TextUtils.isEmpty(callId)){
+                                            ARouter.getInstance()
+                                                    .navigation(MineService.class)
+                                                    .trackEvent("callId", "callId为空了", callId,
+                                                            JSON.toJSONString(callMsg), null);
+                                        }
                                         //当时视频速配过来询问匹配时候调用
                                         service.setCallIsMatch(TextUtils.equals(callMsg.type, ChatMsg.CALL_MATCH_FORCE));
                                         if (System.currentTimeMillis() - imMessage.getTime() > 6000)
