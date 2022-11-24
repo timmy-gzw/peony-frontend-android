@@ -81,7 +81,7 @@
       android:layout_width="match_parent"
       android:orientation="horizontal"
       app:layout_constraintBottom_toBottomOf="parent"
-      android:background="@drawable/bg_record_tip_radiu25"
+      android:background="@drawable/sel_login_btn"
       app:layout_constraintTop_toBottomOf="@id/recy"
       android:gravity="center"
       android:layout_marginTop="@dimen/dp_20"

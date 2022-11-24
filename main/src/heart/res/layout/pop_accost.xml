@@ -103,7 +103,7 @@
             android:layout_height="@dimen/dp_49"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginBottom="@dimen/dp_8"
-            android:background="@drawable/bg_record_tip_radiu25"
+            android:background="@drawable/sel_login_btn"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
