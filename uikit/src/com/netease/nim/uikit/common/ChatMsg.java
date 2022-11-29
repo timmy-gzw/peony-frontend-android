@@ -476,6 +476,8 @@ public class ChatMsg implements Serializable {
      */
     public static class RedPacket {
         public String des;
+        public String desc;
+        public String type;
         public int red_packet_id;
         public String scene;   //task_register_new_user新用户红包
     }
