@@ -1528,11 +1528,11 @@ public class ChatFragment extends BaseMvpFragment<IChatView, ChatPresenter> impl
                                 .navigation(MineService.class)
                                 .trackEvent("banner位点击", "banner_h5_click", "", JSON.toJSONString(new NavigationLogEntity(service.getUserId(), 2, data.link, position, System.currentTimeMillis(), CommonUtil.getOSName(), Constants.APP_NAME)), null
                                 );
-                        ARouter.getInstance()
-                                .navigation(MineService.class)
-                                .trackEvent("新年活动banner点击", "new_year_banner_click", "", JSON.toJSONString(new NavigationLogEntity(service.getUserId(), data.link, 23,
-                                        position, System.currentTimeMillis(), CommonUtil.getOSName(), Constants.APP_NAME, "新年活动banner点击", "-1", -1)), null
-                                );
+//                        ARouter.getInstance()
+//                                .navigation(MineService.class)
+//                                .trackEvent("新年活动banner点击", "new_year_banner_click", "", JSON.toJSONString(new NavigationLogEntity(service.getUserId(), data.link, 23,
+//                                        position, System.currentTimeMillis(), CommonUtil.getOSName(), Constants.APP_NAME, "新年活动banner点击", "-1", -1)), null
+//                                );
 
                         CommonUtil.performLink(getActivity(), new ConfigInfo.MineInfo(data.link, data.option), position, 2);
                     });

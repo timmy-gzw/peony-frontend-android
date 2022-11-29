@@ -385,6 +385,12 @@ public class NERTCVideoCallImpl extends NERtcVoiceRoomInner {
                         token = callMsg1.room_token;
                         channelName = callMsg1.channel_name;
                         service.setCallId(callMsg1.call_id);
+                        if(TextUtils.isEmpty(callId)){
+                            ARouter.getInstance()
+                                    .navigation(MineService.class)
+                                    .trackEvent("callId", "callId为空了1", callId,
+                                            JSON.toJSONString(callMsg1), null);
+                        }
                         service.setRoomToken(callMsg1.room_token);
                         service.setChannelName(callMsg1.channel_name);
                         service.setMatchType(callMsg1.type);
