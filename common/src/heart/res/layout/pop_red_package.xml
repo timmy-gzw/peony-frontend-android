@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="@dimen/dp_38"
+    android:layout_marginEnd="@dimen/dp_38"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_red"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@mipmap/bg_red_package">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_70"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_16"
+            android:text="搭讪红包奖励"
+            android:textColor="@color/c_ffd996"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_16">
+
+            <View
+                android:id="@+id/view_l"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/c_ffd996"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_form"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_form"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:gravity="center"
+                android:textColor="@color/c_ffd996"
+                android:textSize="@dimen/sp_14"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/view_r"
+                app:layout_constraintStart_toEndOf="@id/view_l"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="官方红包" />
+
+            <View
+                android:id="@+id/view_r"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/c_ffd996"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_form"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cl_from"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_30"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="1"
+                android:textColor="@color/c_ffd996"
+                android:textSize="@dimen/sp_36"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/tv_price_unit"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_price_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_price"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/dp_2"
+                android:layout_toEndOf="@+id/tv_price"
+                android:text="元"
+                android:textColor="@color/c_ffd996"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_price"
+                app:layout_constraintBottom_toBottomOf="@id/tv_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_price" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_price"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="已存入账户，可以开始使用啦"
+                android:textColor="@color/c_ffd996"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/iv_open"
+            android:layout_width="117dp"
+            android:layout_height="117dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_53"
+            android:background="@mipmap/ic_open_red_package"
+            tools:visibility="gone" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_card"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/bg_white_radius20">
+
+        <TextView
+            android:id="@+id/tv_title1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_40"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_16"
+            android:text="搭讪红包奖励"
+            android:textColor="#1F1A35"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_16"
+            android:text="搭讪红包奖励"
+            android:textColor="#8282AA"
+            android:textSize="@dimen/sp_14" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_33"
+            android:layout_above="@+id/tv_know"
+            android:background="@mipmap/ic_chat_card"
+            />
+
+        <TextView
+            android:id="@+id/tv_know"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:background="@mipmap/btn_red_package"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp_18"
+            android:text="我知道了" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@mipmap/ic_close_red_package"
+
+        />
+
+
+</LinearLayout>
