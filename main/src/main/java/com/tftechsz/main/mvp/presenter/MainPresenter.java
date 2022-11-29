@@ -50,6 +50,7 @@ import com.tftechsz.common.event.UserStatusEvent;
 import com.tftechsz.common.http.BaseResponse;
 import com.tftechsz.common.http.ResponseObserver;
 import com.tftechsz.common.http.RetrofitManager;
+import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.manager.DbManager;
 import com.tftechsz.common.nim.model.impl.NERTCVideoCallImpl;
@@ -423,6 +424,12 @@ public class MainPresenter extends BasePresenter<IMainView> {
                         userService.setRoomToken(callMsg1.room_token);
                         userService.setChannelName(callMsg1.channel_name);
                         userService.setMatchType(callMsg1.type);
+                        if(TextUtils.isEmpty(callMsg1.call_id)){
+                            ARouter.getInstance()
+                                    .navigation(MineService.class)
+                                    .trackEvent("callId", "callId为空了3", callMsg1.call_id,
+                                            JSON.toJSONString(callMsg1), null);
+                        }
                         UserInfo userInfo = new UserInfo();
                         userInfo.setUser_id(Integer.parseInt(chatMsg.to));
                         boolean isMatch = TextUtils.equals(chatMsg.cmd, ChatMsg.CALL_TYPE_VIDEO_MATCH) || TextUtils.equals(chatMsg.cmd, ChatMsg.CALL_TYPE_VOICE_MATCH);   //是否语音视频速配
