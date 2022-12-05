@@ -137,6 +137,7 @@
                 android:background="@drawable/bg_userinfo_gray"
                 android:drawablePadding="@dimen/dp_4"
                 android:paddingHorizontal="@dimen/dp_size_10"
+                android:singleLine="true"
                 android:paddingVertical="@dimen/dp_size_3"
                 android:text="深圳"
                 android:textColor="#333333"
