@@ -86,45 +86,50 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
         ChatMsg chatMsg = ChatMsgUtil.parseMessage(message);
         if (chatMsg == null)
             return;
-        ChatMsg.AccostCard card = JSON.parseObject(chatMsg.content, ChatMsg.AccostCard.class);
-        if (card != null) {
-            //有照片
-            if (card.picture != null && card.picture.size() > 0) {
-                mRvPhoto.setVisibility(View.VISIBLE);
-                PhotoAdapter adapter = new PhotoAdapter();
-                adapter.setList(card.picture);
-                mRvPhoto.setAdapter(adapter);
-                adapter.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                        if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)
-                            NimUIKitImpl.getSessionListener().onCardPhotoClicked(context, message, position, card.picture.get(position), card.picture);
-                    }
-                });
-            } else {
-                mRvPhoto.setVisibility(View.GONE);
-            }
-            UserInfoAdapter adapter = new UserInfoAdapter();
-            adapter.setList(card.tags);
-            mRvUserinfo.setAdapter(adapter);
+        try {
+            ChatMsg.AccostCard card = JSON.parseObject(chatMsg.content, ChatMsg.AccostCard.class);
+            if (card != null) {
+                //有照片
+                if (card.picture != null && card.picture.size() > 0) {
+                    mRvPhoto.setVisibility(View.VISIBLE);
+                    PhotoAdapter adapter = new PhotoAdapter();
+                    adapter.setList(card.picture);
+                    mRvPhoto.setAdapter(adapter);
+                    adapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                            if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)
+                                NimUIKitImpl.getSessionListener().onCardPhotoClicked(context, message, position, card.picture.get(position), card.picture);
+                        }
+                    });
+                } else {
+                    mRvPhoto.setVisibility(View.GONE);
+                }
+                UserInfoAdapter adapter = new UserInfoAdapter();
+                adapter.setList(card.tags);
+                mRvUserinfo.setAdapter(adapter);
 
-            if (card.tag_list != null && card.tag_list.size() > 0) {
-                TagAdapter tagAdapter = new TagAdapter();
-                tagAdapter.setList(card.tag_list);
-                mRvTag.setAdapter(tagAdapter);
-                mLlTag.setVisibility(View.VISIBLE);
-            } else {
-                mLlTag.setVisibility(View.GONE);
-            }
-            mIvReal.setVisibility(card.is_real == 0 ? View.GONE : View.VISIBLE);
-            mIvSelf.setVisibility(card.is_self == 0 ? View.GONE : View.VISIBLE);
-            mLlConstellation.setVisibility(TextUtils.isEmpty(card.star_sign) ? View.GONE : View.VISIBLE);
-            mTvConstellation.setText(card.star_sign);
-            mLlHometown.setVisibility(TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
-            mTvHometown.setText(card.hometown);
-            mLlAll.setVisibility(TextUtils.isEmpty(card.star_sign) && TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
+                if (card.tag_list != null && card.tag_list.size() > 0) {
+                    TagAdapter tagAdapter = new TagAdapter();
+                    tagAdapter.setList(card.tag_list);
+                    mRvTag.setAdapter(tagAdapter);
+                    mLlTag.setVisibility(View.VISIBLE);
+                } else {
+                    mLlTag.setVisibility(View.GONE);
+                }
+                mIvReal.setVisibility(card.is_real == 0 ? View.GONE : View.VISIBLE);
+                mIvSelf.setVisibility(card.is_self == 0 ? View.GONE : View.VISIBLE);
+                mLlConstellation.setVisibility(TextUtils.isEmpty(card.star_sign) ? View.GONE : View.VISIBLE);
+                mTvConstellation.setText(card.star_sign);
+                mLlHometown.setVisibility(TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
+                mTvHometown.setText(card.hometown);
+                mLlAll.setVisibility(TextUtils.isEmpty(card.star_sign) && TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
 
         findViewById(R.id.message_item_user).setOnClickListener(v -> {
             if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)

@@ -108,7 +108,7 @@
                 android:drawablePadding="@dimen/dp_4"
                 android:paddingHorizontal="@dimen/dp_size_10"
                 android:paddingVertical="@dimen/dp_size_3"
-                android:text="深圳"
+                android:text="摩羯座"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_12" />
 
