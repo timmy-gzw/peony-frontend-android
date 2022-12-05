@@ -2,17 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/message_item_user"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_user_info_radius"
-    android:gravity="center_vertical"
-    android:paddingBottom="16dp"
-    android:id="@+id/message_item_user"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
+    android:paddingHorizontal="@dimen/dp_10"
+    android:background="@drawable/bg_user_info_radius"
+    android:gravity="center_vertical"
     android:minWidth="335dp"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/dp_10">
+    android:paddingBottom="16dp">
 
 
     <LinearLayout
@@ -23,10 +23,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/dp_4"
-            android:text="认证："
             android:layout_gravity="center_vertical"
-            android:textColor="#2A2426"
+            android:drawablePadding="@dimen/dp_4"
+            android:text="认证状态："
+            android:textColor="#333333"
             android:textSize="@dimen/sp_12"
             app:drawableStartCompat="@drawable/ic_auth_status" />
 
@@ -36,17 +36,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_4"
-            android:src="@drawable/ic_is_real"
-             />
+            android:src="@drawable/ic_is_real" />
 
         <ImageView
             android:id="@+id/iv_self"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_4"
-            android:src="@drawable/ic_is_self"
-            />
-
+            android:src="@drawable/ic_is_self" />
 
 
     </LinearLayout>
@@ -59,10 +56,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/dp_4"
-            android:text="资料："
             android:layout_gravity="center_vertical"
-            android:textColor="#2A2426"
+            android:drawablePadding="@dimen/dp_4"
+            android:text="基本资料："
+            android:textColor="#333333"
             android:textSize="@dimen/sp_12"
             app:drawableStartCompat="@drawable/ic_user_info" />
 
@@ -71,46 +68,115 @@
             android:id="@+id/rv_userinfo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_size_23"
-            android:layout_marginEnd="@dimen/dp_size_17"
             android:layout_marginStart="@dimen/dp_4"
             tools:itemCount="4"
             tools:listitem="@layout/nim_message_item_user_info_photo" />
 
 
-
     </LinearLayout>
+
 
     <LinearLayout
+        android:id="@+id/ll_all"
         android:layout_width="match_parent"
-        android:id="@+id/ll_hometown"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="19dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/dp_4"
-            android:text="家乡："
-            android:textColor="#2A2426"
-            android:textSize="@dimen/sp_12"
-            app:drawableStartCompat="@drawable/ic_hometown" />
 
-        <TextView
-            android:id="@+id/tv_hometown"
+        <LinearLayout
+            android:id="@+id/ll_constellation"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_4"
-            android:background="@drawable/bg_userinfo_gray"
-            android:drawablePadding="@dimen/dp_4"
-            android:paddingHorizontal="@dimen/dp_size_10"
-            android:paddingVertical="@dimen/dp_size_3"
-            android:text="深圳"
-            android:textColor="#2A2426"
-            android:textSize="@dimen/sp_12"
-  />
+            android:layout_marginEnd="35dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dp_4"
+                android:text="星座："
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_12"
+                app:drawableStartCompat="@drawable/ic_user_constellation" />
+
+            <TextView
+                android:id="@+id/tv_constellation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:background="@drawable/bg_userinfo_gray"
+                android:drawablePadding="@dimen/dp_4"
+                android:paddingHorizontal="@dimen/dp_size_10"
+                android:paddingVertical="@dimen/dp_size_3"
+                android:text="深圳"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_hometown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dp_4"
+                android:text="家乡："
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_12"
+                app:drawableStartCompat="@drawable/ic_hometown" />
+
+            <TextView
+                android:id="@+id/tv_hometown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:background="@drawable/bg_userinfo_gray"
+                android:drawablePadding="@dimen/dp_4"
+                android:paddingHorizontal="@dimen/dp_size_10"
+                android:paddingVertical="@dimen/dp_size_3"
+                android:text="深圳"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/ll_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:drawablePadding="@dimen/dp_4"
+            android:text="标签："
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_12"
+            app:drawableStartCompat="@drawable/ic_user_tag" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tag"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_size_23"
+            android:layout_marginStart="@dimen/dp_4"
+            tools:itemCount="4"
+            tools:listitem="@layout/nim_message_item_user_info_photo" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -122,17 +188,16 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/dp_4"
             android:text="美照："
-            android:textColor="#2A2426"
+            android:textColor="#333333"
             android:textSize="@dimen/sp_12"
             app:drawableStartCompat="@drawable/ic_beautiful_photo" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_photo"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_size_50"
+            android:layout_height="80dp"
             android:layout_marginStart="@dimen/dp_4"
-            android:layout_marginEnd="@dimen/dp_size_17"
-            tools:itemCount="4"
+            tools:itemCount="3"
             tools:listitem="@layout/nim_message_item_user_info_photo" />
 
     </LinearLayout>

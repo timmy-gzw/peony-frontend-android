@@ -68,6 +68,8 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
     private LinearLayout mLlAccost;
     private boolean mFlagIsBoy;
 
+    public List<String> mPictureList;
+
     @Override
     protected int getLayout() {
         return R.layout.act_user_pic_browser;
@@ -105,6 +107,8 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
         mIndexPos = getIntent().getIntExtra(Interfaces.EXTRA_INDEX, 0);
         mFirstIcon = getIntent().getStringExtra(Interfaces.EXTRA_FIRST_ICON);
         mFlagIsBoy = getIntent().getBooleanExtra(Interfaces.EXTRA_ISBOY_ICON, false);
+        mPictureList = getIntent().getStringArrayListExtra(Interfaces.EXTRA_PICTURE_LIST);
+
         p.getInfoPicture(mUid);
 
         mIv_accost.setUnlikeDrawableRes(
@@ -190,15 +194,24 @@ public class UserPicBrowserActivity extends BaseMvpActivity<IPicBrowserView, Pic
         performAccost(bean.getIs_accost());
 
         List<Fragment> list = new ArrayList<>();
-        if (!TextUtils.isEmpty(mFirstIcon)) {
+
+        if (mPictureList != null && mPictureList.size() > 0) {
+            for (int i = 0; i < mPictureList.size(); i++) {
+                String picUri = mPictureList.get(i);
+                //list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(picUri, picUri, null, pos, true, mIndexPos != pos)));
+                list.add(PicLoadFragment.newInstance(i, picUri));
+            }
+        }else {
+            if (!TextUtils.isEmpty(mFirstIcon)) {
 //            list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(mFirstIcon, mFirstIcon, null, 0, true, mIndexPos != 0)));
-            list.add(PicLoadFragment.newInstance(0, mFirstIcon));
-        }
-        for (int i = 0; i < bean.getPicture().size(); i++) {
-            String picUri = bean.getPicture().get(i);
-            int pos = TextUtils.isEmpty(mFirstIcon) ? i : i + 1;
-            //list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(picUri, picUri, null, pos, true, mIndexPos != pos)));
-            list.add(PicLoadFragment.newInstance(pos, picUri));
+                list.add(PicLoadFragment.newInstance(0, mFirstIcon));
+            }
+            for (int i = 0; i < bean.getPicture().size(); i++) {
+                String picUri = bean.getPicture().get(i);
+                int pos = TextUtils.isEmpty(mFirstIcon) ? i : i + 1;
+                //list.add(ImageMojitoFragment.Companion.newInstance(new FragmentConfig(picUri, picUri, null, pos, true, mIndexPos != pos)));
+                list.add(PicLoadFragment.newInstance(pos, picUri));
+            }
         }
         mViewPager.setAdapter(new FragmentVpAdapter(getSupportFragmentManager(), list));
         mViewPager.setOffscreenPageLimit(list.size());

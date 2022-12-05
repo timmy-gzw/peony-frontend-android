@@ -842,8 +842,9 @@ public class ChatMsg implements Serializable {
         public String desc;
         public String hometown;
         public List<String> tags;
+        public List<String> tag_list;
+        public String star_sign;
         public ArrayList<String> picture;
-
     }
 
     /**
