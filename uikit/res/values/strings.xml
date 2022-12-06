@@ -210,5 +210,6 @@
     <string name="load_more">加载更多</string>
     <string name="no_more_session">没有更多会话了</string>
 
-
+    <string name="im_auth_status">认证状态：</string>
+    <string name="im_basic_info">基本资料：</string>
 </resources>
