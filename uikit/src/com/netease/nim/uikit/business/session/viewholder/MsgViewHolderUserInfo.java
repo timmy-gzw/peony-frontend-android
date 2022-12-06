@@ -1,10 +1,7 @@
 package com.netease.nim.uikit.business.session.viewholder;
 
-import android.media.AudioManager;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,28 +22,22 @@ import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.netease.nim.uikit.R;
-import com.netease.nim.uikit.business.session.audio.MessageAudioControl;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.ChatMsgUtil;
-import com.netease.nim.uikit.common.ui.imageview.AvatarImageView;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
-import com.netease.nim.uikit.common.ui.recyclerview.holder.BaseViewHolder;
 import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
-import com.netease.nimlib.sdk.media.player.AudioPlayer;
-import com.netease.nimlib.sdk.media.player.OnPlayListener;
 
-import java.util.List;
 
 /**
  * 用户信息
  */
 public class MsgViewHolderUserInfo extends MsgViewHolderBase {
 
-    private LinearLayout mLlHometown;
-    private TextView mTvHometown;
+    private LinearLayout mLlHometown, mLlTag, mLlConstellation, mLlAll;
+    private TextView mTvHometown, mTvConstellation;
     private ImageView mIvReal, mIvSelf;
-    private RecyclerView mRvPhoto;
+    private RecyclerView mRvPhoto, mRvTag;
     private RecyclerView mRvUserinfo;
 
     public MsgViewHolderUserInfo(BaseMultiItemFetchLoadAdapter adapter) {
@@ -61,18 +52,28 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
     @Override
     public void inflateContentView() {
         mLlHometown = findViewById(R.id.ll_hometown);
+        mLlTag = findViewById(R.id.ll_tag);
+        mLlConstellation = findViewById(R.id.ll_constellation);
         mTvHometown = findViewById(R.id.tv_hometown);
+        mTvConstellation = findViewById(R.id.tv_constellation);
+        mLlAll = findViewById(R.id.ll_all);
         mIvReal = findViewById(R.id.iv_real);
         mIvSelf = findViewById(R.id.iv_self);
         mRvPhoto = findViewById(R.id.rv_photo);
         mRvUserinfo = findViewById(R.id.rv_userinfo);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 4);
+        mRvTag = findViewById(R.id.rv_tag);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
         mRvPhoto.setLayoutManager(gridLayoutManager);
 
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(context, FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
         layoutManager.setAlignItems(AlignItems.FLEX_START);
         mRvUserinfo.setLayoutManager(layoutManager);
+
+        FlexboxLayoutManager layoutManager1 = new FlexboxLayoutManager(context, FlexDirection.ROW);
+        layoutManager1.setJustifyContent(JustifyContent.FLEX_START);
+        layoutManager1.setAlignItems(AlignItems.FLEX_START);
+        mRvTag.setLayoutManager(layoutManager1);
 
     }
 
@@ -85,32 +86,50 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
         ChatMsg chatMsg = ChatMsgUtil.parseMessage(message);
         if (chatMsg == null)
             return;
-        ChatMsg.AccostCard card = JSON.parseObject(chatMsg.content, ChatMsg.AccostCard.class);
-        if (card != null) {
-            //有照片
-            if (card.picture != null && card.picture.size() > 0) {
-                mRvPhoto.setVisibility(View.VISIBLE);
-                PhotoAdapter adapter = new PhotoAdapter();
-                adapter.setList(card.picture);
-                mRvPhoto.setAdapter(adapter);
-                adapter.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                        if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)
-                            NimUIKitImpl.getSessionListener().onCardPhotoClicked(context, message, position, card.picture.get(position),card.picture);
-                    }
-                });
-            } else {
-                mRvPhoto.setVisibility(View.GONE);
+        try {
+            ChatMsg.AccostCard card = JSON.parseObject(chatMsg.content, ChatMsg.AccostCard.class);
+            if (card != null) {
+                //有照片
+                if (card.picture != null && card.picture.size() > 0) {
+                    mRvPhoto.setVisibility(View.VISIBLE);
+                    PhotoAdapter adapter = new PhotoAdapter();
+                    adapter.setList(card.picture);
+                    mRvPhoto.setAdapter(adapter);
+                    adapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                            if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)
+                                NimUIKitImpl.getSessionListener().onCardPhotoClicked(context, message, position, card.picture.get(position), card.picture);
+                        }
+                    });
+                } else {
+                    mRvPhoto.setVisibility(View.GONE);
+                }
+                UserInfoAdapter adapter = new UserInfoAdapter();
+                adapter.setList(card.tags);
+                mRvUserinfo.setAdapter(adapter);
+
+                if (card.tag_list != null && card.tag_list.size() > 0) {
+                    TagAdapter tagAdapter = new TagAdapter();
+                    tagAdapter.setList(card.tag_list);
+                    mRvTag.setAdapter(tagAdapter);
+                    mLlTag.setVisibility(View.VISIBLE);
+                } else {
+                    mLlTag.setVisibility(View.GONE);
+                }
+                mIvReal.setVisibility(card.is_real == 0 ? View.GONE : View.VISIBLE);
+                mIvSelf.setVisibility(card.is_self == 0 ? View.GONE : View.VISIBLE);
+                mLlConstellation.setVisibility(TextUtils.isEmpty(card.star_sign) ? View.GONE : View.VISIBLE);
+                mTvConstellation.setText(card.star_sign);
+                mLlHometown.setVisibility(TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
+                mTvHometown.setText(card.hometown);
+                mLlAll.setVisibility(TextUtils.isEmpty(card.star_sign) && TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
+
             }
-            UserInfoAdapter adapter = new UserInfoAdapter();
-            adapter.setList(card.tags);
-            mRvUserinfo.setAdapter(adapter);
-            mIvReal.setVisibility(card.is_real == 0 ? View.GONE : View.VISIBLE);
-            mIvSelf.setVisibility(card.is_self == 0 ? View.GONE : View.VISIBLE);
-            mLlHometown.setVisibility(TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
-            mTvHometown.setText(card.hometown);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
 
         findViewById(R.id.message_item_user).setOnClickListener(v -> {
             if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)
@@ -121,11 +140,9 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
 
     public class PhotoAdapter extends BaseQuickAdapter<String, com.chad.library.adapter.base.viewholder.BaseViewHolder> {
 
-
         public PhotoAdapter() {
             super(R.layout.nim_message_item_user_info_photo);
         }
-
 
         @Override
         protected void convert(@NonNull com.chad.library.adapter.base.viewholder.BaseViewHolder helper, String s) {
@@ -145,11 +162,24 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
 
     public static class UserInfoAdapter extends BaseQuickAdapter<String, com.chad.library.adapter.base.viewholder.BaseViewHolder> {
 
-
         public UserInfoAdapter() {
             super(R.layout.nim_message_item_user_info_user);
         }
 
+        @Override
+        protected void convert(@NonNull com.chad.library.adapter.base.viewholder.BaseViewHolder helper, String s) {
+            TextView tvInfo = helper.getView(R.id.tv_info);
+            tvInfo.setText(s);
+        }
+
+    }
+
+
+    public static class TagAdapter extends BaseQuickAdapter<String, com.chad.library.adapter.base.viewholder.BaseViewHolder> {
+
+        public TagAdapter() {
+            super(R.layout.nim_message_item_user_tag);
+        }
 
         @Override
         protected void convert(@NonNull com.chad.library.adapter.base.viewholder.BaseViewHolder helper, String s) {

@@ -39,14 +39,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <TextView
+      <!--  <TextView
             android:id="@+id/tv_vip_stories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vip_can_set"
             android:textColor="#D8B888"
             app:layout_constraintLeft_toRightOf="@id/tv_stories"
-            app:layout_constraintTop_toTopOf="@id/tv_stories" />
+            app:layout_constraintTop_toTopOf="@id/tv_stories" />-->
 
         <TextView
             android:id="@+id/tv_stories_tip"
