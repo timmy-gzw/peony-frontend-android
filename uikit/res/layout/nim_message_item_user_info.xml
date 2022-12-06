@@ -46,6 +46,20 @@
             android:src="@drawable/ic_is_self" />
 
 
+
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="更多"
+            android:textColor="#666666"
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:textSize="@dimen/sp_12"
+            app:drawableEndCompat="@drawable/ic_user_info_arrow_right" />
+
+
     </LinearLayout>
 
     <LinearLayout

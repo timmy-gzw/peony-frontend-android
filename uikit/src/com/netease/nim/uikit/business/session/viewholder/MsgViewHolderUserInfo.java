@@ -39,6 +39,7 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
     private ImageView mIvReal, mIvSelf;
     private RecyclerView mRvPhoto, mRvTag;
     private RecyclerView mRvUserinfo;
+    private TextView mTvMore;
 
     public MsgViewHolderUserInfo(BaseMultiItemFetchLoadAdapter adapter) {
         super(adapter);
@@ -62,6 +63,7 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
         mRvPhoto = findViewById(R.id.rv_photo);
         mRvUserinfo = findViewById(R.id.rv_userinfo);
         mRvTag = findViewById(R.id.rv_tag);
+        mTvMore = findViewById(R.id.tv_more);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
         mRvPhoto.setLayoutManager(gridLayoutManager);
 
@@ -119,6 +121,7 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
                 }
                 mIvReal.setVisibility(card.is_real == 0 ? View.GONE : View.VISIBLE);
                 mIvSelf.setVisibility(card.is_self == 0 ? View.GONE : View.VISIBLE);
+                mTvMore.setVisibility(card.is_show_more == 0 ? View.GONE : View.VISIBLE);
                 mLlConstellation.setVisibility(TextUtils.isEmpty(card.star_sign) ? View.GONE : View.VISIBLE);
                 mTvConstellation.setText(card.star_sign);
                 mLlHometown.setVisibility(TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);

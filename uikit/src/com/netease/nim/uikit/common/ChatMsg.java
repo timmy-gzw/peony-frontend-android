@@ -480,6 +480,7 @@ public class ChatMsg implements Serializable {
         public String type;
         public int red_packet_id;
         public String scene;   //task_register_new_user新用户红包
+        public String coin;
     }
 
 
@@ -839,12 +840,14 @@ public class ChatMsg implements Serializable {
         public String icon;
         public int is_self;
         public int is_real;
+        public int is_show_more;
         public String desc;
         public String hometown;
         public List<String> tags;
         public List<String> tag_list;
         public String star_sign;
         public ArrayList<String> picture;
+
     }
 
     /**
