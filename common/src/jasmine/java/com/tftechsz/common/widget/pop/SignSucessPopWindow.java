@@ -41,8 +41,8 @@ public class SignSucessPopWindow extends BaseCenterPop {
     public SignSucessPopWindow showPop(SignInSuccessBean data) {
         this.bean = data;
         if (data != null) {
-            String text = data.getTitle() + data.getCost();
-            tvTitle.setText(text);
+            String cost = data.getCost();
+            tvTitle.setText(cost.replace("金币", ""));
             if (data.getLinkBean() != null) {
                 tvMore.setVisibility(TextUtils.isEmpty(data.getLinkBean().getLink()) ? View.GONE : View.VISIBLE);
             }

@@ -32,18 +32,18 @@ public class SignInAdapter extends BaseQuickAdapter<SignInBean.SignInListBean, B
         TextView tv_gold = helper.getView(R.id.tv_gold);
         View view = helper.getView(R.id.cl_container);
 
-        tv_gold.setText("+" + item.cost);
-        tv_gold.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/D-DIN.ttf"));
-        if (item.day_number <= start_day) {
-            tv_status.setText(item.is_complete == 1 ? getContext().getString(R.string.sign_in_already) : item.day);
+        tv_status.setText(item.day);
+        if (item.is_complete == 1) {
             iv_gold.setImageResource(R.mipmap.peony_qd_yqd02_icon);
             view.setBackgroundResource(R.drawable.shape_sign_in_item_bg);
-            tv_status.setTextColor(Utils.getColor(R.color.c_ff9e00));
+            tv_status.setTextColor(Utils.getColor(R.color.c_ff7a14));
+            tv_gold.setText("");
         } else {
-            tv_status.setText(item.day);
-            view.setBackgroundResource(R.drawable.sp_f7f7f7_c_5);
             iv_gold.setImageResource(R.mipmap.peony_qd_wqd_icon);
-            tv_status.setTextColor(Utils.getColor(R.color.color_light_font));
+            view.setBackgroundResource(R.drawable.sp_f7f7f7_c_5);
+            tv_status.setTextColor(Utils.getColor(R.color.color_999999));
+            tv_gold.setText("+" + item.cost);
+            tv_gold.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/D-DIN.ttf"));
         }
     }
 }
