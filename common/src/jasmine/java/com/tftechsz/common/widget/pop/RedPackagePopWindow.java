@@ -1,16 +1,11 @@
 package com.tftechsz.common.widget.pop;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,7 +29,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickListener {
 
     private final ChatMsg.RedPacket redPacket;
-    private RelativeLayout mIvOpen,rlBg;
+    private RelativeLayout mIvOpen, rlBg;
     private final PublicService service;
     private ConstraintLayout mClPrice;  //金额布局
     private TextView mTvPrice, mTvPriceUnit; //金额
@@ -58,6 +53,8 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
     }
 
     private void initUI() {
+        RelativeLayout rlRed = findViewById(R.id.rl_red);
+        RelativeLayout rlCard = findViewById(R.id.rl_card);
         mIvOpen = findViewById(R.id.rl_red);  //开红包
         mIvOpen.setOnClickListener(this);
         mClPrice = findViewById(R.id.cl_price);
@@ -68,7 +65,19 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
         TextView tvFrom = findViewById(R.id.tv_form);
         tvFrom.setText(String.format("%s官方红包", mContext.getString(R.string.app_name)));
         findViewById(R.id.iv_close).setOnClickListener(this);
+        findViewById(R.id.tv_know).setOnClickListener(this);
         mTvTitle.setText(redPacket.des);
+        if (TextUtils.equals("chat_cart", redPacket.type)) {
+            TextView tvTitle1 = findViewById(R.id.tv_title1);
+            tvTitle1.setText(redPacket.des);
+            TextView tvContent = findViewById(R.id.tv_desc);
+            tvContent.setText(redPacket.desc);
+            rlRed.setVisibility(View.GONE);
+            rlCard.setVisibility(View.VISIBLE);
+        } else {
+            rlRed.setVisibility(View.VISIBLE);
+            rlCard.setVisibility(View.GONE);
+        }
         setCameraDistance();
     }
 
@@ -85,7 +94,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
         int id = v.getId();
         if (id == R.id.rl_red) {
             mIvOpen.setClickable(false);
-            ObjectAnimator animator = ObjectAnimator.ofFloat(mIvOpen,"rotationY",0.0f,90f);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(mIvOpen, "rotationY", 0.0f, 90f);
             animator.setDuration(300);
             animator.setInterpolator(new LinearInterpolator());
             animator.addListener(new Animator.AnimatorListener() {
@@ -100,7 +109,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
                     mClPrice.setVisibility(View.VISIBLE);
                     rlBg.setBackgroundResource(R.mipmap.bg_red_package_jasmine_open);
                     mIvOpen.setRotationY(-270f);
-                    ObjectAnimator animator2 = ObjectAnimator.ofFloat(mIvOpen,"rotationY",270.0f,360f);
+                    ObjectAnimator animator2 = ObjectAnimator.ofFloat(mIvOpen, "rotationY", 270.0f, 360f);
                     animator2.setDuration(300);
                     animator2.setInterpolator(new LinearInterpolator());
                     animator2.start();
@@ -118,7 +127,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
             });
             animator.start();
             openRedPacket();
-        } else if (id == R.id.iv_close) {
+        } else if (id == R.id.iv_close || id == R.id.tv_know) {
             if (listener != null && redPacket != null && TextUtils.equals(redPacket.scene, "task_register_new_user"))
                 listener.onCancel();
             dismiss();
@@ -128,7 +137,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mCompositeDisposable != null && !mCompositeDisposable.isDisposed()){
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
             mCompositeDisposable.dispose();
             mCompositeDisposable.clear();
         }

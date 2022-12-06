@@ -17,8 +17,8 @@
         android:id="@+id/cl_rich"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_76"
-        android:background="@color/white"
         android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
@@ -84,8 +84,8 @@
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/dp_16"
-            android:visibility="gone"
             android:background="@color/driver"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -97,8 +97,8 @@
         android:id="@+id/cl_stories"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_76"
-        android:background="@color/white"
         android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
@@ -119,15 +119,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <TextView
-            android:id="@+id/tv_vip_stories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_6"
-            android:drawableStart="@mipmap/vip_icon_bg2"
-            android:textColor="#D8B888"
-            app:layout_constraintLeft_toRightOf="@id/tv_stories"
-            app:layout_constraintTop_toTopOf="@id/tv_stories" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_vip_stories"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/dp_6"-->
+        <!--            android:drawableStart="@mipmap/vip_icon_bg2"-->
+        <!--            android:textColor="#D8B888"-->
+        <!--            app:layout_constraintLeft_toRightOf="@id/tv_stories"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/tv_stories" />-->
 
         <TextView
             android:id="@+id/tv_stories_tip"
@@ -163,8 +163,8 @@
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/dp_16"
-            android:visibility="gone"
             android:background="@color/driver"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -173,12 +173,12 @@
         android:id="@+id/cl_gift"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_76"
+        android:layout_marginTop="@dimen/dp_20"
         android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
         android:paddingStart="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_rich">
 
@@ -248,14 +248,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_rank"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_76"
+        android:layout_marginTop="@dimen/dp_20"
         android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
-        android:layout_marginTop="@dimen/dp_20"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
         android:paddingStart="@dimen/dp_16"
@@ -320,8 +319,8 @@
             android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/dp_16"
-            android:visibility="gone"
             android:background="@color/driver"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -330,8 +329,8 @@
         android:id="@+id/cl_location"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_76"
-        android:background="@color/white"
         android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/white"
         android:descendantFocusability="blocksDescendants"
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
