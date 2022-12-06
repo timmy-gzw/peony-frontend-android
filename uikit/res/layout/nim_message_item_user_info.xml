@@ -26,7 +26,7 @@
             android:layout_gravity="center_vertical"
             android:drawablePadding="@dimen/dp_4"
             android:text="认证状态："
-            android:textColor="#333333"
+            android:textColor="@color/color_card_info_title"
             android:textSize="@dimen/sp_12"
             app:drawableStartCompat="@drawable/ic_auth_status" />
 
@@ -73,7 +73,7 @@
             android:layout_gravity="center_vertical"
             android:drawablePadding="@dimen/dp_4"
             android:text="基本资料："
-            android:textColor="#333333"
+            android:textColor="@color/color_card_info_title"
             android:textSize="@dimen/sp_12"
             app:drawableStartCompat="@drawable/ic_user_info" />
 
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/dp_4"
                 android:text="星座："
-                android:textColor="#333333"
+                android:textColor="@color/color_card_info_title"
                 android:textSize="@dimen/sp_12"
                 app:drawableStartCompat="@drawable/ic_user_constellation" />
 
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/dp_4"
                 android:text="家乡："
-                android:textColor="#333333"
+                android:textColor="@color/color_card_info_title"
                 android:textSize="@dimen/sp_12"
                 app:drawableStartCompat="@drawable/ic_hometown" />
 
@@ -177,7 +177,7 @@
             android:layout_gravity="center_vertical"
             android:drawablePadding="@dimen/dp_4"
             android:text="标签："
-            android:textColor="#333333"
+            android:textColor="@color/color_card_info_title"
             android:textSize="@dimen/sp_12"
             app:drawableStartCompat="@drawable/ic_user_tag" />
 
@@ -203,7 +203,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/dp_4"
             android:text="美照："
-            android:textColor="#333333"
+            android:textColor="@color/color_card_info_title"
             android:textSize="@dimen/sp_12"
             app:drawableStartCompat="@drawable/ic_beautiful_photo" />
 

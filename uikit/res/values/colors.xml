@@ -101,4 +101,8 @@
 
     <color name="color_link_color">#41B2F4</color>
 
+    <color name="color_card_info_title">#333333</color>
+
+
+
 </resources>
