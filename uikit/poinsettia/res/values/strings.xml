@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="im_auth_status">认证：</string>
+    <string name="im_basic_info">资料：</string>
+
+</resources>
