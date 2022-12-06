@@ -6,6 +6,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -54,7 +55,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
 
     private void initUI() {
         RelativeLayout rlRed = findViewById(R.id.rl_red);
-        RelativeLayout rlCard = findViewById(R.id.rl_card);
+        LinearLayout llCard = findViewById(R.id.ll_card);
         mIvOpen = findViewById(R.id.rl_red);  //开红包
         mIvOpen.setOnClickListener(this);
         mClPrice = findViewById(R.id.cl_price);
@@ -73,10 +74,12 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
             TextView tvContent = findViewById(R.id.tv_desc);
             tvContent.setText(redPacket.desc);
             rlRed.setVisibility(View.GONE);
-            rlCard.setVisibility(View.VISIBLE);
+            llCard.setVisibility(View.VISIBLE);
+            TextView tvCardNum = findViewById(R.id.tv_chat_card_num);
+            if (tvCardNum != null) tvCardNum.setText(redPacket.coin);
         } else {
             rlRed.setVisibility(View.VISIBLE);
-            rlCard.setVisibility(View.GONE);
+            llCard.setVisibility(View.GONE);
         }
         setCameraDistance();
     }

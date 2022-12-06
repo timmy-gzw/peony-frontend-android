@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_CFB78A">#FEBA0A</color>
+
+    <color name="color_card_info_title">#2A2426</color>
 </resources>
