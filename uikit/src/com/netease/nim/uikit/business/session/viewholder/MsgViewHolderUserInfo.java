@@ -151,7 +151,7 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
         protected void convert(@NonNull com.chad.library.adapter.base.viewholder.BaseViewHolder helper, String s) {
             ImageView typeImage = helper.getView(R.id.message_item_img);
             RequestOptions options = new RequestOptions()
-                    .transforms(new CenterCrop(), new RoundedCorners(ScreenUtil.dip2px(R.integer.card_picture_radius)))
+                    .transforms(new CenterCrop(), new RoundedCorners(ScreenUtil.dip2px(getContext().getResources().getInteger(R.integer.card_picture_radius))))
                     .dontAnimate();          //缓存全尺寸
             Glide.with(context)              //配置上下文
                     .asDrawable()
