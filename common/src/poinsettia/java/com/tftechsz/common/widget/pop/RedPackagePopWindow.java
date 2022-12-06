@@ -58,6 +58,8 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
     }
 
     private void initUI() {
+        RelativeLayout rlRed = findViewById(R.id.rl_red);
+        RelativeLayout rlCard = findViewById(R.id.rl_card);
         mIvOpen = findViewById(R.id.rl_red);  //开红包
         mIvOpen.setOnClickListener(this);
         mClPrice = findViewById(R.id.cl_price);
@@ -68,8 +70,21 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
         TextView tvFrom = findViewById(R.id.tv_form);
         tvFrom.setText(String.format("%s官方红包", mContext.getString(R.string.app_name)));
         findViewById(R.id.iv_close).setOnClickListener(this);
+        findViewById(R.id.tv_know).setOnClickListener(this);
         mTvTitle.setText(redPacket.des);
         setCameraDistance();
+
+        if(TextUtils.equals("chat_cart",redPacket.type)){
+            TextView tvTitle1 = findViewById(R.id.tv_title1);
+            tvTitle1.setText(redPacket.des);
+            TextView tvContent = findViewById(R.id.tv_desc);
+            tvContent.setText(redPacket.desc);
+            rlRed.setVisibility(View.GONE);
+            rlCard.setVisibility(View.VISIBLE);
+        }else {
+            rlRed.setVisibility(View.VISIBLE);
+            rlCard.setVisibility(View.GONE);
+        }
     }
 
     // 改变视角距离, 贴近屏幕,这个必须设置，因为如果不这么做，沿着Y轴旋转的过程中有可能产生超出屏幕的3D效果。
@@ -118,7 +133,7 @@ public class RedPackagePopWindow extends BaseCenterPop implements View.OnClickLi
             });
             animator.start();
             openRedPacket();
-        } else if (id == R.id.iv_close) {
+        } else if (id == R.id.iv_close || id == R.id.tv_know) {
             if (listener != null && redPacket != null && TextUtils.equals(redPacket.scene, "task_register_new_user"))
                 listener.onCancel();
             dismiss();
