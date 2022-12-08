@@ -8,4 +8,6 @@
     <color name="color_split_line_cccccc">#8282AA</color>
 
     <color name="color_link_color">#5397FF</color>
+
+    <color name="color_user_card_color">#7858FC</color>
 </resources>
