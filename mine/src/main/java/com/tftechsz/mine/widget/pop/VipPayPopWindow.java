@@ -76,6 +76,7 @@ public class VipPayPopWindow extends BaseBottomPop {
     private final Activity mActivity;
     private ChargePayAdapter adapter;
     private String mPrice;
+    private int checkPosition = -1;
 
     public VipPayPopWindow(Activity context) {
         super(context);
@@ -284,9 +285,13 @@ public class VipPayPopWindow extends BaseBottomPop {
                         if (response != null && response.getData() != null) {
                             adapter = new ChargePayAdapter(response.getData());
                             mBind.payRecy.setAdapter(adapter);
+                            if (adapter.getData().size() > checkPosition  && checkPosition != -1) {
+                                adapter.notifyDataPosition(checkPosition);
+                            }
                             adapter.setOnItemClickListener((adapter1, view, position) -> {
                                 if (typeId != 0) {
                                     adapter.notifyDataPosition(position);
+                                    checkPosition = position;
                                 } else {
                                     Utils.toast("您还未选择套餐");
                                 }

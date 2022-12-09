@@ -77,6 +77,7 @@ public class BasePayPopWindow extends BaseBottomPop {
     private ChargePayAdapter adapter;
     private String rmb;
     private String coin;
+    private int checkPosition = -1;
 
     public BasePayPopWindow(Activity context) {
         super(context);
@@ -224,9 +225,13 @@ public class BasePayPopWindow extends BaseBottomPop {
                             adapter = new ChargePayAdapter(response.getData());
                             mBind.rvPayWay.setAdapter(adapter);
                             adapter.setList(response.getData());
+                            if (adapter.getData().size() > checkPosition  && checkPosition != -1) {
+                                adapter.notifyDataPosition(checkPosition);
+                            }
                             adapter.setOnItemClickListener((adapter1, view, position) -> {
                                 if (typeId != 0) {
                                     adapter.notifyDataPosition(position);
+                                    checkPosition = position;
                                 } else {
                                     Utils.toast("订单类型为空!");
                                 }

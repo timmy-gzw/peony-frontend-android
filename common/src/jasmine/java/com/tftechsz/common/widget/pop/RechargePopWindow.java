@@ -96,7 +96,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
     private TextView mTvPay;
     private int formType; //0默认   1家族  2派对
     RecyclerView mRvPayWay;
-
+    private int checkPosition = -1;
     /**
      * 2.from_type(1.发送消息2.送礼物3.音视频通话4.转盘抽奖)
      * <p>
@@ -310,9 +310,14 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
                                     mPayTypeData = wayAdapter.getItem(i);
                                 }
                             }
+                            if (wayAdapter.getData().size() > checkPosition && checkPosition != -1) {
+                                wayAdapter.setCheckPositions(checkPosition);
+                                mPayTypeData = wayAdapter.getItem(checkPosition);
+                            }
                             wayAdapter.setOnItemClickListener((adapter12, view, position) -> {
                                 wayAdapter.setCheckPositions(position);
                                 mPayTypeData = wayAdapter.getItem(position);
+                                checkPosition = position;
                             });
 
                         }
