@@ -168,7 +168,7 @@ public class BaseApplication extends Application implements Application.Activity
         } else {
             NIMClient.config(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
         }
-        boolean isMainProcess = isAgree ? NIMUtil.isMainProcess(this) : NIMUtil.isMainProcessPure(this) > 0;
+        boolean isMainProcess = isAgree ? NIMUtil.isMainProcess(this) : NIMUtil.isMainProcessPure(this);
         if (!isMainProcess) return;
 
         new Thread(() -> {

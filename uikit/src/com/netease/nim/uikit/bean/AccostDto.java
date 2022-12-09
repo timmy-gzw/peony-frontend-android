@@ -13,6 +13,7 @@ public class AccostDto {
     public String to_accost_card;
     public int sub_from_type;  //区分消息来自哪
     public int accost_from;  //区分消息来自哪 新加
+    public String accost_resume;
 
     public static class AccostVoice {
         public String url;

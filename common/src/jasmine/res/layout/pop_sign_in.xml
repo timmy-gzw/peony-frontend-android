@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/dp_38"
+    android:layout_marginHorizontal="@dimen/dp_28"
     tools:background="#33000000">
 
     <View
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@mipmap/bg_pop_sign_in_header"
-        app:layout_constraintDimensionRatio="375:150"
+        app:layout_constraintDimensionRatio="320:135"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
@@ -20,35 +20,38 @@
         android:id="@+id/tv_daily_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
         android:layout_marginBottom="@dimen/dp_7"
         android:src="@mipmap/sign_every_day"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_20"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tv_sign_in_c"
-        app:layout_constraintStart_toStartOf="@id/tv_sign_in_c" />
+        app:layout_constraintStart_toStartOf="@id/tv_sign_in_c"
+        app:layout_constraintTop_toTopOf="@id/iv_top"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tv_sign_in_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_20"
-        android:textStyle="bold"
-        android:layout_marginBottom="@dimen/dp_36"
         android:background="@drawable/sp_white_c_5"
         android:paddingHorizontal="@dimen/dp_8"
         android:paddingVertical="@dimen/dp_2"
         android:textColor="#C52828"
         android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/iv_top"
         app:layout_constraintStart_toStartOf="@id/iv_top"
+        app:layout_constraintTop_toBottomOf="@id/tv_daily_sign_in"
         tools:text="已经连续签到 2 天" />
 
     <LinearLayout
         android:id="@+id/ll_sinn_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_bottom_radius10"
+        android:background="@drawable/bg_sign_in_fffdf7"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/iv_top">
 
@@ -56,7 +59,6 @@
             android:id="@+id/sign_recy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_bottom_radius10"
             android:overScrollMode="never"
             android:paddingHorizontal="@dimen/dp_20"
             android:paddingVertical="@dimen/dp_20" />
@@ -81,12 +83,12 @@
         android:id="@+id/iv_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_33"
-        android:src="@mipmap/ic_close_white"
+        android:layout_marginTop="@dimen/dp_28"
         android:layout_marginEnd="@dimen/dp_9"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/ic_close_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_sinn_in"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

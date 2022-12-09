@@ -1,14 +1,12 @@
 package com.netease.nim.uikit.business.session.viewholder;
 
-import android.media.AudioManager;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,35 +15,31 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.netease.nim.uikit.R;
-import com.netease.nim.uikit.business.session.audio.MessageAudioControl;
 import com.netease.nim.uikit.common.ChatMsg;
 import com.netease.nim.uikit.common.ChatMsgUtil;
-import com.netease.nim.uikit.common.ui.imageview.AvatarImageView;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
-import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseQuickAdapter;
-import com.netease.nim.uikit.common.ui.recyclerview.holder.BaseViewHolder;
 import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
-import com.netease.nimlib.sdk.media.player.AudioPlayer;
-import com.netease.nimlib.sdk.media.player.OnPlayListener;
 
-import java.util.List;
 
 /**
  * 用户信息
  */
 public class MsgViewHolderUserInfo extends MsgViewHolderBase {
 
-    private TextView mTvUserInfo, mTvSign, mTvAudioTime, mTvHome, mTvAudioTip;
-    private AvatarImageView ivHead;
-    private LinearLayout mLlAudio;
-    private View mViewBottom;
-    private TextView mTvTip;
-    private FrameLayout mFlTip;
-    private ImageView mIvAudio, mIvSex;
-    private RecyclerView mRvPhoto;
-    private AudioPlayer mIjkPlayer;
+    private LinearLayout mLlHometown, mLlTag, mLlConstellation, mLlAll;
+    private TextView mTvHometown, mTvConstellation;
+    private ImageView mIvReal, mIvSelf;
+    private RecyclerView mRvPhoto, mRvTag;
+    private RecyclerView mRvUserinfo;
+    private TextView mTvMore;
 
     public MsgViewHolderUserInfo(BaseMultiItemFetchLoadAdapter adapter) {
         super(adapter);
@@ -58,53 +52,31 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
 
     @Override
     public void inflateContentView() {
-        mLlAudio = findViewById(R.id.ll_audio);
-        mTvUserInfo = findViewById(R.id.tv_user_info);
-        mTvAudioTime = findViewById(R.id.audio_time);
-        mTvAudioTip = findViewById(R.id.tv_audio_tip);
-        mTvSign = findViewById(R.id.tv_sign);
-        mIvAudio = findViewById(R.id.iv_audio);
-        ivHead = findViewById(R.id.iv_head);
-        mIvSex = findViewById(R.id.iv_sex);
+        mLlHometown = findViewById(R.id.ll_hometown);
+        mLlTag = findViewById(R.id.ll_tag);
+        mLlConstellation = findViewById(R.id.ll_constellation);
+        mTvHometown = findViewById(R.id.tv_hometown);
+        mTvConstellation = findViewById(R.id.tv_constellation);
+        mLlAll = findViewById(R.id.ll_all);
+        mIvReal = findViewById(R.id.iv_real);
+        mIvSelf = findViewById(R.id.iv_self);
         mRvPhoto = findViewById(R.id.rv_photo);
-        mViewBottom = findViewById(R.id.view_bottom);
-        mTvTip = findViewById(R.id.tv_content);
-        mFlTip = findViewById(R.id.fl_title);
-        mTvHome = findViewById(R.id.tv_home);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 4);
+        mRvUserinfo = findViewById(R.id.rv_userinfo);
+        mRvTag = findViewById(R.id.rv_tag);
+        mTvMore = findViewById(R.id.tv_more);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
         mRvPhoto.setLayoutManager(gridLayoutManager);
-        mIjkPlayer = MessageAudioControl.getInstance(context).getAudioPlayer();
-        mIjkPlayer.setOnPlayListener(new OnPlayListener() {
-            @Override
-            public void onPrepared() {
-                RequestOptions requestOptions = new RequestOptions().centerCrop();
-                Glide.with(context)
-                        .asGif()
-                        .load(R.drawable.mine_ic_voice_playing)
-                        .apply(requestOptions)
-                        .into(mIvAudio);
 
-            }
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(context, FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        layoutManager.setAlignItems(AlignItems.FLEX_START);
+        mRvUserinfo.setLayoutManager(layoutManager);
 
-            @Override
-            public void onCompletion() {
-                mIvAudio.setImageResource(R.drawable.peony_me_zt_icon);
-            }
+        FlexboxLayoutManager layoutManager1 = new FlexboxLayoutManager(context, FlexDirection.ROW);
+        layoutManager1.setJustifyContent(JustifyContent.FLEX_START);
+        layoutManager1.setAlignItems(AlignItems.FLEX_START);
+        mRvTag.setLayoutManager(layoutManager1);
 
-            @Override
-            public void onInterrupt() {
-                mIvAudio.setImageResource(R.drawable.peony_me_zt_icon);
-            }
-
-            @Override
-            public void onError(String error) {
-                mIvAudio.setImageResource(R.drawable.peony_me_zt_icon);
-            }
-
-            @Override
-            public void onPlaying(long curPosition) {
-            }
-        });
     }
 
     @Override
@@ -116,59 +88,52 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
         ChatMsg chatMsg = ChatMsgUtil.parseMessage(message);
         if (chatMsg == null)
             return;
-        ChatMsg.AccostCard card = JSON.parseObject(chatMsg.content, ChatMsg.AccostCard.class);
-        if (card != null) {
-            ivHead.loadAvatar(card.icon, 11);
-            //录音时长
-            mLlAudio.setVisibility(!TextUtils.isEmpty(card.voice) ? View.VISIBLE : View.GONE);
-            mTvAudioTip.setVisibility(!TextUtils.isEmpty(card.voice) ? View.VISIBLE : View.GONE);
-            mTvAudioTime.setText(card.voice_time);
-            mIvSex.setImageResource(card.sex == 1 ? R.drawable.nim_ic_boy : R.drawable.nim_ic_girl);
-            mTvUserInfo.setText(card.tags);
-            if(!TextUtils.isEmpty(card.tips)){
-                mFlTip.setVisibility(View.VISIBLE);
-                SpannableStringBuilder span = ChatMsgUtil.getTipContent(card.tips,"", (ChatMsgUtil.OnSelectListener) content -> {
-                    String webview = "webview://";
-                    String peony = "peony://";
-                    if (content.contains(webview)) {  //打开webview
-                        NimUIKitImpl.getSessionTipListener().onTipMessageClicked(context, 2, content.substring(webview.length() + 1, content.length() - 1));
-                    } else if (content.contains(peony)) {   //打开原生页面
-                        NimUIKitImpl.getSessionTipListener().onTipMessageClicked(context, 1, content.substring(peony.length() + 1, content.length() - 1));
-                    }
-                });
-                mTvTip.setText(span);
-            }else {
-                mFlTip.setVisibility(View.GONE);
-            }
-            //签名
-            mTvSign.setText(TextUtils.isEmpty(card.desc) ? "这个人很懒，暂时没有个性签名～" : card.desc);
-            //有照片
-            if (card.quick_picture != null && card.quick_picture.size() > 0) {
-                mTvHome.setVisibility(View.VISIBLE);
-                mViewBottom.setVisibility(View.VISIBLE);
-                mRvPhoto.setVisibility(View.VISIBLE);
-                PhotoAdapter adapter = new PhotoAdapter(mRvPhoto, card.quick_picture);
-                mRvPhoto.setAdapter(adapter);
-            } else {
-                mTvHome.setVisibility(View.GONE);
-                mViewBottom.setVisibility(View.GONE);
-                mRvPhoto.setVisibility(View.GONE);
-            }
-            mIvAudio.setOnClickListener(v -> {
-                if (mIjkPlayer == null) {
-                    mIjkPlayer = new AudioPlayer(context);
+        try {
+            ChatMsg.AccostCard card = JSON.parseObject(chatMsg.content, ChatMsg.AccostCard.class);
+            if (card != null) {
+                //有照片
+                if (card.picture != null && card.picture.size() > 0) {
+                    mRvPhoto.setVisibility(View.VISIBLE);
+                    PhotoAdapter adapter = new PhotoAdapter();
+                    adapter.setList(card.picture);
+                    mRvPhoto.setAdapter(adapter);
+                    adapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                            if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)
+                                NimUIKitImpl.getSessionListener().onCardPhotoClicked(context, message, position, card.picture.get(position), card.picture);
+                        }
+                    });
+                } else {
+                    mRvPhoto.setVisibility(View.GONE);
                 }
-                mIjkPlayer.setDataSource(card.voice);
-                if (mIjkPlayer != null) {
-                    if (mIjkPlayer.isPlaying()) {
-                        mIjkPlayer.stop();
-                        mIvAudio.setImageResource(R.drawable.peony_me_zt_icon);
-                    } else {
-                        mIjkPlayer.start(AudioManager.STREAM_MUSIC);
-                    }
+                UserInfoAdapter adapter = new UserInfoAdapter();
+                adapter.setList(card.tags);
+                mRvUserinfo.setAdapter(adapter);
+
+                if (card.tag_list != null && card.tag_list.size() > 0) {
+                    TagAdapter tagAdapter = new TagAdapter();
+                    tagAdapter.setList(card.tag_list);
+                    mRvTag.setAdapter(tagAdapter);
+                    mLlTag.setVisibility(View.VISIBLE);
+                } else {
+                    mLlTag.setVisibility(View.GONE);
                 }
-            });
+                mIvReal.setVisibility(card.is_real == 0 ? View.GONE : View.VISIBLE);
+                mIvSelf.setVisibility(card.is_self == 0 ? View.GONE : View.VISIBLE);
+                mTvMore.setVisibility(card.is_show_more == 0 ? View.GONE : View.VISIBLE);
+                mLlConstellation.setVisibility(TextUtils.isEmpty(card.star_sign) ? View.GONE : View.VISIBLE);
+                mTvConstellation.setText(card.star_sign);
+                mLlHometown.setVisibility(TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
+                mTvHometown.setText(card.hometown);
+                mLlAll.setVisibility(TextUtils.isEmpty(card.star_sign) && TextUtils.isEmpty(card.hometown) ? View.GONE : View.VISIBLE);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
         findViewById(R.id.message_item_user).setOnClickListener(v -> {
             if (NimUIKitImpl.getSessionListener() != null && context != null && message != null)
                 NimUIKitImpl.getSessionListener().onCardClicked(context, message);
@@ -176,25 +141,55 @@ public class MsgViewHolderUserInfo extends MsgViewHolderBase {
     }
 
 
-    public class PhotoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    public class PhotoAdapter extends BaseQuickAdapter<String, com.chad.library.adapter.base.viewholder.BaseViewHolder> {
 
-        public PhotoAdapter(RecyclerView recyclerView, List<String> data) {
-            super(recyclerView, R.layout.nim_message_item_user_info_photo, data);
+        public PhotoAdapter() {
+            super(R.layout.nim_message_item_user_info_photo);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, String item, int position, boolean isScrolling) {
+        protected void convert(@NonNull com.chad.library.adapter.base.viewholder.BaseViewHolder helper, String s) {
             ImageView typeImage = helper.getView(R.id.message_item_img);
             RequestOptions options = new RequestOptions()
-                    .transforms(new CenterCrop(), new RoundedCorners(ScreenUtil.dip2px(6)))
+                    .transforms(new CenterCrop(), new RoundedCorners(ScreenUtil.dip2px(getContext().getResources().getInteger(R.integer.card_picture_radius))))
                     .dontAnimate();          //缓存全尺寸
             Glide.with(context)              //配置上下文
                     .asDrawable()
+                    .placeholder(R.drawable.ic_default_avatar)
                     .apply(options)
-                    .load(item)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
+                    .load(s)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                     .into(typeImage);
-
         }
+    }
+
+
+    public static class UserInfoAdapter extends BaseQuickAdapter<String, com.chad.library.adapter.base.viewholder.BaseViewHolder> {
+
+        public UserInfoAdapter() {
+            super(R.layout.nim_message_item_user_info_user);
+        }
+
+        @Override
+        protected void convert(@NonNull com.chad.library.adapter.base.viewholder.BaseViewHolder helper, String s) {
+            TextView tvInfo = helper.getView(R.id.tv_info);
+            tvInfo.setText(s);
+        }
+
+    }
+
+
+    public static class TagAdapter extends BaseQuickAdapter<String, com.chad.library.adapter.base.viewholder.BaseViewHolder> {
+
+        public TagAdapter() {
+            super(R.layout.nim_message_item_user_tag);
+        }
+
+        @Override
+        protected void convert(@NonNull com.chad.library.adapter.base.viewholder.BaseViewHolder helper, String s) {
+            TextView tvInfo = helper.getView(R.id.tv_info);
+            tvInfo.setText(s);
+        }
+
     }
 
 

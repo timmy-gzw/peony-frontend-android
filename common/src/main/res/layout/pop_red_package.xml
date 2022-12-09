@@ -11,6 +11,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_red"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:background="@mipmap/bg_red_package">
@@ -143,6 +144,64 @@
             tools:visibility="gone" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_card"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/bg_white_radius20">
+
+        <TextView
+            android:id="@+id/tv_title1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_40"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_16"
+            android:text="搭讪红包奖励"
+            android:textColor="#1F1A35"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp_16"
+            android:text="搭讪红包奖励"
+            android:textColor="#8282AA"
+            android:textSize="@dimen/sp_14" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_33"
+            android:layout_above="@+id/tv_know"
+            android:background="@mipmap/ic_chat_card"
+            />
+
+        <TextView
+            android:id="@+id/tv_know"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:background="@mipmap/btn_red_package"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp_18"
+            android:text="我知道了" />
+
+    </RelativeLayout>
+
 
     <ImageView
         android:id="@+id/iv_close"

@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.netease.nim.uikit.common.ConfigInfo;
 import com.netease.nim.uikit.common.util.log.LogUtil;
-import com.snail.antifake.deviceid.AndroidDeviceIMEIUtil;
 import com.snail.antifake.jni.EmulatorDetectUtil;
 import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.BuildConfig;
@@ -181,6 +180,7 @@ public class RetrofitManager {
         builder.addInterceptor(chain -> {
             //手机版本，厂商，uuid imsi appName,appVersion
             String apiUa = "";
+            boolean isEmulator = false;
             //芍药号
             String userCode = service.getUserInfo() != null ? service.getUserInfo().getUser_code() : "";
 
@@ -196,11 +196,11 @@ public class RetrofitManager {
                     apiUa = "";
                 } else {
                     apiUa = AppUtils.getApiUa();
+                    isEmulator = EmulatorDetectUtil.isEmulatorFromAll(BaseApplication.getInstance());
                 }
             } else {
                 apiUa = AppUtils.getApiUa();
             }
-            boolean isEmulator =  EmulatorDetectUtil.isEmulatorFromAll(BaseApplication.getInstance());
             String deviceIdType = Utils.getDeviceIdType();
             Request request = chain.request().newBuilder()
                     .addHeader("x-auth-token", service.getToken())

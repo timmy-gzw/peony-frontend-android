@@ -96,7 +96,7 @@ public class MsgViewHolderFactory {
                         return MsgViewHolderReplyAccost.class;
                     }
                     return MsgViewHolderAccost.class;
-                } else if (chatMsg != null && TextUtils.equals(ChatMsg.ACCOST_CARD, chatMsg.cmd_type)) {   //搭讪卡片消息
+                } else if (chatMsg != null && TextUtils.equals(ChatMsg.ACCOST_RESUME, chatMsg.cmd_type)) {   //搭讪卡片消息
                     return MsgViewHolderUserInfo.class;
                 } else if (chatMsg != null && TextUtils.equals(ChatMsg.CALL_TYPE, chatMsg.cmd_type)) {   //语音视频通话
                     return MsgViewHolderAVChat.class;

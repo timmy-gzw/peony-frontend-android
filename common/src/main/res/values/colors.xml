@@ -104,4 +104,6 @@
     <color name="c_empty_text">@color/color_cc</color>
     <color name="c_toast_bg">@color/black</color>
     <color name="c_like">@color/colorPrimary</color>
+
+    <color name="c_ff7a14">#FF7A14</color>
 </resources>

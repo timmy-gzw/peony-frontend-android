@@ -11,8 +11,8 @@
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/color_light_font"
         android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/color_light_font"
         android:textSize="@dimen/sp_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,10 +30,9 @@
             android:id="@+id/iv_gold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_centerInParent="true"
             android:maxWidth="@dimen/dp_36"
             android:maxHeight="@dimen/dp_36"
-            android:layout_centerInParent="true"
             tools:ignore="ContentDescription"
             tools:src="@mipmap/peony_qd_wqd_icon" />
 
@@ -41,10 +40,11 @@
             android:id="@+id/tv_gold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/dp_3"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            android:layout_centerInParent="true"
+            android:textStyle="bold"
             tools:text="+2" />
     </RelativeLayout>
 

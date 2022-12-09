@@ -90,11 +90,9 @@ public class AccostPopWindow extends BasePopupWindow implements View.OnClickList
                     }
                 }
                 if (canClick) {
-                    llBtn.setBackgroundResource(R.drawable.bg_record_tip_radiu25);
                     mTvAccost.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     llBtn.setEnabled(true);
                 } else {
-                    llBtn.setBackgroundResource(R.drawable.bg_gray_ee_radius25);
                     mTvAccost.setTextColor(ContextCompat.getColor(mContext, R.color.color_light_font));
                     llBtn.setEnabled(false);
                 }

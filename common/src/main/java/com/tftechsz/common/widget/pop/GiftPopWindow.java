@@ -190,6 +190,7 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
     private RelativeLayout mRelTvNotAvatarHint;
     private ImageView mImgAvatar;//情侣头像
     private ILGiftCallBack ilGiftCallBack;
+    public GiftDto giftDto1;
 
     public GiftPopWindow(Context context, int from_type, int scene, int roomId) {
         super(context);
@@ -809,6 +810,15 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
                             .navigation(MineService.class)
                             .trackEvent("礼物数据异常", "send_gift", "p2p_send_gift",
                                     JSON.toJSONString(dto), null);
+                    dto = giftDto1;
+                    ARouter.getInstance()
+                            .navigation(MineService.class)
+                            .trackEvent("礼物数据异常，进行更改后", "send_gift", "p2p_send_gift",
+                                    JSON.toJSONString(dto), null);
+                    if (null == dto || dto.id <= 0) {
+                        Utils.toast("请重新打开礼物弹窗进行赠送");
+                        return;
+                    }
                 }
 
                 if (!dto.can_use && !TextUtils.isEmpty(dto.cannot_use_msg)) { //礼物不可发送
@@ -1337,11 +1347,13 @@ public class GiftPopWindow extends BaseBottomPop implements View.OnClickListener
         }
     }
 
+
     @Override
     public void onitemClickGiftInfoActivityGet(GiftDto giftDto) {
         if (giftDto == null) {
             return;
         }
+        giftDto1 = giftDto;
         mGiftChildVpAdapter.setGiftList(mGiftVp.getCurrentItem(), giftDto);
 
         if (!isPackMode() && giftDto.is_choose_num == 1) {

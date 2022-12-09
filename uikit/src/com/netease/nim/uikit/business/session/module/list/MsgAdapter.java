@@ -1,5 +1,6 @@
 package com.netease.nim.uikit.business.session.module.list;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import com.netease.nim.uikit.R;
@@ -7,6 +8,8 @@ import com.netease.nim.uikit.business.session.helper.MessageHelper;
 import com.netease.nim.uikit.business.session.module.Container;
 import com.netease.nim.uikit.business.session.viewholder.MsgViewHolderBase;
 import com.netease.nim.uikit.business.session.viewholder.MsgViewHolderFactory;
+import com.netease.nim.uikit.common.ChatMsg;
+import com.netease.nim.uikit.common.ChatMsgUtil;
 import com.netease.nim.uikit.common.CommonUtil;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
 import com.netease.nim.uikit.common.ui.recyclerview.holder.BaseViewHolder;
@@ -335,7 +338,7 @@ public class MsgAdapter extends BaseMultiItemFetchLoadAdapter<IMMessage, BaseVie
         return update;
     }
 
-    private void setShowTime(IMMessage message, boolean show) {
+    public void setShowTime(IMMessage message, boolean show) {
         if (show) {
             timedItems.add(message.getUuid());
         } else {
@@ -386,6 +389,10 @@ public class MsgAdapter extends BaseMultiItemFetchLoadAdapter<IMMessage, BaseVie
 
     private boolean hideTimeAlways(IMMessage message) {
         if (message.getSessionType() == SessionTypeEnum.ChatRoom) {
+            return true;
+        }
+        ChatMsg chatMsg = ChatMsgUtil.parseMessage(message);
+        if (chatMsg != null && TextUtils.equals(ChatMsg.ACCOST_RESUME, chatMsg.cmd_type)) {
             return true;
         }
         switch (message.getMsgType()) {

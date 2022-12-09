@@ -53,7 +53,7 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
         findViewById(R.id.tv_vip_rich).setVisibility(visible);
         findViewById(R.id.tv_vip_gift).setVisibility(visible);
         findViewById(R.id.tv_vip_rank).setVisibility(visible);
-        findViewById(R.id.tv_vip_stories).setVisibility(visible);
+//        findViewById(R.id.tv_vip_stories).setVisibility(visible);
         mSwRecommend = findViewById(R.id.sw_personalized_recommendation);
         boolean checked = MMKVUtils.getInstance().decodeBoolean(Constants.PARAMS_PERSONALIZED_RECOMMENDATION, true);
         mSwRecommend.setChecked(checked);
@@ -132,7 +132,7 @@ public class PrivacySettingActivity extends BaseMvpActivity<IPrivacySettingView,
             if (vipLimit()) return;
             getP().setPrivilege(4, mSwRank.isChecked() ? 0 : 1);
         } else if (id == R.id.cl_stories) {   //上电视上头条
-            if (vipLimit()) return;
+//            if (vipLimit()) return;
             getP().setPrivilege(3, mSwStories.isChecked() ? 0 : 1);
         }
     }

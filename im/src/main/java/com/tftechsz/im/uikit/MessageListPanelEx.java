@@ -81,6 +81,7 @@ import com.netease.nimlib.sdk.team.TeamService;
 import com.netease.nimlib.sdk.team.constant.TeamMemberType;
 import com.netease.nimlib.sdk.team.model.TeamMember;
 import com.tftechsz.common.base.BaseApplication;
+import com.tftechsz.common.iservice.MineService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.widget.pop.CustomPopWindow;
@@ -560,6 +561,12 @@ public class MessageListPanelEx {
                         service.setRoomToken(callMsg1.room_token);
                         service.setChannelName(callMsg1.channel_name);
                         service.setMatchType(callMsg1.type);
+                        if(TextUtils.isEmpty(callMsg1.call_id)){
+                            ARouter.getInstance()
+                                    .navigation(MineService.class)
+                                    .trackEvent("callId", "callId为空了2", callMsg1.call_id,
+                                            JSON.toJSONString(callMsg1), null);
+                        }
                         UserInfo userInfo = new UserInfo();
                         userInfo.setUser_id(Integer.parseInt(chatMsg.to));
                         boolean isMatch = TextUtils.equals(chatMsg.cmd, ChatMsg.CALL_TYPE_VIDEO_MATCH) || TextUtils.equals(chatMsg.cmd, ChatMsg.CALL_TYPE_VOICE_MATCH);   //是否语音视频速配

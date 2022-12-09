@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 会话窗口消息列表一些点击事件的响应处理函数
  */
@@ -17,6 +20,10 @@ public interface SessionEventListener {
 
     // 卡片点击事件处理，一般用于打开用户资料页面
     void onCardClicked(Context context, IMMessage message);
+
+
+    void onCardPhotoClicked(Context context, IMMessage message , int position , String url , ArrayList<String> list);
+
 
     void onAitClicked(String account);
 
