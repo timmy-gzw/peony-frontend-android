@@ -1072,7 +1072,7 @@ public class CommonUtil {
             WXLaunchMiniProgram.Req req1 = new WXLaunchMiniProgram.Req();
             req1.userName = wx.getGh_id(); // 填小程序原始id
             req1.path = wx.getPath();
-            req1.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW;// 可选打开 开发版，体验版和正式版
+            req1.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
             return req1;
         }
         PayReq req = new PayReq();
