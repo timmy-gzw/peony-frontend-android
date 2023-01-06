@@ -6,6 +6,7 @@ import com.tftechsz.common.ApiConstants;
 import com.tftechsz.common.entity.AccostModeDto;
 import com.tftechsz.common.entity.AccostPopupDto;
 import com.tftechsz.common.entity.ActivityGiftInfoDto;
+import com.tftechsz.common.entity.AnTianConfig;
 import com.tftechsz.common.entity.CallbackExt;
 import com.tftechsz.common.entity.CoupleRelieveApplyInfo;
 import com.tftechsz.common.entity.FamilyBoxDto;
@@ -500,4 +501,21 @@ public interface PublicService {
     Flowable<ReviewBean> getReviewConfig(@Path("packageName") String packageName,
                                          @Path("channel") String channel,
                                          @Path("versionName") String versionName);
+
+    /**
+     * 获取安天配置
+     * @return
+     */
+    @GET("antiy_config")
+    Flowable<BaseResponse<AnTianConfig>> anTianConfig();
+
+
+    /**
+     * 提交安天token
+     */
+    @FormUrlEncoded
+    @POST("antiy")
+    Flowable<BaseResponse<Boolean>> commitToken(@Field("token") String apply_id);
+
+
 }

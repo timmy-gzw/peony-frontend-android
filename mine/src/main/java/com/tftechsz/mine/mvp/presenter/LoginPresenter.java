@@ -3,6 +3,7 @@ package com.tftechsz.mine.mvp.presenter;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
@@ -19,6 +20,12 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.sdk.engine.AIDParams;
+import com.sdk.engine.RiskCallBack;
+import com.sdk.engine.RiskControlEngine;
+import com.sdk.engine.RiskErrorCode;
+import com.sdk.engine.RiskInfo;
+import com.sdk.engine.RiskRequestParams;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -29,6 +36,7 @@ import com.tftechsz.common.Constants;
 import com.tftechsz.common.base.AppManager;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.base.BasePresenter;
+import com.tftechsz.common.entity.AnTianConfig;
 import com.tftechsz.common.entity.LoginReq;
 import com.tftechsz.common.entity.PackageDto;
 import com.tftechsz.common.entity.ReviewBean;
@@ -44,6 +52,7 @@ import com.tftechsz.common.utils.ARouterUtils;
 import com.tftechsz.common.utils.AesUtil;
 import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.CustomParams;
 import com.tftechsz.common.utils.MMKVUtils;
 import com.tftechsz.common.utils.SPUtils;
 import com.tftechsz.common.utils.ToastUtil;
@@ -81,6 +90,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     private MineApiService configService;
     private final PublicService publicService;
+    private final PublicService publicService2;
     private final UserProviderService userService;
     private IWXAPI api;
 
@@ -90,7 +100,9 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         Utils.logE("baseurl=" + url);
         configService = RetrofitManager.getInstance().createApi(MineApiService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? ApiConstants.HOST_TEST : url : ApiConstants.HOST);
         publicService = RetrofitManager.getInstance().createApi(PublicService.class, BuildConfig.DEBUG ? TextUtils.isEmpty(url) ? ApiConstants.HOST_TEST : url : ApiConstants.HOST);
+        publicService2 =  RetrofitManager.getInstance().createUserApi(PublicService.class);
         userService = ARouter.getInstance().navigation(UserProviderService.class);
+
     }
 
     /**
@@ -321,6 +333,68 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         });
     }
 
+
+
+    public void getAnTianConfig(){
+        addNet(publicService2.anTianConfig().compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<AnTianConfig>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<AnTianConfig> response) {
+                        if (response.getData() != null) {
+                            if(response.getData().result == 1){
+                                AIDParams params = new AIDParams();
+                                params.setIDParams(new CustomParams(BaseApplication.getInstance()));
+                                int ret = RiskControlEngine.init(BaseApplication.getInstance(), params);
+                                getToken(response.getData());
+                            }
+                        }
+                    }
+                }));
+    }
+
+
+    public void commitToken(String token){
+        addNet(publicService2.commitToken(token).compose(BasePresenter.applySchedulers())
+                .subscribeWith(new ResponseObserver<BaseResponse<Boolean>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<Boolean> response) {
+                        if (response.getData() != null) {
+                        }
+                    }
+                }));
+    }
+
+
+    /**
+     * 获取token
+     * ret:表示执行状态，-1风控sdk未初始化，0执行成功，1执行中
+     */
+    private void getToken(AnTianConfig data) {
+        //构建请求参数
+        RiskRequestParams requestParams = new RiskRequestParams.Builder()
+                //设置设备ip地址
+                .setIp(data.ip)
+                //设置用户账户
+                .setUserAccount(data.userAccount)
+                //设置场景，1买量，2提现，3注册，4登录，5充值
+                .setScene(data.scene)
+                //设置接口的超时时间
+                .setTimeout(data.timeout)
+                .build();
+        //异步请求获取token
+        int ret = RiskControlEngine.getToken(requestParams, new RiskCallBack() {
+            @Override
+            public void onFinish(RiskInfo riskInfo) {
+                int code = riskInfo.getResultCode();
+                String token = riskInfo.getToken();
+                if (code == RiskErrorCode.SUCCESS) {
+                    commitToken(token);
+                }
+            }
+        });
+    }
+
+
     /**
      * 用户登陆  一键登陆
      *
@@ -338,6 +412,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                 .subscribeWith(new ResponseObserver<BaseResponse<LoginDto>>(getView()) {
                                     @Override
                                     public void onSuccess(BaseResponse<LoginDto> response) {
+                                        getAnTianConfig();
+
                                         UserManager.getInstance().setToken(response.getData().token);
                                         UserManager.getInstance().setUserId(response.getData().user_id);
                                         buriedPoint();
