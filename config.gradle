@@ -27,13 +27,13 @@ ext {
     }
 
     appVersion = [
-            versionName: "1.0.8",
-            versionCode: 55
+            versionName: "1.0.9",
+            versionCode: 56
     ]
 
     heartAppVersion = [
-            versionName: "1.0.6",
-            versionCode: 10
+            versionName: "1.0.7",
+            versionCode: 11
     ]
 
     jasmineAppVersion = [
@@ -42,8 +42,8 @@ ext {
     ]
 
     poinsettiaAppVersion = [
-            versionName: "1.0.5",
-            versionCode: 6
+            versionName: "1.0.6",
+            versionCode: 7
     ]
 
     manifestPlaceholders = [

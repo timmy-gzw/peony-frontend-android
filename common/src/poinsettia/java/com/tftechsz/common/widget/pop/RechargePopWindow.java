@@ -63,6 +63,7 @@ import com.tftechsz.common.utils.ClickUtil;
 import com.tftechsz.common.utils.CommonUtil;
 import com.tftechsz.common.utils.GlideUtils;
 import com.tftechsz.common.utils.MMKVUtils;
+import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.PayTextClick;
@@ -93,7 +94,8 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
     private PublicService payService;
     private TextView mTvPay;
     private int formType; //0默认   1家族  2派对
-
+    RecyclerView mRvPayWay;
+    private int checkPosition = -1;
     /**
      * 2.from_type(1.发送消息2.送礼物3.音视频通话4.转盘抽奖)
      * <p>
@@ -192,7 +194,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         RechargeAdapter adapter = new RechargeAdapter(mRechargeDto.payment, mRechargeDto, userService.getUserInfo());
         mRvRecharge.setAdapter(adapter);
         View footerView = LayoutInflater.from(mContext).inflate(R.layout.pop_recharge_footer, null);
-        RecyclerView mRvPayWay = footerView.findViewById(R.id.rv_pay_way);
+        mRvPayWay = footerView.findViewById(R.id.rv_pay_way);
         mRvPayWay.setLayoutManager(new GridLayoutManager(mContext, 2));
         mRvPayWay.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(10f), ConvertUtils.dp2px(10f), false));
         adapter.addFooterView(footerView);
@@ -228,6 +230,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
         } else {
             mIvBanner.setImageResource(R.mipmap.quick_recharge);
         }
+        getPaymentType();
     }
 
     private void setPayButton() {
@@ -249,6 +252,8 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
                             if (event.type == Constants.NOTIFY_UPDATE_USER_INFO_SUCCESS) {
                                 getCoin();
                                 dismiss();
+                            } else if(event.type == Constants.NOTIFY_PAY_FAIL){
+                                getPaymentType();
                             }
                         }
                 ));
@@ -288,6 +293,35 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
                 }));
     }
 
+    public void getPaymentType() {
+        mCompositeDisposable.add(payService.getRechargeNewList()
+                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<List<PaymentTypeDto>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<PaymentTypeDto>> response) {
+                        if (response != null && response.getData() != null) {
+                            PayWayAdapter wayAdapter = new PayWayAdapter(response.getData(), mRechargeDto, userService.getUserInfo());
+                            mRvPayWay.setAdapter(wayAdapter);
+                            //获取默认选中
+                            for (int i = 0; i < mRechargeDto.payment_type.size(); i++) {
+                                if (mRechargeDto.payment_type.get(i).is_active == 1) {
+                                    wayAdapter.setCheckPositions(i);
+                                    mPayTypeData = wayAdapter.getItem(i);
+                                }
+                            }
+                            if (wayAdapter.getData().size() > checkPosition && checkPosition != -1) {
+                                wayAdapter.setCheckPositions(checkPosition);
+                                mPayTypeData = wayAdapter.getItem(checkPosition);
+                            }
+                            wayAdapter.setOnItemClickListener((adapter12, view, position) -> {
+                                wayAdapter.setCheckPositions(position);
+                                mPayTypeData = wayAdapter.getItem(position);
+                                checkPosition = position;
+                            });
+
+                        }
+                    }
+                }));
+    }
 
     /**
      * 设置金币
@@ -395,6 +429,7 @@ public class RechargePopWindow extends BaseBottomPop implements View.OnClickList
                                     Interfaces.POINT_EVENT_PAGE, Interfaces.POINT_INDEX_PAY_SUCCESS, JSON.toJSONString(new BuriedPointExtendDto()), null);
                         }
                     } else {
+                        getPaymentType();
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付失败");
                     }
                 });

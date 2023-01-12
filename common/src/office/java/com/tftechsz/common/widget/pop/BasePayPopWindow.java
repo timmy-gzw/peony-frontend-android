@@ -16,6 +16,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.PayTask;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.netease.nim.uikit.common.PaymentTypeDto;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
@@ -23,6 +24,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tftechsz.common.Constants;
 import com.tftechsz.common.R;
+import com.tftechsz.common.adapter.ChargePayAdapter;
 import com.tftechsz.common.adapter.ChargePayTypeAdapter;
 import com.tftechsz.common.base.BaseApplication;
 import com.tftechsz.common.bus.RxBus;
@@ -32,11 +34,14 @@ import com.tftechsz.common.entity.SXYWxPayResultInfo;
 import com.tftechsz.common.entity.WxPayResultInfo;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.http.BaseResponse;
+import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.http.ResponseObserver;
+import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.PayService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.PayTextClick;
@@ -44,6 +49,10 @@ import com.umeng.analytics.MobclickAgent;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -60,6 +69,7 @@ public class BasePayPopWindow extends BaseBottomPop {
     private PopBasePayBinding mBind;
     private final CompositeDisposable mCompositeDisposable;
     UserProviderService userService;
+    PublicService publicService;
     private final PayService service;
     private int typeId;
     private IWXAPI mApi;
@@ -67,14 +77,18 @@ public class BasePayPopWindow extends BaseBottomPop {
     private ChargePayTypeAdapter adapter;
     private String rmb;
     private String coin;
+    private int checkPosition = -1;
+
 
     public BasePayPopWindow(Activity context) {
         super(context);
         mActivity = context;
         mCompositeDisposable = new CompositeDisposable();
         userService = ARouter.getInstance().navigation(UserProviderService.class);
+        publicService = RetrofitManager.getInstance().createConfigApi(PublicService.class);
         service = ARouter.getInstance().navigation(PayService.class);
         initUI();
+        initRxBus();
     }
 
     public void setTypeId(int typeId) {
@@ -137,7 +151,6 @@ public class BasePayPopWindow extends BaseBottomPop {
             }
 
         });
-
         mBind.rvPayWay.setLayoutManager(new GridLayoutManager(mContext, 2));
         mBind.rvPayWay.addItemDecoration(new SpacingDecoration(ConvertUtils.dp2px(20f), ConvertUtils.dp2px(10f), false));
         ConfigInfo configInfo = userService.getConfigInfo();
@@ -153,6 +166,7 @@ public class BasePayPopWindow extends BaseBottomPop {
                 }
             });
         }
+        getPaymentType();
         if (configInfo != null && configInfo.api != null && configInfo.api.recharge_bottom != null && configInfo.api.recharge_bottom.size() > 0) {
             SpannableStringBuilder builder = new SpannableStringBuilder();
             for (ConfigInfo.MineInfo mineInfo : configInfo.api.recharge_bottom) {
@@ -170,6 +184,24 @@ public class BasePayPopWindow extends BaseBottomPop {
 
         setPayInfo(rmb, coin);
     }
+
+    private void initRxBus() {
+        mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
+                .subscribe(
+                        event -> {
+                            if (event.type == Constants.NOTIFY_PAY_FAIL) {
+                                getPaymentType();
+                            }
+                        }
+                ));
+    }
+
+    @Override
+    public void onShowing() {
+        super.onShowing();
+        getPaymentType();
+    }
+
 
     public void getWxOrderNum(int typeId) {
         if (!AppUtils.isWeChatAppInstalled(mContext)) {
@@ -193,6 +225,31 @@ public class BasePayPopWindow extends BaseBottomPop {
             mApi.registerApp(TextUtils.isEmpty(appId) ? Constants.WX_APP_ID : appId);
             mApi.sendReq(CommonUtil.performWxReq(wx));
         }).start();
+    }
+
+    public void getPaymentType() {
+        mCompositeDisposable.add(publicService.getRechargeNewList()
+                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<List<PaymentTypeDto>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<PaymentTypeDto>> response) {
+                        if (response != null && response.getData() != null) {
+                            adapter = new ChargePayTypeAdapter();
+                            mBind.rvPayWay.setAdapter(adapter);
+                            adapter.setList(response.getData());
+                            if (adapter.getData().size() > checkPosition  && checkPosition != -1) {
+                                adapter.notifyDataPosition(checkPosition);
+                            }
+                            adapter.setOnItemClickListener((adapter1, view, position) -> {
+                                if (typeId != 0) {
+                                    adapter.notifyDataPosition(position);
+                                    checkPosition = position;
+                                } else {
+                                    Utils.toast("订单类型为空!");
+                                }
+                            });
+                        }
+                    }
+                }));
     }
 
     /**
@@ -227,6 +284,7 @@ public class BasePayPopWindow extends BaseBottomPop {
                         RxBus.getDefault().post(new CommonEvent(Constants.NOTIFY_UPDATE_USER_INFO_SUCCESS));
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付成功");
                     } else {
+                        getPaymentType();
                         LogUtil.e("==========","==" + payResult.toString());
                         ToastUtil.showToast(BaseApplication.getInstance(), "支付失败");
                     }

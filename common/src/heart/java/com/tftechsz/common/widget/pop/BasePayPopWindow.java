@@ -17,6 +17,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.PayTask;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.netease.nim.uikit.common.ConfigInfo;
+import com.netease.nim.uikit.common.PaymentTypeDto;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
@@ -33,15 +34,20 @@ import com.tftechsz.common.entity.SXYWxPayResultInfo;
 import com.tftechsz.common.entity.WxPayResultInfo;
 import com.tftechsz.common.event.CommonEvent;
 import com.tftechsz.common.http.BaseResponse;
+import com.tftechsz.common.http.PublicService;
 import com.tftechsz.common.http.ResponseObserver;
+import com.tftechsz.common.http.RetrofitManager;
 import com.tftechsz.common.iservice.PayService;
 import com.tftechsz.common.iservice.UserProviderService;
 import com.tftechsz.common.utils.AppUtils;
 import com.tftechsz.common.utils.CommonUtil;
+import com.tftechsz.common.utils.RxUtil;
 import com.tftechsz.common.utils.ToastUtil;
 import com.tftechsz.common.utils.Utils;
 import com.tftechsz.common.widget.PayTextClick;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
@@ -59,6 +65,7 @@ public class BasePayPopWindow extends BaseBottomPop {
     private PopBasePayBinding mBind;
     private final CompositeDisposable mCompositeDisposable;
     UserProviderService userService;
+    PublicService publicService;
     private final PayService service;
     private int typeId;
     private IWXAPI mApi;
@@ -66,6 +73,8 @@ public class BasePayPopWindow extends BaseBottomPop {
     private ChargePayTypeAdapter adapter;
     private String rmb;
     private String coin;
+    private int checkPosition = -1;
+
 
     public BasePayPopWindow(Activity context) {
         super(context);
@@ -73,7 +82,9 @@ public class BasePayPopWindow extends BaseBottomPop {
         mCompositeDisposable = new CompositeDisposable();
         userService = ARouter.getInstance().navigation(UserProviderService.class);
         service = ARouter.getInstance().navigation(PayService.class);
+        publicService = RetrofitManager.getInstance().createConfigApi(PublicService.class);
         initUI();
+        initRxBus();
     }
 
     public void setTypeId(int typeId) {
@@ -93,6 +104,22 @@ public class BasePayPopWindow extends BaseBottomPop {
         }
     }
 
+    private void initRxBus() {
+        mCompositeDisposable.add(RxBus.getDefault().toObservable(CommonEvent.class)
+                .subscribe(
+                        event -> {
+                            if (event.type == Constants.NOTIFY_PAY_FAIL) {
+                                getPaymentType();
+                            }
+                        }
+                ));
+    }
+
+    @Override
+    public void onShowing() {
+        super.onShowing();
+        getPaymentType();
+    }
     @Override
     protected View createPopupById() {
         View view = createPopupById(R.layout.pop_base_pay);
@@ -152,6 +179,7 @@ public class BasePayPopWindow extends BaseBottomPop {
                 }
             });
         }
+        getPaymentType();
         if (configInfo != null && configInfo.api != null && configInfo.api.recharge_bottom != null && configInfo.api.recharge_bottom.size() > 0) {
             SpannableStringBuilder builder = new SpannableStringBuilder();
             for (ConfigInfo.MineInfo mineInfo : configInfo.api.recharge_bottom) {
@@ -167,6 +195,33 @@ public class BasePayPopWindow extends BaseBottomPop {
         }
 
         setPayInfo(rmb, coin);
+    }
+
+
+
+    public void getPaymentType() {
+        mCompositeDisposable.add(publicService.getRechargeNewList()
+                .compose(RxUtil.applySchedulers()).subscribeWith(new ResponseObserver<BaseResponse<List<PaymentTypeDto>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<PaymentTypeDto>> response) {
+                        if (response != null && response.getData() != null) {
+                            adapter = new ChargePayTypeAdapter();
+                            mBind.rvPayWay.setAdapter(adapter);
+                            adapter.setList(response.getData());
+                            if (adapter.getData().size() > checkPosition  && checkPosition != -1) {
+                                adapter.notifyDataPosition(checkPosition);
+                            }
+                            adapter.setOnItemClickListener((adapter1, view, position) -> {
+                                if (typeId != 0) {
+                                    adapter.notifyDataPosition(position);
+                                    checkPosition = position;
+                                } else {
+                                    Utils.toast("订单类型为空!");
+                                }
+                            });
+                        }
+                    }
+                }));
     }
 
     public void getWxOrderNum(int typeId) {
