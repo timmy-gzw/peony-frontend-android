@@ -32,8 +32,8 @@ ext {
     ]
 
     heartAppVersion = [
-            versionName: "1.0.7",
-            versionCode: 12
+            versionName: "1.0.8",
+            versionCode: 13
     ]
 
     jasmineAppVersion = [
