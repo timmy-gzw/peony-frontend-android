@@ -178,7 +178,8 @@ public class NoblePayPop extends BaseBottomPop implements OnItemClickListener {
                         String appId = CommonUtil.getWeChatAppId(configInfo);
                         mApi = WXAPIFactory.createWXAPI(getContext(), TextUtils.isEmpty(appId) ? Constants.WX_APP_ID : appId);
                         mApi.registerApp(TextUtils.isEmpty(appId) ? Constants.WX_APP_ID : appId);
-                        mApi.sendReq(CommonUtil.performWxReq(response.getData()));
+                        if (CommonUtil.performWxReq((Activity) mContext, response.getData()) != null)
+                            mApi.sendReq(CommonUtil.performWxReq((Activity) mContext, response.getData()));
                     }).start();
                 }
             }

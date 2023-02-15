@@ -2,6 +2,7 @@ package com.tftechsz.common.utils;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -1067,7 +1068,11 @@ public class CommonUtil {
         });
     }
 
-    public static BaseReq performWxReq(WxPayResultInfo wx) {
+    public static BaseReq performWxReq(Activity activity,WxPayResultInfo wx) {
+        if(!TextUtils.isEmpty(wx.getPay_url())){
+            openBrowser(activity,wx.getPay_url());
+            return null;
+        }
         if(TextUtils.equals(wx.getType(),"applet")){
             WXLaunchMiniProgram.Req req1 = new WXLaunchMiniProgram.Req();
             req1.userName = wx.getGh_id(); // 填小程序原始id
@@ -1086,6 +1091,19 @@ public class CommonUtil {
         req.packageValue = wx.getPackageX(); //"Sign=WXPay"
         return req;
     }
+
+
+    public static void openBrowser(Context context, String url) {
+        final Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(Intent.createChooser(intent, "请选择浏览器"));
+        } else {
+           Utils.toast("链接错误或无浏览器");
+        }
+    }
+
 
     public static String getMetaData(String key) {
         String result = "";

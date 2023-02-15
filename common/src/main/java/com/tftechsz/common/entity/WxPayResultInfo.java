@@ -15,6 +15,7 @@ public class WxPayResultInfo {
     private String order_no;
     private String gh_id;
     private String path;
+    private String pay_url;
     private String type;  //wechat   applet
 
     public String getOrder_no() {
@@ -103,5 +104,13 @@ public class WxPayResultInfo {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getPay_url() {
+        return pay_url;
+    }
+
+    public void setPay_url(String pay_url) {
+        this.pay_url = pay_url;
     }
 }
