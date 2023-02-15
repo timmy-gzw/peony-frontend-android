@@ -59,7 +59,7 @@ public class AboutUsActivity extends BaseMvpActivity<IAboutUsView, AboutUsPresen
         mBotLink = findViewById(R.id.bot_link);
         mRvAbout.setLayoutManager(new LinearLayoutManager(this));
         TextView tvAbout = findViewById(R.id.tv_about);
-        tvAbout.setText(String.format("Copyright ©2022 %s\nAll Rights Reserved", getString(R.string.app_name)));
+        tvAbout.setText(String.format("Copyright ©2023 %s\nAll Rights Reserved", getString(R.string.app_name)));
         initListener();
 
     }
