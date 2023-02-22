@@ -221,7 +221,7 @@ public class BasePayPopWindow extends BaseBottomPop {
             String appId = CommonUtil.getWeChatAppId(configInfo);
             mApi = WXAPIFactory.createWXAPI(context, TextUtils.isEmpty(appId) ? Constants.WX_APP_ID : appId);
             mApi.registerApp(TextUtils.isEmpty(appId) ? Constants.WX_APP_ID : appId);
-            mApi.sendReq(CommonUtil.performWxReq(wx));
+            mApi.sendReq(CommonUtil.performWxReq((Activity) context, wx));
         }).start();
     }
 
