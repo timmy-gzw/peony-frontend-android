@@ -254,8 +254,8 @@ public class VipPayPopWindow extends BaseBottomPop {
             String appId = CommonUtil.getWeChatAppId(configInfo);
             mApi = WXAPIFactory.createWXAPI(context, TextUtils.isEmpty(appId) ? Constants.WX_APP_ID : appId);
             mApi.registerApp(TextUtils.isEmpty(appId) ? Constants.WX_APP_ID : appId);
-            if (CommonUtil.performWxReq((Activity) context, wx) != null)
-                mApi.sendReq(CommonUtil.performWxReq((Activity) context, wx));
+            if (CommonUtil.performWxReq(wx) != null)
+                mApi.sendReq(CommonUtil.performWxReq(wx));
         }).start();
     }
 

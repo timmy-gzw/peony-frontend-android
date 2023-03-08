@@ -1,5 +1,7 @@
 package com.tftechsz.common.utils;
 
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -1068,9 +1070,9 @@ public class CommonUtil {
         });
     }
 
-    public static BaseReq performWxReq(Activity activity,WxPayResultInfo wx) {
+    public static BaseReq performWxReq(WxPayResultInfo wx) {
         if(!TextUtils.isEmpty(wx.getPay_url())){
-            openBrowser(activity,wx.getPay_url());
+            openBrowser(wx.getPay_url());
             return null;
         }
         if(TextUtils.equals(wx.getType(),"applet")){
@@ -1093,12 +1095,12 @@ public class CommonUtil {
     }
 
 
-    public static void openBrowser(Context context, String url) {
+    public static void openBrowser(String url) {
         final Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(Intent.createChooser(intent, "请选择浏览器"));
+        if (intent.resolveActivity(BaseApplication.getInstance().getPackageManager()) != null) {
+            startActivity(Intent.createChooser(intent, "请选择浏览器"));
         } else {
            Utils.toast("链接错误或无浏览器");
         }
