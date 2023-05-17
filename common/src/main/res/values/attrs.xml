@@ -92,10 +92,10 @@
     </string-array>
 
     <string-array name="host_url">
-        <item>http://config.api.peony.taifangsz.com/</item>
-        <item>http://config.api.stg.peony.taifangsz.com/</item>
-        <item>http://config.api.dev.peony.taifangsz.com:8080/</item>
-        <item>http://config.api.dev.peony.taifangsz.com:9080/</item>
+        <item>http://config.api.peony.gzthl.com/</item>
+        <item>http://config.api.peony.gzthl.com/</item>
+        <item>http://config.api.peony.gzthl.com/</item>
+        <item>http://config.api.peony.gzthl.com/</item>
         <item>http://config.api.dev.peony.taifangsz.com.com/</item>
     </string-array>
 

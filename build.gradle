@@ -4,12 +4,12 @@ buildscript {
 
     repositories {
         google()
+        mavenCentral()
         maven { url 'https://jitpack.io' }
         maven { url 'https://repo1.maven.org/maven2/' }
         // 配置HMS Core SDK的Maven仓地址。
         maven { url 'https://developer.huawei.com/repo/' }
         jcenter()
-        mavenCentral()
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     }
     dependencies {
@@ -28,12 +28,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        maven {
-            url 'https://jitpack.io'
-            content {
-                includeGroupByRegex '(com|io)\\.(github|gitee)\\..*'
-            }
-        }
+
 //        maven {url'https://maven.google.com'}
         maven { url 'https://dl.google.com/dl/android/maven2/' }
         maven { url 'https://repo1.maven.org/maven2/' }
@@ -55,6 +50,12 @@ allprojects {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/repository/public/' }
         mavenLocal()
+        maven {
+            url 'https://jitpack.io'
+            content {
+                includeGroupByRegex '(com|io)\\.(github|gitee)\\..*'
+            }
+        }
     }
 }
 

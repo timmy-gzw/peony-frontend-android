@@ -455,8 +455,10 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                         if (code == 302) {
                             LogUtil.i("TAG", "云信账号密码错误");
 //                            ToastUtil.showToast(context, "账号密码错误");
-                            Intent intent = new Intent(context, LoginActivity.class);
-                            context.startActivity(intent);
+//                            Intent intent = new Intent(context, LoginActivity.class);
+//                            context.startActivity(intent);
+
+                            intentMain(context, account, token, data, type);
                         } else {
                             doLogin(context, account, token, data, type);
                         }
